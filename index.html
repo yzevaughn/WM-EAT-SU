@@ -7,7 +7,9 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="css/hero.css">
+    
 </head>
 <body>
 
@@ -23,32 +25,31 @@
     </nav>
 
     <main class="hero">
-        
         <div class="hero-left">
             <div class="badge">
                 <span class="dot"></span>
-                <i class="fa-solid fa-graduation-cap"></i> Built for Campus Life
+                <i class="fa-solid fa-graduation-cap"></i> Built for Campus 
             </div>
             
             <h1>Smart Campus <br><span class="text-red">Dining Made Easy</span></h1>
             
-            <p>Order from multiple campus vendors, skip the queue, and enjoy real-time tracking. Your favorite meals delivered fresh to your location.</p>
+            <p>Order from multiple campus vendors and pick up your favorite meals quickly. Enjoy real-time order tracking right on campus.</p>
             
             <div class="hero-cta">
                 <a href="pages/sign-in.html" class="btn btn-primary btn-large btn-shadow">
                     Order Now <i class="fa-solid fa-arrow-right"></i>
                 </a>
-                <a href="#" class="btn btn-outline btn-large">
+                <a href="#features" class="btn btn-outline btn-large">
                     <i class="fa-regular fa-circle-play"></i> Learn More
                 </a>
             </div>
 
             <div class="features-row">
                 <div class="feature-item">
-                    <i class="fa-solid fa-bolt"></i> Fast Delivery
+                    <i class="fa-solid fa-hamburger"></i> Food
                 </div>
                 <div class="feature-item">
-                    <i class="fa-solid fa-lock"></i> Secure Payments
+                    <i class="fa-solid fa-wallet"></i> Digital Payments
                 </div>
                 <div class="feature-item">
                     <i class="fa-solid fa-mobile-screen"></i> Mobile Friendly
@@ -63,40 +64,98 @@
         </div>
     </main>
 
+    <div class="divider"></div>
+
+    <section class="features-section" id = "features">
+        <div class="features-header">
+            <h2>Features for Every User</h2>
+            <p><span> Platform offers a experience for students, vendors, and administrators alike.</span></p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card top-red">
+                <div class="feature-icon bg-solid-red">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                </div>
+                <h3>Digital Orders</h3>
+                <p>Ordering system with real-time tracking and instant confirmations.</p>
+            </div>
+
+            <div class="feature-card top-green">
+                <div class="feature-icon bg-light-green">
+                    <i class="fa-regular fa-credit-card"></i>
+                </div>
+                <h3>Flexible Payments</h3>
+                <p>Multiple payment options including digital wallet and cash.</p>
+            </div>
+
+            <div class="feature-card top-purple">
+                <div class="feature-icon bg-light-purple">
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+                <h3>Vendor Feed</h3>
+                <p>Stay updated with promotional posts, special offers, and daily specials.</p>
+            </div>
+
+            <div class="feature-card top-orange">
+                <div class="feature-icon bg-light-orange">
+                    <i class="fa-solid fa-store"></i>
+                </div>
+                <h3>Vendor Applications</h3>
+                <p>Students are allowed to apply as vendors by submitting a application form.</p>
+            </div>
+
+            <div class="feature-card top-blue">
+                <div class="feature-icon bg-light-blue">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3>Complaint System</h3>
+                <p>The system allows users to submit complaints about their food and service experience.</p>
+            </div>
+
+            <div class="feature-card top-teal">
+                <div class="feature-icon bg-light-teal">
+                    <i class="fa-regular fa-circle-check"></i>
+                </div>
+                <h3>Campus Integration</h3>
+                <p>Interactive map showing all vendor locations across campus.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
     <section class="perspectives">
         <div class="section-header">
-            <div class="badge badge-light">
-                <i class="fa-solid fa-arrow-trend-up text-red"></i> Tailored for Everyone
-            </div>
+           
             <h2>One Platform, Three Perspectives</h2>
-            <p>Seamlessly designed experiences for every member of our campus dining community.</p>
+            <p>Designed experiences for every member of our campus dining community.</p>
         </div>
 
         <div class="cards-grid">
-            <div class="perspective-card">
+            <div class="perspective-card top-red">
                 <div class="card-icon bg-red">
                     <i class="fa-solid fa-user-group"></i>
                 </div>
                 <h3>For Students</h3>
-                <p>Browse menus, place orders, make payments, and track your food in real-time. Get updates instantly and enjoy a seamless dining experience.</p>
+                <p>Browse menus, place orders, make payments, and track your food in real-time. Get updates instantly and enjoy food experience.</p>
                 <a href="pages/sign-in.html?role=student" class="card-btn border-red">
                     Explore as Student <i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
 
-            <div class="perspective-card">
-                <div class="card-icon bg-orange">
+            <div class="perspective-card top-orange">
+                <div class="card-icon bg-light-orange">
                     <i class="fa-solid fa-store"></i>
                 </div>
                 <h3>For Vendors</h3>
-                <p>Manage orders, update menus, process payments, and engage with students through promotional posts with a comprehensive vendor dashboard.</p>
+                <p>Manage orders, update menus, process payments, and engage with students through promotional posts with a vendor dashboard.</p>
                 <a href="pages/sign-in.html?role=vendor" class="card-btn border-orange">
                     Vendor Dashboard <i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
 
-            <div class="perspective-card">
-                <div class="card-icon bg-blue">
+            <div class="perspective-card top-blue">
+                <div class="card-icon bg-light-blue">
                     <i class="fa-solid fa-shield-halved"></i>
                 </div>
                 <h3>For Admins</h3>
