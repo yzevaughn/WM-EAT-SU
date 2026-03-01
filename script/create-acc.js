@@ -32,10 +32,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Redirect to the correct dashboard!
                     if (selectedRole === 'student') {
                         window.location.href = 'student/student-dashboard.html';
-                    } else if (selectedRole === 'vendor') {
-                        window.location.href = 'vendor-dashboard.html';
-                    } else if (selectedRole === 'admin') {
-                        window.location.href = 'admin-dashboard.html';
+                    } 
+                    else if (selectedRole === 'admin') {
+                        window.location.href = 'admin/admin-dashboard.html';
                     }
                 });
             }

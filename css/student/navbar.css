@@ -1,0 +1,151 @@
+
+:root {
+    --primary-red: #E61524;
+    --primary-red-hover: #D11220;
+    --text-dark: #1F2937;
+    --text-gray: #6B7280;
+    --bg-white: #FFFFFF;
+    --border-color: #F3F4F6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #F9FAFB;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 6%;
+    background: #fff;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--primary-red);
+    color: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.logo-text {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--primary-red);
+}
+
+/* Profile Section */
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Text container */
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+/* Profile picture */
+.profile-pic {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+}
+
+/* Divider */
+.profile-divider {
+    width: 1px;
+    height: 32px;
+    background-color: var(--border-color);
+}
+
+/* Text */
+.profile-name {
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--text-dark);
+}
+
+.email {
+    font-size: 13px;
+    color: var(--text-gray);
+}
+
+/* Logout Button */
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: var(--primary-red);
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+    text-decoration: none;
+}
+
+.logout-btn:hover {
+    background-color: var(--primary-red-hover);
+}
+
+/* Remove default link styles */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Responsive: Hide text but keep picture and logout aligned right */
+@media (max-width: 768px) {
+    .logo-text {
+        font-size: 16px;
+    }
+
+    .profile-info, .profile-divider {
+        display: none; /* hide name/email and divider */
+    }
+
+    .profile-pic {
+        width: 36px;
+        height: 36px;
+    }
+
+    .logout-btn {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+
+    /* Keep profile aligned right */
+    .navbar {
+        justify-content: space-between; /* still logo left, profile right */
+    }
+}
