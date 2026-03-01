@@ -37,7 +37,7 @@
 
                 // Redirect to the correct dashboard based on the role
                 if (selectedRole === 'student') {
-                    window.location.href = 'student-dashboard.html';
+                    window.location.href = 'student/student-dashboard.html';
                 } else if (selectedRole === 'vendor') {
                     window.location.href = 'vendor-dashboard.html';
                 } else if (selectedRole === 'admin') {
