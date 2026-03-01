@@ -15,10 +15,8 @@
 }
 
 body {
-    background-color: var(--bg-light);
-    /* Subtle dot pattern background */
-    background-image: radial-gradient(#ffe0e0 1.5px, transparent 1.5px);
-    background-size: 24px 24px;
+   background-color: #ffffff; /* Changed to solid white */
+    /* The subtle dot pattern radial-gradient has been removed */
     display: flex;
     justify-content: center;
     align-items: center;
