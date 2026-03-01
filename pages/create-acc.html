@@ -27,18 +27,19 @@
             <p class="subtitle">Fill in your details to create a new account</p>
 
             <div class="role-selector">
-                <button class="role-btn active">
+                <button type="button" class="role-btn active" data-role="student">
                     <i class="fa-solid fa-utensils"></i> Student
                 </button>
-                <button class="role-btn">
-                    <i class="fa-solid fa-store"></i> Vendor
-                </button>
-                <button class="role-btn">
+                
+                <button type="button" class="role-btn" data-role="admin">
                     <i class="fa-solid fa-shield-halved"></i> Admin
                 </button>
             </div>
 
             <form action="#" method="POST">
+
+                <input type="hidden" id="selectedRole" value="student">
+
                 <div class="form-group">
                     <label for="fullname">Full Name</label>
                     <input type="text" id="fullname" class="form-control" placeholder="Enter your name" required>
@@ -63,6 +64,6 @@
         </div>
     </div>
 
-    <script src="../script/create-sign.js"></script>
+    <script src="../script/create-acc.js"></script>
 </body>
 </html>
