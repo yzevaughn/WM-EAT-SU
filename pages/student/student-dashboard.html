@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+  <link rel="stylesheet" href="../../css/student/dashboard.css">
 <link rel="stylesheet" href="../../css/student/navbar.css"> 
 </head>
 <body>
@@ -56,7 +56,7 @@
 <ul class="nav-list">
 
 <li class="nav-item">
-<a href="#" class="nav-link active">
+<a href="#" class="nav-link act ive">
 <i class="fa-solid fa-house"></i>
 <span>Dashboard</span>
 </a>
@@ -117,7 +117,127 @@
 </nav>
 
 <main class="main-content">
+<!-- WELCOME CARD -->
+<div class="welcome-card">
+  <div>
+    <h1>✨ Welcome back, John Student!</h1>
+    <p>Ready to order your favorite campus food?</p>
+  </div>
+</div>
 
+
+<!-- STATS -->
+<div class="stats-grid">
+
+  <div class="stat-card">
+    <div class="stat-top">
+      <div>
+        <span class="stat-label">Wallet Balance</span>
+        <h2>$150.00</h2>
+      </div>
+      <div class="stat-icon green">
+        <i class="fa-solid fa-wallet"></i>
+      </div>
+    </div>
+    <button class="btn green">Top Up Wallet</button>
+  </div>
+
+
+  <div class="stat-card">
+    <div class="stat-top">
+      <div>
+        <span class="stat-label">Cart Items</span>
+        <h2>0</h2>
+      </div>
+      <div class="stat-icon red">
+        <i class="fa-solid fa-bag-shopping"></i>
+      </div>
+    </div>
+    <button class="btn red">View Cart</button>
+  </div>
+
+
+  <div class="stat-card">
+    <div class="stat-top">
+      <div>
+        <span class="stat-label">Total Orders</span>
+        <h2>2</h2>
+      </div>
+      <div class="stat-icon blue">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+      </div>
+    </div>
+    <button class="btn outline">View History</button>
+  </div>
+
+</div>
+
+
+<!-- ACTIVE ORDER -->
+<div class="active-order">
+
+  <div class="order-left">
+    <div class="order-icon">
+      <i class="fa-solid fa-clock"></i>
+    </div>
+
+    <div>
+      <div class="order-title">
+        Active Order
+        <span class="status">Ready</span>
+      </div>
+
+      <div class="order-place">Campus Cafe</div>
+
+      <div class="order-details">
+        1 item(s) • $9.00 • Pickup: 2:00 PM
+      </div>
+    </div>
+  </div>
+
+  <button class="track-btn">
+    Track Order <i class="fa-solid fa-arrow-right"></i>
+  </button>
+
+</div>
+
+
+<!-- QUICK ACTIONS -->
+<div class="quick-grid">
+
+  <div class="quick-card">
+    <div class="quick-icon red">
+      <i class="fa-solid fa-bag-shopping"></i>
+    </div>
+    <h3>Browse Food</h3>
+    <p>Explore menu items</p>
+  </div>
+
+  <div class="quick-card">
+    <div class="quick-icon blue">
+      <i class="fa-solid fa-location-dot"></i>
+    </div>
+    <h3>Campus Map</h3>
+    <p>Find canteens</p>
+  </div>
+
+  <div class="quick-card">
+    <div class="quick-icon purple">
+      <i class="fa-solid fa-clock-rotate-left"></i>
+    </div>
+    <h3>Order History</h3>
+    <p>View past orders</p>
+  </div>
+
+  <div class="quick-card">
+    <div class="quick-icon green">
+      <i class="fa-solid fa-wallet"></i>
+    </div>
+    <h3>My Wallet</h3>
+    <p>Manage balance</p>
+  </div>
+
+</div>
 </main>
 
 <script src = "../../script/hum.js"></script>
