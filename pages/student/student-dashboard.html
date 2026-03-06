@@ -6,241 +6,216 @@
   <title>WM EAT SU - Student Portal</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../../css/student/dashboard.css">
-<link rel="stylesheet" href="../../css/student/navbar.css"> 
+  <link rel="stylesheet" href="../../css/navbar.css">
 </head>
 <body>
-  
-  <body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
-<nav class="navbar">
+      <a href="#" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
+    </div>
 
-<div class="nav-left">
+    <div class="profile">
+      <div class="profile-info">
+        <span class="profile-name">Vaughn Evangelista</span>
+        <span class="email">vaughn.student@wm.edu.ph</span>
+      </div>
 
-<button class="menu-toggle" id="menuToggle">
-<i class="fa-solid fa-bars"></i>
-</button>
+      <img src="../../images/pfp.jpg" class="profile-pic">
 
-<a href="#" class="logo">
-<div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-<span class="logo-text">WM EAT SU</span>
-</a>
+      <div class="profile-divider"></div>
 
-</div>
+      <a href="../../index.html" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Log out
+      </a>
+    </div>
+  </nav>
 
-<div class="profile">
+  <!-- SIDEBAR -->
+  <nav class="nav-menu" id="navMenu">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="#" class="nav-link active">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
 
-<div class="profile-info">
-<span class="profile-name">Vaughn Evangelista</span>
-<span class="email">vaughn.student@wm.edu.ph</span>
-</div>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span>Browse Food</span>
+        </a>
+      </li>
 
-<img src="../../images/pfp.jpg" class="profile-pic">
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span>Cart</span>
+          <span class="badge">0</span>
+        </a>
+      </li>
 
-<div class="profile-divider"></div>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>Orders</span>
+        </a>
+      </li>
 
-<a href="../../index.html" class="logout-btn">
-<i class="fas fa-sign-out-alt"></i> Log out
-</a>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Wallet</span>
+        </a>
+      </li>
 
-</div>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Campus Map</span>
+        </a>
+      </li>
 
-</nav>
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="fa-regular fa-star"></i>
+          <span>Complaints</span>
+        </a>
+      </li>
 
-<!-- SIDEBAR -->
+      <li class="nav-item">
+        <a href="#" class="nav-link">
+          <i class="fa-solid fa-rss"></i>
+          <span>Vendor Profile</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 
-<nav class="nav-menu" id="navMenu">
-
-<ul class="nav-list">
-
-<li class="nav-item">
-<a href="#" class="nav-link act ive">
-<i class="fa-solid fa-house"></i>
-<span>Dashboard</span>
-</a>
-</li>
-
-<li class="nav-item">
-<a href="#" class="nav-link">
-<i class="fa-solid fa-bag-shopping"></i>
-<span>Browse Food</span>
-</a>
-</li>
-
-<li class="nav-item">
-<a href="#" class="nav-link">
-<i class="fa-solid fa-cart-shopping"></i>
-<span>Cart</span>
-<span class="badge">0</span>
-</a>
-</li>
-
-<li class="nav-item">
-<a href="#" class="nav-link">
-<i class="fa-solid fa-clock-rotate-left"></i>
-<span>Orders</span>
-</a>
-</li>
-
-<li class="nav-item">
-<a href="#" class="nav-link">
-<i class="fa-solid fa-wallet"></i>
-<span>Wallet</span>
-</a>
-</li>
-
-<li class="nav-item">
-<a href="#" class="nav-link">
-<i class="fa-solid fa-location-dot"></i>
-<span>Campus Map</span>
-</a>
-</li>
-
-<li class="nav-item">
-<a href="#" class="nav-link">
-<i class="fa-regular fa-star"></i>
-<span>Complaints</span>
-</a>
-</li>
-
-<li class="nav-item">
-<a href="#" class="nav-link">
-<i class="fa-solid fa-rss"></i>
-<span>Vendor Profile</span>
-</a>
-</li>
-
-</ul>
-
-</nav>
-
-<main class="main-content">
-<!-- WELCOME CARD -->
-<div class="welcome-card">
-  <div>
-    <h1>✨ Welcome back, John Student!</h1>
-    <p>Ready to order your favorite campus food?</p>
-  </div>
-</div>
-
-
-<!-- STATS -->
-<div class="stats-grid">
-
-  <div class="stat-card">
-    <div class="stat-top">
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <!-- WELCOME CARD -->
+    <div class="welcome-card">
       <div>
-        <span class="stat-label">Wallet Balance</span>
-        <h2>$150.00</h2>
-      </div>
-      <div class="stat-icon green">
-        <i class="fa-solid fa-wallet"></i>
+        <h1>✨ Welcome back, John Student!</h1>
+        <p>Ready to order your favorite campus food?</p>
       </div>
     </div>
-    <button class="btn green">Top Up Wallet</button>
-  </div>
 
-
-  <div class="stat-card">
-    <div class="stat-top">
-      <div>
-        <span class="stat-label">Cart Items</span>
-        <h2>0</h2>
-      </div>
-      <div class="stat-icon red">
-        <i class="fa-solid fa-bag-shopping"></i>
-      </div>
-    </div>
-    <button class="btn red">View Cart</button>
-  </div>
-
-
-  <div class="stat-card">
-    <div class="stat-top">
-      <div>
-        <span class="stat-label">Total Orders</span>
-        <h2>2</h2>
-      </div>
-      <div class="stat-icon blue">
-        <i class="fa-solid fa-clock-rotate-left"></i>
-      </div>
-    </div>
-    <button class="btn outline">View History</button>
-  </div>
-
-</div>
-
-
-<!-- ACTIVE ORDER -->
-<div class="active-order">
-
-  <div class="order-left">
-    <div class="order-icon">
-      <i class="fa-solid fa-clock"></i>
-    </div>
-
-    <div>
-      <div class="order-title">
-        Active Order
-        <span class="status">Ready</span>
+    <!-- STATS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-top">
+          <div>
+            <span class="stat-label">Wallet Balance</span>
+            <h2>$150.00</h2>
+          </div>
+          <div class="stat-icon green">
+            <i class="fa-solid fa-wallet"></i>
+          </div>
+        </div>
+        <button class="btn green">Top Up Wallet</button>
       </div>
 
-      <div class="order-place">Campus Cafe</div>
+      <div class="stat-card">
+        <div class="stat-top">
+          <div>
+            <span class="stat-label">Cart Items</span>
+            <h2>0</h2>
+          </div>
+          <div class="stat-icon red">
+            <i class="fa-solid fa-bag-shopping"></i>
+          </div>
+        </div>
+        <button class="btn red">View Cart</button>
+      </div>
 
-      <div class="order-details">
-        1 item(s) • $9.00 • Pickup: 2:00 PM
+      <div class="stat-card">
+        <div class="stat-top">
+          <div>
+            <span class="stat-label">Total Orders</span>
+            <h2>2</h2>
+          </div>
+          <div class="stat-icon blue">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+          </div>
+        </div>
+        <button class="btn outline">View History</button>
       </div>
     </div>
-  </div>
 
-  <button class="track-btn">
-    Track Order <i class="fa-solid fa-arrow-right"></i>
-  </button>
+    <!-- ACTIVE ORDER -->
+    <div class="active-order">
+      <div class="order-left">
+        <div class="order-icon">
+          <i class="fa-solid fa-clock"></i>
+        </div>
 
-</div>
+        <div>
+          <div class="order-title">
+            Active Order
+            <span class="status">Ready</span>
+          </div>
 
+          <div class="order-place">Campus Cafe</div>
 
-<!-- QUICK ACTIONS -->
-<div class="quick-grid">
+          <div class="order-details">
+            1 item(s) • $9.00 • Pickup: 2:00 PM
+          </div>
+        </div>
+      </div>
 
-  <div class="quick-card">
-    <div class="quick-icon red">
-      <i class="fa-solid fa-bag-shopping"></i>
+      <button class="track-btn">
+        Track Order <i class="fa-solid fa-arrow-right"></i>
+      </button>
     </div>
-    <h3>Browse Food</h3>
-    <p>Explore menu items</p>
-  </div>
 
-  <div class="quick-card">
-    <div class="quick-icon blue">
-      <i class="fa-solid fa-location-dot"></i>
+    <!-- QUICK ACTIONS -->
+    <div class="quick-grid">
+      <div class="quick-card">
+        <div class="quick-icon red">
+          <i class="fa-solid fa-bag-shopping"></i>
+        </div>
+        <h3>Browse Food</h3>
+        <p>Explore menu items</p>
+      </div>
+
+      <div class="quick-card">
+        <div class="quick-icon blue">
+          <i class="fa-solid fa-location-dot"></i>
+        </div>
+        <h3>Campus Map</h3>
+        <p>Find canteens</p>
+      </div>
+
+      <div class="quick-card">
+        <div class="quick-icon purple">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+        </div>
+        <h3>Order History</h3>
+        <p>View past orders</p>
+      </div>
+
+      <div class="quick-card">
+        <div class="quick-icon green">
+          <i class="fa-solid fa-wallet"></i>
+        </div>
+        <h3>My Wallet</h3>
+        <p>Manage balance</p>
+      </div>
     </div>
-    <h3>Campus Map</h3>
-    <p>Find canteens</p>
-  </div>
+  </main>
 
-  <div class="quick-card">
-    <div class="quick-icon purple">
-      <i class="fa-solid fa-clock-rotate-left"></i>
-    </div>
-    <h3>Order History</h3>
-    <p>View past orders</p>
-  </div>
-
-  <div class="quick-card">
-    <div class="quick-icon green">
-      <i class="fa-solid fa-wallet"></i>
-    </div>
-    <h3>My Wallet</h3>
-    <p>Manage balance</p>
-  </div>
-
-</div>
-</main>
-
-<script src = "../../script/hum.js"></script>
-
+  <script src="../../script/hum.js"></script>
 </body>
 </html>

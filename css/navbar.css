@@ -196,15 +196,9 @@ background:#eaeef3;
 margin-left:auto;
 }
 
-/* =========================================
-MAIN CONTENT
-========================================= */
 
-.main-content{
-margin-left:260px;
-padding:30px 4%;
-min-height:calc(100vh - 76px);
-}
+
+
 
 /* =========================================
 MOBILE RESPONSIVE

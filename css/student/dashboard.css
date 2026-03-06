@@ -1,7 +1,11 @@
 /* =========================================
 WELCOME CARD
 ========================================= */
+.main-content{
+margin-left:260px;
+padding:30px 4%;
 
+}
 .welcome-card{
 background:#ffffff;
 border-radius:16px;

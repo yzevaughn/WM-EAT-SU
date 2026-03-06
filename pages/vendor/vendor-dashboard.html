@@ -6,46 +6,115 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../css/student/navbar.css"> 
+<link rel="stylesheet" href="../../css/navbar.css">
 
 </head>
 <body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
-<nav class="navbar">
-    <a href="#" class="logo">
+      <a href="#" class="logo">
         <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
         <span class="logo-text">WM EAT SU</span>
-    </a>
+      </a>
+    </div>
 
     <div class="profile">
-        <div class="profile-info">
-            <span class="profile-name">Sherwin Lim</span>
-            <span class="email">sherwin4532@gmail.com</span>
-        </div>
-        <img src="../../images/pfp.jpg" alt="Profile Picture" class="profile-pic">
-        <div class="profile-divider"></div>
-        <a href="../../index.html" class="logout-btn">
-            <i class="fas fa-sign-out-alt"></i> Log out
-        </a>
+      <div class="profile-info">
+        <span class="profile-name">Vendor</span>
+        <span class="email">vendor@wm.edu.ph</span>
+      </div>
+
+      <img src="../../images/pfp.jpg" class="profile-pic">
+
+      <div class="profile-divider"></div>
+
+      <a href="../../index.html" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Log out
+      </a>
     </div>
-</nav>
+  </nav>
 
 
-<nav class="nav-menu" id="navMenu">
+ <div class="dashboard-layout">
 
-<ul class="nav-list">
+  <!-- SIDEBAR BOX -->
+  <div class="sidebar-box">
+    <nav class="nav-menu" id="navMenu">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="#" class="nav-link active">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
 
-<li class="nav-item">
-<a href="#" class="nav-link act ive">
-<i class="fa-solid fa-house"></i>
-<span>Dashboard</span>
-</a>
-</li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span>Browse Food</span>
+          </a>
+        </li>
 
-</nav> 
- 
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Cart</span>
+            <span class="badge">0</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Orders</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-wallet"></i>
+            <span>Wallet</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Campus Map</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-regular fa-star"></i>
+            <span>Complaints</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-rss"></i>
+            <span>Vendor Profile</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- MAIN CONTENT BOX -->
+  <main class="main-content">
+
+    
+  </main>
+
+</div>
 
 
-<script src = "../../script/hum.js"></script>
+  <script src="../../script/hum.js"></script>
 </body>
 </html>
