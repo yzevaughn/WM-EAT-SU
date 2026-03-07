@@ -315,6 +315,13 @@
   color: #4b5563;
 }
 
+.method-logo {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+  color: #4b5563;
+}
+
 .payment-method-btn:hover {
   border-color: #cbd5e0;
   background-color: #f7fafc;

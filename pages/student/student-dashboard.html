@@ -19,7 +19,7 @@
 
 <div class="nav-left">
 
-<button class="menu-toggle" onclick="toggleMenu()">
+<button class="menu-toggle" id="menuToggle">
 <i class="fa-solid fa-bars"></i>
 </button>
 
@@ -38,7 +38,7 @@
 </div>
 
 <div class="profile-dropdown">
-<button class="profile-btn" onclick="toggleProfileDropdown()">
+<button class="profile-btn" id="profileBtn">
 <img src="../../images/pfp.jpg" class="profile-pic">
 <i class="fa-solid fa-chevron-down"></i>
 </button>
@@ -468,33 +468,17 @@ Add to Cart
 
 </div>
 
+<script src="../../script/dropdown.js"></script>
+<script src="../../script/menu.js"></script>
 <script>
-
-function toggleMenu(){
-document.getElementById("sidebar").classList.toggle("active");
-}
-
-function toggleProfileDropdown(){
-document.getElementById("profileDropdown").classList.toggle("active");
-}
-
-document.addEventListener("click", function(event){
-const profileDropdown = document.getElementById("profileDropdown");
-const profileBtn = document.querySelector(".profile-btn");
-if(!profileDropdown.contains(event.target) && !profileBtn.contains(event.target)){
-profileDropdown.classList.remove("active");
-}
-});
-
 // Filter buttons functionality
 const filterButtons = document.querySelectorAll('.filter-btn');
 filterButtons.forEach(button => {
-button.addEventListener('click', () => {
-filterButtons.forEach(btn => btn.classList.remove('active'));
-button.classList.add('active');
+  button.addEventListener('click', () => {
+    filterButtons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+  });
 });
-});
-
 </script>
 
 </body>
