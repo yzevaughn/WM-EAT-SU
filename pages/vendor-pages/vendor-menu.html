@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WM EAT SU - Vendor Menu</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/vendor-css/menu.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+
+<div class="top-nav">
+
+<div class="nav-left">
+
+<button class="menu-toggle" id="menuToggle">
+<i class="fa-solid fa-bars"></i>
+</button>
+
+<a href="#" class="logo">
+<div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+<span class="logo-text">WM EAT SU</span>
+</a>
+
+</div>
+
+<div class="profile">
+
+<div class="profile-info">
+<span class="profile-name">Vendor Name</span>
+<span class="email">vendor@wm.edu.ph</span>
+</div>
+
+<div class="profile-dropdown">
+<button class="profile-btn" id="profileBtn">
+<img src="../../images/pfp.jpg" class="profile-pic">
+<i class="fa-solid fa-chevron-down"></i>
+</button>
+<div class="dropdown-menu" id="profileDropdown">
+<a href="../../index.html" class="dropdown-item">
+<i class="fas fa-sign-out-alt"></i>
+<span>Log Out</span>
+</a>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- LAYOUT -->
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+
+<div class="left-nav" id="sidebar">
+
+<ul class="nav-list">
+
+<li>
+<a href="vendor-dashboard.html" class="nav-link">
+<i class="fa-solid fa-house"></i>
+<span>Dashboard</span>
+</a>
+</li>
+
+<li>
+<a href="vendor-orders.html" class="nav-link">
+<i class="fa-solid fa-clock-rotate-left"></i>
+<span>Orders</span>
+</a>
+</li>
+
+<li>
+<a href="vendor-reviews.html" class="nav-link">
+<i class="fa-solid fa-star"></i>
+<span>Reviews</span>
+</a>
+</li>
+
+<li>
+<a href="vendor-menu.html" class="nav-link active">
+<i class="fa-solid fa-utensils"></i>
+<span>Menu</span>
+</a>
+</li>
+
+<li>
+<a href="vendor-wallet.html" class="nav-link">
+<i class="fa-solid fa-wallet"></i>
+<span>Wallet</span>
+</a>
+</li>
+
+</ul>
+
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div class="main-content">
+
+<div class="menu-header">
+  <div class="header-left">
+    <h1>Menu Management</h1>
+    <p>Add and manage your food items</p>
+  </div>
+  <button class="add-item-btn" onclick="openModal()">
+    <i class="fas fa-plus"></i>
+    Add New Item
+  </button>
+</div>
+
+<!-- Menu Items Grid -->
+<div class="menu-grid" id="menuGrid">
+  <!-- Item 1 -->
+  <div class="menu-item-card" data-category="meals">
+    <div class="item-image">
+      <img src="../../images/burger.avif" alt="Classic Burger Meal">
+      <span class="category-badge">Meals</span>
+    </div>
+    <div class="item-info">
+      <h3 class="item-name">Classic Burger Meal</h3>
+      <p class="item-description">Juicy beef burger with fries and a drink</p>
+    </div>
+    <div class="item-footer">
+      <div class="price">$12.99</div>
+      <label class="stock-toggle">
+        <input type="checkbox" checked>
+        <span class="toggle-slider"></span>
+        <span class="toggle-label">In Stock</span>
+      </label>
+    </div>
+    <div class="actions">
+      <button class="edit-btn" onclick="openEditModal(this)">
+        <i class="fas fa-pencil"></i>
+        Edit
+      </button>
+      <button class="delete-btn" onclick="confirmDelete('Classic Burger Meal')">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Item 2 -->
+  <div class="menu-item-card" data-category="snacks">
+    <div class="item-image">
+      <img src="../../images/burger.avif" alt="Crispy French Fries">
+      <span class="category-badge">Snacks</span>
+    </div>
+    <div class="item-info">
+      <h3 class="item-name">Crispy French Fries</h3>
+      <p class="item-description">Golden crispy fries with sea salt</p>
+    </div>
+    <div class="item-footer">
+      <div class="price">$3.99</div>
+      <label class="stock-toggle">
+        <input type="checkbox" checked>
+        <span class="toggle-slider"></span>
+        <span class="toggle-label">In Stock</span>
+      </label>
+    </div>
+    <div class="actions">
+      <button class="edit-btn" onclick="openEditModal(this)">
+        <i class="fas fa-pencil"></i>
+        Edit
+      </button>
+      <button class="delete-btn" onclick="confirmDelete('Crispy French Fries')">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Item Modal -->
+<div class="modal" id="itemModal">
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modalTitle">Add New Item</h2>
+      <button class="modal-close" id="modalClose">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form id="itemForm">
+        <div class="form-group">
+          <label for="itemName">Item Name</label>
+          <input type="text" id="itemName" required>
+        </div>
+        <div class="form-group">
+          <label for="itemDescription">Description</label>
+          <textarea id="itemDescription" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="itemPrice">Price</label>
+          <input type="number" id="itemPrice" step="0.01" required>
+        </div>
+        <div class="form-group">
+          <label for="itemCategory">Category</label>
+          <select id="itemCategory" required>
+            <option value="meals">Meals</option>
+            <option value="snacks">Snacks</option>
+            <option value="drinks">Drinks</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="itemImage">Image URL</label>
+          <input type="url" id="itemImage" required>
+        </div>
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="itemStock" checked>
+            In Stock
+          </label>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" id="cancelBtn">Cancel</button>
+      <button class="btn-save" id="saveBtn">Save Item</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</div>
+
+<script src="../../script/dropdown.js"></script>
+<script src="../../script/hum.js"></script>
+<script src="../../script/menu.js"></script>
+<script>
+  // Menu functionality
+  let editingItem = null;
+
+  function openModal() {
+    document.getElementById('itemModal').classList.add('active');
+    document.getElementById('modalTitle').textContent = 'Add New Item';
+    document.getElementById('itemForm').reset();
+    editingItem = null;
+  }
+
+  function openEditModal(btn) {
+    const card = btn.closest('.menu-item-card');
+    editingItem = card;
+
+    document.getElementById('itemModal').classList.add('active');
+    document.getElementById('modalTitle').textContent = 'Edit Item';
+
+    document.getElementById('itemName').value = card.querySelector('.item-name').textContent;
+    document.getElementById('itemDescription').value = card.querySelector('.item-description').textContent;
+    document.getElementById('itemPrice').value = card.querySelector('.price').textContent.replace('$', '');
+    document.getElementById('itemCategory').value = card.dataset.category;
+    document.getElementById('itemImage').value = card.querySelector('img').src;
+    document.getElementById('itemStock').checked = card.querySelector('input[type="checkbox"]').checked;
+  }
+
+  function closeModal() {
+    document.getElementById('itemModal').classList.remove('active');
+  }
+
+  function confirmDelete(itemName) {
+    if (confirm(`Are you sure you want to delete "${itemName}"?`)) {
+      // Remove the item
+      event.target.closest('.menu-item-card').remove();
+    }
+  }
+
+  // Event listeners
+  document.addEventListener('DOMContentLoaded', () => {
+    // Menu toggle
+    document.getElementById('menuToggle')?.addEventListener('click', () => {
+      document.getElementById('sidebar').classList.toggle('active');
+    });
+
+    // Profile dropdown
+    document.getElementById('profileBtn')?.addEventListener('click', () => {
+      document.getElementById('profileDropdown').classList.toggle('active');
+    });
+
+    // Modal close
+    document.getElementById('modalClose')?.addEventListener('click', closeModal);
+    document.getElementById('modalOverlay')?.addEventListener('click', closeModal);
+    document.getElementById('cancelBtn')?.addEventListener('click', closeModal);
+
+    // Form submit
+    document.getElementById('itemForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      saveItem();
+    });
+  });
+
+  function saveItem() {
+    const name = document.getElementById('itemName').value;
+    const description = document.getElementById('itemDescription').value;
+    const price = document.getElementById('itemPrice').value;
+    const category = document.getElementById('itemCategory').value;
+    const image = document.getElementById('itemImage').value;
+    const inStock = document.getElementById('itemStock').checked;
+
+    if (editingItem) {
+      // Update existing item
+      editingItem.querySelector('.item-name').textContent = name;
+      editingItem.querySelector('.item-description').textContent = description;
+      editingItem.querySelector('.price').textContent = `$${price}`;
+      editingItem.dataset.category = category;
+      editingItem.querySelector('img').src = image;
+      editingItem.querySelector('input[type="checkbox"]').checked = inStock;
+      editingItem.querySelector('.category-badge').textContent = category.charAt(0).toUpperCase() + category.slice(1);
+    } else {
+      // Add new item
+      const newItem = document.createElement('div');
+      newItem.className = 'menu-item-card';
+      newItem.dataset.category = category;
+      newItem.innerHTML = `
+        <div class="item-image">
+          <img src="${image}" alt="${name}">
+          <span class="category-badge">${category.charAt(0).toUpperCase() + category.slice(1)}</span>
+        </div>
+        <div class="item-info">
+          <h3 class="item-name">${name}</h3>
+          <p class="item-description">${description}</p>
+        </div>
+        <div class="item-footer">
+          <div class="price">$${price}</div>
+          <label class="stock-toggle">
+            <input type="checkbox" ${inStock ? 'checked' : ''}>
+            <span class="toggle-slider"></span>
+            <span class="toggle-label">In Stock</span>
+          </label>
+        </div>
+        <div class="actions">
+          <button class="edit-btn" onclick="openEditModal(this)">
+            <i class="fas fa-pencil"></i>
+            Edit
+          </button>
+          <button class="delete-btn" onclick="confirmDelete('${name}')">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      `;
+      document.getElementById('menuGrid').appendChild(newItem);
+    }
+
+    closeModal();
+  }
+</script>
+
+</body>
+</html>

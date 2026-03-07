@@ -39,7 +39,7 @@
                 if (selectedRole === 'student') {
                     window.location.href = 'student/student-dashboard.html';
                 } else if (selectedRole === 'vendor') {
-                    window.location.href = 'vendor/vendor-dashboard.html';
+                    window.location.href = 'vendor-pages/vendor-dashboard.html';
                 } else if (selectedRole === 'admin') {
                     window.location.href = 'admin/admin-dashboard.html';
                 }

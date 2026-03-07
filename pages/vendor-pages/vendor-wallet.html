@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WM EAT SU - Vendor Wallet</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/navbar.css">
+    <link rel="stylesheet" href="../../css/vendor-css/wallet.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="top-nav">
+  <div class="nav-left">
+    <button class="menu-toggle" id="menuToggle">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <a href="#" class="logo">
+      <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+      <span class="logo-text">WM EAT SU</span>
+    </a>
+  </div>
+
+  <div class="profile">
+    <div class="profile-info">
+      <span class="profile-name">Vendor Name</span>
+      <span class="email">vendor@wm.edu.ph</span>
+    </div>
+    <div class="profile-dropdown">
+      <button class="profile-btn" id="profileBtn">
+        <img src="../../images/pfp.jpg" class="profile-pic">
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="dropdown-menu" id="profileDropdown">
+        <a href="../../index.html" class="dropdown-item">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Log Out</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="left-nav" id="sidebar">
+    <ul class="nav-list">
+      <li>
+        <a href="vendor-dashboard.html" class="nav-link">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a href="vendor-orders.html" class="nav-link">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <span>Orders</span>
+        </a>
+      </li>
+      <li>
+        <a href="vendor-reviews.html" class="nav-link">
+          <i class="fa-solid fa-star"></i>
+          <span>Reviews</span>
+        </a>
+      </li>
+      <li>
+        <a href="vendor-menu.html" class="nav-link">
+          <i class="fa-solid fa-utensils"></i>
+          <span>Menu</span>
+        </a>
+      </li>
+      <li>
+        <a href="vendor-wallet.html" class="nav-link active">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Wallet</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="wallet-container">
+
+      <!-- CURRENT BALANCE CARD -->
+      <div class="balance-card">
+        <div class="balance-header">
+          <h1>Wallet Balance</h1>
+          <i class="fa-solid fa-wallet"></i>
+        </div>
+        <div class="balance-amount">
+          <span class="currency-symbol">₱</span>
+          <span class="balance-value" id="walletBalance">2500.00</span>
+        </div>
+        <button class="topup-btn" id="topupBtn">
+          <i class="fa-solid fa-plus"></i> Withdraw Funds
+        </button>
+      </div>
+
+      <!-- TRANSACTION HISTORY -->
+      <div class="transaction-section">
+        <h2>Transaction History</h2>
+        <div class="transaction-list" id="transactionList">
+          <div class="transaction-item">
+            <div class="transaction-icon topup">
+              <i class="fa-solid fa-shopping-cart"></i>
+            </div>
+            <div class="transaction-details">
+              <p class="transaction-type">Order Payment - Burger Meal</p>
+              <p class="transaction-date">Mar 5, 2026 - 12:30 PM</p>
+            </div>
+            <div class="transaction-amount positive">+₱125.50</div>
+          </div>
+
+          <div class="transaction-item">
+            <div class="transaction-icon payment">
+              <i class="fa-solid fa-money-bill-wave"></i>
+            </div>
+            <div class="transaction-details">
+              <p class="transaction-type">Withdrawal to Bank Account</p>
+              <p class="transaction-date">Mar 3, 2026 - 3:15 PM</p>
+            </div>
+            <div class="transaction-amount negative">-₱500.00</div>
+          </div>
+
+          <div class="transaction-item">
+            <div class="transaction-icon topup">
+              <i class="fa-solid fa-shopping-cart"></i>
+            </div>
+            <div class="transaction-details">
+              <p class="transaction-type">Order Payment - Pizza Combo</p>
+              <p class="transaction-date">Mar 1, 2026 - 1:45 PM</p>
+            </div>
+            <div class="transaction-amount positive">+₱275.75</div>
+          </div>
+
+          <div class="transaction-item">
+            <div class="transaction-icon payment">
+              <i class="fa-solid fa-money-bill-wave"></i>
+            </div>
+            <div class="transaction-details">
+              <p class="transaction-type">Withdrawal to GCash</p>
+              <p class="transaction-date">Feb 28, 2026 - 10:20 AM</p>
+            </div>
+            <div class="transaction-amount negative">-₱1000.00</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- WITHDRAW FUNDS MODAL -->
+<div class="modal" id="topUpModal">
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="modal-content">
+
+    <div class="modal-header">
+      <h2>Withdraw Funds</h2>
+      <button class="modal-close" id="modalClose">
+        <i class="fa-solid fa-times"></i>
+      </button>
+    </div>
+
+    <div class="modal-body">
+
+      <!-- PAYMENT METHOD SELECTION -->
+      <div class="form-section">
+        <label class="form-label">Select Withdrawal Method</label>
+        <div class="payment-methods">
+          <button class="payment-method-btn" data-method="gcash">
+            <img src="../../images/gcash.png" alt="GCash" class="method-logo">
+            <span class="method-name">GCash</span>
+          </button>
+          <button class="payment-method-btn" data-method="maya">
+            <img src="../../images/maya.png" alt="Maya" class="method-logo">
+            <span class="method-name">Maya</span>
+          </button>
+          <button class="payment-method-btn" data-method="bank">
+            <i class="fa-solid fa-university"></i>
+            <span class="method-name">Bank Transfer</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- AMOUNT SELECTION -->
+      <div class="form-section">
+        <label class="form-label" for="topupAmount">Enter Amount (PHP)</label>
+        <div class="amount-input-group">
+          <span class="currency-symbol-input">₱</span>
+          <input
+            type="number"
+            id="topupAmount"
+            placeholder="0.00"
+            min="0"
+            step="0.01"
+          >
+        </div>
+      </div>
+
+      <!-- QUICK AMOUNT BUTTONS -->
+      <div class="form-section">
+        <label class="form-label">Quick Amount</label>
+        <div class="quick-amounts" id="quickAmounts">
+          <button class="quick-btn" data-amount="500">₱500</button>
+          <button class="quick-btn" data-amount="1000">₱1000</button>
+          <button class="quick-btn" data-amount="2000">₱2000</button>
+          <button class="quick-btn" data-amount="5000">₱5000</button>
+        </div>
+      </div>
+
+      <!-- ERROR MESSAGE -->
+      <div class="error-message" id="errorMessage"></div>
+
+      <!-- SELECTED INFO DISPLAY -->
+      <div class="topup-summary" id="topupSummary" style="display: none;">
+        <div class="summary-row">
+          <span>Withdrawal Method:</span>
+          <span id="selectedMethodDisplay">-</span>
+        </div>
+        <div class="summary-row">
+          <span>Amount:</span>
+          <span id="selectedAmountDisplay">-</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-cancel" id="cancelBtn">Cancel</button>
+      <button class="btn-confirm" id="confirmTopUpBtn" disabled>
+        Confirm Withdrawal
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- SUCCESS MESSAGE -->
+<div class="success-message" id="successMessage">
+  <div class="success-content">
+    <i class="fa-solid fa-check-circle"></i>
+    <p id="successText">Withdrawal successful!</p>
+  </div>
+</div>
+
+<script src="../../script/vendor-script/vendor-wallet.js"></script>
+
+</body>
+</html>

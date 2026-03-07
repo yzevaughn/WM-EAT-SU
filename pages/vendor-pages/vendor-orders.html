@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WM EAT SU - Vendor Orders</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/vendor-css/orders.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+
+<div class="top-nav">
+
+<div class="nav-left">
+
+<button class="menu-toggle" id="menuToggle">
+<i class="fa-solid fa-bars"></i>
+</button>
+
+<a href="#" class="logo">
+<div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+<span class="logo-text">WM EAT SU</span>
+</a>
+
+</div>
+
+<div class="profile">
+
+<div class="profile-info">
+<span class="profile-name">Vendor Name</span>
+<span class="email">vendor@wm.edu.ph</span>
+</div>
+
+<div class="profile-dropdown">
+<button class="profile-btn" id="profileBtn">
+<img src="../../images/pfp.jpg" class="profile-pic">
+<i class="fa-solid fa-chevron-down"></i>
+</button>
+<div class="dropdown-menu" id="profileDropdown">
+<a href="../../index.html" class="dropdown-item">
+<i class="fas fa-sign-out-alt"></i>
+<span>Log Out</span>
+</a>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- LAYOUT -->
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+
+<div class="left-nav" id="sidebar">
+
+<ul class="nav-list">
+
+<li>
+<a href="vendor-dashboard.html" class="nav-link">
+<i class="fa-solid fa-house"></i>
+<span>Dashboard</span>
+</a>
+</li>
+
+<li>
+<a href="vendor-orders.html" class="nav-link active">
+<i class="fa-solid fa-clock-rotate-left"></i>
+<span>Orders</span>
+</a>
+</li>
+
+<li>
+<a href="vendor-reviews.html" class="nav-link">
+<i class="fa-solid fa-star"></i>
+<span>Reviews</span>
+</a>
+</li>
+
+<li>
+<a href="vendor-menu.html" class="nav-link">
+<i class="fa-solid fa-utensils"></i>
+<span>Menu</span>
+</a>
+</li>
+
+<li>
+<a href="vendor-wallet.html" class="nav-link">
+<i class="fa-solid fa-wallet"></i>
+<span>Wallet</span>
+</a>
+</li>
+
+</ul>
+
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div class="main-content">
+
+<div class="orders-header">
+  <h1>Orders</h1>
+  <p>Manage incoming customer orders</p>
+</div>
+
+<!-- Filter Tabs Section -->
+<div class="filter-tabs">
+  <button class="tab-btn active" data-tab="All">All (2)</button>
+  <button class="tab-btn" data-tab="Pending">Pending (1)</button>
+  <button class="tab-btn" data-tab="Preparing">Preparing (0)</button>
+  <button class="tab-btn" data-tab="Ready">Ready (0)</button>
+</div>
+
+<!-- Order Cards -->
+<div class="orders-container">
+  <!-- Pending Order -->
+  <div class="order-card" data-status="Pending">
+    <div class="order-header">
+      <div class="order-info">
+        <h3>Order #01772877443686</h3>
+        <p>John Student</p>
+        <p>3/7/2026, 5:57:23 PM</p>
+      </div>
+      <span class="status-badge status-pending">Pending</span>
+    </div>
+
+    <div class="order-item">
+      <img src="../../images/burger.avif" alt="Classic Burger Meal" class="item-image">
+      <div class="item-details">
+        <h4>Classic Burger Meal</h4>
+        <p>Qty: 1</p>
+      </div>
+      <div class="item-price">$12.99</div>
+    </div>
+
+    <div class="pickup-info">
+      <i class="fas fa-clock"></i>
+      <span>Pickup: 12:00 PM</span>
+    </div>
+
+    <div class="order-footer">
+      <div class="total">Total: $12.99</div>
+      <button class="accept-btn" onclick="acceptOrder(this)">
+        <i class="fas fa-box"></i>
+        Accept & Prepare
+      </button>
+    </div>
+  </div>
+
+  <!-- Completed Order -->
+  <div class="order-card" data-status="Completed">
+    <div class="order-header">
+      <div class="order-info">
+        <h3>Order #01</h3>
+        <p>Jane Doe</p>
+        <p>3/6/2026, 2:15:00 PM</p>
+      </div>
+      <span class="status-badge status-completed">Completed</span>
+    </div>
+
+    <div class="order-item">
+      <img src="../../images/burger.avif" alt="Cheese Burger" class="item-image">
+      <div class="item-details">
+        <h4>Cheese Burger</h4>
+        <p>Qty: 2</p>
+      </div>
+      <div class="item-price">$21.98</div>
+    </div>
+
+    <div class="pickup-info">
+      <i class="fas fa-clock"></i>
+      <span>Pickup: 1:00 PM</span>
+    </div>
+
+    <div class="order-footer">
+      <div class="total">Total: $21.98</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</div>
+
+<script src="../../script/dropdown.js"></script>
+<script src="../../script/hum.js"></script>
+<script src="../../script/menu.js"></script>
+<script>
+  // Orders functionality
+  let activeTab = 'All';
+
+  function updateTabs() {
+    const tabs = document.querySelectorAll('.tab-btn');
+    const cards = document.querySelectorAll('.order-card');
+
+    // Update tab styles
+    tabs.forEach(tab => {
+      tab.classList.remove('active');
+      if (tab.dataset.tab === activeTab) {
+        tab.classList.add('active');
+      }
+    });
+
+    // Calculate counts
+    const counts = { All: 0, Pending: 0, Preparing: 0, Ready: 0, Completed: 0 };
+    cards.forEach(card => {
+      counts[card.dataset.status]++;
+      counts.All++;
+    });
+
+    // Update tab text
+    tabs.forEach(tab => {
+      const status = tab.dataset.tab;
+      tab.textContent = `${status} (${counts[status] || 0})`;
+    });
+
+    // Filter cards
+    cards.forEach(card => {
+      if (activeTab === 'All' || card.dataset.status === activeTab) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // Add event listeners
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeTab = btn.dataset.tab;
+      updateTabs();
+    });
+  });
+
+  // Initialize
+  updateTabs();
+
+  function acceptOrder(btn) {
+    const card = btn.closest('.order-card');
+    card.dataset.status = 'Preparing';
+    card.querySelector('.status-badge').className = 'status-badge status-preparing';
+    card.querySelector('.status-badge').textContent = 'Preparing';
+    btn.remove();
+    updateTabs();
+  }
+</script>
+
+</body>
+</html>

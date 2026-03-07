@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WM EAT SU - Vendor Reviews</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/vendor-css/reviews.css">
+  <style>
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .metric-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .metric-info h3 {
+      font-size: 14px;
+      font-weight: 500;
+      color: #6b7280;
+      margin: 0;
+    }
+    .metric-info p {
+      font-size: 24px;
+      font-weight: bold;
+      color: #1f2937;
+      margin: 4px 0 0 0;
+    }
+    .metric-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .icon-blue {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+    .icon-gold {
+      background: #fef3c7;
+      color: #a16207;
+    }
+    .icon-green {
+      background: #dcfce7;
+      color: #166534;
+    }
+    .icon-orange {
+      background: #fed7aa;
+      color: #9a3412;
+    }
+    .review-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .reviewer-info h3 {
+      font-size: 18px;
+      font-weight: bold;
+      color: #1f2937;
+      margin: 0;
+    }
+    .reviewer-info p {
+      margin: 2px 0;
+      color: #6b7280;
+      font-size: 14px;
+    }
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 12px;
+    }
+    .stars {
+      color: #fbbf24;
+    }
+    .review-text {
+      font-size: 16px;
+      color: #374151;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .response-section {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 16px;
+    }
+    .response-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .response-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+    .response-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .response-modal.show {
+      display: flex;
+    }
+    .response-modal-content {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .response-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .response-modal-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1f2937;
+      margin: 0;
+    }
+    .response-close-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #6b7280;
+    }
+    .response-textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      resize: vertical;
+      min-height: 120px;
+      margin-bottom: 16px;
+    }
+    .response-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+    .submit-btn {
+      background: #10b981;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .submit-btn:hover {
+      background: #059669;
+    }
+    .cancel-btn {
+      background: #6b7280;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .cancel-btn:hover {
+      background: #4b5563;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+
+<div class="top-nav">
+
+<div class="nav-left">
+
+<button class="menu-toggle" id="menuToggle">
+<i class="fa-solid fa-bars"></i>
+</button>
+
+<a href="#" class="logo">
+<div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+<span class="logo-text">WM EAT SU</span>
+</a>
+
+</div>
+
+<div class="profile">
+
+<div class="profile-info">
+<span class="profile-name">Vendor Name</span>
+<span class="email">vendor@wm.edu.ph</span>
+</div>
+
+<div class="profile-dropdown">
+<button class="profile-btn" id="profileBtn">
+<img src="../../images/pfp.jpg" class="profile-pic">
+<i class="fa-solid fa-chevron-down"></i>
+</button>
+<div class="dropdown-menu" id="profileDropdown">
+<a href="../../index.html" class="dropdown-item">
+<i class="fas fa-sign-out-alt"></i>
+<span>Log Out</span>
+</a>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- LAYOUT -->
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+
+<div class="left-nav" id="sidebar">
+
+<ul class="nav-list">
+
+<li>
+<a href="vendor-dashboard.html" class="nav-link">
+<i class="fa-solid fa-house"></i>
+<span>Dashboard</span>
+</a>
+</li>
+
+<li>
+<a href="vendor-orders.html" class="nav-link">
+<i class="fa-solid fa-clock-rotate-left"></i>
+<span>Orders</span>
+</a>
+</li>
+
+<li>
+<a href="vendor-reviews.html" class="nav-link active">
+<i class="fa-solid fa-star"></i>
+<span>Reviews</span>
+</a>
+</li>
+
+<li>
+<a href="vendor-menu.html" class="nav-link">
+<i class="fa-solid fa-utensils"></i>
+<span>Menu</span>
+</a>
+</li>
+
+<li>
+<a href="vendor-wallet.html" class="nav-link">
+<i class="fa-solid fa-wallet"></i>
+<span>Wallet</span>
+</a>
+</li>
+
+</ul>
+
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div class="main-content">
+
+<div class="reviews-content">
+
+<div class="reviews-header">
+  <h1>Vendor Reviews</h1>
+  <p>See customer feedback</p>
+</div>
+
+<!-- Metrics Grid -->
+<div class="metrics-grid">
+  <!-- Total Reviews -->
+  <div class="metric-card">
+    <div class="metric-info">
+      <h3>Total Reviews</h3>
+      <p>6</p>
+    </div>
+    <div class="metric-icon icon-blue">
+      <i class="fas fa-star"></i>
+    </div>
+  </div>
+
+  <!-- Average Rating -->
+  <div class="metric-card">
+    <div class="metric-info">
+      <h3>Average Rating</h3>
+      <p>4.3</p>
+    </div>
+    <div class="metric-icon icon-gold">
+      <i class="fas fa-chart-line"></i>
+    </div>
+  </div>
+
+  <!-- Positive Feedback -->
+  <div class="metric-card">
+    <div class="metric-info">
+      <h3>Positive Feedback</h3>
+      <p>83%</p>
+    </div>
+    <div class="metric-icon icon-green">
+      <i class="fas fa-thumbs-up"></i>
+    </div>
+  </div>
+
+  <!-- Pending Responses -->
+  <div class="metric-card">
+    <div class="metric-info">
+      <h3>Pending Responses</h3>
+      <p>4</p>
+    </div>
+    <div class="metric-icon icon-orange">
+      <i class="fas fa-clock"></i>
+    </div>
+  </div>
+</div>
+
+<!-- Review Card -->
+<div class="review-card">
+  <div class="review-header">
+    <div class="reviewer-info">
+      <h3>Sarah Johnson</h3>
+      <p>March 5, 2026</p>
+    </div>
+    <div class="rating">
+      <div class="stars">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+      </div>
+      <span>5.0</span>
+    </div>
+  </div>
+
+  <div class="review-text">
+    "The Classic Cheeseburger was absolutely delicious! Juicy and hot, with perfectly crispy fries. Will definitely be back!"
+  </div>
+</div>
+
+<!-- Response Modal -->
+<div class="response-modal" id="responseModal">
+  <div class="response-modal-content">
+    <div class="response-modal-header">
+      <h2 class="response-modal-title">Respond to Review</h2>
+      <button class="response-close-btn" onclick="closeResponseModal()">&times;</button>
+    </div>
+    <textarea class="response-textarea" placeholder="Write your response...">Dear Sarah,
+
+Thank you so much for your wonderful review! We're thrilled to hear that you enjoyed our Classic Cheeseburger and crispy fries. Your feedback means the world to us, and we're glad we could make your meal memorable. We look forward to serving you again soon!
+
+Best regards,
+WM EAT SU Team</textarea>
+    <div class="response-actions">
+      <button class="cancel-btn" onclick="closeResponseModal()">Cancel</button>
+      <button class="submit-btn" onclick="submitResponse()">Submit Response</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="../../script/dropdown.js"></script>
+<script src="../../script/hum.js"></script>
+<script src="../../script/menu.js"></script>
+<script>
+  function openResponseModal() {
+    document.getElementById('responseModal').classList.add('show');
+  }
+
+  function closeResponseModal() {
+    document.getElementById('responseModal').classList.remove('show');
+  }
+
+  function submitResponse() {
+    const textarea = document.querySelector('.response-textarea');
+    const response = textarea.value.trim();
+    
+    if (response) {
+      // Here you would typically send the response to your backend
+      alert('Response submitted successfully!');
+      closeResponseModal();
+      // Update pending responses count
+      const pendingCard = document.querySelector('.metric-info p');
+      if (pendingCard.textContent === '4') {
+        pendingCard.textContent = '3';
+      }
+    } else {
+      alert('Please enter a response.');
+    }
+  }
+
+  // Close modal when clicking outside
+  document.getElementById('responseModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeResponseModal();
+    }
+  });
+</script>
+
+</body>
+</html>
