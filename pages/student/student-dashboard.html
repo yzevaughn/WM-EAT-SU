@@ -11,475 +11,444 @@
   <link rel="stylesheet" href="../../css/navbar.css">
 </head>
 <body>
-  <body>
 
-<!-- NAVBAR -->
+  <!-- NAVBAR -->
+  <div class="top-nav">
+    <div class="nav-left">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
-<div class="top-nav">
+      <a href="#" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
+    </div>
 
-<div class="nav-left">
+    <div class="profile">
+      <div class="profile-info">
+        <span class="profile-name">Vaughn Evangelista</span>
+        <span class="email">vaughn.student@wm.edu.ph</span>
+      </div>
 
-<button class="menu-toggle" id="menuToggle">
-<i class="fa-solid fa-bars"></i>
-</button>
+      <div class="profile-dropdown">
+        <button class="profile-btn" id="profileBtn">
+          <img src="../../images/pfp.jpg" class="profile-pic">
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="profileDropdown">
+          <a href="../../index.html" class="dropdown-item">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Log Out</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<a href="#" class="logo">
-<div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-<span class="logo-text">WM EAT SU</span>
-</a>
+  <!-- LAYOUT -->
+  <div class="layout">
 
-</div>
+    <!-- SIDEBAR -->
+    <div class="left-nav" id="sidebar">
+      <ul class="nav-list">
+        <li>
+          <a href="student-dashboard.html" class="nav-link active">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-cart.html" class="nav-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Cart</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-order.html" class="nav-link">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Orders</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-wallet.html" class="nav-link">
+            <i class="fa-solid fa-wallet"></i>
+            <span>Wallet</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Campus Map</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-feedback.html" class="nav-link">
+            <i class="fa-regular fa-star"></i>
+            <span>Feedback</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-vendor-applications.html" class="nav-link">
+            <i class="fa-solid fa-rss"></i>
+            <span>Vendor Applications</span>
+          </a>
+        </li>
+      </ul>
+    </div>
 
-<div class="profile">
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
 
-<div class="profile-info">
-<span class="profile-name">Vaughn Evangelista</span>
-<span class="email">vaughn.student@wm.edu.ph</span>
-</div>
+      <!-- WELCOME BANNER -->
+      <div class="welcome-section">
+        <div class="welcome-text">
+          <h1>Welcome back, Vaughn!</h1>
+          <p>Let's grab some delicious food from our campus vendors today</p>
+        </div>
+        <div class="welcome-icon">
+          <i class="fa-solid fa-utensils"></i>
+        </div>
+      </div>
 
-<div class="profile-dropdown">
-<button class="profile-btn" id="profileBtn">
-<img src="../../images/pfp.jpg" class="profile-pic">
-<i class="fa-solid fa-chevron-down"></i>
-</button>
-<div class="dropdown-menu" id="profileDropdown">
-<a href="../../index.html" class="dropdown-item">
-<i class="fas fa-sign-out-alt"></i>
-<span>Log Out</span>
-</a>
-</div>
-</div>
+      <!-- STATS GRID -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="stat-label">Wallet Balance</div>
+            <div class="stat-icon green"><i class="fa-solid fa-wallet"></i></div>
+          </div>
+          <div class="stat-value">₱245.50</div>
+          
+        </div>
 
-</div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="stat-label">Cart Items</div>
+            <div class="stat-icon blue"><i class="fa-solid fa-cart-shopping"></i></div>
+          </div>
+          <div class="stat-value">3</div>
+   
+        </div>
 
-</div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <div class="stat-label">Total Orders</div>
+            <div class="stat-icon red"><i class="fa-solid fa-receipt"></i></div>
+          </div>
+          <div class="stat-value">24</div>
+         
+        </div>
+      </div>
 
-<!-- LAYOUT -->
+      <!-- ACTIVE ORDER SECTION -->
+      <div class="active-order-section">
+        <div class="section-header">
+          <h2>Active Order</h2>
+        </div>
 
-<div class="layout">
+        <div class="active-order-card">
+          <div class="order-header">
+            <div class="order-vendor">
+              <div class="vendor-icon"><i class="fa-solid fa-fire"></i></div>
+              <div class="vendor-info">
+                <h3>Spicy Dragon Kitchen</h3>
+                <p>Order ID: #ORD-2026-1547</p>
+              </div>
+            </div>
+            <div class="order-time">
+              <i class="fa-solid fa-clock"></i> Est. 12 mins
+            </div>
+          </div>
 
-<!-- SIDEBAR -->
+          <div class="order-footer">
+            <div class="order-total">
+              <span>Total:</span>
+              <strong>₱18.50</strong>
+            </div>
+            <button class="track-btn">Track Order</button>
+          </div>
+        </div>
+      </div>
 
-<div class="left-nav" id="sidebar">
+      <!-- QUICK ACTIONS -->
+      <div class="quick-section">
+        <h2>Quick Actions</h2>
+        <div class="quick-grid">
+          <div class="quick-card">
+            <div class="quick-icon red">
+              <i class="fa-solid fa-fire"></i>
+            </div>
+            <h3>Browse Food</h3>
+            <p>Explore menus from campus vendors</p>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
 
-<ul class="nav-list">
+          <div class="quick-card">
+            <div class="quick-icon blue">
+              <i class="fa-solid fa-map"></i>
+            </div>
+            <h3>Campus Map</h3>
+            <p>Find vendor locations near you</p>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
 
-<li>
-<a href="student-dashboard.html" class="nav-link active">
-<i class="fa-solid fa-house"></i>
-<span>Dashboard</span>
-</a>
-</li>
+          <div class="quick-card">
+            <div class="quick-icon purple">
+              <i class="fa-solid fa-history"></i>
+            </div>
+            <h3>Order History</h3>
+            <p>View past orders and favorites</p>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
 
+          <div class="quick-card">
+            <div class="quick-icon green">
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <h3>Leave Feedback</h3>
+            <p>Share your dining experience</p>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+          </div>
+        </div>
+      </div>
 
+      <!-- BROWSE FOOD SECTION -->
+      <div class="browse-food-section">
+        <div class="browse-header">
+          <h2>Browse Food</h2>
+          <p>Discover delicious meals from our campus vendors</p>
+        </div>
 
-<li>
-<a href="student-cart.html" class="nav-link">
-<i class="fa-solid fa-cart-shopping"></i>
-<span>Cart</span>
-</a>
-</li>
+        <div class="search-container">
+          <div class="search-bar">
+            <i class="fa-solid fa-search search-icon"></i>
+            <input type="text" placeholder="Search for food, vendors, or cuisine..." class="search-input">
+          </div>
+        </div>
 
-<li>
-<a href="student-order.html" class="nav-link">
-<i class="fa-solid fa-clock-rotate-left"></i>
-<span>Orders</span>
-</a>
-</li>
+        <div class="category-filters">
+          <button class="filter-btn active" data-category="all">All</button>
+          <button class="filter-btn" data-category="meals">Meals</button>
+          <button class="filter-btn" data-category="snacks">Snacks</button>
+          <button class="filter-btn" data-category="drinks">Drinks</button>
+          <button class="filter-btn" data-category="desserts">Desserts</button>
+          <button class="filter-btn" data-category="healthy">Healthy</button>
+          <button class="filter-btn" data-category="breakfast">Breakfast</button>
+        </div>
 
-<li>
-<a href="student-wallet.html" class="nav-link">
-<i class="fa-solid fa-wallet"></i>
-<span>Wallet</span>
-</a>
-</li>
+        <div class="food-grid">
+          <!-- Food Card 1 -->
+          <div class="food-card">
+            <div class="food-image">
+              <img src="../../images/burger.avif" alt="Classic Burger">
+              <div class="food-badge">Popular</div>
+            </div>
+            <div class="food-content">
+              <div class="food-header">
+                <h3>Classic Burger</h3>
+                <div class="food-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star-half-stroke"></i>
+                  <span>4.5</span>
+                </div>
+              </div>
+              <p class="food-description">Juicy beef patty with lettuce, tomato, cheese, and our special sauce</p>
+              <div class="food-vendor">
+                <i class="fa-solid fa-store"></i>
+                <span>Canteen 1</span>
+              </div>
+              <div class="food-footer">
+                <div class="food-price">$12.99</div>
+                <button class="add-btn">
+                  <i class="fa-solid fa-plus"></i>
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
 
-<li>
-<a href="#" class="nav-link">
-<i class="fa-solid fa-location-dot"></i>
-<span>Campus Map</span>
-</a>
-</li>
+          <!-- Food Card 2 -->
+          <div class="food-card">
+            <div class="food-image">
+              <img src="../../images/burger.avif" alt="Caesar Salad">
+            </div>
+            <div class="food-content">
+              <div class="food-header">
+                <h3>Caesar Salad</h3>
+                <div class="food-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>5.0</span>
+                </div>
+              </div>
+              <p class="food-description">Fresh romaine lettuce with parmesan, croutons, and creamy Caesar dressing</p>
+              <div class="food-vendor">
+                <i class="fa-solid fa-store"></i>
+                <span>Canteen 2</span>
+              </div>
+              <div class="food-footer">
+                <div class="food-price">$8.50</div>
+                <button class="add-btn">
+                  <i class="fa-solid fa-plus"></i>
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
 
-<li>
-<a href="#" class="nav-link">
-<i class="fa-regular fa-star"></i>
-<span>Feedback</span>
-</a>
-</li>
+          <!-- Food Card 3 -->
+          <div class="food-card">
+            <div class="food-image">
+              <img src="../../images/burger.avif" alt="Margherita Pizza">
+              <div class="food-badge">New</div>
+            </div>
+            <div class="food-content">
+              <div class="food-header">
+                <h3>Margherita Pizza</h3>
+                <div class="food-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star-half-stroke"></i>
+                  <span>4.7</span>
+                </div>
+              </div>
+              <p class="food-description">Traditional pizza with fresh mozzarella, basil, and tomato sauce</p>
+              <div class="food-vendor">
+                <i class="fa-solid fa-store"></i>
+                <span>Canteen 3</span>
+              </div>
+              <div class="food-footer">
+                <div class="food-price">$15.99</div>
+                <button class="add-btn">
+                  <i class="fa-solid fa-plus"></i>
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
 
-<li>
-<a href="#" class="nav-link">
-<i class="fa-solid fa-rss"></i>
-<span>Vendor Applications</span>
-</a>
-</li>
+          <!-- Food Card 4 -->
+          <div class="food-card">
+            <div class="food-image">
+              <img src="../../images/burger.avif" alt="Iced Coffee">
+            </div>
+            <div class="food-content">
+              <div class="food-header">
+                <h3>Iced Coffee</h3>
+                <div class="food-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>4.8</span>
+                </div>
+              </div>
+              <p class="food-description">Cold brewed coffee with milk and a hint of vanilla</p>
+              <div class="food-vendor">
+                <i class="fa-solid fa-store"></i>
+                <span>Canteen 5</span>
+              </div>
+              <div class="food-footer">
+                <div class="food-price">$4.25</div>
+                <button class="add-btn">
+                  <i class="fa-solid fa-plus"></i>
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
 
-</ul>
+          <!-- Food Card 5 -->
+          <div class="food-card">
+            <div class="food-image">
+              <img src="../../images/burger.avif" alt="Chocolate Brownie">
+            </div>
+            <div class="food-content">
+              <div class="food-header">
+                <h3>Chocolate Brownie</h3>
+                <div class="food-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star-half-stroke"></i>
+                  <span>4.6</span>
+                </div>
+              </div>
+              <p class="food-description">Rich and fudgy chocolate brownie with walnuts</p>
+              <div class="food-vendor">
+                <i class="fa-solid fa-store"></i>
+                <span>Canteen 7</span>
+              </div>
+              <div class="food-footer">
+                <div class="food-price">$6.99</div>
+                <button class="add-btn">
+                  <i class="fa-solid fa-plus"></i>
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
 
-</div>
+          <!-- Food Card 6 -->
+          <div class="food-card">
+            <div class="food-image">
+              <img src="../../images/burger.avif" alt="Avocado Toast">
+              <div class="food-badge">Healthy</div>
+            </div>
+            <div class="food-content">
+              <div class="food-header">
+                <h3>Avocado Toast</h3>
+                <div class="food-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <span>4.9</span>
+                </div>
+              </div>
+              <p class="food-description">Smashed avocado on toasted sourdough with cherry tomatoes and herbs</p>
+              <div class="food-vendor">
+                <i class="fa-solid fa-store"></i>
+                <span>Student Vendor</span>
+              </div>
+              <div class="food-footer">
+                <div class="food-price">$9.75</div>
+                <button class="add-btn">
+                  <i class="fa-solid fa-plus"></i>
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<!-- MAIN CONTENT -->
-
-<div class="main-content">
-
-<!-- WELCOME BANNER -->
-<div class="welcome-section">
-<div class="welcome-text">
-<h1>Welcome back, Vaughn!</h1>
-<p>Let's grab some delicious food from our campus vendors today</p>
-</div>
-<div class="welcome-icon">
-<i class="fa-solid fa-utensils"></i>
-</div>
-</div>
-
-<!-- STATS GRID -->
-<div class="stats-grid">
-
-<div class="stat-card">
-<div class="stat-top">
-<div class="stat-label">Wallet Balance</div>
-<div class="stat-icon green"><i class="fa-solid fa-wallet"></i></div>
-</div>
-<div class="stat-value">$245.50</div>
-<div class="stat-change positive">+$50 this month</div>
-</div>
-
-<div class="stat-card">
-<div class="stat-top">
-<div class="stat-label">Cart Items</div>
-<div class="stat-icon blue"><i class="fa-solid fa-cart-shopping"></i></div>
-</div>
-<div class="stat-value">3</div>
-<div class="stat-change">Ready to checkout</div>
-</div>
-
-<div class="stat-card">
-<div class="stat-top">
-<div class="stat-label">Total Orders</div>
-<div class="stat-icon red"><i class="fa-solid fa-receipt"></i></div>
-</div>
-<div class="stat-value">24</div>
-<div class="stat-change">This semester</div>
-</div>
-
-</div>
-
-<!-- ACTIVE ORDER SECTION -->
-<div class="active-order-section">
-<div class="section-header">
-<h2>Active Order</h2>
-<!-- badge removed -->
-</div>
-
-<div class="active-order-card">
-<div class="order-header">
-<div class="order-vendor">
-<div class="vendor-icon"><i class="fa-solid fa-fire"></i></div>
-<div class="vendor-info">
-<h3>Spicy Dragon Kitchen</h3>
-<p>Order ID: #ORD-2026-1547</p>
-</div>
-</div>
-<div class="order-time">
-<i class="fa-solid fa-clock"></i> Est. 12 mins
-</div>
-</div>
-
-<div class="order-footer">
-<div class="order-total">
-<span>Total:</span>
-<strong>$18.50</strong>
-</div>
-<button class="track-btn">Track Order</button>
-</div>
-</div>
-</div>
-
-<!-- QUICK ACTIONS -->
-<div class="quick-section">
-<h2>Quick Actions</h2>
-<div class="quick-grid">
-
-<div class="quick-card">
-<div class="quick-icon red">
-<i class="fa-solid fa-fire"></i>
-</div>
-<h3>Browse Food</h3>
-<p>Explore menus from campus vendors</p>
-<div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-</div>
-
-<div class="quick-card">
-<div class="quick-icon blue">
-<i class="fa-solid fa-map"></i>
-</div>
-<h3>Campus Map</h3>
-<p>Find vendor locations near you</p>
-<div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-</div>
-
-<div class="quick-card">
-<div class="quick-icon purple">
-<i class="fa-solid fa-history"></i>
-</div>
-<h3>Order History</h3>
-<p>View past orders and favorites</p>
-<div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-</div>
-
-<div class="quick-card">
-<div class="quick-icon green">
-<i class="fa-solid fa-star"></i>
-</div>
-<h3>Leave Feedback</h3>
-<p>Share your dining experience</p>
-<div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-</div>
-
-</div>
-</div>
-
-<!-- BROWSE FOOD SECTION -->
-<div class="browse-food-section">
-<div class="browse-header">
-<h2>Browse Food</h2>
-<p>Discover delicious meals from our campus vendors</p>
-</div>
-
-<div class="search-container">
-<div class="search-bar">
-<i class="fa-solid fa-search search-icon"></i>
-<input type="text" placeholder="Search for food, vendors, or cuisine..." class="search-input">
-</div>
-</div>
-
-<div class="category-filters">
-<button class="filter-btn active" data-category="all">All</button>
-<button class="filter-btn" data-category="meals">Meals</button>
-<button class="filter-btn" data-category="snacks">Snacks</button>
-<button class="filter-btn" data-category="drinks">Drinks</button>
-<button class="filter-btn" data-category="desserts">Desserts</button>
-<button class="filter-btn" data-category="healthy">Healthy</button>
-<button class="filter-btn" data-category="breakfast">Breakfast</button>
-</div>
-
-<div class="food-grid">
-<!-- Food Card 1 -->
-<div class="food-card">
-<div class="food-image">
-<img src="../../images/burger.avif" alt="Classic Burger">
-<div class="food-badge">Popular</div>
-</div>
-<div class="food-content">
-<div class="food-header">
-<h3>Classic Burger</h3>
-<div class="food-rating">
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star-half-stroke"></i>
-<span>4.5</span>
-</div>
-</div>
-<p class="food-description">Juicy beef patty with lettuce, tomato, cheese, and our special sauce</p>
-<div class="food-vendor">
-<i class="fa-solid fa-store"></i>
-<span>Canteen 1</span>
-</div>
-<div class="food-footer">
-<div class="food-price">$12.99</div>
-<button class="add-btn">
-<i class="fa-solid fa-plus"></i>
-Add to Cart
-</button>
-</div>
-</div>
-</div>
-
-<!-- Food Card 2 -->
-<div class="food-card">
-<div class="food-image">
-<img src="../../images/burger.avif" alt="Caesar Salad">
-</div>
-<div class="food-content">
-<div class="food-header">
-<h3>Caesar Salad</h3>
-<div class="food-rating">
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<span>5.0</span>
-</div>
-</div>
-<p class="food-description">Fresh romaine lettuce with parmesan, croutons, and creamy Caesar dressing</p>
-<div class="food-vendor">
-<i class="fa-solid fa-store"></i>
-<span>Canteen 2</span>
-</div>
-<div class="food-footer">
-<div class="food-price">$8.50</div>
-<button class="add-btn">
-<i class="fa-solid fa-plus"></i>
-Add to Cart
-</button>
-</div>
-</div>
-</div>
-
-<!-- Food Card 3 -->
-<div class="food-card">
-<div class="food-image">
-<img src="../../images/burger.avif" alt="Margherita Pizza">
-<div class="food-badge">New</div>
-</div>
-<div class="food-content">
-<div class="food-header">
-<h3>Margherita Pizza</h3>
-<div class="food-rating">
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star-half-stroke"></i>
-<span>4.7</span>
-</div>
-</div>
-<p class="food-description">Traditional pizza with fresh mozzarella, basil, and tomato sauce</p>
-<div class="food-vendor">
-<i class="fa-solid fa-store"></i>
-<span>Canteen 3</span>
-</div>
-<div class="food-footer">
-<div class="food-price">$15.99</div>
-<button class="add-btn">
-<i class="fa-solid fa-plus"></i>
-Add to Cart
-</button>
-</div>
-</div>
-</div>
-
-<!-- Food Card 4 -->
-<div class="food-card">
-<div class="food-image">
-<img src="../../images/burger.avif" alt="Iced Coffee">
-</div>
-<div class="food-content">
-<div class="food-header">
-<h3>Iced Coffee</h3>
-<div class="food-rating">
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<span>4.8</span>
-</div>
-</div>
-<p class="food-description">Cold brewed coffee with milk and a hint of vanilla</p>
-<div class="food-vendor">
-<i class="fa-solid fa-store"></i>
-<span>Canteen 5</span>
-</div>
-<div class="food-footer">
-<div class="food-price">$4.25</div>
-<button class="add-btn">
-<i class="fa-solid fa-plus"></i>
-Add to Cart
-</button>
-</div>
-</div>
-</div>
-
-<!-- Food Card 5 -->
-<div class="food-card">
-<div class="food-image">
-<img src="../../images/burger.avif" alt="Chocolate Brownie">
-</div>
-<div class="food-content">
-<div class="food-header">
-<h3>Chocolate Brownie</h3>
-<div class="food-rating">
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star-half-stroke"></i>
-<span>4.6</span>
-</div>
-</div>
-<p class="food-description">Rich and fudgy chocolate brownie with walnuts</p>
-<div class="food-vendor">
-<i class="fa-solid fa-store"></i>
-<span>Canteen 7</span>
-</div>
-<div class="food-footer">
-<div class="food-price">$6.99</div>
-<button class="add-btn">
-<i class="fa-solid fa-plus"></i>
-Add to Cart
-</button>
-</div>
-</div>
-</div>
-
-<!-- Food Card 6 -->
-<div class="food-card">
-<div class="food-image">
-<img src="../../images/burger.avif" alt="Avocado Toast">
-<div class="food-badge">Healthy</div>
-</div>
-<div class="food-content">
-<div class="food-header">
-<h3>Avocado Toast</h3>
-<div class="food-rating">
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<i class="fa-solid fa-star"></i>
-<span>4.9</span>
-</div>
-</div>
-<p class="food-description">Smashed avocado on toasted sourdough with cherry tomatoes and herbs</p>
-<div class="food-vendor">
-<i class="fa-solid fa-store"></i>
-<span>Student Vendor</span>
-</div>
-<div class="food-footer">
-<div class="food-price">$9.75</div>
-<button class="add-btn">
-<i class="fa-solid fa-plus"></i>
-Add to Cart
-</button>
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-
-</div>
-
-<script src="../../script/dropdown.js"></script>
-<script src="../../script/menu.js"></script>
-<script>
-// Filter buttons functionality
-const filterButtons = document.querySelectorAll('.filter-btn');
-filterButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    filterButtons.forEach(btn => btn.classList.remove('active'));
-    button.classList.add('active');
-  });
-});
-</script>
+  <script src="../../script/dropdown.js"></script>
+  <script src="../../script/menu.js"></script>
+  <script>
+    // Filter buttons functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+      });
+    });
+  </script>
 
 </body>
 </html>

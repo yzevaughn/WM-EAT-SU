@@ -1,169 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WM EAT SU - Order History</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WM EAT SU - Order History</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../../css/student/dashboard.css">
-    <link rel="stylesheet" href="../../css/navbar.css">
-    <link rel="stylesheet" href="../../css/student/order.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../../css/student/dashboard.css">
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/student/order.css">
 </head>
 <body>
 
-<!-- NAVBAR -->
-<div class="top-nav">
-  <div class="nav-left">
-    <button class="menu-toggle" onclick="toggleMenu()">
-      <i class="fa-solid fa-bars"></i>
-    </button>
-    <a href="#" class="logo">
-      <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-      <span class="logo-text">WM EAT SU</span>
-    </a>
-  </div>
-  <div class="profile">
-    <div class="profile-info">
-      <span class="profile-name">Vaughn Evangelista</span>
-      <span class="email">vaughn.student@wm.edu.ph</span>
-    </div>
-    <div class="profile-dropdown">
-      <button class="profile-btn" onclick="toggleProfileDropdown()">
-        <img src="../../images/pfp.jpg" class="profile-pic">
-        <i class="fa-solid fa-chevron-down"></i>
+  <!-- NAVBAR -->
+  <div class="top-nav">
+    <div class="nav-left">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
       </button>
-      <div class="dropdown-menu" id="profileDropdown">
-        <a href="../../index.html" class="dropdown-item">
-          <i class="fas fa-sign-out-alt"></i>
-          <span>Log Out</span>
-        </a>
-      </div>
+      <a href="#" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
     </div>
-  </div>
-</div>
-
-<!-- LAYOUT -->
-<div class="layout">
-  <!-- SIDEBAR -->
-  <div class="left-nav" id="sidebar">
-    <ul class="nav-list">
-      <li><a href="student-dashboard.html" class="nav-link"><i class="fa-solid fa-house"></i><span>Dashboard</span></a></li>
-      <li><a href="student-cart.html" class="nav-link"><i class="fa-solid fa-cart-shopping"></i><span>Cart</span></a></li>
-      <li><a href="student-order.html" class="nav-link active"><i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span></a></li>
-      <li><a href="student-wallet.html" class="nav-link"><i class="fa-solid fa-wallet"></i><span>Wallet</span></a></li>
-      <li><a href="#" class="nav-link"><i class="fa-solid fa-location-dot"></i><span>Campus Map</span></a></li>
-      <li><a href="#" class="nav-link"><i class="fa-regular fa-star"></i><span>Feedback</span></a></li>
-      <li><a href="#" class="nav-link"><i class="fa-solid fa-rss"></i><span>Vendor Applications</span></a></li>
-    </ul>
-  </div>
-
-  <!-- MAIN CONTENT -->
-  <div class="main-content">
-    <div class="orders-page">
-      <h1>Order History</h1>
-      <p class="page-subtitle">Track and manage your orders</p>
-      <div class="order-tabs">
-        <button class="tab active">Active (2)</button>
-        <button class="tab">Completed (1)</button>
-        <button class="tab">Cancelled (1)</button>
+    <div class="profile">
+      <div class="profile-info">
+        <span class="profile-name">Vaughn Evangelista</span>
+        <span class="email">vaughn.student@wm.edu.ph</span>
       </div>
-      <div class="orders-list">
-        <!-- active order ready -->
-        <div class="order-card">
-          <div class="order-card-header">
-            <div class="order-title">
-              <i class="fa-solid fa-check-circle status-icon"></i>
-              <span class="canteen-name">Canteen 3</span>
-            </div>
-            <span class="status-badge ready">Ready</span>
-          </div>
-          <p class="order-id">Order #02</p>
-          <p class="order-date">3/7/2026, 11:59:33 AM</p>
-          <div class="order-details">
-            <span>2x Iced Coffee</span>
-            <span class="order-price-align">$9.00</span>
-          </div>
-          <p class="pickup-text">Pickup: 2:00 PM</p>
-          <hr>
-          <div class="order-total-row">
-            <strong>Total: $9.00</strong>
-          </div>
-        </div>
-        <!-- active order pending -->
-        <div class="order-card">
-          <div class="order-card-header">
-            <div class="order-title">
-              <i class="fa-solid fa-clock status-icon"></i>
-              <span class="canteen-name">Canteen 2</span>
-            </div>
-            <span class="status-badge pending">Pending</span>
-          </div>
-          <p class="order-id">Order #1772861172498</p>
-          <p class="order-date">3/7/2026, 1:26:12 PM</p>
-          <div class="order-details">
-            <span>1x Classic Burger Meal</span>
-            <span class="order-price-align">$12.99</span>
-          </div>
-          <p class="pickup-text">Pickup: 12:00 PM</p>
-          <hr>
-          <div class="order-total-row">
-            <strong>Total: $12.99</strong>
-          </div>
-        </div>
-        <!-- completed order -->
-        <div class="order-card">
-          <div class="order-card-header">
-            <div class="order-title">
-              <i class="fa-solid fa-check-circle status-icon"></i>
-              <span class="canteen-name">Canteen 1</span>
-            </div>
-            <span class="status-badge ready">Completed</span>
-          </div>
-          <p class="order-id">Order #12345</p>
-          <p class="order-date">3/6/2026, 10:15:00 AM</p>
-          <div class="order-details">
-            <span>2x Avocado Salad</span>
-            <span class="order-price-align">$16.50</span>
-          </div>
-          <p class="pickup-text">Pickup: 11:00 AM</p>
-          <hr>
-          <div class="order-total-row">
-            <strong>Total: $16.50</strong>
-          </div>
-        </div>
-        <!-- cancelled order -->
-        <div class="order-card">
-          <div class="order-card-header">
-            <div class="order-title">
-              <i class="fa-solid fa-times-circle status-icon"></i>
-              <span class="canteen-name">Canteen 4</span>
-            </div>
-            <span class="status-badge cancelled">Cancelled</span>
-          </div>
-          <p class="order-id">Order #54321</p>
-          <p class="order-date">3/5/2026, 4:00:00 PM</p>
-          <div class="order-details">
-            <span>1x Chocolate Cake</span>
-            <span class="order-price-align">$5.00</span>
-          </div>
-          <p class="pickup-text">Pickup: 5:00 PM</p>
-          <hr>
-          <div class="order-total-row">
-            <strong>Total: $5.00</strong>
-          </div>
+      <div class="profile-dropdown">
+        <button class="profile-btn" id="profileBtn">
+          <img src="../../images/pfp.jpg" class="profile-pic">
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="profileDropdown">
+          <a href="../../index.html" class="dropdown-item">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Log Out</span>
+          </a>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<script>
-function toggleMenu(){document.getElementById("sidebar").classList.toggle("active");}
-function toggleProfileDropdown(){document.getElementById("profileDropdown").classList.toggle("active");}
-document.addEventListener("click", function(event){const profileDropdown=document.getElementById("profileDropdown");const profileBtn=document.querySelector(".profile-btn");if(!profileDropdown.contains(event.target)&&!profileBtn.contains(event.target)){profileDropdown.classList.remove("active");}});
-</script>
+  <!-- LAYOUT -->
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <div class="left-nav" id="sidebar">
+      <ul class="nav-list">
+        <li>
+          <a href="student-dashboard.html" class="nav-link">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-cart.html" class="nav-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Cart</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-order.html" class="nav-link active">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Orders</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-wallet.html" class="nav-link">
+            <i class="fa-solid fa-wallet"></i>
+            <span>Wallet</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Campus Map</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-feedback.html" class="nav-link">
+            <i class="fa-regular fa-star"></i>
+            <span>Feedback</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-vendor-applications.html" class="nav-link">
+            <i class="fa-solid fa-rss"></i>
+            <span>Vendor Applications</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <div class="orders-page">
+        <h1>Order History</h1>
+        <p class="page-subtitle">Track and manage your orders</p>
+        <div class="order-tabs">
+          <button class="tab active">Active (2)</button>
+          <button class="tab">Completed (1)</button>
+          <button class="tab">Cancelled (1)</button>
+        </div>
+        <div class="orders-list">
+          <!-- active order ready -->
+          <div class="order-card">
+            <div class="order-card-header">
+              <div class="order-title">
+                <i class="fa-solid fa-check-circle status-icon"></i>
+                <span class="canteen-name">Canteen 3</span>
+              </div>
+              <span class="status-badge ready">Ready</span>
+            </div>
+            <p class="order-id">Order #02</p>
+            <p class="order-date">3/7/2026, 11:59:33 AM</p>
+            <div class="order-details">
+              <span>2x Iced Coffee</span>
+              <span class="order-price-align">₱9.00</span>
+            </div>
+            <p class="pickup-text">Pickup: 2:00 PM</p>
+            <hr>
+            <div class="order-total-row">
+              <strong>Total: ₱9.00</strong>
+            </div>
+          </div>
+          <!-- active order pending -->
+          <div class="order-card">
+            <div class="order-card-header">
+              <div class="order-title">
+                <i class="fa-solid fa-clock status-icon"></i>
+                <span class="canteen-name">Canteen 2</span>
+              </div>
+              <span class="status-badge pending">Pending</span>
+            </div>
+            <p class="order-id">Order #1772861172498</p>
+            <p class="order-date">3/7/2026, 1:26:12 PM</p>
+            <div class="order-details">
+              <span>1x Classic Burger Meal</span>
+              <span class="order-price-align">₱12.99</span>
+            </div>
+            <p class="pickup-text">Pickup: 12:00 PM</p>
+            <hr>
+            <div class="order-total-row">
+              <strong>Total: ₱12.99</strong>
+            </div>
+          </div>
+          <!-- completed order -->
+          <div class="order-card">
+            <div class="order-card-header">
+              <div class="order-title">
+                <i class="fa-solid fa-check-circle status-icon"></i>
+                <span class="canteen-name">Canteen 1</span>
+              </div>
+              <span class="status-badge ready">Completed</span>
+            </div>
+            <p class="order-id">Order #12345</p>
+            <p class="order-date">3/6/2026, 10:15:00 AM</p>
+            <div class="order-details">
+              <span>2x Avocado Salad</span>
+              <span class="order-price-align">₱16.50</span>
+            </div>
+            <p class="pickup-text">Pickup: 11:00 AM</p>
+            <hr>
+            <div class="order-total-row">
+              <strong>Total: ₱16.50</strong>
+            </div>
+          </div>
+          <!-- cancelled order -->
+          <div class="order-card">
+            <div class="order-card-header">
+              <div class="order-title">
+                <i class="fa-solid fa-times-circle status-icon"></i>
+                <span class="canteen-name">Canteen 4</span>
+              </div>
+              <span class="status-badge cancelled">Cancelled</span>
+            </div>
+            <p class="order-id">Order #54321</p>
+            <p class="order-date">3/5/2026, 4:00:00 PM</p>
+            <div class="order-details">
+              <span>1x Chocolate Cake</span>
+              <span class="order-price-align">₱5.00</span>
+            </div>
+            <p class="pickup-text">Pickup: 5:00 PM</p>
+            <hr>
+            <div class="order-total-row">
+              <strong>Total: ₱5.00</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../script/dropdown.js"></script>
+  <script src="../../script/menu.js"></script>
 
 </body>
 </html>

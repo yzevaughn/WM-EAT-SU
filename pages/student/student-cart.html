@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WM EAT SU - Shopping Cart</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WM EAT SU - Shopping Cart</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,207 +13,198 @@
 </head>
 <body>
 
-<!-- NAVBAR -->
-<div class="top-nav">
-  <div class="nav-left">
-    <button class="menu-toggle" onclick="toggleMenu()">
-      <i class="fa-solid fa-bars"></i>
-    </button>
-
-    <a href="#" class="logo">
-      <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-      <span class="logo-text">WM EAT SU</span>
-    </a>
-  </div>
-
-  <div class="profile">
-    <div class="profile-info">
-      <span class="profile-name">Vaughn Evangelista</span>
-      <span class="email">vaughn.student@wm.edu.ph</span>
-    </div>
-    <div class="profile-dropdown">
-      <button class="profile-btn" onclick="toggleProfileDropdown()">
-        <img src="../../images/pfp.jpg" class="profile-pic">
-        <i class="fa-solid fa-chevron-down"></i>
+  <!-- NAVBAR -->
+  <div class="top-nav">
+    <div class="nav-left">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
       </button>
-      <div class="dropdown-menu" id="profileDropdown">
-        <a href="../../index.html" class="dropdown-item">
-          <i class="fas fa-sign-out-alt"></i>
-          <span>Log Out</span>
-        </a>
+
+      <a href="#" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
+    </div>
+
+    <div class="profile">
+      <div class="profile-info">
+        <span class="profile-name">Vaughn Evangelista</span>
+        <span class="email">vaughn.student@wm.edu.ph</span>
+      </div>
+      <div class="profile-dropdown">
+        <button class="profile-btn" id="profileBtn">
+          <img src="../../images/pfp.jpg" class="profile-pic">
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="profileDropdown">
+          <a href="../../index.html" class="dropdown-item">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Log Out</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 <!-- LAYOUT -->
-<div class="layout">
-
-  <!-- SIDEBAR -->
-  <div class="left-nav" id="sidebar">
-    <ul class="nav-list">
-      <li>
-        <a href="student-dashboard.html" class="nav-link">
-          <i class="fa-solid fa-house"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-      <li>
-        <a href="student-cart.html" class="nav-link active">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <span>Cart</span>
-        </a>
-      </li>
-      <li>
-        <a href="student-order.html" class="nav-link">
-          <i class="fa-solid fa-clock-rotate-left"></i>
-          <span>Orders</span>
-        </a>
-      </li>
-      <li>
-        <a href="student-wallet.html" class="nav-link">
-          <i class="fa-solid fa-wallet"></i>
-          <span>Wallet</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link">
-          <i class="fa-solid fa-location-dot"></i>
-          <span>Campus Map</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link">
-          <i class="fa-regular fa-star"></i>
-          <span>Feedback</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link">
-          <i class="fa-solid fa-rss"></i>
-          <span>Vendor Applications</span>
-        </a>
-      </li>
-    </ul>
   </div>
 
-  <!-- MAIN CONTENT -->
-  <div class="main-content">
-    <div class="cart-container">
-      <div class="cart-items">
-        <h2>Your Cart</h2>
-        <p class="cart-subtitle">3 item(s) in your cart</p>
-        <!-- example cart item -->
-        <div class="cart-item">
-          <button class="item-remove"><i class="fa-solid fa-trash"></i></button>
-          <div class="item-image">
-            <img src="../../images/burger.avif" alt="Classic Burger">
-          </div>
-          <div class="item-details">
-            <h3>Classic Burger</h3>
-            <p class="canteen-name">Burger Joint</p>
-            <div class="item-price-unit">$12.99</div>
-            <div class="item-meta">
-              <div class="item-quantity">
-                <button class="qty-btn minus"><i class="fa-solid fa-minus"></i></button>
-                <span class="qty-number">1</span>
-                <button class="qty-btn plus"><i class="fa-solid fa-plus"></i></button>
+  <!-- LAYOUT -->
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <div class="left-nav" id="sidebar">
+      <ul class="nav-list">
+        <li>
+          <a href="student-dashboard.html" class="nav-link">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-cart.html" class="nav-link active">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Cart</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-order.html" class="nav-link">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Orders</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-wallet.html" class="nav-link">
+            <i class="fa-solid fa-wallet"></i>
+            <span>Wallet</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Campus Map</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-feedback.html" class="nav-link">
+            <i class="fa-regular fa-star"></i>
+            <span>Feedback</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-vendor-applications.html" class="nav-link">
+            <i class="fa-solid fa-rss"></i>
+            <span>Vendor Applications</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <div class="cart-container">
+        <div class="cart-items">
+          <h2>Your Cart</h2>
+          <p class="cart-subtitle">3 item(s) in your cart</p>
+          
+          <!-- example cart item -->
+          <div class="cart-item">
+            <button class="item-remove"><i class="fa-solid fa-trash"></i></button>
+            <div class="item-image">
+              <img src="../../images/burger.avif" alt="Classic Burger">
+            </div>
+            <div class="item-details">
+              <h3>Classic Burger</h3>
+              <p class="canteen-name">Burger Joint</p>
+              <div class="item-price-unit">₱12.99</div>
+              <div class="item-meta">
+                <div class="item-quantity">
+                  <button class="qty-btn minus"><i class="fa-solid fa-minus"></i></button>
+                  <span class="qty-number">1</span>
+                  <button class="qty-btn plus"><i class="fa-solid fa-plus"></i></button>
+                </div>
+                <div class="item-total-price">₱12.99</div>
               </div>
-              <div class="item-total-price">$12.99</div>
             </div>
           </div>
-        </div>
-        <!-- example cart item -->
-        <div class="cart-item">
-          <button class="item-remove"><i class="fa-solid fa-trash"></i></button>
-          <div class="item-image">
-            <img src="../../images/burger.avif" alt="Caesar Salad">
-          </div>
-          <div class="item-details">
-            <h3>Caesar Salad</h3>
-            <p class="canteen-name">Green Garden</p>
-            <div class="item-price-unit">$8.50</div>
-            <div class="item-meta">
-              <div class="item-quantity">
-                <button class="qty-btn minus"><i class="fa-solid fa-minus"></i></button>
-                <span class="qty-number">2</span>
-                <button class="qty-btn plus"><i class="fa-solid fa-plus"></i></button>
+          
+          <!-- example cart item -->
+          <div class="cart-item">
+            <button class="item-remove"><i class="fa-solid fa-trash"></i></button>
+            <div class="item-image">
+              <img src="../../images/burger.avif" alt="Caesar Salad">
+            </div>
+            <div class="item-details">
+              <h3>Caesar Salad</h3>
+              <p class="canteen-name">Green Garden</p>
+              <div class="item-price-unit">₱8.50</div>
+              <div class="item-meta">
+                <div class="item-quantity">
+                  <button class="qty-btn minus"><i class="fa-solid fa-minus"></i></button>
+                  <span class="qty-number">2</span>
+                  <button class="qty-btn plus"><i class="fa-solid fa-plus"></i></button>
+                </div>
+                <div class="item-total-price">₱17.00</div>
               </div>
-              <div class="item-total-price">$17.00</div>
             </div>
           </div>
-        </div>
-        <!-- example cart item -->
-        <div class="cart-item">
-          <button class="item-remove"><i class="fa-solid fa-trash"></i></button>
-          <div class="item-image">
-            <img src="../../images/burger.avif" alt="Margherita Pizza">
-          </div>
-          <div class="item-details">
-            <h3>Margherita Pizza</h3>
-            <p class="canteen-name">Pizza Palace</p>
-            <div class="item-price-unit">$15.99</div>
-            <div class="item-meta">
-              <div class="item-quantity">
-                <button class="qty-btn minus"><i class="fa-solid fa-minus"></i></button>
-                <span class="qty-number">1</span>
-                <button class="qty-btn plus"><i class="fa-solid fa-plus"></i></button>
+          
+          <!-- example cart item -->
+          <div class="cart-item">
+            <button class="item-remove"><i class="fa-solid fa-trash"></i></button>
+            <div class="item-image">
+              <img src="../../images/burger.avif" alt="Margherita Pizza">
+            </div>
+            <div class="item-details">
+              <h3>Margherita Pizza</h3>
+              <p class="canteen-name">Pizza Palace</p>
+              <div class="item-price-unit">₱15.99</div>
+              <div class="item-meta">
+                <div class="item-quantity">
+                  <button class="qty-btn minus"><i class="fa-solid fa-minus"></i></button>
+                  <span class="qty-number">1</span>
+                  <button class="qty-btn plus"><i class="fa-solid fa-plus"></i></button>
+                </div>
+                <div class="item-total-price">₱15.99</div>
               </div>
-              <div class="item-total-price">$15.99</div>
             </div>
           </div>
-        </div>
-        <!-- repeat cart-item as needed -->
-      </div>
-
-      <div class="order-summary">
-        <h2>Order Summary</h2>
-        <div class="order-form">
-          <label for="pickup-time">Pickup Time</label>
-          <select id="pickup-time">
-            <option>In 15 minutes</option>
-            <option>In 30 minutes</option>
-            <option>In 1 hour</option>
-          </select>
-
-          <label for="special-instructions">Special Instructions</label>
-          <textarea id="special-instructions" rows="3" placeholder="Add a note..."></textarea>
-
-          <label for="payment-method">Payment Method</label>
-          <select id="payment-method">
-            <option>Wallet</option>
-            <option>Cash</option>
-          </select>
+          
         </div>
 
-        <div class="summary-details">
-          <div class="summary-row"><span>Subtotal</span><span>$12.99</span></div>
-          <div class="summary-row"><span>Wallet Balance</span><span>-$5.00</span></div>
-          <div class="summary-row total"><span>Total</span><span>$7.99</span></div>
+        <div class="order-summary">
+          <h2>Order Summary</h2>
+          <div class="order-form">
+            <label for="pickup-time">Pickup Time</label>
+            <select id="pickup-time">
+              <option>In 15 minutes</option>
+              <option>In 30 minutes</option>
+              <option>In 1 hour</option>
+            </select>
+
+            <label for="special-instructions">Special Instructions</label>
+            <textarea id="special-instructions" rows="3" placeholder="Add a note..."></textarea>
+
+            <label for="payment-method">Payment Method</label>
+            <select id="payment-method">
+              <option>Wallet</option>
+              <option>Cash</option>
+            </select>
+          </div>
+
+          <div class="summary-details">
+            <div class="summary-row"><span>Subtotal</span><span>₱12.99</span></div>
+            <div class="summary-row"><span>Wallet Balance</span><span>-₱5.00</span></div>
+            <div class="summary-row total"><span>Total</span><span>₱7.99</span></div>
+          </div>
+          <button class="checkout-btn">Place Order</button>
         </div>
-        <button class="checkout-btn">Place Order</button>
       </div>
     </div>
   </div>
-</div>
 
-<script>
-function toggleMenu(){
-  document.getElementById("sidebar").classList.toggle("active");
-}
-
-function toggleProfileDropdown(){
-  document.getElementById("profileDropdown").classList.toggle("active");
-}
-
-document.addEventListener("click", function(event){
-  const profileDropdown = document.getElementById("profileDropdown");
-  const profileBtn = document.querySelector(".profile-btn");
-  if(!profileDropdown.contains(event.target) && !profileBtn.contains(event.target)){
-    profileDropdown.classList.remove("active");
-  }
-});
-</script>
+  <script src="../../script/dropdown.js"></script>
+  <script src="../../script/menu.js"></script>
 
 </body>
 </html>

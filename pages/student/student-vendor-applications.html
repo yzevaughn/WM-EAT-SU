@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WM EAT SU - Become a Vendor</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../../css/student/dashboard.css">
+  <link rel="stylesheet" href="../../css/navbar.css">
+  <link rel="stylesheet" href="../../css/student/vendor-applications.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <div class="top-nav">
+    <div class="nav-left">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <a href="#" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
+    </div>
+
+    <div class="profile">
+      <div class="profile-info">
+        <span class="profile-name">Vaughn Evangelista</span>
+        <span class="email">vaughn.student@wm.edu.ph</span>
+      </div>
+      <div class="profile-dropdown">
+        <button class="profile-btn" id="profileBtn">
+          <img src="../../images/pfp.jpg" class="profile-pic">
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="profileDropdown">
+          <a href="../../index.html" class="dropdown-item">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Log Out</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAYOUT -->
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <div class="left-nav" id="sidebar">
+      <ul class="nav-list">
+        <li>
+          <a href="student-dashboard.html" class="nav-link">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-cart.html" class="nav-link">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Cart</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-order.html" class="nav-link">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Orders</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-wallet.html" class="nav-link">
+            <i class="fa-solid fa-wallet"></i>
+            <span>Wallet</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="nav-link">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Campus Map</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-feedback.html" class="nav-link">
+            <i class="fa-regular fa-star"></i>
+            <span>Feedback</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-vendor-applications.html" class="nav-link active">
+            <i class="fa-solid fa-rss"></i>
+            <span>Vendor Applications</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+
+      <!-- HEADER SECTION -->
+      <div class="vendor-header">
+        <div class="header-text">
+          <h1>Become a Vendor</h1>
+          <p>Apply to sell your food on campus</p>
+        </div>
+        <button class="btn-apply-now" id="applyNowBtn">
+          <i class="fa-solid fa-plus"></i> Apply Now
+        </button>
+      </div>
+
+      <!-- REQUIREMENTS CARD -->
+      <div class="requirements-card">
+        <div class="requirements-header">
+          <i class="fa-solid fa-info-circle"></i>
+          <h2>Application Requirements</h2>
+        </div>
+        <ul class="requirements-list">
+          <li>Provide detailed information about your food business</li>
+          <li>List all ingredients used in your products</li>
+          <li>Upload step-by-step preparation photos with descriptions</li>
+          <li>Admin will review your application within 3–5 business days</li>
+        </ul>
+      </div>
+
+      <!-- APPLICATION STATUS SECTION -->
+      <div class="applications-section">
+        <h2>Your Applications</h2>
+        <div class="applications-list" id="applicationsList">
+          <!-- Applications will be rendered here -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- APPLICATION MODAL -->
+  <div class="modal" id="applicationModal">
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <h2>Vendor Application Form</h2>
+        <button class="modal-close" id="modalClose">
+          <i class="fa-solid fa-times"></i>
+        </button>
+      </div>
+
+      <form class="application-form" id="applicationForm">
+        
+        <div class="form-group">
+          <label for="businessName">Business Name <span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="businessName" 
+            class="form-control" 
+            placeholder="e.g., Juan's Street Food"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="ownerName">Owner Name <span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="ownerName" 
+            class="form-control" 
+            placeholder="e.g., Juan Dela Cruz"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="productName">Product Name <span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="productName" 
+            class="form-control" 
+            placeholder="e.g., Chicken BBQ Skewers"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="ingredients">Ingredients <span class="required">*</span></label>
+          <textarea 
+            id="ingredients" 
+            class="form-control" 
+            rows="4"
+            placeholder="List all ingredients used in your products..."
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="prepPhotos">Preparation Photos (Optional)</label>
+          <input 
+            type="file" 
+            id="prepPhotos" 
+            class="form-control-file"
+            accept="image/*"
+            multiple
+          >
+          <small class="helper-text">Upload photos showing your food preparation process</small>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-cancel" id="cancelBtn">Cancel</button>
+          <button type="submit" class="btn-submit">Submit Application</button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <script src="../../script/dropdown.js"></script>
+  <script src="../../script/menu.js"></script>
+  <script src="../../script/vendor-application.js"></script>
+
+</body>
+</html>
