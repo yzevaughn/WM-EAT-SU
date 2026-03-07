@@ -117,7 +117,6 @@
 
 </ul>
 
-
 </div>
 
 <!-- MAIN CONTENT -->
@@ -243,162 +242,221 @@
 </div>
 
 <!-- BROWSE FOOD SECTION -->
-<div class="browse-section">
+<div class="browse-food-section">
 <div class="browse-header">
 <h2>Browse Food</h2>
-<p>Discover delicious meals from your favorite campus vendors</p>
+<p>Discover delicious meals from our campus vendors</p>
 </div>
 
-<!-- SEARCH BAR -->
 <div class="search-container">
 <div class="search-bar">
-<i class="fa-solid fa-search"></i>
-<input type="text" placeholder="Search for food, restaurants, or cuisines...">
+<i class="fa-solid fa-search search-icon"></i>
+<input type="text" placeholder="Search for food, vendors, or cuisine..." class="search-input">
 </div>
 </div>
 
-<!-- CATEGORY FILTERS -->
 <div class="category-filters">
-<button class="filter-btn active">All</button>
-<button class="filter-btn">Meals</button>
-<button class="filter-btn">Snacks</button>
-<button class="filter-btn">Drinks</button>
-<button class="filter-btn">Desserts</button>
-<button class="filter-btn">Healthy</button>
-<button class="filter-btn">Breakfast</button>
+<button class="filter-btn active" data-category="all">All</button>
+<button class="filter-btn" data-category="meals">Meals</button>
+<button class="filter-btn" data-category="snacks">Snacks</button>
+<button class="filter-btn" data-category="drinks">Drinks</button>
+<button class="filter-btn" data-category="desserts">Desserts</button>
+<button class="filter-btn" data-category="healthy">Healthy</button>
+<button class="filter-btn" data-category="breakfast">Breakfast</button>
 </div>
 
-<!-- FOOD CARDS GRID -->
 <div class="food-grid">
-
+<!-- Food Card 1 -->
 <div class="food-card">
 <div class="food-image">
-<img src="../../images/burger.avif" alt="Classic Cheeseburger">
+<img src="../../images/burger.avif" alt="Classic Burger">
 <div class="food-badge">Popular</div>
 </div>
 <div class="food-content">
 <div class="food-header">
-<h3>Classic Cheeseburger</h3>
+<h3>Classic Burger</h3>
 <div class="food-rating">
 <i class="fa-solid fa-star"></i>
-<span>4.8</span>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star-half-stroke"></i>
+<span>4.5</span>
 </div>
 </div>
-<p class="food-description">Juicy beef patty with melted cheese, lettuce, tomato, and our special sauce</p>
-<div class="food-vendor">Burger Joint</div>
+<p class="food-description">Juicy beef patty with lettuce, tomato, cheese, and our special sauce</p>
+<div class="food-vendor">
+<i class="fa-solid fa-store"></i>
+<span>Burger Joint</span>
+</div>
 <div class="food-footer">
 <div class="food-price">$12.99</div>
-<button class="add-btn">Add to Cart</button>
+<button class="add-btn">
+<i class="fa-solid fa-plus"></i>
+Add to Cart
+</button>
 </div>
 </div>
 </div>
 
-<div class="food-card">
-<div class="food-image">
-<img src="../../images/burger.avif" alt="Margherita Pizza">
-<div class="food-badge">Vegetarian</div>
-</div>
-<div class="food-content">
-<div class="food-header">
-<h3>Margherita Pizza</h3>
-<div class="food-rating">
-<i class="fa-solid fa-star"></i>
-<span>4.6</span>
-</div>
-</div>
-<p class="food-description">Fresh mozzarella, tomato sauce, basil, and olive oil on thin crust</p>
-<div class="food-vendor">Pizza Palace</div>
-<div class="food-footer">
-<div class="food-price">$14.50</div>
-<button class="add-btn">Add to Cart</button>
-</div>
-</div>
-</div>
-
+<!-- Food Card 2 -->
 <div class="food-card">
 <div class="food-image">
 <img src="../../images/burger.avif" alt="Caesar Salad">
-<div class="food-badge">Healthy</div>
 </div>
 <div class="food-content">
 <div class="food-header">
 <h3>Caesar Salad</h3>
 <div class="food-rating">
 <i class="fa-solid fa-star"></i>
-<span>4.7</span>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<span>5.0</span>
 </div>
 </div>
-<p class="food-description">Crisp romaine lettuce, parmesan cheese, croutons, and Caesar dressing</p>
-<div class="food-vendor">Green Eats</div>
+<p class="food-description">Fresh romaine lettuce with parmesan, croutons, and creamy Caesar dressing</p>
+<div class="food-vendor">
+<i class="fa-solid fa-store"></i>
+<span>Green Garden</span>
+</div>
 <div class="food-footer">
-<div class="food-price">$9.99</div>
-<button class="add-btn">Add to Cart</button>
+<div class="food-price">$8.50</div>
+<button class="add-btn">
+<i class="fa-solid fa-plus"></i>
+Add to Cart
+</button>
 </div>
 </div>
 </div>
 
+<!-- Food Card 3 -->
+<div class="food-card">
+<div class="food-image">
+<img src="../../images/burger.avif" alt="Margherita Pizza">
+<div class="food-badge">New</div>
+</div>
+<div class="food-content">
+<div class="food-header">
+<h3>Margherita Pizza</h3>
+<div class="food-rating">
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star-half-stroke"></i>
+<span>4.7</span>
+</div>
+</div>
+<p class="food-description">Traditional pizza with fresh mozzarella, basil, and tomato sauce</p>
+<div class="food-vendor">
+<i class="fa-solid fa-store"></i>
+<span>Pizza Palace</span>
+</div>
+<div class="food-footer">
+<div class="food-price">$15.99</div>
+<button class="add-btn">
+<i class="fa-solid fa-plus"></i>
+Add to Cart
+</button>
+</div>
+</div>
+</div>
+
+<!-- Food Card 4 -->
+<div class="food-card">
+<div class="food-image">
+<img src="../../images/burger.avif" alt="Iced Coffee">
+</div>
+<div class="food-content">
+<div class="food-header">
+<h3>Iced Coffee</h3>
+<div class="food-rating">
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<span>4.8</span>
+</div>
+</div>
+<p class="food-description">Cold brewed coffee with milk and a hint of vanilla</p>
+<div class="food-vendor">
+<i class="fa-solid fa-store"></i>
+<span>Cafe Corner</span>
+</div>
+<div class="food-footer">
+<div class="food-price">$4.25</div>
+<button class="add-btn">
+<i class="fa-solid fa-plus"></i>
+Add to Cart
+</button>
+</div>
+</div>
+</div>
+
+<!-- Food Card 5 -->
 <div class="food-card">
 <div class="food-image">
 <img src="../../images/burger.avif" alt="Chocolate Brownie">
-<div class="food-badge">Sweet</div>
 </div>
 <div class="food-content">
 <div class="food-header">
 <h3>Chocolate Brownie</h3>
 <div class="food-rating">
 <i class="fa-solid fa-star"></i>
-<span>4.9</span>
-</div>
-</div>
-<p class="food-description">Rich chocolate brownie with vanilla ice cream and chocolate sauce</p>
-<div class="food-vendor">Sweet Treats</div>
-<div class="food-footer">
-<div class="food-price">$6.50</div>
-<button class="add-btn">Add to Cart</button>
-</div>
-</div>
-</div>
-
-<div class="food-card">
-<div class="food-image">
-<img src="../../images/burger.avif" alt="Chicken Tacos">
-<div class="food-badge">Spicy</div>
-</div>
-<div class="food-content">
-<div class="food-header">
-<h3>Chicken Tacos</h3>
-<div class="food-rating">
 <i class="fa-solid fa-star"></i>
-<span>4.5</span>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star-half-stroke"></i>
+<span>4.6</span>
 </div>
 </div>
-<p class="food-description">Grilled chicken with salsa, cheese, and sour cream in corn tortillas</p>
-<div class="food-vendor">Taco Time</div>
+<p class="food-description">Rich and fudgy chocolate brownie with walnuts</p>
+<div class="food-vendor">
+<i class="fa-solid fa-store"></i>
+<span>Sweet Treats</span>
+</div>
 <div class="food-footer">
-<div class="food-price">$11.99</div>
-<button class="add-btn">Add to Cart</button>
+<div class="food-price">$6.99</div>
+<button class="add-btn">
+<i class="fa-solid fa-plus"></i>
+Add to Cart
+</button>
 </div>
 </div>
 </div>
 
+<!-- Food Card 6 -->
 <div class="food-card">
 <div class="food-image">
-<img src="../../images/burger.avif" alt="Green Smoothie">
+<img src="../../images/burger.avif" alt="Avocado Toast">
 <div class="food-badge">Healthy</div>
 </div>
 <div class="food-content">
 <div class="food-header">
-<h3>Green Smoothie</h3>
+<h3>Avocado Toast</h3>
 <div class="food-rating">
 <i class="fa-solid fa-star"></i>
-<span>4.4</span>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<span>4.9</span>
 </div>
 </div>
-<p class="food-description">Spinach, banana, almond milk, and honey blended to perfection</p>
-<div class="food-vendor">Juice Bar</div>
+<p class="food-description">Smashed avocado on toasted sourdough with cherry tomatoes and herbs</p>
+<div class="food-vendor">
+<i class="fa-solid fa-store"></i>
+<span>Healthy Bites</span>
+</div>
 <div class="food-footer">
-<div class="food-price">$7.99</div>
-<button class="add-btn">Add to Cart</button>
+<div class="food-price">$9.75</div>
+<button class="add-btn">
+<i class="fa-solid fa-plus"></i>
+Add to Cart
+</button>
 </div>
 </div>
 </div>
@@ -426,6 +484,15 @@ const profileBtn = document.querySelector(".profile-btn");
 if(!profileDropdown.contains(event.target) && !profileBtn.contains(event.target)){
 profileDropdown.classList.remove("active");
 }
+});
+
+// Filter buttons functionality
+const filterButtons = document.querySelectorAll('.filter-btn');
+filterButtons.forEach(button => {
+button.addEventListener('click', () => {
+filterButtons.forEach(btn => btn.classList.remove('active'));
+button.classList.add('active');
+});
 });
 
 </script>
