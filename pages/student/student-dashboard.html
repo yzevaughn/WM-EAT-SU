@@ -172,7 +172,7 @@
           <div class="order-footer">
             <div class="order-total">
               <span>Total:</span>
-              <strong>₱18.50</strong>
+              <strong>₱20.00</strong>
             </div>
             <button class="track-btn">Track Order</button>
           </div>
@@ -183,46 +183,46 @@
       <div class="quick-section">
         <h2>Quick Actions</h2>
         <div class="quick-grid">
-          <div class="quick-card">
+          <a href="#browse-food" class="quick-card">
             <div class="quick-icon red">
               <i class="fa-solid fa-fire"></i>
             </div>
             <h3>Browse Food</h3>
             <p>Explore menus from campus vendors</p>
             <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-          </div>
+          </a>
 
-          <div class="quick-card">
+          <a href="#" class="quick-card">
             <div class="quick-icon blue">
               <i class="fa-solid fa-map"></i>
             </div>
             <h3>Campus Map</h3>
             <p>Find vendor locations near you</p>
             <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-          </div>
+          </a>
 
-          <div class="quick-card">
+          <a href="student-order.html" class="quick-card">
             <div class="quick-icon purple">
               <i class="fa-solid fa-history"></i>
             </div>
             <h3>Order History</h3>
             <p>View past orders and favorites</p>
             <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-          </div>
+          </a>
 
-          <div class="quick-card">
+          <a href="student-feedback.html" class="quick-card">
             <div class="quick-icon green">
               <i class="fa-solid fa-star"></i>
             </div>
             <h3>Leave Feedback</h3>
             <p>Share your dining experience</p>
             <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-          </div>
+          </a>
         </div>
       </div>
 
       <!-- BROWSE FOOD SECTION -->
-      <div class="browse-food-section">
+      <div class="browse-food-section" id="browse-food">
         <div class="browse-header">
           <h2>Browse Food</h2>
           <p>Discover delicious meals from our campus vendors</p>
@@ -270,7 +270,7 @@
                 <span>Canteen 1</span>
               </div>
               <div class="food-footer">
-                <div class="food-price">$12.99</div>
+                <div class="food-price">₱30.00</div>
                 <button class="add-btn">
                   <i class="fa-solid fa-plus"></i>
                   Add to Cart
@@ -302,7 +302,7 @@
                 <span>Student vendor</span>
               </div>
               <div class="food-footer">
-                <div class="food-price">$8.50</div>
+                <div class="food-price">₱20.00</div>
                 <button class="add-btn">
                   <i class="fa-solid fa-plus"></i>
                   Add to Cart
@@ -335,7 +335,7 @@
                 <span>Canteen 3</span>
               </div>
               <div class="food-footer">
-                <div class="food-price">$15.99</div>
+                <div class="food-price">₱15.99</div>
                 <button class="add-btn">
                   <i class="fa-solid fa-plus"></i>
                   Add to Cart
@@ -367,7 +367,7 @@
                 <span>Canteen 5</span>
               </div>
               <div class="food-footer">
-                <div class="food-price">$4.25</div>
+                <div class="food-price">₱30.00</div>
                 <button class="add-btn">
                   <i class="fa-solid fa-plus"></i>
                   Add to Cart
@@ -399,7 +399,7 @@
                 <span>Canteen 7</span>
               </div>
               <div class="food-footer">
-                <div class="food-price">$6.99</div>
+                <div class="food-price">₱25.00</div>
                 <button class="add-btn">
                   <i class="fa-solid fa-plus"></i>
                   Add to Cart
@@ -432,7 +432,7 @@
                 <span>Canteen 2</span>
               </div>
               <div class="food-footer">
-                <div class="food-price">$9.75</div>
+                <div class="food-price">₱25.00</div>
                 <button class="add-btn">
                   <i class="fa-solid fa-plus"></i>
                   Add to Cart
@@ -447,41 +447,7 @@
 
   <script src="../../script/dropdown.js"></script>
   <script src="../../script/menu.js"></script>
-  <script>
-    // Filter buttons functionality
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const foodCards = document.querySelectorAll('.food-card');
-
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const selectedCategory = button.getAttribute('data-category');
-        
-        // Update active button
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-        
-        // Filter food cards
-        foodCards.forEach(card => {
-          const cardCategories = card.getAttribute('data-category').split(' ');
-          
-          if (selectedCategory === 'all' || cardCategories.includes(selectedCategory)) {
-            card.style.display = 'block';
-            // Trigger a reflow to ensure animation works
-            card.offsetHeight;
-            card.classList.add('visible');
-          } else {
-            card.classList.remove('visible');
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-
-    // Initialize with 'all' category visible
-    foodCards.forEach(card => {
-      card.classList.add('visible');
-    });
-  </script>
+  <script src ="../../script/student-script/dashboard-browse-food.js"> </script>
 
 </body>
 </html>
