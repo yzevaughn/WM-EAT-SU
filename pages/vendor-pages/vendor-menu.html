@@ -111,10 +111,6 @@
     <h1>Menu Management</h1>
     <p>Add and manage your food items</p>
   </div>
-  <button class="add-item-btn" onclick="openModal()">
-    <i class="fas fa-plus"></i>
-    Add New Item
-  </button>
 </div>
 
 <!-- Menu Items Grid -->
@@ -130,7 +126,7 @@
       <p class="item-description">Juicy beef burger with fries and a drink</p>
     </div>
     <div class="item-footer">
-      <div class="price">$12.99</div>
+      <div class="price">₱12.99</div>
       <label class="stock-toggle">
         <input type="checkbox" checked>
         <span class="toggle-slider"></span>
@@ -138,11 +134,11 @@
       </label>
     </div>
     <div class="actions">
-      <button class="edit-btn" onclick="openEditModal(this)">
+      <button class="edit-btn">
         <i class="fas fa-pencil"></i>
         Edit
       </button>
-      <button class="delete-btn" onclick="confirmDelete('Classic Burger Meal')">
+      <button class="delete-btn">
         <i class="fas fa-trash"></i>
       </button>
     </div>
@@ -159,7 +155,7 @@
       <p class="item-description">Golden crispy fries with sea salt</p>
     </div>
     <div class="item-footer">
-      <div class="price">$3.99</div>
+      <div class="price">₱3.99</div>
       <label class="stock-toggle">
         <input type="checkbox" checked>
         <span class="toggle-slider"></span>
@@ -167,11 +163,11 @@
       </label>
     </div>
     <div class="actions">
-      <button class="edit-btn" onclick="openEditModal(this)">
+      <button class="edit-btn">
         <i class="fas fa-pencil"></i>
         Edit
       </button>
-      <button class="delete-btn" onclick="confirmDelete('Crispy French Fries')">
+      <button class="delete-btn">
         <i class="fas fa-trash"></i>
       </button>
     </div>
@@ -234,124 +230,7 @@
 </div>
 
 <script src="../../script/dropdown.js"></script>
-<script src="../../script/hum.js"></script>
 <script src="../../script/menu.js"></script>
-<script>
-  // Menu functionality
-  let editingItem = null;
-
-  function openModal() {
-    document.getElementById('itemModal').classList.add('active');
-    document.getElementById('modalTitle').textContent = 'Add New Item';
-    document.getElementById('itemForm').reset();
-    editingItem = null;
-  }
-
-  function openEditModal(btn) {
-    const card = btn.closest('.menu-item-card');
-    editingItem = card;
-
-    document.getElementById('itemModal').classList.add('active');
-    document.getElementById('modalTitle').textContent = 'Edit Item';
-
-    document.getElementById('itemName').value = card.querySelector('.item-name').textContent;
-    document.getElementById('itemDescription').value = card.querySelector('.item-description').textContent;
-    document.getElementById('itemPrice').value = card.querySelector('.price').textContent.replace('$', '');
-    document.getElementById('itemCategory').value = card.dataset.category;
-    document.getElementById('itemImage').value = card.querySelector('img').src;
-    document.getElementById('itemStock').checked = card.querySelector('input[type="checkbox"]').checked;
-  }
-
-  function closeModal() {
-    document.getElementById('itemModal').classList.remove('active');
-  }
-
-  function confirmDelete(itemName) {
-    if (confirm(`Are you sure you want to delete "${itemName}"?`)) {
-      // Remove the item
-      event.target.closest('.menu-item-card').remove();
-    }
-  }
-
-  // Event listeners
-  document.addEventListener('DOMContentLoaded', () => {
-    // Menu toggle
-    document.getElementById('menuToggle')?.addEventListener('click', () => {
-      document.getElementById('sidebar').classList.toggle('active');
-    });
-
-    // Profile dropdown
-    document.getElementById('profileBtn')?.addEventListener('click', () => {
-      document.getElementById('profileDropdown').classList.toggle('active');
-    });
-
-    // Modal close
-    document.getElementById('modalClose')?.addEventListener('click', closeModal);
-    document.getElementById('modalOverlay')?.addEventListener('click', closeModal);
-    document.getElementById('cancelBtn')?.addEventListener('click', closeModal);
-
-    // Form submit
-    document.getElementById('itemForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      saveItem();
-    });
-  });
-
-  function saveItem() {
-    const name = document.getElementById('itemName').value;
-    const description = document.getElementById('itemDescription').value;
-    const price = document.getElementById('itemPrice').value;
-    const category = document.getElementById('itemCategory').value;
-    const image = document.getElementById('itemImage').value;
-    const inStock = document.getElementById('itemStock').checked;
-
-    if (editingItem) {
-      // Update existing item
-      editingItem.querySelector('.item-name').textContent = name;
-      editingItem.querySelector('.item-description').textContent = description;
-      editingItem.querySelector('.price').textContent = `$${price}`;
-      editingItem.dataset.category = category;
-      editingItem.querySelector('img').src = image;
-      editingItem.querySelector('input[type="checkbox"]').checked = inStock;
-      editingItem.querySelector('.category-badge').textContent = category.charAt(0).toUpperCase() + category.slice(1);
-    } else {
-      // Add new item
-      const newItem = document.createElement('div');
-      newItem.className = 'menu-item-card';
-      newItem.dataset.category = category;
-      newItem.innerHTML = `
-        <div class="item-image">
-          <img src="${image}" alt="${name}">
-          <span class="category-badge">${category.charAt(0).toUpperCase() + category.slice(1)}</span>
-        </div>
-        <div class="item-info">
-          <h3 class="item-name">${name}</h3>
-          <p class="item-description">${description}</p>
-        </div>
-        <div class="item-footer">
-          <div class="price">$${price}</div>
-          <label class="stock-toggle">
-            <input type="checkbox" ${inStock ? 'checked' : ''}>
-            <span class="toggle-slider"></span>
-            <span class="toggle-label">In Stock</span>
-          </label>
-        </div>
-        <div class="actions">
-          <button class="edit-btn" onclick="openEditModal(this)">
-            <i class="fas fa-pencil"></i>
-            Edit
-          </button>
-          <button class="delete-btn" onclick="confirmDelete('${name}')">
-            <i class="fas fa-trash"></i>
-          </button>
-        </div>
-      `;
-      document.getElementById('menuGrid').appendChild(newItem);
-    }
-
-    closeModal();
-  }
-</script>
 
 </body>
 </html>

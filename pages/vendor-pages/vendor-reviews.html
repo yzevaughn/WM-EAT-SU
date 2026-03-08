@@ -410,42 +410,7 @@ WM EAT SU Team</textarea>
 </div>
 
 <script src="../../script/dropdown.js"></script>
-<script src="../../script/hum.js"></script>
 <script src="../../script/menu.js"></script>
-<script>
-  function openResponseModal() {
-    document.getElementById('responseModal').classList.add('show');
-  }
-
-  function closeResponseModal() {
-    document.getElementById('responseModal').classList.remove('show');
-  }
-
-  function submitResponse() {
-    const textarea = document.querySelector('.response-textarea');
-    const response = textarea.value.trim();
-    
-    if (response) {
-      // Here you would typically send the response to your backend
-      alert('Response submitted successfully!');
-      closeResponseModal();
-      // Update pending responses count
-      const pendingCard = document.querySelector('.metric-info p');
-      if (pendingCard.textContent === '4') {
-        pendingCard.textContent = '3';
-      }
-    } else {
-      alert('Please enter a response.');
-    }
-  }
-
-  // Close modal when clicking outside
-  document.getElementById('responseModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-      closeResponseModal();
-    }
-  });
-</script>
 
 </body>
 </html>

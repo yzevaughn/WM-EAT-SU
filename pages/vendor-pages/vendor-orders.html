@@ -106,152 +106,250 @@
 
 <div class="main-content">
 
-<div class="orders-header">
+<div class="orders-page">
   <h1>Orders</h1>
-  <p>Manage incoming customer orders</p>
-</div>
+  <p class="page-subtitle">Manage incoming customer orders</p>
 
-<!-- Filter Tabs Section -->
-<div class="filter-tabs">
-  <button class="tab-btn active" data-tab="All">All (2)</button>
-  <button class="tab-btn" data-tab="Pending">Pending (1)</button>
-  <button class="tab-btn" data-tab="Preparing">Preparing (0)</button>
-  <button class="tab-btn" data-tab="Ready">Ready (0)</button>
-</div>
-
-<!-- Order Cards -->
-<div class="orders-container">
-  <!-- Pending Order -->
-  <div class="order-card" data-status="Pending">
-    <div class="order-header">
-      <div class="order-info">
-        <h3>Order #01772877443686</h3>
-        <p>John Student</p>
-        <p>3/7/2026, 5:57:23 PM</p>
-      </div>
-      <span class="status-badge status-pending">Pending</span>
-    </div>
-
-    <div class="order-item">
-      <img src="../../images/burger.avif" alt="Classic Burger Meal" class="item-image">
-      <div class="item-details">
-        <h4>Classic Burger Meal</h4>
-        <p>Qty: 1</p>
-      </div>
-      <div class="item-price">$12.99</div>
-    </div>
-
-    <div class="pickup-info">
-      <i class="fas fa-clock"></i>
-      <span>Pickup: 12:00 PM</span>
-    </div>
-
-    <div class="order-footer">
-      <div class="total">Total: $12.99</div>
-      <button class="accept-btn" onclick="acceptOrder(this)">
-        <i class="fas fa-box"></i>
-        Accept & Prepare
-      </button>
-    </div>
+  <!-- Filter Tabs Section -->
+  <div class="filter-tabs">
+    <button class="tab-btn active" data-tab="Pending">Pending (2)</button>
+    <button class="tab-btn" data-tab="Preparing">Preparing (2)</button>
+    <button class="tab-btn" data-tab="Ready">Ready (2)</button>
+    <button class="tab-btn" data-tab="Completed">Completed (2)</button>
+    <button class="tab-btn" data-tab="Cancelled">Cancelled (1)</button>
   </div>
 
-  <!-- Completed Order -->
-  <div class="order-card" data-status="Completed">
-    <div class="order-header">
-      <div class="order-info">
-        <h3>Order #01</h3>
-        <p>Jane Doe</p>
-        <p>3/6/2026, 2:15:00 PM</p>
+  <!-- Order Cards -->
+  <div class="orders-list">
+    <!-- Pending Order 1 -->
+    <div class="order-card" data-status="Pending">
+      <div class="order-card-header">
+        <div class="order-title">
+          <i class="fa-solid fa-clock status-icon pending-icon"></i>
+          <span class="customer-name">John Student</span>
+        </div>
+        <span class="status-badge pending">Pending</span>
       </div>
-      <span class="status-badge status-completed">Completed</span>
-    </div>
-
-    <div class="order-item">
-      <img src="../../images/burger.avif" alt="Cheese Burger" class="item-image">
-      <div class="item-details">
-        <h4>Cheese Burger</h4>
-        <p>Qty: 2</p>
+      <p class="order-id">Order #01772877443686</p>
+      <p class="order-date">3/8/2026, 9:15:00 AM</p>
+      <div class="order-details">
+        <span>1x Classic Burger Meal</span>
+        <span class="order-price-align">₱12.99</span>
       </div>
-      <div class="item-price">$21.98</div>
+      <p class="pickup-text">Pickup: 10:00 AM</p>
+      <hr>
+      <div class="order-total-row">
+        <strong>Total: ₱12.99</strong>
+        <div class="order-actions">
+          <button class="decline-btn">
+            <i class="fas fa-times"></i> Decline
+          </button>
+          <button class="accept-btn">
+            <i class="fas fa-box"></i> Prepare
+          </button>
+        </div>
+      </div>
     </div>
 
-    <div class="pickup-info">
-      <i class="fas fa-clock"></i>
-      <span>Pickup: 1:00 PM</span>
+    <!-- Pending Order 2 -->
+    <div class="order-card" data-status="Pending">
+      <div class="order-card-header">
+        <div class="order-title">
+          <i class="fa-solid fa-clock status-icon pending-icon"></i>
+          <span class="customer-name">Emily Chang</span>
+        </div>
+        <span class="status-badge pending">Pending</span>
+      </div>
+      <p class="order-id">Order #02</p>
+      <p class="order-date">3/8/2026, 9:30:00 AM</p>
+      <div class="order-details">
+        <span>2x Pizza Slice</span>
+        <span class="order-price-align">₱18.50</span>
+      </div>
+      <p class="pickup-text">Pickup: 10:30 AM</p>
+      <hr>
+      <div class="order-total-row">
+        <strong>Total: ₱18.50</strong>
+        <div class="order-actions">
+          <button class="decline-btn">
+            <i class="fas fa-times"></i> Decline
+          </button>
+          <button class="accept-btn">
+            <i class="fas fa-box"></i> Prepare
+          </button>
+        </div>
+      </div>
     </div>
 
-    <div class="order-footer">
-      <div class="total">Total: $21.98</div>
+    <!-- Preparing Order 1 -->
+    <div class="order-card" data-status="Preparing">
+      <div class="order-card-header">
+        <div class="order-title">
+          <i class="fa-solid fa-clock status-icon"></i>
+          <span class="customer-name">Jane Doe</span>
+        </div>
+        <span class="status-badge preparing">Preparing</span>
+      </div>
+      <p class="order-id">Order #03</p>
+      <p class="order-date">3/8/2026, 1:26:12 PM</p>
+      <div class="order-details">
+        <span>1x Avocado Toast</span>
+        <span class="order-price-align">₱9.75</span>
+      </div>
+      <p class="pickup-text">Pickup: 12:00 PM</p>
+      <hr>
+      <div class="order-total-row">
+        <strong>Total: ₱9.75</strong>
+        <button class="mark-ready-btn">
+          <i class="fas fa-check"></i> Mark Ready
+        </button>
+      </div>
+    </div>
+
+    <!-- Preparing Order 2 -->
+    <div class="order-card" data-status="Preparing">
+      <div class="order-card-header">
+        <div class="order-title">
+          <i class="fa-solid fa-clock status-icon"></i>
+          <span class="customer-name">David Lee</span>
+        </div>
+        <span class="status-badge preparing">Preparing</span>
+      </div>
+      <p class="order-id">Order #04</p>
+      <p class="order-date">3/8/2026, 1:45:00 PM</p>
+      <div class="order-details">
+        <span>3x Fried Chicken</span>
+        <span class="order-price-align">₱24.75</span>
+      </div>
+      <p class="pickup-text">Pickup: 2:30 PM</p>
+      <hr>
+      <div class="order-total-row">
+        <strong>Total: ₱24.75</strong>
+        <button class="mark-ready-btn">
+          <i class="fas fa-check"></i> Mark Ready
+        </button>
+      </div>
+    </div>
+
+    <!-- Ready Order 1 -->
+    <div class="order-card" data-status="Ready">
+      <div class="order-card-header">
+        <div class="order-title">
+          <i class="fa-solid fa-check-circle status-icon"></i>
+          <span class="customer-name">Mike Johnson</span>
+        </div>
+        <span class="status-badge ready">Ready</span>
+      </div>
+      <p class="order-id">Order #05</p>
+      <p class="order-date">3/7/2026, 11:59:33 AM</p>
+      <div class="order-details">
+        <span>2x Iced Coffee</span>
+        <span class="order-price-align">₱9.00</span>
+      </div>
+      <p class="pickup-text">Pickup: 2:00 PM</p>
+      <hr>
+      <div class="order-total-row">
+        <strong>Total: ₱9.00</strong>
+      </div>
+    </div>
+
+    <!-- Ready Order 2 -->
+    <div class="order-card" data-status="Ready">
+      <div class="order-card-header">
+        <div class="order-title">
+          <i class="fa-solid fa-check-circle status-icon"></i>
+          <span class="customer-name">Rachel Brown</span>
+        </div>
+        <span class="status-badge ready">Ready</span>
+      </div>
+      <p class="order-id">Order #06</p>
+      <p class="order-date">3/6/2026, 3:15:00 PM</p>
+      <div class="order-details">
+        <span>1x Pasta Carbonara</span>
+        <span class="order-price-align">₱15.50</span>
+      </div>
+      <p class="pickup-text">Pickup: 4:00 PM</p>
+      <hr>
+      <div class="order-total-row">
+        <strong>Total: ₱15.50</strong>
+      </div>
+    </div>
+
+    <!-- Completed Order 1 -->
+    <div class="order-card" data-status="Completed">
+      <div class="order-card-header">
+        <div class="order-title">
+          <i class="fa-solid fa-check-circle status-icon"></i>
+          <span class="customer-name">Sarah Lee</span>
+        </div>
+        <span class="status-badge completed">Completed</span>
+      </div>
+      <p class="order-id">Order #07</p>
+      <p class="order-date">3/6/2026, 10:15:00 AM</p>
+      <div class="order-details">
+        <span>2x Avocado Salad</span>
+        <span class="order-price-align">₱16.50</span>
+      </div>
+      <p class="pickup-text">Pickup: 11:00 AM</p>
+      <hr>
+      <div class="order-total-row">
+        <strong>Total: ₱16.50</strong>
+      </div>
+    </div>
+
+    <!-- Completed Order 2 -->
+    <div class="order-card" data-status="Completed">
+      <div class="order-card-header">
+        <div class="order-title">
+          <i class="fa-solid fa-check-circle status-icon"></i>
+          <span class="customer-name">Mark Wilson</span>
+        </div>
+        <span class="status-badge completed">Completed</span>
+      </div>
+      <p class="order-id">Order #08</p>
+      <p class="order-date">3/5/2026, 5:45:00 PM</p>
+      <div class="order-details">
+        <span>1x Grilled Fish</span>
+        <span class="order-price-align">₱22.00</span>
+      </div>
+      <p class="pickup-text">Pickup: 6:30 PM</p>
+      <hr>
+      <div class="order-total-row">
+        <strong>Total: ₱22.00</strong>
+      </div>
+    </div>
+
+    <!-- Cancelled Order -->
+    <div class="order-card" data-status="Cancelled">
+      <div class="order-card-header">
+        <div class="order-title">
+          <i class="fa-solid fa-circle-xmark status-icon cancelled-icon"></i>
+          <span class="customer-name">Tom Wilson</span>
+        </div>
+        <span class="status-badge cancelled">Cancelled</span>
+      </div>
+      <p class="order-id">Order #09</p>
+      <p class="order-date">3/5/2026, 2:45:00 PM</p>
+      <div class="order-details">
+        <span>1x Caesar Salad</span>
+        <span class="order-price-align">₱8.50</span>
+      </div>
+      <p class="pickup-text">Pickup: 3:30 PM</p>
+      <hr>
+      <div class="order-total-row">
+        <strong>Total: ₱8.50</strong>
+      </div>
     </div>
   </div>
-</div>
 
 </div>
 
 </div>
 
 <script src="../../script/dropdown.js"></script>
-<script src="../../script/hum.js"></script>
 <script src="../../script/menu.js"></script>
-<script>
-  // Orders functionality
-  let activeTab = 'All';
+<script src="../../script/vendor-script/vendor-orders.js"></script>
 
-  function updateTabs() {
-    const tabs = document.querySelectorAll('.tab-btn');
-    const cards = document.querySelectorAll('.order-card');
-
-    // Update tab styles
-    tabs.forEach(tab => {
-      tab.classList.remove('active');
-      if (tab.dataset.tab === activeTab) {
-        tab.classList.add('active');
-      }
-    });
-
-    // Calculate counts
-    const counts = { All: 0, Pending: 0, Preparing: 0, Ready: 0, Completed: 0 };
-    cards.forEach(card => {
-      counts[card.dataset.status]++;
-      counts.All++;
-    });
-
-    // Update tab text
-    tabs.forEach(tab => {
-      const status = tab.dataset.tab;
-      tab.textContent = `${status} (${counts[status] || 0})`;
-    });
-
-    // Filter cards
-    cards.forEach(card => {
-      if (activeTab === 'All' || card.dataset.status === activeTab) {
-        card.style.display = 'block';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  }
-
-  // Add event listeners
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      activeTab = btn.dataset.tab;
-      updateTabs();
-    });
-  });
-
-  // Initialize
-  updateTabs();
-
-  function acceptOrder(btn) {
-    const card = btn.closest('.order-card');
-    card.dataset.status = 'Preparing';
-    card.querySelector('.status-badge').className = 'status-badge status-preparing';
-    card.querySelector('.status-badge').textContent = 'Preparing';
-    btn.remove();
-    updateTabs();
-  }
-</script>
 
 </body>
 </html>
