@@ -231,7 +231,7 @@
         <div class="search-container">
           <div class="search-bar">
             <i class="fa-solid fa-search search-icon"></i>
-            <input type="text" placeholder="Search for food, vendors, or cuisine..." class="search-input">
+            <input type="text" placeholder="Search for food..." class="search-input">
           </div>
         </div>
 
@@ -247,14 +247,14 @@
 
         <div class="food-grid">
           <!-- Food Card 1 -->
-          <div class="food-card">
+          <div class="food-card" data-category="meals">
             <div class="food-image">
-              <img src="../../images/burger.avif" alt="Classic Burger">
+              <img src="../../images/burger.avif" alt="Burger">
               <div class="food-badge">Popular</div>
             </div>
             <div class="food-content">
               <div class="food-header">
-                <h3>Classic Burger</h3>
+                <h3>Burger</h3>
                 <div class="food-rating">
                   <i class="fa-solid fa-star"></i>
                   <i class="fa-solid fa-star"></i>
@@ -280,13 +280,13 @@
           </div>
 
           <!-- Food Card 2 -->
-          <div class="food-card">
+          <div class="food-card" data-category="meals breakfast">
             <div class="food-image">
-              <img src="../../images/burger.avif" alt="Caesar Salad">
+              <img src="../../images/Shomai-rice.jpg" alt="Shomai Rice">
             </div>
             <div class="food-content">
               <div class="food-header">
-                <h3>Caesar Salad</h3>
+                <h3>Shomai Rice</h3>
                 <div class="food-rating">
                   <i class="fa-solid fa-star"></i>
                   <i class="fa-solid fa-star"></i>
@@ -296,10 +296,10 @@
                   <span>5.0</span>
                 </div>
               </div>
-              <p class="food-description">Fresh romaine lettuce with parmesan, croutons, and creamy Caesar dressing</p>
+              <p class="food-description">Steamed dumplings served over warm rice with savory sauce.</p>
               <div class="food-vendor">
                 <i class="fa-solid fa-store"></i>
-                <span>Canteen 2</span>
+                <span>Student vendor</span>
               </div>
               <div class="food-footer">
                 <div class="food-price">$8.50</div>
@@ -312,14 +312,14 @@
           </div>
 
           <!-- Food Card 3 -->
-          <div class="food-card">
+          <div class="food-card" data-category="meals healthy">
             <div class="food-image">
-              <img src="../../images/burger.avif" alt="Margherita Pizza">
+              <img src="../../images/Shomai.jpg" alt="Shomai">
               <div class="food-badge">New</div>
             </div>
             <div class="food-content">
               <div class="food-header">
-                <h3>Margherita Pizza</h3>
+                <h3>Shomai</h3>
                 <div class="food-rating">
                   <i class="fa-solid fa-star"></i>
                   <i class="fa-solid fa-star"></i>
@@ -329,7 +329,7 @@
                   <span>4.7</span>
                 </div>
               </div>
-              <p class="food-description">Traditional pizza with fresh mozzarella, basil, and tomato sauce</p>
+              <p class="food-description">Mapapa wow ka sa sarap neto</p>
               <div class="food-vendor">
                 <i class="fa-solid fa-store"></i>
                 <span>Canteen 3</span>
@@ -345,9 +345,9 @@
           </div>
 
           <!-- Food Card 4 -->
-          <div class="food-card">
+          <div class="food-card" data-category="drinks">
             <div class="food-image">
-              <img src="../../images/burger.avif" alt="Iced Coffee">
+              <img src="../../images/Iced-coffee.png" alt="Iced Coffee">
             </div>
             <div class="food-content">
               <div class="food-header">
@@ -377,13 +377,13 @@
           </div>
 
           <!-- Food Card 5 -->
-          <div class="food-card">
+          <div class="food-card" data-category="desserts snacks breakfast">
             <div class="food-image">
-              <img src="../../images/burger.avif" alt="Chocolate Brownie">
+              <img src="../../images/Fries.jpg" alt="Fries">
             </div>
             <div class="food-content">
               <div class="food-header">
-                <h3>Chocolate Brownie</h3>
+                <h3>Fries</h3>
                 <div class="food-rating">
                   <i class="fa-solid fa-star"></i>
                   <i class="fa-solid fa-star"></i>
@@ -393,7 +393,7 @@
                   <span>4.6</span>
                 </div>
               </div>
-              <p class="food-description">Rich and fudgy chocolate brownie with walnuts</p>
+              <p class="food-description">Crispy on the outside and fluffy on the inside, these perfectly seasoned fries are the ultimate campus snack.</p>
               <div class="food-vendor">
                 <i class="fa-solid fa-store"></i>
                 <span>Canteen 7</span>
@@ -409,14 +409,14 @@
           </div>
 
           <!-- Food Card 6 -->
-          <div class="food-card">
+          <div class="food-card" data-category="drinks">
             <div class="food-image">
-              <img src="../../images/burger.avif" alt="Avocado Toast">
-              <div class="food-badge">Healthy</div>
+              <img src="../../images/coke.png" alt="Coke">
+              <div class="food-badge">Popular</div>
             </div>
             <div class="food-content">
               <div class="food-header">
-                <h3>Avocado Toast</h3>
+                <h3>Coke</h3>
                 <div class="food-rating">
                   <i class="fa-solid fa-star"></i>
                   <i class="fa-solid fa-star"></i>
@@ -426,10 +426,10 @@
                   <span>4.9</span>
                 </div>
               </div>
-              <p class="food-description">Smashed avocado on toasted sourdough with cherry tomatoes and herbs</p>
+              <p class="food-description">Icy-cold classic that delivers the perfect refreshing kick to complement any campus meal.</p>
               <div class="food-vendor">
                 <i class="fa-solid fa-store"></i>
-                <span>Student Vendor</span>
+                <span>Canteen 2</span>
               </div>
               <div class="food-footer">
                 <div class="food-price">$9.75</div>
@@ -450,11 +450,36 @@
   <script>
     // Filter buttons functionality
     const filterButtons = document.querySelectorAll('.filter-btn');
+    const foodCards = document.querySelectorAll('.food-card');
+
     filterButtons.forEach(button => {
       button.addEventListener('click', () => {
+        const selectedCategory = button.getAttribute('data-category');
+        
+        // Update active button
         filterButtons.forEach(btn => btn.classList.remove('active'));
         button.classList.add('active');
+        
+        // Filter food cards
+        foodCards.forEach(card => {
+          const cardCategories = card.getAttribute('data-category').split(' ');
+          
+          if (selectedCategory === 'all' || cardCategories.includes(selectedCategory)) {
+            card.style.display = 'block';
+            // Trigger a reflow to ensure animation works
+            card.offsetHeight;
+            card.classList.add('visible');
+          } else {
+            card.classList.remove('visible');
+            card.style.display = 'none';
+          }
+        });
       });
+    });
+
+    // Initialize with 'all' category visible
+    foodCards.forEach(card => {
+      card.classList.add('visible');
     });
   </script>
 

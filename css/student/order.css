@@ -19,31 +19,7 @@
   margin-bottom: 24px;
 }
 
-.order-tabs {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 24px;
-  overflow-x: auto;
-}
 
-.order-tabs .tab {
-  flex: 0 0 auto;
-  padding: 8px 20px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #111827;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s;
-}
-
-.order-tabs .tab.active {
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  border-color: #e5e7eb;
-}
 
 .orders-list {
   display: grid;
@@ -85,6 +61,11 @@
   padding: 4px;
 }
 
+.status-icon.pending-icon {
+  color: #d97706;
+  border-color: #d97706;
+}
+
 .status-badge.ready {
   background: #dcfce7;
   color: #16a34a;
@@ -94,10 +75,19 @@
   border-radius: 999px;
 }
 
-.status-badge.pending {
+.status-badge.preparing {
   background: #f3f4f6;
 
   color: #6b7280;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.status-badge.pending {
+  background: #fef3c7;
+  color: #92400e;
   font-size: 12px;
   font-weight: 600;
   padding: 4px 12px;
@@ -167,6 +157,33 @@
 }
 
 .review-btn:active {
+  transform: translateY(0);
+}
+
+/* CANCEL ORDER BUTTON */
+.cancel-btn {
+  background: #f3f4f6;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+}
+
+.cancel-btn:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #fecaca;
+  transform: translateY(-1px);
+}
+
+.cancel-btn:active {
   transform: translateY(0);
 }
 

@@ -99,12 +99,34 @@
       <div class="orders-page">
         <h1>Order History</h1>
         <p class="page-subtitle">Track and manage your orders</p>
-        <div class="order-tabs">
-          <button class="tab active">Active (2)</button>
-          <button class="tab">Completed (1)</button>
-          <button class="tab">Cancelled (1)</button>
-        </div>
+       
         <div class="orders-list">
+          <!-- pending order -->
+          <div class="order-card">
+            <div class="order-card-header">
+              <div class="order-title">
+                <i class="fa-solid fa-clock status-icon pending-icon"></i>
+                <span class="canteen-name">Canteen 1</span>
+              </div>
+              <span class="status-badge pending">Pending</span>
+            </div>
+            <p class="order-id">Order #03</p>
+            <p class="order-date">3/8/2026, 9:15:00 AM</p>
+            <div class="order-details">
+              <span>1x Avocado Toast</span>
+              <span class="order-price-align">₱9.75</span>
+            </div>
+            <p class="pickup-text">Pickup: 10:00 AM</p>
+            <hr>
+            <div class="order-total-row">
+              <div>
+                <strong>Total: ₱9.75</strong>
+              </div>
+              <button class="cancel-btn">
+                <i class="fa-solid fa-times"></i> Cancel Order
+              </button>
+            </div>
+          </div>
           <!-- active order ready -->
           <div class="order-card">
             <div class="order-card-header">
@@ -126,14 +148,14 @@
               <strong>Total: ₱9.00</strong>
             </div>
           </div>
-          <!-- active order pending -->
+          <!-- active order preparing -->
           <div class="order-card">
             <div class="order-card-header">
               <div class="order-title">
                 <i class="fa-solid fa-clock status-icon"></i>
                 <span class="canteen-name">Canteen 2</span>
               </div>
-              <span class="status-badge pending">Pending</span>
+              <span class="status-badge preparing">Preparing</span>
             </div>
             <p class="order-id">Order #1772861172498</p>
             <p class="order-date">3/7/2026, 1:26:12 PM</p>
@@ -263,7 +285,7 @@
 
   <script src="../../script/dropdown.js"></script>
   <script src="../../script/menu.js"></script>
-  <script src="../../script/order.js"></script>
+  <script src="../../script/student-script/order.js"></script>
 
 </body>
 </html>
