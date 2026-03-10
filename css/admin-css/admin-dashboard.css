@@ -39,6 +39,7 @@ body {
     margin: 0;
     padding: 40px;
     color: var(--text-dark);
+    scrollbar-gutter: stable;
 }
 
 header {
@@ -108,12 +109,19 @@ p.subtitle {
     border-radius: 24px;
     border: 1px solid rgba(0,0,0,0.05);
     position: relative;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.fade-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 /* fade-card color fades */
-.fade-card.yellow-fade { background: linear-gradient(180deg, #FFFDF2, #FFF9E0); }
-.fade-card.orange-fade { background: linear-gradient(180deg, #FFF8F2, #FFF1E6); }
-.fade-card.pink-fade { background: linear-gradient(180deg, #FFF5F5, #FFEBEB); }
+.fade-card.yellow-fade { background: white; }
+.fade-card.orange-fade { background: linear-gradient(180deg, #FFFBF5, #FFEED4); }
+.fade-card.pink-fade { background: linear-gradient(180deg, #FFFBF9, #FFE8E1); }
 
 .fade-card h3 { margin: 15px 0 5px; font-size: 20px; }
 .fade-card p { margin: 0; font-size: 14px; color: var(--text-sub); }
@@ -163,7 +171,7 @@ p.subtitle {
     padding: 12px 16px;
     border-radius: 16px;
     margin-bottom: 12px;
-    background: #f8fafc;
+    background: white;
 }
 
 .status-info { display: flex; align-items: center; gap: 15px; }
@@ -216,14 +224,14 @@ p.subtitle {
 
 /* Card Container */
 .action-card {
-    width: 280px;
-    border-radius: 20px;
+    border-radius: 24px;
     padding: 24px;
-    border: 1px solid transparent;
+    border: 1px solid #eef2f6;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     position: relative;
-    transition: transform 0.2s ease;
+    transition: all 0.2s ease;
 }
 .action-card .badge {
     position: absolute;
@@ -254,12 +262,17 @@ p.subtitle {
     font-weight: bold;
 }
 
-.badge {
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: white;
+.badge-minimal {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--y-accent);
+    background: rgba(234, 179, 8, 0.08);
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(234, 179, 8, 0.2);
 }
 
 /* Middle: Text Content */
