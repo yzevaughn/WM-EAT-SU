@@ -1,171 +1,270 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WM EAT SU</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <link rel="stylesheet" href="css/hero.css">
-    
-</head>
-<body>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>WM EAT SU - Smart Campus Dining</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <nav class="navbar">
-        <a href="#" class="logo">
-            <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-            <span class="logo-text">WM EAT SU</span>
-        </a>
-        <div class="auth-buttons">
-            <a href="pages/sign-in.html" class="btn btn-outline">Sign In</a>
-            <a href="pages/create-acc.html" class="btn btn-primary">Sign Up</a>
+        <link rel="stylesheet" href="css/index.css">
+    </head>
+    <body>
+
+        <header>
+            <div class="container nav-container">
+                <div class="logo">
+                    <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+                    WM EAT SU
+                </div>
+                
+                <nav class="nav-links">
+                    <a href="#">Features</a>
+                    <a href="#">How It Works</a>
+                </nav>
+
+                <div class="nav-buttons">
+                    <button class="btn btn-outline">Sign In</button>
+                    <button class="btn btn-primary">Sign Up</button>
+                    <button class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <div class="hero-wrapper">
+            <section class="hero container">
+                <div class="hero-content">
+                    <div class="badge">
+                        <div class="badge-dot"></div>
+                        🎓 Built for WMSU
+                    </div>
+                    
+                    <h1>WMSU Campus<br><span>Eating Made<br>Easy</span></h1>
+                    
+                    <p>Order from multiple campus vendors and know exactly when your food is ready. Grab your favorite meals fresh and on the go.</p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary">Order Now <i class="fa-solid fa-arrow-right" style="font-size: 12px; margin-left: 4px;"></i></button>
+                        <button class="btn btn-outline" style="background: rgba(255,255,255,0.9); backdrop-filter: blur(4px);"><i class="fa-regular fa-circle-play"></i> Learn More</button>
+                    </div>
+
+                  <div class="feature-tags">
+    <div class="tag"><i class="fa-solid fa-utensils"></i> Delicous Food</div>
+    <div class="tag"><i class="fa-solid fa-credit-card"></i> Online Payments</div>
+    <div class="tag"><i class="fa-solid fa-mobile-screen"></i> Mobile Friendly</div>
+</div>
+
+</div>
+                   
+
+
+                <div class="hero-image-wrapper">
+                    <img src="images/pizza.avif" alt="Person taking picture of food" class="hero-image">
+                    
+                   
+                </div>
+            </section>
         </div>
-    </nav>
 
-    <main class="hero">
-        <div class="hero-left">
-            <div class="badge">
-                <span class="dot"></span>
-                <i class="fa-solid fa-graduation-cap"></i> Built for Campus 
-            </div>
-            
-            <h1>Smart Campus <br><span class="text-red">Dining Made Easy</span></h1>
-            
-            <p>Order from multiple campus vendors and pick up your favorite meals quickly. Enjoy real-time order tracking right on campus.</p>
-            
-            <div class="hero-cta">
-                <a href="pages/sign-in.html" class="btn btn-primary btn-large btn-shadow">
-                    Order Now <i class="fa-solid fa-arrow-right"></i>
-                </a>
-                <a href="#features" class="btn btn-outline btn-large">
-                    <i class="fa-regular fa-circle-play"></i> Learn More
-                </a>
-            </div>
+        <section class="perspectives">
+            <div class="container">
+                <div class="section-header">
+                    <h2>One Platform, Three Perspectives</h2>
+                    <p>Seamlessly designed experiences for every member of our campus dining community.</p>
+                </div>
 
-            <div class="features-row">
-                <div class="feature-item">
-                    <i class="fa-solid fa-hamburger"></i> Food
-                </div>
-                <div class="feature-item">
-                    <i class="fa-solid fa-wallet"></i> Digital Payments
-                </div>
-                <div class="feature-item">
-                    <i class="fa-solid fa-mobile-screen"></i> Mobile Friendly
+                <div class="grid-3">
+                    <div class="perspective-card">
+                        <div class="p-icon icon-red"><i class="fa-solid fa-user-group"></i></div>
+                        <h3>For Students</h3>
+                        <p>Browse menus, place orders, make payments, and track your food in real-time. Get updates instantly and enjoy a seamless dining experience.</p>
+                        <a href="#" class="p-link link-red">Explore as Student &rarr;</a>
+                    </div>
+
+                    <div class="perspective-card">
+                        <div class="p-icon icon-orange"><i class="fa-solid fa-store"></i></div>
+                        <h3>For Vendors</h3>
+                        <p>Manage orders, update menus, process payments, and engage with students through promotional posts with a comprehensive vendor dashboard.</p>
+                        <a href="#" class="p-link link-orange">Vendor Dashboard &rarr;</a>
+                    </div>
+
+                    <div class="perspective-card">
+                        <div class="p-icon icon-blue"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3>For Admins</h3>
+                        <p>Oversee the entire platform, manage vendor approvals, review complaints, moderate content, and ensure system-wide security.</p>
+                        <a href="#" class="p-link link-blue">Admin Controls &rarr;</a>
+                    </div>
                 </div>
             </div>
+        </section>
+
+                <section class="features">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2>Everything You Need in One Place</h2>
+                            <p>Comprehensive tools designed to make campus dining effortless and enjoyable.</p>
+                        </div>
+
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <div class="f-icon-sm bg-light-red"><i class="fa-solid fa-bag-shopping"></i></div>
+                                <h3>Digital Orders</h3>
+                                <p>Seamless ordering system with real-time tracking and instant confirmations.</p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="f-icon-sm bg-light-green"><i class="fa-regular fa-credit-card"></i></div>
+                                <h3>Flexible Payments</h3>
+                                <p>Multiple payment options including digital wallet and cash on delivery.</p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="f-icon-sm bg-light-purple"><i class="fa-regular fa-bell"></i></div>
+                                <h3>Vendor Feed</h3>
+                                <p>Stay updated with promotional posts, special offers, and daily specials.</p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="f-icon-sm bg-light-orange"><i class="fa-solid fa-shop"></i></div>
+                                <h3>Vendor Applications</h3>
+                                <p>Student-initiated vendor proposals with detailed preparation docs.</p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="f-icon-sm bg-light-blue"><i class="fa-solid fa-shield"></i></div>
+                                <h3>Complaint System</h3>
+                                <p>Comprehensive feedback with image uploads and resolution tracking.</p>
+                            </div>
+
+                            <div class="feature-card">
+                                <div class="f-icon-sm bg-light-teal"><i class="fa-regular fa-circle-check"></i></div>
+                                <h3>Campus Integration</h3>
+                                <p>Interactive map showing all vendor locations across campus canteens.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+    <section class="how-it-works">
+
+    <div class="container">
+
+        <div class="badge badge-center">
+            <i class="fa-regular fa-clock"></i> Simple Process
         </div>
 
-        <div class="hero-right">
-            <div class="image-wrapper">
-                <img src="images/burger.avif" alt="Scanning food with smartphone">
-            </div>
-        </div>
-    </main>
-
-    <div class="divider"></div>
-
-    <section class="features-section" id = "features">
-        <div class="features-header">
-            <h2>Features for Every User</h2>
-            <p><span> Platform offers a experience for students, vendors, and administrators alike.</span></p>
-        </div>
-        <div class="features-grid">
-            <div class="feature-card top-red">
-                <div class="feature-icon bg-solid-red">
-                    <i class="fa-solid fa-bag-shopping"></i>
-                </div>
-                <h3>Digital Orders</h3>
-                <p>Ordering system with real-time tracking and instant confirmations.</p>
-            </div>
-
-            <div class="feature-card top-green">
-                <div class="feature-icon bg-light-green">
-                    <i class="fa-regular fa-credit-card"></i>
-                </div>
-                <h3>Flexible Payments</h3>
-                <p>Multiple payment options including digital wallet and cash.</p>
-            </div>
-
-            <div class="feature-card top-purple">
-                <div class="feature-icon bg-light-purple">
-                    <i class="fa-regular fa-bell"></i>
-                </div>
-                <h3>Vendor Feed</h3>
-                <p>Stay updated with promotional posts, special offers, and daily specials.</p>
-            </div>
-
-            <div class="feature-card top-orange">
-                <div class="feature-icon bg-light-orange">
-                    <i class="fa-solid fa-store"></i>
-                </div>
-                <h3>Vendor Applications</h3>
-                <p>Students are allowed to apply as vendors by submitting a application form.</p>
-            </div>
-
-            <div class="feature-card top-blue">
-                <div class="feature-icon bg-light-blue">
-                    <i class="fa-solid fa-shield-halved"></i>
-                </div>
-                <h3>Complaint System</h3>
-                <p>The system allows users to submit complaints about their food and service experience.</p>
-            </div>
-
-            <div class="feature-card top-teal">
-                <div class="feature-icon bg-light-teal">
-                    <i class="fa-regular fa-circle-check"></i>
-                </div>
-                <h3>Campus Integration</h3>
-                <p>Interactive map showing all vendor locations across campus.</p>
-            </div>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <section class="perspectives">
         <div class="section-header">
-           
-            <h2>One Platform, Three Perspectives</h2>
-            <p>Designed experiences for every member of our campus dining community.</p>
+            <h2>How It Works</h2>
+            <p>Get started in minutes and enjoy delicious campus meals with just a few simple steps.</p>
         </div>
 
-        <div class="cards-grid">
-            <div class="perspective-card top-red">
-                <div class="card-icon bg-red">
-                    <i class="fa-solid fa-user-group"></i>
+        <div class="steps-container">
+
+            <div class="step">
+                <div class="step-num step-num-1">1</div>
+                <div class="step-icon-wrapper" style="background: #fff1f2; color: #e11d48;">
+                    <i class="fa-solid fa-user-plus"></i>
                 </div>
-                <h3>For Students</h3>
-                <p>Browse menus, place orders, make payments, and track your food in real-time. Get updates instantly and enjoy food experience.</p>
-                <a href="pages/sign-in.html?role=student" class="card-btn border-red">
-                    Explore as Student <i class="fa-solid fa-arrow-right"></i>
-                </a>
+                <h3>Sign Up</h3>
+                <p>Create your account in just a few minutes and get started.</p>
             </div>
 
-            <div class="perspective-card top-orange">
-                <div class="card-icon bg-light-orange">
-                    <i class="fa-solid fa-store"></i>
+            <div class="step">
+                <div class="step-num step-num-2">2</div>
+                <div class="step-icon-wrapper" style="background: #ffedd5; color: #ea580c;">
+                    <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
-                <h3>For Vendors</h3>
-                <p>Manage orders, update menus, process payments, and engage with students through promotional posts with a vendor dashboard.</p>
-                <a href="pages/sign-in.html?role=vendor" class="card-btn border-orange">
-                    Vendor Dashboard <i class="fa-solid fa-arrow-right"></i>
-                </a>
+                <h3>Browse</h3>
+                <p>Explore our vendors and browse their delicious menus.</p>
             </div>
 
-            <div class="perspective-card top-blue">
-                <div class="card-icon bg-light-blue">
-                    <i class="fa-solid fa-shield-halved"></i>
+            <div class="step">
+                <div class="step-num step-num-3">3</div>
+                <div class="step-icon-wrapper" style="background: #dcfce7; color: #16a34a;">
+                    <i class="fa-solid fa-cart-shopping"></i>
                 </div>
-                <h3>For Admins</h3>
-                <p>Oversee the entire platform, manage vendor approvals, review complaints, moderate content, and ensure system-wide security.</p>
-                <a href="pages/sign-in.html?role=admin" class="card-btn border-blue">
-                    Admin Controls <i class="fa-solid fa-arrow-right"></i>
-                </a>
+                <h3>Order</h3>
+                <p>Add items to your cart and place your order.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-num step-num-4">4</div>
+                <div class="step-icon-wrapper" style="background: #dbeafe; color: #2563eb;">
+                    <i class="fa-regular fa-face-smile"></i>
+                </div>
+                <h3>Enjoy</h3>
+                <p>Receive your order and enjoy your meal.</p>
+            </div>
+
+        </div>
+
+        <button class="btn btn-primary">
+            Get Started Now 
+            <i class="fa-solid fa-arrow-right" style="font-size: 12px; margin-left: 4px;"></i>
+        </button>
+
+    </div>
+
+</section>
+
+
+        <!-- ==================== Footer ==================== -->
+<footer class="footer">
+    <div class="container footer-grid">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+            <div class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+                WM EAT SU
+            </div>
+            <p>Smart campus dining platform designed to connect students, vendors, and administrators in one seamless food ordering experience.</p>
+
+            <div class="socials">
+                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
         </div>
-    </section>
+
+        <!-- Links -->
+        <div class="footer-links">
+            <h4>Platform</h4>
+            <ul>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">How It Works</a></li>
+                <li><a href="#">Vendors</a></li>
+                <li><a href="#">Student Access</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-links">
+            <h4>Support</h4>
+            <ul>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">Report Issue</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">System Status</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-links">
+            <h4>Legal</h4>
+            <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="#">Campus Guidelines</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2026 WM EAT SU. All rights reserved.</p>
+    </div>
+</footer>
 
 </body>
 </html>
