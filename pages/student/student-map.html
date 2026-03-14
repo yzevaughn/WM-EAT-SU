@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WM EAT SU - Map</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/student/dashboard.css">
+    <link rel="stylesheet" href="../../css/navbar.css">
+    <link rel="stylesheet" href="../../css/student/map.css">
+
+    <style>
+        .main-content {
+  flex: 1; 
+  padding: 2rem;
+  
+  overflow-y: auto;
+  height: calc(100vh - 70px); 
+}
+
+.content-header {
+  margin-bottom: 2rem;
+}
+
+.content-header h2 {
+  color: #1f2937;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.content-header p {
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+/* --- MAP CARD --- */
+.map-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.map-placeholder {
+  background-color: #e5e7eb;
+  border: 2px dashed #9ca3af;
+  border-radius: 8px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #4b5563;
+  text-align: center;
+}
+
+.map-placeholder i {
+  font-size: 4rem;
+  color: #6b7280;
+  margin-bottom: 1rem;
+}
+
+.map-placeholder h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* --- MAP LEGEND --- */
+.map-legend {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+}
+
+.map-legend h3 {
+  font-size: 1.2rem;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.legend-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.color-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+/* Legend Colors */
+.color-dot.canteen { background-color: #ef4444; } /* Red */
+.color-dot.vendor { background-color: #f59e0b; } /* Amber */
+.color-dot.pickup { background-color: #10b981; } /* Green */
+.color-dot.building { background-color: #6366f1; } /* Indigo */
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <div class="top-nav">
+      <div class="nav-left">
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <a href="#" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
+        </a>
+      </div>
+      <div class="profile">
+        <div class="profile-info">
+          <span class="profile-name">Vaughn Evangelista</span>
+          <span class="email">vaughn.student@wm.edu.ph</span>
+        </div>
+        <div class="profile-dropdown">
+          <button class="profile-btn" id="profileBtn">
+            <img src="../../images/pfp.jpg" class="profile-pic">
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-menu" id="profileDropdown">
+            <a href="../../index.html" class="dropdown-item">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Log Out</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- LAYOUT -->
+    <div class="layout">
+      <!-- SIDEBAR -->
+      <div class="left-nav" id="sidebar">
+        <ul class="nav-list">
+          <li>
+            <a href="student-dashboard.html" class="nav-link">
+              <i class="fa-solid fa-house"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-cart.html" class="nav-link">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span>Cart</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-order.html" class="nav-link">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+              <span>Orders</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-wallet.html" class="nav-link">
+              <i class="fa-solid fa-wallet"></i>
+              <span>Wallet</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link active">
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Campus Map</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-feedback.html" class="nav-link">
+              <i class="fa-regular fa-star"></i>
+              <span>Feedback</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-vendor-applications.html" class="nav-link">
+              <i class="fa-solid fa-rss"></i>
+              <span>Vendor Applications</span>
+            </a>
+          </li>
+        </ul>
+      
+
+    </div>
+
+    <main class="main-content">
+        <div class="content-header">
+          <h2>Campus Map</h2>
+          <p>Locate food vendors, canteens, and designated pick-up points across the campus.</p>
+        </div>
+
+        <div class="map-card">
+          <div class="map-placeholder">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <h3>Interactive Map Loading...</h3>
+            <p>Explore your campus food options</p>
+          </div>
+        </div>
+
+        <div class="map-legend">
+          <h3>Map Legend</h3>
+          <div class="legend-grid">
+            <div class="legend-item">
+              <div class="color-dot canteen"></div>
+              <span>Main Canteen</span>
+            </div>
+            <div class="legend-item">
+              <div class="color-dot vendor"></div>
+              <span>Food Vendors</span>
+            </div>
+            <div class="legend-item">
+              <div class="color-dot pickup"></div>
+              <span>Pick-up Points</span>
+            </div>
+            <div class="legend-item">
+              <div class="color-dot building"></div>
+              <span>Academic Buildings</span>
+            </div>
+          </div>
+        </div>
+      </main>
+
+    
+ </body>
+
+ </html>
