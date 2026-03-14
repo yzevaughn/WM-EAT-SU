@@ -1,311 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WM EAT SU - Student Wallet</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<link rel="stylesheet" href="../../css/student/dashboard.css">
-<link rel="stylesheet" href="../../css/navbar.css">
-<link rel="stylesheet" href="../../css/student/wallet.css">
-
-</head>
-<body>
-
-
-<!-- NAVBAR -->
-
-<div class="top-nav">
-
-<div class="nav-left">
-<button class="menu-toggle">
-<i class="fa-solid fa-bars"></i>
-</button>
-
-<a href="#" class="logo">
-<div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-<span class="logo-text">WM EAT SU</span>
-</a>
-</div>
-
-<div class="profile">
-
-<div class="profile-info">
-<span class="profile-name">Vaughn Evangelista</span>
-<span class="email">vaughn.student@wm.edu.ph</span>
-</div>
-
-<div class="profile-dropdown">
-
-<button class="profile-btn">
-<img src="../../images/pfp.jpg" class="profile-pic">
-<i class="fa-solid fa-chevron-down"></i>
-</button>
-
-<div class="dropdown-menu">
-<a href="../../index.html" class="dropdown-item">
-<i class="fas fa-sign-out-alt"></i>
-<span>Log Out</span>
-</a>
-</div>
-
-</div>
-</div>
-</div>
-
-
-
-<!-- LAYOUT -->
-
-<div class="layout">
-
-<!-- SIDEBAR -->
-
-<div class="left-nav">
-
-<ul class="nav-list">
-
-<li>
-<a href="student-dashboard.html" class="nav-link">
-<i class="fa-solid fa-house"></i>
-<span>Dashboard</span>
-</a>
-</li>
-
-<li>
-<a href="student-cart.html" class="nav-link">
-<i class="fa-solid fa-cart-shopping"></i>
-<span>Cart</span>
-</a>
-</li>
-
-<li>
-<a href="student-order.html" class="nav-link">
-<i class="fa-solid fa-clock-rotate-left"></i>
-<span>Orders</span>
-</a>
-</li>
-
-<li>
-<a href="student-wallet.html" class="nav-link active">
-<i class="fa-solid fa-wallet"></i>
-<span>Wallet</span>
-</a>
-</li>
-
-<li>
-<a href="#" class="nav-link">
-<i class="fa-solid fa-location-dot"></i>
-<span>Campus Map</span>
-</a>
-</li>
-
-<li>
-<a href="student-feedback.html" class="nav-link">
-<i class="fa-regular fa-star"></i>
-<span>Feedback</span>
-</a>
-</li>
-
-<li>
-<a href="student-vendor-applications.html" class="nav-link">
-<i class="fa-solid fa-rss"></i>
-<span>Vendor Applications</span>
-</a>
-</li>
-
-</ul>
-
-</div>
-
-
-
-<!-- MAIN CONTENT -->
-
-<div class="main-content">
-
-<div class="wallet-container">
-
-<!-- BALANCE CARD -->
-
-<div class="balance-card">
-
-<div class="balance-header">
-<h1>Wallet Balance</h1>
-<i class="fa-solid fa-wallet"></i>
-</div>
-
-<div class="balance-amount">
-<span class="currency-symbol">₱</span>
-<span class="balance-value">50.00</span>
-</div>
-
-<label for="topupToggle" class="topup-btn">
-<i class="fa-solid fa-plus"></i> Top Up Wallet
-</label>
-
-</div>
-
-
-
-<!-- TRANSACTIONS -->
-
-<div class="transaction-section">
-
-<h2>Transaction History</h2>
-
-<div class="transaction-list">
-
-<div class="transaction-item">
-
-<div class="transaction-icon payment">
-<i class="fa-solid fa-shopping-cart"></i>
-</div>
-
-<div class="transaction-details">
-<p class="transaction-type">Food Order</p>
-<p class="transaction-date">Mar 5, 2026 - 12:30 PM</p>
-</div>
-
-<div class="transaction-amount negative">-₱25.50</div>
-
-</div>
-
-
-
-<div class="transaction-item">
-
-<div class="transaction-icon topup">
-<i class="fa-solid fa-plus-circle"></i>
-</div>
-
-<div class="transaction-details">
-<p class="transaction-type">Wallet Top-up via GCash</p>
-<p class="transaction-date">Mar 3, 2026 - 3:15 PM</p>
-</div>
-
-<div class="transaction-amount positive">+₱25.00</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-
-
-
-<!-- MODAL TOGGLE -->
-
-<input type="checkbox" id="topupToggle">
-
-
-
-<!-- TOP UP MODAL -->
-
-<div class="modal">
-
-<label for="topupToggle" class="modal-overlay"></label>
-
-<div class="modal-content">
-
-<div class="modal-header">
-
-<h2>Top Up Wallet</h2>
-
-<label for="topupToggle" class="modal-close">
-<i class="fa-solid fa-times"></i>
-</label>
-
-</div>
-
-
-
-<div class="modal-body">
-
-<!-- PAYMENT METHOD -->
-
-<div class="form-section">
-
-<label class="form-label">Select Payment Method</label>
-
-<div class="payment-methods">
-
-<input type="radio" name="payment" id="gcash">
-<label for="gcash" class="payment-method-btn">
-<img src="../../images/gcash-logo.png" class="method-logo">
-<span class="method-name">GCash</span>
-</label>
-
-<input type="radio" name="payment" id="maya">
-<label for="maya" class="payment-method-btn">
-<img src="../../images/paymaya-logo.png" class="method-logo">
-<span class="method-name">Maya</span>
-</label>
-
-<input type="radio" name="payment" id="card">
-<label for="card" class="payment-method-btn">
-<i class="fa-solid fa-credit-card"></i>
-<span class="method-name">Bank Card</span>
-</label>
-
-</div>
-
-</div>
-
-
-
-<!-- QUICK AMOUNT -->
-
-<div class="form-section">
-
-<label class="form-label">Quick Amount</label>
-
-<div class="quick-amounts">
-
-<input type="radio" name="amount" id="a10">
-<label for="a10" class="quick-btn">₱10</label>
-
-<input type="radio" name="amount" id="a20">
-<label for="a20" class="quick-btn">₱20</label>
-
-<input type="radio" name="amount" id="a50">
-<label for="a50" class="quick-btn">₱50</label>
-
-<input type="radio" name="amount" id="a100">
-<label for="a100" class="quick-btn">₱100</label>
-
-</div>
-
-</div>
-
-</div>
-
-
-
-<div class="modal-footer">
-
-<label for="topupToggle" class="btn-cancel">
-Cancel
-</label>
-
-<label for="topupToggle" class="btn-confirm">
-Confirm Top Up
-</label>
-
-</div>
-
-</div>
-
-</div>
-
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>WM EAT SU - Student Wallet</title>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+		<link rel="stylesheet" href="../../css/student/dashboard.css">
+		<link rel="stylesheet" href="../../css/navbar.css">
+		<link rel="stylesheet" href="../../css/student/wallet.css">
+	</head>
+	<body>
+		<!-- NAVBAR -->
+		<div class="top-nav">
+			<div class="nav-left">
+				<button class="menu-toggle">
+					<i class="fa-solid fa-bars"></i>
+				</button>
+				<a href="#" class="logo">
+					<div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+					<span class="logo-text">WM EAT SU</span>
+				</a>
+			</div>
+			<div class="profile">
+				<div class="profile-info">
+					<span class="profile-name">Vaughn Evangelista</span>
+					<span class="email">vaughn.student@wm.edu.ph</span>
+				</div>
+				<div class="profile-dropdown">
+					<button class="profile-btn">
+						<img src="../../images/pfp.jpg" class="profile-pic">
+						<i class="fa-solid fa-chevron-down"></i>
+					</button>
+					<div class="dropdown-menu">
+						<a href="../../index.html" class="dropdown-item">
+							<i class="fas fa-sign-out-alt"></i>
+							<span>Log Out</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- LAYOUT -->
+		<div class="layout">
+			<!-- SIDEBAR -->
+			<div class="left-nav">
+				<ul class="nav-list">
+					<li>
+						<a href="student-dashboard.html" class="nav-link">
+							<i class="fa-solid fa-house"></i>
+							<span>Dashboard</span>
+						</a>
+					</li>
+					<li>
+						<a href="student-cart.html" class="nav-link">
+							<i class="fa-solid fa-cart-shopping"></i>
+							<span>Cart</span>
+						</a>
+					</li>
+					<li>
+						<a href="student-order.html" class="nav-link">
+							<i class="fa-solid fa-clock-rotate-left"></i>
+							<span>Orders</span>
+						</a>
+					</li>
+					<li>
+						<a href="student-wallet.html" class="nav-link active">
+							<i class="fa-solid fa-wallet"></i>
+							<span>Wallet</span>
+						</a>
+					</li>
+					<li>
+						<a href="#" class="nav-link">
+							<i class="fa-solid fa-location-dot"></i>
+							<span>Campus Map</span>
+						</a>
+					</li>
+					<li>
+						<a href="student-feedback.html" class="nav-link">
+							<i class="fa-regular fa-star"></i>
+							<span>Feedback</span>
+						</a>
+					</li>
+					<li>
+						<a href="student-vendor-applications.html" class="nav-link">
+							<i class="fa-solid fa-rss"></i>
+							<span>Vendor Applications</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="wallet-container">
+					<!-- BALANCE CARD -->
+					<div class="balance-card">
+						<div class="balance-header">
+							<h1>Wallet Balance</h1>
+							<i class="fa-solid fa-wallet"></i>
+						</div>
+						<div class="balance-amount">
+							<span class="currency-symbol">₱</span>
+							<span class="balance-value">50.00</span>
+						</div>
+						<label for="topupToggle" class="topup-btn">
+							<i class="fa-solid fa-plus"></i> Top Up Wallet
+						</label>
+					</div>
+					<!-- TRANSACTIONS -->
+					<div class="transaction-section">
+						<h2>Transaction History</h2>
+						<div class="transaction-list">
+							<div class="transaction-item">
+								<div class="transaction-icon payment">
+									<i class="fa-solid fa-shopping-cart"></i>
+								</div>
+								<div class="transaction-details">
+									<p class="transaction-type">Food Order</p>
+									<p class="transaction-date">Mar 5, 2026 - 12:30 PM</p>
+								</div>
+								<div class="transaction-amount negative">-₱25.50</div>
+							</div>
+							<div class="transaction-item">
+								<div class="transaction-icon topup">
+									<i class="fa-solid fa-plus-circle"></i>
+								</div>
+								<div class="transaction-details">
+									<p class="transaction-type">Wallet Top-up via GCash</p>
+									<p class="transaction-date">Mar 3, 2026 - 3:15 PM</p>
+								</div>
+								<div class="transaction-amount positive">+₱25.00</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- MODAL TOGGLE -->
+		<input type="checkbox" id="topupToggle">
+		<!-- TOP UP MODAL -->
+		<div class="modal">
+			<label for="topupToggle" class="modal-overlay"></label>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2>Top Up Wallet</h2>
+					<label for="topupToggle" class="modal-close">
+						<i class="fa-solid fa-times"></i>
+					</label>
+				</div>
+				<div class="modal-body">
+					<!-- PAYMENT METHOD -->
+					<div class="form-section">
+						<label class="form-label">Select Payment Method</label>
+						<div class="payment-methods">
+							<input type="radio" name="payment" id="gcash">
+							<label for="gcash" class="payment-method-btn">
+								<img src="../../images/gcash-logo.png" class="method-logo">
+								<span class="method-name">GCash</span>
+							</label>
+							<input type="radio" name="payment" id="maya">
+							<label for="maya" class="payment-method-btn">
+								<img src="../../images/paymaya-logo.png" class="method-logo">
+								<span class="method-name">Maya</span>
+							</label>
+							<input type="radio" name="payment" id="card">
+							<label for="card" class="payment-method-btn">
+								<i class="fa-solid fa-credit-card"></i>
+								<span class="method-name">Bank Card</span>
+							</label>
+						</div>
+					</div>
+					<!-- QUICK AMOUNT -->
+					<div class="form-section">
+						<label class="form-label">Quick Amount</label>
+						<div class="quick-amounts">
+							<input type="radio" name="amount" id="a10">
+							<label for="a10" class="quick-btn">₱10</label>
+							<input type="radio" name="amount" id="a20">
+							<label for="a20" class="quick-btn">₱20</label>
+							<input type="radio" name="amount" id="a50">
+							<label for="a50" class="quick-btn">₱50</label>
+							<input type="radio" name="amount" id="a100">
+							<label for="a100" class="quick-btn">₱100</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<label for="topupToggle" class="btn-cancel">Cancel</label>
+					<label for="topupToggle" class="btn-confirm">Confirm Top Up</label>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
