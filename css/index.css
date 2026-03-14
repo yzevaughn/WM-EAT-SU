@@ -70,6 +70,9 @@
                 color: var(--white);
             }
 
+            header .logo{
+                color: var(--text-dark);
+            }
             .logo-icon {
                 background-color: var(--brand-red);
                 color: var(--white);
