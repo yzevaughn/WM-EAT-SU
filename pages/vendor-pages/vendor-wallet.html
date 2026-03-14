@@ -98,9 +98,9 @@
           <span class="currency-symbol">₱</span>
           <span class="balance-value" id="walletBalance">2500.00</span>
         </div>
-        <button class="topup-btn" id="topupBtn">
-          <i class="fa-solid fa-plus"></i> Withdraw Funds
-        </button>
+        <label for="withdrawToggle" class="topup-btn">
+          <i class="fa-solid fa-minus"></i> Withdraw Funds
+        </label>
       </div>
 
       <!-- TRANSACTION HISTORY -->
@@ -115,143 +115,69 @@
               <p class="transaction-type">Order Payment - Burger Meal</p>
               <p class="transaction-date">Mar 5, 2026 - 12:30 PM</p>
             </div>
-            <div class="transaction-amount positive">+₱125.50</div>
-          </div>
-
-          <div class="transaction-item">
-            <div class="transaction-icon payment">
-              <i class="fa-solid fa-money-bill-wave"></i>
-            </div>
-            <div class="transaction-details">
-              <p class="transaction-type">Withdrawal to Bank Account</p>
-              <p class="transaction-date">Mar 3, 2026 - 3:15 PM</p>
-            </div>
-            <div class="transaction-amount negative">-₱500.00</div>
-          </div>
-
-          <div class="transaction-item">
-            <div class="transaction-icon topup">
-              <i class="fa-solid fa-shopping-cart"></i>
-            </div>
-            <div class="transaction-details">
-              <p class="transaction-type">Order Payment - Pizza Combo</p>
-              <p class="transaction-date">Mar 1, 2026 - 1:45 PM</p>
-            </div>
-            <div class="transaction-amount positive">+₱275.75</div>
-          </div>
-
-          <div class="transaction-item">
-            <div class="transaction-icon payment">
-              <i class="fa-solid fa-money-bill-wave"></i>
-            </div>
-            <div class="transaction-details">
-              <p class="transaction-type">Withdrawal to GCash</p>
-              <p class="transaction-date">Feb 28, 2026 - 10:20 AM</p>
-            </div>
-            <div class="transaction-amount negative">-₱1000.00</div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
 
-<!-- WITHDRAW FUNDS MODAL -->
-<div class="modal" id="topUpModal">
-  <div class="modal-overlay" id="modalOverlay"></div>
-  <div class="modal-content">
+<!-- MODAL TOGGLE (place once, after layout) -->
+<input type="checkbox" id="withdrawToggle" style="display:none;">
 
+<!-- WITHDRAW FUNDS MODAL (CSS-only, student-wallet style, for vendor) -->
+<div class="modal">
+  <label for="withdrawToggle" class="modal-overlay"></label>
+  <div class="modal-content">
     <div class="modal-header">
       <h2>Withdraw Funds</h2>
-      <button class="modal-close" id="modalClose">
+      <label for="withdrawToggle" class="modal-close">
         <i class="fa-solid fa-times"></i>
-      </button>
+      </label>
     </div>
-
     <div class="modal-body">
-
-      <!-- PAYMENT METHOD SELECTION -->
+      <!-- PAYMENT METHOD -->
       <div class="form-section">
         <label class="form-label">Select Withdrawal Method</label>
         <div class="payment-methods">
-          <button class="payment-method-btn" data-method="gcash">
-            <img src="../../images/gcash-logo.png" alt="GCash" class="method-logo">
+          <input type="radio" name="withdraw-method" id="gcash" style="display:none;">
+          <label for="gcash" class="payment-method-btn">
+            <img src="../../images/gcash-logo.png" class="method-logo">
             <span class="method-name">GCash</span>
-          </button>
-          <button class="payment-method-btn" data-method="maya">
-            <img src="../../images/paymaya-logo.png" alt="PayMaya" class="method-logo">
-            <span class="method-name">PayMaya</span>
-          </button>
-          <button class="payment-method-btn" data-method="bank">
+          </label>
+          <input type="radio" name="withdraw-method" id="maya" style="display:none;">
+          <label for="maya" class="payment-method-btn">
+            <img src="../../images/paymaya-logo.png" class="method-logo">
+            <span class="method-name">Maya</span>
+          </label>
+          <input type="radio" name="withdraw-method" id="bank" style="display:none;">
+          <label for="bank" class="payment-method-btn">
             <i class="fa-solid fa-university"></i>
             <span class="method-name">Bank Transfer</span>
-          </button>
+          </label>
         </div>
       </div>
-
-      <!-- AMOUNT SELECTION -->
-      <div class="form-section">
-        <label class="form-label" for="topupAmount">Enter Amount (PHP)</label>
-        <div class="amount-input-group">
-          <span class="currency-symbol-input">₱</span>
-          <input
-            type="number"
-            id="topupAmount"
-            placeholder="0.00"
-            min="0"
-            step="0.01"
-          >
-        </div>
-      </div>
-
-      <!-- QUICK AMOUNT BUTTONS -->
+      <!-- QUICK AMOUNT -->
       <div class="form-section">
         <label class="form-label">Quick Amount</label>
-        <div class="quick-amounts" id="quickAmounts">
-          <button class="quick-btn" data-amount="500">₱500</button>
-          <button class="quick-btn" data-amount="1000">₱1000</button>
-          <button class="quick-btn" data-amount="2000">₱2000</button>
-          <button class="quick-btn" data-amount="5000">₱5000</button>
+        <div class="quick-amounts">
+          <input type="radio" name="withdraw-amount" id="a500" style="display:none;">
+          <label for="a500" class="quick-btn">₱500</label>
+          <input type="radio" name="withdraw-amount" id="a1000" style="display:none;">
+          <label for="a1000" class="quick-btn">₱1000</label>
+          <input type="radio" name="withdraw-amount" id="a2000" style="display:none;">
+          <label for="a2000" class="quick-btn">₱2000</label>
+          <input type="radio" name="withdraw-amount" id="a5000" style="display:none;">
+          <label for="a5000" class="quick-btn">₱5000</label>
         </div>
       </div>
-
-      <!-- ERROR MESSAGE -->
-      <div class="error-message" id="errorMessage"></div>
-
-      <!-- SELECTED INFO DISPLAY -->
-      <div class="topup-summary" id="topupSummary" style="display: none;">
-        <div class="summary-row">
-          <span>Withdrawal Method:</span>
-          <span id="selectedMethodDisplay">-</span>
-        </div>
-        <div class="summary-row">
-          <span>Amount:</span>
-          <span id="selectedAmountDisplay">-</span>
-        </div>
-      </div>
-
     </div>
-
     <div class="modal-footer">
-      <button class="btn-cancel" id="cancelBtn">Cancel</button>
-      <button class="btn-confirm" id="confirmTopUpBtn" disabled>
-        Confirm Withdrawal
-      </button>
+      <label for="withdrawToggle" class="btn-cancel">Cancel</label>
+      <label for="withdrawToggle" class="btn-confirm">Confirm Withdrawal</label>
     </div>
-
   </div>
 </div>
-
-<!-- SUCCESS MESSAGE -->
-<div class="success-message" id="successMessage">
-  <div class="success-content">
-    <i class="fa-solid fa-check-circle"></i>
-    <p id="successText">Withdrawal successful!</p>
-  </div>
-</div>
-
-<script src="../../script/vendor-script/vendor-wallet.js"></script>
 
 </body>
 </html>
