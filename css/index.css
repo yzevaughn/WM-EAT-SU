@@ -67,7 +67,7 @@
                 gap: 12px;
                 font-size: 20px;
                 font-weight: 700;
-                color: var(--text-dark);
+                color: var(--white);
             }
 
             .logo-icon {
@@ -319,12 +319,12 @@
             /* ==================== Perspectives Section ==================== */
             .perspectives {
                 padding: 100px 0;
-                background: radial-gradient(circle at center, #fff0f2 0%, #ffffff 100%);
+               background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
             }
 
                 .grid-3 {
                     display: grid;
-                    grid-template-columns: repeat(3, 1fr);
+                    grid-template-columns: repeat(2, 1fr);
                     gap: 32px;
                 }
 
@@ -391,7 +391,8 @@
 
 .features {
     padding: 120px 0;
-    background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+    
+     background: radial-gradient(circle at center, #fff0f2 0%, #ffffff 100%);
 }
 
 .feature-grid {
@@ -624,6 +625,7 @@
     text-align:center;
     font-size:13px;
 }
+
 
 /* Responsive Footer */
 
