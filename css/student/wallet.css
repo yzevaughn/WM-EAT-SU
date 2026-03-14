@@ -147,7 +147,9 @@ color:#dc2626;
 /* MODAL SYSTEM */
 
 #topupToggle{
-display:none;
+position:absolute;
+opacity:0;
+pointer-events:none;
 }
 
 .modal{
