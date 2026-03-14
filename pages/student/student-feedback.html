@@ -1,230 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WM EAT SU - Reports & Complaints</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../../css/student/dashboard.css">
-  <link rel="stylesheet" href="../../css/navbar.css">
-  <link rel="stylesheet" href="../../css/student/feedback.css">
-</head>
-<body>
-
-  <!-- NAVBAR -->
-  <div class="top-nav">
-    <div class="nav-left">
-      <button class="menu-toggle" id="menuToggle">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-
-      <a href="#" class="logo">
-        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-        <span class="logo-text">WM EAT SU</span>
-      </a>
-    </div>
-
-    <div class="profile">
-      <div class="profile-info">
-        <span class="profile-name">Vaughn Evangelista</span>
-        <span class="email">vaughn.student@wm.edu.ph</span>
-      </div>
-      <div class="profile-dropdown">
-        <button class="profile-btn" id="profileBtn">
-          <img src="../../images/pfp.jpg" class="profile-pic">
-          <i class="fa-solid fa-chevron-down"></i>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WM EAT SU - Reports & Complaints</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../css/student/dashboard.css">
+    <link rel="stylesheet" href="../../css/navbar.css">
+    <link rel="stylesheet" href="../../css/student/feedback.css">
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <div class="top-nav">
+      <div class="nav-left">
+        <button class="menu-toggle" id="menuToggle">
+          <i class="fa-solid fa-bars"></i>
         </button>
-        <div class="dropdown-menu" id="profileDropdown">
-          <a href="../../index.html" class="dropdown-item">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Log Out</span>
-          </a>
-        </div>
+        <a href="#" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
+        </a>
       </div>
-    </div>
-  </div>
-
-  <!-- LAYOUT -->
-  <div class="layout">
-
-    <!-- SIDEBAR -->
-    <div class="left-nav" id="sidebar">
-      <ul class="nav-list">
-        <li>
-          <a href="student-dashboard.html" class="nav-link">
-            <i class="fa-solid fa-house"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-cart.html" class="nav-link">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>Cart</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-order.html" class="nav-link">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-            <span>Orders</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-wallet.html" class="nav-link">
-            <i class="fa-solid fa-wallet"></i>
-            <span>Wallet</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="nav-link">
-            <i class="fa-solid fa-location-dot"></i>
-            <span>Campus Map</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-feedback.html" class="nav-link active">
-            <i class="fa-regular fa-star"></i>
-            <span>Feedback</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-vendor-applications.html" class="nav-link">
-            <i class="fa-solid fa-rss"></i>
-            <span>Vendor Applications</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div class="main-content">
-      
-      <!-- REPORTS & COMPLAINTS SECTION -->
-      <div class="complaints-container">
-        
-        <!-- HEADER -->
-        <div class="complaints-header">
-          <div class="header-text">
-            <h1>Reports & Complaints</h1>
-            <p>Report issues with your orders or food quality</p>
-          </div>
-          <button class="btn-file-complaint" id="fileComplaintBtn">
-            <i class="fa-solid fa-plus"></i> File Complaint
+      <div class="profile">
+        <div class="profile-info">
+          <span class="profile-name">Vaughn Evangelista</span>
+          <span class="email">vaughn.student@wm.edu.ph</span>
+        </div>
+        <div class="profile-dropdown">
+          <button class="profile-btn" id="profileBtn">
+            <img src="../../images/pfp.jpg" class="profile-pic">
+            <i class="fa-solid fa-chevron-down"></i>
           </button>
+          <div class="dropdown-menu" id="profileDropdown">
+            <a href="../../index.html" class="dropdown-item">
+              <i class="fas fa-sign-out-alt"></i>
+              <span>Log Out</span>
+            </a>
+          </div>
         </div>
-
-        <!-- COMPLAINTS LIST -->
-        <div class="complaints-list">
-          
-          <!-- Complaint Item 1 -->
-          <div class="complaint-item">
-            <div class="complaint-header">
-              <div class="complaint-title">
-                <h3>Quantum Butterfly Syndrome</h3>
-                <span class="complaint-id">Complaint #001</span>
-              </div>
-              <span class="status-badge status-resolved">Resolved</span>
+      </div>
+    </div>
+    <!-- LAYOUT -->
+    <div class="layout">
+      <!-- SIDEBAR -->
+      <div class="left-nav" id="sidebar">
+        <ul class="nav-list">
+          <li>
+            <a href="student-dashboard.html" class="nav-link">
+              <i class="fa-solid fa-house"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-cart.html" class="nav-link">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span>Cart</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-order.html" class="nav-link">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+              <span>Orders</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-wallet.html" class="nav-link">
+              <i class="fa-solid fa-wallet"></i>
+              <span>Wallet</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-map.html" class="nav-link">
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Campus Map</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-feedback.html" class="nav-link active">
+              <i class="fa-regular fa-star"></i>
+              <span>Feedback</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-vendor-applications.html" class="nav-link">
+              <i class="fa-solid fa-rss"></i>
+              <span>Vendor Applications</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- MAIN CONTENT -->
+      <div class="main-content">
+        <!-- REPORTS & COMPLAINTS SECTION -->
+        <div class="complaints-container">
+          <div class="complaints-header">
+            <div class="header-text">
+              <h1>Reports & Complaints</h1>
+              <p>Report issues with your orders or food quality</p>
             </div>
-            <p class="complaint-order">Order: #ORD-2026-1547 - Spicy Dragon Kitchen</p>
-            <p class="complaint-message">The chromatic oscillation manifested through perpendicular dimensions causing the vermillion substrate to achieve temporal displacement across seventeen alternate frequencies.</p>
-            <div class="complaint-footer">
-              <span class="filed-date">Filed: March 5, 2026</span>
+            <a href="#complaintModal" class="btn-file-complaint">
+              <i class="fa-solid fa-plus"></i> File Complaint
+            </a>
+          </div>
+          <div class="complaints-list">
+            <div class="complaint-item">
+              <div class="complaint-header">
+                <div class="complaint-title">
+                  <h3>Wrong Order</h3>
+                  <span class="complaint-id">Complaint #001</span>
+                </div>
+                <span class="status-badge status-resolved">Resolved</span>
+              </div>
+              <p class="complaint-order">Order: #ORD-2026-1547 - Spicy Dragon Kitchen</p>
+              <p class="complaint-message">I received the wrong food order. I ordered chicken but received beef instead.</p>
+              <div class="complaint-footer">
+                <span class="filed-date">Filed: March 5, 2026</span>
+              </div>
+            </div>
+            <div class="complaint-item">
+              <div class="complaint-header">
+                <div class="complaint-title">
+                  <h3>Food Quality Issue</h3>
+                  <span class="complaint-id">Complaint #002</span>
+                </div>
+                <span class="status-badge status-pending">Pending</span>
+              </div>
+              <p class="complaint-order">Order: #ORD-2026-1549 - Salad Bar</p>
+              <p class="complaint-message">The salad vegetables were not fresh and tasted spoiled.</p>
+              <div class="complaint-footer">
+                <span class="filed-date">Filed: March 4, 2026</span>
+              </div>
             </div>
           </div>
-
-         
-
-          <!-- Complaint Item 2 -->
-          <div class="complaint-item">
-            <div class="complaint-header">
-              <div class="complaint-title">
-                <h3>Kaleidoscope Phantom Ridge</h3>
-                <span class="complaint-id">Complaint #002</span>
+        </div>
+        <!-- MODAL -->
+        <div id="complaintModal" class="modal">
+          <a href="#" class="modal-overlay"></a>
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2>File a Complaint</h2>
+              <a href="#" class="modal-close">
+                <i class="fa-solid fa-times"></i>
+              </a>
+            </div>
+            <form class="complaint-form">
+              <div class="form-group">
+                <label>Related Order (Optional)</label>
+                <select class="form-control">
+                  <option>No specific order</option>
+                  <option>Order #ORD-2026-1547 - Fries</option>
+                  <option>Order #ORD-2026-1548 - Shomai Rice</option>
+                </select>
               </div>
-              <span class="status-badge status-pending">Pending</span>
-            </div>
-            <p class="complaint-order">Order: #ORD-2026-1549 - Salad Bar</p>
-            <p class="complaint-message">Ethereal monuments cascaded through vertical turbulence, weaving obsidian serpents within luminescent voids of undefined architectural blueprints.</p>
-            <div class="complaint-footer">
-              <span class="filed-date">Filed: March 4, 2026</span>
-            </div>
+              <div class="form-group">
+                <label>Subject *</label>
+                <input type="text" class="form-control" placeholder="Brief description of the issue" required>
+              </div>
+              <div class="form-group">
+                <label>Description *</label>
+                <textarea class="form-control" rows="5" placeholder="Provide detailed information about your complaint" required></textarea>
+              </div>
+              <div class="form-group">
+                <label>Upload Image (Optional)</label>
+                <input type="file" class="form-control-file">
+              </div>
+              <div class="form-actions">
+                <a href="#" class="btn-cancel">Cancel</a>
+                <button class="btn-submit">Submit Complaint</button>
+              </div>
+            </form>
           </div>
-
         </div>
-
       </div>
-
     </div>
-  </div>
-
-  <!-- COMPLAINT MODAL -->
-  <div class="modal" id="complaintModal">
-    <div class="modal-overlay" id="modalOverlay"></div>
-    <div class="modal-content">
-      
-      <div class="modal-header">
-        <h2>File a Complaint</h2>
-        <button class="modal-close" id="modalClose">
-          <i class="fa-solid fa-times"></i>
-        </button>
-      </div>
-
-      <form class="complaint-form" id="complaintForm">
-        
-        <div class="form-group">
-          <label for="relatedOrder">Related Order (Optional)</label>
-          <select id="relatedOrder" class="form-control">
-            <option value="">No specific order</option>
-            <option value="ORD-2026-1547">Order #ORD-2026-1547 - Fries</option>
-            <option value="ORD-2026-1548">Order #ORD-2026-1548 - Shomai Rice</option>
-        
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="subject">Subject <span class="required">*</span></label>
-          <input 
-            type="text" 
-            id="subject" 
-            class="form-control" 
-            placeholder="Brief description of the issue"
-            required
-          >
-        </div>
-
-        <div class="form-group">
-          <label for="description">Description <span class="required">*</span></label>
-          <textarea 
-            id="description" 
-            class="form-control" 
-            rows="5"
-            placeholder="Please provide detailed information about your complaint..."
-            required
-          ></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="imageUpload">Upload Image (Optional)</label>
-          <input 
-            type="file" 
-            id="imageUpload" 
-            class="form-control-file"
-            accept="image/*"
-          >
-          <small class="helper-text">Upload a photo to help illustrate the issue</small>
-        </div>
-
-        <div class="form-actions">
-          <button type="button" class="btn-cancel" id="cancelBtn">Cancel</button>
-          <button type="submit" class="btn-submit">Submit Complaint</button>
-        </div>
-
-      </form>
-
-    </div>
-  </div>
-
-
-</body>
+  </body>
 </html>
