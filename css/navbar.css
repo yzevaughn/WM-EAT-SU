@@ -273,36 +273,38 @@ background:#f8f9fa;
 
 @media (max-width:768px){
 
-.menu-toggle{
-display:block;
-}
+  .menu-toggle{
+    display:block;
+  }
 
-.logo-text{
-display:none;
-}
+  .logo-text{
+    display:none;
+  }
 
-.profile-info{
-display:none;
-}
+  .profile-info{
+    display:none;
+  }
 
-.profile-pic{
-width:36px;
-height:36px;
-}
+  .profile-pic{
+    width:36px;
+    height:36px;
+  }
 
-.left-nav{
-position:fixed;
-left:-260px;
-top:70px;
-width:260px;
-height:100vh;
-background:#fff;
-transition:left 0.3s ease;
-box-shadow:4px 0 20px rgba(0,0,0,0.1);
-}
+  .left-nav{
+    position:fixed;
+    left:-260px;
+    top:70px;
+    width:260px;
+    height:100vh;
+    background:#fff;
+    transition:left 0.3s ease;
+    box-shadow:4px 0 20px rgba(0,0,0,0.1);
+    z-index: 999; /* Added to ensure it sits above the main content */
+  }
 
-.left-nav.active{
-left:0;
-}
+  
+  #menu-checkbox:checked ~ .layout .left-nav {
+    left: 0;
+  }
 
 }
