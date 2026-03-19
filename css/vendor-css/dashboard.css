@@ -13,7 +13,7 @@
   background: #F9FAFB;
   padding: 20px;
   overflow-y: auto;
-  z-index: 1000;
+  z-index: 1000000;
 }
 
 .main-content {
