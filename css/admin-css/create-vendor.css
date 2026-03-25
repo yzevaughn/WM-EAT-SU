@@ -1,4 +1,6 @@
-        * {
+  
+/* reset everything and set default styling */
+* {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -11,12 +13,14 @@
             color: #1e293b;
         }
 
+/* main container for the page */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 30px 20px;
         }
 
+/* header styling */
         header {
             margin-bottom: 30px;
         }
@@ -33,6 +37,7 @@
             font-size: clamp(14px, 2vw, 16px);
         }
 
+/* layout for form and sidebar */
         .main-layout {
             display: grid;
             grid-template-columns: 1fr 320px;
@@ -40,6 +45,7 @@
             align-items: start;
         }
 
+/* form card container - white box with form */
         .form-card {
             background: white;
             border-radius: 16px;
@@ -92,6 +98,7 @@
             color: #334155;
         }
 
+/* form input and textarea styling */
         input, textarea, select {
             background-color: #f1f5f9;
             border: 1px solid transparent;
@@ -127,6 +134,7 @@
             cursor: pointer;
         }
 
+/* the submit button style */
         .submit-btn {
             background-color: #e11d48;
             color: white;
@@ -144,6 +152,7 @@
             margin-top: 20px;
         }
 
+/* right sidebar cards */
         .sidebar-card {
             background: white;
             border-radius: 16px;
@@ -182,7 +191,7 @@
         .stat-value { font-weight: 700; font-size: 18px; }
         .val-green { color: #22c55e; }
 
-        /* Tablet Responsiveness */
+/* tablet view */
         @media (max-width: 1024px) {
             .container {
               max-width: 100%;
@@ -211,7 +220,7 @@
             }
         }
 
-        /* Mobile Responsiveness */
+/* phone screens */
         @media (max-width: 768px) {
             .container {
               max-width: 100%;
@@ -296,7 +305,7 @@
             }
         }
 
-        /* Small Mobile */
+/* small phones */
         @media (max-width: 480px) {
             .container {
               padding: 12px;
@@ -370,7 +379,7 @@
             }
         }
 
-        /* Extra Small Mobile */
+/* super small phones */
         @media (max-width: 360px) {
             .container {
               padding: 8px;

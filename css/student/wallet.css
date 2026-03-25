@@ -1,5 +1,6 @@
 /* GENERAL */
 
+/* wallet main container */
 .wallet-container{
 max-width:900px;
 margin:auto;
@@ -61,6 +62,7 @@ font-size:30px;
 opacity:.8;
 }
 
+/* button to add money */
 .topup-btn{
 display:inline-flex;
 align-items:center;
@@ -98,6 +100,7 @@ display:flex;
 flex-direction:column;
 }
 
+/* single transaction row */
 .transaction-item{
 display:flex;
 align-items:center;
@@ -161,10 +164,12 @@ color:#dc2626;
 
 #topupToggle{
 position:absolute;
+/* hidden checkbox for open/close */
 opacity:0;
 pointer-events:none;
 }
 
+/* modal popup content */
 .modal{
 position:fixed;
 top:0;

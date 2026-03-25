@@ -1,4 +1,5 @@
 /* LAYOUT */
+/* main flex layout */
 .layout {
   display: flex;
   min-height: 100vh;
@@ -14,6 +15,7 @@
 
 
 /* WALLET PAGE - Main Container */
+/* main wallet container */
 .wallet-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -24,6 +26,7 @@
 }
 
 /* BALANCE CARD */
+/* big balance display card */
 .balance-card {
   background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   border-radius: 1.5rem;
@@ -92,6 +95,7 @@
 }
 
 /* TRANSACTION SECTION */
+/* all transactions list */
 .transaction-section {
   display: flex;
   flex-direction: column;
@@ -187,6 +191,7 @@
 }
 
 /* MODAL */
+/* modal popup for topup */
 .modal {
   display: none;
   position: fixed;
@@ -291,6 +296,7 @@
 }
 
 /* FORM SECTIONS */
+/* form styling */
 .form-section {
   display: flex;
   flex-direction: column;
@@ -304,6 +310,7 @@
 }
 
 /* PAYMENT METHODS */
+/* payment method selection buttons */
 .payment-methods {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -393,6 +400,7 @@
 }
 
 /* QUICK AMOUNTS */
+/* quick amount selection buttons */
 .quick-amounts {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

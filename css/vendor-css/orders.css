@@ -1,4 +1,5 @@
 /* LAYOUT */
+/* main flex layout */
 .layout {
   display: flex;
   min-height: 100vh;
@@ -35,6 +36,7 @@
   margin-bottom: 24px;
 }
 
+/* filter tabs for status */
 .filter-tabs {
   display: flex;
   gap: 12px;
@@ -63,6 +65,7 @@
   background: #e5e7eb;
 }
 
+/* grid of order cards */
 .orders-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, 360px);
@@ -70,6 +73,7 @@
   justify-content: flex-start;
 }
 
+/* single order card */
 .order-card {
   background: #fff;
   border: 1px solid #e5e7eb;
@@ -197,6 +201,7 @@ hr {
 }
 
 /* ACTION BUTTONS */
+/* accept/decline buttons */
 .order-actions {
   display: flex;
   gap: 8px;

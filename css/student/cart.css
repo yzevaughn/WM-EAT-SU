@@ -1,5 +1,6 @@
-/* Cart page styles */
 
+
+/* main container with flex layout */
 .cart-container {
   display: flex;
   gap: 32px;
@@ -7,7 +8,7 @@
  
 }
 
-
+/* left side - list of items in cart */
 .cart-items .cart-header h2 {
   font-size: 28px;
   font-weight: 700;
@@ -19,6 +20,7 @@
   flex: 0 0 70%;
 }
 
+/* right sidebar - order summary and checkout */
 .order-summary {
   flex: 0 0 30%;
 }  
@@ -49,6 +51,7 @@
   top: 100px;
 }
 
+/* single cart item styling */
 .cart-item {
   display: flex;
   gap: 20px;
@@ -105,6 +108,7 @@
   gap: 12px;
 }
 
+/* quantity buttons to add/remove */
 .item-quantity {
   display: flex;
   align-items: center;
@@ -167,6 +171,7 @@
   border-color: #3b82f6;
 }
 
+/* showing subtotal, tax, total */
 .summary-details {
   display: flex;
   flex-direction: column;
@@ -187,6 +192,7 @@
   color: #0f172a;
 }
 
+/* big red checkout button */
 .checkout-btn {
   width: 100%;
   background:linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
@@ -210,7 +216,7 @@
   transform: translateY(0);
 }
 
-/* Responsive adjustments */
+/* responsive for tablets and phones */
 @media (max-width: 1024px) {
   .cart-container {
     flex-direction: column;

@@ -1,5 +1,6 @@
 /* Minimalist Order History styles */
 
+/* main page container */
 .orders-page {
   /* background removed for cleaner look */
 
@@ -19,14 +20,14 @@ margin:0 0 8px 0;
   margin-bottom: 24px;
 }
 
-
-
+/* grid of order cards */
 .orders-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
 
+/* single order card */
 .order-card {
   background: #fff;
   border: 1px solid #e5e7eb;
@@ -66,6 +67,7 @@ margin:0 0 8px 0;
   border-color: #d97706;
 }
 
+/* status badges - ready, preparing, pending */
 .status-badge.ready {
   background: #dcfce7;
   color: #16a34a;
@@ -163,7 +165,7 @@ margin:0 0 8px 0;
   transform: translateY(0);
 }
 
-/* MODAL STYLING */
+/* the modal/popup for reviewing orders */
 .modal {
   display: none;
   position: fixed;
@@ -279,7 +281,7 @@ margin:0 0 8px 0;
   color: #111827;
 }
 
-/* STAR RATING */
+/* stars for rating food */
 .star-rating {
   display: flex;
   align-items: center;
@@ -308,7 +310,7 @@ margin:0 0 8px 0;
   margin-left: 8px;
 }
 
-/* FORM CONTROL */
+/* form input styling */
 .form-control {
   padding: 12px;
   border: 1px solid #e5e7eb;

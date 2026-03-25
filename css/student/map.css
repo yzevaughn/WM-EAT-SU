@@ -1,5 +1,6 @@
 
 
+/* header with title and description */
 .content-header {
   margin-bottom: 2rem;
 }
@@ -16,6 +17,7 @@
   font-size: 1rem;
 }
 
+/* the actual map display area */
 .map-card {
   background-color: #ffffff;
   border-radius: 12px;
@@ -24,6 +26,7 @@
   margin-bottom: 2rem;
 }
 
+/* placeholder for when map is loading */
 .map-placeholder {
   background-color: #e5e7eb;
   border: 2px dashed #9ca3af;
@@ -48,6 +51,7 @@
   margin-bottom: 0.5rem;
 }
 
+/* showing what each color means on the map */
 .map-legend {
   background-color: #ffffff;
   border-radius: 12px;

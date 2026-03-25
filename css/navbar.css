@@ -299,7 +299,7 @@ background:#f8f9fa;
     background:#fff;
     transition:left 0.3s ease;
     box-shadow:4px 0 20px rgba(0,0,0,0.1);
-    z-index: 999; /* Added to ensure it sits above the main content */
+    z-index: 999; 
   }
 
   

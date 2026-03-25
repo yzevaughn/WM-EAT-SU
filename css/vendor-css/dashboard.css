@@ -1,4 +1,5 @@
 /* LAYOUT */
+/* main flex layout for sidebar and content */
 .layout {
   display: flex;
   min-height: 100vh;
@@ -34,6 +35,7 @@
   margin: 4px 0 0 0;
   font-size: clamp(14px, 2vw, 16px);
 }
+/* grid of stat cards */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -87,6 +89,7 @@
   background: #fef3c7;
   color: #a16207;
 }
+/* quick action cards - menu, orders, reviews */
 .actions-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

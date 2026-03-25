@@ -1,6 +1,7 @@
 
 body{
 font-family:'Inter',sans-serif;
+/* page background */
 background:#f9fafb;
 margin:0;
 padding:0;
@@ -8,6 +9,7 @@ padding:0;
 
 /* CONTAINER */
 
+/* main container */
 .complaints-container{
 max-width:100%;
 margin:0;

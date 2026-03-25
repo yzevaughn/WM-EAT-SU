@@ -22,8 +22,7 @@ a {
 }
 
 body {
-   background-color: #ffffff; /* Changed to solid white */
-    /* The subtle dot pattern radial-gradient has been removed */
+   background-color: #ffffff; 
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,12 +1,12 @@
-/* =========================================
-MAIN CONTENT LAYOUT
-========================================= */
+
+/* main layout - flex container for sidebar and content */
 .layout {
   display: flex;
   min-height: 100vh; 
   position: relative;
 }
 /* SIDEBAR */
+/* left sidebar navigation area */
 .left-nav {
   width: 250px;
   position: fixed;
@@ -15,6 +15,7 @@ MAIN CONTENT LAYOUT
   left: 0;
   z-index: 1000; 
 }
+/* main content area with padding */
 .main-content{
 margin-left:250px;
 padding:30px 3%;
@@ -22,10 +23,7 @@ background:#f8fafc;
 overflow-y:auto;
 }
 
-/* =========================================
-   WELCOME SECTION
-========================================= */
-
+/* big welcome banner at the top */
 .welcome-section {
   display: flex;
   justify-content: space-between;
@@ -95,6 +93,7 @@ overflow-y:auto;
   backdrop-filter: blur(4px);
 }
 
+/* three stat cards showing numbers */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -226,9 +225,7 @@ overflow-y:auto;
   top: 100%;
 }
 
-/* =========================================
-   ACTIVE ORDER SECTION
-========================================= */
+
 
 .active-order-section {
   margin-bottom: 32px;
@@ -335,7 +332,7 @@ overflow-y:auto;
   50%       { opacity: 0.5; transform: scale(0.75); }
 }
 
-/* progress track */
+/* order progress tracker - ordered, preparing, ready */
 .order-progress {
   display: flex;
   align-items: center;
@@ -454,10 +451,7 @@ overflow-y:auto;
   box-shadow: 0 2px 8px rgba(230, 21, 36, 0.2);
 }
 
-/* =========================================
-   QUICK ACTIONS
-========================================= */
-
+/* quick action buttons - cart, orders, balance,and  others*/
 .quick-section {
   margin-bottom: 32px;
 }
@@ -568,9 +562,6 @@ overflow-y:auto;
   transform: translateX(3px);
 }
 
-/* =========================================
-BROWSE FOOD SECTION
-========================================= */
 
 .browse-food-section{
 margin-bottom:32px;
@@ -751,6 +742,7 @@ color:#0f172a;
 margin:0;
 }
 
+/* rating stars */
 .food-rating{
 display:flex;
 align-items:center;
@@ -825,10 +817,7 @@ box-shadow:0 4px 16px rgba(239, 68, 68, 0.3);
 transform:translateY(0);
 }
 
-/* =========================================
-RESPONSIVE DESIGN
-========================================= */
-
+/* for bigger screens */
 @media (max-width:1440px){
 .quick-grid{
 grid-template-columns:repeat(3, 1fr);
@@ -839,6 +828,7 @@ padding:24px 2.5%;
 }
 }
 
+/* tablets */
 @media (max-width:1024px){
 .stats-grid{
 grid-template-columns:repeat(2, 1fr);
@@ -859,6 +849,7 @@ margin-top:16px;
 }
 }
 
+/* phones and small screens */
 @media (max-width:768px){
 .main-content{
 margin-left:0;

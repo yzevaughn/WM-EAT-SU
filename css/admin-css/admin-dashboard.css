@@ -1,4 +1,5 @@
 :root {
+    /* color variables and theme stuff we use everywhere */
     --bg-color: #f8f9fa;
     --text-dark: #1a1a1a;
     --text-gray: #6c757d;
@@ -24,12 +25,14 @@
     --text-sub: #64748b;
 }
 
+/* main layout structure - sidebar and content side by side */
 .layout {
   display: flex;
   min-height: 100vh; 
   position: relative;
 }
 
+/* the actual content area with padding and stuff */
 .main-content{
 margin-left:250px;
 padding:30px 4%;
@@ -42,6 +45,7 @@ svg {
     stroke-width: 2;
 }
 
+/* basic page styles for body and everything */
 body {
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     background-color: var(--bg-color);
@@ -51,6 +55,7 @@ body {
     scrollbar-gutter: stable;
 }
 
+/* heading and description text styling */
 header {
     margin-bottom: 30px;
 }
@@ -73,6 +78,7 @@ p.subtitle {
     margin: 0 auto;
 }
 
+/* the big numbers showing orders, vendors, health */
 .metrics-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -104,6 +110,7 @@ p.subtitle {
     border-radius: 12px;
 }
 
+/* quick action cards - yellow/orange/pink boxes */
 .fade-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -150,6 +157,7 @@ p.subtitle {
     border: 1px solid #eef2f6;
 }
 
+/* the bottom section with approval queue and system status */
 .status-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -323,6 +331,7 @@ p.subtitle {
 .action-card.red .badge { background: var(--r-accent); }
 .action-card.red .card-link { color: var(--r-text); }
 
+/* nice cards for saas-like design with icons and badges */
     .saas-card {
       background: #fff;
       border-radius: 22px;

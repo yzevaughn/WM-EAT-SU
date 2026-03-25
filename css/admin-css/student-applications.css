@@ -4,6 +4,7 @@
       padding: 0 20px;
     }
 
+    /* styling for the page title and description */
     .header {
       margin-bottom: 24px;
     }
@@ -20,6 +21,7 @@
       color: #64748b;
     }
 
+    /* grid layout for the stat cards */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -27,6 +29,7 @@
       margin-bottom: 24px;
     }
 
+    /* each stat card styling - pending, approved, rejected colors */
     .stat-card {
       flex: 1;
       display: flex;
@@ -96,6 +99,7 @@
       color: #991b1b;
     }
 
+    /* empty state message when theres no data */
     .empty-state {
       background-color: #ffffff;
       border: 1px solid #e2e8f0;
@@ -119,7 +123,7 @@
       color: #64748b;
     }
 
-    /* Tablet Responsiveness */
+    /* tablet version */
     @media (max-width: 1024px) {
       .dashboard-section {
         max-width: 100%;
@@ -135,7 +139,7 @@
       }
     }
 
-    /* Mobile Responsiveness */
+    /* mobile version */
     @media (max-width: 768px) {
       .dashboard-section {
         max-width: 100%;
@@ -193,7 +197,7 @@
       }
     }
 
-    /* Small Mobile */
+    /* really small phones */
     @media (max-width: 480px) {
       .dashboard-section {
         padding: 0 12px;
@@ -236,7 +240,7 @@
       }
     }
 
-    /* Extra Small Mobile */
+    /* tiny screens */
     @media (max-width: 360px) {
       .dashboard-section {
         padding: 0 8px;
