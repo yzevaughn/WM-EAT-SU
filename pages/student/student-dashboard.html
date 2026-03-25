@@ -103,133 +103,173 @@
       </ul>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div class="main-content">
+   <!-- MAIN CONTENT -->
+<div class="main-content">
+  <div class="content-wrapper">
 
-      <!-- WELCOME BANNER -->
-      <div class="welcome-section">
-        <div class="welcome-text">
-          <h1>Welcome back, Vaughn!</h1>
-          <p>Let's grab some delicious food from our campus vendors today</p>
-        </div>
-        <div class="welcome-icon">
-          <i class="fa-solid fa-utensils"></i>
+    <!-- WELCOME BANNER -->
+    <div class="welcome-section">
+      <div class="welcome-text">
+        <h1>Welcome back, Vaughn! 👋</h1>
+        <p>Let's grab some delicious food from our campus vendors today</p>
+      </div>
+      <div class="welcome-icon">
+        <i class="fa-solid fa-utensils"></i>
+      </div>
+    </div>
+
+    <!-- STATS GRID -->
+    <div class="stats-grid">
+
+      <div class="stat-card green">
+        <div class="stat-icon"><i class="fa-solid fa-wallet"></i></div>
+        <div class="stat-info">
+          <div class="stat-value">₱245.50</div>
+          <div class="stat-label">Wallet Balance</div>
         </div>
       </div>
 
-      <!-- STATS GRID -->
-      <div class="stats-grid">
+      <div class="stat-card blue">
+        <div class="stat-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+        <div class="stat-info">
+          <div class="stat-value">3</div>
+          <div class="stat-label">Cart Items</div>
+        </div>
+      </div>
 
-  <div class="stat-card green">
-    <div class="stat-icon">
-      <i class="fa-solid fa-wallet"></i>
+      <div class="stat-card red">
+        <div class="stat-icon"><i class="fa-solid fa-receipt"></i></div>
+        <div class="stat-info">
+          <div class="stat-value">24</div>
+          <div class="stat-label">Total Orders</div>
+        </div>
+      </div>
+
     </div>
 
-    <div class="stat-info">
-      <div class="stat-value">₱245.50</div>
-      <div class="stat-label">Wallet Balance</div>
+    <!-- ACTIVE ORDER SECTION -->
+    <div class="active-order-section">
+      <div class="section-header">
+        <h2>Active Order</h2>
+      </div>
+
+      <div class="active-order-card">
+
+        <div class="order-header">
+          <div class="order-vendor">
+            <div class="vendor-icon"><i class="fa-solid fa-fire"></i></div>
+            <div class="vendor-info">
+              <h3>Shomai Rice</h3>
+              <p>Order ID: #ORD-2026-1547</p>
+            </div>
+          </div>
+
+          <div class="order-status">
+            <span class="status-dot"></span>
+            Preparing
+          </div>
+        </div>
+
+        <!-- ORDER PROGRESS -->
+        <div class="order-progress">
+
+          <div class="progress-step done">
+            <div class="step-dot">
+              <i class="fa-solid fa-check"></i>
+            </div>
+            <span class="step-label">Placed</span>
+          </div>
+
+          <div class="progress-step active">
+            <div class="step-dot">
+              <i class="fa-solid fa-fire-burner"></i>
+            </div>
+            <span class="step-label">Preparing</span>
+          </div>
+
+          <div class="progress-step">
+            <div class="step-dot">
+              <i class="fa-solid fa-bell"></i>
+            </div>
+            <span class="step-label">Ready</span>
+          </div>
+
+          <div class="progress-step">
+            <div class="step-dot">
+              <i class="fa-solid fa-bag-shopping"></i>
+            </div>
+            <span class="step-label">Picked Up</span>
+          </div>
+
+        </div>
+
+        <div class="order-footer">
+          <div class="order-total">
+            <span>Total</span>
+            <strong>₱20.00</strong>
+          </div>
+
+          <button class="track-btn">Track Order</button>
+        </div>
+
+      </div>
     </div>
+
+    <!-- QUICK ACTIONS -->
+    <div class="quick-section">
+      <h2>Quick Actions</h2>
+
+      <div class="quick-grid">
+
+        <a href="#browse-food" class="quick-card">
+          <div class="quick-icon red">
+            <i class="fa-solid fa-fire"></i>
+          </div>
+          <h3>Browse Food</h3>
+          <p>Explore menus from campus vendors</p>
+          <div class="card-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </a>
+
+        <a href="#" class="quick-card">
+          <div class="quick-icon blue">
+            <i class="fa-solid fa-map"></i>
+          </div>
+          <h3>Campus Map</h3>
+          <p>Find vendor locations near you</p>
+          <div class="card-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </a>
+
+        <a href="student-order.html" class="quick-card">
+          <div class="quick-icon purple">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+          </div>
+          <h3>Order History</h3>
+          <p>View past orders and favorites</p>
+          <div class="card-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </a>
+
+        <a href="student-feedback.html" class="quick-card">
+          <div class="quick-icon green">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <h3>Leave Feedback</h3>
+          <p>Share your dining experience</p>
+          <div class="card-arrow">
+            <i class="fa-solid fa-arrow-right"></i>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
   </div>
-
-  <div class="stat-card blue">
-    <div class="stat-icon">
-      <i class="fa-solid fa-cart-shopping"></i>
-    </div>
-
-    <div class="stat-info">
-      <div class="stat-value">3</div>
-      <div class="stat-label">Cart Items</div>
-    </div>
-  </div>
-
-  <div class="stat-card red">
-    <div class="stat-icon">
-      <i class="fa-solid fa-receipt"></i>
-    </div>
-
-    <div class="stat-info">
-      <div class="stat-value">24</div>
-      <div class="stat-label">Total Orders</div>
-    </div>
-  </div>
-
 </div>
-
-      <!-- ACTIVE ORDER SECTION -->
-      <div class="active-order-section">
-        <div class="section-header">
-          <h2>Active Order</h2>
-        </div>
-
-        <div class="active-order-card">
-          <div class="order-header">
-            <div class="order-vendor">
-              <div class="vendor-icon"><i class="fa-solid fa-fire"></i></div>
-              <div class="vendor-info">
-                <h3>Shomai Rice</h3>
-                <p>Order ID: #ORD-2026-1547</p>
-              </div>
-            </div>
-            <div class="order-status">
-              <i class="fa-solid fa-clock"></i> Preparing
-            </div>
-          </div>
-
-          <div class="order-footer">
-            <div class="order-total">
-              <span>Total:</span>
-              <strong>₱20.00</strong>
-            </div>
-            <button class="track-btn">Track Order</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- QUICK ACTIONS -->
-      <div class="quick-section">
-        <h2>Quick Actions</h2>
-        <div class="quick-grid">
-          <a href="#browse-food" class="quick-card">
-            <div class="quick-icon red">
-              <i class="fa-solid fa-fire"></i>
-            </div>
-            <h3>Browse Food</h3>
-            <p>Explore menus from campus vendors</p>
-            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-          </a>
-
-          <a href="#" class="quick-card">
-            <div class="quick-icon blue">
-              <i class="fa-solid fa-map"></i>
-            </div>
-            <h3>Campus Map</h3>
-            <p>Find vendor locations near you</p>
-            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-          </a>
-
-          <a href="student-order.html" class="quick-card">
-            <div class="quick-icon purple">
-              <i class="fa-solid fa-history"></i>
-            </div>
-            <h3>Order History</h3>
-            <p>View past orders and favorites</p>
-            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-          </a>
-
-          <a href="student-feedback.html" class="quick-card">
-            <div class="quick-icon green">
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <h3>Leave Feedback</h3>
-            <p>Share your dining experience</p>
-            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-          </a>
-        </div>
-      </div>
-
-      
-    </div>
-  </div>
 
 
 
