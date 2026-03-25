@@ -25,6 +25,28 @@
     --text-main: #0f172a;
     --text-sub: #64748b;
 }
+
+.layout {
+  display: flex;
+  min-height: 100vh; 
+  position: relative;
+}
+/* SIDEBAR */
+.left-nav {
+  width: 250px;
+  position: fixed;
+  top: 70px;
+  bottom: 0;
+  left: 0;
+  z-index: 1000; 
+}
+.main-content{
+margin-left:250px;
+padding:30px 3%;
+background:#f8fafc;
+overflow-y:auto;
+}
+
 svg {
     stroke-width: 2;
 }
