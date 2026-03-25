@@ -2,11 +2,9 @@
     --bg-color: #f8f9fa;
     --text-dark: #1a1a1a;
     --text-gray: #6c757d;
-    --color-red: #e61a23;
     --color-blue: #1a73e8;
     --color-green: #00b041;
     --color-purple: #9d26ff;
-    --color-red-light: rgba(230,26,35,0.1);
     --color-blue-light: rgba(26,115,232,0.1);
     --color-green-light: rgba(0,176,65,0.1);
     --color-purple-light: rgba(157,38,255,0.1);
@@ -93,7 +91,6 @@ p.subtitle {
 .metric-card h2 { margin: 10px 0; font-size: clamp(24px, 6vw, 32px); }
 .metric-card p { margin: 0; font-size: 13px; opacity: 0.8; }
 
-.bg-red { background: #ef4444; }
 .bg-blue { background: #3b82f6; }
 .bg-green { background: #22c55e; }
 .bg-purple { background: #a855f7; }
