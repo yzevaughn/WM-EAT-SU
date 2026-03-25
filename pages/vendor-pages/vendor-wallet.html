@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../../css/vendor-css/wallet.css">
 </head>
 <body>
+ <!-- navbar at the top with logo and profile -->
  <input type="checkbox" id="menu-checkbox" class="menu-checkbox">
 <!-- NAVBAR -->
 <div class="top-nav">
@@ -45,10 +46,11 @@
   </div>
 </div>
 
-<!-- LAYOUT -->
+
+<!-- main layout with sidebar and content -->
 <div class="layout">
 
-  <!-- SIDEBAR -->
+ 
   <div class="left-nav" id="sidebar">
     <ul class="nav-list">
       <li>
@@ -84,11 +86,13 @@
     </ul>
   </div>
 
-  <!-- MAIN CONTENT -->
+  <!
+  <!-- wallet page content -->
   <div class="main-content">
     <div class="wallet-container">
 
-      <!-- CURRENT BALANCE CARD -->
+   
+      <!-- big card showing how much money in wallet -->
       <div class="balance-card">
         <div class="balance-header">
           <h1>Wallet Balance</h1>
@@ -103,7 +107,8 @@
         </label>
       </div>
 
-      <!-- TRANSACTION HISTORY -->
+      
+      <!-- list of all money transactions -->
       <div class="transaction-section">
         <h2>Transaction History</h2>
         <div class="transaction-list" id="transactionList">
@@ -122,7 +127,8 @@
   </div>
 </div>
 
-<!-- MODAL TOGGLE (place once, after layout) -->
+<
+<!-- checkbox to show/hide modal -->
 <input type="checkbox" id="withdrawToggle" style="display:none;">
 
 <!-- WITHDRAW FUNDS MODAL (CSS-only, student-wallet style, for vendor) -->
@@ -137,6 +143,7 @@
     </div>
     <div class="modal-body">
       <!-- PAYMENT METHOD -->
+<!-- choose how to withdraw money -->
       <div class="form-section">
         <label class="form-label">Select Withdrawal Method</label>
         <div class="payment-methods">
@@ -158,6 +165,7 @@
         </div>
       </div>
       <!-- QUICK AMOUNT -->
+      <!-- buttons for common withdraw amounts -->
       <div class="form-section">
         <label class="form-label">Quick Amount</label>
         <div class="quick-amounts">
