@@ -13,39 +13,9 @@
   <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css">
   <link rel="stylesheet" href="../../css/admin-css/complaints.css">
 
-  <style>
-    /* Adding these specific styles here to ensure the icon 
-       stays in the top right as requested.
-    */
-    .card {
-      position: relative; /* Required for absolute icon positioning */
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      padding: 24px;
-      min-height: 120px;
-    }
-
-    .card-info {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .icon-wrapper {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-    }
-  </style>
 </head>
 <body>
+  <!-- navbar at the top with logo and profile dropdown -->
   <input type="checkbox" id="menu-checkbox" class="menu-checkbox">
   <div class="top-nav">
     <div class="nav-left">
@@ -82,6 +52,7 @@
 
   <div class="layout">
 
+    <!-- left sidebar with nav links -->
     <div class="left-nav" id="sidebar">
       <ul class="nav-list">
         <li>
@@ -113,11 +84,13 @@
 
     <div class="main-content">
       <div class="container">
+        <!-- title and description of the page -->
         <header>
             <h1>Complaints Management</h1>
             <p class="subtitle">View, track, and resolve customer complaints</p>
         </header>
 
+        <!-- cards showing complaint status counts -->
         <div class="cards-grid">
             <div class="card card-open">
                 <div class="card-info">
@@ -160,6 +133,7 @@
             </div>
         </div>
 
+        <!-- tabs to filter complaints by status -->
         <div class="tabs-container">
             <button class="tab active">Open (0)</button>
             <button class="tab">In Progress (0)</button>
@@ -167,6 +141,7 @@
             <button class="tab">Closed (0)</button>
         </div>
 
+        <!-- when theres nothing, show empty state -->
         <div class="empty-state">
             <div class="empty-icon">
                 <i class="fa-solid fa-inbox"></i>

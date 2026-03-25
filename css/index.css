@@ -43,7 +43,7 @@
             }
 
             /* ==================== Navigation ==================== */
-           header{
+           nav{
     position: sticky;
     top: 0;
     width: 100%;
@@ -70,7 +70,7 @@
                 color: var(--white);
             }
 
-            header .logo{
+            nav .logo{
                 color: var(--text-dark);
             }
             .logo-icon {
