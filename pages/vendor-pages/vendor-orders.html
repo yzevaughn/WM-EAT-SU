@@ -9,348 +9,312 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="../../css/navbar.css">
   <link rel="stylesheet" href="../../css/vendor-css/orders.css">
-  
 </head>
 <body>
 
-<!-- NAVBAR -->
+  <div class="top-nav">
+    <div class="nav-left">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
-<div class="top-nav">
-
-<div class="nav-left">
-
-<button class="menu-toggle" id="menuToggle">
-<i class="fa-solid fa-bars"></i>
-</button>
-
-<a href="#" class="logo">
-<div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-<span class="logo-text">WM EAT SU</span>
-</a>
-
-</div>
-
-<div class="profile">
-
-<div class="profile-info">
-<span class="profile-name">Vendor Name</span>
-<span class="email">vendor@wm.edu.ph</span>
-</div>
-
-<div class="profile-dropdown">
-<button class="profile-btn" id="profileBtn">
-<img src="../../images/pfp.jpg" class="profile-pic">
-<i class="fa-solid fa-chevron-down"></i>
-</button>
-<div class="dropdown-menu" id="profileDropdown">
-<a href="../../index.html" class="dropdown-item">
-<i class="fas fa-sign-out-alt"></i>
-<span>Log Out</span>
-</a>
-</div>
-</div>
-
-</div>
-
-</div>
-
-<!-- LAYOUT -->
-
-<div class="layout">
-
-<!-- SIDEBAR -->
-
-<div class="left-nav" id="sidebar">
-
-<ul class="nav-list">
-
-<li>
-<a href="vendor-dashboard.html" class="nav-link">
-<i class="fa-solid fa-house"></i>
-<span>Dashboard</span>
-</a>
-</li>
-
-<li>
-<a href="vendor-orders.html" class="nav-link active">
-<i class="fa-solid fa-clock-rotate-left"></i>
-<span>Orders</span>
-</a>
-</li>
-
-<li>
-<a href="vendor-reviews.html" class="nav-link">
-<i class="fa-solid fa-star"></i>
-<span>Reviews</span>
-</a>
-</li>
-
-<li>
-<a href="vendor-menu.html" class="nav-link">
-<i class="fa-solid fa-utensils"></i>
-<span>Menu</span>
-</a>
-</li>
-
-<li>
-<a href="vendor-wallet.html" class="nav-link">
-<i class="fa-solid fa-wallet"></i>
-<span>Wallet</span>
-</a>
-</li>
-
-</ul>
-
-</div>
-
-<!-- MAIN CONTENT -->
-
-<div class="main-content">
-
-<div class="orders-page">
-  <h1>Orders</h1>
-  <p class="page-subtitle">Manage incoming customer orders</p>
-
-  <!-- Filter Tabs Section -->
-  <div class="filter-tabs">
-    <button class="tab-btn all-tab active" data-tab="All">
-      <i class="fa-solid fa-list"></i> All (9)
-    </button>
-    <button class="tab-btn" data-tab="Pending">Pending (2)</button>
-    <button class="tab-btn" data-tab="Preparing">Preparing (2)</button>
-    <button class="tab-btn" data-tab="Ready">Ready (2)</button>
-    <button class="tab-btn" data-tab="Completed">Completed (2)</button>
-    <button class="tab-btn" data-tab="Cancelled">Cancelled (1)</button>
-  </div>
-
-  <!-- Order Cards -->
-  <div class="orders-list">
-    <!-- Pending Order 1 -->
-    <div class="order-card" data-status="Pending">
-      <div class="order-card-header">
-        <div class="order-title">
-          <i class="fa-solid fa-clock status-icon pending-icon"></i>
-          <span class="customer-name">John Student</span>
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-utensils"></i>
         </div>
-        <span class="status-badge pending">Pending</span>
-      </div>
-      <p class="order-id">Order #01772877443686</p>
-      <p class="order-date">3/8/2026, 9:15:00 AM</p>
-      <div class="order-details">
-        <span>1x Classic Burger Meal</span>
-        <span class="order-price-align">₱12.99</span>
-      </div>
-      <p class="pickup-text">Pickup: 10:00 AM</p>
-      <hr>
-      <div class="order-total-row">
-        <strong>Total: ₱12.99</strong>
-        <div class="order-actions">
-          <button class="decline-btn">
-            <i class="fas fa-times"></i> Decline
-          </button>
-          <button class="accept-btn">
-            <i class="fas fa-box"></i> Prepare
-          </button>
-        </div>
-      </div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
     </div>
 
-    <!-- Pending Order 2 -->
-    <div class="order-card" data-status="Pending">
-      <div class="order-card-header">
-        <div class="order-title">
-          <i class="fa-solid fa-clock status-icon pending-icon"></i>
-          <span class="customer-name">Emily Chang</span>
-        </div>
-        <span class="status-badge pending">Pending</span>
+    <div class="profile">
+      <div class="profile-info">
+        <span class="profile-name">Vendor Name</span>
+        <span class="email">vendor@wm.edu.ph</span>
       </div>
-      <p class="order-id">Order #02</p>
-      <p class="order-date">3/8/2026, 9:30:00 AM</p>
-      <div class="order-details">
-        <span>2x Pizza Slice</span>
-        <span class="order-price-align">₱18.50</span>
-      </div>
-      <p class="pickup-text">Pickup: 10:30 AM</p>
-      <hr>
-      <div class="order-total-row">
-        <strong>Total: ₱18.50</strong>
-        <div class="order-actions">
-          <button class="decline-btn">
-            <i class="fas fa-times"></i> Decline
-          </button>
-          <button class="accept-btn">
-            <i class="fas fa-box"></i> Prepare
-          </button>
-        </div>
-      </div>
-    </div>
 
-    <!-- Preparing Order 1 -->
-    <div class="order-card" data-status="Preparing">
-      <div class="order-card-header">
-        <div class="order-title">
-          <i class="fa-solid fa-clock status-icon"></i>
-          <span class="customer-name">Jane Doe</span>
-        </div>
-        <span class="status-badge preparing">Preparing</span>
-      </div>
-      <p class="order-id">Order #03</p>
-      <p class="order-date">3/8/2026, 1:26:12 PM</p>
-      <div class="order-details">
-        <span>1x Avocado Toast</span>
-        <span class="order-price-align">₱9.75</span>
-      </div>
-      <p class="pickup-text">Pickup: 12:00 PM</p>
-      <hr>
-      <div class="order-total-row">
-        <strong>Total: ₱9.75</strong>
-        <button class="mark-ready-btn">
-          <i class="fas fa-check"></i> Mark Ready
+      <div class="profile-dropdown">
+        <button class="profile-btn" id="profileBtn">
+          <img src="../../images/pfp.jpg" class="profile-pic">
+          <i class="fa-solid fa-chevron-down"></i>
         </button>
-      </div>
-    </div>
-
-    <!-- Preparing Order 2 -->
-    <div class="order-card" data-status="Preparing">
-      <div class="order-card-header">
-        <div class="order-title">
-          <i class="fa-solid fa-clock status-icon"></i>
-          <span class="customer-name">David Lee</span>
+        <div class="dropdown-menu" id="profileDropdown">
+          <a href="../../index.html" class="dropdown-item">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Log Out</span>
+          </a>
         </div>
-        <span class="status-badge preparing">Preparing</span>
-      </div>
-      <p class="order-id">Order #04</p>
-      <p class="order-date">3/8/2026, 1:45:00 PM</p>
-      <div class="order-details">
-        <span>3x Fried Chicken</span>
-        <span class="order-price-align">₱24.75</span>
-      </div>
-      <p class="pickup-text">Pickup: 2:30 PM</p>
-      <hr>
-      <div class="order-total-row">
-        <strong>Total: ₱24.75</strong>
-        <button class="mark-ready-btn">
-          <i class="fas fa-check"></i> Mark Ready
-        </button>
-      </div>
-    </div>
-
-    <!-- Ready Order 1 -->
-    <div class="order-card" data-status="Ready">
-      <div class="order-card-header">
-        <div class="order-title">
-          <i class="fa-solid fa-check-circle status-icon"></i>
-          <span class="customer-name">Mike Johnson</span>
-        </div>
-        <span class="status-badge ready">Ready</span>
-      </div>
-      <p class="order-id">Order #05</p>
-      <p class="order-date">3/7/2026, 11:59:33 AM</p>
-      <div class="order-details">
-        <span>2x Iced Coffee</span>
-        <span class="order-price-align">₱9.00</span>
-      </div>
-      <p class="pickup-text">Pickup: 2:00 PM</p>
-      <hr>
-      <div class="order-total-row">
-        <strong>Total: ₱9.00</strong>
-      </div>
-    </div>
-
-    <!-- Ready Order 2 -->
-    <div class="order-card" data-status="Ready">
-      <div class="order-card-header">
-        <div class="order-title">
-          <i class="fa-solid fa-check-circle status-icon"></i>
-          <span class="customer-name">Rachel Brown</span>
-        </div>
-        <span class="status-badge ready">Ready</span>
-      </div>
-      <p class="order-id">Order #06</p>
-      <p class="order-date">3/6/2026, 3:15:00 PM</p>
-      <div class="order-details">
-        <span>1x Pasta Carbonara</span>
-        <span class="order-price-align">₱15.50</span>
-      </div>
-      <p class="pickup-text">Pickup: 4:00 PM</p>
-      <hr>
-      <div class="order-total-row">
-        <strong>Total: ₱15.50</strong>
-      </div>
-    </div>
-
-    <!-- Completed Order 1 -->
-    <div class="order-card" data-status="Completed">
-      <div class="order-card-header">
-        <div class="order-title">
-          <i class="fa-solid fa-check-circle status-icon"></i>
-          <span class="customer-name">Sarah Lee</span>
-        </div>
-        <span class="status-badge completed">Completed</span>
-      </div>
-      <p class="order-id">Order #07</p>
-      <p class="order-date">3/6/2026, 10:15:00 AM</p>
-      <div class="order-details">
-        <span>2x Avocado Salad</span>
-        <span class="order-price-align">₱16.50</span>
-      </div>
-      <p class="pickup-text">Pickup: 11:00 AM</p>
-      <hr>
-      <div class="order-total-row">
-        <strong>Total: ₱16.50</strong>
-      </div>
-    </div>
-
-    <!-- Completed Order 2 -->
-    <div class="order-card" data-status="Completed">
-      <div class="order-card-header">
-        <div class="order-title">
-          <i class="fa-solid fa-check-circle status-icon"></i>
-          <span class="customer-name">Mark Wilson</span>
-        </div>
-        <span class="status-badge completed">Completed</span>
-      </div>
-      <p class="order-id">Order #08</p>
-      <p class="order-date">3/5/2026, 5:45:00 PM</p>
-      <div class="order-details">
-        <span>1x Grilled Fish</span>
-        <span class="order-price-align">₱22.00</span>
-      </div>
-      <p class="pickup-text">Pickup: 6:30 PM</p>
-      <hr>
-      <div class="order-total-row">
-        <strong>Total: ₱22.00</strong>
-      </div>
-    </div>
-
-    <!-- Cancelled Order -->
-    <div class="order-card" data-status="Cancelled">
-      <div class="order-card-header">
-        <div class="order-title">
-          <i class="fa-solid fa-circle-xmark status-icon cancelled-icon"></i>
-          <span class="customer-name">Tom Wilson</span>
-        </div>
-        <span class="status-badge cancelled">Cancelled</span>
-      </div>
-      <p class="order-id">Order #09</p>
-      <p class="order-date">3/5/2026, 2:45:00 PM</p>
-      <div class="order-details">
-        <span>1x Caesar Salad</span>
-        <span class="order-price-align">₱8.50</span>
-      </div>
-      <p class="pickup-text">Pickup: 3:30 PM</p>
-      <hr>
-      <div class="order-total-row">
-        <strong>Total: ₱8.50</strong>
       </div>
     </div>
   </div>
 
-</div>
+  <div class="layout">
 
-</div>
+    <div class="left-nav" id="sidebar">
+      <ul class="nav-list">
+        <li>
+          <a href="vendor-dashboard.html" class="nav-link">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="vendor-orders.html" class="nav-link active">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Orders</span>
+          </a>
+        </li>
+        <li>
+          <a href="vendor-reviews.html" class="nav-link">
+            <i class="fa-solid fa-star"></i>
+            <span>Reviews</span>
+          </a>
+        </li>
+        <li>
+          <a href="vendor-menu.html" class="nav-link">
+            <i class="fa-solid fa-utensils"></i>
+            <span>Menu</span>
+          </a>
+        </li>
+        <li>
+          <a href="vendor-wallet.html" class="nav-link">
+            <i class="fa-solid fa-wallet"></i>
+            <span>Wallet</span>
+          </a>
+        </li>
+      </ul>
+    </div>
 
+    <div class="main-content">
+      <div class="orders-page">
+        <h1>Orders</h1>
+        <p class="page-subtitle">Manage incoming customer orders</p>
 
+        <div class="filter-tabs">
+          <button class="tab-btn all-tab active" data-tab="All">
+            <i class="fa-solid fa-list"></i> All (9)
+          </button>
+          <button class="tab-btn" data-tab="Pending">Pending (2)</button>
+          <button class="tab-btn" data-tab="Preparing">Preparing (2)</button>
+          <button class="tab-btn" data-tab="Ready">Ready (2)</button>
+          <button class="tab-btn" data-tab="Completed">Completed (2)</button>
+          <button class="tab-btn" data-tab="Cancelled">Cancelled (1)</button>
+        </div>
+
+        <div class="orders-list">
+          <div class="order-card" data-status="Pending">
+            <div class="order-card-header">
+              <div class="order-title">
+                <i class="fa-solid fa-clock status-icon pending-icon"></i>
+                <span class="customer-name">John Student</span>
+              </div>
+              <span class="status-badge pending">Pending</span>
+            </div>
+            <p class="order-id">Order #01772877443686</p>
+            <p class="order-date">3/8/2026, 9:15:00 AM</p>
+            <div class="order-details">
+              <span>1x Classic Burger Meal</span>
+              <span class="order-price-align">₱12.99</span>
+            </div>
+            <p class="pickup-text">Pickup: 10:00 AM</p>
+            <hr>
+            <div class="order-total-row">
+              <strong>Total: ₱12.99</strong>
+              <div class="order-actions">
+                <button class="decline-btn">
+                  <i class="fas fa-times"></i> Decline
+                </button>
+                <button class="accept-btn">
+                  <i class="fas fa-box"></i> Prepare
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="order-card" data-status="Pending">
+            <div class="order-card-header">
+              <div class="order-title">
+                <i class="fa-solid fa-clock status-icon pending-icon"></i>
+                <span class="customer-name">Emily Chang</span>
+              </div>
+              <span class="status-badge pending">Pending</span>
+            </div>
+            <p class="order-id">Order #02</p>
+            <p class="order-date">3/8/2026, 9:30:00 AM</p>
+            <div class="order-details">
+              <span>2x Pizza Slice</span>
+              <span class="order-price-align">₱18.50</span>
+            </div>
+            <p class="pickup-text">Pickup: 10:30 AM</p>
+            <hr>
+            <div class="order-total-row">
+              <strong>Total: ₱18.50</strong>
+              <div class="order-actions">
+                <button class="decline-btn">
+                  <i class="fas fa-times"></i> Decline
+                </button>
+                <button class="accept-btn">
+                  <i class="fas fa-box"></i> Prepare
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="order-card" data-status="Preparing">
+            <div class="order-card-header">
+              <div class="order-title">
+                <i class="fa-solid fa-clock status-icon"></i>
+                <span class="customer-name">Jane Doe</span>
+              </div>
+              <span class="status-badge preparing">Preparing</span>
+            </div>
+            <p class="order-id">Order #03</p>
+            <p class="order-date">3/8/2026, 1:26:12 PM</p>
+            <div class="order-details">
+              <span>1x Avocado Toast</span>
+              <span class="order-price-align">₱9.75</span>
+            </div>
+            <p class="pickup-text">Pickup: 12:00 PM</p>
+            <hr>
+            <div class="order-total-row">
+              <strong>Total: ₱9.75</strong>
+              <button class="mark-ready-btn">
+                <i class="fas fa-check"></i> Mark Ready
+              </button>
+            </div>
+          </div>
+
+          <div class="order-card" data-status="Preparing">
+            <div class="order-card-header">
+              <div class="order-title">
+                <i class="fa-solid fa-clock status-icon"></i>
+                <span class="customer-name">David Lee</span>
+              </div>
+              <span class="status-badge preparing">Preparing</span>
+            </div>
+            <p class="order-id">Order #04</p>
+            <p class="order-date">3/8/2026, 1:45:00 PM</p>
+            <div class="order-details">
+              <span>3x Fried Chicken</span>
+              <span class="order-price-align">₱24.75</span>
+            </div>
+            <p class="pickup-text">Pickup: 2:30 PM</p>
+            <hr>
+            <div class="order-total-row">
+              <strong>Total: ₱24.75</strong>
+              <button class="mark-ready-btn">
+                <i class="fas fa-check"></i> Mark Ready
+              </button>
+            </div>
+          </div>
+
+          <div class="order-card" data-status="Ready">
+            <div class="order-card-header">
+              <div class="order-title">
+                <i class="fa-solid fa-check-circle status-icon"></i>
+                <span class="customer-name">Mike Johnson</span>
+              </div>
+              <span class="status-badge ready">Ready</span>
+            </div>
+            <p class="order-id">Order #05</p>
+            <p class="order-date">3/7/2026, 11:59:33 AM</p>
+            <div class="order-details">
+              <span>2x Iced Coffee</span>
+              <span class="order-price-align">₱9.00</span>
+            </div>
+            <p class="pickup-text">Pickup: 2:00 PM</p>
+            <hr>
+            <div class="order-total-row">
+              <strong>Total: ₱9.00</strong>
+            </div>
+          </div>
+
+          <div class="order-card" data-status="Ready">
+            <div class="order-card-header">
+              <div class="order-title">
+                <i class="fa-solid fa-check-circle status-icon"></i>
+                <span class="customer-name">Rachel Brown</span>
+              </div>
+              <span class="status-badge ready">Ready</span>
+            </div>
+            <p class="order-id">Order #06</p>
+            <p class="order-date">3/6/2026, 3:15:00 PM</p>
+            <div class="order-details">
+              <span>1x Pasta Carbonara</span>
+              <span class="order-price-align">₱15.50</span>
+            </div>
+            <p class="pickup-text">Pickup: 4:00 PM</p>
+            <hr>
+            <div class="order-total-row">
+              <strong>Total: ₱15.50</strong>
+            </div>
+          </div>
+
+          <div class="order-card" data-status="Completed">
+            <div class="order-card-header">
+              <div class="order-title">
+                <i class="fa-solid fa-check-circle status-icon"></i>
+                <span class="customer-name">Sarah Lee</span>
+              </div>
+              <span class="status-badge completed">Completed</span>
+            </div>
+            <p class="order-id">Order #07</p>
+            <p class="order-date">3/6/2026, 10:15:00 AM</p>
+            <div class="order-details">
+              <span>2x Avocado Salad</span>
+              <span class="order-price-align">₱16.50</span>
+            </div>
+            <p class="pickup-text">Pickup: 11:00 AM</p>
+            <hr>
+            <div class="order-total-row">
+              <strong>Total: ₱16.50</strong>
+            </div>
+          </div>
+
+          <div class="order-card" data-status="Completed">
+            <div class="order-card-header">
+              <div class="order-title">
+                <i class="fa-solid fa-check-circle status-icon"></i>
+                <span class="customer-name">Mark Wilson</span>
+              </div>
+              <span class="status-badge completed">Completed</span>
+            </div>
+            <p class="order-id">Order #08</p>
+            <p class="order-date">3/5/2026, 5:45:00 PM</p>
+            <div class="order-details">
+              <span>1x Grilled Fish</span>
+              <span class="order-price-align">₱22.00</span>
+            </div>
+            <p class="pickup-text">Pickup: 6:30 PM</p>
+            <hr>
+            <div class="order-total-row">
+              <strong>Total: ₱22.00</strong>
+            </div>
+          </div>
+
+          <div class="order-card" data-status="Cancelled">
+            <div class="order-card-header">
+              <div class="order-title">
+                <i class="fa-solid fa-circle-xmark status-icon cancelled-icon"></i>
+                <span class="customer-name">Tom Wilson</span>
+              </div>
+              <span class="status-badge cancelled">Cancelled</span>
+            </div>
+            <p class="order-id">Order #09</p>
+            <p class="order-date">3/5/2026, 2:45:00 PM</p>
+            <div class="order-details">
+              <span>1x Caesar Salad</span>
+              <span class="order-price-align">₱8.50</span>
+            </div>
+            <p class="pickup-text">Pickup: 3:30 PM</p>
+            <hr>
+            <div class="order-total-row">
+              <strong>Total: ₱8.50</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

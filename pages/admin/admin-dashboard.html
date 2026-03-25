@@ -7,14 +7,13 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://unpkg.com/lucide@latest"></script>
+  
   <link rel="stylesheet" href="../../css/student/dashboard.css">
   <link rel="stylesheet" href="../../css/navbar.css">
   <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css">
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <div class="top-nav">
     <div class="nav-left">
       <button class="menu-toggle" id="menuToggle">
@@ -48,10 +47,8 @@
     </div>
   </div>
 
-  <!-- LAYOUT -->
   <div class="layout">
 
-    <!-- SIDEBAR -->
     <div class="left-nav" id="sidebar">
       <ul class="nav-list">
         <li>
@@ -81,7 +78,6 @@
       </ul>
     </div>
 
-    <!-- MAIN CONTENT -->
     <div class="main-content">
       <header>
         <h1>Admin Dashboard</h1>
@@ -95,63 +91,60 @@
                 <h4>Total Revenue</h4>
                 <h2>₱21.99</h2>
                 <p>↗ +12.5%</p>
-                <div class="metric-icon"><i data-lucide="philippine-peso"></i></div>
+                <div class="metric-icon"><i class="fa-solid fa-peseta-sign"></i></div>
             </div>
             <div class="metric-card bg-blue">
                 <h4>Total Orders</h4>
                 <h2>2</h2>
                 <p>All time</p>
-                <div class="metric-icon"><i data-lucide="shopping-bag"></i></div>
+                <div class="metric-icon"><i class="fa-solid fa-bag-shopping"></i></div>
             </div>
             <div class="metric-card bg-green">
                 <h4>Active Vendors</h4>
                 <h2>9</h2>
                 <p>Approved</p>
-                <div class="metric-icon"><i data-lucide="store"></i></div>
+                <div class="metric-icon"><i class="fa-solid fa-store"></i></div>
             </div>
             <div class="metric-card bg-purple">
                 <h4>System Health</h4>
                 <h2>98%</h2>
                 <p>Uptime</p>
-                <div class="metric-icon"><i data-lucide="activity"></i></div>
+                <div class="metric-icon"><i class="fa-solid fa-heart-pulse"></i></div>
             </div>
         </div>
 
         <div class="fade-grid">
             <div class="fade-card yellow-fade">
               <span class="badge-minimal">0</span>
-              <i data-lucide="file-text" style="color: #b45309"></i>
+              <i class="fa-solid fa-file-lines" style="color: #b45309"></i>
               <h3>Student Applications</h3>
               <p>Pending vendor applications</p>
               <a href="student-applications.html" class="link" style="color: #b45309">Review Applications →</a>
             </div>
             <div class="fade-card yellow-fade">
               <span class="badge-minimal">0</span>
-              <i data-lucide="user-plus" style="color: #b45309"></i>
+              <i class="fa-solid fa-user-plus" style="color: #b45309"></i>
               <h3>Create Vendor Account</h3>
               <p>Add new vendors</p>
               <a href="create-vendor.html" class="link" style="color: #b45309">Create Vendor →</a>
             </div>
             <div class="fade-card yellow-fade">
               <span class="badge-minimal">0</span>
-              <i data-lucide="alert-circle" style="color: #b45309"></i>
+              <i class="fa-solid fa-circle-exclamation" style="color: #b45309"></i>
               <h3>Open Complaints</h3>
               <p>Issues needing attention</p>
               <a href="complaints.html" class="link" style="color: #b45309">View Complaints →</a>
             </div>
         </div>
-        <!-- for Approval Queue and System Status -->
-        <div class="action-grid">
-        </div>
 
         <div class="status-grid">
             <div class="saas-card approval-queue">
               <div class="saas-card-header">
-                <span class="saas-card-title"><i data-lucide="clock" class="saas-icon-amber"></i> Approval Queue</span>
+                <span class="saas-card-title"><i class="fa-solid fa-clock saas-icon-amber"></i> Approval Queue</span>
                 <span class="saas-badge">0 items</span>
               </div>
               <div class="saas-list-item">
-                <span class="saas-list-icon saas-icon-amber"><i data-lucide="store"></i></span>
+                <span class="saas-list-icon saas-icon-amber"><i class="fa-solid fa-store"></i></span>
                 <div class="saas-list-info">
                   <span class="saas-list-title">Pending Vendors</span>
                   <span class="saas-list-desc">New registrations</span>
@@ -159,7 +152,7 @@
                 <span class="saas-list-badge saas-badge-amber">0</span>
               </div>
               <div class="saas-list-item">
-                <span class="saas-list-icon saas-icon-amber"><i data-lucide="shopping-bag"></i></span>
+                <span class="saas-list-icon saas-icon-amber"><i class="fa-solid fa-bag-shopping"></i></span>
                 <div class="saas-list-info">
                   <span class="saas-list-title">Pending Menu Items</span>
                   <span class="saas-list-desc">Food items to review</span>
@@ -167,7 +160,7 @@
                 <span class="saas-list-badge saas-badge-amber">0</span>
               </div>
               <div class="saas-list-item">
-                <span class="saas-list-icon saas-icon-amber"><i data-lucide="file-text"></i></span>
+                <span class="saas-list-icon saas-icon-amber"><i class="fa-solid fa-file-lines"></i></span>
                 <div class="saas-list-info">
                   <span class="saas-list-title">Pending Posts</span>
                   <span class="saas-list-desc">Posts awaiting review</span>
@@ -178,10 +171,10 @@
 
             <div class="saas-card system-status">
               <div class="saas-card-header">
-                <span class="saas-card-title"><i data-lucide="activity" class="saas-icon-blue"></i> System Status</span>
+                <span class="saas-card-title"><i class="fa-solid fa-chart-line saas-icon-blue"></i> System Status</span>
               </div>
               <div class="saas-list-item">
-                <span class="saas-list-icon saas-icon-green"><i data-lucide="check-circle"></i></span>
+                <span class="saas-list-icon saas-icon-green"><i class="fa-solid fa-circle-check"></i></span>
                 <div class="saas-list-info">
                   <span class="saas-list-title">Platform Status</span>
                   <span class="saas-list-desc">All operational</span>
@@ -189,7 +182,7 @@
                 <span class="saas-list-badge saas-badge-green">Online</span>
               </div>
               <div class="saas-list-item">
-                <span class="saas-list-icon saas-icon-blue"><i data-lucide="users"></i></span>
+                <span class="saas-list-icon saas-icon-blue"><i class="fa-solid fa-users"></i></span>
                 <div class="saas-list-info">
                   <span class="saas-list-title">Total Vendors</span>
                   <span class="saas-list-desc">Active on platform</span>
@@ -197,7 +190,7 @@
                 <span class="saas-list-badge saas-badge-blue">9</span>
               </div>
               <div class="saas-list-item">
-                <span class="saas-list-icon saas-icon-blue"><i data-lucide="menu"></i></span>
+                <span class="saas-list-icon saas-icon-blue"><i class="fa-solid fa-list"></i></span>
                 <div class="saas-list-info">
                   <span class="saas-list-title">Active Menu</span>
                   <span class="saas-list-desc">Items currently live</span>
@@ -212,8 +205,5 @@
 
   </div> 
 
-  <script>lucide.createIcons();</script>
-
 </body>
 </html>
-
