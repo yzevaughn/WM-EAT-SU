@@ -2,15 +2,15 @@
 
 .orders-page {
   /* background removed for cleaner look */
-  padding: 24px;
+
   min-height: 100vh;
 }
 
-.orders-page h1 {
-  font-size: 32px;
-  font-weight: 700;
-  color: #111827;
-  margin-bottom: 4px;
+.orders-page h2 {
+ font-size:28px;
+font-weight:700;
+color:#0f172a;
+margin:0 0 8px 0;
 }
 
 .page-subtitle {
