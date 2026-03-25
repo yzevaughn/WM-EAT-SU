@@ -171,6 +171,7 @@
             margin-bottom: 16px;
         }
 
+
         .empty-text {
             color: #64748b;
             font-size: 16px;
@@ -188,3 +189,40 @@
                 text-align: center;
             }
         }
+
+        
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* The Card Base */
+.card {
+    position: relative;
+    padding: 24px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden; 
+}
+
+/* The Text Info */
+.card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.icon-wrapper {
+    position: absolute;
+    top: 20px;    
+    right: 20px;  
+    width: 35px;  
+    height: 35px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}

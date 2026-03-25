@@ -12,183 +12,150 @@
 </head>
 <body>
 
-<!-- NAVBAR -->
+  <div class="top-nav">
+    <div class="nav-left">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
-<div class="top-nav">
-
-<div class="nav-left">
-
-<button class="menu-toggle" id="menuToggle">
-<i class="fa-solid fa-bars"></i>
-</button>
-
-<a href="#" class="logo">
-<div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-<span class="logo-text">WM EAT SU</span>
-</a>
-
-</div>
-
-<div class="profile">
-
-<div class="profile-info">
-<span class="profile-name">Vendor Name</span>
-<span class="email">vendor@wm.edu.ph</span>
-</div>
-
-<div class="profile-dropdown">
-<button class="profile-btn" id="profileBtn">
-<img src="../../images/pfp.jpg" class="profile-pic">
-<i class="fa-solid fa-chevron-down"></i>
-</button>
-<div class="dropdown-menu" id="profileDropdown">
-<a href="../../index.html" class="dropdown-item">
-<i class="fas fa-sign-out-alt"></i>
-<span>Log Out</span>
-</a>
-</div>
-</div>
-
-</div>
-
-</div>
-
-<!-- LAYOUT -->
-
-<div class="layout">
-
-<!-- SIDEBAR -->
-
-<div class="left-nav" id="sidebar">
-
-<ul class="nav-list">
-
-<li>
-<a href="vendor-dashboard.html" class="nav-link active">
-<i class="fa-solid fa-house"></i>
-<span>Dashboard</span>
-</a>
-</li>
-
-<li>
-<a href="vendor-orders.html" class="nav-link">
-<i class="fa-solid fa-clock-rotate-left"></i>
-<span>Orders</span>
-</a>
-</li>
-
-<li>
-<a href="vendor-reviews.html" class="nav-link">
-<i class="fa-solid fa-star"></i>
-<span>Reviews</span>
-</a>
-</li>
-
-<li>
-<a href="vendor-menu.html" class="nav-link">
-<i class="fa-solid fa-utensils"></i>
-<span>Menu</span>
-</a>
-</li>
-
-<li>
-<a href="vendor-wallet.html" class="nav-link">
-<i class="fa-solid fa-wallet"></i>
-<span>Wallet</span>
-</a>
-</li>
-
-</ul>
-
-</div>
-
-<!-- MAIN CONTENT -->
-
-<div class="main-content">
-
-<div class="dashboard-content">
-
-<div class="dashboard-header">
-  <h1>Vendor Dashboard</h1>
-  <p>Manage your menu and orders</p>
-</div>
-
-<!-- Top Section: Analytics/Stats Cards -->
-<div class="stats-grid">
-  <!-- Card 1: Total Revenue -->
-  <div class="stat-card">
-    <div class="stat-info">
-      <h3>Total Revenue</h3>
-      <p>₱12.99</p>
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-utensils"></i>
+        </div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
     </div>
-    <div class="stat-icon icon-green">
-      <i class="fas fa-peso-sign"></i>
+
+    <div class="profile">
+      <div class="profile-info">
+        <span class="profile-name">Vendor Name</span>
+        <span class="email">vendor@wm.edu.ph</span>
+      </div>
+
+      <div class="profile-dropdown">
+        <button class="profile-btn" id="profileBtn">
+          <img src="../../images/pfp.jpg" class="profile-pic">
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="profileDropdown">
+          <a href="../../index.html" class="dropdown-item">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Log Out</span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Card 2: Active Orders -->
-  <div class="stat-card">
-    <div class="stat-info">
-      <h3>Active Orders</h3>
-      <p>0</p>
+  <div class="layout">
+
+    <div class="left-nav" id="sidebar">
+      <ul class="nav-list">
+        <li>
+          <a href="vendor-dashboard.html" class="nav-link active">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="vendor-orders.html" class="nav-link">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Orders</span>
+          </a>
+        </li>
+        <li>
+          <a href="vendor-reviews.html" class="nav-link">
+            <i class="fa-solid fa-star"></i>
+            <span>Reviews</span>
+          </a>
+        </li>
+        <li>
+          <a href="vendor-menu.html" class="nav-link">
+            <i class="fa-solid fa-utensils"></i>
+            <span>Menu</span>
+          </a>
+        </li>
+        <li>
+          <a href="vendor-wallet.html" class="nav-link">
+            <i class="fa-solid fa-wallet"></i>
+            <span>Wallet</span>
+          </a>
+        </li>
+      </ul>
     </div>
-    <div class="stat-icon icon-orange">
-      <i class="fas fa-shopping-bag"></i>
+
+    <div class="main-content">
+      <div class="dashboard-content">
+        <div class="dashboard-header">
+          <h1>Vendor Dashboard</h1>
+          <p>Manage your menu and orders</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-info">
+              <h3>Total Revenue</h3>
+              <p>₱12.99</p>
+            </div>
+            <div class="stat-icon icon-green">
+              <i class="fas fa-peso-sign"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <h3>Active Orders</h3>
+              <p>0</p>
+            </div>
+            <div class="stat-icon icon-orange">
+              <i class="fas fa-shopping-bag"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <h3>Menu Items</h3>
+              <p>2</p>
+            </div>
+            <div class="stat-icon icon-blue">
+              <i class="fas fa-chart-line"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <h3>Average Rating</h3>
+              <p>0.0</p>
+            </div>
+            <div class="stat-icon icon-yellow">
+              <i class="fas fa-star"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions-grid">
+          <a href="vendor-menu.html" class="action-card">
+            <i class="fas fa-shopping-bag action-icon menu"></i>
+            <h3>Manage Menu</h3>
+            <p>Add or edit items</p>
+          </a>
+
+          <a href="vendor-orders.html" class="action-card">
+            <i class="fas fa-archive action-icon orders"></i>
+            <h3>View Orders</h3>
+            <p>Manage incoming orders</p>
+          </a>
+
+          <a href="vendor-reviews.html" class="action-card">
+            <i class="fas fa-star action-icon reviews"></i>
+            <h3>Reviews</h3>
+            <p>See customer feedback</p>
+          </a>
+        </div>
+      </div>
     </div>
+
   </div>
-
-  <!-- Card 3: Menu Items -->
-  <div class="stat-card">
-    <div class="stat-info">
-      <h3>Menu Items</h3>
-      <p>2</p>
-    </div>
-    <div class="stat-icon icon-blue">
-      <i class="fas fa-chart-line"></i>
-    </div>
-  </div>
-
-  <!-- Card 4: Average Rating -->
-  <div class="stat-card">
-    <div class="stat-info">
-      <h3>Average Rating</h3>
-      <p>0.0</p>
-    </div>
-    <div class="stat-icon icon-yellow">
-      <i class="fas fa-star"></i>
-    </div>
-  </div>
-</div>
-
-<!-- Bottom Section: Action/Navigation Cards -->
-<div class="actions-grid">
-  <!-- Card 1: Manage Menu -->
-  <a href="vendor-menu.html" class="action-card">
-    <i class="fas fa-shopping-bag action-icon menu"></i>
-    <h3>Manage Menu</h3>
-    <p>Add or edit items</p>
-  </a>
-
-  <!-- Card 2: View Orders -->
-  <a href="vendor-orders.html" class="action-card">
-    <i class="fas fa-archive action-icon orders"></i>
-    <h3>View Orders</h3>
-    <p>Manage incoming orders</p>
-  </a>
-
-  <!-- Card 3: Reviews -->
-  <a href="vendor-reviews.html" class="action-card">
-    <i class="fas fa-star action-icon reviews"></i>
-    <h3>Reviews</h3>
-    <p>See customer feedback</p>
-  </a>
-</div>
-
-</div>
-
-</div>
-
-</div>
 
 </body>
 </html>

@@ -7,16 +7,46 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://unpkg.com/lucide@latest"></script>
+  
   <link rel="stylesheet" href="../../css/student/dashboard.css">
   <link rel="stylesheet" href="../../css/navbar.css">
   <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css">
-
   <link rel="stylesheet" href="../../css/admin-css/complaints.css">
+
+  <style>
+    /* Adding these specific styles here to ensure the icon 
+       stays in the top right as requested.
+    */
+    .card {
+      position: relative; /* Required for absolute icon positioning */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 24px;
+      min-height: 120px;
+    }
+
+    .card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .icon-wrapper {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <div class="top-nav">
     <div class="nav-left">
       <button class="menu-toggle" id="menuToggle">
@@ -50,10 +80,8 @@
     </div>
   </div>
 
-  <!-- LAYOUT -->
   <div class="layout">
 
-    <!-- SIDEBAR -->
     <div class="left-nav" id="sidebar">
       <ul class="nav-list">
         <li>
@@ -83,7 +111,6 @@
       </ul>
     </div>
 
-    <!-- MAIN CONTENT -->
     <div class="main-content">
       <div class="container">
         <header>
@@ -98,7 +125,7 @@
                     <span class="card-value">0</span>
                 </div>
                 <div class="icon-wrapper">
-                    <i class="fa-solid fa-exclamation"></i>
+                    <i class="fa-solid fa-circle-exclamation"></i>
                 </div>
             </div>
 
@@ -108,7 +135,7 @@
                     <span class="card-value">0</span>
                 </div>
                 <div class="icon-wrapper">
-                    <i class="fa-solid fa-clock"></i>
+                    <i class="fa-solid fa-spinner"></i>
                 </div>
             </div>
 
@@ -118,7 +145,7 @@
                     <span class="card-value">0</span>
                 </div>
                 <div class="icon-wrapper">
-                    <i class="fa-solid fa-check"></i>
+                    <i class="fa-solid fa-circle-check"></i>
                 </div>
             </div>
 
@@ -128,7 +155,7 @@
                     <span class="card-value">0</span>
                 </div>
                 <div class="icon-wrapper">
-                    <i class="fa-regular fa-comment"></i>
+                    <i class="fa-solid fa-box-archive"></i>
                 </div>
             </div>
         </div>
@@ -142,17 +169,13 @@
 
         <div class="empty-state">
             <div class="empty-icon">
-                <i class="fa-solid fa-exclamation"></i>
+                <i class="fa-solid fa-inbox"></i>
             </div>
             <p class="empty-text">No open complaints</p>
         </div>
       </div>
     </div>
 
-  </div> <!-- end layout -->
-
-  
-  <script>lucide.createIcons();</script>
-
+  </div> 
 </body>
 </html>

@@ -12,223 +12,195 @@
 </head>
 <body>
 
-<!-- NAVBAR -->
-
-<div class="top-nav">
-
-<div class="nav-left">
-
-<button class="menu-toggle" id="menuToggle">
-<i class="fa-solid fa-bars"></i>
-</button>
-
-<a href="#" class="logo">
-<div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-<span class="logo-text">WM EAT SU</span>
-</a>
-
-</div>
-
-<div class="profile">
-
-<div class="profile-info">
-<span class="profile-name">Vendor Name</span>
-<span class="email">vendor@wm.edu.ph</span>
-</div>
-
-<div class="profile-dropdown">
-<button class="profile-btn" id="profileBtn">
-<img src="../../images/pfp.jpg" class="profile-pic">
-<i class="fa-solid fa-chevron-down"></i>
-</button>
-<div class="dropdown-menu" id="profileDropdown">
-<a href="../../index.html" class="dropdown-item">
-<i class="fas fa-sign-out-alt"></i>
-<span>Log Out</span>
-</a>
-</div>
-</div>
-
-</div>
-
-</div>
-
-<!-- LAYOUT -->
-
-<div class="layout">
-
-<!-- SIDEBAR -->
-
-<div class="left-nav" id="sidebar">
-
-<ul class="nav-list">
-
-<li>
-<a href="vendor-dashboard.html" class="nav-link">
-<i class="fa-solid fa-house"></i>
-<span>Dashboard</span>
-</a>
-</li>
-
-<li>
-<a href="vendor-orders.html" class="nav-link">
-<i class="fa-solid fa-clock-rotate-left"></i>
-<span>Orders</span>
-</a>
-</li>
-
-<li>
-<a href="vendor-reviews.html" class="nav-link">
-<i class="fa-solid fa-star"></i>
-<span>Reviews</span>
-</a>
-</li>
-
-<li>
-<a href="vendor-menu.html" class="nav-link active">
-<i class="fa-solid fa-utensils"></i>
-<span>Menu</span>
-</a>
-</li>
-
-<li>
-<a href="vendor-wallet.html" class="nav-link">
-<i class="fa-solid fa-wallet"></i>
-<span>Wallet</span>
-</a>
-</li>
-
-</ul>
-
-</div>
-
-<!-- MAIN CONTENT -->
-
-<div class="main-content">
-
-<div class="menu-header">
-  <div class="header-left">
-    <h1>Menu Management</h1>
-    <p>Add and manage your food items</p>
-  </div>
-</div>
-
-<!-- Menu Items Grid -->
-<div class="menu-grid" id="menuGrid">
-  <!-- Item 1 -->
-  <div class="menu-item-card" data-category="meals">
-    <div class="item-image">
-      <img src="../../images/burger.avif" alt="Classic Burger Meal">
-      <span class="category-badge">Meals</span>
-    </div>
-    <div class="item-info">
-      <h3 class="item-name">Classic Burger Meal</h3>
-      <p class="item-description">Juicy beef burger with fries and a drink</p>
-    </div>
-    <div class="item-footer">
-      <div class="price">₱12.99</div>
-      <label class="stock-toggle">
-        <input type="checkbox" checked>
-        <span class="toggle-slider"></span>
-        <span class="toggle-label">In Stock</span>
-      </label>
-    </div>
-    <div class="actions">
-      <button class="edit-btn">
-        <i class="fas fa-pencil"></i>
-        Edit
+  <div class="top-nav">
+    <div class="nav-left">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fa-solid fa-bars"></i>
       </button>
-      <button class="delete-btn">
-        <i class="fas fa-trash"></i>
-      </button>
+
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-utensils"></i>
+        </div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
+    </div>
+
+    <div class="profile">
+      <div class="profile-info">
+        <span class="profile-name">Vendor Name</span>
+        <span class="email">vendor@wm.edu.ph</span>
+      </div>
+
+      <div class="profile-dropdown">
+        <button class="profile-btn" id="profileBtn">
+          <img src="../../images/pfp.jpg" class="profile-pic">
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" id="profileDropdown">
+          <a href="../../index.html" class="dropdown-item">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Log Out</span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Item 2 -->
-  <div class="menu-item-card" data-category="snacks">
-    <div class="item-image">
-      <img src="../../images/burger.avif" alt="Crispy French Fries">
-      <span class="category-badge">Snacks</span>
+  <div class="layout">
+
+    <div class="left-nav" id="sidebar">
+      <ul class="nav-list">
+        <li>
+          <a href="vendor-dashboard.html" class="nav-link">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="vendor-orders.html" class="nav-link">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Orders</span>
+          </a>
+        </li>
+        <li>
+          <a href="vendor-reviews.html" class="nav-link">
+            <i class="fa-solid fa-star"></i>
+            <span>Reviews</span>
+          </a>
+        </li>
+        <li>
+          <a href="vendor-menu.html" class="nav-link active">
+            <i class="fa-solid fa-utensils"></i>
+            <span>Menu</span>
+          </a>
+        </li>
+        <li>
+          <a href="vendor-wallet.html" class="nav-link">
+            <i class="fa-solid fa-wallet"></i>
+            <span>Wallet</span>
+          </a>
+        </li>
+      </ul>
     </div>
-    <div class="item-info">
-      <h3 class="item-name">Crispy French Fries</h3>
-      <p class="item-description">Golden crispy fries with sea salt</p>
-    </div>
-    <div class="item-footer">
-      <div class="price">₱3.99</div>
-      <label class="stock-toggle">
-        <input type="checkbox" checked>
-        <span class="toggle-slider"></span>
-        <span class="toggle-label">In Stock</span>
-      </label>
-    </div>
-    <div class="actions">
-      <button class="edit-btn">
-        <i class="fas fa-pencil"></i>
-        Edit
-      </button>
-      <button class="delete-btn">
-        <i class="fas fa-trash"></i>
-      </button>
+
+    <div class="main-content">
+      <div class="menu-header">
+        <div class="header-left">
+          <h1>Menu Management</h1>
+          <p>Add and manage your food items</p>
+        </div>
+      </div>
+
+      <div class="menu-grid" id="menuGrid">
+        <div class="menu-item-card" data-category="meals">
+          <div class="item-image">
+            <img src="../../images/burger.avif" alt="Classic Burger Meal">
+            <span class="category-badge">Meals</span>
+          </div>
+          <div class="item-info">
+            <h3 class="item-name">Classic Burger Meal</h3>
+            <p class="item-description">Juicy beef burger with fries and a drink</p>
+          </div>
+          <div class="item-footer">
+            <div class="price">₱12.99</div>
+            <label class="stock-toggle">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+              <span class="toggle-label">In Stock</span>
+            </label>
+          </div>
+          <div class="actions">
+            <button class="edit-btn">
+              <i class="fas fa-pencil"></i>
+              Edit
+            </button>
+            <button class="delete-btn">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="menu-item-card" data-category="snacks">
+          <div class="item-image">
+            <img src="../../images/burger.avif" alt="Crispy French Fries">
+            <span class="category-badge">Snacks</span>
+          </div>
+          <div class="item-info">
+            <h3 class="item-name">Crispy French Fries</h3>
+            <p class="item-description">Golden crispy fries with sea salt</p>
+          </div>
+          <div class="item-footer">
+            <div class="price">₱3.99</div>
+            <label class="stock-toggle">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+              <span class="toggle-label">In Stock</span>
+            </label>
+          </div>
+          <div class="actions">
+            <button class="edit-btn">
+              <i class="fas fa-pencil"></i>
+              Edit
+            </button>
+            <button class="delete-btn">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal" id="itemModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 id="modalTitle">Add New Item</h2>
+            <button class="modal-close" id="modalClose">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="itemForm">
+              <div class="form-group">
+                <label for="itemName">Item Name</label>
+                <input type="text" id="itemName" required>
+              </div>
+              <div class="form-group">
+                <label for="itemDescription">Description</label>
+                <textarea id="itemDescription" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="itemPrice">Price</label>
+                <input type="number" id="itemPrice" step="0.01" required>
+              </div>
+              <div class="form-group">
+                <label for="itemCategory">Category</label>
+                <select id="itemCategory" required>
+                  <option value="meals">Meals</option>
+                  <option value="snacks">Snacks</option>
+                  <option value="drinks">Drinks</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="itemImage">Image URL</label>
+                <input type="url" id="itemImage" required>
+              </div>
+              <div class="form-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="itemStock" checked>
+                  In Stock
+                </label>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn-cancel" id="cancelBtn">Cancel</button>
+            <button class="btn-save" id="saveBtn">Save Item</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-
-<!-- Item Modal -->
-<div class="modal" id="itemModal">
-  <div class="modal-overlay" id="modalOverlay"></div>
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2 id="modalTitle">Add New Item</h2>
-      <button class="modal-close" id="modalClose">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form id="itemForm">
-        <div class="form-group">
-          <label for="itemName">Item Name</label>
-          <input type="text" id="itemName" required>
-        </div>
-        <div class="form-group">
-          <label for="itemDescription">Description</label>
-          <textarea id="itemDescription" required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="itemPrice">Price</label>
-          <input type="number" id="itemPrice" step="0.01" required>
-        </div>
-        <div class="form-group">
-          <label for="itemCategory">Category</label>
-          <select id="itemCategory" required>
-            <option value="meals">Meals</option>
-            <option value="snacks">Snacks</option>
-            <option value="drinks">Drinks</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="itemImage">Image URL</label>
-          <input type="url" id="itemImage" required>
-        </div>
-        <div class="form-group">
-          <label class="checkbox-label">
-            <input type="checkbox" id="itemStock" checked>
-            In Stock
-          </label>
-        </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-cancel" id="cancelBtn">Cancel</button>
-      <button class="btn-save" id="saveBtn">Save Item</button>
-    </div>
-  </div>
-</div>
-
-</div>
-
-</div>
-
 
 </body>
 </html>
