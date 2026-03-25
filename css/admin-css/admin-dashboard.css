@@ -31,15 +31,7 @@
   min-height: 100vh; 
   position: relative;
 }
-/* SIDEBAR */
-.left-nav {
-  width: 250px;
-  position: fixed;
-  top: 70px;
-  bottom: 0;
-  left: 0;
-  z-index: 1000; 
-}
+
 .main-content{
 margin-left:250px;
 padding:30px 3%;
