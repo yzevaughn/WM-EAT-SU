@@ -18,17 +18,19 @@
 .orders-page {
   padding: 24px;
   min-height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .orders-page h1 {
-  font-size: 32px;
+  font-size: clamp(24px, 5vw, 32px);
   font-weight: 700;
   color: #111827;
   margin-bottom: 4px;
 }
 
 .page-subtitle {
-  font-size: 14px;
+  font-size: clamp(12px, 2vw, 14px);
   color: #6b7280;
   margin-bottom: 24px;
 }
@@ -158,7 +160,7 @@
 .order-id,
 .order-date,
 .pickup-text {
-  font-size: 14px;
+  font-size: clamp(12px, 2vw, 14px);
   color: #6b7280;
   margin: 2px 0;
 }
@@ -262,15 +264,42 @@ hr {
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
-/* RESPONSIVE - MOBILE */
-@media (max-width: 768px) {
+/* RESPONSIVE */
 
+/* Tablet Responsiveness */
+@media (max-width: 1024px) {
+  .main-content {
+    margin-left: 250px;
+    padding-top: 16px;
+  }
+  
+  .orders-page {
+    padding: 20px 16px;
+  }
+  
+  .orders-list {
+    gap: 20px;
+  }
+  
+  .order-card {
+    padding: 20px;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
   .main-content {
     margin-left: 0;
+    padding-top: 12px;
+  }
+  
+  .orders-page {
+    padding: 16px;
   }
 
   .orders-list {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   .orders-page h1 {
@@ -294,6 +323,72 @@ hr {
 
   .order-actions button {
     flex: 1;
+  }
+  
+  .order-title {
+    font-size: 16px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .main-content {
+    margin-left: 0;
+    padding-top: 8px;
+  }
+  
+  .orders-page {
+    padding: 12px;
+  }
+  
+  .filter-tabs {
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .tab-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+  
+  .orders-list {
+    gap: 12px;
+  }
+  
+  .order-card {
+    padding: 12px;
+    min-height: 280px;
+  }
+  
+  .order-title {
+    font-size: 14px;
+  }
+  
+  .status-badge {
+    font-size: 11px;
+  }
+  
+  .accept-btn,
+  .decline-btn,
+  .mark-ready-btn {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 360px) {
+  .orders-page {
+    padding: 8px;
+  }
+  
+  .order-card {
+    padding: 10px;
+  }
+  
+  .tab-btn {
+    padding: 6px 10px;
+    font-size: 11px;
   }
 }
 
