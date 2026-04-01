@@ -1,524 +1,683 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WM EAT SU</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/index.css">
-</head>
-<body>
-
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
     <!-- ===== NAVIGATION ===== -->
     <nav id="navbar">
-        <div class="container nav-container">
-            <div class="logo">
-                <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-                WM EAT SU
-            </div>
-            <div class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#how-it-works">How It Works</a>
-                <a href="#about">About</a>
-            </div>
-            <div class="nav-buttons">
-                <button class="btn btn-outline"><a href="pages/sign-in.html">Sign In</a></button>
-                <button class="btn btn-primary"><a href="pages/create-acc.html">Sign Up</a></button>
-                <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fa-solid fa-bars"></i></button>
-            </div>
+      <div class="container nav-container">
+        <a href="index.html" class="logo">
+          <div class="logo-icon">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+          WM EAT SU
+        </a>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#how-it-works">How It Works</a>
+          <a href="#about">About</a>
         </div>
-        <div class="mobile-nav" id="mobileNav">
-            <a href="#features">Features</a>
-            <a href="#how-it-works">How It Works</a>
-            <a href="#about">About</a>
-            <a href="pages/sign-in.html" class="mobile-nav-btn">Sign In</a>
-            <a href="pages/create-acc.html" class="mobile-nav-btn primary">Sign Up</a>
+        <div class="nav-buttons">
+          <button class="btn btn-outline">
+            <a href="pages/sign-in.html">Sign In</a>
+          </button>
+          <button class="btn btn-primary">
+            <a href="pages/create-acc.html">Sign Up</a>
+          </button>
+          <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fa-solid fa-bars"></i>
+          </button>
         </div>
+      </div>
+      <div class="mobile-nav" id="mobileNav">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#about">About</a>
+        <a href="pages/sign-in.html" class="mobile-nav-btn">Sign In</a>
+        <a href="pages/create-acc.html" class="mobile-nav-btn primary"
+          >Sign Up</a
+        >
+      </div>
     </nav>
 
     <!-- ===== HERO SECTION ===== -->
     <div class="hero-wrapper">
-        <div class="hero-orb orb-1"></div>
-        <div class="hero-orb orb-2"></div>
-        <div class="hero-orb orb-3"></div>
+      <div class="hero-orb orb-1"></div>
+      <div class="hero-orb orb-2"></div>
+      <div class="hero-orb orb-3"></div>
 
-        <section class="hero container">
-            <div class="hero-content" data-animate="fade-up">
-                <div class="badge">
-                    <div class="badge-dot"></div>
-                    🎓 Built for WMSU Students
-                </div>
-                <h1>WMSU Campus<br><span>Eating Made<br>Easy</span></h1>
-                <p>Order from multiple campus vendors and know exactly when your food is ready. Grab your favorite meals fresh and on the go.</p>
-                <div class="hero-actions">
-                    <a href="pages/sign-in.html">
-                        <button class="btn btn-primary btn-glow">
-                            Order Now <i class="fa-solid fa-arrow-right btn-arrow"></i>
-                        </button>
-                    </a>
-                    <a href="#features">
-                        <button class="btn btn-outline">
-                            <i class="fa-regular fa-circle-play"></i> Learn More
-                        </button>
-                    </a>
-                </div>
-                <div class="feature-tags">
-                    <div class="tag"><i class="fa-solid fa-utensils"></i> Delicious Food</div>
-                    <div class="tag"><i class="fa-solid fa-credit-card"></i> Online Payments</div>
-                    <div class="tag"><i class="fa-solid fa-mobile-screen"></i> Mobile Friendly</div>
-                </div>
-                <div class="hero-mini-stats">
-                    <div class="mini-stat">
-                        <span class="mini-stat-num">50+</span>
-                        <span class="mini-stat-label">Menu Items</span>
-                    </div>
-                    <div class="mini-stat-divider"></div>
-                    <div class="mini-stat">
-                        <span class="mini-stat-num">10+</span>
-                        <span class="mini-stat-label">Vendors</span>
-                    </div>
-                    <div class="mini-stat-divider"></div>
-                    <div class="mini-stat">
-                        <span class="mini-stat-num">4.8★</span>
-                        <span class="mini-stat-label">Rating</span>
-                    </div>
-                </div>
+      <section class="hero container">
+        <div class="hero-content" data-animate="fade-up">
+          <div class="badge">
+            <div class="badge-dot"></div>
+            🎓 Built for WMSU Students
+          </div>
+          <h1>
+            WMSU Campus<br /><span>Eating Made<br />Easy</span>
+          </h1>
+          <p>
+            Order from multiple campus vendors and know exactly when your food
+            is ready. Grab your favorite meals fresh and on the go.
+          </p>
+          <div class="hero-actions">
+            <a href="pages/sign-in.html">
+              <button class="btn btn-primary btn-glow">
+                Order Now <i class="fa-solid fa-arrow-right btn-arrow"></i>
+              </button>
+            </a>
+            <a href="#features">
+              <button class="btn btn-outline">
+                <i class="fa-regular fa-circle-play"></i> Learn More
+              </button>
+            </a>
+          </div>
+          <div class="feature-tags">
+            <div class="tag">
+              <i class="fa-solid fa-utensils"></i> Delicious Food
             </div>
+            <div class="tag">
+              <i class="fa-solid fa-credit-card"></i> Online Payments
+            </div>
+            <div class="tag">
+              <i class="fa-solid fa-mobile-screen"></i> Mobile Friendly
+            </div>
+          </div>
+          <div class="hero-mini-stats">
+            <div class="mini-stat">
+              <span class="mini-stat-num">50+</span>
+              <span class="mini-stat-label">Menu Items</span>
+            </div>
+            <div class="mini-stat-divider"></div>
+            <div class="mini-stat">
+              <span class="mini-stat-num">10+</span>
+              <span class="mini-stat-label">Vendors</span>
+            </div>
+            <div class="mini-stat-divider"></div>
+            <div class="mini-stat">
+              <span class="mini-stat-num">4.8★</span>
+              <span class="mini-stat-label">Rating</span>
+            </div>
+          </div>
+        </div>
 
-            <div class="hero-image-wrapper" data-animate="fade-left">
-                <img src="images/pizza.avif" alt="Delicious campus food" class="hero-image floating">
-                <div class="float-card float-card-1">
-                    <i class="fa-solid fa-fire" style="color:#ea333f;"></i>
-                    <div>
-                        <strong>Popular Now</strong>
-                        <span>Pizza</span>
-                    </div>
-                </div>
-                
-               
+        <div class="hero-image-wrapper" data-animate="fade-left">
+          <img
+            src="images/pizza.avif"
+            alt="Delicious campus food"
+            class="hero-image floating"
+          />
+          <div class="float-card float-card-1">
+            <i class="fa-solid fa-fire" style="color: #ea333f"></i>
+            <div>
+              <strong>Popular Now</strong>
+              <span>Pizza</span>
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
     </div>
 
     <!-- ===== FOOD SLIDER SECTION ===== -->
     <section class="food-slider-section">
-        <div class="container">
-            <div class="slider-header">
-                <div>
-                    <span class="section-pill">🔥 Trending Today</span>
-                    <h2 class="slider-title">Popular on Campus</h2>
-                </div>
-                <div class="slider-controls">
-                    <button class="slider-btn" id="slidePrev"><i class="fa-solid fa-chevron-left"></i></button>
-                    <button class="slider-btn" id="slideNext"><i class="fa-solid fa-chevron-right"></i></button>
-                </div>
-            </div>
+      <div class="container">
+        <div class="slider-header">
+          <div>
+            <span class="section-pill">🔥 Trending Today</span>
+            <h2 class="slider-title">Popular on Campus</h2>
+          </div>
+          <div class="slider-controls">
+            <button class="slider-btn" id="slidePrev">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button class="slider-btn" id="slideNext">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
         </div>
-        <div class="slider-track-wrapper">
-            <div class="slider-track" id="sliderTrack">
-
-                <div class="food-card">
-                    <div class="food-card-img-wrapper">
-                        <img src="images/spciy.jpg"  alt="Chicken Rice">
-                        <span class="food-badge popular">⭐ Popular</span>
-                        <div class="food-img-overlay"></div>
-                    </div>
-                    <div class="food-card-body">
-                        <div class="food-meta">
-                            <span class="food-vendor"><i class="fa-solid fa-store"></i> Canteen A</span>
-                            <span class="food-rating">★ 4.9</span>
-                        </div>
-                        <h4>Spicy Chicken Rice</h4>
-                        <p>Tender chicken with garlic fried rice and special sauce</p>
-                        <div class="food-price-row">
-                            <span class="food-price">₱55</span>
-                        </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fa-solid fa-cart-shopping"></i> Add to Cart
-                        </button>
-                    </div>
-                </div>
-
-                <div class="food-card">
-                    <div class="food-card-img-wrapper">
-                        <img src="images/pancit.avif" onerror=" alt="Pancit">
-                        <span class="food-badge new">✨ New</span>
-                        <div class="food-img-overlay"></div>
-                    </div>
-                    <div class="food-card-body">
-                        <div class="food-meta">
-                            <span class="food-vendor"><i class="fa-solid fa-store"></i> Canteen B</span>
-                            <span class="food-rating">★ 4.7</span>
-                        </div>
-                        <h4>Pancit Canton Guisado</h4>
-                        <p>Stir-fried noodles with fresh veggies and pork</p>
-                        <div class="food-price-row">
-                            <span class="food-price">₱45</span>
-                        </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fa-solid fa-cart-shopping"></i> Add to Cart
-                        </button>
-                    </div>
-                </div>
-
-                <div class="food-card">
-                    <div class="food-card-img-wrapper">
-                        <img src="images/shake.avif" onerror="this.src='https://placehold.co/280x180/f0fdf4/16a34a?text=Shake'" alt="Fruit Shake">
-                        <span class="food-badge deal">💸 Deal</span>
-                        <div class="food-img-overlay"></div>
-                    </div>
-                    <div class="food-card-body">
-                        <div class="food-meta">
-                            <span class="food-vendor"><i class="fa-solid fa-store"></i> Drinks Corner</span>
-                            <span class="food-rating">★ 4.8</span>
-                        </div>
-                        <h4>Mango Graham Shake</h4>
-                        <p>Creamy blended mango with graham crumble topping</p>
-                        <div class="food-price-row">
-                            <span class="food-price">₱35</span>
-                        </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fa-solid fa-cart-shopping"></i> Add to Cart
-                        </button>
-                    </div>
-                </div>
-
-                <div class="food-card">
-                    <div class="food-card-img-wrapper">
-                        <img src="images/pizza.avif" onerror="this.src='https://placehold.co/280x180/fdf4ff/9333ea?text=Pizza'" alt="Pizza">
-                        <span class="food-badge popular">⭐ Popular</span>
-                        <div class="food-img-overlay"></div>
-                    </div>
-                    <div class="food-card-body">
-                        <div class="food-meta">
-                            <span class="food-vendor"><i class="fa-solid fa-store"></i> Pizza Hub</span>
-                            <span class="food-rating">★ 4.6</span>
-                        </div>
-                        <h4>Hawaiian Mini Pizza</h4>
-                        <p>Ham, pineapple and mozzarella on crispy thin crust</p>
-                        <div class="food-price-row">
-                            <span class="food-price">₱65</span>
-                        </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fa-solid fa-cart-shopping"></i> Add to Cart
-                        </button>
-                    </div>
-                </div>
-
-                <div class="food-card">
-                    <div class="food-card-img-wrapper">
-                        <img src="images/silog.avif" onerror=" alt="Silog">
-                        <span class="food-badge new">✨ New</span>
-                        <div class="food-img-overlay"></div>
-                    </div>
-                    <div class="food-card-body">
-                        <div class="food-meta">
-                            <span class="food-vendor"><i class="fa-solid fa-store"></i> Silog Station</span>
-                            <span class="food-rating">★ 4.5</span>
-                        </div>
-                        <h4>Tapsilog with Egg</h4>
-                        <p>Marinated beef tapa, garlic rice, and sunny-side-up</p>
-                        <div class="food-price-row">
-                            <span class="food-price">₱70</span>
-                        </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fa-solid fa-cart-shopping"></i> Add to Cart
-                        </button>
-                    </div>
-                </div>
-
-                <div class="food-card">
-                    <div class="food-card-img-wrapper">
-                        <img src="images/food6.jpg" onerror="this.src='https://placehold.co/280x180/fff1f2/ea333f?text=Milk+Tea'" alt="Milk Tea">
-                        <span class="food-badge deal">💸 Deal</span>
-                        <div class="food-img-overlay"></div>
-                    </div>
-                    <div class="food-card-body">
-                        <div class="food-meta">
-                            <span class="food-vendor"><i class="fa-solid fa-store"></i> Sip &amp; Go</span>
-                            <span class="food-rating">★ 4.9</span>
-                        </div>
-                        <h4>Brown Sugar Milk Tea</h4>
-                        <p>Classic milk tea with chewy tapioca pearls</p>
-                        <div class="food-price-row">
-                            <span class="food-price">₱40</span>
-                        </div>
-                        <button class="add-to-cart-btn">
-                            <i class="fa-solid fa-cart-shopping"></i> Add to Cart
-                        </button>
-                    </div>
-                </div>
-
+      </div>
+      <div class="slider-track-wrapper">
+        <div class="slider-track" id="sliderTrack">
+          <div class="food-card">
+            <div class="food-card-img-wrapper">
+              <img src="images/spciy.jpg" alt="Chicken Rice" />
+              <span class="food-badge popular">⭐ Popular</span>
+              <div class="food-img-overlay"></div>
             </div>
+            <div class="food-card-body">
+              <div class="food-meta">
+                <span class="food-vendor"
+                  ><i class="fa-solid fa-store"></i> Canteen A</span
+                >
+                <span class="food-rating">★ 4.9</span>
+              </div>
+              <h4>Spicy Chicken Rice</h4>
+              <p>Tender chicken with garlic fried rice and special sauce</p>
+              <div class="food-price-row">
+                <span class="food-price">₱55</span>
+              </div>
+              <button class="add-to-cart-btn">
+                <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <div class="food-card">
+            <div class="food-card-img-wrapper">
+              <img src="images/pancit.avif" alt="Pancit" />
+              <span class="food-badge new">✨ New</span>
+              <div class="food-img-overlay"></div>
+            </div>
+            <div class="food-card-body">
+              <div class="food-meta">
+                <span class="food-vendor"
+                  ><i class="fa-solid fa-store"></i> Canteen B</span
+                >
+                <span class="food-rating">★ 4.7</span>
+              </div>
+              <h4>Pancit Canton Guisado</h4>
+              <p>Stir-fried noodles with fresh veggies and pork</p>
+              <div class="food-price-row">
+                <span class="food-price">₱45</span>
+              </div>
+              <button class="add-to-cart-btn">
+                <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <div class="food-card">
+            <div class="food-card-img-wrapper">
+              <img src="images/shake.avif" alt="Fruit Shake" />
+              <span class="food-badge deal">💸 Deal</span>
+              <div class="food-img-overlay"></div>
+            </div>
+            <div class="food-card-body">
+              <div class="food-meta">
+                <span class="food-vendor"
+                  ><i class="fa-solid fa-store"></i> Drinks Corner</span
+                >
+                <span class="food-rating">★ 4.8</span>
+              </div>
+              <h4>Mango Graham Shake</h4>
+              <p>Creamy blended mango with graham crumble topping</p>
+              <div class="food-price-row">
+                <span class="food-price">₱35</span>
+              </div>
+              <button class="add-to-cart-btn">
+                <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <div class="food-card">
+            <div class="food-card-img-wrapper">
+              <img src="images/pizza.avif" alt="Pizza" />
+              <span class="food-badge popular">⭐ Popular</span>
+              <div class="food-img-overlay"></div>
+            </div>
+            <div class="food-card-body">
+              <div class="food-meta">
+                <span class="food-vendor"
+                  ><i class="fa-solid fa-store"></i> Pizza Hub</span
+                >
+                <span class="food-rating">★ 4.6</span>
+              </div>
+              <h4>Hawaiian Mini Pizza</h4>
+              <p>Ham, pineapple and mozzarella on crispy thin crust</p>
+              <div class="food-price-row">
+                <span class="food-price">₱65</span>
+              </div>
+              <button class="add-to-cart-btn">
+                <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <div class="food-card">
+            <div class="food-card-img-wrapper">
+              <img src="images/silog.avif" alt="Silog" />
+              <span class="food-badge new">✨ New</span>
+              <div class="food-img-overlay"></div>
+            </div>
+            <div class="food-card-body">
+              <div class="food-meta">
+                <span class="food-vendor"
+                  ><i class="fa-solid fa-store"></i> Silog Station</span
+                >
+                <span class="food-rating">★ 4.5</span>
+              </div>
+              <h4>Tapsilog with Egg</h4>
+              <p>Marinated beef tapa, garlic rice, and sunny-side-up</p>
+              <div class="food-price-row">
+                <span class="food-price">₱70</span>
+              </div>
+              <button class="add-to-cart-btn">
+                <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <div class="food-card">
+            <div class="food-card-img-wrapper">
+              <img src="images/milktea.avif" alt="Milk Tea" />
+              <span class="food-badge deal">💸 Deal</span>
+              <div class="food-img-overlay"></div>
+            </div>
+            <div class="food-card-body">
+              <div class="food-meta">
+                <span class="food-vendor"
+                  ><i class="fa-solid fa-store"></i> Sip &amp; Go</span
+                >
+                <span class="food-rating">★ 4.9</span>
+              </div>
+              <h4>Brown Sugar Milk Tea</h4>
+              <p>Classic milk tea with chewy tapioca pearls</p>
+              <div class="food-price-row">
+                <span class="food-price">₱40</span>
+              </div>
+              <button class="add-to-cart-btn">
+                <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="slider-dots" id="sliderDots"></div>
+      </div>
+      <div class="slider-dots" id="sliderDots"></div>
     </section>
 
     <!-- ===== FOOD CATEGORIES SECTION ===== -->
     <section class="categories-section" data-animate="fade-up">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-pill">Browse by Type</span>
-                <h2>What Are You Craving?</h2>
-                <p>Pick a category and discover what's available from our campus vendors today.</p>
-            </div>
-
-            <!-- Category Tabs -->
-            <div class="categories-grid">
-                <div class="category-card active" data-cat="meals">
-                    <div class="cat-icon-wrap" style="background:#fff1f2;color:#ea333f;">
-                        <i class="fa-solid fa-bowl-food"></i>
-                    </div>
-                    <span>Meals</span>
-                </div>
-                <div class="category-card" data-cat="drinks">
-                    <div class="cat-icon-wrap" style="background:#dbeafe;color:#2563eb;">
-                        <i class="fa-solid fa-mug-hot"></i>
-                    </div>
-                    <span>Drinks</span>
-                </div>
-                <div class="category-card" data-cat="snacks">
-                    <div class="cat-icon-wrap" style="background:#ffedd5;color:#ea580c;">
-                        <i class="fa-solid fa-cookie-bite"></i>
-                    </div>
-                    <span>Snacks</span>
-                </div>
-                <div class="category-card" data-cat="desserts">
-                    <div class="cat-icon-wrap" style="background:#fdf4ff;color:#9333ea;">
-                        <i class="fa-solid fa-ice-cream"></i>
-                    </div>
-                    <span>Desserts</span>
-                </div>
-               
-            </div>
-
-            <!-- Dynamic Food Grid (2x2) — populated by JS -->
-            <div class="cat-food-grid" id="catFoodGrid"></div>
-
-            <!-- View More -->
-             <div class="cat-view-more">
-                <button class="btn-view-more" id="viewMoreBtn">
-                    <span>View More</span> <i class="fa-solid fa-arrow-right"></i>
-                </button>
-            </div>
+      <div class="container">
+        <div class="section-header">
+          <span class="section-pill">Browse by Type</span>
+          <h2>What Are You Craving?</h2>
+          <p>
+            Pick a category and discover what's available from our campus
+            vendors today.
+          </p>
         </div>
+
+        <!-- Category Tabs -->
+        <div class="categories-grid">
+          <div class="category-card active" data-cat="meals">
+            <div
+              class="cat-icon-wrap"
+              style="background: #fff1f2; color: #ea333f"
+            >
+              <i class="fa-solid fa-bowl-food"></i>
+            </div>
+            <span>Meals</span>
+          </div>
+          <div class="category-card" data-cat="drinks">
+            <div
+              class="cat-icon-wrap"
+              style="background: #dbeafe; color: #2563eb"
+            >
+              <i class="fa-solid fa-mug-hot"></i>
+            </div>
+            <span>Drinks</span>
+          </div>
+          <div class="category-card" data-cat="snacks">
+            <div
+              class="cat-icon-wrap"
+              style="background: #ffedd5; color: #ea580c"
+            >
+              <i class="fa-solid fa-cookie-bite"></i>
+            </div>
+            <span>Snacks</span>
+          </div>
+          <div class="category-card" data-cat="desserts">
+            <div
+              class="cat-icon-wrap"
+              style="background: #fdf4ff; color: #9333ea"
+            >
+              <i class="fa-solid fa-ice-cream"></i>
+            </div>
+            <span>Desserts</span>
+          </div>
+        </div>
+
+        <!-- Dynamic Food Grid (2x2) — populated by JS -->
+        <div class="cat-food-grid" id="catFoodGrid"></div>
+
+        <!-- View More -->
+        <div class="cat-view-more">
+          <button class="btn-view-more" id="viewMoreBtn">
+            <span>View More</span> <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
     </section>
 
     <!-- ===== FEATURES SECTION ===== -->
     <section class="features" id="features">
-        <div class="container">
-            <div class="section-header" data-animate="fade-up">
-                <span class="section-pill">What We Offer</span>
-                <h2>List of Features</h2>
-                <p>Tools designed to make campus dining accessible and enjoyable.</p>
-            </div>
-            <div class="feature-grid">
-                <div class="feature-card" data-animate="fade-up" style="--delay:0ms">
-                    <div class="f-icon-sm bg-light-red"><i class="fa-solid fa-bag-shopping"></i></div>
-                    <h3>Digital Orders</h3>
-                    <p>Ordering system with real-time tracking and instant confirmations.</p>
-                </div>
-                <div class="feature-card" data-animate="fade-up" style="--delay:80ms">
-                    <div class="f-icon-sm bg-light-green"><i class="fa-regular fa-credit-card"></i></div>
-                    <h3>Online Payments</h3>
-                    <p>Multiple payment options including digital wallet and cash on delivery.</p>
-                </div>
-                <div class="feature-card" data-animate="fade-up" style="--delay:160ms">
-                    <div class="f-icon-sm bg-light-purple"><i class="fa-regular fa-bell"></i></div>
-                    <h3>Vendor Feed</h3>
-                    <p>Stay updated with promotional posts, special offers, and daily specials.</p>
-                </div>
-                <div class="feature-card" data-animate="fade-up" style="--delay:240ms">
-                    <div class="f-icon-sm bg-light-orange"><i class="fa-solid fa-shop"></i></div>
-                    <h3>Vendor Applications</h3>
-                    <p>Student-initiated vendor proposals with detailed application forms.</p>
-                </div>
-                <div class="feature-card" data-animate="fade-up" style="--delay:320ms">
-                    <div class="f-icon-sm bg-light-blue"><i class="fa-solid fa-shield"></i></div>
-                    <h3>Complaint System</h3>
-                    <p>Users can submit complaints or reports regarding their food experience.</p>
-                </div>
-                <div class="feature-card" data-animate="fade-up" style="--delay:400ms">
-                    <div class="f-icon-sm bg-light-teal"><i class="fa-regular fa-circle-check"></i></div>
-                    <h3>Campus Integration</h3>
-                    <p>Interactive map showing all vendor locations across campus canteens.</p>
-                </div>
-            </div>
+      <div class="container">
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-pill">What We Offer</span>
+          <h2>List of Features</h2>
+          <p>Tools designed to make campus dining accessible and enjoyable.</p>
         </div>
+        <div class="feature-grid">
+          <div class="feature-card" data-animate="fade-up" style="--delay: 0ms">
+            <div class="f-icon-sm bg-light-red">
+              <i class="fa-solid fa-bag-shopping"></i>
+            </div>
+            <h3>Digital Orders</h3>
+            <p>
+              Ordering system with real-time tracking and instant confirmations.
+            </p>
+          </div>
+          <div
+            class="feature-card"
+            data-animate="fade-up"
+            style="--delay: 80ms"
+          >
+            <div class="f-icon-sm bg-light-green">
+              <i class="fa-regular fa-credit-card"></i>
+            </div>
+            <h3>Online Payments</h3>
+            <p>
+              Multiple payment options including digital wallet and cash on
+              delivery.
+            </p>
+          </div>
+          <div
+            class="feature-card"
+            data-animate="fade-up"
+            style="--delay: 160ms"
+          >
+            <div class="f-icon-sm bg-light-purple">
+              <i class="fa-regular fa-bell"></i>
+            </div>
+            <h3>Vendor Feed</h3>
+            <p>
+              Stay updated with promotional posts, special offers, and daily
+              specials.
+            </p>
+          </div>
+          <div
+            class="feature-card"
+            data-animate="fade-up"
+            style="--delay: 240ms"
+          >
+            <div class="f-icon-sm bg-light-orange">
+              <i class="fa-solid fa-shop"></i>
+            </div>
+            <h3>Vendor Applications</h3>
+            <p>
+              Student-initiated vendor proposals with detailed application
+              forms.
+            </p>
+          </div>
+          <div
+            class="feature-card"
+            data-animate="fade-up"
+            style="--delay: 320ms"
+          >
+            <div class="f-icon-sm bg-light-blue">
+              <i class="fa-solid fa-shield"></i>
+            </div>
+            <h3>Complaint System</h3>
+            <p>
+              Users can submit complaints or reports regarding their food
+              experience.
+            </p>
+          </div>
+          <div
+            class="feature-card"
+            data-animate="fade-up"
+            style="--delay: 400ms"
+          >
+            <div class="f-icon-sm bg-light-teal">
+              <i class="fa-regular fa-circle-check"></i>
+            </div>
+            <h3>Campus Integration</h3>
+            <p>
+              Interactive map showing all vendor locations across campus
+              canteens.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ===== PERSPECTIVES SECTION ===== -->
     <section class="perspectives">
-        <div class="container">
-            <div class="section-header" data-animate="fade-up">
-                <span class="section-pill">Who It's For</span>
-                <h2><span>A Platform for Everyone</span></h2>
-                <p>Designed experiences for every member of our campus dining community.</p>
-            </div>
-            <div class="grid-3">
-                <div class="perspective-card" data-animate="fade-up" style="--delay:0ms">
-                    <div class="p-icon icon-red"><i class="fa-solid fa-user-group"></i></div>
-                    <h3>For Students</h3>
-                    <p>Browse menus, place orders, make payments, and track your food in real-time. Get updates instantly and enjoy a seamless dining experience.</p>
-                    <a href="pages/sign-in.html" class="p-link link-red">Sign in &rarr;</a>
-                </div>
-                <div class="perspective-card" data-animate="fade-up" style="--delay:120ms">
-                    <div class="p-icon icon-orange"><i class="fa-solid fa-store"></i></div>
-                    <h3>For Vendors</h3>
-                    <p>Manage orders, update menus, process payments, and engage with students through promotional posts with a powerful vendor dashboard.</p>
-                    <a href="pages/sign-in.html" class="p-link link-orange">Sign in &rarr;</a>
-                </div>
-            </div>
+      <div class="container">
+        <div class="section-header" data-animate="fade-up">
+          <span class="section-pill">Who It's For</span>
+          <h2><span>A Platform for Everyone</span></h2>
+          <p>
+            Designed experiences for every member of our campus dining
+            community.
+          </p>
         </div>
+        <div class="grid-3">
+          <div
+            class="perspective-card"
+            data-animate="fade-up"
+            style="--delay: 0ms"
+          >
+            <div class="p-icon icon-red">
+              <i class="fa-solid fa-user-group"></i>
+            </div>
+            <h3>For Students</h3>
+            <p>
+              Browse menus, place orders, make payments, and track your food in
+              real-time. Get updates instantly and enjoy a dining experience.
+            </p>
+            <a href="pages/sign-in.html" class="p-link link-red"
+              >Sign in &rarr;</a
+            >
+          </div>
+          <div
+            class="perspective-card"
+            data-animate="fade-up"
+            style="--delay: 120ms"
+          >
+            <div class="p-icon icon-orange">
+              <i class="fa-solid fa-store"></i>
+            </div>
+            <h3>For Vendors</h3>
+            <p>
+              Manage orders, update menus, process payments, and engage with
+              students through promotional posts with a powerful vendor
+              dashboard.
+            </p>
+            <a href="pages/sign-in.html" class="p-link link-orange"
+              >Sign in &rarr;</a
+            >
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ===== HOW IT WORKS SECTION ===== -->
     <section class="how-it-works" id="how-it-works">
-        <div class="container">
-            <div class="badge badge-center">
-                <i class="fa-regular fa-clock"></i> Simple Process
-            </div>
-            <div class="section-header" data-animate="fade-up">
-                <h2>How It Works</h2>
-                <p>Get started in minutes and enjoy delicious campus meals with just a few simple steps.</p>
-            </div>
-            <div class="steps-container">
-                <div class="step" data-animate="fade-up" style="--delay:0ms">
-                    <div class="step-num step-num-1">1</div>
-                    <div class="step-icon-wrapper" style="background:#fff1f2;color:#e11d48;">
-                        <i class="fa-solid fa-user-plus"></i>
-                    </div>
-                    <h3>Sign Up</h3>
-                    <p>Create your account in just a few minutes and get started.</p>
-                </div>
-                <div class="step" data-animate="fade-up" style="--delay:100ms">
-                    <div class="step-num step-num-2">2</div>
-                    <div class="step-icon-wrapper" style="background:#ffedd5;color:#ea580c;">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </div>
-                    <h3>Browse</h3>
-                    <p>Explore our vendors and browse their delicious menus.</p>
-                </div>
-                <div class="step" data-animate="fade-up" style="--delay:200ms">
-                    <div class="step-num step-num-3">3</div>
-                    <div class="step-icon-wrapper" style="background:#dcfce7;color:#16a34a;">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </div>
-                    <h3>Order</h3>
-                    <p>Add items to your cart and place your order with ease.</p>
-                </div>
-                <div class="step" data-animate="fade-up" style="--delay:300ms">
-                    <div class="step-num step-num-4">4</div>
-                    <div class="step-icon-wrapper" style="background:#dbeafe;color:#2563eb;">
-                        <i class="fa-regular fa-face-smile"></i>
-                    </div>
-                    <h3>Enjoy</h3>
-                    <p>Pick up your order when it's ready and enjoy your meal.</p>
-                </div>
-            </div>
-            <a href="pages/create-acc.html">
-                <button class="btn btn-primary btn-glow">
-                    Get Started Now
-                    <i class="fa-solid fa-arrow-right btn-arrow" style="font-size:12px;margin-left:4px;"></i>
-                </button>
-            </a>
+      <div class="container">
+        <div class="badge badge-center">
+          <i class="fa-regular fa-clock"></i> Simple Process
         </div>
+        <div class="section-header" data-animate="fade-up">
+          <h2>How It Works</h2>
+          <p>
+            Get started in minutes and enjoy delicious campus meals with just a
+            few simple steps.
+          </p>
+        </div>
+        <div class="steps-container">
+          <div class="step" data-animate="fade-up" style="--delay: 0ms">
+            <div class="step-num step-num-1">1</div>
+            <div
+              class="step-icon-wrapper"
+              style="background: #fff1f2; color: #e11d48"
+            >
+              <i class="fa-solid fa-user-plus"></i>
+            </div>
+            <h3>Sign Up</h3>
+            <p>Create your account in just a few minutes and get started.</p>
+          </div>
+          <div class="step" data-animate="fade-up" style="--delay: 100ms">
+            <div class="step-num step-num-2">2</div>
+            <div
+              class="step-icon-wrapper"
+              style="background: #ffedd5; color: #ea580c"
+            >
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <h3>Browse</h3>
+            <p>Explore our vendors and browse their delicious menus.</p>
+          </div>
+          <div class="step" data-animate="fade-up" style="--delay: 200ms">
+            <div class="step-num step-num-3">3</div>
+            <div
+              class="step-icon-wrapper"
+              style="background: #dcfce7; color: #16a34a"
+            >
+              <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+            <h3>Order</h3>
+            <p>Add items to your cart and place your order with ease.</p>
+          </div>
+          <div class="step" data-animate="fade-up" style="--delay: 300ms">
+            <div class="step-num step-num-4">4</div>
+            <div
+              class="step-icon-wrapper"
+              style="background: #dbeafe; color: #2563eb"
+            >
+              <i class="fa-regular fa-face-smile"></i>
+            </div>
+            <h3>Enjoy</h3>
+            <p>Pick up your order when it's ready and enjoy your meal.</p>
+          </div>
+        </div>
+        <a href="pages/create-acc.html">
+          <button class="btn btn-primary btn-glow">
+            Get Started Now
+            <i
+              class="fa-solid fa-arrow-right btn-arrow"
+              style="font-size: 12px; margin-left: 4px"
+            ></i>
+          </button>
+        </a>
+      </div>
     </section>
 
     <!-- ===== ABOUT US SECTION ===== -->
     <section class="about-section" id="about">
-        <div class="container about-grid" data-animate="fade-up">
-            <div class="about-image-wrap">
-                <img src="images/wmsu.jpg" onerror="this.src='https://placehold.co/560x400/fff1f2/ea333f?text=WMSU+Campus'" alt="WMSU Campus" class="about-img">
-                <div class="about-img-badge">
-                    <i class="fa-solid fa-award" style="color:#ea333f;"></i>
-                    <div>
-                        <strong>WMSU Approved</strong>
-                        <span>Official Campus Platform</span>
-                    </div>
-                </div>
-            </div>
-            <div class="about-content">
-                <span class="section-pill">About Us</span>
-                <h2>Powering Campus Dining at <span>Western Mindanao<br>State University</span></h2>
-                <p>WM EAT SU is a digital food ordering platform built exclusively for the WMSU community. We connect hungry students with their favorite campus vendors — making it faster, easier, and more enjoyable to grab a meal between classes.</p>
-                <p>Our mission is to modernize campus dining by eliminating long queues, reducing food waste, and empowering student entrepreneurs and canteen vendors through technology.</p>
-                <div class="about-highlights">
-                    <div class="highlight-item">
-                        <i class="fa-solid fa-circle-check" style="color:#ea333f;"></i>
-                        <span>Real-time order tracking</span>
-                    </div>
-                    <div class="highlight-item">
-                        <i class="fa-solid fa-circle-check" style="color:#ea333f;"></i>
-                        <span>Student &amp; vendor focused</span>
-                    </div>
-                    <div class="highlight-item">
-                        <i class="fa-solid fa-circle-check" style="color:#ea333f;"></i>
-                        <span>Online payments</span>
-                    </div>
-                    <div class="highlight-item">
-                        <i class="fa-solid fa-circle-check" style="color:#ea333f;"></i>
-                        <span>Campus coverage</span>
-                    </div>
-                </div>
-                <a href="pages/create-acc.html">
-                    <button class="btn btn-primary btn-glow" style="margin-top:8px;">
-                        Join the Community <i class="fa-solid fa-arrow-right btn-arrow"></i>
-                    </button>
-                </a>
-            </div>
+      <div class="container about-grid" data-animate="fade-up">
+        <div class="about-image-wrap">
+          <img src="images/wmsu.jpg" alt="WMSU Campus" class="about-img" />
+          <div class="about-img-badge"></div>
         </div>
+        <div class="about-content">
+          <span class="section-pill">About Us</span>
+          <h2>
+            Powering Campus Dining at
+            <span>Western Mindanao<br />State University</span>
+          </h2>
+          <p>
+            WM EAT SU is a digital food ordering platform built exclusively for
+            the WMSU community. We connect hungry students with their favorite
+            campus vendors — making it faster, easier, and more enjoyable to
+            grab a meal between classes.
+          </p>
+          <p>
+            Our mission is to modernize campus dining by eliminating long
+            queues, reducing food waste, and empowering student entrepreneurs
+            and canteen vendors through technology.
+          </p>
+          <div class="about-highlights">
+            <div class="highlight-item">
+              <i class="fa-solid fa-circle-check" style="color: #ea333f"></i>
+              <span>Real-time order tracking</span>
+            </div>
+            <div class="highlight-item">
+              <i class="fa-solid fa-circle-check" style="color: #ea333f"></i>
+              <span>Student &amp; vendor focused</span>
+            </div>
+            <div class="highlight-item">
+              <i class="fa-solid fa-circle-check" style="color: #ea333f"></i>
+              <span>Online payments</span>
+            </div>
+            <div class="highlight-item">
+              <i class="fa-solid fa-circle-check" style="color: #ea333f"></i>
+              <span>Campus coverage</span>
+            </div>
+          </div>
+          <a href="pages/create-acc.html">
+            <button class="btn btn-primary btn-glow" style="margin-top: 8px">
+              Join the Community
+              <i class="fa-solid fa-arrow-right btn-arrow"></i>
+            </button>
+          </a>
+        </div>
+      </div>
     </section>
 
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
-        <div class="container footer-grid">
-            <div class="footer-brand">
-                <div class="logo">
-                    <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-                    WM EAT SU
-                </div>
-                <p>Campus dining platform designed to connect students, vendors, and administrators in one seamless food ordering experience.</p>
-                <div class="socials">
-                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                </div>
-            </div>
-            <div class="footer-links">
-                <h4>Platform</h4>
-                <ul>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#how-it-works">How It Works</a></li>
-                    <li><a href="pages/sign-in.html">Vendors</a></li>
-                    <li><a href="pages/create-acc.html">Get Started</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Report Issue</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">System Status</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Campus Guidelines</a></li>
-                </ul>
-            </div>
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+            WM EAT SU
+          </div>
+          <p>
+            Campus dining platform designed to connect students, vendors, and
+            administrators in one seamless food ordering experience.
+          </p>
+          <div class="socials">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+          </div>
         </div>
-        <div class="footer-bottom">
-            <p>© 2026 WM EAT SU. All rights reserved.</p>
+        <div class="footer-links">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="pages/sign-in.html">Vendors</a></li>
+            <li><a href="pages/create-acc.html">Get Started</a></li>
+          </ul>
         </div>
+        <div class="footer-links">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Report Issue</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">System Status</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Campus Guidelines</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 WM EAT SU. All rights reserved.</p>
+      </div>
     </footer>
 
     <script src="script/index.js"></script>
-</body>
+  </body>
 </html>

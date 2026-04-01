@@ -1265,23 +1265,7 @@ nav.scrolled {
     box-shadow: 0 30px 70px rgba(0,0,0,0.18);
 }
 
-.about-img-badge {
-    position: absolute;
-    bottom: 24px;
-    right: -16px;
-    background: white;
-    border-radius: var(--radius-md);
-    padding: 14px 18px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-    font-size: 13px;
-}
 
-.about-img-badge i { font-size: 28px; }
-.about-img-badge strong { display: block; color: var(--text-dark); font-size: 13px; font-weight: 700; }
-.about-img-badge span { font-size: 11px; color: var(--text-gray); }
 
 .about-content h2 {
     font-size: 34px;
