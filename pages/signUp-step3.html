@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WM EAT SU — Step 3: Verify</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="../css/sign-in-up.css" />
+  </head>
+
+  <body>
+    <div class="page-grid">
+      <div class="card">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+          <div class="sb-brand">
+            <div class="sb-icon"><i class="fa-solid fa-utensils"></i></div>
+            <div class="sb-name">WM EAT SU</div>
+            <div class="sb-tag">Your Campus Food,<br />serve delicous food</div>
+          </div>
+
+          <nav class="sb-steps">
+            <div class="sb-step completed">
+              <div class="sb-dot"><i class="fa-solid fa-user"></i></div>
+              <div class="sb-step-name">Student Info</div>
+              <div class="sb-step-sub">Name, email &amp; password</div>
+            </div>
+
+            <div class="sb-step completed">
+              <div class="sb-dot"><i class="fa-solid fa-file-lines"></i></div>
+              <div class="sb-step-name">Documents</div>
+              <div class="sb-step-sub">COE &amp; School ID</div>
+            </div>
+
+            <div class="sb-step active" id="sb-step3">
+              <div class="sb-dot">
+                <i class="fa-solid fa-envelope-circle-check"></i>
+              </div>
+              <div class="sb-step-name">Verify Email</div>
+              <div class="sb-step-sub">4-digit OTP code</div>
+            </div>
+          </nav>
+        </aside>
+
+        <!-- FORM PANEL -->
+        <section class="form-panel">
+          <div class="fp-top" id="topBar">
+            <div class="prog-track">
+              <div class="prog-fill" id="progFill" style="width: 100%"></div>
+            </div>
+
+            <div class="step-badge">Step <em id="stepNum">3</em> of 3</div>
+          </div>
+
+          <div class="fp-body">
+            <!-- GLOBAL ALERT -->
+            <div class="alert alert-err" id="gAlert">
+              <i class="fa-solid fa-circle-exclamation"></i>
+              <span id="gMsg">Please enter your details to continue.</span>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="step-panel active" id="step3Panel">
+              <div class="step-head">
+                <h2>Verify Your Email</h2>
+                <p>Enter the 4-digit OTP sent to your school inbox.</p>
+              </div>
+
+              <div class="email-chip">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Code sent to <strong id="emailDisp">—</strong></span>
+              </div>
+
+              <div
+                style="
+                  font-size: 11px;
+                  color: var(--gray-400);
+                  font-family: &quot;Inter&quot;, sans-serif;
+                  margin-bottom: 2px;
+                "
+              >
+                <i
+                  class="fa-solid fa-triangle-exclamation"
+                  style="color: var(--red-300)"
+                ></i>
+                Demo OTP: <strong>1234</strong>
+              </div>
+
+              <!-- OTP INPUT -->
+              <div class="fg-otp" id="otpGrid">
+                <input
+                  class="otp-in"
+                  type="text"
+                  maxlength="1"
+                  inputmode="numeric"
+                  pattern="[0-9]*"
+                />
+                <input
+                  class="otp-in"
+                  type="text"
+                  maxlength="1"
+                  inputmode="numeric"
+                  pattern="[0-9]*"
+                />
+                <input
+                  class="otp-in"
+                  type="text"
+                  maxlength="1"
+                  inputmode="numeric"
+                  pattern="[0-9]*"
+                />
+                <input
+                  class="otp-in"
+                  type="text"
+                  maxlength="1"
+                  inputmode="numeric"
+                  pattern="[0-9]*"
+                />
+              </div>
+
+              <!-- ERROR -->
+              <div class="ferr" id="ferr-otp" style="justify-content: center">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span></span>
+              </div>
+
+              <!-- SUCCESS -->
+              <div class="alert alert-ok" id="otpOk">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Code verified! Setting up your account…</span>
+              </div>
+
+              <!-- RESEND -->
+              <div class="resend-row">
+                Didn't get it?
+                <button
+                  class="resend-btn"
+                  id="resendBtn"
+                  onclick="resendCode()"
+                  disabled
+                >
+                  Resend in <span id="cd">60s</span>
+                </button>
+              </div>
+
+              <!-- ACTION BUTTONS -->
+              <div class="fg-action">
+                <a href="step2.html" class="btn btn-back">
+                  <i class="fa-solid fa-arrow-left"></i>
+                </a>
+
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  onclick="verifyOTP(event)"
+                >
+                  <i class="fa-solid fa-shield-check"></i>
+                  Verify & Create Account
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script src="../script/create-account/step3.js"></script>
+  </body>
+</html>

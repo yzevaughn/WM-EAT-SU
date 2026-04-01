@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WM EAT SU — Sign In</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/sign-in.css" />
+  </head>
+  <body>
+    <div class="page-grid">
+      <div class="card">
+        <aside class="sidebar">
+          <div class="sb-brand">
+            <div class="sb-icon"><i class="fa-solid fa-utensils"></i></div>
+            <div class="sb-name">WM EAT SU</div>
+            <div class="sb-tag">
+              Your Campus Food,<br />serve delicious food
+            </div>
+          </div>
+          <div class="sb-welcome">
+            <div class="sb-welcome-title">Welcome back! 👋</div>
+            <div class="sb-welcome-text">
+              Sign in to browse the campus menu, track your orders, and enjoy
+              the food within our campus.
+            </div>
+          </div>
+        </aside>
+
+        <section class="form-panel">
+          <div class="fp-head">
+            <h2>Sign In</h2>
+            <p>Enter your school email and password to continue.</p>
+          </div>
+
+          <div class="alert alert-err" id="gAlert">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span id="gMsg">Invalid credentials. Please try again.</span>
+          </div>
+          <div class="alert alert-ok" id="gOk">
+            <i class="fa-solid fa-circle-check"></i>
+            <span id="gOkMsg">Signed in successfully! Redirecting…</span>
+          </div>
+
+          <div class="fg">
+            <label for="email"
+              >School Email Address <span class="req">*</span></label
+            >
+            <div class="iw">
+              <i class="ico fa-solid fa-envelope"></i>
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                autocomplete="email"
+              />
+            </div>
+            <div class="ferr" id="ferr-email">
+              <i class="fa-solid fa-circle-exclamation"></i><span></span>
+            </div>
+          </div>
+
+          <div class="fg">
+            <label for="password">Password <span class="req">*</span></label>
+            <div class="iw">
+              <i class="ico fa-solid fa-lock"></i>
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+              />
+              <button class="eye-btn" type="button" onclick="togglePw()">
+                <i class="fa-solid fa-eye" id="eyeIco"></i>
+              </button>
+            </div>
+            <div class="ferr" id="ferr-password">
+              <i class="fa-solid fa-circle-exclamation"></i><span></span>
+            </div>
+          </div>
+
+          <div class="row-forgot">
+            <a href="#">Forgot password?</a>
+          </div>
+
+          <div class="row-remember">
+            <input type="checkbox" id="remember" />
+            <label for="remember">Remember me for 30 days</label>
+          </div>
+
+          <button class="btn btn-primary" id="signInBtn" onclick="signIn()">
+            <i class="fa-solid fa-right-to-bracket"></i> Sign In
+          </button>
+
+          <div class="signup-link">
+            Don't have an account? <a href="signUp-step1.html">Sign Up</a>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="../script/sign-in/sign-in.js"></script>
+  </body>
+</html>

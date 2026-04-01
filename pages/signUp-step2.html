@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WM EAT SU — Step 2: Documents</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/sign-in-up.css" />
+  </head>
+  <body>
+    <div class="page-grid">
+      <div class="card">
+        <aside class="sidebar">
+          <div class="sb-brand">
+            <div class="sb-icon"><i class="fa-solid fa-utensils"></i></div>
+            <div class="sb-name">WM EAT SU</div>
+            <div class="sb-tag">Your Campus Food,<br />serve delicous food</div>
+          </div>
+          <nav class="sb-steps">
+            <div class="sb-step completed">
+              <div class="sb-dot"><i class="fa-solid fa-user"></i></div>
+              <div class="sb-step-name">Student Info</div>
+              <div class="sb-step-sub">Name, email &amp; password</div>
+            </div>
+            <div class="sb-step active">
+              <div class="sb-dot"><i class="fa-solid fa-file-lines"></i></div>
+              <div class="sb-step-name">Documents</div>
+              <div class="sb-step-sub">COE &amp; School ID</div>
+            </div>
+            <div class="sb-step">
+              <div class="sb-dot">
+                <i class="fa-solid fa-envelope-circle-check"></i>
+              </div>
+              <div class="sb-step-name">Verify Email</div>
+              <div class="sb-step-sub">4-digit OTP code</div>
+            </div>
+          </nav>
+        </aside>
+
+        <section class="form-panel">
+          <div class="fp-top">
+            <div class="prog-track">
+              <div class="prog-fill" style="width: 66.66%"></div>
+            </div>
+            <div class="step-badge">Step <em>2</em> of 3</div>
+          </div>
+
+          <div class="fp-body">
+            <div class="alert alert-err" id="gAlert">
+              <i class="fa-solid fa-circle-exclamation"></i>
+              <span id="gMsg">Please enter your details to continue.</span>
+            </div>
+
+            <div class="step-panel active">
+              <div class="step-head">
+                <h2>Verification Documents</h2>
+                <p>Upload your school credentials for account review.</p>
+              </div>
+
+              <div class="fg-upload">
+                <div class="fg">
+                  <div class="uz-lbl">
+                    <i class="fa-solid fa-file-circle-check"></i> Certificate of
+                    Enrollment <span class="req">*</span>
+                  </div>
+                  <div
+                    class="upload-zone"
+                    id="coeZone"
+                    ondragover="dv(event, 'coeZone')"
+                    ondragleave="dl(event, 'coeZone')"
+                    ondrop="
+                      dd(
+                        event,
+                        'coeFile',
+                        'coeZone',
+                        'coePrev',
+                        'coeIco',
+                        'coeTxt',
+                      )
+                    "
+                  >
+                    <input
+                      type="file"
+                      id="coeFile"
+                      accept=".pdf,.jpg,.jpeg,.png"
+                      onchange="
+                        hf(this, 'coeZone', 'coePrev', 'coeIco', 'coeTxt')
+                      "
+                    />
+                    <div class="uz-ico">
+                      <i class="fa-solid fa-cloud-arrow-up" id="coeIco"></i>
+                    </div>
+                    <div class="uz-t" id="coeTxt">Click or drag & drop</div>
+                    <div class="uz-s">Certificate of Enrollment</div>
+                    <div class="uz-pills">
+                      <span class="uz-pill">PDF</span
+                      ><span class="uz-pill">JPG</span
+                      ><span class="uz-pill">PNG</span
+                      ><span class="uz-pill">≤5MB</span>
+                    </div>
+                  </div>
+                  <div class="uz-prev" id="coePrev"></div>
+                  <div class="ferr" id="ferr-coe">
+                    <i class="fa-solid fa-circle-exclamation"></i><span></span>
+                  </div>
+                </div>
+
+                <div class="fg">
+                  <div class="uz-lbl">
+                    <i class="fa-solid fa-id-card"></i> School ID
+                    <span class="req">*</span>
+                  </div>
+                  <div
+                    class="upload-zone"
+                    id="idZone"
+                    ondragover="dv(event, 'idZone')"
+                    ondragleave="dl(event, 'idZone')"
+                    ondrop="
+                      dd(event, 'idFile', 'idZone', 'idPrev', 'idIco', 'idTxt')
+                    "
+                  >
+                    <input
+                      type="file"
+                      id="idFile"
+                      accept=".pdf,.jpg,.jpeg,.png"
+                      onchange="hf(this, 'idZone', 'idPrev', 'idIco', 'idTxt')"
+                    />
+                    <div class="uz-ico">
+                      <i class="fa-solid fa-id-card" id="idIco"></i>
+                    </div>
+                    <div class="uz-t" id="idTxt">Click or drag & drop</div>
+                    <div class="uz-s">Front of your School ID</div>
+                    <div class="uz-pills">
+                      <span class="uz-pill">PDF</span
+                      ><span class="uz-pill">JPG</span
+                      ><span class="uz-pill">PNG</span
+                      ><span class="uz-pill">≤5MB</span>
+                    </div>
+                  </div>
+                  <div class="uz-prev" id="idPrev"></div>
+                  <div class="ferr" id="ferr-id">
+                    <i class="fa-solid fa-circle-exclamation"></i><span></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="fg-action">
+                <a href="step1.html" class="btn btn-back"
+                  ><i class="fa-solid fa-arrow-left"></i
+                ></a>
+                <button class="btn btn-primary" onclick="submitStep2()">
+                  Continue <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="../script/create-account/step2.js"></script>
+  </body>
+</html>

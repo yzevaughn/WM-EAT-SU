@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WM EAT SU — Step 1: Sign Up</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/sign-in-up.css" />
+  </head>
+  <body>
+    <div class="page-grid">
+      <div class="card">
+        <aside class="sidebar">
+          <div class="sb-brand">
+            <div class="sb-icon"><i class="fa-solid fa-utensils"></i></div>
+            <div class="sb-name">WM EAT SU</div>
+            <div class="sb-tag">Your Campus Food,<br />serve delicous food</div>
+          </div>
+          <nav class="sb-steps">
+            <div class="sb-step active">
+              <div class="sb-dot"><i class="fa-solid fa-user"></i></div>
+              <div class="sb-step-name">Student Info</div>
+              <div class="sb-step-sub">Name, email &amp; password</div>
+            </div>
+            <div class="sb-step">
+              <div class="sb-dot"><i class="fa-solid fa-file-lines"></i></div>
+              <div class="sb-step-name">Documents</div>
+              <div class="sb-step-sub">COE &amp; School ID</div>
+            </div>
+            <div class="sb-step">
+              <div class="sb-dot">
+                <i class="fa-solid fa-envelope-circle-check"></i>
+              </div>
+              <div class="sb-step-name">Verify Email</div>
+              <div class="sb-step-sub">4-digit OTP code</div>
+            </div>
+          </nav>
+        </aside>
+
+        <section class="form-panel">
+          <div class="fp-top">
+            <div class="prog-track">
+              <div class="prog-fill" style="width: 33.33%"></div>
+            </div>
+            <div class="step-badge">Step <em>1</em> of 3</div>
+          </div>
+
+          <div class="fp-body">
+            <div class="alert alert-err" id="gAlert">
+              <i class="fa-solid fa-circle-exclamation"></i>
+              <span id="gMsg">Please fix the errors below.</span>
+            </div>
+
+            <div class="step-panel active">
+              <div class="step-head">
+                <h2>Student Information</h2>
+                <p>Fill in your personal details to create your account.</p>
+              </div>
+
+              <div class="sec-divider">Personal Details</div>
+              <div class="fg-name">
+                <div class="fg">
+                  <label>First Name <span class="req">*</span></label>
+                  <div class="iw">
+                    <i class="ico fa-solid fa-user"></i>
+                    <input type="text" id="firstName" placeholder="Juan" />
+                  </div>
+                  <div class="ferr" id="ferr-firstName">
+                    <i class="fa-solid fa-circle-exclamation"></i><span></span>
+                  </div>
+                </div>
+                <div class="fg">
+                  <label>Last Name <span class="req">*</span></label>
+                  <div class="iw">
+                    <i class="ico fa-solid fa-user"></i>
+                    <input type="text" id="lastName" placeholder="Dela Cruz" />
+                  </div>
+                  <div class="ferr" id="ferr-lastName">
+                    <i class="fa-solid fa-circle-exclamation"></i><span></span>
+                  </div>
+                </div>
+                <div class="fg mi">
+                  <label>M.I. <span class="opt">(opt)</span></label>
+                  <div class="iw">
+                    <i class="ico fa-solid fa-pen"></i>
+                    <input
+                      type="text"
+                      id="midInit"
+                      placeholder="A."
+                      maxlength="3"
+                      style="padding-left: 30px"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="sec-divider">Account Details</div>
+              <div class="fg-1">
+                <div class="fg">
+                  <label>School Email Address <span class="req">*</span></label>
+                  <div class="iw">
+                    <i class="ico fa-solid fa-envelope"></i>
+                    <input
+                      type="email"
+                      id="email"
+                      placeholder="student@wmsu.edu.ph"
+                    />
+                  </div>
+                  <div class="ferr" id="ferr-email">
+                    <i class="fa-solid fa-circle-exclamation"></i><span></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="fg-1">
+                <div class="fg">
+                  <label>Password <span class="req">*</span></label>
+                  <div class="iw">
+                    <i class="ico fa-solid fa-lock"></i>
+                    <input
+                      type="password"
+                      id="password"
+                      placeholder="Create a strong password"
+                    />
+                    <button class="eye-btn" type="button" onclick="togglePw()">
+                      <i class="fa-solid fa-eye" id="eyeIco"></i>
+                    </button>
+                  </div>
+                  <div class="pw-strength">
+                    <div class="pw-seg" id="ps1"></div>
+                    <div class="pw-seg" id="ps2"></div>
+                    <div class="pw-seg" id="ps3"></div>
+                    <div class="pw-seg" id="ps4"></div>
+                    <div class="pw-seg" id="ps5"></div>
+                    <div class="pw-lbl" id="pwLbl">—</div>
+                  </div>
+                  <div class="ferr" id="ferr-password">
+                    <i class="fa-solid fa-circle-exclamation"></i><span></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="fg-action no-back">
+                <button class="btn btn-primary" onclick="submitStep1()">
+                  Continue <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+              <div class="login-link">
+                Already have an account? <a href="signin.html">Sign In</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="../script/create-account/step1.js"></script>
+  </body>
+</html>
