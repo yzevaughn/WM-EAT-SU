@@ -1,277 +1,699 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WM EAT SU - Student Portal</title>
-  <!--  this is  main dashboard page -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../../css/student/dashboard.css">
-  <link rel="stylesheet" href="../../css/navbar.css">
-</head>
-<body>
-  <input type="checkbox" id="menu-checkbox" class="menu-checkbox">
-  <!-- NAVBAR -->
-  <div class="top-nav">
-    <div class="nav-left">
-      <label for="menu-checkbox" class="menu-toggle" id="menuToggle">
-        <i class="fa-solid fa-bars"></i>
-      </label>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WM EAT SU — Dashboard</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../css/navbar.css" />
 
-      <a href="#" class="logo">
-        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-        <span class="logo-text">WM EAT SU</span>
-      </a>
-    </div>
+    <link rel="stylesheet" href="../../css/student/dashboard.css" />
+  </head>
+  <body>
+    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <div class="profile">
-      <div class="profile-info">
-        <span class="profile-name">Vaughn Evangelista</span>
-        <span class="email">vaughn.student@wm.edu.ph</span>
-      </div>
-
-      <div class="profile-dropdown">
-        <button class="profile-btn" id="profileBtn">
-          <img src="../../images/pfp.jpg" class="profile-pic">
-          <i class="fa-solid fa-chevron-down"></i>
-        </button>
-        <div class="dropdown-menu" id="profileDropdown">
-          <a href="../../index.html" class="dropdown-item">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Log Out</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- LAYOUT -->
-  <div class="layout">
-
-    <!-- SIDEBAR -->
-    <div class="left-nav" id="sidebar">
-      <ul class="nav-list">
-        <li>
-          <a href="student-dashboard.html" class="nav-link active">
-            <i class="fa-solid fa-house"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
-         <li>
-          <a href="student-browse-food.html" class="nav-link">
-            <i class="fa-solid fa-utensils"></i>
-            <span>Browse Food</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-cart.html" class="nav-link">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>Cart</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-order.html" class="nav-link">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-            <span>Orders</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-wallet.html" class="nav-link">
-            <i class="fa-solid fa-wallet"></i>
-            <span>Wallet</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-map.html" class="nav-link">
-            <i class="fa-solid fa-location-dot"></i>
-            <span>Campus Map</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-feedback.html" class="nav-link">
-            <i class="fa-regular fa-star"></i>
-            <span>Feedback</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-vendor-applications.html" class="nav-link">
-            <i class="fa-solid fa-rss"></i>
-            <span>Vendor Applications</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-
-   <!-- MAIN CONTENT -->
-<div class="main-content">
-  <div class="content-wrapper">
-
-    <!-- WELCOME BANNER -->
-    <div class="welcome-section">
-      <div class="welcome-text">
-        <h1>Welcome back, Vaughn! 👋</h1>
-        <p>Let's grab some delicious food from our campus vendors today</p>
-      </div>
-      <div class="welcome-icon">
-        <i class="fa-solid fa-utensils"></i>
-      </div>
-    </div>
-
-    <!-- STATS GRID -->
-    <div class="stats-grid">
-
-      <div class="stat-card green">
-        <div class="stat-icon"><i class="fa-solid fa-wallet"></i></div>
-        <div class="stat-info">
-          <div class="stat-value">₱245.50</div>
-          <div class="stat-label">Wallet Balance</div>
-        </div>
-      </div>
-
-      <div class="stat-card blue">
-        <div class="stat-icon"><i class="fa-solid fa-cart-shopping"></i></div>
-        <div class="stat-info">
-          <div class="stat-value">3</div>
-          <div class="stat-label">Cart Items</div>
-        </div>
-      </div>
-
-      <div class="stat-card red">
-        <div class="stat-icon"><i class="fa-solid fa-receipt"></i></div>
-        <div class="stat-info">
-          <div class="stat-value">24</div>
-          <div class="stat-label">Total Orders</div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ACTIVE ORDER SECTION -->
-    <div class="active-order-section">
-      <div class="section-header">
-        <h2>Active Order</h2>
-      </div>
-
-      <div class="active-order-card">
-
-        <div class="order-header">
-          <div class="order-vendor">
-            <div class="vendor-icon"><i class="fa-solid fa-fire"></i></div>
-            <div class="vendor-info">
-              <h3>Shomai Rice</h3>
-              <p>Order ID: #ORD-2026-1547</p>
-            </div>
-          </div>
-
-          <div class="order-status">
-            <span class="status-dot"></span>
-            Preparing
-          </div>
-        </div>
-
-        <!-- ORDER PROGRESS -->
-        <div class="order-progress">
-
-          <div class="progress-step done">
-            <div class="step-dot">
-              <i class="fa-solid fa-check"></i>
-            </div>
-            <span class="step-label">Placed</span>
-          </div>
-
-          <div class="progress-step active">
-            <div class="step-dot">
-              <i class="fa-solid fa-fire-burner"></i>
-            </div>
-            <span class="step-label">Preparing</span>
-          </div>
-
-          <div class="progress-step">
-            <div class="step-dot">
-              <i class="fa-solid fa-bell"></i>
-            </div>
-            <span class="step-label">Ready</span>
-          </div>
-
-          <div class="progress-step">
-            <div class="step-dot">
-              <i class="fa-solid fa-bag-shopping"></i>
-            </div>
-            <span class="step-label">Picked Up</span>
-          </div>
-
-        </div>
-
-        <div class="order-footer">
-          <div class="order-total">
-            <span>Total</span>
-            <strong>₱20.00</strong>
-          </div>
-
-          <button class="track-btn">Track Order</button>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- QUICK ACTIONS -->
-    <div class="quick-section">
-      <h2>Quick Actions</h2>
-
-      <div class="quick-grid">
-
-        <a href="student-browse-food.html" class="quick-card">
-          <div class="quick-icon red">
-            <i class="fa-solid fa-fire"></i>
-          </div>
-          <h3>Browse Food</h3>
-          <p>Explore menus from campus vendors</p>
-          <div class="card-arrow">
-            <i class="fa-solid fa-arrow-right"></i>
-          </div>
+    <!-- ════════════════════════════════════════
+         TOP NAVBAR
+         ════════════════════════════════════════ -->
+    <div class="top-nav">
+      <!-- LEFT: hamburger + logo -->
+      <div class="nav-left">
+        <label for="menu-checkbox" class="menu-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </label>
+        <a href="#" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
         </a>
+      </div>
 
-        <a href="student-map.html" class="quick-card">
-          <div class="quick-icon blue">
-            <i class="fa-solid fa-map"></i>
-          </div>
-          <h3>Campus Map</h3>
-          <p>Find vendor locations near you</p>
-          <div class="card-arrow">
-            <i class="fa-solid fa-arrow-right"></i>
-          </div>
-        </a>
+      <!-- CENTER: role switcher -->
+      <div class="nav-center">
+        <div class="role-switcher" id="roleSwitcher">
+          <button class="role-btn active" data-role="student" id="roleStudent">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Student</span>
+          </button>
+          <button class="role-btn" data-role="vendor" id="roleVendor">
+            <i class="fa-solid fa-store"></i>
+            <span>Vendor</span>
+          </button>
+        </div>
+      </div>
 
-        <a href="student-order.html" class="quick-card">
-          <div class="quick-icon purple">
-            <i class="fa-solid fa-clock-rotate-left"></i>
+      <!-- RIGHT: profile -->
+      <div class="nav-right">
+        <div class="profile">
+          <div class="profile-info">
+            <span class="profile-name">Vaughn Evangelista</span>
+            <span class="email">vaughn.student@wm.edu.ph</span>
           </div>
-          <h3>Order History</h3>
-          <p>View past orders and favorites</p>
-          <div class="card-arrow">
-            <i class="fa-solid fa-arrow-right"></i>
+          <div class="profile-dropdown">
+            <button class="profile-btn">
+              <img
+                src="../../images/pfp.jpg"
+                class="profile-pic"
+                alt="Profile"
+              />
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="../../index.html" class="dropdown-item">
+                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+              </a>
+            </div>
           </div>
-        </a>
+        </div>
+      </div>
+    </div>
+    <!-- /top-nav -->
 
-        <a href="student-feedback.html" class="quick-card">
-          <div class="quick-icon green">
-            <i class="fa-solid fa-star"></i>
-          </div>
-          <h3>Leave Feedback</h3>
-          <p>Share your dining experience</p>
-          <div class="card-arrow">
-            <i class="fa-solid fa-arrow-right"></i>
-          </div>
-        </a>
+    <!-- ════════════════════════════════════════
+         LAYOUT
+         ════════════════════════════════════════ -->
+    <div class="layout">
+      <!-- ── SIDEBAR ── -->
+      <div class="left-nav" id="sidebar">
+        <ul class="nav-list">
+          <li>
+            <a href="student-dashboard.html" class="nav-link active">
+              <i class="fa-solid fa-house"></i><span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-browse-food.html" class="nav-link">
+              <i class="fa-solid fa-utensils"></i><span>Browse Food</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-cart.html" class="nav-link">
+              <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
+              <span class="nav-badge">3</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-order.html" class="nav-link">
+              <i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-wallet.html" class="nav-link">
+              <i class="fa-solid fa-wallet"></i><span>Wallet</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-map.html" class="nav-link">
+              <i class="fa-solid fa-location-dot"></i><span>Campus Map</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-feedback.html" class="nav-link">
+              <i class="fa-regular fa-star"></i><span>Feedback</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-vendor-applications.html" class="nav-link">
+              <i class="fa-solid fa-rss"></i><span>Vendor Applications</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- MAIN CONTENT -->
+      <div class="main-content">
+        <div class="promo-carousel">
+          <div class="promo-slides">
+            <div class="promo-slide active">
+              <a href="student-browse-food.html">
+                <img
+                  src="../../images/banner4.avif"
+                  alt="Spicy Chicken Rice - 20% Off"
+                />
+              </a>
+            </div>
 
+            <div class="promo-slide">
+              <a href="student-browse-food.html">
+                <img
+                  src="../../images/banner5.avif"
+                  alt="New Vendors Announcement"
+                />
+              </a>
+            </div>
+
+            <div class="promo-slide">
+              <a href="student-wallet.html">
+                <img
+                  src="../../images/banner6.avif"
+                  alt="Wallet Top Up Promo"
+                />
+              </a>
+            </div>
+          </div>
+
+          <button class="promo-prev" id="promoPrev">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button class="promo-next" id="promoNext">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+          <div class="promo-dots" id="promoDots"></div>
+        </div>
+
+        <!-- FOOD SLIDER SECTION -->
+        <div class="food-slider-section">
+          <div class="slider-header">
+            <div>
+              <h2 class="slider-title">Popular on Campus</h2>
+            </div>
+            <div class="slider-controls">
+              <button class="slider-btn" id="slidePrev">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <button class="slider-btn" id="slideNext">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+          <div class="slider-track-wrapper">
+            <div class="slider-track" id="sliderTrack">
+              <div class="food-card">
+                <div class="food-card-img-wrapper">
+                  <img src="../../images/spciy.jpg" alt="Chicken Rice" />
+                  <span class="food-badge popular">⭐ Popular</span>
+                  <div class="food-img-overlay"></div>
+                </div>
+                <div class="food-card-body">
+                  <div class="food-meta">
+                    <span class="food-vendor"
+                      ><i class="fa-solid fa-store"></i> Canteen A</span
+                    >
+                    <span class="food-rating">★ 4.9</span>
+                  </div>
+                  <h4>Spicy Chicken Rice</h4>
+                  <p>Tender chicken with garlic fried rice and special sauce</p>
+                  <div class="food-price-row">
+                    <span class="food-price">₱55</span>
+                  </div>
+                  <button class="add-to-cart-btn">
+                    <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="food-card-img-wrapper">
+                  <img src="../../images/pancit.avif" alt="Pancit" />
+                  <span class="food-badge new">✨ New</span>
+                  <div class="food-img-overlay"></div>
+                </div>
+                <div class="food-card-body">
+                  <div class="food-meta">
+                    <span class="food-vendor"
+                      ><i class="fa-solid fa-store"></i> Canteen B</span
+                    >
+                    <span class="food-rating">★ 4.7</span>
+                  </div>
+                  <h4>Pancit Canton Guisado</h4>
+                  <p>Stir-fried noodles with fresh veggies and pork</p>
+                  <div class="food-price-row">
+                    <span class="food-price">₱45</span>
+                  </div>
+                  <button class="add-to-cart-btn">
+                    <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="food-card-img-wrapper">
+                  <img src="../../images/shake.avif" alt="Fruit Shake" />
+                  <span class="food-badge deal">💸 Deal</span>
+                  <div class="food-img-overlay"></div>
+                </div>
+                <div class="food-card-body">
+                  <div class="food-meta">
+                    <span class="food-vendor"
+                      ><i class="fa-solid fa-store"></i> Drinks Corner</span
+                    >
+                    <span class="food-rating">★ 4.8</span>
+                  </div>
+                  <h4>Mango Graham Shake</h4>
+                  <p>Creamy blended mango with graham crumble topping</p>
+                  <div class="food-price-row">
+                    <span class="food-price">₱35</span>
+                  </div>
+                  <button class="add-to-cart-btn">
+                    <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="food-card-img-wrapper">
+                  <img src="../../images/pizza.avif" alt="Pizza" />
+                  <span class="food-badge popular">⭐ Popular</span>
+                  <div class="food-img-overlay"></div>
+                </div>
+                <div class="food-card-body">
+                  <div class="food-meta">
+                    <span class="food-vendor"
+                      ><i class="fa-solid fa-store"></i> Pizza Hub</span
+                    >
+                    <span class="food-rating">★ 4.6</span>
+                  </div>
+                  <h4>Hawaiian Mini Pizza</h4>
+                  <p>Ham, pineapple and mozzarella on crispy thin crust</p>
+                  <div class="food-price-row">
+                    <span class="food-price">₱65</span>
+                  </div>
+                  <button class="add-to-cart-btn">
+                    <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="food-card-img-wrapper">
+                  <img src="../../images/silog.avif" alt="Silog" />
+                  <span class="food-badge new">✨ New</span>
+                  <div class="food-img-overlay"></div>
+                </div>
+                <div class="food-card-body">
+                  <div class="food-meta">
+                    <span class="food-vendor"
+                      ><i class="fa-solid fa-store"></i> Silog Station</span
+                    >
+                    <span class="food-rating">★ 4.5</span>
+                  </div>
+                  <h4>Tapsilog with Egg</h4>
+                  <p>Marinated beef tapa, garlic rice, and sunny-side-up</p>
+                  <div class="food-price-row">
+                    <span class="food-price">₱70</span>
+                  </div>
+                  <button class="add-to-cart-btn">
+                    <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="food-card-img-wrapper">
+                  <img src="../../images/milktea.avif" alt="Milk Tea" />
+                  <span class="food-badge deal">💸 Deal</span>
+                  <div class="food-img-overlay"></div>
+                </div>
+                <div class="food-card-body">
+                  <div class="food-meta">
+                    <span class="food-vendor"
+                      ><i class="fa-solid fa-store"></i> Sip &amp; Go</span
+                    >
+                    <span class="food-rating">★ 4.9</span>
+                  </div>
+                  <h4>Brown Sugar Milk Tea</h4>
+                  <p>Classic milk tea with chewy tapioca pearls</p>
+                  <div class="food-price-row">
+                    <span class="food-price">₱40</span>
+                  </div>
+                  <button class="add-to-cart-btn">
+                    <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slider-dots" id="sliderDots"></div>
+        </div>
+
+        <div class="recent-orders-section">
+          <div class="slider-header">
+            <div>
+              <h2 class="slider-title">Recent Orders</h2>
+            </div>
+            <div class="slider-controls">
+              <button class="slider-btn" id="recentOrdersPrev">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <button class="slider-btn" id="recentOrdersNext">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="slider-track-wrapper">
+            <div class="slider-track" id="recentOrdersTrack">
+              <div class="food-card">
+                <div class="food-card-img-wrapper">
+                  <img src="../../images/burger.avif" alt="Burger" />
+                  <span class="food-badge completed">✅ Completed</span>
+                  <div class="food-img-overlay"></div>
+                </div>
+                <div class="food-card-body">
+                  <div class="food-meta">
+                    <span class="food-vendor"
+                      ><i class="fa-solid fa-store"></i> Canteen 1</span
+                    >
+                    <span class="food-rating">Ordered: 10:00 AM</span>
+                  </div>
+                  <h4>Burger</h4>
+                  <p>
+                    Classic beef burger with fresh toppings • Ready in 5-10 min
+                  </p>
+                  <div class="food-price-row">
+                    <span class="food-price">₱85</span>
+                  </div>
+                  <button
+                    class="add-to-cart-btn"
+                    data-item="Burger"
+                    data-price="85"
+                  >
+                    <i class="fa-solid fa-cart-shopping"></i> Add to Cart Again
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="food-card-img-wrapper">
+                  <img src="../../images/Iced-coffee.png" alt="Iced Coffee" />
+                  <span class="food-badge ready">🔔 Ready</span>
+                  <div class="food-img-overlay"></div>
+                </div>
+                <div class="food-card-body">
+                  <div class="food-meta">
+                    <span class="food-vendor"
+                      ><i class="fa-solid fa-store"></i> Canteen 5</span
+                    >
+                    <span class="food-rating">Ordered: 2:00 PM</span>
+                  </div>
+                  <h4>Iced Coffee ×2</h4>
+                  <p>Cold brewed coffee with ice and milk • Ready in 2-3 min</p>
+                  <div class="food-price-row">
+                    <span class="food-price">₱60</span>
+                  </div>
+                  <button
+                    class="add-to-cart-btn"
+                    data-item="Iced Coffee"
+                    data-price="60"
+                    data-quantity="2"
+                  >
+                    <i class="fa-solid fa-cart-shopping"></i> Add to Cart Again
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="food-card-img-wrapper">
+                  <img src="../../images/Shomai-rice.jpg" alt="Shomai Rice" />
+                  <span class="food-badge preparing">👨‍🍳 Preparing</span>
+                  <div class="food-img-overlay"></div>
+                </div>
+                <div class="food-card-body">
+                  <div class="food-meta">
+                    <span class="food-vendor"
+                      ><i class="fa-solid fa-store"></i> Student Vendor</span
+                    >
+                    <span class="food-rating">Ordered: 12:35 PM</span>
+                  </div>
+                  <h4>Shomai Rice</h4>
+                  <p>
+                    Steamed dumplings served with garlic rice • Ready in 8-12
+                    min
+                  </p>
+                  <div class="food-price-row">
+                    <span class="food-price">₱45</span>
+                  </div>
+                  <button
+                    class="add-to-cart-btn"
+                    data-item="Shomai Rice"
+                    data-price="45"
+                  >
+                    <i class="fa-solid fa-cart-shopping"></i> Add to Cart Again
+                  </button>
+                </div>
+              </div>
+
+              <div class="food-card">
+                <div class="food-card-img-wrapper">
+                  <img src="../../images/Fries.jpg" alt="Fries" />
+                  <span class="food-badge cancelled">❌ Cancelled</span>
+                  <div class="food-img-overlay"></div>
+                </div>
+                <div class="food-card-body">
+                  <div class="food-meta">
+                    <span class="food-vendor"
+                      ><i class="fa-solid fa-store"></i> Canteen 4</span
+                    >
+                    <span class="food-rating">Ordered: 5:00 PM</span>
+                  </div>
+                  <h4>Fries</h4>
+                  <p>Crispy golden fries with seasoning • Ready in 3-5 min</p>
+                  <div class="food-price-row">
+                    <span class="food-price">₱35</span>
+                  </div>
+                  <button
+                    class="add-to-cart-btn"
+                    data-item="Fries"
+                    data-price="35"
+                  >
+                    <i class="fa-solid fa-cart-shopping"></i> Add to Cart Again
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slider-dots" id="recentOrdersDots"></div>
+        </div>
+
+        <!-- ─────────────────────────────────────
+             4. STATS (4 cards)
+             ───────────────────────────────────── -->
+        <div class="section-label" style="margin-bottom: 16px">
+          <span class="section-title">Overview</span>
+        </div>
+        <div class="stats-grid" style="margin-bottom: 32px">
+          <div class="stat-card green">
+            <div class="stat-icon"><i class="fa-solid fa-wallet"></i></div>
+            <div class="stat-info">
+              <div class="stat-value">₱245.50</div>
+              <div class="stat-label">Wallet Balance</div>
+            </div>
+          </div>
+          <div class="stat-card blue">
+            <div class="stat-icon">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+            <div class="stat-info">
+              <div class="stat-value">3</div>
+              <div class="stat-label">Cart Items</div>
+            </div>
+          </div>
+          <div class="stat-card red">
+            <div class="stat-icon"><i class="fa-solid fa-receipt"></i></div>
+            <div class="stat-info">
+              <div class="stat-value">24</div>
+              <div class="stat-label">Total Orders</div>
+            </div>
+          </div>
+          <div class="stat-card orange">
+            <div class="stat-icon"><i class="fa-solid fa-clock"></i></div>
+            <div class="stat-info">
+              <div class="stat-value">1</div>
+              <div class="stat-label">Pending Orders</div>
+            </div>
+          </div>
+        </div>
+        <div class="active-order-section">
+          <div class="section-title">Active Order</div>
+          <div class="active-order-card">
+            <div class="order-header">
+              <div class="order-vendor">
+                <div class="vendor-img-wrapper">
+                  <img src="../../images/Shomai-rice.jpg" alt="Shomai Rice" />
+                </div>
+                <div class="vendor-info">
+                  <h3>Shomai Rice</h3>
+                  <p>Order ID: #ORD-2026-1547</p>
+                </div>
+              </div>
+              <div class="order-status">
+                <span class="status-dot"></span> Preparing
+              </div>
+            </div>
+
+            <div class="order-progress">
+              <div class="progress-step done">
+                <div class="step-dot"><i class="fa-solid fa-check"></i></div>
+                <span class="step-label">Placed</span>
+              </div>
+
+              <div class="progress-step active">
+                <div class="step-dot">
+                  <i class="fa-solid fa-fire-burner"></i>
+                </div>
+                <span class="step-label">Preparing</span>
+              </div>
+
+              <div class="progress-step">
+                <div class="step-dot"><i class="fa-solid fa-bell"></i></div>
+                <span class="step-label">Ready</span>
+              </div>
+
+              <div class="progress-step">
+                <div class="step-dot">
+                  <i class="fa-solid fa-bag-shopping"></i>
+                </div>
+                <span class="step-label">Picked Up</span>
+              </div>
+            </div>
+
+            <div class="order-footer">
+              <div class="order-total">
+                <span>Total</span>
+                <strong>₱20.00</strong>
+              </div>
+              <button class="track-btn">Track Order</button>
+            </div>
+          </div>
+        </div>
+        <!-- QUICK ACTIONS -->
+        <!-- ─────────────────────────────────────
+             5. QUICK ACTIONS (6 cards)
+             ───────────────────────────────────── -->
+        <div class="quick-section">
+          <div class="section-label">
+            <span class="section-title">Quick Actions</span>
+          </div>
+          <div class="quick-grid">
+            <a href="student-browse-food.html" class="quick-card">
+              <div class="quick-icon red">
+                <i class="fa-solid fa-utensils"></i>
+              </div>
+              <h3>Browse Food</h3>
+              <p>Explore menus from all campus vendors</p>
+              <div class="card-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </a>
+            <a href="student-cart.html" class="quick-card">
+              <div class="quick-icon blue">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </div>
+              <h3>View Cart</h3>
+              <p>You have 3 items waiting to be ordered</p>
+              <div class="card-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </a>
+            <a href="student-order.html" class="quick-card">
+              <div class="quick-icon purple">
+                <i class="fa-solid fa-location-arrow"></i>
+              </div>
+              <h3>Track Order</h3>
+              <p>Monitor real-time status of your orders</p>
+              <div class="card-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </a>
+            <a href="student-wallet.html" class="quick-card">
+              <div class="quick-icon green">
+                <i class="fa-solid fa-plus-circle"></i>
+              </div>
+              <h3>Wallet Top Up</h3>
+              <p>Add balance via GCash, Maya, or card</p>
+              <div class="card-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </a>
+            <a href="student-map.html" class="quick-card">
+              <div class="quick-icon orange">
+                <i class="fa-solid fa-map-location-dot"></i>
+              </div>
+              <h3>Campus Map</h3>
+              <p>Find vendor locations across campus</p>
+              <div class="card-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </a>
+            <a href="student-feedback.html" class="quick-card">
+              <div class="quick-icon teal">
+                <i class="fa-regular fa-star"></i>
+              </div>
+              <h3>Feedback</h3>
+              <p>Rate your orders and share your experience</p>
+              <div class="card-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- /main-content -->
+      </div>
+      <!-- /layout -->
+
+      <!-- FOOD DETAIL MODAL -->
+      <div class="food-modal-overlay" id="foodModal">
+        <div class="food-modal">
+          <img id="modalImg" class="modal-img" src="" alt="" />
+          <div class="modal-body">
+            <div class="modal-header-row">
+              <div>
+                <div class="modal-food-name" id="modalName"></div>
+                <div class="modal-food-price" id="modalPrice"></div>
+              </div>
+              <button class="modal-close-btn" id="modalClose">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+                margin-bottom: 10px;
+              "
+            >
+              <span
+                id="modalVendor"
+                style="font-size: 13px; color: #64748b"
+              ></span>
+              <span
+                id="modalPrep"
+                style="font-size: 13px; color: #f97316"
+              ></span>
+              <span
+                id="modalRating"
+                style="font-size: 13px; color: #fbbf24; font-weight: 700"
+              ></span>
+            </div>
+            <div class="modal-section-label">Description</div>
+            <p
+              id="modalDesc"
+              style="font-size: 14px; color: #64748b; line-height: 1.6"
+            ></p>
+            <div class="modal-section-label">Ingredients</div>
+            <div id="modalIngredients" class="food-ingredients"></div>
+            <div class="modal-section-label">Customer Reviews</div>
+            <div id="modalReviews"></div>
+            <button class="modal-add-btn" id="modalAddBtn">
+              <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
-  </div>
-</div>
-
-
-
-</body>
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container"></div>
+    <script src="../../script/student/dashboard.js"></script>
+    <script src="../../script/role.js"></script>
+  </body>
 </html>
