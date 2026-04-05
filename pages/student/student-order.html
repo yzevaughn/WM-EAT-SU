@@ -19,7 +19,7 @@
   </head>
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
     <!-- ════════════════════════════════════════
          TOP NAVBAR
          ════════════════════════════════════════ -->
@@ -35,17 +35,25 @@
         </a>
       </div>
 
-      <!-- CENTER: role switcher -->
       <div class="nav-center">
         <div class="role-switcher" id="roleSwitcher">
-          <button class="role-btn active" data-role="student" id="roleStudent">
+          <a
+            href="student-dashboard.html"
+            class="role-btn active"
+            id="roleStudent"
+          >
             <i class="fa-solid fa-graduation-cap"></i>
             <span>Student</span>
-          </button>
-          <button class="role-btn" data-role="vendor" id="roleVendor">
+          </a>
+
+          <a
+            href="../vendor-pages/vendor-dashboard.html"
+            class="role-btn"
+            id="roleVendor"
+          >
             <i class="fa-solid fa-store"></i>
             <span>Vendor</span>
-          </button>
+          </a>
         </div>
       </div>
 
@@ -83,10 +91,6 @@
       <!-- ── SIDEBAR ── -->
       <div class="left-nav" id="sidebar">
         <!-- logo shown on mobile inside sidebar -->
-        <div class="sidebar-logo">
-          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-          <span class="logo-text">WM EAT SU</span>
-        </div>
 
         <ul class="nav-list">
           <li>
@@ -316,6 +320,5 @@
         </div>
       </div>
     </div>
-    <script src="../../script/role.js"></script>
   </body>
 </html>

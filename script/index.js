@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       {
         img: "images/silog.avif",
-        nama: "Tapsilog with Egg",
+        name: "Tapsilog with Egg",
         desc: "Marinated beef tapa & garlic rice",
         price: "₱70",
         vendor: "Silog Station",

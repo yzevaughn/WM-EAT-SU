@@ -117,9 +117,6 @@ button { font-family: inherit; }
   white-space: nowrap;
 }
 
-/* ============================================================
-   ROLE SWITCHER  (center of navbar)
-   ============================================================ */
 .role-switcher {
   display: flex;
   align-items: center;
@@ -144,25 +141,32 @@ button { font-family: inherit; }
   font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
-  transition: var(--transition);
+  transition: all 0.3s ease; /* Replaced var(--transition) for safety */
   position: relative;
   z-index: 1;
   white-space: nowrap;
   letter-spacing: .1px;
+  text-decoration: none; /* Required for <a> tags */
 }
-.role-btn i { font-size: 14px; transition: var(--transition); }
+
+.role-btn i { 
+  font-size: 14px; 
+  transition: all 0.3s ease; 
+}
 
 .role-btn:hover:not(.active) {
   color: #1e293b;
 }
 
 .role-btn.active {
-  background: var(--red);
+  background: var(--red, #e61524); /* Fallback added just in case */
   color: #fff;
   box-shadow: 0 3px 12px rgba(230,21,36,.35);
 }
-.role-btn.active i { color: #fff; }
 
+.role-btn.active i { 
+  color: #fff; 
+}
 /* ── PROFILE ── */
 .profile {
   display: flex;

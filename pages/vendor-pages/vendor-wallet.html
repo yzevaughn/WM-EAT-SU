@@ -1,191 +1,261 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WM EAT SU - Vendor Wallet</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../../css/navbar.css">
-    <link rel="stylesheet" href="../../css/vendor-css/wallet.css">
-</head>
-<body>
- <!-- navbar at the top with logo and profile -->
- <input type="checkbox" id="menu-checkbox" class="menu-checkbox">
-<!-- NAVBAR -->
-<div class="top-nav">
-  <div class="nav-left">
-     <label for="menu-checkbox" class="menu-toggle" id="menuToggle">
-        <i class="fa-solid fa-bars"></i>
-      </label>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../css/navbar.css" />
+    <link rel="stylesheet" href="../../css/vendor-css/wallet.css" />
+  </head>
+  <body>
+    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
 
-    <a href="#" class="logo">
-      <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-      <span class="logo-text">WM EAT SU</span>
-    </a>
-  </div>
-
-  <div class="profile">
-    <div class="profile-info">
-      <span class="profile-name">Vendor Name</span>
-      <span class="email">vendor@wm.edu.ph</span>
-    </div>
-    <div class="profile-dropdown">
-      <button class="profile-btn" id="profileBtn">
-        <img src="../../images/pfp.jpg" class="profile-pic">
-        <i class="fa-solid fa-chevron-down"></i>
-      </button>
-      <div class="dropdown-menu" id="profileDropdown">
-        <a href="../../index.html" class="dropdown-item">
-          <i class="fas fa-sign-out-alt"></i>
-          <span>Log Out</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- main layout with sidebar and content -->
-<div class="layout">
-
- 
-  <div class="left-nav" id="sidebar">
-    <ul class="nav-list">
-      <li>
-        <a href="vendor-dashboard.html" class="nav-link">
-          <i class="fa-solid fa-house"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-      <li>
-        <a href="vendor-orders.html" class="nav-link">
-          <i class="fa-solid fa-clock-rotate-left"></i>
-          <span>Orders</span>
-        </a>
-      </li>
-      <li>
-        <a href="vendor-reviews.html" class="nav-link">
-          <i class="fa-solid fa-star"></i>
-          <span>Reviews</span>
-        </a>
-      </li>
-      <li>
-        <a href="vendor-menu.html" class="nav-link">
-          <i class="fa-solid fa-utensils"></i>
-          <span>Menu</span>
-        </a>
-      </li>
-      <li>
-        <a href="vendor-wallet.html" class="nav-link active">
-          <i class="fa-solid fa-wallet"></i>
-          <span>Wallet</span>
-        </a>
-      </li>
-    </ul>
-  </div>
-
-  <!
-  <!-- wallet page content -->
-  <div class="main-content">
-    <div class="wallet-container">
-
-   
-      <!-- big card showing how much money in wallet -->
-      <div class="balance-card">
-        <div class="balance-header">
-          <h1>Wallet Balance</h1>
-          <i class="fa-solid fa-wallet"></i>
-        </div>
-        <div class="balance-amount">
-          <span class="currency-symbol">₱</span>
-          <span class="balance-value" id="walletBalance">2500.00</span>
-        </div>
-        <label for="withdrawToggle" class="topup-btn">
-          <i class="fa-solid fa-minus"></i> Withdraw Funds
+    <!-- ════════════════════════════════════════
+         TOP NAVBAR
+         ════════════════════════════════════════ -->
+    <div class="top-nav">
+      <!-- LEFT: hamburger + logo -->
+      <div class="nav-left">
+        <label for="menu-checkbox" class="menu-toggle">
+          <i class="fa-solid fa-bars"></i>
         </label>
+        <a href="#" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
+        </a>
       </div>
 
-      
-      <!-- list of all money transactions -->
-      <div class="transaction-section">
-        <h2>Transaction History</h2>
-        <div class="transaction-list" id="transactionList">
-          <div class="transaction-item">
-            <div class="transaction-icon topup">
-              <i class="fa-solid fa-shopping-cart"></i>
-            </div>
-            <div class="transaction-details">
-              <p class="transaction-type">Order Payment - Burger Meal</p>
-              <p class="transaction-date">Mar 5, 2026 - 12:30 PM</p>
+      <div class="nav-center">
+        <div class="role-switcher" id="roleSwitcher">
+          <a
+            href="../student/student-dashboard.html"
+            class="role-btn"
+            id="roleStudent"
+          >
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Student</span>
+          </a>
+
+          <a
+            href="vendor-dashboard.html"
+            class="role-btn active"
+            id="roleVendor"
+          >
+            <i class="fa-solid fa-store"></i>
+            <span>Vendor</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT: profile -->
+      <div class="nav-right">
+        <div class="profile">
+          <div class="profile-info">
+            <span class="profile-name">Vaughn Evangelista</span>
+            <span class="email">vaughn.student@wm.edu.ph</span>
+          </div>
+          <div class="profile-dropdown">
+            <button class="profile-btn">
+              <img
+                src="../../images/pfp.jpg"
+                class="profile-pic"
+                alt="Profile"
+              />
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="../../index.html" class="dropdown-item">
+                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+    <!-- /top-nav -->
 
-<
-<!-- checkbox to show/hide modal -->
-<input type="checkbox" id="withdrawToggle" style="display:none;">
+    <!-- ════════════════════════════════════════
+         LAYOUT
+         ════════════════════════════════════════ -->
+    <div class="layout">
+      <!-- ── SIDEBAR ── -->
+      <div class="left-nav" id="sidebar">
+        <!-- logo shown on mobile inside sidebar -->
 
-<!-- WITHDRAW FUNDS MODAL (CSS-only, student-wallet style, for vendor) -->
-<div class="modal">
-  <label for="withdrawToggle" class="modal-overlay"></label>
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2>Withdraw Funds</h2>
-      <label for="withdrawToggle" class="modal-close">
-        <i class="fa-solid fa-times"></i>
-      </label>
-    </div>
-    <div class="modal-body">
-      <!-- PAYMENT METHOD -->
-<!-- choose how to withdraw money -->
-      <div class="form-section">
-        <label class="form-label">Select Withdrawal Method</label>
-        <div class="payment-methods">
-          <input type="radio" name="withdraw-method" id="gcash" style="display:none;">
-          <label for="gcash" class="payment-method-btn">
-            <img src="../../images/gcash-logo.png" class="method-logo">
-            <span class="method-name">GCash</span>
-          </label>
-          <input type="radio" name="withdraw-method" id="maya" style="display:none;">
-          <label for="maya" class="payment-method-btn">
-            <img src="../../images/paymaya-logo.png" class="method-logo">
-            <span class="method-name">Maya</span>
-          </label>
-          <input type="radio" name="withdraw-method" id="bank" style="display:none;">
-          <label for="bank" class="payment-method-btn">
-            <i class="fa-solid fa-university"></i>
-            <span class="method-name">Bank Transfer</span>
-          </label>
+        <ul class="nav-list">
+          <li>
+            <a href="vendor-dashboard.html" class="nav-link">
+              <i class="fa-solid fa-house"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="vendor-orders.html" class="nav-link">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+              <span>Orders</span>
+            </a>
+          </li>
+          <li>
+            <a href="vendor-reviews.html" class="nav-link">
+              <i class="fa-solid fa-star"></i>
+              <span>Reviews</span>
+            </a>
+          </li>
+          <li>
+            <a href="vendor-menu.html" class="nav-link">
+              <i class="fa-solid fa-utensils"></i>
+              <span>Menu</span>
+            </a>
+          </li>
+          <li>
+            <a href="vendor-wallet.html" class="nav-link active">
+              <i class="fa-solid fa-wallet"></i>
+              <span>Wallet</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- wallet page content -->
+      <div class="main-content">
+        <div class="wallet-container">
+          <!-- big card showing how much money in wallet -->
+          <div class="balance-card">
+            <div class="balance-header">
+              <h1>Wallet Balance</h1>
+              <i class="fa-solid fa-wallet"></i>
+            </div>
+            <div class="balance-amount">
+              <span class="currency-symbol">₱</span>
+              <span class="balance-value" id="walletBalance">2500.00</span>
+            </div>
+            <label for="withdrawToggle" class="topup-btn">
+              <i class="fa-solid fa-minus"></i> Withdraw Funds
+            </label>
+          </div>
+
+          <!-- list of all money transactions -->
+          <div class="transaction-section">
+            <h2>Transaction History</h2>
+            <div class="transaction-list" id="transactionList">
+              <div class="transaction-item">
+                <div class="transaction-icon topup">
+                  <i class="fa-solid fa-shopping-cart"></i>
+                </div>
+                <div class="transaction-details">
+                  <p class="transaction-type">Order Payment - Burger Meal</p>
+                  <p class="transaction-date">Mar 5, 2026 - 12:30 PM</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <!-- QUICK AMOUNT -->
-      <!-- buttons for common withdraw amounts -->
-      <div class="form-section">
-        <label class="form-label">Quick Amount</label>
-        <div class="quick-amounts">
-          <input type="radio" name="withdraw-amount" id="a500" style="display:none;">
-          <label for="a500" class="quick-btn">₱500</label>
-          <input type="radio" name="withdraw-amount" id="a1000" style="display:none;">
-          <label for="a1000" class="quick-btn">₱1000</label>
-          <input type="radio" name="withdraw-amount" id="a2000" style="display:none;">
-          <label for="a2000" class="quick-btn">₱2000</label>
-          <input type="radio" name="withdraw-amount" id="a5000" style="display:none;">
-          <label for="a5000" class="quick-btn">₱5000</label>
+    </div>
+
+    <
+    <!-- checkbox to show/hide modal -->
+    <input type="checkbox" id="withdrawToggle" style="display: none" />
+
+    <!-- WITHDRAW FUNDS MODAL (CSS-only, student-wallet style, for vendor) -->
+    <div class="modal">
+      <label for="withdrawToggle" class="modal-overlay"></label>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Withdraw Funds</h2>
+          <label for="withdrawToggle" class="modal-close">
+            <i class="fa-solid fa-times"></i>
+          </label>
+        </div>
+        <div class="modal-body">
+          <!-- PAYMENT METHOD -->
+          <!-- choose how to withdraw money -->
+          <div class="form-section">
+            <label class="form-label">Select Withdrawal Method</label>
+            <div class="payment-methods">
+              <input
+                type="radio"
+                name="withdraw-method"
+                id="gcash"
+                style="display: none"
+              />
+              <label for="gcash" class="payment-method-btn">
+                <img src="../../images/gcash-logo.png" class="method-logo" />
+                <span class="method-name">GCash</span>
+              </label>
+              <input
+                type="radio"
+                name="withdraw-method"
+                id="maya"
+                style="display: none"
+              />
+              <label for="maya" class="payment-method-btn">
+                <img src="../../images/paymaya-logo.png" class="method-logo" />
+                <span class="method-name">Maya</span>
+              </label>
+              <input
+                type="radio"
+                name="withdraw-method"
+                id="bank"
+                style="display: none"
+              />
+              <label for="bank" class="payment-method-btn">
+                <i class="fa-solid fa-university"></i>
+                <span class="method-name">Bank Transfer</span>
+              </label>
+            </div>
+          </div>
+          <!-- QUICK AMOUNT -->
+          <!-- buttons for common withdraw amounts -->
+          <div class="form-section">
+            <label class="form-label">Quick Amount</label>
+            <div class="quick-amounts">
+              <input
+                type="radio"
+                name="withdraw-amount"
+                id="a500"
+                style="display: none"
+              />
+              <label for="a500" class="quick-btn">₱500</label>
+              <input
+                type="radio"
+                name="withdraw-amount"
+                id="a1000"
+                style="display: none"
+              />
+              <label for="a1000" class="quick-btn">₱1000</label>
+              <input
+                type="radio"
+                name="withdraw-amount"
+                id="a2000"
+                style="display: none"
+              />
+              <label for="a2000" class="quick-btn">₱2000</label>
+              <input
+                type="radio"
+                name="withdraw-amount"
+                id="a5000"
+                style="display: none"
+              />
+              <label for="a5000" class="quick-btn">₱5000</label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <label for="withdrawToggle" class="btn-cancel">Cancel</label>
+          <label for="withdrawToggle" class="btn-confirm"
+            >Confirm Withdrawal</label
+          >
         </div>
       </div>
     </div>
-    <div class="modal-footer">
-      <label for="withdrawToggle" class="btn-cancel">Cancel</label>
-      <label for="withdrawToggle" class="btn-confirm">Confirm Withdrawal</label>
-    </div>
-  </div>
-</div>
-
-</body>
+  </body>
 </html>

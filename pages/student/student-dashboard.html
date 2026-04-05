@@ -34,18 +34,25 @@
           <span class="logo-text">WM EAT SU</span>
         </a>
       </div>
-
-      <!-- CENTER: role switcher -->
       <div class="nav-center">
         <div class="role-switcher" id="roleSwitcher">
-          <button class="role-btn active" data-role="student" id="roleStudent">
+          <a
+            href="student-dashboard.html"
+            class="role-btn active"
+            id="roleStudent"
+          >
             <i class="fa-solid fa-graduation-cap"></i>
             <span>Student</span>
-          </button>
-          <button class="role-btn" data-role="vendor" id="roleVendor">
+          </a>
+
+          <a
+            href="../vendor-pages/vendor-dashboard.html"
+            class="role-btn"
+            id="roleVendor"
+          >
             <i class="fa-solid fa-store"></i>
             <span>Vendor</span>
-          </button>
+          </a>
         </div>
       </div>
 
@@ -694,6 +701,5 @@
     <!-- TOAST CONTAINER -->
     <div id="toast-container"></div>
     <script src="../../script/student/dashboard.js"></script>
-    <script src="../../script/role.js"></script>
   </body>
 </html>

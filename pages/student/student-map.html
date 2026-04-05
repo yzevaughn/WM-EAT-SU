@@ -1,18 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WM EAT SU - Map</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../../css/student/dashboard.css">
-    <link rel="stylesheet" href="../../css/navbar.css">
-    <link rel="stylesheet" href="../../css/student/map.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../css/student/dashboard.css" />
+    <link rel="stylesheet" href="../../css/navbar.css" />
+    <link rel="stylesheet" href="../../css/student/map.css" />
   </head>
   <body>
- <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+
     <!-- ════════════════════════════════════════
          TOP NAVBAR
          ════════════════════════════════════════ -->
@@ -28,17 +34,25 @@
         </a>
       </div>
 
-      <!-- CENTER: role switcher -->
       <div class="nav-center">
         <div class="role-switcher" id="roleSwitcher">
-          <button class="role-btn active" data-role="student" id="roleStudent">
+          <a
+            href="student-dashboard.html"
+            class="role-btn active"
+            id="roleStudent"
+          >
             <i class="fa-solid fa-graduation-cap"></i>
             <span>Student</span>
-          </button>
-          <button class="role-btn" data-role="vendor" id="roleVendor">
+          </a>
+
+          <a
+            href="../vendor-pages/vendor-dashboard.html"
+            class="role-btn"
+            id="roleVendor"
+          >
             <i class="fa-solid fa-store"></i>
             <span>Vendor</span>
-          </button>
+          </a>
         </div>
       </div>
 
@@ -76,10 +90,6 @@
       <!-- ── SIDEBAR ── -->
       <div class="left-nav" id="sidebar">
         <!-- logo shown on mobile inside sidebar -->
-        <div class="sidebar-logo">
-          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-          <span class="logo-text">WM EAT SU</span>
-        </div>
 
         <ul class="nav-list">
           <li>
@@ -93,7 +103,7 @@
             </a>
           </li>
           <li>
-            <a href="student-cart.html" class="nav-link ">
+            <a href="student-cart.html" class="nav-link">
               <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
               <span class="nav-badge">3</span>
             </a>
@@ -126,7 +136,7 @@
         </ul>
       </div>
 
-    <main class="main-content">
+      <main class="main-content">
         <div class="content-header">
           <h2>Campus Map</h2>
           <p>Locate food vendors and canteens.</p>
@@ -155,12 +165,9 @@
               <div class="color-dot building"></div>
               <span>Building</span>
             </div>
-            
           </div>
         </div>
       </main>
-    <script src="../../script/role.js"></script>
-    
- </body>
-
- </html>
+    </div>
+  </body>
+</html>

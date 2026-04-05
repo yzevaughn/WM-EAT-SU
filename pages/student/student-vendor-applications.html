@@ -1,19 +1,24 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>WM EAT SU - Become a Vendor</title>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-		<link rel="stylesheet" href="../../css/student/dashboard.css">
-		<link rel="stylesheet" href="../../css/navbar.css">
-		<link rel="stylesheet" href="../../css/student/vendor-applications.css">
-	</head>
-	<body>
-		<input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WM EAT SU - Become a Vendor</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../css/student/dashboard.css" />
+    <link rel="stylesheet" href="../../css/navbar.css" />
+    <link rel="stylesheet" href="../../css/student/vendor-applications.css" />
+  </head>
+  <body>
+    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+
     <!-- ════════════════════════════════════════
          TOP NAVBAR
          ════════════════════════════════════════ -->
@@ -29,17 +34,25 @@
         </a>
       </div>
 
-      <!-- CENTER: role switcher -->
       <div class="nav-center">
         <div class="role-switcher" id="roleSwitcher">
-          <button class="role-btn active" data-role="student" id="roleStudent">
+          <a
+            href="student-dashboard.html"
+            class="role-btn active"
+            id="roleStudent"
+          >
             <i class="fa-solid fa-graduation-cap"></i>
             <span>Student</span>
-          </button>
-          <button class="role-btn" data-role="vendor" id="roleVendor">
+          </a>
+
+          <a
+            href="../vendor-pages/vendor-dashboard.html"
+            class="role-btn"
+            id="roleVendor"
+          >
             <i class="fa-solid fa-store"></i>
             <span>Vendor</span>
-          </button>
+          </a>
         </div>
       </div>
 
@@ -77,10 +90,6 @@
       <!-- ── SIDEBAR ── -->
       <div class="left-nav" id="sidebar">
         <!-- logo shown on mobile inside sidebar -->
-        <div class="sidebar-logo">
-          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-          <span class="logo-text">WM EAT SU</span>
-        </div>
 
         <ul class="nav-list">
           <li>
@@ -94,7 +103,7 @@
             </a>
           </li>
           <li>
-            <a href="student-cart.html" class="nav-link ">
+            <a href="student-cart.html" class="nav-link">
               <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
               <span class="nav-badge">3</span>
             </a>
@@ -126,86 +135,113 @@
           </li>
         </ul>
       </div>
-			<!-- MAIN CONTENT -->
-			<div class="main-content">
-				<div class="vendor-header">
-					<div class="header-text">
-						<h1>Vendor Application</h1>
-						<p>Apply to sell your food on campus</p>
-					</div>
-					<a href="#applicationModal" class="btn-apply-now">
-						<i class="fa-solid fa-plus"></i> Apply Now
-					</a>
-				</div>
-				<!-- REQUIREMENTS CARD -->
-				<div class="requirements-card">
-					<div class="requirements-header">
-						<i class="fa-solid fa-info-circle"></i>
-						<h2>Application Requirements</h2>
-					</div>
-					<ul class="requirements-list">
-						<li>Provide detailed information about your food business</li>
-						<li>List all ingredients used in your products</li>
-						<li>Upload step-by-step preparation photos with descriptions</li>
-						<li>Admin will review your application within 3-5 days</li>
-					</ul>
-				</div>
-				<!-- APPLICATION LIST -->
-				<div class="applications-section">
-					<h2>Your Applications</h2>
-					<div class="applications-list">
-						<div class="application-item">
-							<div class="application-header">
-								<h3>Vaughn's Shomai Rice</h3>
-								<span class="status pending">Pending Review</span>
-							</div>
-							<p class="application-product">Product: Shomai Rice</p>
-							<p class="application-date">Submitted: March 10, 2026</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- MODAL -->
-		<div id="applicationModal" class="modal">
-			<a href="#" class="modal-overlay"></a>
-			<div class="modal-content">
-				<div class="modal-header">
-					<h2>Vendor Application Form</h2>
-					<a href="#" class="modal-close">
-						<i class="fa-solid fa-times"></i>
-					</a>
-				</div>
-				<form class="application-form">
-					<div class="form-group">
-						<label>Business Name <span class="required">*</span></label>
-						<input type="text" class="form-control" placeholder="e.g., Vaughn's Shomai Rice" required>
-					</div>
-					<div class="form-group">
-						<label>Owner Name <span class="required">*</span></label>
-						<input type="text" class="form-control" placeholder="e.g., Vaughn Evangelista" required>
-					</div>
-					<div class="form-group">
-						<label>Product Name <span class="required">*</span></label>
-						<input type="text" class="form-control" placeholder="e.g., Shomai Rice" required>
-					</div>
-					<div class="form-group">
-						<label>Ingredients <span class="required">*</span></label>
-						<textarea class="form-control" rows="4" placeholder="List all ingredients used..." required></textarea>
-					</div>
-					<div class="form-group">
-						<label>Step-by-Step Preparation <span class="required">*</span></label>
-						<input type="file" class="form-control-file" accept="image/*" multiple>
-						<small class="helper-text">Upload photos showing your preparation process</small>
-					</div>
-					<div class="form-actions">
-						<a href="#" class="btn-cancel">Cancel</a>
-						<button class="btn-submit">Submit Application</button>
-					</div>
-				</form>
-			</div>
-		</div>
-		    <script src="../../script/role.js"></script>
-	</body>
+      <!-- MAIN CONTENT -->
+      <div class="main-content">
+        <div class="vendor-header">
+          <div class="header-text">
+            <h1>Vendor Application</h1>
+            <p>Apply to sell your food on campus</p>
+          </div>
+          <a href="#applicationModal" class="btn-apply-now">
+            <i class="fa-solid fa-plus"></i> Apply Now
+          </a>
+        </div>
+        <!-- REQUIREMENTS CARD -->
+        <div class="requirements-card">
+          <div class="requirements-header">
+            <i class="fa-solid fa-info-circle"></i>
+            <h2>Application Requirements</h2>
+          </div>
+          <ul class="requirements-list">
+            <li>Provide detailed information about your food business</li>
+            <li>List all ingredients used in your products</li>
+            <li>Upload step-by-step preparation photos with descriptions</li>
+            <li>Admin will review your application within 3-5 days</li>
+          </ul>
+        </div>
+        <!-- APPLICATION LIST -->
+        <div class="applications-section">
+          <h2>Your Applications</h2>
+          <div class="applications-list">
+            <div class="application-item">
+              <div class="application-header">
+                <h3>Vaughn's Shomai Rice</h3>
+                <span class="status pending">Pending Review</span>
+              </div>
+              <p class="application-product">Product: Shomai Rice</p>
+              <p class="application-date">Submitted: March 10, 2026</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- MODAL -->
+    <div id="applicationModal" class="modal">
+      <a href="#" class="modal-overlay"></a>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Vendor Application Form</h2>
+          <a href="#" class="modal-close">
+            <i class="fa-solid fa-times"></i>
+          </a>
+        </div>
+        <form class="application-form">
+          <div class="form-group">
+            <label>Business Name <span class="required">*</span></label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="e.g., Vaughn's Shomai Rice"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Owner Name <span class="required">*</span></label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="e.g., Vaughn Evangelista"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Product Name <span class="required">*</span></label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="e.g., Shomai Rice"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Ingredients <span class="required">*</span></label>
+            <textarea
+              class="form-control"
+              rows="4"
+              placeholder="List all ingredients used..."
+              required
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label
+              >Step-by-Step Preparation <span class="required">*</span></label
+            >
+            <input
+              type="file"
+              class="form-control-file"
+              accept="image/*"
+              multiple
+            />
+            <small class="helper-text"
+              >Upload photos showing your preparation process</small
+            >
+          </div>
+          <div class="form-actions">
+            <a href="#" class="btn-cancel">Cancel</a>
+            <button class="btn-submit">Submit Application</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
 </html>
-</div>
