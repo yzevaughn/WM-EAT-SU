@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
       this.style.background = "#16a34a";
       this.style.boxShadow = "0 4px 14px rgba(22, 163, 74, 0.35)";
       setTimeout(() => {
-        window.location.href = "pages/sign-in.html";
+        window.location.href = "pages/signin.html";
       }, 600);
     });
   });
@@ -441,16 +441,6 @@ document.addEventListener("DOMContentLoaded", () => {
     ==============================*/
   catFoodGrid.innerHTML = buildGridHTML("meals");
   bindCartButtons();
-
-  /* ============================
-       10. VIEW MORE BUTTON
-    ==============================*/
-  const viewMoreBtn = document.getElementById("viewMoreBtn");
-  if (viewMoreBtn) {
-    viewMoreBtn.addEventListener("click", () => {
-      window.location.href = "pages/sign-in.html";
-    });
-  }
 
   /* ============================
        11. SMOOTH SCROLL
