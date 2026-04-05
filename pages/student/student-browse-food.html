@@ -1,338 +1,612 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WM EAT SU - Student Portal</title>
-  <!--  this is  main dashboard page -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../../css/student/dashboard.css">
-  <link rel="stylesheet" href="../../css/navbar.css">
-</head>
-<body>
-  <input type="checkbox" id="menu-checkbox" class="menu-checkbox">
-  <!-- NAVBAR -->
-  <div class="top-nav">
-    <div class="nav-left">
-      <label for="menu-checkbox" class="menu-toggle" id="menuToggle">
-        <i class="fa-solid fa-bars"></i>
-      </label>
-
-      <a href="#" class="logo">
-        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-        <span class="logo-text">WM EAT SU</span>
-      </a>
-    </div>
-
-    <div class="profile">
-      <div class="profile-info">
-        <span class="profile-name">Vaughn Evangelista</span>
-        <span class="email">vaughn.student@wm.edu.ph</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WM EAT SU — Browse Food</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../css/navbar.css" />
+    <link rel="stylesheet" href="../../css/student/browse-food.css" />
+  </head>
+  <body>
+    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <!-- ════════════════════════════════════════
+         TOP NAVBAR
+         ════════════════════════════════════════ -->
+    <div class="top-nav">
+      <!-- LEFT: hamburger + logo -->
+      <div class="nav-left">
+        <label for="menu-checkbox" class="menu-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </label>
+        <a href="#" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
+        </a>
       </div>
 
-      <div class="profile-dropdown">
-        <button class="profile-btn" id="profileBtn">
-          <img src="../../images/pfp.jpg" class="profile-pic">
-          <i class="fa-solid fa-chevron-down"></i>
-        </button>
-        <div class="dropdown-menu" id="profileDropdown">
-          <a href="../../index.html" class="dropdown-item">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Log Out</span>
-          </a>
+      <!-- CENTER: role switcher -->
+      <div class="nav-center">
+        <div class="role-switcher" id="roleSwitcher">
+          <button class="role-btn active" data-role="student" id="roleStudent">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Student</span>
+          </button>
+          <button class="role-btn" data-role="vendor" id="roleVendor">
+            <i class="fa-solid fa-store"></i>
+            <span>Vendor</span>
+          </button>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- LAYOUT -->
-  <div class="layout">
-
-    <!-- SIDEBAR -->
-    <div class="left-nav" id="sidebar">
-      <ul class="nav-list">
-        <li>
-          <a href="student-dashboard.html" class="nav-link">
-            <i class="fa-solid fa-house"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-browse-food.html" class="nav-link active">
-            <i class="fa-solid fa-utensils"></i>
-            <span>Browse Food</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-cart.html" class="nav-link">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>Cart</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-order.html" class="nav-link">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-            <span>Orders</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-wallet.html" class="nav-link">
-            <i class="fa-solid fa-wallet"></i>
-            <span>Wallet</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-map.html" class="nav-link">
-            <i class="fa-solid fa-location-dot"></i>
-            <span>Campus Map</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-feedback.html" class="nav-link">
-            <i class="fa-regular fa-star"></i>
-            <span>Feedback</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-vendor-applications.html" class="nav-link">
-            <i class="fa-solid fa-rss"></i>
-            <span>Vendor Applications</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div class="main-content">
-
-
-
-      <!-- BROWSE FOOD SECTION -->
-      <div class="browse-food-section" id="browse-food">
-        <div class="browse-header">
-          <h2>Browse Food</h2>
-          <p>Discover delicious meals from our campus vendors</p>
-        </div>
-
-        <div class="search-container">
-          <div class="search-bar">
-            <i class="fa-solid fa-search search-icon"></i>
-            <input type="text" placeholder="Search for food..." class="search-input">
+      <!-- RIGHT: profile -->
+      <div class="nav-right">
+        <div class="profile">
+          <div class="profile-info">
+            <span class="profile-name">Vaughn Evangelista</span>
+            <span class="email">vaughn.student@wm.edu.ph</span>
           </div>
-        </div>
-
-        <div class="category-filters">
-          <button class="filter-btn active">All</button>
-          <button class="filter-btn">Meals</button>
-          <button class="filter-btn">Snacks</button>
-          <button class="filter-btn">Drinks</button>
-          <button class="filter-btn">Desserts</button>
-          <button class="filter-btn">Healthy</button>
-          <button class="filter-btn">Breakfast</button>
-        </div>
-
-        <div class="food-grid">
-          <!-- Food Card 1 -->
-            <div class="food-card">
-            <div class="food-image">
-              <img src="../../images/burger.avif" alt="Burger">
-              <div class="food-badge">Popular</div>
-            </div>
-            <div class="food-content">
-              <div class="food-header">
-                <h3>Burger</h3>
-                <div class="food-rating">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star-half-stroke"></i>
-                  <span>4.5</span>
-                </div>
-              </div>
-              <p class="food-description">Juicy beef patty with lettuce, tomato, cheese, and our special sauce</p>
-              <div class="food-vendor">
-                <i class="fa-solid fa-store"></i>
-                <span>Canteen 1</span>
-              </div>
-              <div class="food-footer">
-                <div class="food-price">₱30.00</div>
-                <button class="add-btn">
-                  <i class="fa-solid fa-plus"></i>
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Food Card 2 -->
-            <div class="food-card">
-            <div class="food-image">
-              <img src="../../images/Shomai-rice.jpg" alt="Shomai Rice">
-            </div>
-            <div class="food-content">
-              <div class="food-header">
-                <h3>Shomai Rice</h3>
-                <div class="food-rating">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <span>5.0</span>
-                </div>
-              </div>
-              <p class="food-description">Steamed dumplings served over warm rice with savory sauce.</p>
-              <div class="food-vendor">
-                <i class="fa-solid fa-store"></i>
-                <span>Student vendor</span>
-              </div>
-              <div class="food-footer">
-                <div class="food-price">₱20.00</div>
-                <button class="add-btn">
-                  <i class="fa-solid fa-plus"></i>
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Food Card 3 -->
-            <div class="food-card">
-            <div class="food-image">
-              <img src="../../images/Shomai.jpg" alt="Shomai">
-              <div class="food-badge">New</div>
-            </div>
-            <div class="food-content">
-              <div class="food-header">
-                <h3>Shomai</h3>
-                <div class="food-rating">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star-half-stroke"></i>
-                  <span>4.7</span>
-                </div>
-              </div>
-              <p class="food-description">Mapapa wow ka sa sarap neto</p>
-              <div class="food-vendor">
-                <i class="fa-solid fa-store"></i>
-                <span>Canteen 3</span>
-              </div>
-              <div class="food-footer">
-                <div class="food-price">₱15.99</div>
-                <button class="add-btn">
-                  <i class="fa-solid fa-plus"></i>
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Food Card 4 -->
-            <div class="food-card">
-            <div class="food-image">
-              <img src="../../images/Iced-coffee.png" alt="Iced Coffee">
-            </div>
-            <div class="food-content">
-              <div class="food-header">
-                <h3>Iced Coffee</h3>
-                <div class="food-rating">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <span>4.8</span>
-                </div>
-              </div>
-              <p class="food-description">Cold brewed coffee with milk and a hint of vanilla</p>
-              <div class="food-vendor">
-                <i class="fa-solid fa-store"></i>
-                <span>Canteen 5</span>
-              </div>
-              <div class="food-footer">
-                <div class="food-price">₱30.00</div>
-                <button class="add-btn">
-                  <i class="fa-solid fa-plus"></i>
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Food Card 5 -->
-            <div class="food-card">
-            <div class="food-image">
-              <img src="../../images/Fries.jpg" alt="Fries">
-            </div>
-            <div class="food-content">
-              <div class="food-header">
-                <h3>Fries</h3>
-                <div class="food-rating">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star-half-stroke"></i>
-                  <span>4.6</span>
-                </div>
-              </div>
-              <p class="food-description">Crispy on the outside and fluffy on the inside, these perfectly seasoned fries are the ultimate campus snack.</p>
-              <div class="food-vendor">
-                <i class="fa-solid fa-store"></i>
-                <span>Canteen 7</span>
-              </div>
-              <div class="food-footer">
-                <div class="food-price">₱25.00</div>
-                <button class="add-btn">
-                  <i class="fa-solid fa-plus"></i>
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Food Card 6 -->
-            <div class="food-card">
-            <div class="food-image">
-              <img src="../../images/coke.png" alt="Coke">
-              <div class="food-badge">Popular</div>
-            </div>
-            <div class="food-content">
-              <div class="food-header">
-                <h3>Coke</h3>
-                <div class="food-rating">
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <span>4.9</span>
-                </div>
-              </div>
-              <p class="food-description">Icy-cold classic that delivers the perfect refreshing kick to complement any campus meal.</p>
-              <div class="food-vendor">
-                <i class="fa-solid fa-store"></i>
-                <span>Canteen 2</span>
-              </div>
-              <div class="food-footer">
-                <div class="food-price">₱25.00</div>
-                <button class="add-btn">
-                  <i class="fa-solid fa-plus"></i>
-                  Add to Cart
-                </button>
-              </div>
+          <div class="profile-dropdown">
+            <button class="profile-btn">
+              <img
+                src="../../images/pfp.jpg"
+                class="profile-pic"
+                alt="Profile"
+              />
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="../../index.html" class="dropdown-item">
+                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+    <!-- /top-nav -->
 
+    <!-- ════════════════════════════════════════
+         LAYOUT
+         ════════════════════════════════════════ -->
+    <div class="layout">
+      <!-- ── SIDEBAR ── -->
+      <div class="left-nav" id="sidebar">
+        <!-- logo shown on mobile inside sidebar -->
+        <div class="sidebar-logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
+        </div>
 
+        <ul class="nav-list">
+          <li>
+            <a href="student-dashboard.html" class="nav-link">
+              <i class="fa-solid fa-house"></i><span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-browse-food.html" class="nav-link active">
+              <i class="fa-solid fa-utensils"></i><span>Browse Food</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-cart.html" class="nav-link">
+              <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
+              <span class="nav-badge">3</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-order.html" class="nav-link">
+              <i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-wallet.html" class="nav-link">
+              <i class="fa-solid fa-wallet"></i><span>Wallet</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-map.html" class="nav-link">
+              <i class="fa-solid fa-location-dot"></i><span>Campus Map</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-feedback.html" class="nav-link">
+              <i class="fa-regular fa-star"></i><span>Feedback</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-vendor-applications.html" class="nav-link">
+              <i class="fa-solid fa-rss"></i><span>Vendor Applications</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- MAIN -->
+      <div class="main-content">
+        <div class="browse-food-section">
+          <div class="browse-header">
+            <h2>Browse Food</h2>
+            <p>Discover delicious meals from our campus vendors</p>
+          </div>
 
-</body>
+          <div class="search-container">
+            <div class="search-bar">
+              <i class="fa-solid fa-search search-icon"></i>
+              <input
+                type="text"
+                placeholder="Search for food or vendor..."
+                class="search-input"
+                id="searchInput"
+              />
+            </div>
+          </div>
+
+          <div class="category-filters">
+            <button class="filter-btn active" data-cat="all">All</button>
+            <button class="filter-btn" data-cat="meals">Meals</button>
+            <button class="filter-btn" data-cat="snacks">Snacks</button>
+            <button class="filter-btn" data-cat="drinks">Drinks</button>
+            <button class="filter-btn" data-cat="desserts">Desserts</button>
+            <button class="filter-btn" data-cat="healthy">Healthy</button>
+          </div>
+
+          <div class="food-grid" id="foodGrid"></div>
+
+          <!-- PAGINATION -->
+          <div class="pagination" id="pagination"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOD DETAIL MODAL -->
+    <div class="food-modal-overlay" id="foodModal">
+      <div class="food-modal">
+        <img id="modalImg" class="modal-img" src="" alt="" />
+        <div class="modal-body">
+          <div class="modal-header-row">
+            <div>
+              <div class="modal-food-name" id="modalName"></div>
+              <div class="modal-food-price" id="modalPrice"></div>
+            </div>
+            <button class="modal-close-btn" id="modalClose">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <div
+            style="
+              display: flex;
+              gap: 10px;
+              flex-wrap: wrap;
+              margin-bottom: 10px;
+            "
+          >
+            <span
+              id="modalVendor"
+              style="font-size: 13px; color: #64748b"
+            ></span>
+            <span id="modalPrep" style="font-size: 13px; color: #f97316"></span>
+            <span
+              id="modalRating"
+              style="font-size: 13px; color: #fbbf24; font-weight: 700"
+            ></span>
+          </div>
+          <div class="modal-section-label">Description</div>
+          <p
+            id="modalDesc"
+            style="font-size: 14px; color: #64748b; line-height: 1.6"
+          ></p>
+          <div class="modal-section-label">Ingredients</div>
+          <div id="modalIngredients" class="food-ingredients"></div>
+          <div class="modal-section-label">Customer Reviews</div>
+          <div id="modalReviews"></div>
+          <button class="modal-add-btn" id="modalAddBtn">
+            <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container"></div>
+
+    <script>
+      /* ─────────── DATA ─────────── */
+      const foods = [
+        {
+          id: 1,
+          name: "Burger",
+          price: "₱30.00",
+          category: "meals",
+          img: "../../images/burger.avif",
+          badge: "popular",
+          rating: 4.5,
+          vendor: "Canteen 1",
+          prepTime: "8 min",
+          desc: "Juicy beef patty with lettuce, tomato, cheese, and our special sauce.",
+          ingredients: [
+            "Beef patty",
+            "Lettuce",
+            "Tomato",
+            "Cheese",
+            "Special sauce",
+            "Bun",
+          ],
+          reviews: [
+            {
+              name: "Ana R.",
+              stars: 5,
+              comment: "Best burger on campus! Always fresh.",
+            },
+            {
+              name: "Mark T.",
+              stars: 4,
+              comment: "Great taste, a bit small for the price.",
+            },
+          ],
+        },
+        {
+          id: 2,
+          name: "Shomai Rice",
+          price: "₱20.00",
+          category: "meals",
+          img: "../../images/Shomai-rice.jpg",
+          badge: "",
+          rating: 5.0,
+          vendor: "Student Vendor",
+          prepTime: "5 min",
+          desc: "Steamed dumplings served over warm rice with savory sauce.",
+          ingredients: [
+            "Shomai",
+            "White rice",
+            "Soy sauce",
+            "Sesame oil",
+            "Green onion",
+          ],
+          reviews: [
+            {
+              name: "Lisa M.",
+              stars: 5,
+              comment: "Absolutely love this! Perfect comfort food.",
+            },
+            {
+              name: "Jake P.",
+              stars: 5,
+              comment: "Worth every peso. Filling and delicious.",
+            },
+          ],
+        },
+        {
+          id: 3,
+          name: "Shomai",
+          price: "₱15.99",
+          category: "snacks",
+          img: "../../images/Shomai.jpg",
+          badge: "new",
+          rating: 4.7,
+          vendor: "Canteen 3",
+          prepTime: "6 min",
+          desc: "Classic steamed dumplings with pork and prawn filling.",
+          ingredients: ["Pork", "Shrimp", "Wrapper", "Ginger", "Soy sauce"],
+          reviews: [
+            { name: "Carla S.", stars: 5, comment: "Mapapa wow ka sa sarap!" },
+          ],
+        },
+        {
+          id: 4,
+          name: "Iced Coffee",
+          price: "₱30.00",
+          category: "drinks",
+          img: "../../images/Iced-coffee.png",
+          badge: "",
+          rating: 4.8,
+          vendor: "Canteen 5",
+          prepTime: "3 min",
+          desc: "Cold brewed coffee with milk and a hint of vanilla.",
+          ingredients: [
+            "Cold brew",
+            "Fresh milk",
+            "Vanilla syrup",
+            "Ice",
+            "Sugar",
+          ],
+          reviews: [
+            {
+              name: "Ryan B.",
+              stars: 5,
+              comment: "Perfect pick-me-up between classes!",
+            },
+            {
+              name: "Sofia D.",
+              stars: 4,
+              comment: "Really smooth and not too sweet.",
+            },
+          ],
+        },
+        {
+          id: 5,
+          name: "Fries",
+          price: "₱25.00",
+          category: "snacks",
+          img: "../../images/Fries.jpg",
+          badge: "",
+          rating: 4.6,
+          vendor: "Canteen 7",
+          prepTime: "7 min",
+          desc: "Crispy on the outside and fluffy on the inside, perfectly seasoned fries.",
+          ingredients: ["Potato", "Vegetable oil", "Salt", "Seasoning"],
+          reviews: [
+            {
+              name: "Ken A.",
+              stars: 5,
+              comment: "Always crispy. Never disappoints!",
+            },
+          ],
+        },
+        {
+          id: 6,
+          name: "Coke",
+          price: "₱25.00",
+          category: "drinks",
+          img: "../../images/coke.png",
+          badge: "popular",
+          rating: 4.9,
+          vendor: "Canteen 2",
+          prepTime: "1 min",
+          desc: "Icy-cold classic that delivers the perfect refreshing kick.",
+          ingredients: [
+            "Carbonated water",
+            "Sugar",
+            "Caramel color",
+            "Caffeine",
+          ],
+          reviews: [
+            {
+              name: "Mia C.",
+              stars: 5,
+              comment: "Ice cold and perfectly chilled!",
+            },
+          ],
+        },
+      ];
+
+      /* ─────────── STATE ─────────── */
+      const PER_PAGE = 4;
+      let filtered = [...foods];
+      let page = 1;
+      let activeCat = "all";
+      let activeFood = null;
+
+      /* ─────────── RENDER GRID ─────────── */
+      function renderGrid() {
+        const grid = document.getElementById("foodGrid");
+        const start = (page - 1) * PER_PAGE;
+        const pageItems = filtered.slice(start, start + PER_PAGE);
+
+        if (pageItems.length === 0) {
+          grid.innerHTML =
+            '<p style="color:#94a3b8;padding:40px 0;text-align:center;grid-column:1/-1;">No food items found.</p>';
+          renderPagination();
+          return;
+        }
+
+        grid.innerHTML = pageItems
+          .map(
+            (f) => `
+    <div class="food-card" data-id="${f.id}">
+      <div class="food-image">
+        <img src="${f.img}" alt="${f.name}" onerror="this.src='https://placehold.co/300x195/fff0f1/E61524?text=${encodeURIComponent(f.name)}'">
+        ${f.badge ? `<span class="food-badge ${f.badge}">${f.badge === "popular" ? "⭐ Popular" : f.badge === "new" ? "✨ New" : f.badge}</span>` : ""}
+      </div>
+      <div class="food-content">
+        <div class="food-header">
+          <h3>${f.name}</h3>
+          <div class="food-rating">${starHtml(f.rating)}<span>${f.rating}</span></div>
+        </div>
+        <p class="food-description">${f.desc}</p>
+        <div class="food-ingredients">
+          ${f.ingredients
+            .slice(0, 3)
+            .map((i) => `<span class="ingredient-tag">${i}</span>`)
+            .join("")}
+          ${f.ingredients.length > 3 ? `<span class="ingredient-tag">+${f.ingredients.length - 3} more</span>` : ""}
+        </div>
+        <div class="food-prep-time"><i class="fa-regular fa-clock"></i> Ready in ${f.prepTime}</div>
+        <div class="food-vendor"><i class="fa-solid fa-store"></i> ${f.vendor}</div>
+        <div class="food-footer">
+          <div class="food-price">${f.price}</div>
+          <button class="add-btn add-cart-btn" data-id="${f.id}">
+            <i class="fa-solid fa-plus"></i> Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  `,
+          )
+          .join("");
+
+        // card click → modal
+        grid.querySelectorAll(".food-card").forEach((card) => {
+          card.addEventListener("click", (e) => {
+            if (e.target.closest(".add-cart-btn")) return;
+            openModal(+card.dataset.id);
+          });
+        });
+
+        // add to cart buttons
+        grid.querySelectorAll(".add-cart-btn").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            showToast(
+              "success",
+              "fa-check-circle",
+              "Item added to cart successfully!",
+            );
+          });
+        });
+
+        renderPagination();
+      }
+
+      /* ─────────── PAGINATION ─────────── */
+      function renderPagination() {
+        const total = Math.ceil(filtered.length / PER_PAGE);
+        const pag = document.getElementById("pagination");
+        if (total <= 1) {
+          pag.innerHTML = "";
+          return;
+        }
+
+        let html = `<button class="page-btn arrow" ${page === 1 ? "disabled" : ""} id="pgPrev"><i class="fa-solid fa-chevron-left"></i></button>`;
+        for (let i = 1; i <= total; i++) {
+          html += `<button class="page-btn${i === page ? " active" : ""}" data-p="${i}">${i}</button>`;
+        }
+        html += `<button class="page-btn arrow" ${page === total ? "disabled" : ""} id="pgNext"><i class="fa-solid fa-chevron-right"></i></button>`;
+        pag.innerHTML = html;
+
+        pag.querySelectorAll("[data-p]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              page = +b.dataset.p;
+              renderGrid();
+            }),
+        );
+        pag.querySelector("#pgPrev").onclick = () => {
+          if (page > 1) {
+            page--;
+            renderGrid();
+          }
+        };
+        pag.querySelector("#pgNext").onclick = () => {
+          if (page < total) {
+            page++;
+            renderGrid();
+          }
+        };
+      }
+
+      /* ─────────── MODAL ─────────── */
+      function openModal(id) {
+        const f = foods.find((x) => x.id === id);
+        if (!f) return;
+        activeFood = f;
+        document.getElementById("modalImg").src = f.img;
+        document.getElementById("modalName").textContent = f.name;
+        document.getElementById("modalPrice").textContent = f.price;
+        document.getElementById("modalVendor").innerHTML =
+          `<i class="fa-solid fa-store" style="color:#3b82f6;margin-right:4px;"></i>${f.vendor}`;
+        document.getElementById("modalPrep").innerHTML =
+          `<i class="fa-regular fa-clock" style="margin-right:4px;"></i>${f.prepTime}`;
+        document.getElementById("modalRating").innerHTML =
+          starHtml(f.rating) + ` ${f.rating}`;
+        document.getElementById("modalDesc").textContent = f.desc;
+        document.getElementById("modalIngredients").innerHTML = f.ingredients
+          .map((i) => `<span class="ingredient-tag">${i}</span>`)
+          .join("");
+        document.getElementById("modalReviews").innerHTML = f.reviews
+          .map(
+            (r) => `
+    <div class="review-item">
+      <div class="review-avatar">${r.name[0]}</div>
+      <div>
+        <div class="review-name">${r.name}</div>
+        <div class="review-stars">${"★".repeat(r.stars)}${"☆".repeat(5 - r.stars)}</div>
+        <div class="review-comment">${r.comment}</div>
+      </div>
+    </div>
+  `,
+          )
+          .join("");
+        document.getElementById("foodModal").classList.add("open");
+      }
+
+      document.getElementById("modalClose").onclick = () =>
+        document.getElementById("foodModal").classList.remove("open");
+      document.getElementById("foodModal").addEventListener("click", (e) => {
+        if (e.target === document.getElementById("foodModal"))
+          document.getElementById("foodModal").classList.remove("open");
+      });
+      document.getElementById("modalAddBtn").onclick = () => {
+        document.getElementById("foodModal").classList.remove("open");
+        showToast(
+          "success",
+          "fa-check-circle",
+          "Item added to cart successfully!",
+        );
+      };
+
+      /* ─────────── FILTERS ─────────── */
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          activeCat = btn.dataset.cat;
+          applyFilters();
+        });
+      });
+
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", applyFilters);
+
+      function applyFilters() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        filtered = foods.filter((f) => {
+          const matchCat = activeCat === "all" || f.category === activeCat;
+          const matchQ =
+            !q ||
+            f.name.toLowerCase().includes(q) ||
+            f.vendor.toLowerCase().includes(q);
+          return matchCat && matchQ;
+        });
+        page = 1;
+        renderGrid();
+      }
+
+      /* ─────────── TOAST ─────────── */
+      function showToast(type, icon, msg) {
+        const el = document.createElement("div");
+        el.className = `toast ${type}`;
+        el.innerHTML = `<i class="fa-solid ${icon}"></i><span>${msg}</span>`;
+        document.getElementById("toast-container").appendChild(el);
+        setTimeout(() => {
+          el.classList.add("fade-out");
+          setTimeout(() => el.remove(), 300);
+        }, 3000);
+      }
+
+      /* ─────────── HELPERS ─────────── */
+      function starHtml(r) {
+        let h = "";
+        const full = Math.floor(r);
+        const half = r % 1 >= 0.5;
+        for (let i = 0; i < full; i++) h += '<i class="fa-solid fa-star"></i>';
+        if (half) h += '<i class="fa-solid fa-star-half-stroke"></i>';
+        return h;
+      }
+
+      /* ─────────── MOBILE SIDEBAR ─────────── */
+      const sidebarOverlay = document.getElementById("sidebarOverlay");
+      if (sidebarOverlay) {
+        sidebarOverlay.onclick = () => {
+          const menuCheckbox = document.getElementById("menu-checkbox");
+          if (menuCheckbox) menuCheckbox.checked = false;
+        };
+      }
+
+      /* ─────────── INIT ─────────── */
+      renderGrid();
+    </script>
+    <script src="../../script/role.js"></script>
+  </body>
 </html>

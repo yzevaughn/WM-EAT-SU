@@ -1,292 +1,321 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WM EAT SU - Order History</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WM EAT SU - Order History</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="../../css/student/dashboard.css">
-  <link rel="stylesheet" href="../../css/navbar.css">
-  <link rel="stylesheet" href="../../css/student/order.css">
-</head>
-<body>
-<input type="checkbox" id="menu-checkbox" class="menu-checkbox">
-  <!-- NAVBAR -->
-  <div class="top-nav">
-    <div class="nav-left">
-      <label for="menu-checkbox" class="menu-toggle" id="menuToggle">
-        <i class="fa-solid fa-bars"></i>
-      </label>
-      <a href="#" class="logo">
-        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-        <span class="logo-text">WM EAT SU</span>
-      </a>
-    </div>
-    <div class="profile">
-      <div class="profile-info">
-        <span class="profile-name">Vaughn Evangelista</span>
-        <span class="email">vaughn.student@wm.edu.ph</span>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../css/student/dashboard.css" />
+    <link rel="stylesheet" href="../../css/navbar.css" />
+    <link rel="stylesheet" href="../../css/student/order.css" />
+  </head>
+  <body>
+    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <!-- ════════════════════════════════════════
+         TOP NAVBAR
+         ════════════════════════════════════════ -->
+    <div class="top-nav">
+      <!-- LEFT: hamburger + logo -->
+      <div class="nav-left">
+        <label for="menu-checkbox" class="menu-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </label>
+        <a href="#" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
+        </a>
       </div>
-      <div class="profile-dropdown">
-        <button class="profile-btn" id="profileBtn">
-          <img src="../../images/pfp.jpg" class="profile-pic">
-          <i class="fa-solid fa-chevron-down"></i>
-        </button>
-        <div class="dropdown-menu" id="profileDropdown">
-          <a href="../../index.html" class="dropdown-item">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Log Out</span>
-          </a>
+
+      <!-- CENTER: role switcher -->
+      <div class="nav-center">
+        <div class="role-switcher" id="roleSwitcher">
+          <button class="role-btn active" data-role="student" id="roleStudent">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Student</span>
+          </button>
+          <button class="role-btn" data-role="vendor" id="roleVendor">
+            <i class="fa-solid fa-store"></i>
+            <span>Vendor</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT: profile -->
+      <div class="nav-right">
+        <div class="profile">
+          <div class="profile-info">
+            <span class="profile-name">Vaughn Evangelista</span>
+            <span class="email">vaughn.student@wm.edu.ph</span>
+          </div>
+          <div class="profile-dropdown">
+            <button class="profile-btn">
+              <img
+                src="../../images/pfp.jpg"
+                class="profile-pic"
+                alt="Profile"
+              />
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="../../index.html" class="dropdown-item">
+                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+    <!-- /top-nav -->
 
-  <!-- LAYOUT -->
-  <div class="layout">
-    <!-- SIDEBAR -->
-    <div class="left-nav" id="sidebar">
-      <ul class="nav-list">
-        <li>
-          <a href="student-dashboard.html" class="nav-link">
-            <i class="fa-solid fa-house"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-browse-food.html" class="nav-link">
-            <i class="fa-solid fa-utensils"></i>
-            <span>Browse Food</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-cart.html" class="nav-link">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span>Cart</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-order.html" class="nav-link active">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-            <span>Orders</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-wallet.html" class="nav-link">
-            <i class="fa-solid fa-wallet"></i>
-            <span>Wallet</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-map.html" class="nav-link">
-            <i class="fa-solid fa-location-dot"></i>
-            <span>Campus Map</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-feedback.html" class="nav-link">
-            <i class="fa-regular fa-star"></i>
-            <span>Feedback</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-vendor-applications.html" class="nav-link">
-            <i class="fa-solid fa-rss"></i>
-            <span>Vendor Applications</span>
-          </a>
-        </li>
-      </ul>
-    </div>
+    <!-- ════════════════════════════════════════
+         LAYOUT
+         ════════════════════════════════════════ -->
+    <div class="layout">
+      <!-- ── SIDEBAR ── -->
+      <div class="left-nav" id="sidebar">
+        <!-- logo shown on mobile inside sidebar -->
+        <div class="sidebar-logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
+        </div>
 
-    <!-- MAIN CONTENT -->
-    <div class="main-content">
-      <div class="orders-page">
-        <h2>Order History</h2>
-        <p class="page-subtitle">Track and manage your orders</p>
-       
-        <div class="orders-list">
-          <!-- pending order -->
-          <div class="order-card">
-            <div class="order-card-header">
-              <div class="order-title">
-                <i class="fa-solid fa-clock status-icon pending-icon"></i>
-                <span class="canteen-name">Canteen 1</span>
+        <ul class="nav-list">
+          <li>
+            <a href="student-dashboard.html" class="nav-link">
+              <i class="fa-solid fa-house"></i><span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-browse-food.html" class="nav-link">
+              <i class="fa-solid fa-utensils"></i><span>Browse Food</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-cart.html" class="nav-link">
+              <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
+              <span class="nav-badge">3</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-order.html" class="nav-link active">
+              <i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-wallet.html" class="nav-link">
+              <i class="fa-solid fa-wallet"></i><span>Wallet</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-map.html" class="nav-link">
+              <i class="fa-solid fa-location-dot"></i><span>Campus Map</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-feedback.html" class="nav-link">
+              <i class="fa-regular fa-star"></i><span>Feedback</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-vendor-applications.html" class="nav-link">
+              <i class="fa-solid fa-rss"></i><span>Vendor Applications</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div class="main-content">
+        <div class="orders-page">
+          <h2>Order History</h2>
+          <p class="page-subtitle">Track and manage your orders</p>
+
+          <div class="orders-list">
+            <!-- pending order -->
+            <div class="order-card">
+              <div class="order-card-header">
+                <div class="order-title">
+                  <i class="fa-solid fa-clock status-icon pending-icon"></i>
+                  <span class="canteen-name">Canteen 1</span>
+                </div>
+                <span class="status-badge pending">Pending</span>
               </div>
-              <span class="status-badge pending">Pending</span>
+              <p class="order-id">Order #033213123123</p>
+              <p class="order-date">3/04/2026, 9:15:00 AM</p>
+              <div class="order-details">
+                <span>1x Burger</span>
+                <span class="order-price-align">₱30.00</span>
+              </div>
+              <p class="pickup-text">Pickup: 10:00 AM</p>
+              <hr />
+              <div class="order-total-row">
+                <div>
+                  <strong>Total: ₱30.00</strong>
+                </div>
+                <button class="cancel-btn">
+                  <i class="fa-solid fa-times"></i> Cancel Order
+                </button>
+              </div>
             </div>
-            <p class="order-id">Order #033213123123</p>
-            <p class="order-date">3/04/2026, 9:15:00 AM</p>
-            <div class="order-details">
-              <span>1x Burger</span>
-              <span class="order-price-align">₱30.00</span>
+            <!-- active order ready -->
+            <div class="order-card">
+              <div class="order-card-header">
+                <div class="order-title">
+                  <i class="fa-solid fa-check-circle status-icon"></i>
+                  <span class="canteen-name">Canteen 5</span>
+                </div>
+                <span class="status-badge ready">Ready</span>
+              </div>
+              <p class="order-id">Order #02</p>
+              <p class="order-date">3/7/2026, 11:59:33 AM</p>
+              <div class="order-details">
+                <span>2x Iced Coffee</span>
+                <span class="order-price-align">₱30.00</span>
+              </div>
+              <p class="pickup-text">Pickup: 2:00 PM</p>
+              <hr />
+              <div class="order-total-row">
+                <strong>Total: ₱60.00</strong>
+              </div>
             </div>
-            <p class="pickup-text">Pickup: 10:00 AM</p>
-            <hr>
-            <div class="order-total-row">
-              <div>
+            <!-- active order preparing -->
+            <div class="order-card">
+              <div class="order-card-header">
+                <div class="order-title">
+                  <i class="fa-solid fa-clock status-icon"></i>
+                  <span class="canteen-name">Canteen 1</span>
+                </div>
+                <span class="status-badge preparing">Preparing</span>
+              </div>
+              <p class="order-id">Order #1772861172498</p>
+              <p class="order-date">3/7/2026, 1:26:12 PM</p>
+              <div class="order-details">
+                <span>1x Burger</span>
+                <span class="order-price-align">₱30.00</span>
+              </div>
+              <p class="pickup-text">Pickup: 12:00 PM</p>
+              <hr />
+              <div class="order-total-row">
                 <strong>Total: ₱30.00</strong>
               </div>
-              <button class="cancel-btn">
-                <i class="fa-solid fa-times"></i> Cancel Order
-              </button>
             </div>
-          </div>
-          <!-- active order ready -->
-          <div class="order-card">
-            <div class="order-card-header">
-              <div class="order-title">
-                <i class="fa-solid fa-check-circle status-icon"></i>
-                <span class="canteen-name">Canteen 5</span>
+            <!-- completed order -->
+            <div class="order-card">
+              <div class="order-card-header">
+                <div class="order-title">
+                  <i class="fa-solid fa-check-circle status-icon"></i>
+                  <span class="canteen-name">Student vendor</span>
+                </div>
+                <span class="status-badge ready">Completed</span>
               </div>
-              <span class="status-badge ready">Ready</span>
-            </div>
-            <p class="order-id">Order #02</p>
-            <p class="order-date">3/7/2026, 11:59:33 AM</p>
-            <div class="order-details">
-              <span>2x Iced Coffee</span>
-              <span class="order-price-align">₱30.00</span>
-            </div>
-            <p class="pickup-text">Pickup: 2:00 PM</p>
-            <hr>
-            <div class="order-total-row">
-              <strong>Total: ₱60.00</strong>
-            </div>
-          </div>
-          <!-- active order preparing -->
-          <div class="order-card">
-            <div class="order-card-header">
-              <div class="order-title">
-                <i class="fa-solid fa-clock status-icon"></i>
-                <span class="canteen-name">Canteen 1</span>
+              <p class="order-id">Order #12345</p>
+              <p class="order-date">3/6/2026, 10:15:00 AM</p>
+              <div class="order-details">
+                <span>1x Shomai Rice</span>
+                <span class="order-price-align">₱20.00</span>
               </div>
-              <span class="status-badge preparing">Preparing</span>
-            </div>
-            <p class="order-id">Order #1772861172498</p>
-            <p class="order-date">3/7/2026, 1:26:12 PM</p>
-            <div class="order-details">
-              <span>1x Burger</span>
-              <span class="order-price-align">₱30.00</span>
-            </div>
-            <p class="pickup-text">Pickup: 12:00 PM</p>
-            <hr>
-            <div class="order-total-row">
-              <strong>Total: ₱30.00</strong>
-            </div>
-          </div>
-          <!-- completed order -->
-          <div class="order-card">
-            <div class="order-card-header">
-              <div class="order-title">
-                <i class="fa-solid fa-check-circle status-icon"></i>
-                <span class="canteen-name">Student vendor</span>
+              <p class="pickup-text">Pickup: 11:00 AM</p>
+              <hr />
+              <div class="order-total-row">
+                <div>
+                  <strong>Total: ₱20.00</strong>
+                </div>
               </div>
-              <span class="status-badge ready">Completed</span>
             </div>
-            <p class="order-id">Order #12345</p>
-            <p class="order-date">3/6/2026, 10:15:00 AM</p>
-            <div class="order-details">
-              <span>1x Shomai Rice</span>
-              <span class="order-price-align">₱20.00</span>
-            </div>
-            <p class="pickup-text">Pickup: 11:00 AM</p>
-            <hr>
-            <div class="order-total-row">
-              <div>
-                <strong>Total: ₱20.00</strong>
+            <!-- cancelled order -->
+            <div class="order-card">
+              <div class="order-card-header">
+                <div class="order-title">
+                  <i class="fa-solid fa-times-circle status-icon"></i>
+                  <span class="canteen-name">Canteen 4</span>
+                </div>
+                <span class="status-badge cancelled">Cancelled</span>
               </div>
-             
-            </div>
-          </div>
-          <!-- cancelled order -->
-          <div class="order-card">
-            <div class="order-card-header">
-              <div class="order-title">
-                <i class="fa-solid fa-times-circle status-icon"></i>
-                <span class="canteen-name">Canteen 4</span>
+              <p class="order-id">Order #54321</p>
+              <p class="order-date">3/5/2026, 4:00:00 PM</p>
+              <div class="order-details">
+                <span>1x Fries</span>
+                <span class="order-price-align">₱25.00</span>
               </div>
-              <span class="status-badge cancelled">Cancelled</span>
-            </div>
-            <p class="order-id">Order #54321</p>
-            <p class="order-date">3/5/2026, 4:00:00 PM</p>
-            <div class="order-details">
-              <span>1x Fries</span>
-              <span class="order-price-align">₱25.00</span>
-            </div>
-            <p class="pickup-text">Pickup: 5:00 PM</p>
-            <hr>
-            <div class="order-total-row">
-              <strong>Total: ₱25.00</strong>
+              <p class="pickup-text">Pickup: 5:00 PM</p>
+              <hr />
+              <div class="order-total-row">
+                <strong>Total: ₱25.00</strong>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- REVIEW MODAL -->
-  <div class="modal" id="reviewModal">
-    <div class="modal-overlay" id="reviewModalOverlay"></div>
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h2>Leave a Review</h2>
-        <button class="modal-close" id="reviewModalClose">
-          <i class="fa-solid fa-times"></i>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <div class="review-food-info">
-          <p class="review-food-name" id="reviewFoodName">2x Avocado Salad</p>
+    <!-- REVIEW MODAL -->
+    <div class="modal" id="reviewModal">
+      <div class="modal-overlay" id="reviewModalOverlay"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Leave a Review</h2>
+          <button class="modal-close" id="reviewModalClose">
+            <i class="fa-solid fa-times"></i>
+          </button>
         </div>
 
-        <form class="review-form" id="reviewForm">
-          
-          <div class="form-group">
-            <label>Rate your experience</label>
-            <div class="star-rating" id="starRating">
-              <button type="button" class="star-btn">
-                <i class="fa-solid fa-star"></i>
-              </button>
-              <button type="button" class="star-btn">
-                <i class="fa-solid fa-star"></i>
-              </button>
-              <button type="button" class="star-btn">
-                <i class="fa-solid fa-star"></i>
-              </button>
-              <button type="button" class="star-btn">
-                <i class="fa-solid fa-star"></i>
-              </button>
-              <button type="button" class="star-btn">
-                <i class="fa-solid fa-star"></i>
-              </button>
-              <span class="rating-text" id="ratingText">Click to rate</span>
+        <div class="modal-body">
+          <div class="review-food-info">
+            <p class="review-food-name" id="reviewFoodName">2x Avocado Salad</p>
+          </div>
+
+          <form class="review-form" id="reviewForm">
+            <div class="form-group">
+              <label>Rate your experience</label>
+              <div class="star-rating" id="starRating">
+                <button type="button" class="star-btn">
+                  <i class="fa-solid fa-star"></i>
+                </button>
+                <button type="button" class="star-btn">
+                  <i class="fa-solid fa-star"></i>
+                </button>
+                <button type="button" class="star-btn">
+                  <i class="fa-solid fa-star"></i>
+                </button>
+                <button type="button" class="star-btn">
+                  <i class="fa-solid fa-star"></i>
+                </button>
+                <button type="button" class="star-btn">
+                  <i class="fa-solid fa-star"></i>
+                </button>
+                <span class="rating-text" id="ratingText">Click to rate</span>
+              </div>
             </div>
-          </div>
 
-          <div class="form-group">
-            <label for="reviewComment">Your Comment</label>
-            <textarea 
-              id="reviewComment" 
-              class="form-control" 
-              rows="4"
-              placeholder="Share your thoughts about this food..."
-            ></textarea>
-          </div>
+            <div class="form-group">
+              <label for="reviewComment">Your Comment</label>
+              <textarea
+                id="reviewComment"
+                class="form-control"
+                rows="4"
+                placeholder="Share your thoughts about this food..."
+              ></textarea>
+            </div>
 
-          <div class="form-actions">
-            <button type="button" class="btn-cancel" id="reviewCancelBtn">Cancel</button>
-            <button type="submit" class="btn-submit">Submit Review</button>
-          </div>
-
-        </form>
+            <div class="form-actions">
+              <button type="button" class="btn-cancel" id="reviewCancelBtn">
+                Cancel
+              </button>
+              <button type="submit" class="btn-submit">Submit Review</button>
+            </div>
+          </form>
+        </div>
       </div>
-
     </div>
-  </div>
-
-
-</body>
+    <script src="../../script/role.js"></script>
+  </body>
 </html>

@@ -11,94 +11,120 @@
     <link rel="stylesheet" href="../../css/student/map.css">
   </head>
   <body>
- <input type="checkbox" id="menu-checkbox" class="menu-checkbox">
-  <!-- NAVBAR -->
-  <div class="top-nav">
-    <div class="nav-left">
-      <label for="menu-checkbox" class="menu-toggle" id="menuToggle">
-        <i class="fa-solid fa-bars"></i>
-      </label>
+ <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <!-- ════════════════════════════════════════
+         TOP NAVBAR
+         ════════════════════════════════════════ -->
+    <div class="top-nav">
+      <!-- LEFT: hamburger + logo -->
+      <div class="nav-left">
+        <label for="menu-checkbox" class="menu-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </label>
         <a href="#" class="logo">
           <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
           <span class="logo-text">WM EAT SU</span>
         </a>
       </div>
-      <div class="profile">
-        <div class="profile-info">
-          <span class="profile-name">Vaughn Evangelista</span>
-          <span class="email">vaughn.student@wm.edu.ph</span>
-        </div>
-        <div class="profile-dropdown">
-          <button class="profile-btn" id="profileBtn">
-            <img src="../../images/pfp.jpg" class="profile-pic">
-            <i class="fa-solid fa-chevron-down"></i>
+
+      <!-- CENTER: role switcher -->
+      <div class="nav-center">
+        <div class="role-switcher" id="roleSwitcher">
+          <button class="role-btn active" data-role="student" id="roleStudent">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Student</span>
           </button>
-          <div class="dropdown-menu" id="profileDropdown">
-            <a href="../../index.html" class="dropdown-item">
-              <i class="fas fa-sign-out-alt"></i>
-              <span>Log Out</span>
-            </a>
+          <button class="role-btn" data-role="vendor" id="roleVendor">
+            <i class="fa-solid fa-store"></i>
+            <span>Vendor</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT: profile -->
+      <div class="nav-right">
+        <div class="profile">
+          <div class="profile-info">
+            <span class="profile-name">Vaughn Evangelista</span>
+            <span class="email">vaughn.student@wm.edu.ph</span>
+          </div>
+          <div class="profile-dropdown">
+            <button class="profile-btn">
+              <img
+                src="../../images/pfp.jpg"
+                class="profile-pic"
+                alt="Profile"
+              />
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="../../index.html" class="dropdown-item">
+                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- LAYOUT -->
+    <!-- /top-nav -->
+
+    <!-- ════════════════════════════════════════
+         LAYOUT
+         ════════════════════════════════════════ -->
     <div class="layout">
-      <!-- SIDEBAR -->
+      <!-- ── SIDEBAR ── -->
       <div class="left-nav" id="sidebar">
+        <!-- logo shown on mobile inside sidebar -->
+        <div class="sidebar-logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
+        </div>
+
         <ul class="nav-list">
           <li>
             <a href="student-dashboard.html" class="nav-link">
-              <i class="fa-solid fa-house"></i>
-              <span>Dashboard</span>
+              <i class="fa-solid fa-house"></i><span>Dashboard</span>
             </a>
           </li>
           <li>
             <a href="student-browse-food.html" class="nav-link">
-              <i class="fa-solid fa-utensils"></i>
-              <span>Browse Food</span>
+              <i class="fa-solid fa-utensils"></i><span>Browse Food</span>
             </a>
           </li>
           <li>
-            <a href="student-cart.html" class="nav-link">
-              <i class="fa-solid fa-cart-shopping"></i>
-              <span>Cart</span>
+            <a href="student-cart.html" class="nav-link ">
+              <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
+              <span class="nav-badge">3</span>
             </a>
           </li>
           <li>
             <a href="student-order.html" class="nav-link">
-              <i class="fa-solid fa-clock-rotate-left"></i>
-              <span>Orders</span>
+              <i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span>
             </a>
           </li>
           <li>
             <a href="student-wallet.html" class="nav-link">
-              <i class="fa-solid fa-wallet"></i>
-              <span>Wallet</span>
+              <i class="fa-solid fa-wallet"></i><span>Wallet</span>
             </a>
           </li>
           <li>
-            <a href="#" class="nav-link active">
-              <i class="fa-solid fa-location-dot"></i>
-              <span>Campus Map</span>
+            <a href="student-map.html" class="nav-link active">
+              <i class="fa-solid fa-location-dot"></i><span>Campus Map</span>
             </a>
           </li>
           <li>
             <a href="student-feedback.html" class="nav-link">
-              <i class="fa-regular fa-star"></i>
-              <span>Feedback</span>
+              <i class="fa-regular fa-star"></i><span>Feedback</span>
             </a>
           </li>
           <li>
             <a href="student-vendor-applications.html" class="nav-link">
-              <i class="fa-solid fa-rss"></i>
-              <span>Vendor Applications</span>
+              <i class="fa-solid fa-rss"></i><span>Vendor Applications</span>
             </a>
           </li>
         </ul>
-      
-
-    </div>
+      </div>
 
     <main class="main-content">
         <div class="content-header">
@@ -133,7 +159,7 @@
           </div>
         </div>
       </main>
-
+    <script src="../../script/role.js"></script>
     
  </body>
 

@@ -1,98 +1,132 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WM EAT SU - Reports & Complaints</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../../css/student/dashboard.css">
-    <link rel="stylesheet" href="../../css/navbar.css">
-    <link rel="stylesheet" href="../../css/student/feedback.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../css/student/dashboard.css" />
+    <link rel="stylesheet" href="../../css/navbar.css" />
+    <link rel="stylesheet" href="../../css/student/feedback.css" />
   </head>
   <body>
-   <input type="checkbox" id="menu-checkbox" class="menu-checkbox">
-  <!-- NAVBAR -->
-  <div class="top-nav">
-    <div class="nav-left">
-      <label for="menu-checkbox" class="menu-toggle" id="menuToggle">
-        <i class="fa-solid fa-bars"></i>
-      </label>
+    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <!-- ════════════════════════════════════════
+         TOP NAVBAR
+         ════════════════════════════════════════ -->
+    <div class="top-nav">
+      <!-- LEFT: hamburger + logo -->
+      <div class="nav-left">
+        <label for="menu-checkbox" class="menu-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </label>
         <a href="#" class="logo">
           <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
           <span class="logo-text">WM EAT SU</span>
         </a>
       </div>
-      <div class="profile">
-        <div class="profile-info">
-          <span class="profile-name">Vaughn Evangelista</span>
-          <span class="email">vaughn.student@wm.edu.ph</span>
-        </div>
-        <div class="profile-dropdown">
-          <button class="profile-btn" id="profileBtn">
-            <img src="../../images/pfp.jpg" class="profile-pic">
-            <i class="fa-solid fa-chevron-down"></i>
+
+      <!-- CENTER: role switcher -->
+      <div class="nav-center">
+        <div class="role-switcher" id="roleSwitcher">
+          <button class="role-btn active" data-role="student" id="roleStudent">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Student</span>
           </button>
-          <div class="dropdown-menu" id="profileDropdown">
-            <a href="../../index.html" class="dropdown-item">
-              <i class="fas fa-sign-out-alt"></i>
-              <span>Log Out</span>
-            </a>
+          <button class="role-btn" data-role="vendor" id="roleVendor">
+            <i class="fa-solid fa-store"></i>
+            <span>Vendor</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- RIGHT: profile -->
+      <div class="nav-right">
+        <div class="profile">
+          <div class="profile-info">
+            <span class="profile-name">Vaughn Evangelista</span>
+            <span class="email">vaughn.student@wm.edu.ph</span>
+          </div>
+          <div class="profile-dropdown">
+            <button class="profile-btn">
+              <img
+                src="../../images/pfp.jpg"
+                class="profile-pic"
+                alt="Profile"
+              />
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="../../index.html" class="dropdown-item">
+                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- LAYOUT -->
+    <!-- /top-nav -->
+
+    <!-- ════════════════════════════════════════
+         LAYOUT
+         ════════════════════════════════════════ -->
     <div class="layout">
-      <!-- SIDEBAR -->
+      <!-- ── SIDEBAR ── -->
       <div class="left-nav" id="sidebar">
+        <!-- logo shown on mobile inside sidebar -->
+        <div class="sidebar-logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
+        </div>
+
         <ul class="nav-list">
           <li>
             <a href="student-dashboard.html" class="nav-link">
-              <i class="fa-solid fa-house"></i>
-              <span>Dashboard</span>
+              <i class="fa-solid fa-house"></i><span>Dashboard</span>
             </a>
           </li>
           <li>
             <a href="student-browse-food.html" class="nav-link">
-              <i class="fa-solid fa-utensils"></i>
-              <span>Browse Food</span>
+              <i class="fa-solid fa-utensils"></i><span>Browse Food</span>
             </a>
           </li>
           <li>
             <a href="student-cart.html" class="nav-link">
-              <i class="fa-solid fa-cart-shopping"></i>
-              <span>Cart</span>
+              <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
+              <span class="nav-badge">3</span>
             </a>
           </li>
           <li>
             <a href="student-order.html" class="nav-link">
-              <i class="fa-solid fa-clock-rotate-left"></i>
-              <span>Orders</span>
+              <i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span>
             </a>
           </li>
           <li>
             <a href="student-wallet.html" class="nav-link">
-              <i class="fa-solid fa-wallet"></i>
-              <span>Wallet</span>
+              <i class="fa-solid fa-wallet"></i><span>Wallet</span>
             </a>
           </li>
           <li>
             <a href="student-map.html" class="nav-link">
-              <i class="fa-solid fa-location-dot"></i>
-              <span>Campus Map</span>
+              <i class="fa-solid fa-location-dot"></i><span>Campus Map</span>
             </a>
           </li>
           <li>
             <a href="student-feedback.html" class="nav-link active">
-              <i class="fa-regular fa-star"></i>
-              <span>Feedback</span>
+              <i class="fa-regular fa-star"></i><span>Feedback</span>
             </a>
           </li>
           <li>
             <a href="student-vendor-applications.html" class="nav-link">
-              <i class="fa-solid fa-rss"></i>
-              <span>Vendor Applications</span>
+              <i class="fa-solid fa-rss"></i><span>Vendor Applications</span>
             </a>
           </li>
         </ul>
@@ -119,8 +153,13 @@
                 </div>
                 <span class="status-badge status-resolved">Resolved</span>
               </div>
-              <p class="complaint-order">Order: #ORD-2026-1547 - Spicy Dragon Kitchen</p>
-              <p class="complaint-message">I received the wrong food order. I ordered chicken but received beef instead.</p>
+              <p class="complaint-order">
+                Order: #ORD-2026-1547 - Spicy Dragon Kitchen
+              </p>
+              <p class="complaint-message">
+                I received the wrong food order. I ordered chicken but received
+                beef instead.
+              </p>
               <div class="complaint-footer">
                 <span class="filed-date">Filed: March 5, 2026</span>
               </div>
@@ -134,7 +173,9 @@
                 <span class="status-badge status-pending">Pending</span>
               </div>
               <p class="complaint-order">Order: #ORD-2026-1549 - Salad Bar</p>
-              <p class="complaint-message">The salad vegetables were not fresh and tasted spoiled.</p>
+              <p class="complaint-message">
+                The salad vegetables were not fresh and tasted spoiled.
+              </p>
               <div class="complaint-footer">
                 <span class="filed-date">Filed: March 4, 2026</span>
               </div>
@@ -162,19 +203,34 @@
               </div>
               <div class="form-group">
                 <label>Subject *</label>
-                <input type="text" class="form-control" placeholder="Brief description of the issue" required>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Brief description of the issue"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label>Number *</label>
-                <input type="number" class="form-control" placeholder="Personal number" required>
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="Personal number"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label>Description *</label>
-                <textarea class="form-control" rows="5" placeholder="Provide detailed information about your complaint" required></textarea>
+                <textarea
+                  class="form-control"
+                  rows="5"
+                  placeholder="Provide detailed information about your complaint"
+                  required
+                ></textarea>
               </div>
               <div class="form-group">
                 <label>Upload Image (Optional)</label>
-                <input type="file" class="form-control-file">
+                <input type="file" class="form-control-file" />
               </div>
               <div class="form-actions">
                 <a href="#" class="btn-cancel">Cancel</a>
@@ -185,5 +241,7 @@
         </div>
       </div>
     </div>
+
+    <script src="../../script/role.js"></script>
   </body>
 </html>
