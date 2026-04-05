@@ -1,134 +1,155 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WM EAT SU - Admin Student Applications</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WM EAT SU - Admin Student Applications</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
-  <link rel="stylesheet" href="../../css/navbar.css">
-  <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css">
-  <link rel="stylesheet" href="../../css/admin-css/student-applications.css">
-</head>
-<body>
-<!-- top navbar with logo and profile stuff -->
-<input type="checkbox" id="menu-checkbox" class="menu-checkbox">
-  <div class="top-nav">
-    <div class="nav-left">
-      <label for="menu-checkbox" class="menu-toggle">
-     <i class="fa-solid fa-bars"></i>
-      </label>
+    <link rel="stylesheet" href="../../css/navbar.css" />
+    <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="../../css/admin-css/student-applications.css"
+    />
+  </head>
+  <body>
+    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
 
-      <a href="#" class="logo">
-        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-        <span class="logo-text">WM EAT SU</span>
-      </a>
-    </div>
-
-    <div class="profile">
-      <div class="profile-info">
-        <span class="profile-name">Admin Name</span>
-        <span class="email">admin@wmsu.edu.ph</span>
+    <!-- ════════════════════════════════════════
+         TOP NAVBAR
+         ════════════════════════════════════════ -->
+    <div class="top-nav">
+      <!-- LEFT: hamburger + logo -->
+      <div class="nav-left">
+        <label for="menu-checkbox" class="menu-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </label>
+        <a href="#" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
+        </a>
       </div>
-
-      <div class="profile-dropdown">
-        <button class="profile-btn" id="profileBtn">
-          <img src="../../images/pfp.jpg" class="profile-pic">
-          <i class="fa-solid fa-chevron-down"></i>
-        </button>
-        <div class="dropdown-menu" id="profileDropdown">
-          <a href="../../index.html" class="dropdown-item">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Log Out</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="layout">
-
-    <!-- sidebar menu for navigation -->
-    <div class="left-nav" id="sidebar">
-      <ul class="nav-list">
-        <li>
-          <a href="admin-dashboard.html" class="nav-link">
-            <i class="fa-solid fa-house"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-applications.html" class="nav-link active">
-            <i class="fa-solid fa-user-check"></i>
-            <span>Student Applications</span>
-          </a>
-        </li>
-        <li>
-          <a href="complaints.html" class="nav-link">
-            <i class="fa-solid fa-comment-dots"></i>
-            <span>Complaints</span>
-          </a>
-        </li>
-        <li>
-          <a href="create-vendor.html" class="nav-link">
-            <i class="fa-solid fa-user-plus"></i>
-            <span>Create Vendor</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="main-content">
-      <div class="dashboard-section">
-        <!-- page title and description -->
-        <header class="header">
-          <h1>Student Applications</h1>
-          <p>Review and manage student vendor applications</p>
-        </header>
-
-        <!-- shows pending, approved, rejected counts -->
-        <div class="stats-grid">
-          <div class="stat-card pending">
-            <div class="stat-content">
-              <span class="stat-label">Pending</span>
-              <span class="stat-value">0</span>
-            </div>
-            <div class="icon-wrapper">
-              <i class="fa-solid fa-clock"></i>
-            </div>
+      <div class="nav-center"></div>
+      <!-- RIGHT: profile -->
+      <div class="nav-right">
+        <div class="profile">
+          <div class="profile-info">
+            <span class="profile-name">Vaughn Evangelista</span>
+            <span class="email">vaughn.student@wm.edu.ph</span>
           </div>
-
-          <div class="stat-card approved">
-            <div class="stat-content">
-              <span class="stat-label">Approved</span>
-              <span class="stat-value">0</span>
-            </div>
-            <div class="icon-wrapper">
-              <i class="fa-solid fa-circle-check"></i>
-            </div>
-          </div>
-
-          <div class="stat-card rejected">
-            <div class="stat-content">
-              <span class="stat-label">Rejected</span>
-              <span class="stat-value">0</span>
-            </div>
-            <div class="icon-wrapper">
-              <i class="fa-solid fa-circle-xmark"></i>
+          <div class="profile-dropdown">
+            <button class="profile-btn">
+              <img
+                src="../../images/pfp.jpg"
+                class="profile-pic"
+                alt="Profile"
+              />
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="../../index.html" class="dropdown-item">
+                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+              </a>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <!-- /top-nav -->
 
-        <!-- if theres nothing to show, display this message -->
-        <div class="empty-state">
-          <i class="fa-solid fa-file-circle-exclamation"></i>
-          <p>No student applications submitted yet</p>
+    <!-- ════════════════════════════════════════
+         LAYOUT
+         ════════════════════════════════════════ -->
+    <div class="layout">
+      <!-- ── SIDEBAR ── -->
+      <div class="left-nav" id="sidebar">
+        <!-- logo shown on mobile inside sidebar -->
+
+        <ul class="nav-list">
+          <li>
+            <a href="admin-dashboard.html" class="nav-link">
+              <i class="fa-solid fa-house"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-applications.html" class="nav-link active">
+              <i class="fa-solid fa-user-check"></i>
+              <span>Student Applications</span>
+            </a>
+          </li>
+          <li>
+            <a href="complaints.html" class="nav-link">
+              <i class="fa-solid fa-comment-dots"></i>
+              <span>Complaints</span>
+            </a>
+          </li>
+          <li>
+            <a href="create-vendor.html" class="nav-link">
+              <i class="fa-solid fa-user-plus"></i>
+              <span>Create Vendor</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="main-content">
+        <div class="dashboard-section">
+          <!-- page title and description -->
+          <header class="header">
+            <h1>Student Applications</h1>
+            <p>Review and manage student vendor applications</p>
+          </header>
+
+          <!-- shows pending, approved, rejected counts -->
+          <div class="stats-grid">
+            <div class="stat-card pending">
+              <div class="stat-content">
+                <span class="stat-label">Pending</span>
+                <span class="stat-value">0</span>
+              </div>
+              <div class="icon-wrapper">
+                <i class="fa-solid fa-clock"></i>
+              </div>
+            </div>
+
+            <div class="stat-card approved">
+              <div class="stat-content">
+                <span class="stat-label">Approved</span>
+                <span class="stat-value">0</span>
+              </div>
+              <div class="icon-wrapper">
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+            </div>
+
+            <div class="stat-card rejected">
+              <div class="stat-content">
+                <span class="stat-label">Rejected</span>
+                <span class="stat-value">0</span>
+              </div>
+              <div class="icon-wrapper">
+                <i class="fa-solid fa-circle-xmark"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- if theres nothing to show, display this message -->
+          <div class="empty-state">
+            <i class="fa-solid fa-file-circle-exclamation"></i>
+            <p>No student applications submitted yet</p>
+          </div>
         </div>
       </div>
     </div>
-
-  </div> </body>
+  </body>
 </html>

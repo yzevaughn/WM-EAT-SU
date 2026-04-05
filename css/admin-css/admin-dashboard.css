@@ -25,35 +25,7 @@
     --text-sub: #64748b;
 }
 
-/* main layout structure - sidebar and content side by side */
-.layout {
-  display: flex;
-  min-height: 100vh; 
-  position: relative;
-}
 
-/* the actual content area with padding and stuff */
-.main-content{
-margin-left:250px;
-padding:30px 4%;
-background:#f8fafc;
-overflow-y:auto;
-min-height: calc(100vh - 70px);
-}
-
-svg {
-    stroke-width: 2;
-}
-
-/* basic page styles for body and everything */
-body {
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--bg-color);
-    margin: 0;
-    padding: 0;
-    color: var(--text-dark);
-    scrollbar-gutter: stable;
-}
 
 /* heading and description text styling */
 header {

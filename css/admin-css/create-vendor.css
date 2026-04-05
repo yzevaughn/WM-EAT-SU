@@ -1,24 +1,4 @@
-  
-/* reset everything and set default styling */
-* {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
 
-        body {
-            background-color: #f8fafc;
-            padding: 0;
-            color: #1e293b;
-        }
-
-/* main container for the page */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
 
 /* header styling */
         header {
