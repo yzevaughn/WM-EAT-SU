@@ -137,188 +137,360 @@
         </ul>
       </div>
 
-      <!-- MAIN CONTENT -->
       <div class="main-content">
         <div class="orders-page">
           <h2>Order History</h2>
-          <p class="page-subtitle">Track and manage your orders</p>
+          <p class="page-subtitle">Track and manage your campus food orders</p>
 
           <div class="orders-list">
-            <!-- pending order -->
+            <!-- PENDING ORDER -->
             <div class="order-card">
-              <div class="order-card-header">
-                <div class="order-title">
-                  <i class="fa-solid fa-clock status-icon pending-icon"></i>
-                  <span class="canteen-name">Canteen 1</span>
+              <div class="order-card-accent accent-pending"></div>
+              <div class="order-card-inner">
+                <div class="order-card-header">
+                  <div class="order-title">
+                    <div class="order-store-icon ic-pending">
+                      <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <span class="order-card-title">Canteen 1</span>
+                  </div>
+                  <span class="status-badge pending">Pending</span>
                 </div>
-                <span class="status-badge pending">Pending</span>
-              </div>
-              <p class="order-id">Order #033213123123</p>
-              <p class="order-date">3/04/2026, 9:15:00 AM</p>
-              <div class="order-details">
-                <span>1x Burger</span>
-                <span class="order-price-align">₱30.00</span>
-              </div>
-              <p class="pickup-text">Pickup: 10:00 AM</p>
-              <hr />
-              <div class="order-total-row">
-                <div>
-                  <strong>Total: ₱30.00</strong>
+                <div class="order-meta">
+                  <span><i class="fa-solid fa-hashtag"></i> #033213123123</span>
+                  <span
+                    ><i class="fa-regular fa-calendar"></i> Mar 4, 2026 · 9:15
+                    AM</span
+                  >
                 </div>
-                <button class="cancel-btn">
-                  <i class="fa-solid fa-times"></i> Cancel Order
-                </button>
-              </div>
-            </div>
-            <!-- active order ready -->
-            <div class="order-card">
-              <div class="order-card-header">
-                <div class="order-title">
-                  <i class="fa-solid fa-check-circle status-icon"></i>
-                  <span class="canteen-name">Canteen 5</span>
+                <div class="order-items">
+                  <div class="order-item-row">
+                    <span>1× Burger</span><span>₱30.00</span>
+                  </div>
                 </div>
-                <span class="status-badge ready">Ready</span>
-              </div>
-              <p class="order-id">Order #02</p>
-              <p class="order-date">3/7/2026, 11:59:33 AM</p>
-              <div class="order-details">
-                <span>2x Iced Coffee</span>
-                <span class="order-price-align">₱30.00</span>
-              </div>
-              <p class="pickup-text">Pickup: 2:00 PM</p>
-              <hr />
-              <div class="order-total-row">
-                <strong>Total: ₱60.00</strong>
-              </div>
-            </div>
-            <!-- active order preparing -->
-            <div class="order-card">
-              <div class="order-card-header">
-                <div class="order-title">
-                  <i class="fa-solid fa-clock status-icon"></i>
-                  <span class="canteen-name">Canteen 1</span>
-                </div>
-                <span class="status-badge preparing">Preparing</span>
-              </div>
-              <p class="order-id">Order #1772861172498</p>
-              <p class="order-date">3/7/2026, 1:26:12 PM</p>
-              <div class="order-details">
-                <span>1x Burger</span>
-                <span class="order-price-align">₱30.00</span>
-              </div>
-              <p class="pickup-text">Pickup: 12:00 PM</p>
-              <hr />
-              <div class="order-total-row">
-                <strong>Total: ₱30.00</strong>
-              </div>
-            </div>
-            <!-- completed order -->
-            <div class="order-card">
-              <div class="order-card-header">
-                <div class="order-title">
-                  <i class="fa-solid fa-check-circle status-icon"></i>
-                  <span class="canteen-name">Student vendor</span>
-                </div>
-                <span class="status-badge ready">Completed</span>
-              </div>
-              <p class="order-id">Order #12345</p>
-              <p class="order-date">3/6/2026, 10:15:00 AM</p>
-              <div class="order-details">
-                <span>1x Shomai Rice</span>
-                <span class="order-price-align">₱20.00</span>
-              </div>
-              <p class="pickup-text">Pickup: 11:00 AM</p>
-              <hr />
-              <div class="order-total-row">
-                <div>
-                  <strong>Total: ₱20.00</strong>
+                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 12px">
+                  <i class="fa-regular fa-clock"></i> Pickup: 10:00 AM
+                </p>
+                <hr class="order-divider" />
+                <div class="order-total-row">
+                  <span>Total: ₱30.00</span>
+                  <div class="order-actions">
+                    <button class="cancel-btn">
+                      <i class="fa-solid fa-times"></i> Cancel Order
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-            <!-- cancelled order -->
+
+            <!-- READY FOR PICKUP -->
             <div class="order-card">
-              <div class="order-card-header">
-                <div class="order-title">
-                  <i class="fa-solid fa-times-circle status-icon"></i>
-                  <span class="canteen-name">Canteen 4</span>
+              <div class="order-card-accent accent-ready"></div>
+              <div class="order-card-inner">
+                <div class="order-card-header">
+                  <div class="order-title">
+                    <div class="order-store-icon ic-ready">
+                      <i class="fa-solid fa-check-circle"></i>
+                    </div>
+                    <span class="order-card-title">Canteen 5</span>
+                  </div>
+                  <span class="status-badge ready">Ready for Pickup</span>
                 </div>
-                <span class="status-badge cancelled">Cancelled</span>
+                <div class="order-meta">
+                  <span><i class="fa-solid fa-hashtag"></i> #02</span>
+                  <span
+                    ><i class="fa-regular fa-calendar"></i> Mar 7, 2026 · 11:59
+                    AM</span
+                  >
+                </div>
+                <div class="order-items">
+                  <div class="order-item-row">
+                    <span>2× Iced Coffee</span><span>₱60.00</span>
+                  </div>
+                </div>
+                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 12px">
+                  <i class="fa-regular fa-clock"></i> Pickup: 2:00 PM
+                </p>
+                <hr class="order-divider" />
+                <div class="order-total-row"><span>Total: ₱60.00</span></div>
+                <div class="order-actions" style="margin-top: 14px">
+                  <button class="view-code-btn" id="openCodeBtn">
+                    <i class="fa-solid fa-qrcode"></i> View Pickup Code
+                  </button>
+                  <button class="pickup-btn" id="markPickedBtn">
+                    <i class="fa-solid fa-bag-shopping"></i> Mark as Picked Up
+                  </button>
+                </div>
               </div>
-              <p class="order-id">Order #54321</p>
-              <p class="order-date">3/5/2026, 4:00:00 PM</p>
-              <div class="order-details">
-                <span>1x Fries</span>
-                <span class="order-price-align">₱25.00</span>
+            </div>
+
+            <!-- PREPARING -->
+            <div class="order-card">
+              <div class="order-card-accent accent-preparing"></div>
+              <div class="order-card-inner">
+                <div class="order-card-header">
+                  <div class="order-title">
+                    <div class="order-store-icon ic-preparing">
+                      <i class="fa-solid fa-fire-burner"></i>
+                    </div>
+                    <span class="order-card-title">Canteen 1</span>
+                  </div>
+                  <span class="status-badge preparing">Preparing</span>
+                </div>
+                <div class="order-meta">
+                  <span
+                    ><i class="fa-solid fa-hashtag"></i> #1772861172498</span
+                  >
+                  <span
+                    ><i class="fa-regular fa-calendar"></i> Mar 7, 2026 · 1:26
+                    PM</span
+                  >
+                </div>
+                <div class="order-items">
+                  <div class="order-item-row">
+                    <span>1× Burger</span><span>₱30.00</span>
+                  </div>
+                </div>
+                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 12px">
+                  <i class="fa-regular fa-clock"></i> Pickup: 12:00 PM
+                </p>
+                <hr class="order-divider" />
+                <div class="order-total-row"><span>Total: ₱30.00</span></div>
               </div>
-              <p class="pickup-text">Pickup: 5:00 PM</p>
-              <hr />
-              <div class="order-total-row">
-                <strong>Total: ₱25.00</strong>
+            </div>
+
+            <!-- COMPLETED -->
+            <div class="order-card">
+              <div class="order-card-accent accent-completed"></div>
+              <div class="order-card-inner">
+                <div class="order-card-header">
+                  <div class="order-title">
+                    <div class="order-store-icon ic-completed">
+                      <i class="fa-solid fa-check-double"></i>
+                    </div>
+                    <span class="order-card-title">Student Vendor</span>
+                  </div>
+                  <span class="status-badge completed">Completed</span>
+                </div>
+                <div class="order-meta">
+                  <span><i class="fa-solid fa-hashtag"></i> #12345</span>
+                  <span
+                    ><i class="fa-regular fa-calendar"></i> Mar 6, 2026 · 10:15
+                    AM</span
+                  >
+                </div>
+                <div class="order-items">
+                  <div class="order-item-row">
+                    <span>1× Shomai Rice</span><span>₱20.00</span>
+                  </div>
+                </div>
+                <hr class="order-divider" />
+                <div class="order-total-row"><span>Total: ₱20.00</span></div>
+              </div>
+            </div>
+
+            <!-- CANCELLED BY VENDOR -->
+            <div class="order-card">
+              <div class="order-card-accent accent-cancelled"></div>
+              <div class="order-card-inner">
+                <div class="order-card-header">
+                  <div class="order-title">
+                    <div class="order-store-icon ic-cancelled">
+                      <i class="fa-solid fa-ban"></i>
+                    </div>
+                    <span class="order-card-title">Canteen 4</span>
+                  </div>
+                  <span class="status-badge cancelled"
+                    >Cancelled by Vendor</span
+                  >
+                </div>
+                <div class="order-meta">
+                  <span><i class="fa-solid fa-hashtag"></i> #54321</span>
+                  <span
+                    ><i class="fa-regular fa-calendar"></i> Mar 5, 2026 · 4:00
+                    PM</span
+                  >
+                </div>
+                <div class="order-items">
+                  <div class="order-item-row">
+                    <span>1× Fries</span><span>₱25.00</span>
+                  </div>
+                </div>
+                <p style="font-size: 12px; color: #ef4444; margin-bottom: 8px">
+                  <i class="fa-solid fa-circle-info"></i> The vendor has
+                  cancelled this order. A refund will be processed.
+                </p>
+                <hr class="order-divider" />
+                <div class="order-total-row"><span>Total: ₱25.00</span></div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PICKUP CODE MODAL -->
+    <div class="modal" id="pickupModal">
+      <div class="modal-overlay" id="pickupOverlay"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Pickup Code</h2>
+          <button class="modal-close" id="closePickupModal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="pickup-code-card">
+            <div class="pickup-code-label">Your pickup code</div>
+            <div class="pickup-code-value">A7C3</div>
+            <div class="pickup-code-order">Order #02 · Canteen 5</div>
+          </div>
+          <div class="modal-info-row">
+            <span class="modal-info-label">Status</span>
+            <span class="modal-info-value" style="color: #22c55e"
+              >✔ Ready for Pickup</span
+            >
+          </div>
+          <div class="modal-info-row">
+            <span class="modal-info-label">Estimated Pickup</span>
+            <span class="modal-info-value">2:00 PM</span>
+          </div>
+          <div class="modal-info-row">
+            <span class="modal-info-label">Items</span>
+            <span class="modal-info-value">2× Iced Coffee</span>
+          </div>
+          <p
+            style="
+              font-size: 12px;
+              color: #94a3b8;
+              margin-top: 16px;
+              text-align: center;
+            "
+          >
+            Show this code to the vendor when picking up your order.
+          </p>
         </div>
       </div>
     </div>
 
     <!-- REVIEW MODAL -->
     <div class="modal" id="reviewModal">
-      <div class="modal-overlay" id="reviewModalOverlay"></div>
+      <div class="modal-overlay" id="reviewOverlay"></div>
       <div class="modal-content">
         <div class="modal-header">
           <h2>Leave a Review</h2>
-          <button class="modal-close" id="reviewModalClose">
-            <i class="fa-solid fa-times"></i>
+          <button class="modal-close" id="closeReviewModal">
+            <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
-
         <div class="modal-body">
-          <div class="review-food-info">
-            <p class="review-food-name" id="reviewFoodName">2x Avocado Salad</p>
-          </div>
-
-          <form class="review-form" id="reviewForm">
-            <div class="form-group">
-              <label>Rate your experience</label>
-              <div class="star-rating" id="starRating">
-                <button type="button" class="star-btn">
-                  <i class="fa-solid fa-star"></i>
-                </button>
-                <button type="button" class="star-btn">
-                  <i class="fa-solid fa-star"></i>
-                </button>
-                <button type="button" class="star-btn">
-                  <i class="fa-solid fa-star"></i>
-                </button>
-                <button type="button" class="star-btn">
-                  <i class="fa-solid fa-star"></i>
-                </button>
-                <button type="button" class="star-btn">
-                  <i class="fa-solid fa-star"></i>
-                </button>
-                <span class="rating-text" id="ratingText">Click to rate</span>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="reviewComment">Your Comment</label>
-              <textarea
-                id="reviewComment"
-                class="form-control"
-                rows="4"
-                placeholder="Share your thoughts about this food..."
-              ></textarea>
-            </div>
-
-            <div class="form-actions">
-              <button type="button" class="btn-cancel" id="reviewCancelBtn">
-                Cancel
+          <div class="form-group">
+            <label>Rate your experience</label>
+            <div class="star-rating" id="starRating">
+              <button type="button" class="star-btn">
+                <i class="fa-solid fa-star"></i>
               </button>
-              <button type="submit" class="btn-submit">Submit Review</button>
+              <button type="button" class="star-btn">
+                <i class="fa-solid fa-star"></i>
+              </button>
+              <button type="button" class="star-btn">
+                <i class="fa-solid fa-star"></i>
+              </button>
+              <button type="button" class="star-btn">
+                <i class="fa-solid fa-star"></i>
+              </button>
+              <button type="button" class="star-btn">
+                <i class="fa-solid fa-star"></i>
+              </button>
+              <span class="rating-text">Click to rate</span>
             </div>
-          </form>
+          </div>
+          <div class="form-group">
+            <label>Comment</label>
+            <textarea
+              class="form-control"
+              rows="4"
+              placeholder="Share your thoughts..."
+            ></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="btn-cancel" id="cancelReview">Cancel</button>
+            <button class="btn-submit">Submit Review</button>
+          </div>
         </div>
       </div>
     </div>
+
+    <div id="toast-container"></div>
+
+    <script>
+      /* ── Pickup Code Modal ── */
+      document.getElementById("openCodeBtn").onclick = () =>
+        document.getElementById("pickupModal").classList.add("active");
+      document.getElementById("closePickupModal").onclick = () =>
+        document.getElementById("pickupModal").classList.remove("active");
+      document.getElementById("pickupOverlay").onclick = () =>
+        document.getElementById("pickupModal").classList.remove("active");
+
+      /* ── Mark as Picked Up → Review Modal ── */
+      document.getElementById("markPickedBtn").onclick = () => {
+        document.getElementById("pickupModal").classList.remove("active");
+        document.getElementById("reviewModal").classList.add("active");
+      };
+      document.getElementById("closeReviewModal").onclick = () =>
+        document.getElementById("reviewModal").classList.remove("active");
+      document.getElementById("reviewOverlay").onclick = () =>
+        document.getElementById("reviewModal").classList.remove("active");
+      document.getElementById("cancelReview").onclick = () =>
+        document.getElementById("reviewModal").classList.remove("active");
+
+      /* ── Star rating ── */
+      const stars = document.querySelectorAll(".star-btn");
+      const ratingText = document.querySelector(".rating-text");
+      const labels = ["", "Poor", "Fair", "Good", "Very Good", "Excellent"];
+      let selected = 0;
+      stars.forEach((btn, i) => {
+        btn.addEventListener("mouseenter", () => highlight(i + 1));
+        btn.addEventListener("mouseleave", () => highlight(selected));
+        btn.addEventListener("click", () => {
+          selected = i + 1;
+          highlight(selected);
+          ratingText.textContent = labels[selected];
+        });
+      });
+      function highlight(n) {
+        stars.forEach((b, i) => b.classList.toggle("active", i < n));
+      }
+
+      /* ── Cancel order ── */
+      document.querySelectorAll(".cancel-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          btn.closest(".order-card").style.opacity = ".5";
+          btn.textContent = "Cancelled";
+          btn.disabled = true;
+        });
+      });
+
+      /* ── Review submit ── */
+      document.querySelector(".btn-submit").addEventListener("click", () => {
+        document.getElementById("reviewModal").classList.remove("active");
+        showToast("success", "fa-star", "Review submitted! Thank you.");
+      });
+
+      function showToast(type, icon, msg) {
+        const el = document.createElement("div");
+        el.className = `toast ${type}`;
+        el.innerHTML = `<i class="fa-solid ${icon}"></i><span>${msg}</span>`;
+        document.getElementById("toast-container").appendChild(el);
+        setTimeout(() => {
+          el.classList.add("fade-out");
+          setTimeout(() => el.remove(), 300);
+        }, 3200);
+      }
+
+      document.getElementById("sidebarOverlay").onclick = () => {
+        document.getElementById("menu-checkbox").checked = false;
+      };
+    </script>
   </body>
 </html>
