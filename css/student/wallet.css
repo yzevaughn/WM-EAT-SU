@@ -411,6 +411,42 @@ input[name="amount"]:checked+.quick-btn {
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 
+.custom-amount-input.invalid {
+  border-color: #dc2626;
+  background-color: #fff1f2;
+}
+
+.custom-amount-input.invalid:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* ERROR MESSAGES */
+.error-message {
+  color: #dc2626;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 6px;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.error-message.show {
+  height: 18px;
+  opacity: 1;
+}
+
+.payment-methods.invalid {
+  border: 1px solid #fee2e2;
+  padding: 10px;
+  border-radius: 12px;
+  background: #fff1f2;
+}
+
 /* WIZARD & DISPLAY HELPERS */
 .hidden-step {
   display: none !important;

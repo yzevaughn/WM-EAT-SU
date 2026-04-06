@@ -196,8 +196,7 @@
         <div class="modal-body" id="step1Body">
           <!-- PAYMENT METHOD -->
           <div class="form-section">
-            <label class="form-label">Select Payment Method</label>
-            <div class="payment-methods">
+            <div class="payment-methods" id="paymentMethods">
               <input type="radio" name="payment" id="gcash" />
               <label for="gcash" class="payment-method-btn">
                 <img src="../../images/gcash-logo.png" class="method-logo" />
@@ -213,6 +212,10 @@
                 <i class="fa-solid fa-credit-card"></i>
                 <span class="method-name">Bank Card</span>
               </label>
+            </div>
+            <div id="methodError" class="error-message">
+              <i class="fa-solid fa-circle-exclamation"></i>
+              <span>Please select a payment method</span>
             </div>
           </div>
           <!-- QUICK AMOUNT -->
@@ -235,6 +238,10 @@
                 <span class="currency-prefix">₱</span>
                 <input type="number" id="customAmount" class="custom-amount-input" placeholder="0.00" min="10" />
               </div>
+              <div id="amountError" class="error-message">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span>Please enter a valid amount (Min. ₱10.00)</span>
+              </div>
             </div>
           </div>
         </div>
@@ -256,6 +263,10 @@
            <div class="form-section" id="phoneInputGroup">
              <label class="form-label">Mobile Number</label>
              <input type="tel" id="mobileNumber" class="custom-amount-input" placeholder="09XXXXXXXXX" />
+             <div id="phoneError" class="error-message">
+               <i class="fa-solid fa-circle-exclamation"></i>
+               <span>Please enter a valid 11-digit mobile number</span>
+             </div>
            </div>
 
            <!-- Bank Input (For Bank Card) -->
@@ -278,11 +289,15 @@
            <h3 style="margin-top:0;">Enter OTP</h3>
            <p style="color:#6b7280; font-size:14px; margin-bottom: 20px;">A 4-digit PIN has been sent to your mobile number.</p>
            
-           <div class="otp-container">
+           <div class="otp-container" id="otpContainer">
               <input type="text" class="otp-digit" maxlength="1">
               <input type="text" class="otp-digit" maxlength="1">
               <input type="text" class="otp-digit" maxlength="1">
               <input type="text" class="otp-digit" maxlength="1">
+           </div>
+           <div id="otpError" class="error-message" style="justify-content: center;">
+             <i class="fa-solid fa-circle-exclamation"></i>
+             <span>Please enter the 4-digit OTP</span>
            </div>
         </div>
 
@@ -305,10 +320,40 @@
     <div class="toast-container" id="toastContainer"></div>
 
     <script>
+       const paymentMethods = document.getElementById('paymentMethods');
+
        // QUICK AMOUNT LOGIC
        const quickAmounts = document.querySelectorAll('.quick-btn');
        const customInput = document.getElementById('customAmount');
        const paymentInputs = document.querySelectorAll('input[name="payment"]');
+
+       function clearErrors() {
+         document.querySelectorAll('.error-message').forEach(err => err.classList.remove('show'));
+         document.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+       }
+
+       // Auto-clear error when user starts typing or selecting
+       customInput.addEventListener('input', () => {
+         customInput.classList.remove('invalid');
+         document.getElementById('amountError').classList.remove('show');
+       });
+
+       paymentInputs.forEach(input => {
+         input.addEventListener('change', () => {
+           paymentMethods.classList.remove('invalid');
+           document.getElementById('methodError').classList.remove('show');
+         });
+       });
+
+       document.getElementById('mobileNumber').addEventListener('input', () => {
+         document.getElementById('mobileNumber').classList.remove('invalid');
+         document.getElementById('phoneError').classList.remove('show');
+       });
+
+       document.getElementById('bankAccount').addEventListener('input', () => {
+         document.getElementById('bankAccount').classList.remove('invalid');
+         document.getElementById('bankError').classList.remove('show');
+       });
 
        quickAmounts.forEach(btn => {
          btn.addEventListener('click', (e) => {
@@ -316,25 +361,34 @@
            const val = parseInt(e.target.innerText.replace('₱', ''));
            if(!isNaN(val)) {
              customInput.value = val;
+             // Clear error when quick amount is picked
+             customInput.classList.remove('invalid');
+             document.getElementById('amountError').classList.remove('show');
            }
          });
        });
 
        // WIZARD LOGIC
        function goToStep2() {
+          clearErrors();
           let selectedMethod = null;
           paymentInputs.forEach(i => { if(i.checked) selectedMethod = i.id; });
           
+          let hasError = false;
           if(!selectedMethod) {
-            alert('Please select a payment method.');
-            return;
+            paymentMethods.classList.add('invalid');
+            document.getElementById('methodError').classList.add('show');
+            hasError = true;
           }
 
           const amount = parseFloat(customInput.value);
           if(!amount || amount < 10) {
-            alert('Please enter a valid amount of at least ₱10.');
-            return;
+            customInput.classList.add('invalid');
+            document.getElementById('amountError').classList.add('show');
+            hasError = true;
           }
+
+          if(hasError) return;
 
           // Setup Summary Data
           const summaryMethodText = selectedMethod === 'gcash' ? 'GCash' : (selectedMethod === 'maya' ? 'Maya' : 'Bank Card');
@@ -360,6 +414,7 @@
        }
 
        function goToStep1() {
+          clearErrors();
           document.getElementById('step3Body').classList.add('hidden-step');
           document.getElementById('step3Footer').classList.add('hidden-step');
           document.getElementById('step2Body').classList.add('hidden-step');
@@ -369,6 +424,7 @@
        }
 
        function goToStep3() {
+          clearErrors();
           document.getElementById('step1Body').classList.add('hidden-step');
           document.getElementById('step1Footer').classList.add('hidden-step');
           document.getElementById('step2Body').classList.add('hidden-step');
@@ -378,18 +434,25 @@
        }
 
        function processStep2() {
+          clearErrors();
           let selectedMethod = null;
           paymentInputs.forEach(i => { if(i.checked) selectedMethod = i.id; });
           
           if(selectedMethod === 'card') {
-            if(!document.getElementById('bankAccount').value.trim()) {
-               alert("Please enter a valid bank account number.");
+            const accField = document.getElementById('bankAccount');
+            if(!accField.value.trim()) {
+               accField.classList.add('invalid');
+               document.getElementById('bankError').classList.add('show');
                return;
             }
             finalizeTopUp(); // Bank jumps right to end
           } else {
-            if(!document.getElementById('mobileNumber').value.trim()) {
-               alert("Please enter a valid mobile number.");
+            const phoneField = document.getElementById('mobileNumber');
+            const phoneVal = phoneField.value.trim();
+            // Basic 11 digit check for PH numbers
+            if(!phoneVal || phoneVal.length < 11) {
+               phoneField.classList.add('invalid');
+               document.getElementById('phoneError').classList.add('show');
                return;
             }
             goToStep3(); // Mobile jumps to OTP
@@ -407,7 +470,8 @@
              let otpVal = '';
              boxes.forEach(b => otpVal += b.value);
              if(otpVal.length < 4) {
-                 alert("Please enter your 4-digit OTP.");
+                 boxes.forEach(b => b.classList.add('invalid'));
+                 document.getElementById('otpError').classList.add('show');
                  return;
              }
           }
@@ -421,27 +485,36 @@
              customInput.value = '';
              document.getElementById('mobileNumber').value = '';
              document.getElementById('bankAccount').value = '';
-             document.querySelectorAll('.otp-digit').forEach(b => b.value = '');
+             document.querySelectorAll('.otp-digit').forEach(b => {
+                b.value = '';
+                b.classList.remove('invalid');
+             });
           }, 300);
 
           // Show Toast
           showToast('Successfully topped up wallet!');
        }
 
-       // Auto advance OTP boxes
-       const otpInputs = document.querySelectorAll('.otp-digit');
-       otpInputs.forEach((input, index) => {
-         input.addEventListener('input', (e) => {
-            if(input.value.length === 1 && index < otpInputs.length - 1) {
-                otpInputs[index + 1].focus();
-            }
-         });
-         input.addEventListener('keydown', (e) => {
-            if(e.key === 'Backspace' && input.value === '' && index > 0) {
-                otpInputs[index - 1].focus();
-            }
-         });
-       });
+        // Auto advance OTP boxes
+        const otpInputs = document.querySelectorAll('.otp-digit');
+        otpInputs.forEach((input, index) => {
+          input.addEventListener('input', (e) => {
+             // Clear errors when typing
+             input.classList.remove('invalid');
+             if(document.getElementById('otpError')) {
+                document.getElementById('otpError').classList.remove('show');
+             }
+
+             if(input.value.length === 1 && index < otpInputs.length - 1) {
+                 otpInputs[index + 1].focus();
+             }
+          });
+          input.addEventListener('keydown', (e) => {
+             if(e.key === 'Backspace' && input.value === '' && index > 0) {
+                 otpInputs[index - 1].focus();
+             }
+          });
+        });
 
        function showToast(message) {
          const container = document.getElementById('toastContainer');
