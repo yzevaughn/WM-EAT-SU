@@ -1,257 +1,221 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU - Admin Portal</title>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WM EAT SU - Admin Portal</title>
 
-    <link rel="stylesheet" href="../../css/navbar.css" />
-    <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css" />
-  </head>
-  <body>
-    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <!-- ════════════════════════════════════════
+  <link rel="stylesheet" href="../../css/navbar.css" />
+  <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css" />
+</head>
+
+<body>
+  <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+
+  <!-- ════════════════════════════════════════
          TOP NAVBAR
          ════════════════════════════════════════ -->
-    <div class="top-nav">
-      <!-- LEFT: hamburger + logo -->
-      <div class="nav-left">
-        <label for="menu-checkbox" class="menu-toggle">
-          <i class="fa-solid fa-bars"></i>
-        </label>
-        <a href="#" class="logo">
-          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-          <span class="logo-text">WM EAT SU</span>
-        </a>
-      </div>
+  <div class="top-nav">
+    <!-- LEFT: hamburger + logo -->
+    <div class="nav-left">
+      <label for="menu-checkbox" class="menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </label>
+      <a href="#" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
+    </div>
 
-      <div class="nav-center"></div>
-      <!-- RIGHT: profile -->
-      <div class="nav-right">
-        <div class="profile">
-          <div class="profile-info">
-            <span class="profile-name">Vaughn Evangelista</span>
-            <span class="email">vaughn.student@wm.edu.ph</span>
-          </div>
-          <div class="profile-dropdown">
-            <button class="profile-btn">
-              <img
-                src="../../images/pfp.jpg"
-                class="profile-pic"
-                alt="Profile"
-              />
-              <i class="fa-solid fa-chevron-down"></i>
-            </button>
-            <div class="dropdown-menu">
-              <a href="../../index.html" class="dropdown-item">
-                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
-              </a>
-            </div>
+    <div class="nav-center"></div>
+    <!-- RIGHT: profile -->
+    <div class="nav-right">
+      <div class="profile">
+        <div class="profile-info">
+          <span class="profile-name">Vaughn Evangelista</span>
+          <span class="email">vaughn.student@wm.edu.ph</span>
+        </div>
+        <div class="profile-dropdown">
+          <button class="profile-btn">
+            <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" />
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-menu">
+            <a href="../../index.html" class="dropdown-item">
+              <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+            </a>
           </div>
         </div>
       </div>
     </div>
-    <!-- /top-nav -->
+  </div>
+  <!-- /top-nav -->
 
-    <!-- ════════════════════════════════════════
+  <!-- ════════════════════════════════════════
          LAYOUT
          ════════════════════════════════════════ -->
-    <div class="layout">
-      <!-- ── SIDEBAR ── -->
-      <div class="left-nav" id="sidebar">
-        <!-- logo shown on mobile inside sidebar -->
+  <div class="layout">
+    <!-- ── SIDEBAR ── -->
+    <div class="left-nav" id="sidebar">
+      <!-- logo shown on mobile inside sidebar -->
 
-        <ul class="nav-list">
-          <li>
-            <a href="admin-dashboard.html" class="nav-link active">
-              <i class="fa-solid fa-house"></i>
-              <span>Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-applications.html" class="nav-link">
-              <i class="fa-solid fa-user-check"></i>
-              <span>Student Applications</span>
-            </a>
-          </li>
-          <li>
-            <a href="complaints.html" class="nav-link">
-              <i class="fa-solid fa-comment-dots"></i>
-              <span>Complaints</span>
-            </a>
-          </li>
-          <li>
-            <a href="create-vendor.html" class="nav-link">
-              <i class="fa-solid fa-user-plus"></i>
-              <span>Create Vendor</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+      <ul class="nav-list">
+        <li>
+          <a href="admin-dashboard.html" class="nav-link active">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-applications.html" class="nav-link">
+            <i class="fa-solid fa-user-check"></i>
+            <span>Student Applications</span>
+          </a>
+        </li>
+        <li>
+          <a href="complaints.html" class="nav-link">
+            <i class="fa-solid fa-comment-dots"></i>
+            <span>Complaints</span>
+          </a>
+        </li>
+        <li>
+          <a href="create-vendor.html" class="nav-link">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>Create Vendor</span>
+          </a>
+        </li>
+      </ul>
+    </div>
 
-      <div class="main-content">
-        <header>
-          <h1>Admin Dashboard</h1>
-          <p class="subtitle">
-            System overview and quick access to management tools
-          </p>
-        </header>
+    <div class="main-content">
+      <header>
+        <h1>Admin Dashboard</h1>
+        <p class="subtitle">
+          System overview and quick access to management tools
+        </p>
+      </header>
 
-        <div class="dashboard-container">
-          <!-- main numbers showing orders, vendors, system health -->
-          <div class="metrics-grid">
-            <div class="metric-card bg-blue">
-              <h4></h4>
-              <h2></h2>
-              <p></p>
-              <div class="metric-icon">
-                <i class="fa-solid fa-bag-shopping"></i>
+      <div class="dashboard-container">
+        <!-- main numbers showing orders, vendors, system health -->
+        <div class="metrics-grid">
+          <div class="metric-card bg-blue">
+            <h4></h4>
+            <h2></h2>
+            <p></p>
+            <div class="metric-icon">
+            </div>
+          </div>
+          <div class="metric-card bg-green">
+            <h4></h4>
+            <h2></h2>
+            <p></p>
+            <div class="metric-icon"></div>
+          </div>
+          <div class="metric-card bg-purple">
+            <h4></h4>
+            <h2></h2>
+            <p></p>
+            <div class="metric-icon"></div>
+          </div>
+        </div>
+
+        <!-- quick action cards for common tasks -->
+        <div class="fade-grid">
+          <div class="fade-card yellow-fade">
+            <span class="badge-minimal">0</span>
+            <i class="fa-solid fa-file-lines" style="color: #b45309"></i>
+            <h3>Student Applications</h3>
+            <p>Pending vendor applications</p>
+            <a href="student-applications.html" class="link" style="color: #b45309">Review Applications →</a>
+          </div>
+          <div class="fade-card yellow-fade">
+            <span class="badge-minimal">0</span>
+            <i class="fa-solid fa-user-plus" style="color: #b45309"></i>
+            <h3>Create Vendor Account</h3>
+            <p>Add new vendors</p>
+            <a href="create-vendor.html" class="link" style="color: #b45309">Create Vendor →</a>
+          </div>
+          <div class="fade-card yellow-fade">
+            <span class="badge-minimal">0</span>
+            <i class="fa-solid fa-circle-exclamation" style="color: #b45309"></i>
+            <h3>Open Complaints</h3>
+            <p>Issues needing attention</p>
+            <a href="complaints.html" class="link" style="color: #b45309">View Complaints →</a>
+          </div>
+        </div>
+
+        <!-- showing Queue and System Status info -->
+        <div class="status-grid">
+          <div class="saas-card approval-queue">
+            <div class="saas-card-header">
+              <span class="saas-card-title"><i class="fa-solid fa-clock saas-icon-amber"></i> Approval
+                Queue</span>
+              <span class="saas-badge">0 items</span>
+            </div>
+            <div class="saas-list-item">
+              <span class="saas-list-icon saas-icon-amber"><i class="fa-solid fa-store"></i></span>
+              <div class="saas-list-info">
+                <span class="saas-list-title">Pending Vendors</span>
+                <span class="saas-list-desc">New registrations</span>
               </div>
+              <span class="saas-list-badge saas-badge-amber">0</span>
             </div>
-            <div class="metric-card bg-green">
-              <h4>Active Vendors</h4>
-              <h2>0</h2>
-              <p>Approved</p>
-              <div class="metric-icon"></div>
+            <div class="saas-list-item">
+              <span class="saas-list-icon saas-icon-amber"><i class="fa-solid fa-bag-shopping"></i></span>
+              <div class="saas-list-info">
+                <span class="saas-list-title">Pending Menu Items</span>
+                <span class="saas-list-desc">Food items to review</span>
+              </div>
+              <span class="saas-list-badge saas-badge-amber">0</span>
             </div>
-            <div class="metric-card bg-purple">
-              <h4></h4>
-              <h2></h2>
-              <p></p>
-              <div class="metric-icon"></div>
+            <div class="saas-list-item">
+              <span class="saas-list-icon saas-icon-amber"><i class="fa-solid fa-file-lines"></i></span>
+              <div class="saas-list-info">
+                <span class="saas-list-title">Pending Posts</span>
+                <span class="saas-list-desc">Posts awaiting review</span>
+              </div>
+              <span class="saas-list-badge saas-badge-amber">0</span>
             </div>
           </div>
 
-          <!-- quick action cards for common tasks -->
-          <div class="fade-grid">
-            <div class="fade-card yellow-fade">
-              <span class="badge-minimal">0</span>
-              <i class="fa-solid fa-file-lines" style="color: #b45309"></i>
-              <h3>Student Applications</h3>
-              <p>Pending vendor applications</p>
-              <a
-                href="student-applications.html"
-                class="link"
-                style="color: #b45309"
-                >Review Applications →</a
-              >
+          <div class="saas-card system-status">
+            <div class="saas-card-header">
+              <span class="saas-card-title"><i class="fa-solid fa-chart-line saas-icon-blue"></i> System
+                Status</span>
             </div>
-            <div class="fade-card yellow-fade">
-              <span class="badge-minimal">0</span>
-              <i class="fa-solid fa-user-plus" style="color: #b45309"></i>
-              <h3>Create Vendor Account</h3>
-              <p>Add new vendors</p>
-              <a href="create-vendor.html" class="link" style="color: #b45309"
-                >Create Vendor →</a
-              >
+            <div class="saas-list-item">
+              <span class="saas-list-icon saas-icon-green"><i class="fa-solid fa-circle-check"></i></span>
+              <div class="saas-list-info">
+                <span class="saas-list-title">Platform Status</span>
+                <span class="saas-list-desc">All operational</span>
+              </div>
+              <span class="saas-list-badge saas-badge-green">Online</span>
             </div>
-            <div class="fade-card yellow-fade">
-              <span class="badge-minimal">0</span>
-              <i
-                class="fa-solid fa-circle-exclamation"
-                style="color: #b45309"
-              ></i>
-              <h3>Open Complaints</h3>
-              <p>Issues needing attention</p>
-              <a href="complaints.html" class="link" style="color: #b45309"
-                >View Complaints →</a
-              >
+            <div class="saas-list-item">
+              <span class="saas-list-icon saas-icon-blue"><i class="fa-solid fa-users"></i></span>
+              <div class="saas-list-info">
+                <span class="saas-list-title">Total Vendors</span>
+                <span class="saas-list-desc">Active on platform</span>
+              </div>
+              <span class="saas-list-badge saas-badge-blue">9</span>
             </div>
-          </div>
-
-          <!-- showing Queue and System Status info -->
-          <div class="status-grid">
-            <div class="saas-card approval-queue">
-              <div class="saas-card-header">
-                <span class="saas-card-title"
-                  ><i class="fa-solid fa-clock saas-icon-amber"></i> Approval
-                  Queue</span
-                >
-                <span class="saas-badge">0 items</span>
+            <div class="saas-list-item">
+              <span class="saas-list-icon saas-icon-blue"><i class="fa-solid fa-list"></i></span>
+              <div class="saas-list-info">
+                <span class="saas-list-title">Active Menu</span>
+                <span class="saas-list-desc">Items currently live</span>
               </div>
-              <div class="saas-list-item">
-                <span class="saas-list-icon saas-icon-amber"
-                  ><i class="fa-solid fa-store"></i
-                ></span>
-                <div class="saas-list-info">
-                  <span class="saas-list-title">Pending Vendors</span>
-                  <span class="saas-list-desc">New registrations</span>
-                </div>
-                <span class="saas-list-badge saas-badge-amber">0</span>
-              </div>
-              <div class="saas-list-item">
-                <span class="saas-list-icon saas-icon-amber"
-                  ><i class="fa-solid fa-bag-shopping"></i
-                ></span>
-                <div class="saas-list-info">
-                  <span class="saas-list-title">Pending Menu Items</span>
-                  <span class="saas-list-desc">Food items to review</span>
-                </div>
-                <span class="saas-list-badge saas-badge-amber">0</span>
-              </div>
-              <div class="saas-list-item">
-                <span class="saas-list-icon saas-icon-amber"
-                  ><i class="fa-solid fa-file-lines"></i
-                ></span>
-                <div class="saas-list-info">
-                  <span class="saas-list-title">Pending Posts</span>
-                  <span class="saas-list-desc">Posts awaiting review</span>
-                </div>
-                <span class="saas-list-badge saas-badge-amber">0</span>
-              </div>
-            </div>
-
-            <div class="saas-card system-status">
-              <div class="saas-card-header">
-                <span class="saas-card-title"
-                  ><i class="fa-solid fa-chart-line saas-icon-blue"></i> System
-                  Status</span
-                >
-              </div>
-              <div class="saas-list-item">
-                <span class="saas-list-icon saas-icon-green"
-                  ><i class="fa-solid fa-circle-check"></i
-                ></span>
-                <div class="saas-list-info">
-                  <span class="saas-list-title">Platform Status</span>
-                  <span class="saas-list-desc">All operational</span>
-                </div>
-                <span class="saas-list-badge saas-badge-green">Online</span>
-              </div>
-              <div class="saas-list-item">
-                <span class="saas-list-icon saas-icon-blue"
-                  ><i class="fa-solid fa-users"></i
-                ></span>
-                <div class="saas-list-info">
-                  <span class="saas-list-title">Total Vendors</span>
-                  <span class="saas-list-desc">Active on platform</span>
-                </div>
-                <span class="saas-list-badge saas-badge-blue">9</span>
-              </div>
-              <div class="saas-list-item">
-                <span class="saas-list-icon saas-icon-blue"
-                  ><i class="fa-solid fa-list"></i
-                ></span>
-                <div class="saas-list-info">
-                  <span class="saas-list-title">Active Menu</span>
-                  <span class="saas-list-desc">Items currently live</span>
-                </div>
-                <span class="saas-list-badge saas-badge-blue">0</span>
-              </div>
+              <span class="saas-list-badge saas-badge-blue">0</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

@@ -154,6 +154,7 @@
                   <p class="transaction-type">Order Payment - Burger Meal</p>
                   <p class="transaction-date">Mar 5, 2026 - 12:30 PM</p>
                 </div>
+                <div class="transaction-amount positive">+₱12.99</div>
               </div>
             </div>
           </div>
@@ -161,7 +162,6 @@
       </div>
     </div>
 
-    <
     <!-- checkbox to show/hide modal -->
     <input type="checkbox" id="withdrawToggle" style="display: none" />
 
@@ -185,6 +185,7 @@
                 type="radio"
                 name="withdraw-method"
                 id="gcash"
+                value="GCash"
                 style="display: none"
               />
               <label for="gcash" class="payment-method-btn">
@@ -195,6 +196,7 @@
                 type="radio"
                 name="withdraw-method"
                 id="maya"
+                value="Maya"
                 style="display: none"
               />
               <label for="maya" class="payment-method-btn">
@@ -205,6 +207,7 @@
                 type="radio"
                 name="withdraw-method"
                 id="bank"
+                value="Bank Transfer"
                 style="display: none"
               />
               <label for="bank" class="payment-method-btn">
@@ -216,12 +219,13 @@
           <!-- QUICK AMOUNT -->
           <!-- buttons for common withdraw amounts -->
           <div class="form-section">
-            <label class="form-label">Quick Amount</label>
+            <label class="form-label">Withdraw Amount</label>
             <div class="quick-amounts">
               <input
                 type="radio"
                 name="withdraw-amount"
                 id="a500"
+                value="500"
                 style="display: none"
               />
               <label for="a500" class="quick-btn">₱500</label>
@@ -229,6 +233,7 @@
                 type="radio"
                 name="withdraw-amount"
                 id="a1000"
+                value="1000"
                 style="display: none"
               />
               <label for="a1000" class="quick-btn">₱1000</label>
@@ -236,6 +241,7 @@
                 type="radio"
                 name="withdraw-amount"
                 id="a2000"
+                value="2000"
                 style="display: none"
               />
               <label for="a2000" class="quick-btn">₱2000</label>
@@ -243,6 +249,7 @@
                 type="radio"
                 name="withdraw-amount"
                 id="a5000"
+                value="5000"
                 style="display: none"
               />
               <label for="a5000" class="quick-btn">₱5000</label>
@@ -251,11 +258,13 @@
         </div>
         <div class="modal-footer">
           <label for="withdrawToggle" class="btn-cancel">Cancel</label>
-          <label for="withdrawToggle" class="btn-confirm"
-            >Confirm Withdrawal</label
+          <button id="confirmWithdrawBtn" class="btn-confirm" style="border:none; cursor:pointer;"
+            >Confirm Withdrawal</button
           >
         </div>
       </div>
     </div>
+    
+    <script src="../../script/vendor-js/wallet.js"></script>
   </body>
 </html>

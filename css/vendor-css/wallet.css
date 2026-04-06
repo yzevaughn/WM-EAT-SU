@@ -199,11 +199,12 @@
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 1000;
+  z-index: 10000;
   animation: fadeIn 0.3s ease;
 }
 
-.modal.active {
+.modal.active,
+#withdrawToggle:checked~.modal {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -213,6 +214,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -245,6 +247,7 @@
     transform: translateY(20px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -471,6 +474,7 @@
     transform: translateX(400px);
     opacity: 0;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
@@ -567,12 +571,12 @@
     margin-left: 250px;
     padding-top: 16px;
   }
-  
+
   .wallet-container {
     padding: 1.5rem 16px;
     gap: 1.5rem;
   }
-  
+
   .balance-card {
     padding: 2rem;
   }
@@ -584,39 +588,39 @@
     margin-left: 0;
     padding-top: 12px;
   }
-  
+
   .wallet-container {
     padding: 1rem 16px;
     gap: 1.2rem;
   }
-  
+
   .balance-card {
     padding: 1.5rem;
     gap: 1.2rem;
   }
-  
+
   .balance-amount {
     gap: 0.25rem;
   }
-  
+
   .currency-symbol {
     font-size: 1.2rem;
   }
-  
+
   .topup-btn {
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
   }
-  
+
   .transaction-section h2 {
     padding: 0 0.75rem;
   }
-  
+
   .transaction-item {
     padding: 1.25rem;
     gap: 0.75rem;
   }
-  
+
   .transaction-icon {
     width: 2.5rem;
     height: 2.5rem;
@@ -630,53 +634,53 @@
     margin-left: 0;
     padding-top: 8px;
   }
-  
+
   .wallet-container {
     padding: 0.75rem 12px;
     gap: 1rem;
   }
-  
+
   .balance-card {
     padding: 1.25rem;
     gap: 1rem;
     border-radius: 1rem;
   }
-  
+
   .balance-header {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .topup-btn {
     align-self: flex-start;
     padding: 0.5rem 1rem;
     font-size: 0.85rem;
   }
-  
+
   .transaction-section h2 {
     font-size: 1.25rem;
     padding: 0 0.5rem;
   }
-  
+
   .transaction-item {
     padding: 1rem;
     gap: 0.75rem;
   }
-  
+
   .transaction-icon {
     width: 2.25rem;
     height: 2.25rem;
     font-size: 0.9rem;
   }
-  
+
   .modal-header h2 {
     font-size: 1.25rem;
   }
-  
+
   .payment-methods {
     grid-template-columns: 1fr 1fr;
   }
-  
+
   .quick-amounts {
     grid-template-columns: 1fr 1fr;
     gap: 0.75rem;
@@ -689,49 +693,49 @@
     padding: 0.5rem 8px;
     gap: 0.75rem;
   }
-  
+
   .balance-card {
     padding: 1rem;
     gap: 0.75rem;
     border-radius: 0.75rem;
   }
-  
+
   .balance-header h1 {
     font-size: 1rem;
   }
-  
+
   .topup-btn {
     font-size: 0.8rem;
     padding: 0.4rem 0.8rem;
   }
-  
+
   .transaction-section h2 {
     font-size: 1.1rem;
   }
-  
+
   .transaction-item {
     padding: 0.75rem;
   }
-  
+
   .transaction-icon {
     width: 2rem;
     height: 2rem;
     font-size: 0.8rem;
   }
-  
+
   .payment-methods {
     grid-template-columns: 1fr;
   }
-  
+
   .quick-amounts {
     grid-template-columns: 1fr;
   }
-  
+
   .payment-method-btn {
     padding: 1rem;
     font-size: 0.85rem;
   }
-  
+
   .method-logo {
     width: 1.5rem;
     height: 1.5rem;
