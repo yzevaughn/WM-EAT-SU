@@ -326,7 +326,11 @@ input[name="payment"]:checked+.payment-method-btn {
 }
 
 .quick-btn:hover {
-  background: #f9fafb;
+  background: #ef4444;
+  color: white;
+  border-color: #ef4444;
+  transform: scale(1.03);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
 input[name="amount"] {
@@ -405,6 +409,102 @@ input[name="amount"]:checked+.quick-btn {
   outline: none;
   border-color: #ef4444;
   box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+/* WIZARD & DISPLAY HELPERS */
+.hidden-step {
+  display: none !important;
+}
+
+select.form-control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  margin-bottom: 10px;
+}
+select.form-control:focus {
+  outline: none;
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.step-details-container {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.step-details-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+.step-details-row:last-child {
+  margin-bottom: 0;
+  font-weight: 600;
+  border-top: 1px dashed #d1d5db;
+  padding-top: 8px;
+}
+
+/* OTP INPUT */
+.otp-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 30px 0;
+}
+
+.otp-digit {
+  width: 50px;
+  height: 60px;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #f9fafb;
+}
+
+.otp-digit:focus {
+  outline: none;
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  background: white;
+}
+
+/* TOAST MESSAGE */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 20000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  background: #1f2937;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
 
 /* RESPONSIVE */
