@@ -153,11 +153,6 @@
             </div>
             <div class="item-footer">
               <div class="price">₱12.99</div>
-              <label class="stock-toggle">
-                <input type="checkbox" checked />
-                <span class="toggle-slider"></span>
-                <span class="toggle-label">In Stock</span>
-              </label>
             </div>
             <div class="actions">
               <button class="edit-btn">
@@ -181,11 +176,6 @@
             </div>
             <div class="item-footer">
               <div class="price">₱3.99</div>
-              <label class="stock-toggle">
-                <input type="checkbox" checked />
-                <span class="toggle-slider"></span>
-                <span class="toggle-label">In Stock</span>
-              </label>
             </div>
             <div class="actions">
               <button class="edit-btn">
@@ -234,12 +224,6 @@
                 <div class="form-group">
                   <label for="itemImage">Image URL</label>
                   <input type="file" id="itemImage" accept="image/*" />
-                </div>
-                <div class="form-group">
-                  <label class="checkbox-label">
-                    <input type="checkbox" id="itemStock" checked />
-                    In Stock
-                  </label>
                 </div>
               </form>
             </div>
@@ -339,15 +323,7 @@
               let formPrice = priceText.replace(/[^0-9.]/g, ''); 
               
               const category = card.getAttribute("data-category") || "meals";
-              const toggleInput = card.querySelector(".stock-toggle input");
-              const inStock = toggleInput ? toggleInput.checked : true;
-
-              document.getElementById("itemName").value = itemName;
-              document.getElementById("itemDescription").value = itemDesc;
-              document.getElementById("itemPrice").value = formPrice;
-              document.getElementById("itemCategory").value = category;
               document.getElementById("itemImage").value = "";
-              document.getElementById("itemStock").checked = inStock;
 
               modal.classList.add("active");
             }
@@ -398,9 +374,6 @@
                   if (existingImg) itemImage = existingImg.src;
               }
               
-              const isInStock = document.getElementById("itemStock").checked;
-              const stockChecked = isInStock ? "checked" : "";
-              
               if (editingCard) {
                 editingCard.setAttribute("data-category", itemCat);
                 const imgEl = editingCard.querySelector(".item-image img");
@@ -412,11 +385,7 @@
                 const descEl = editingCard.querySelector(".item-description");
                 if(descEl) descEl.textContent = itemDesc;
                 const priceEl = editingCard.querySelector(".price");
-                if(priceEl) priceEl.textContent = "?" + itemPrice;
-                const toggleInput = editingCard.querySelector(".stock-toggle input");
-                if(toggleInput) toggleInput.checked = isInStock;
-                const labelEl = editingCard.querySelector(".toggle-label");
-                if(labelEl) labelEl.textContent = isInStock ? "In Stock" : "Out of Stock";
+                if(priceEl) priceEl.textContent = "₱" + itemPrice;
               } else {
                 const card = document.createElement("div");
                 card.className = "menu-item-card";
@@ -431,12 +400,7 @@
                     <p class="item-description">${itemDesc}</p>
                   </div>
                   <div class="item-footer">
-                    <div class="price">?${itemPrice}</div>
-                    <label class="stock-toggle">
-                      <input type="checkbox" ${stockChecked} />
-                      <span class="toggle-slider"></span>
-                      <span class="toggle-label">${isInStock ? "In Stock" : "Out of Stock"}</span>
-                    </label>
+                    <div class="price">₱${itemPrice}</div>
                   </div>
                   <div class="actions">
                     <button class="edit-btn">
@@ -460,6 +424,7 @@
       </script>
   </body>
 </html>
+
 
 
 

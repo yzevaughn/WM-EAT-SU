@@ -42,7 +42,7 @@
 }
 
 .add-item-btn {
-  background: #1e40af;
+  background: #dc2626;
   color: white;
   border: none;
   border-radius: 12px;
@@ -57,7 +57,7 @@
 }
 
 .add-item-btn:hover {
-  background: #1d4ed8;
+  background: #b91c1c;
 }
 
 .add-item-btn i {

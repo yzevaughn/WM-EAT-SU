@@ -109,16 +109,6 @@
 
           <!-- cards showing complaint status counts -->
           <div class="cards-grid">
-            <div class="card card-open">
-              <div class="card-info">
-                <span class="card-label">Open</span>
-                <span class="card-value">0</span>
-              </div>
-              <div class="icon-wrapper">
-                <i class="fa-solid fa-circle-exclamation"></i>
-              </div>
-            </div>
-
             <div class="card card-progress">
               <div class="card-info">
                 <span class="card-label">In Progress</span>
@@ -150,23 +140,32 @@
             </div>
           </div>
 
-          <!-- tabs to filter complaints by status -->
-          <div class="tabs-container">
-            <button class="tab active">Open (0)</button>
-            <button class="tab">In Progress (0)</button>
-            <button class="tab">Resolved (0)</button>
-            <button class="tab">Closed (0)</button>
+          <!-- filter section for status -->
+          <div class="filter-controls">
+            <div class="tabs-container" id="statusTabs">
+              <button class="tab active" data-status="In Progress">In Progress (<span id="count-progress">0</span>)</button>
+              <button class="tab" data-status="Resolved">Resolved (<span id="count-resolved">0</span>)</button>
+              <button class="tab" data-status="Closed">Closed (<span id="count-closed">0</span>)</button>
+            </div>
+          </div>
+
+          <!-- complaints display area -->
+          <div id="complaintsList" class="complaints-list">
+             <!-- data populated by complaints.js -->
           </div>
 
           <!-- when theres nothing, show empty state -->
-          <div class="empty-state">
+          <div class="empty-state" id="emptyState" style="display:none">
             <div class="empty-icon">
               <i class="fa-solid fa-inbox"></i>
             </div>
-            <p class="empty-text">No open complaints</p>
+            <p class="empty-text">No complaints matching this filter</p>
           </div>
         </div>
       </div>
     </div>
+    
+    <!-- Scripts -->
+    <script src="../../script/admin-js/complaints.js"></script>
   </body>
 </html>
