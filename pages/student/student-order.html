@@ -230,12 +230,13 @@
               <hr class="order-divider" />
               <div class="order-total-row"><span>Total: ₱60.00</span></div>
               <div class="order-actions" style="margin-top: 14px">
-                <button class="view-code-btn open-code-btn" data-code="A7C3" data-time="2:00 PM">
-                  <i class="fa-solid fa-qrcode"></i> View Pickup Code
-                </button>
                 <button class="pickup-btn" id="markPickedBtn">
                   <i class="fa-solid fa-bag-shopping"></i> Mark as Picked Up
                 </button>
+                <button class="view-code-btn open-code-btn" data-code="A7C3" data-time="2:00 PM">
+                  <i class="fa-solid fa-qrcode"></i> View Pickup Code
+                </button>
+              
               </div>
             </div>
           </div>
@@ -306,8 +307,14 @@
                 </div>
               </div>
               <hr class="order-divider" />
-              <div class="order-total-row">
-                <span>Total: ₱20.00</span>
+              <div class="order-total-row"><span>Total: ₱20.00</span></div>
+              <div class="order-actions" style="margin-top: 14px">
+                <button class="order-again-btn">
+                  <i class="fa-solid fa-cart-plus"></i> Order Again
+                </button>
+                <button class="leave-review-btn">
+                  <i class="fa-regular fa-star"></i> Leave a Review
+                </button>
                 <button class="remove-btn">
                   <i class="fa-solid fa-trash-can"></i> Remove
                 </button>
@@ -349,8 +356,8 @@
                 cancelled this order. A refund will be processed.
               </p>
               <hr class="order-divider" />
-              <div class="order-total-row">
-                <span>Total: ₱25.00</span>
+              <div class="order-total-row"><span>Total: ₱25.00</span></div>
+              <div class="order-actions" style="margin-top: 14px">
                 <button class="remove-btn">
                   <i class="fa-solid fa-trash-can"></i> Remove
                 </button>
@@ -449,6 +456,24 @@
     </div>
   </div>
 
+  <!-- CONFIRMATION MODAL -->
+  <div class="modal" id="confirmModal">
+    <div class="modal-overlay" id="confirmOverlay"></div>
+    <div class="modal-content" style="max-width: 400px; text-align: center;">
+      <div class="modal-body" style="padding-top: 32px;">
+        <div class="modal-icon" style="font-size: 48px; color: #ef4444; margin-bottom: 16px;">
+          <i class="fa-solid fa-circle-exclamation"></i>
+        </div>
+        <h2 style="font-size: 20px; font-weight: 800; color: #0f172a; margin-bottom: 8px;" id="confirmTitle">Confirm Action</h2>
+        <p style="font-size: 14px; color: #64748b; margin-bottom: 24px;" id="confirmMessage">Are you sure you want to do this?</p>
+        <div class="form-actions" style="justify-content: center; gap: 12px;">
+          <button class="btn-cancel" id="cancelConfirmBtn">Cancel</button>
+          <button class="btn-submit" id="submitConfirmBtn" style="background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 2px 8px rgba(239, 68, 68, .2);">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="toast-container"></div>
 
   <script>
@@ -500,11 +525,18 @@
     document.getElementById("closePickupModal").onclick = () => pickupModal.classList.remove("active");
     document.getElementById("pickupOverlay").onclick = () => pickupModal.classList.remove("active");
 
-    /* ── Mark as Picked Up → Review Modal ── */
+    /* ── Mark as Picked Up ── */
     document.getElementById("markPickedBtn").onclick = () => {
       pickupModal.classList.remove("active");
-      document.getElementById("reviewModal").classList.add("active");
+      showToast("success", "fa-check", "Order marked as picked up");
     };
+
+    /* ── Leave Review ── */
+    document.querySelectorAll(".leave-review-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.getElementById("reviewModal").classList.add("active");
+      });
+    });
     document.getElementById("closeReviewModal").onclick = () =>
       document.getElementById("reviewModal").classList.remove("active");
     document.getElementById("reviewOverlay").onclick = () =>
@@ -530,14 +562,47 @@
       stars.forEach((b, i) => b.classList.toggle("active", i < n));
     }
 
+    /* ── Confirmation Modal Logic ── */
+    const confirmModal = document.getElementById("confirmModal");
+    let confirmCallback = null;
+
+    function showConfirmation(title, message, callback) {
+      document.getElementById("confirmTitle").textContent = title;
+      document.getElementById("confirmMessage").textContent = message;
+      confirmCallback = callback;
+      confirmModal.classList.add("active");
+    }
+
+    document.getElementById("cancelConfirmBtn").onclick = () => {
+      confirmModal.classList.remove("active");
+      confirmCallback = null;
+    };
+    document.getElementById("confirmOverlay").onclick = () => {
+      confirmModal.classList.remove("active");
+      confirmCallback = null;
+    };
+    document.getElementById("submitConfirmBtn").onclick = () => {
+      if (confirmCallback) confirmCallback();
+      confirmModal.classList.remove("active");
+      confirmCallback = null;
+    };
+
     /* ── Cancel order ── */
     document.querySelectorAll(".cancel-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
-        const card = btn.closest(".order-card");
-        card.style.opacity = ".5";
-        btn.textContent = "Cancelled";
-        btn.disabled = true;
-        card.setAttribute("data-status", "cancelled"); // Update status so filter works
+        showConfirmation(
+          "Cancel Order", 
+          "Are you sure you want to cancel and remove this order?", 
+          () => {
+            const card = btn.closest(".order-card");
+            card.style.opacity = ".5";
+            btn.textContent = "Cancelled";
+            btn.disabled = true;
+            card.setAttribute("data-status", "cancelled"); // Update status so filter works
+            applyFilters();
+            showToast("success", "fa-check", "Order cancelled");
+          }
+        );
       });
     });
 
@@ -545,14 +610,25 @@
     document.querySelectorAll(".remove-btn").forEach(btn => {
       btn.addEventListener("click", (e) => {
         const card = e.target.closest(".order-card");
-        if (confirm("Are you sure you want to remove this transaction from your history?")) {
-          card.classList.add("removing");
-          setTimeout(() => {
-            card.remove();
-            showToast("success", "fa-check", "Transaction removed");
-            applyFilters(); // Recheck if empty
-          }, 300);
-        }
+        showConfirmation(
+          "Remove Transaction", 
+          "Are you sure you want to remove this transaction from your history?", 
+          () => {
+            card.classList.add("removing");
+            setTimeout(() => {
+              card.remove();
+              showToast("success", "fa-check", "Transaction removed");
+              applyFilters(); // Recheck if empty
+            }, 300);
+          }
+        );
+      });
+    });
+
+    /* ── Order Again ── */
+    document.querySelectorAll(".order-again-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        showToast("success", "fa-cart-plus", "Added to cart again");
       });
     });
 

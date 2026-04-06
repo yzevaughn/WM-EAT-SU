@@ -182,6 +182,7 @@
   pointer-events: none;
   transition: .25s;
   z-index: 10000;
+  backdrop-filter: blur(4px);
 }
 
 #topupToggle:checked~.modal {
@@ -210,6 +211,7 @@
   flex-direction: column;
   z-index: 5;
   animation: modalPop .25s ease;
+  
 }
 
 @keyframes modalPop {
@@ -365,6 +367,44 @@ input[name="amount"]:checked+.quick-btn {
   text-align: center;
   cursor: pointer;
   font-weight: 600;
+}
+
+/* CUSTOM AMOUNT INPUT */
+.custom-amount-wrapper {
+  margin-top: 20px;
+  border-top: 1px dashed #e5e7eb;
+  padding-top: 15px;
+}
+
+.custom-input-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.currency-prefix {
+  position: absolute;
+  left: 12px;
+  color: #6b7280;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.custom-amount-input {
+  width: 100%;
+  padding: 12px 12px 12px 35px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  transition: .2s;
+  box-sizing: border-box;
+}
+
+.custom-amount-input:focus {
+  outline: none;
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 
 /* RESPONSIVE */

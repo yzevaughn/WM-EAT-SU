@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU - Reports & Complaints</title>
+    <title>WM EAT SU - Reports & Concerns</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -135,115 +135,442 @@
           </li>
         </ul>
       </div>
+
       <!-- MAIN CONTENT -->
       <div class="main-content">
-        <!-- REPORTS & COMPLAINTS SECTION -->
         <div class="complaints-container">
+          
+          <!-- Header -->
           <div class="complaints-header">
             <div class="header-text">
-              <h1>Reports & Complaints</h1>
-              <p>Report issues with your orders or food quality</p>
+              <h1>Reports & Concerns</h1>
+              <p>Track your reported issues or submit a new concern.</p>
             </div>
-            <a href="#complaintModal" class="btn-file-complaint">
-              <i class="fa-solid fa-plus"></i> File Complaint
-            </a>
+            <button class="btn-primary" onclick="openModal('formModal')">
+              <i class="fa-solid fa-plus"></i> Report an Issue
+            </button>
           </div>
-          <div class="complaints-list">
-            <div class="complaint-item">
-              <div class="complaint-header">
-                <div class="complaint-title">
-                  <h3>Wrong Order</h3>
-                  <span class="complaint-id">Complaint #001</span>
-                </div>
-                <span class="status-badge status-resolved">Resolved</span>
-              </div>
-              <p class="complaint-order">
-                Order: #ORD-2026-1547 - Spicy Dragon Kitchen
-              </p>
-              <p class="complaint-message">
-                I received the wrong food order. I ordered chicken but received
-                beef instead.
-              </p>
-              <div class="complaint-footer">
-                <span class="filed-date">Filed: March 5, 2026</span>
-              </div>
+
+          <!-- Controls -->
+          <div class="controls-bar">
+            <div class="search-box">
+              <i class="fa-solid fa-search"></i>
+              <input type="text" class="search-input" id="searchInput" placeholder="Search reports...">
             </div>
-            <div class="complaint-item">
-              <div class="complaint-header">
-                <div class="complaint-title">
-                  <h3>Food Quality Issue</h3>
-                  <span class="complaint-id">Complaint #002</span>
-                </div>
-                <span class="status-badge status-pending">Pending</span>
-              </div>
-              <p class="complaint-order">Order: #ORD-2026-1549 - Salad Bar</p>
-              <p class="complaint-message">
-                The salad vegetables were not fresh and tasted spoiled.
-              </p>
-              <div class="complaint-footer">
-                <span class="filed-date">Filed: March 4, 2026</span>
-              </div>
+            <div class="filter-tabs">
+              <button class="filter-tab active" data-filter="review">Under Review</button>
+              <button class="filter-tab" data-filter="resolved">Resolved</button>
             </div>
           </div>
-        </div>
-        <!-- MODAL -->
-        <div id="complaintModal" class="modal">
-          <a href="#" class="modal-overlay"></a>
-          <div class="modal-content">
-            <div class="modal-header">
-              <h2>File a Complaint</h2>
-              <a href="#" class="modal-close">
-                <i class="fa-solid fa-times"></i>
-              </a>
-            </div>
-            <form class="complaint-form">
-              <div class="form-group">
-                <label>Related Order (Optional)</label>
-                <select class="form-control">
-                  <option>No specific order</option>
-                  <option>Order #ORD-2026-1547 - Fries</option>
-                  <option>Order #ORD-2026-1548 - Shomai Rice</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Subject *</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Brief description of the issue"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label>Number *</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  placeholder="Personal number"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label>Description *</label>
-                <textarea
-                  class="form-control"
-                  rows="5"
-                  placeholder="Provide detailed information about your complaint"
-                  required
-                ></textarea>
-              </div>
-              <div class="form-group">
-                <label>Upload Image (Optional)</label>
-                <input type="file" class="form-control-file" />
-              </div>
-              <div class="form-actions">
-                <a href="#" class="btn-cancel">Cancel</a>
-                <button class="btn-submit">Submit Complaint</button>
-              </div>
-            </form>
+
+          <!-- List -->
+          <div class="complaints-list" id="reportsList">
+            <!-- Reports dynamically injected here -->
           </div>
+
         </div>
       </div>
     </div>
+
+    <!-- ════════════════════════════════════════
+         MODALS
+         ════════════════════════════════════════ -->
+
+    <!-- New Report Form Modal -->
+    <div class="modal-backdrop" id="formModal">
+      <div class="modal-panel">
+        <div class="modal-header">
+          <h2>File a New Report</h2>
+          <button class="btn-close" onclick="closeModal('formModal')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <form id="reportForm" onsubmit="handleReportSubmit(event)">
+            <div class="form-group">
+              <label>Related Order (Optional)</label>
+              <select class="form-control" id="formOrder">
+                <option value="">No specific order</option>
+                <option value="#ORD-2026-1547 - Fries">#ORD-2026-1547 - Fries</option>
+                <option value="#ORD-2026-1548 - Shomai Rice">#ORD-2026-1548 - Shomai Rice</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Subject *</label>
+              <input type="text" class="form-control" id="formSubject" placeholder="Brief description of the issue" required />
+            </div>
+            <div class="form-group">
+              <label>Contact Number (Optional)</label>
+              <input type="tel" class="form-control" id="formPhone" placeholder="Personal number" />
+            </div>
+            <div class="form-group">
+              <label>Description *</label>
+              <textarea class="form-control" id="formDesc" placeholder="Provide detailed information about your concern..." required></textarea>
+            </div>
+            
+            <div class="form-group">
+              <label>Attach Photo (Optional)</label>
+              <div class="upload-area" id="uploadArea">
+                <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                <p class="upload-text">Click or drag image to upload</p>
+                <p class="upload-subtext">SVG, PNG, JPG or GIF (max. 5MB)</p>
+                <input type="file" id="fileInput" accept="image/*" />
+              </div>
+              <div class="preview-container" id="previewContainer">
+                <img src="" alt="Preview" class="preview-img" id="imagePreview" />
+                <button type="button" class="btn-remove-img" onclick="removeImage()">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost" onclick="closeModal('formModal')">Cancel</button>
+          <button class="btn-primary" type="submit" form="reportForm">Submit Report</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Report Details Modal -->
+    <div class="modal-backdrop" id="detailsModal">
+      <div class="modal-panel">
+        <div class="modal-header">
+          <h2>Report Details</h2>
+          <button class="btn-close" onclick="closeModal('detailsModal')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="detail-grid">
+            <div class="detail-item">
+              <span class="detail-label">Status</span>
+              <span class="badge" id="detailStatus"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Date Submitted</span>
+              <span class="detail-value" id="detailDate"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Subject</span>
+              <span class="detail-value" id="detailSubject"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Related Order</span>
+              <span class="detail-value" id="detailOrder"></span>
+            </div>
+          </div>
+          
+          <span class="detail-label">Description</span>
+          <div class="detail-desc-box" id="detailDesc"></div>
+
+          <div id="detailConclusionSection" style="display: none;">
+            <span class="detail-label">Resolution Conclusion</span>
+            <div class="conclusion-box" id="detailConclusion"></div>
+          </div>
+
+          <span class="detail-label">Attachment</span>
+          <div id="detailAttachmentContainer" style="margin-top: 8px;">
+            <!-- Attached image or placeholder will go here -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost" onclick="closeModal('detailsModal')">Close</button>
+          <button class="btn-danger" id="btnRemoveReport" style="display:none;" onclick="deleteReport()">Delete Report</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ════════════════════════════════════════
+         JAVASCRIPT
+         ════════════════════════════════════════ -->
+    <script>
+      // Mock Data
+      let reports = [
+        {
+          id: 'REP-002',
+          subject: 'Food Quality Issue',
+          order: '#ORD-2026-1549 - Salad Bar',
+          desc: 'The salad vegetables were not fresh and tasted slightly spoiled. I could not eat it.',
+          status: 'review', // 'review' or 'resolved'
+          date: 'March 4, 2026',
+          img: null,
+          phone: '09123456789'
+        },
+        {
+          id: 'REP-001',
+          subject: 'Wrong Order',
+          order: '#ORD-2026-1547 - Spicy Dragon Kitchen',
+          desc: 'I received the wrong food order. I ordered chicken but received beef instead. The vendor refused to change it when I asked.',
+          status: 'resolved',
+          date: 'March 1, 2026',
+          img: null,
+          phone: '',
+          conclusion: 'We checked with Spicy Dragon Kitchen regarding your order. They apologized for the mistake and their staff has been re-trained on order accuracy. A refund of PHP 85 has been successfully credited back to your wallet and the issue is resolved.'
+        }
+      ];
+
+      let currentFilter = 'review';
+      let currentViewId = null;
+
+      // DOM Elements
+      const reportsList = document.getElementById('reportsList');
+      const searchInput = document.getElementById('searchInput');
+      const filterTabs = document.querySelectorAll('.filter-tab');
+
+      // Initialize
+      document.addEventListener('DOMContentLoaded', () => {
+        renderReports();
+
+        // Setup filter listeners
+        filterTabs.forEach(tab => {
+          tab.addEventListener('click', (e) => {
+            filterTabs.forEach(t => t.classList.remove('active'));
+            e.target.classList.add('active');
+            currentFilter = e.target.getAttribute('data-filter');
+            renderReports();
+          });
+        });
+
+        // Setup search listener
+        searchInput.addEventListener('input', () => {
+          renderReports();
+        });
+
+        // Drag & drop logic
+        setupDragDrop();
+      });
+
+      // Render List
+      function renderReports() {
+        const searchTerm = searchInput.value.toLowerCase();
+        
+        const filtered = reports.filter(r => {
+          const matchFilter = r.status === currentFilter;
+          const matchSearch = r.subject.toLowerCase().includes(searchTerm) || 
+                              r.id.toLowerCase().includes(searchTerm) ||
+                              (r.order && r.order.toLowerCase().includes(searchTerm));
+          return matchFilter && matchSearch;
+        });
+
+        reportsList.innerHTML = '';
+
+        if (filtered.length === 0) {
+          reportsList.innerHTML = `
+            <div class="empty-state">
+              <i class="fa-solid fa-face-smile-beam"></i>
+              <h3>No ${currentFilter === 'review' ? 'active' : ''} reports found</h3>
+              <p>Everything looks good right now.</p>
+              ${currentFilter === 'review' ? `<button class="btn-primary" onclick="openModal('formModal')">Submit a Concern</button>` : ''}
+            </div>
+          `;
+          return;
+        }
+
+        filtered.forEach(r => {
+          const isResolved = r.status === 'resolved';
+          const badgeClass = isResolved ? 'resolved' : 'review';
+          const badgeText = isResolved ? 'Resolved' : 'Under Review';
+          const orderHtml = r.order ? `<p class="complaint-order"><i class="fa-solid fa-receipt"></i> ${r.order}</p>` : '';
+
+          const item = document.createElement('div');
+          item.className = `complaint-item ${isResolved ? 'resolved' : ''}`;
+          item.onclick = () => openDetails(r.id);
+          
+          item.innerHTML = `
+            <div class="complaint-header">
+              <div class="complaint-title-group">
+                <h3>${r.subject}</h3>
+                ${orderHtml}
+              </div>
+              <span class="badge ${badgeClass}">${badgeText}</span>
+            </div>
+            <p class="complaint-desc">${r.desc}</p>
+            <div class="complaint-footer">
+              <span>Filed: ${r.date}</span>
+              <span class="view-details-text">View Details <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          `;
+          reportsList.appendChild(item);
+        });
+      }
+
+      // Modal Handlers
+      function openModal(id) {
+        document.getElementById(id).classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal(id) {
+        document.getElementById(id).classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+
+      // Details View
+      function openDetails(id) {
+        currentViewId = id;
+        const r = reports.find(x => x.id === id);
+        if (!r) return;
+
+        document.getElementById('detailStatus').className = `badge ${r.status}`;
+        document.getElementById('detailStatus').innerText = r.status === 'resolved' ? 'Resolved' : 'Under Review';
+        
+        document.getElementById('detailDate').innerText = r.date;
+        document.getElementById('detailSubject').innerText = r.subject;
+        document.getElementById('detailOrder').innerText = r.order || 'N/A';
+        document.getElementById('detailDesc').innerText = r.desc;
+
+        const attachmentContainer = document.getElementById('detailAttachmentContainer');
+        if (r.img) {
+          attachmentContainer.innerHTML = `<img src="${r.img}" class="detail-image" alt="Attachment" onclick="window.open('${r.img}', '_blank')"/>`;
+        } else {
+          attachmentContainer.innerHTML = `
+            <div class="detail-image-placeholder">
+              <i class="fa-regular fa-image"></i>
+              <span>No image attached</span>
+            </div>
+          `;
+        }
+
+        // Handle conclusion display & Buttons
+        const conclusionSec = document.getElementById('detailConclusionSection');
+        const btnRemove = document.getElementById('btnRemoveReport');
+
+        if (r.status === 'resolved') {
+          btnRemove.style.display = 'inline-flex';
+          
+          if (r.conclusion) {
+            conclusionSec.style.display = 'block';
+            document.getElementById('detailConclusion').innerText = r.conclusion;
+          } else {
+            conclusionSec.style.display = 'block';
+            document.getElementById('detailConclusion').innerText = 'This complaint has been reviewed and marked as resolved by the administration.';
+          }
+        } else {
+          btnRemove.style.display = 'none';
+          conclusionSec.style.display = 'none';
+        }
+
+        openModal('detailsModal');
+      }
+
+      function deleteReport() {
+        if(!currentViewId) return;
+        if(confirm("Are you sure you want to permanently remove this report record?")) {
+          reports = reports.filter(x => x.id !== currentViewId);
+          closeModal('detailsModal');
+          showToast('Report completely removed.');
+          renderReports();
+        }
+      }
+
+      // Form Submission
+      function handleReportSubmit(e) {
+        e.preventDefault();
+        
+        const newReport = {
+          id: 'REP-' + Math.floor(Math.random() * 1000).toString().padStart(3, '0'),
+          subject: document.getElementById('formSubject').value,
+          order: document.getElementById('formOrder').value,
+          phone: document.getElementById('formPhone').value,
+          desc: document.getElementById('formDesc').value,
+          status: 'review',
+          date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+          img: document.getElementById('imagePreview').src || null
+        };
+
+        // Don't save image if it's empty/placeholder
+        if(!document.getElementById('previewContainer').classList.contains('active')) {
+           newReport.img = null;
+        }
+
+        reports.unshift(newReport); // Add to top
+
+        closeModal('formModal');
+        e.target.reset();
+        removeImage();
+        showToast('Your report has been submitted successfully.');
+        
+        // Ensure we are viewing "Under Review"
+        if(currentFilter !== 'review') {
+           document.querySelector('[data-filter="review"]').click();
+        } else {
+           renderReports();
+        }
+      }
+
+      // Drag & Drop Upload
+      function setupDragDrop() {
+        const dropArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+          dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+          dropArea.addEventListener(eventName, () => dropArea.classList.add('dragover'), false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+          dropArea.addEventListener(eventName, () => dropArea.classList.remove('dragover'), false);
+        });
+
+        dropArea.addEventListener('drop', (e) => {
+          const dt = e.dataTransfer;
+          const files = dt.files;
+          handleFiles(files);
+        });
+
+        fileInput.addEventListener('change', function() {
+          handleFiles(this.files);
+        });
+      }
+
+      function handleFiles(files) {
+        if (files.length === 0) return;
+        const file = files[0];
+        
+        if (!file.type.startsWith('image/')) {
+          alert('Please upload an image file.');
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          document.getElementById('imagePreview').src = e.target.result;
+          document.getElementById('uploadArea').style.display = 'none';
+          document.getElementById('previewContainer').classList.add('active');
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function removeImage() {
+        document.getElementById('fileInput').value = '';
+        document.getElementById('imagePreview').src = '';
+        document.getElementById('uploadArea').style.display = 'block';
+        document.getElementById('previewContainer').classList.remove('active');
+      }
+
+      // Toast System
+      function showToast(message) {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${message}`;
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateX(100%)';
+          toast.style.transition = 'all 0.3s ease';
+          setTimeout(() => toast.remove(), 300);
+        }, 3000);
+      }
+    </script>
   </body>
 </html>

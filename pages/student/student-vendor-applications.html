@@ -4,14 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WM EAT SU - Become a Vendor</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="../../css/student/dashboard.css" />
     <link rel="stylesheet" href="../../css/navbar.css" />
     <link rel="stylesheet" href="../../css/student/vendor-applications.css" />
@@ -19,44 +13,21 @@
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
 
-    <!-- ════════════════════════════════════════
-         TOP NAVBAR
-         ════════════════════════════════════════ -->
+    <!-- TOP NAVBAR -->
     <div class="top-nav">
-      <!-- LEFT: hamburger + logo -->
       <div class="nav-left">
-        <label for="menu-checkbox" class="menu-toggle">
-          <i class="fa-solid fa-bars"></i>
-        </label>
+        <label for="menu-checkbox" class="menu-toggle"><i class="fa-solid fa-bars"></i></label>
         <a href="#" class="logo">
           <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
           <span class="logo-text">WM EAT SU</span>
         </a>
       </div>
-
       <div class="nav-center">
         <div class="role-switcher" id="roleSwitcher">
-          <a
-            href="student-dashboard.html"
-            class="role-btn active"
-            id="roleStudent"
-          >
-            <i class="fa-solid fa-graduation-cap"></i>
-            <span>Student</span>
-          </a>
-
-          <a
-            href="../vendor-pages/vendor-dashboard.html"
-            class="role-btn"
-            id="roleVendor"
-          >
-            <i class="fa-solid fa-store"></i>
-            <span>Vendor</span>
-          </a>
+          <a href="student-dashboard.html" class="role-btn active" id="roleStudent"><i class="fa-solid fa-graduation-cap"></i><span>Student</span></a>
+          <a href="../vendor-pages/vendor-dashboard.html" class="role-btn" id="roleVendor"><i class="fa-solid fa-store"></i><span>Vendor</span></a>
         </div>
       </div>
-
-      <!-- RIGHT: profile -->
       <div class="nav-right">
         <div class="profile">
           <div class="profile-info">
@@ -64,77 +35,31 @@
             <span class="email">vaughn.student@wm.edu.ph</span>
           </div>
           <div class="profile-dropdown">
-            <button class="profile-btn">
-              <img
-                src="../../images/pfp.jpg"
-                class="profile-pic"
-                alt="Profile"
-              />
-              <i class="fa-solid fa-chevron-down"></i>
-            </button>
+            <button class="profile-btn"><img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" /><i class="fa-solid fa-chevron-down"></i></button>
             <div class="dropdown-menu">
-              <a href="../../index.html" class="dropdown-item">
-                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
-              </a>
+              <a href="../../index.html" class="dropdown-item"><i class="fas fa-sign-out-alt"></i><span>Log Out</span></a>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- /top-nav -->
 
-    <!-- ════════════════════════════════════════
-         LAYOUT
-         ════════════════════════════════════════ -->
+    <!-- MAIN LAYOUT -->
     <div class="layout">
-      <!-- ── SIDEBAR ── -->
+      <!-- SIDEBAR -->
       <div class="left-nav" id="sidebar">
-        <!-- logo shown on mobile inside sidebar -->
-
         <ul class="nav-list">
-          <li>
-            <a href="student-dashboard.html" class="nav-link">
-              <i class="fa-solid fa-house"></i><span>Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-browse-food.html" class="nav-link">
-              <i class="fa-solid fa-utensils"></i><span>Browse Food</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-cart.html" class="nav-link">
-              <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
-              <span class="nav-badge">3</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-order.html" class="nav-link">
-              <i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-wallet.html" class="nav-link">
-              <i class="fa-solid fa-wallet"></i><span>Wallet</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-map.html" class="nav-link">
-              <i class="fa-solid fa-location-dot"></i><span>Campus Map</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-feedback.html" class="nav-link">
-              <i class="fa-regular fa-star"></i><span>Feedback</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-vendor-applications.html" class="nav-link active">
-              <i class="fa-solid fa-rss"></i><span>Vendor Applications</span>
-            </a>
-          </li>
+          <li><a href="student-dashboard.html" class="nav-link"><i class="fa-solid fa-house"></i><span>Dashboard</span></a></li>
+          <li><a href="student-browse-food.html" class="nav-link"><i class="fa-solid fa-utensils"></i><span>Browse Food</span></a></li>
+          <li><a href="student-cart.html" class="nav-link"><i class="fa-solid fa-cart-shopping"></i><span>Cart</span><span class="nav-badge">3</span></a></li>
+          <li><a href="student-order.html" class="nav-link"><i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span></a></li>
+          <li><a href="student-wallet.html" class="nav-link"><i class="fa-solid fa-wallet"></i><span>Wallet</span></a></li>
+          <li><a href="student-map.html" class="nav-link"><i class="fa-solid fa-location-dot"></i><span>Campus Map</span></a></li>
+          <li><a href="student-feedback.html" class="nav-link"><i class="fa-regular fa-star"></i><span>Feedback</span></a></li>
+          <li><a href="student-vendor-applications.html" class="nav-link active"><i class="fa-solid fa-rss"></i><span>Vendor Applications</span></a></li>
         </ul>
       </div>
+
       <!-- MAIN CONTENT -->
       <div class="main-content">
         <div class="vendor-header">
@@ -142,106 +67,430 @@
             <h1>Vendor Application</h1>
             <p>Apply to sell your food on campus</p>
           </div>
-          <a href="#applicationModal" class="btn-apply-now">
+          <button class="btn-primary" onclick="openApplicationForm()">
             <i class="fa-solid fa-plus"></i> Apply Now
-          </a>
+          </button>
         </div>
-        <!-- REQUIREMENTS CARD -->
+
         <div class="requirements-card">
-          <div class="requirements-header">
-            <i class="fa-solid fa-info-circle"></i>
-            <h2>Application Requirements</h2>
-          </div>
+          <div class="requirements-header"><i class="fa-solid fa-info-circle"></i> Requirements</div>
           <ul class="requirements-list">
             <li>Provide detailed information about your food business</li>
-            <li>List all ingredients used in your products</li>
-            <li>Upload step-by-step preparation photos with descriptions</li>
+            <li>List all products you intend to sell</li>
+            <li>Include ingredients and step-by-step preparation photos for each product</li>
             <li>Admin will review your application within 3-5 days</li>
           </ul>
         </div>
-        <!-- APPLICATION LIST -->
+
         <div class="applications-section">
           <h2>Your Applications</h2>
-          <div class="applications-list">
-            <div class="application-item">
-              <div class="application-header">
-                <h3>Vaughn's Shomai Rice</h3>
-                <span class="status pending">Pending Review</span>
+          <div class="applications-list" id="applicationsList">
+            <!-- Dynamically injected applications -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         MODALS
+         ========================================== -->
+
+    <!-- Form Modal (Used for both Create and Edit) -->
+    <div class="modal-backdrop" id="applicationFormModal">
+      <div class="modal-panel">
+        <div class="modal-header">
+          <h2 id="formModalTitle">Vendor Application Form</h2>
+          <button class="btn-close" onclick="closeModal('applicationFormModal')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <form class="application-form" id="vendorForm" onsubmit="handleFormSubmit(event)">
+            <input type="hidden" id="formEntryId" value="">
+            
+            <div class="form-group">
+              <label>Business Name <span class="required">*</span></label>
+              <input type="text" id="businessName" class="form-control" placeholder="e.g., Vaughn's Shomai Rice" required />
+            </div>
+            <div class="form-group">
+              <label>Owner Name <span class="required">*</span></label>
+              <input type="text" id="ownerName" class="form-control" placeholder="e.g., Vaughn Evangelista" required />
+            </div>
+
+            <div style="margin-top: 24px;">
+              <label style="font-weight: 600; font-size: 16px; display: block; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px; margin-bottom: 12px;">Products Catalog</label>
+              <div id="productsContainer">
+                <!-- Product blocks will be injected here -->
               </div>
-              <p class="application-product">Product: Shomai Rice</p>
-              <p class="application-date">Submitted: March 10, 2026</p>
+              <button type="button" class="btn-add-product" onclick="addProductBlock()">
+                <i class="fa-solid fa-plus"></i> Add Another Product
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost" onclick="closeModal('applicationFormModal')">Cancel</button>
+          <button class="btn-primary" type="submit" form="vendorForm">Save Application</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- View Details Modal -->
+    <div class="modal-backdrop" id="detailsModal">
+      <div class="modal-panel">
+        <div class="modal-header">
+          <h2>Application Details</h2>
+          <button class="btn-close" onclick="closeModal('detailsModal')"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="detail-grid">
+            <div class="detail-item">
+              <span class="detail-label">Status</span>
+              <span class="badge" id="detStatusHtml"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Date Submitted</span>
+              <span class="detail-value" id="detDate"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Business Name</span>
+              <span class="detail-value" id="detBusiness"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Owner Name</span>
+              <span class="detail-value" id="detOwner"></span>
             </div>
           </div>
+
+          <div style="margin-bottom: 24px;">
+            <span class="detail-label" style="font-size: 14px; border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; margin-bottom: 16px;">Products Included</span>
+            <div id="detProductsContainer">
+              <!-- Products rendered here -->
+            </div>
+          </div>
+
+          <div id="adminFeedbackSection" style="display:none;">
+            <span class="detail-label">Admin Remarks</span>
+            <div class="feedback-box" id="detFeedbackBox"></div>
+          </div>
+        </div>
+        <div class="modal-footer" id="detailsFooter">
+           <!-- Dynamic buttons based on status -->
         </div>
       </div>
     </div>
-    <!-- MODAL -->
-    <div id="applicationModal" class="modal">
-      <a href="#" class="modal-overlay"></a>
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>Vendor Application Form</h2>
-          <a href="#" class="modal-close">
-            <i class="fa-solid fa-times"></i>
-          </a>
-        </div>
-        <form class="application-form">
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ==========================================
+         JAVASCRIPT
+         ========================================== -->
+    <script>
+      let applications = [
+        {
+          id: 'APP-1001',
+          business: "Vaughn's Shomai Rice (New Location)",
+          owner: "Vaughn Evangelista",
+          products: [
+            { name: "Shomai Rice", ingredients: "Pork, Wrapper, Rice, Chili Oil, Soy Sauce" },
+            { name: "Pork Sisig", ingredients: "Pork Face, Calamansi, Onions, Chilis, Egg" }
+          ],
+          status: "pending", 
+          date: "March 15, 2026",
+          feedback: ""
+        },
+        {
+          id: 'APP-1002',
+          business: "Vaughn's Sweet Treats",
+          owner: "Vaughn Evangelista",
+          products: [
+            { name: "Brownies", ingredients: "Flour, Sugar, Cocoa Powder, Butter, Eggs" },
+            { name: "Chocolate Chip Cookies", ingredients: "Flour, Sugar, Chocolate Chips, Baking Soda" }
+          ],
+          status: "review", 
+          date: "March 12, 2026",
+          feedback: ""
+        },
+        {
+          id: 'APP-1003',
+          business: "Vaughn's Refreshments",
+          owner: "Vaughn Evangelista",
+          products: [
+            { name: "Mango Shake", ingredients: "Fresh Mango, Ice, Milk, Sugar" }
+          ],
+          status: "approved", 
+          date: "March 1, 2026",
+          feedback: "Everything looks great! Please proceed to the Admin building to claim your vendor pass."
+        },
+        {
+          id: 'APP-1004',
+          business: "Vaughn's Kwek-Kwek Stand",
+          owner: "Vaughn Evangelista",
+          products: [
+            { name: "Kwek-Kwek", ingredients: "Quail Eggs, Flour mix, Orange Food Color, Oil" }
+          ],
+          status: "rejected", 
+          date: "February 20, 2026",
+          feedback: "Application denied. We currently have too many vendors selling deep-fried street food items in this sector."
+        }
+      ];
+
+      let currentViewId = null;
+
+      document.addEventListener('DOMContentLoaded', () => {
+        renderList();
+      });
+
+      function renderList() {
+        const listDiv = document.getElementById('applicationsList');
+        listDiv.innerHTML = '';
+        
+        applications.forEach(app => {
+          const item = document.createElement('div');
+          item.className = `application-item ${app.status}`;
+          item.onclick = () => openDetails(app.id);
+
+          let statusText = '';
+          switch(app.status) {
+            case 'pending': statusText = 'Pending Review'; break;
+            case 'review': statusText = 'Under Review'; break;
+            case 'approved': statusText = 'Approved'; break;
+            case 'rejected': statusText = 'Not Approved'; break;
+          }
+
+          // Combine product names for summary
+          const productNames = app.products.map(p => p.name).join(', ');
+
+          item.innerHTML = `
+            <div class="application-header">
+              <h3>${app.business}</h3>
+              <span class="badge ${app.status}">${statusText}</span>
+            </div>
+            <p class="application-product"><strong>Products:</strong> ${productNames}</p>
+            <div class="application-footer">
+              <span>Submitted: ${app.date}</span>
+              <span class="view-details-text">View Details <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          `;
+          listDiv.appendChild(item);
+        });
+      }
+
+      function openModal(id) {
+        document.getElementById(id).classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal(id) {
+        document.getElementById(id).classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+
+      // PRODUCT BLOCK LOGIC (Form)
+      function addProductBlock(name = '', ingredients = '') {
+        const container = document.getElementById('productsContainer');
+        const index = container.children.length;
+        
+        const box = document.createElement('div');
+        box.className = 'product-entry-box';
+        
+        box.innerHTML = `
+          <h4>Product #${index + 1} <button type="button" class="btn-remove-product" onclick="this.parentElement.parentElement.remove()">Remove</button></h4>
           <div class="form-group">
-            <label>Business Name <span class="required">*</span></label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="e.g., Vaughn's Shomai Rice"
-              required
-            />
+            <input type="text" class="form-control prod-name" placeholder="Name of Product" value="${name}" required />
           </div>
-          <div class="form-group">
-            <label>Owner Name <span class="required">*</span></label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="e.g., Vaughn Evangelista"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label>Product Name <span class="required">*</span></label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="e.g., Shomai Rice"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label>Ingredients <span class="required">*</span></label>
-            <textarea
-              class="form-control"
-              rows="4"
-              placeholder="List all ingredients used..."
-              required
-            ></textarea>
-          </div>
-          <div class="form-group">
-            <label
-              >Step-by-Step Preparation <span class="required">*</span></label
-            >
-            <input
-              type="file"
-              class="form-control-file"
-              accept="image/*"
-              multiple
-            />
-            <small class="helper-text"
-              >Upload photos showing your preparation process</small
-            >
-          </div>
-          <div class="form-actions">
-            <a href="#" class="btn-cancel">Cancel</a>
-            <button class="btn-submit">Submit Application</button>
-          </div>
-        </form>
-      </div>
-    </div>
+          
+          <details class="product-details-dropdown" open>
+            <summary>Ingredients <span class="required">*</span></summary>
+            <div class="dropdown-content">
+              <textarea class="form-control prod-ingredients" rows="3" placeholder="List all ingredients used..." required>${ingredients}</textarea>
+            </div>
+          </details>
+
+          <details class="product-details-dropdown">
+            <summary>Step-by-Step Preparation Photos <span class="required">*</span></summary>
+            <div class="dropdown-content">
+              <input type="file" class="form-control-file prod-photos" accept="image/*" multiple />
+              <span class="helper-text" style="display:block; margin-top:8px;">Upload photos showing your preparation process</span>
+            </div>
+          </details>
+        `;
+        
+        container.appendChild(box);
+      }
+
+      // FORM LOGIC
+      function openApplicationForm(editId = null) {
+        const form = document.getElementById('vendorForm');
+        form.reset();
+        document.getElementById('productsContainer').innerHTML = '';
+        
+        if (editId) {
+          document.getElementById('formModalTitle').innerText = "Edit Application";
+          const app = applications.find(x => x.id === editId);
+          document.getElementById('formEntryId').value = app.id;
+          document.getElementById('businessName').value = app.business;
+          document.getElementById('ownerName').value = app.owner;
+          
+          // Add product blocks
+          app.products.forEach(p => {
+             addProductBlock(p.name, p.ingredients);
+          });
+        } else {
+          document.getElementById('formModalTitle').innerText = "New Vendor Application";
+          document.getElementById('formEntryId').value = "";
+          // Add one empty product initially
+          addProductBlock();
+        }
+        
+        closeModal('detailsModal');
+        openModal('applicationFormModal');
+      }
+
+      function handleFormSubmit(e) {
+        e.preventDefault();
+        
+        // Extract products
+        const productsContainer = document.getElementById('productsContainer');
+        if (productsContainer.children.length === 0) {
+           alert("You must add at least one product.");
+           return;
+        }
+
+        const newProducts = [];
+        const blocks = productsContainer.querySelectorAll('.product-entry-box');
+        blocks.forEach(box => {
+           const pName = box.querySelector('.prod-name').value;
+           const pIng = box.querySelector('.prod-ingredients').value;
+           newProducts.push({ name: pName, ingredients: pIng });
+        });
+
+        const editId = document.getElementById('formEntryId').value;
+        const bName = document.getElementById('businessName').value;
+        const oName = document.getElementById('ownerName').value;
+
+        if (editId) {
+          // Edit existing
+          const idx = applications.findIndex(x => x.id === editId);
+          if(idx > -1) {
+            applications[idx].business = bName;
+            applications[idx].owner = oName;
+            applications[idx].products = newProducts;
+          }
+          showToast('Application updated successfully.');
+        } else {
+          // Create new
+          applications.unshift({
+            id: 'APP-' + Math.floor(Math.random() * 9000 + 1000),
+            business: bName,
+            owner: oName,
+            products: newProducts,
+            status: "pending",
+            date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+            feedback: ""
+          });
+          showToast('Application submitted successfully.');
+        }
+        
+        closeModal('applicationFormModal');
+        renderList();
+      }
+
+      // DETAILS LOGIC
+      function openDetails(id) {
+        currentViewId = id;
+        const app = applications.find(x => x.id === id);
+        if (!app) return;
+
+        let statusText = '';
+        switch(app.status) {
+          case 'pending': statusText = 'Pending Review'; break;
+          case 'review': statusText = 'Under Review'; break;
+          case 'approved': statusText = 'Approved'; break;
+          case 'rejected': statusText = 'Not Approved'; break;
+        }
+
+        document.getElementById('detStatusHtml').className = `badge ${app.status}`;
+        document.getElementById('detStatusHtml').innerText = statusText;
+        document.getElementById('detDate').innerText = app.date;
+        document.getElementById('detBusiness').innerText = app.business;
+        document.getElementById('detOwner').innerText = app.owner;
+
+        // Render detailed multi-products view
+        const detProductsContainer = document.getElementById('detProductsContainer');
+        detProductsContainer.innerHTML = '';
+
+        app.products.forEach(prod => {
+           const wrap = document.createElement('div');
+           wrap.className = 'det-product-block';
+           
+           wrap.innerHTML = `
+              <div class="det-product-title"><i class="fa-solid fa-box"></i> ${prod.name}</div>
+              <details class="product-details-dropdown" open>
+                <summary>Ingredients Provided</summary>
+                <div class="dropdown-content">
+                  <p style="margin: 0; line-height: 1.5; color: #4b5563;">${prod.ingredients}</p>
+                </div>
+              </details>
+              <details class="product-details-dropdown">
+                <summary>Step-by-Step Preparation Photos</summary>
+                <div class="dropdown-content">
+                  <div style="background: #f3f4f6; border-radius: 8px; padding: 24px; text-align: center; color: #9ca3af;">
+                    <i class="fa-regular fa-images" style="font-size: 24px;"></i>
+                    <p style="margin: 8px 0 0 0; font-size: 13px;">Photos securely attached to submission.</p>
+                  </div>
+                </div>
+              </details>
+           `;
+           detProductsContainer.appendChild(wrap);
+        });
+
+        // Feedback section
+        const fbSection = document.getElementById('adminFeedbackSection');
+        const fbBox = document.getElementById('detFeedbackBox');
+        if (app.status === 'approved' || app.status === 'rejected') {
+          fbSection.style.display = 'block';
+          fbBox.innerText = app.feedback;
+          fbBox.className = `feedback-box ${app.status}`;
+        } else {
+          fbSection.style.display = 'none';
+        }
+
+        // Action Buttons based on state
+        const footer = document.getElementById('detailsFooter');
+        footer.innerHTML = `<button class="btn-ghost" onclick="closeModal('detailsModal')">Close</button>`;
+
+        if (app.status === 'pending') {
+          footer.innerHTML += `
+            <button class="btn-primary" onclick="openApplicationForm('${app.id}')">Edit Response</button>
+            <button class="btn-danger" onclick="deleteApplication('${app.id}')">Delete</button>
+          `;
+        }
+
+        openModal('detailsModal');
+      }
+
+      function deleteApplication(id) {
+        if(confirm("Are you sure you want to permanently delete this application?")) {
+          applications = applications.filter(x => x.id !== id);
+          closeModal('detailsModal');
+          showToast('Application deleted successfully.');
+          renderList();
+        }
+      }
+
+      function showToast(message) {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> ${message}`;
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateX(100%)';
+          setTimeout(() => toast.remove(), 300);
+        }, 3000);
+      }
+    </script>
   </body>
 </html>

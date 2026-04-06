@@ -422,11 +422,55 @@ hr.order-divider {
   font-family: inherit;
   cursor: pointer;
   transition: all .2s;
+  margin-left: auto;
 }
 
 .remove-btn:hover {
   background: #fee2e2;
   border-color: #fca5a5;
+}
+
+.order-again-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #0f172a;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all .2s;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, .2);
+}
+
+.order-again-btn:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 16px rgba(15, 23, 42, .3);
+}
+
+.leave-review-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  border: 1.5px solid #eab308;
+  color: #ca8a04;
+  padding: 8px 16px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.leave-review-btn:hover {
+  background: #fefce8;
 }
 
 .pickup-btn {
