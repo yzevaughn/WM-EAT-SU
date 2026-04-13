@@ -38,9 +38,9 @@
 
   /* ── 2. APPLICATION STATE ──────────────────────────────── */
 
-  let activeFilter = "Pending";   // active tab filter
-  let pendingCard       = null;    // card waiting for confirmation
-  let pendingAction     = null;    // action waiting for confirmation
+  let activeFilter = "Queue";   // active tab filter
+  let QueueCard       = null;    // card waiting for confirmation
+  let QueueAction     = null;    // action waiting for confirmation
 
   /* ── 3. MODAL CONFIGURATION PER ACTION ─────────────────── */
 
@@ -95,6 +95,26 @@
       btnIconClass:"fas fa-bag-shopping",
       btnLabel:    "Yes, Complete Order",
     },
+
+    moveToHistory: {
+      title:       "Move to History",
+      iconClass:   "fa-solid fa-clock-rotate-left",
+      iconColor:   "#8b5cf6",
+      subtitle:    "Move this order to <strong>History</strong>? It will no longer be listed here.",
+      btnClass:    "btn-confirm-history",
+      btnIconClass:"fas fa-arrow-right",
+      btnLabel:    "Yes, Move",
+    },
+
+    deleteHistory: {
+      title:       "Delete Order",
+      iconClass:   "fa-solid fa-trash",
+      iconColor:   "#ef4444",
+      subtitle:    "Are you sure you want to <strong>delete</strong> this order? This action cannot be undone.",
+      btnClass:    "btn-confirm-delete",
+      btnIconClass:"fas fa-trash",
+      btnLabel:    "Yes, Delete",
+    },
   };
 
   /* ── 4. STATUS TRANSITION MAP ──────────────────────────── */
@@ -120,7 +140,9 @@
       accentClass: "accent-cancelled",
       iconClass:   "fa-solid fa-ban",
       iconBgClass: "ic-cancelled",
-      nextButtons: "",
+      nextButtons: `<button class="btn-action btn-move-history" data-action="moveToHistory">
+                     <i class="fas fa-arrow-right"></i> Move
+                   </button>`,
     },
 
     markReady: {
@@ -142,7 +164,21 @@
       accentClass: "accent-completed",
       iconClass:   "fa-solid fa-check-double",
       iconBgClass: "ic-completed",
-      nextButtons: "",
+      nextButtons: `<button class="btn-action btn-move-history" data-action="moveToHistory">
+                     <i class="fas fa-arrow-right"></i> Move
+                   </button>`,
+    },
+
+    moveToHistory: {
+      newStatus:   "History",
+      badgeClass:  "history",
+      badgeText:   "History",
+      accentClass: "accent-history",
+      iconClass:   "fa-solid fa-clock-rotate-left",
+      iconBgClass: "ic-history",
+      nextButtons: `<button class="btn-action btn-delete-history" data-action="deleteHistory">
+                     <i class="fas fa-trash"></i> Delete
+                   </button>`,
     },
   };
 
@@ -157,7 +193,7 @@
   }
 
   function refreshCounts() {
-    ["All","Pending","Preparing","Ready","Completed","Cancelled"].forEach((s) => {
+    ["All","Queue","Preparing","Ready","Completed","Cancelled","History"].forEach((s) => {
       const badge = document.getElementById("count-" + s);
       if (badge) badge.textContent = countByStatus(s);
     });
@@ -215,11 +251,11 @@
 
   /**
    * Opens the shared modal, configuring it for the given action.
-   * Stores pendingCard and pendingAction for the confirm handler.
+   * Stores QueueCard and QueueAction for the confirm handler.
    */
   function openConfirmModal(card, action) {
-    pendingCard   = card;
-    pendingAction = action;
+    QueueCard   = card;
+    QueueAction = action;
 
     const cfg = MODAL_CONFIG[action];
     const det = getCardDetails(card);
@@ -261,12 +297,15 @@
     document.body.style.overflow = "hidden";
   }
 
-  /** Closes the modal and resets pending state. */
   function closeModal() {
     confirmModal.classList.remove("active");
     document.body.style.overflow = "";
-    pendingCard   = null;
-    pendingAction = null;
+    QueueCard   = null;
+    QueueAction = null;
+    
+    // Reset modal button states
+    confirmActionBtn.style.display = "";
+    cancelConfirmModal.textContent = "Cancel";
   }
 
   // Wire up all close triggers
@@ -277,8 +316,8 @@
   // Confirm button → actually perform the action
   if (confirmActionBtn) {
     confirmActionBtn.addEventListener("click", () => {
-      if (pendingCard && pendingAction) {
-        handleAction(pendingCard, pendingAction);
+      if (QueueCard && QueueAction) {
+        handleAction(QueueCard, QueueAction);
       }
       closeModal();
     });
@@ -288,6 +327,13 @@
 
   /** Mutates the card DOM to reflect its new status. */
   function handleAction(card, action) {
+    if (action === "deleteHistory") {
+      card.remove();
+      applyFilter();
+      refreshCounts();
+      return;
+    }
+
     const t = STATUS_TRANSITIONS[action];
     if (!t) return;
 
@@ -345,6 +391,27 @@
       const card   = btn.closest(".order-card");
       const action = btn.dataset.action;
       if (!card || !action || !MODAL_CONFIG[action]) return;
+
+      if (action === "accept" || action === "markReady" || action === "complete") {
+        const currentStatus = card.dataset.status;
+        const allOfStatus = [...ordersList.querySelectorAll(".order-card")].filter(c => c.dataset.status === currentStatus);
+        
+        if (allOfStatus[0] !== card) {
+          modalHeaderIcon.className = "fa-solid fa-triangle-exclamation";
+          modalHeaderIcon.style.color = "#dc2626";
+          modalHeaderTitle.textContent = "Action Not Allowed";
+          
+          modalSubtitle.innerHTML = "<strong>The first order should be processed first.</strong> Please process orders in sequence.";
+          modalDetail.innerHTML = ""; 
+          
+          confirmActionBtn.style.display = "none";
+          cancelConfirmModal.textContent = "OK";
+          
+          confirmModal.classList.add("active");
+          document.body.style.overflow = "hidden";
+          return;
+        }
+      }
 
       // All actions → show confirmation modal first
       openConfirmModal(card, action);

@@ -98,11 +98,12 @@
   border-radius: 50%;
 }
 
-.filter-dot.pending { background: #fbbf24; }
+.filter-dot.Queue { background: #fbbf24; }
 .filter-dot.preparing { background: #94a3b8; }
 .filter-dot.ready { background: #22c55e; }
 .filter-dot.completed { background: #3b82f6; }
 .filter-dot.cancelled { background: #ef4444; }
+.filter-dot.history { background: #8b5cf6; }
 
 /* Counter badge within the filter pill */
 .tab-count {
@@ -123,7 +124,7 @@
 /* grid of order cards */
 .orders-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
   gap: 24px;
   justify-content: flex-start;
 }
@@ -144,11 +145,12 @@
   height: 4px;
   border-radius: 18px 18px 0 0;
 }
-.accent-pending   { background: #fbbf24; }
+.accent-Queue   { background: #fbbf24; }
 .accent-preparing { background: #94a3b8; }
 .accent-ready     { background: #22c55e; }
 .accent-completed { background: #3b82f6; }
 .accent-cancelled { background: #ef4444; }
+.accent-history   { background: #8b5cf6; }
 
 /* padded inner wrapper */
 .order-card-inner { padding: 20px 22px; }
@@ -177,11 +179,12 @@
   color: #64748b;
   flex-shrink: 0;
 }
-.order-store-icon.ic-pending   { background: #fef9c3; color: #b45309; }
+.order-store-icon.ic-Queue   { background: #fef9c3; color: #b45309; }
 .order-store-icon.ic-preparing { background: #f3f4f6; color: #6b7280; }
 .order-store-icon.ic-ready     { background: #dcfce7; color: #15803d; }
 .order-store-icon.ic-cancelled { background: #fee2e2; color: #b91c1c; }
 .order-store-icon.ic-completed { background: #dbeafe; color: #1d4ed8; }
+.order-store-icon.ic-history   { background: #f3e8ff; color: #7c3aed; }
 
 .order-card-title { font-size: 15px; font-weight: 700; color: #0f172a; }
 
@@ -258,7 +261,7 @@ hr.order-divider { border: none; border-top: 1px solid #f1f5f9; margin: 12px 0; 
   justify-content: center;
 }
 
-.status-icon.pending-icon {
+.status-icon.Queue-icon {
   color: #d97706;
   border-color: #d97706;
 }
@@ -285,7 +288,7 @@ hr.order-divider { border: none; border-top: 1px solid #f1f5f9; margin: 12px 0; 
   color: #6b7280;
 }
 
-.status-badge.pending {
+.status-badge.Queue {
   background: #fef3c7;
   color: #92400e;
 }
@@ -298,6 +301,11 @@ hr.order-divider { border: none; border-top: 1px solid #f1f5f9; margin: 12px 0; 
 .status-badge.cancelled {
   background: #fee2e2;
   color: #dc2626;
+}
+
+.status-badge.history {
+  background: #f3e8ff;
+  color: #7c3aed;
 }
 
 .order-id,
@@ -930,6 +938,28 @@ hr {
   border-color: #a78bfa;
 }
 
+/* Move to History */
+.btn-move-history {
+  background: #f5f3ff;
+  color: #7c3aed;
+  border-color: #c4b5fd;
+}
+.btn-move-history:hover {
+  background: #ede9fe;
+  border-color: #a78bfa;
+}
+
+/* Delete History */
+.btn-delete-history {
+  background: #fff1f2;
+  color: #dc2626;
+  border-color: #fca5a5;
+}
+.btn-delete-history:hover {
+  background: #fee2e2;
+  border-color: #f87171;
+}
+
 /* ── ORDER ACTIONS row ────────────────────────────────── */
 .order-actions {
   display: flex;
@@ -1137,12 +1167,14 @@ hr {
   box-shadow: 0 5px 16px rgba(22,163,74,0.35);
 }
 
-/* Decline — red */
-.btn-confirm-decline {
+/* Decline / Delete — red */
+.btn-confirm-decline,
+.btn-confirm-delete {
   background: linear-gradient(135deg, #ef4444, #b91c1c);
   box-shadow: 0 2px 8px rgba(239,68,68,0.25);
 }
-.btn-confirm-decline:hover {
+.btn-confirm-decline:hover,
+.btn-confirm-delete:hover {
   transform: translateY(-1px);
   box-shadow: 0 5px 16px rgba(239,68,68,0.35);
 }
@@ -1163,6 +1195,16 @@ hr {
   box-shadow: 0 2px 8px rgba(139,92,246,0.25);
 }
 .btn-confirm-complete:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 16px rgba(139,92,246,0.35);
+}
+
+/* History Move — violet */
+.btn-confirm-history {
+  background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+  box-shadow: 0 2px 8px rgba(139,92,246,0.25);
+}
+.btn-confirm-history:hover {
   transform: translateY(-1px);
   box-shadow: 0 5px 16px rgba(139,92,246,0.35);
 }

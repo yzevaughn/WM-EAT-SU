@@ -116,9 +116,9 @@
 
         <div class="order-controls">
           <div class="filter-bar" id="filterTabs">
-            <button class="filter-btn active" data-tab="Pending" id="tab-Pending">
-              <span class="filter-dot pending"></span> Pending
-              <span class="tab-count" id="count-Pending">2</span>
+            <button class="filter-btn active" data-tab="Queue" id="tab-Queue">
+              <span class="filter-dot Queue"></span> Queue
+              <span class="tab-count" id="count-Queue">2</span>
             </button>
             <button class="filter-btn" data-tab="Preparing" id="tab-Preparing">
               <span class="filter-dot preparing"></span> Preparing
@@ -136,23 +136,61 @@
               <span class="filter-dot cancelled"></span> Cancelled
               <span class="tab-count" id="count-Cancelled">1</span>
             </button>
+            <button class="filter-btn" data-tab="History" id="tab-History">
+              <span class="filter-dot history"></span> History
+              <span class="tab-count" id="count-History">1</span>
+            </button>
           </div>
         </div>
 
         <div class="orders-list" id="ordersList">
 
-          <!-- ── PENDING: John Student ── -->
-          <div class="order-card" data-status="Pending">
-            <div class="order-card-accent accent-pending"></div>
+          <!-- ── HISTORY: Anna Smith ── -->
+          <div class="order-card" data-status="History">
+            <div class="order-card-accent accent-history"></div>
             <div class="order-card-inner">
               <div class="order-card-header">
                 <div class="order-title">
-                  <div class="order-store-icon ic-pending">
+                  <div class="order-store-icon ic-history">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                  </div>
+                  <span class="order-card-title">Anna Smith</span>
+                </div>
+                <span class="status-badge history">History</span>
+              </div><div class="order-body-wrapper">
+  <img src="../../images/burger.avif" alt="Food image" class="order-image">
+  <div class="order-body-info">
+    <div class="order-meta">
+                <span><i class="fa-solid fa-hashtag"></i> #108371928371</span>
+                <span><i class="fa-regular fa-calendar"></i> Mar 4, 2026 · 1:15 PM</span>
+              </div>
+    <div class="order-items">
+                <div class="order-item-row"><span>1× Vegan Wrap</span><span>₱11.50</span></div>
+  </div>
+</div>
+              </div>
+              <p class="pickup-label"><i class="fa-regular fa-clock"></i> Pickup: 2:00 PM</p>
+              <div class="order-total-row">
+                <span>Total: ₱11.50</span>
+                <div class="order-actions">
+                  <button class="btn-action btn-delete-history" data-action="deleteHistory"><i class="fas fa-trash"></i> Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Queue: John Student ── -->
+          <div class="order-card" data-status="Queue">
+            <div class="order-card-accent accent-Queue"></div>
+            <div class="order-card-inner">
+              <div class="order-card-header">
+                <div class="order-title">
+                  <div class="order-store-icon ic-Queue">
                     <i class="fa-solid fa-clock"></i>
                   </div>
                   <span class="order-card-title">John Student</span>
                 </div>
-                <span class="status-badge pending">Pending</span>
+                <span class="status-badge Queue">Queue</span>
               </div><div class="order-body-wrapper">
   <img src="../../images/burger.avif" alt="Food image" class="order-image">
   <div class="order-body-info">
@@ -179,18 +217,18 @@
             </div>
           </div>
 
-          <!-- ── PENDING: Emily Chang ── -->
-          <div class="order-card" data-status="Pending">
-            <div class="order-card-accent accent-pending"></div>
+          <!-- ── Queue: Emily Chang ── -->
+          <div class="order-card" data-status="Queue">
+            <div class="order-card-accent accent-Queue"></div>
             <div class="order-card-inner">
               <div class="order-card-header">
                 <div class="order-title">
-                  <div class="order-store-icon ic-pending">
+                  <div class="order-store-icon ic-Queue">
                     <i class="fa-solid fa-clock"></i>
                   </div>
                   <span class="order-card-title">Emily Chang</span>
                 </div>
-                <span class="status-badge pending">Pending</span>
+                <span class="status-badge Queue">Queue</span>
               </div><div class="order-body-wrapper">
   <img src="../../images/burger.avif" alt="Food image" class="order-image">
   <div class="order-body-info">
@@ -387,7 +425,12 @@
               </div>
               <p class="pickup-label"><i class="fa-regular fa-clock"></i> Pickup: 11:00 AM</p>
               <hr class="order-divider" />
-              <div class="order-total-row"><span>Total: ₱16.50</span></div>
+              <div class="order-total-row">
+                <span>Total: ₱16.50</span>
+                <div class="order-actions">
+                  <button class="btn-action btn-move-history" data-action="moveToHistory"><i class="fas fa-arrow-right"></i> Move</button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -417,7 +460,12 @@
               </div>
               <p class="pickup-label"><i class="fa-regular fa-clock"></i> Pickup: 6:30 PM</p>
               <hr class="order-divider" />
-              <div class="order-total-row"><span>Total: ₱22.00</span></div>
+              <div class="order-total-row">
+                <span>Total: ₱22.00</span>
+                <div class="order-actions">
+                  <button class="btn-action btn-move-history" data-action="moveToHistory"><i class="fas fa-arrow-right"></i> Move</button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -447,7 +495,12 @@
               </div>
               <p class="pickup-label"><i class="fa-regular fa-clock"></i> Pickup: 3:30 PM</p>
               <hr class="order-divider" />
-              <div class="order-total-row"><span>Total: ₱8.50</span></div>
+              <div class="order-total-row">
+                <span>Total: ₱8.50</span>
+                <div class="order-actions">
+                  <button class="btn-action btn-move-history" data-action="moveToHistory"><i class="fas fa-arrow-right"></i> Move</button>
+                </div>
+              </div>
             </div>
           </div>
 

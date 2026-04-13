@@ -132,7 +132,10 @@
             <h1>Menu Management</h1>
             <p>Add and manage your food items</p>
           </div>
-          <div class="header-right">
+          <div class="header-right" style="display: flex; gap: 12px; align-items: center;">
+            <button id="openPosterModalBtn" style="background-color: #ef4444; color: white; border: none; padding: 10px 18px; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; font-family: inherit; font-size: 15px; transition: opacity 0.2s; box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.2);" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+              <i class="fas fa-image"></i> Add Poster
+            </button>
             <button class="add-item-btn" id="openModalBtn">
               <i class="fas fa-plus"></i> Create
             </button>
@@ -233,6 +236,34 @@
             </div>
           </div>
         </div>
+
+        <div class="modal" id="posterModal">
+          <div class="modal-overlay" id="posterModalOverlay"></div>
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2>Add Dashboard Poster</h2>
+              <button class="modal-close" id="posterModalClose">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="posterForm">
+                <div class="form-group">
+                  <label for="posterImage">Upload Poster Image</label>
+                  <input type="file" id="posterImage" accept="image/*" required />
+                </div>
+                <div class="form-group">
+                  <label for="posterLink">Optional Link (on click)</label>
+                  <input type="url" id="posterLink" placeholder="https://" />
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button class="btn-cancel" id="cancelPosterBtn">Cancel</button>
+              <button class="btn-save" id="savePosterBtn" style="background: #ef4444;">Add Poster</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
         <div class="modal" id="confirmSaveModal" style="z-index: 3000;">
@@ -280,9 +311,44 @@
         }
 
         if(openModalBtn) openModalBtn.addEventListener("click", openModal);
-        if(modalClose) modalClose.addEventListener("click", closeModal);
         if(cancelBtn) cancelBtn.addEventListener("click", closeModal);
         if(modalOverlay) modalOverlay.addEventListener("click", closeModal);
+
+        const posterModal = document.getElementById("posterModal");
+        const openPosterModalBtn = document.getElementById("openPosterModalBtn");
+        const posterModalClose = document.getElementById("posterModalClose");
+        const cancelPosterBtn = document.getElementById("cancelPosterBtn");
+        const posterModalOverlay = document.getElementById("posterModalOverlay");
+        const savePosterBtn = document.getElementById("savePosterBtn");
+
+        function openPosterModal() {
+          const form = document.getElementById("posterForm");
+          if(form) form.reset();
+          if(posterModal) posterModal.classList.add("active");
+        }
+
+        function closePosterModal(e) {
+          if (e) e.preventDefault();
+          if(posterModal) posterModal.classList.remove("active");
+        }
+
+        if(openPosterModalBtn) openPosterModalBtn.addEventListener("click", openPosterModal);
+        if(posterModalClose) posterModalClose.addEventListener("click", closePosterModal);
+        if(cancelPosterBtn) cancelPosterBtn.addEventListener("click", closePosterModal);
+        if(posterModalOverlay) posterModalOverlay.addEventListener("click", closePosterModal);
+
+        if(savePosterBtn) {
+          savePosterBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            const form = document.getElementById("posterForm");
+            if (form && !form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            alert("Poster successfully added to student dashboard!");
+            closePosterModal();
+          });
+        }
 
         const confirmSaveModal = document.getElementById("confirmSaveModal");
         const confirmSaveBtn = document.getElementById("confirmSaveBtn");
