@@ -366,12 +366,6 @@
                     </div>
                   </div>
                 </div>
-                <p
-                  class="pickup-label"
-                  style="font-size: 12px; color: #94a3b8; margin-bottom: 12px"
-                >
-                  <i class="fa-regular fa-clock"></i> Pickup: 10:00 AM
-                </p>
                 <hr class="order-divider" />
                 <div class="order-total-row"><span>Total: ₱12.99</span></div>
                 <div
@@ -439,12 +433,6 @@
                     </div>
                   </div>
                 </div>
-                <p
-                  class="pickup-label"
-                  style="font-size: 12px; color: #94a3b8; margin-bottom: 12px"
-                >
-                  <i class="fa-regular fa-clock"></i> Pickup: 10:30 AM
-                </p>
                 <hr class="order-divider" />
                 <div class="order-total-row"><span>Total: ₱18.50</span></div>
                 <div
@@ -494,12 +482,6 @@
                     </div>
                   </div>
                 </div>
-                <p
-                  class="pickup-label"
-                  style="font-size: 12px; color: #94a3b8; margin-bottom: 12px"
-                >
-                  <i class="fa-regular fa-clock"></i> Pickup: 12:00 PM
-                </p>
                 <hr class="order-divider" />
                 <div class="order-total-row"><span>Total: ₱9.75</span></div>
                 <div
@@ -564,12 +546,6 @@
                     </div>
                   </div>
                 </div>
-                <p
-                  class="pickup-label"
-                  style="font-size: 12px; color: #94a3b8; margin-bottom: 12px"
-                >
-                  <i class="fa-regular fa-clock"></i> Pickup: 2:30 PM
-                </p>
                 <hr class="order-divider" />
                 <div class="order-total-row"><span>Total: ₱24.75</span></div>
                 <div
@@ -638,7 +614,6 @@
                   <button
                     class="view-code-btn open-code-btn"
                     data-code="B4X2"
-                    data-time="2:00 PM"
                   >
                     <i class="fa-solid fa-qrcode"></i> View Pickup Code
                   </button>
@@ -686,12 +661,6 @@
                     </div>
                   </div>
                 </div>
-                <p
-                  class="pickup-label"
-                  style="font-size: 12px; color: #94a3b8; margin-bottom: 12px"
-                >
-                  <i class="fa-regular fa-clock"></i> Pickup: 4:00 PM
-                </p>
                 <hr class="order-divider" />
                 <div class="order-total-row"><span>Total: ₱15.50</span></div>
                 <div
@@ -701,7 +670,6 @@
                   <button
                     class="view-code-btn open-code-btn"
                     data-code="8C9D"
-                    data-time="4:00 PM"
                   >
                     <i class="fa-solid fa-qrcode"></i> View Pickup Code
                   </button>
@@ -742,12 +710,6 @@
                     </div>
                   </div>
                 </div>
-                <p
-                  class="pickup-label"
-                  style="font-size: 12px; color: #94a3b8; margin-bottom: 12px"
-                >
-                  <i class="fa-regular fa-clock"></i> Pickup: 11:00 AM
-                </p>
                 <hr class="order-divider" />
                 <div class="order-total-row"><span>Total: ₱16.50</span></div>
                 <div
@@ -794,12 +756,6 @@
                     </div>
                   </div>
                 </div>
-                <p
-                  class="pickup-label"
-                  style="font-size: 12px; color: #94a3b8; margin-bottom: 12px"
-                >
-                  <i class="fa-regular fa-clock"></i> Pickup: 6:30 PM
-                </p>
                 <hr class="order-divider" />
                 <div class="order-total-row"><span>Total: ₱22.00</span></div>
                 <div
@@ -846,12 +802,6 @@
                     </div>
                   </div>
                 </div>
-                <p
-                  class="pickup-label"
-                  style="font-size: 12px; color: #94a3b8; margin-bottom: 12px"
-                >
-                  <i class="fa-regular fa-clock"></i> Pickup: 3:30 PM
-                </p>
                 <hr class="order-divider" />
                 <div class="order-total-row"><span>Total: ₱8.50</span></div>
                 <div
@@ -941,10 +891,6 @@
               >✔ Ready for Pickup</span
             >
           </div>
-          <div class="modal-info-row">
-            <span class="modal-info-label">Estimated Pickup</span>
-            <span class="modal-info-value" id="modalPickupTime">2:00 PM</span>
-          </div>
           <div class="modal-order-items" id="modalOrderItems"></div>
           <div class="modal-total-price" id="modalTotalPrice">Total: ₱0.00</div>
 
@@ -971,14 +917,12 @@
               const vendor = card.getAttribute("data-vendor") || "Customer";
               const orderId = card.getAttribute("data-order-id") || "0000";
               const price = card.getAttribute("data-price") || "0.00";
-              const time = btn.getAttribute("data-time") || "ASAP";
               const code = btn.getAttribute("data-code") || "A7C3";
               const image = card.getAttribute("data-image");
 
               document.getElementById("modalCodeVal").textContent = code;
               document.getElementById("modalCodeOrder").textContent =
                 `Order #${orderId} · ${vendor}`;
-              document.getElementById("modalPickupTime").textContent = time;
               document.getElementById("modalTotalPrice").textContent =
                 `Total: ₱${price}`;
 

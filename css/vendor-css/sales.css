@@ -4,7 +4,7 @@
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   margin-top: 32px;
 }
 
@@ -237,9 +237,9 @@
 }
 
 .page-btn.active {
-  background: #ea580c;
+  background: #e61524;
   color: white;
-  border-color: #ea580c;
+  border-color: #e61524;
 }
 
 .page-btn[disabled] {
@@ -262,19 +262,20 @@
     flex-direction: column;
     align-items: stretch;
   }
-  
+
   .search-bar {
     max-width: none;
   }
-  
+
   .filters {
     flex-direction: column;
   }
-  
-  .filter-dropdown, .sort-dropdown {
+
+  .filter-dropdown,
+  .sort-dropdown {
     width: 100%;
   }
-  
+
   .pagination {
     flex-direction: column;
     align-items: center;

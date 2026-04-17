@@ -1,0 +1,125 @@
+<svg viewBox="0 0 1000 850" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    path, polygon, rect {
+      fill: #ffffff;
+      stroke: #333;
+      stroke-width: 2.5;
+      stroke-linejoin: round;
+    }
+    .boundary {
+      fill: none;
+      stroke-width: 4;
+    }
+    .road {
+      fill: none;
+    }
+    text {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      fill: #111;
+      stroke: none;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+    .small-text {
+      font-size: 11px;
+    }
+  </style>
+
+  <path class="boundary" d="M 40,195 L 700,100 L 980,530 L 990,780 L 15,780 L 25,500 Z" />
+
+  <polygon points="515,110 540,113 535,153 510,150" />
+  <g transform="translate(525, 131) rotate(90)">
+    <text class="small-text">Gate</text>
+  </g>
+
+  <polygon points="35,320 55,320 50,370 30,370" />
+  <g transform="translate(42, 345) rotate(-90)">
+    <text class="small-text">Gate</text>
+  </g>
+
+  <polygon points="25,470 45,470 40,520 20,520" />
+  <g transform="translate(32, 495) rotate(-90)">
+    <text class="small-text">Gate</text>
+  </g>
+
+  <polygon points="305,175 440,155 450,225 315,245" />
+  <g transform="translate(375, 200) rotate(-8)">
+    <text y="-10">Collage of</text>
+    <text y="10">Architecture</text>
+  </g>
+
+  <path d="M 210,250 L 270,240 L 275,300 C 270,315 240,320 240,340 L 245,415 L 275,415 L 270,425 L 140,435 C 110,435 100,405 110,395 C 115,390 145,395 145,370 C 145,350 120,340 115,335 L 210,325 Z" />
+
+  <polygon points="310,270 455,250 458,280 445,282 450,345 465,342 475,375 325,395 320,345 330,343 325,310 315,312" />
+  <g transform="translate(385, 322) rotate(-8)">
+    <text y="-10">Food Service &amp;</text>
+    <text y="10">Garments</text>
+  </g>
+
+  <polygon points="465,245 520,240 535,370 480,375" />
+  <text x="500" y="307">C2</text>
+
+  <polygon points="90,460 485,470 480,545 85,530" />
+  <g transform="translate(285, 502) rotate(1)">
+    <text y="-12">High School Building/</text>
+    <text y="12">Ils Building</text>
+  </g>
+
+  <polygon points="580,160 645,150 670,405 605,415" />
+  <g transform="translate(625, 285) rotate(-82)">
+    <text>Collage of Medicine</text>
+  </g>
+
+  <polygon points="675,220 730,210 745,395 690,405" />
+  <g transform="translate(702, 310) rotate(-85)">
+    <text class="small-text">Evaluation Center/</text>
+  </g>
+  <g transform="translate(717, 310) rotate(-85)">
+    <text class="small-text">Old Highschool Building</text>
+  </g>
+
+  <polygon points="615,425 655,420 660,465 620,470" />
+
+  <path d="M 675,430 L 715,425 Q 725,425 725,435 L 730,460 Q 730,470 720,470 L 680,475 Q 670,475 670,465 L 665,440 Q 665,430 675,430 Z" />
+  <text x="698" y="450" class="small-text">MSA</text>
+
+  <polygon points="800,360 850,370 940,520 800,580 780,550 870,500" />
+  <g transform="translate(865, 450) rotate(-31)">
+    <text y="-8" class="small-text">Collage of</text>
+    <text y="8" class="small-text">Computing Studies</text>
+  </g>
+
+  <polygon points="850,610 900,580 920,615 870,645" />
+  <g transform="translate(885, 612) rotate(-30)">
+    <text class="small-text">C1</text>
+  </g>
+
+  <path class="road" d="M 870,645 Q 900,710 950,780" />
+  <path class="road" d="M 920,615 Q 960,690 990,780" />
+
+  <polygon points="95,540 330,550 325,605 235,605 230,695 160,690 160,595 95,590" />
+
+  <polygon points="290,610 335,615 330,685 290,685" />
+
+  <path d="M 340,600 C 340,550 425,550 425,600 L 420,685 L 335,685 Z" />
+  <text x="380" y="605" class="small-text">Collage of</text>
+  <text x="380" y="625" class="small-text">Criminal Justice</text>
+  <text x="380" y="645" class="small-text">Education</text>
+
+  <polygon points="95,710 305,705 305,755 95,760" />
+  <text x="200" y="725">Collage of Science</text>
+  <text x="200" y="745">and Mathematics</text>
+
+  <polygon points="305,705 545,695 545,750 305,755" />
+  <text x="425" y="720">Collage of Asian and</text>
+  <text x="425" y="740">Islamic Studies</text>
+
+  <polygon points="545,695 745,690 745,745 545,750" />
+  <text x="645" y="718">Collage of Social Work</text>
+  <text x="645" y="738">and Development Studies</text>
+
+  <polygon points="750,690 815,690 815,745 750,745" />
+  <polygon points="820,715 855,715 855,750 820,750" />
+
+</svg>
