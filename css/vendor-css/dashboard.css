@@ -17,7 +17,7 @@
 
 .dashboard-content {
   padding: 20px;
-  background: #f8f9fa;
+ 
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -89,6 +89,88 @@
   background: #fef3c7;
   color: #a16207;
 }
+
+/* Chart Container */
+.chart-container-wrapper {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.chart-title h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+}
+.chart-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.chart-summary .total-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: #111827;
+}
+.growth-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 20px;
+}
+.growth-badge.positive {
+  background: #dcfce7;
+  color: #166534;
+}
+.growth-badge.negative {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.chart-controls {
+  display: flex;
+  background: #f3f4f6;
+  border-radius: 8px;
+  padding: 4px;
+}
+.chart-tab {
+  border: none;
+  background: transparent;
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b7280;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.chart-tab:hover {
+  color: #374151;
+}
+.chart-tab.active {
+  background: white;
+  color: #ea580c;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.chart-body {
+  position: relative;
+  height: 300px;
+  width: 100%;
+}
+
 /* quick action cards - menu, orders, reviews */
 .actions-grid {
   display: grid;

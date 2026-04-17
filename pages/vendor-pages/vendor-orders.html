@@ -10,6 +10,32 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="../../css/navbar.css" />
   <link rel="stylesheet" href="../../css/vendor-css/orders.css" />
+  <style>
+    /* Button styles borrowed from student-order.css to maintain consistency */
+    .cancel-btn {
+      display: flex; align-items: center; justify-content: center; gap: 6px; background: #f3f4f6; color: #64748b;
+      border: 1px solid #e2e8f0; padding: 8px 16px; border-radius: 9px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .2s;
+    }
+    .cancel-btn:hover { background: #fee2e2; color: #b91c1c; border-color: #fecaca; }
+    
+    .remove-btn {
+      display: flex; align-items: center; justify-content: center; gap: 6px; background: #fff; color: #ef4444; margin-left: auto;
+      border: 1px solid #fecaca; padding: 8px 16px; border-radius: 9px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .2s;
+    }
+    .remove-btn:hover { background: #fee2e2; border-color: #fca5a5; }
+
+    .pickup-btn {
+      display: flex; align-items: center; justify-content: center; gap: 6px; background: linear-gradient(135deg, #22c55e, #15803d); color: #fff;
+      border: none; padding: 8px 18px; border-radius: 9px; font-size: 13px; font-weight: 600; cursor: pointer; box-shadow: 0 3px 10px rgba(34, 197, 94, .3); transition: all .2s;
+    }
+    .pickup-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 16px rgba(34, 197, 94, .4); }
+
+    .view-code-btn {
+      display: flex; align-items: center; justify-content: center; gap: 6px; background: #fff; color: #15803d;
+      border: 1.5px solid #22c55e; padding: 8px 16px; border-radius: 9px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .2s;
+    }
+    .view-code-btn:hover { background: #f0fdf4; }
+  </style>
 </head>
 
 <body>
@@ -161,7 +187,6 @@
   <img src="../../images/burger.avif" alt="Food image" class="order-image">
   <div class="order-body-info">
     <div class="order-meta">
-                <span><i class="fa-solid fa-hashtag"></i> #108371928371</span>
                 <span><i class="fa-regular fa-calendar"></i> Mar 4, 2026 · 1:15 PM</span>
               </div>
     <div class="order-items">
@@ -169,12 +194,11 @@
   </div>
 </div>
               </div>
-              <p class="pickup-label"><i class="fa-regular fa-clock"></i> Pickup: 2:00 PM</p>
-              <div class="order-total-row">
-                <span>Total: ₱11.50</span>
-                <div class="order-actions">
-                  <button class="btn-action btn-delete-history" data-action="deleteHistory"><i class="fas fa-trash"></i> Delete</button>
-                </div>
+              <p class="pickup-label" style="font-size: 12px; color: #94a3b8; margin-bottom: 12px"><i class="fa-regular fa-clock"></i> Pickup: 2:00 PM</p>
+              <hr class="order-divider" />
+              <div class="order-total-row"><span>Total: ₱11.50</span></div>
+              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px;">
+                  <button class="remove-btn"><i class="fa-solid fa-trash-can"></i> Delete</button>
               </div>
             </div>
           </div>
@@ -195,24 +219,22 @@
   <img src="../../images/burger.avif" alt="Food image" class="order-image">
   <div class="order-body-info">
     <div class="order-meta">
-                <span><i class="fa-solid fa-hashtag"></i> #01772877443686</span>
                 <span><i class="fa-regular fa-calendar"></i> Mar 8, 2026 · 9:15 AM</span>
               </div>
     <div class="order-items">
                 <div class="order-item-row"><span>1× Classic Burger Meal</span><span>₱12.99</span></div>
   </div>
+  <div class="order-instruction" style="font-size: 12px; color: #64748b; margin-top: 8px; padding: 6px 8px; background: #f8fafc; border-radius: 4px; border-left: 2px solid #cbd5e1;">
+    <i class="fa-regular fa-comment-dots" style="margin-right: 4px; color: #94a3b8;"></i> <strong>Note:</strong> No mayo, extra napkins.
+  </div>
 </div>
               </div>
-              <p class="pickup-label"><i class="fa-regular fa-clock"></i> Pickup: 10:00 AM</p>
+              <p class="pickup-label" style="font-size: 12px; color: #94a3b8; margin-bottom: 12px"><i class="fa-regular fa-clock"></i> Pickup: 10:00 AM</p>
               <hr class="order-divider" />
-              <div class="order-total-row">
-                <span>Total: ₱12.99</span>
-                <div class="order-actions">
-                  <button class="btn-action btn-decline" data-action="decline"><i class="fas fa-times"></i>
-                    Decline</button>
-                  <button class="btn-action btn-accept" data-action="accept"><i class="fas fa-check"></i>
-                    Accept</button>
-                </div>
+              <div class="order-total-row"><span>Total: ₱12.99</span></div>
+              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px;">
+                  <button class="cancel-btn"><i class="fas fa-times"></i> Decline</button>
+                  <button class="pickup-btn"><i class="fas fa-check"></i> Accept</button>
               </div>
             </div>
           </div>
@@ -233,24 +255,22 @@
   <img src="../../images/burger.avif" alt="Food image" class="order-image">
   <div class="order-body-info">
     <div class="order-meta">
-                <span><i class="fa-solid fa-hashtag"></i> #028371928371</span>
                 <span><i class="fa-regular fa-calendar"></i> Mar 8, 2026 · 9:30 AM</span>
               </div>
     <div class="order-items">
                 <div class="order-item-row"><span>2× Pizza Slice</span><span>₱18.50</span></div>
   </div>
+  <div class="order-instruction" style="font-size: 12px; color: #64748b; margin-top: 8px; padding: 6px 8px; background: #f8fafc; border-radius: 4px; border-left: 2px solid #cbd5e1;">
+    <i class="fa-regular fa-comment-dots" style="margin-right: 4px; color: #94a3b8;"></i> <strong>Note:</strong> Extra chili flakes please.
+  </div>
 </div>
               </div>
-              <p class="pickup-label"><i class="fa-regular fa-clock"></i> Pickup: 10:30 AM</p>
+              <p class="pickup-label" style="font-size: 12px; color: #94a3b8; margin-bottom: 12px"><i class="fa-regular fa-clock"></i> Pickup: 10:30 AM</p>
               <hr class="order-divider" />
-              <div class="order-total-row">
-                <span>Total: ₱18.50</span>
-                <div class="order-actions">
-                  <button class="btn-action btn-decline" data-action="decline"><i class="fas fa-times"></i>
-                    Decline</button>
-                  <button class="btn-action btn-accept" data-action="accept"><i class="fas fa-check"></i>
-                    Accept</button>
-                </div>
+              <div class="order-total-row"><span>Total: ₱18.50</span></div>
+              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px;">
+                  <button class="cancel-btn"><i class="fas fa-times"></i> Decline</button>
+                  <button class="pickup-btn"><i class="fas fa-check"></i> Accept</button>
               </div>
             </div>
           </div>
@@ -271,7 +291,6 @@
   <img src="../../images/burger.avif" alt="Food image" class="order-image">
   <div class="order-body-info">
     <div class="order-meta">
-                <span><i class="fa-solid fa-hashtag"></i> #038371928371</span>
                 <span><i class="fa-regular fa-calendar"></i> Mar 8, 2026 · 1:26 PM</span>
               </div>
     <div class="order-items">
@@ -279,14 +298,11 @@
   </div>
 </div>
               </div>
-              <p class="pickup-label"><i class="fa-regular fa-clock"></i> Pickup: 12:00 PM</p>
+              <p class="pickup-label" style="font-size: 12px; color: #94a3b8; margin-bottom: 12px"><i class="fa-regular fa-clock"></i> Pickup: 12:00 PM</p>
               <hr class="order-divider" />
-              <div class="order-total-row">
-                <span>Total: ₱9.75</span>
-                <div class="order-actions">
-                  <button class="btn-action btn-ready" data-action="markReady"><i class="fas fa-bell"></i> Mark
-                    Ready</button>
-                </div>
+              <div class="order-total-row"><span>Total: ₱9.75</span></div>
+              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px;">
+                  <button class="pickup-btn" data-action="markReady"><i class="fas fa-bell"></i> Mark Ready</button>
               </div>
             </div>
           </div>
@@ -307,28 +323,27 @@
   <img src="../../images/burger.avif" alt="Food image" class="order-image">
   <div class="order-body-info">
     <div class="order-meta">
-                <span><i class="fa-solid fa-hashtag"></i> #048371928371</span>
                 <span><i class="fa-regular fa-calendar"></i> Mar 8, 2026 · 1:45 PM</span>
               </div>
     <div class="order-items">
                 <div class="order-item-row"><span>3× Fried Chicken</span><span>₱24.75</span></div>
   </div>
+  <div class="order-instruction" style="font-size: 12px; color: #64748b; margin-top: 8px; padding: 6px 8px; background: #f8fafc; border-radius: 4px; border-left: 2px solid #cbd5e1;">
+    <i class="fa-regular fa-comment-dots" style="margin-right: 4px; color: #94a3b8;"></i> <strong>Note:</strong> Make it extra spicy!
+  </div>
 </div>
               </div>
-              <p class="pickup-label"><i class="fa-regular fa-clock"></i> Pickup: 2:30 PM</p>
+              <p class="pickup-label" style="font-size: 12px; color: #94a3b8; margin-bottom: 12px"><i class="fa-regular fa-clock"></i> Pickup: 2:30 PM</p>
               <hr class="order-divider" />
-              <div class="order-total-row">
-                <span>Total: ₱24.75</span>
-                <div class="order-actions">
-                  <button class="btn-action btn-ready" data-action="markReady"><i class="fas fa-bell"></i> Mark
-                    Ready</button>
-                </div>
+              <div class="order-total-row"><span>Total: ₱24.75</span></div>
+              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px;">
+                  <button class="pickup-btn" data-action="markReady"><i class="fas fa-bell"></i> Mark Ready</button>
               </div>
             </div>
           </div>
 
           <!-- ── READY: Mike Johnson ── -->
-          <div class="order-card" data-status="Ready">
+          <div class="order-card" data-status="Ready" data-vendor="Mike Johnson" data-order-id="058371928371" data-price="9.00" data-image="../../images/burger.avif">
             <div class="order-card-accent accent-ready"></div>
             <div class="order-card-inner">
               <div class="order-card-header">
@@ -343,7 +358,6 @@
   <img src="../../images/burger.avif" alt="Food image" class="order-image">
   <div class="order-body-info">
     <div class="order-meta">
-                <span><i class="fa-solid fa-hashtag"></i> #058371928371</span>
                 <span><i class="fa-regular fa-calendar"></i> Mar 7, 2026 · 11:59 AM</span>
               </div>
     <div class="order-items">
@@ -351,20 +365,17 @@
   </div>
 </div>
               </div>
-              <p class="pickup-label"><i class="fa-regular fa-clock"></i> Pickup: 2:00 PM</p>
+              <p class="pickup-label" style="font-size: 12px; color: #94a3b8; margin-bottom: 12px"><i class="fa-regular fa-clock"></i> Pickup: 2:00 PM</p>
               <hr class="order-divider" />
-              <div class="order-total-row">
-                <span>Total: ₱9.00</span>
-                <div class="order-actions">
-                  <button class="btn-action btn-complete" data-action="complete"><i class="fas fa-bag-shopping"></i>
-                    Complete</button>
-                </div>
+              <div class="order-total-row"><span>Total: ₱9.00</span></div>
+              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px;">
+                  <button class="view-code-btn open-code-btn" data-code="B4X2" data-time="2:00 PM"><i class="fa-solid fa-qrcode"></i> View Pickup Code</button>
               </div>
             </div>
           </div>
 
           <!-- ── READY: Rachel Brown ── -->
-          <div class="order-card" data-status="Ready">
+          <div class="order-card" data-status="Ready" data-vendor="Rachel Brown" data-order-id="068371928371" data-price="15.50" data-image="../../images/burger.avif">
             <div class="order-card-accent accent-ready"></div>
             <div class="order-card-inner">
               <div class="order-card-header">
@@ -379,7 +390,6 @@
   <img src="../../images/burger.avif" alt="Food image" class="order-image">
   <div class="order-body-info">
     <div class="order-meta">
-                <span><i class="fa-solid fa-hashtag"></i> #068371928371</span>
                 <span><i class="fa-regular fa-calendar"></i> Mar 6, 2026 · 3:15 PM</span>
               </div>
     <div class="order-items">
@@ -387,14 +397,11 @@
   </div>
 </div>
               </div>
-              <p class="pickup-label"><i class="fa-regular fa-clock"></i> Pickup: 4:00 PM</p>
+              <p class="pickup-label" style="font-size: 12px; color: #94a3b8; margin-bottom: 12px"><i class="fa-regular fa-clock"></i> Pickup: 4:00 PM</p>
               <hr class="order-divider" />
-              <div class="order-total-row">
-                <span>Total: ₱15.50</span>
-                <div class="order-actions">
-                  <button class="btn-action btn-complete" data-action="complete"><i class="fas fa-bag-shopping"></i>
-                    Complete</button>
-                </div>
+              <div class="order-total-row"><span>Total: ₱15.50</span></div>
+              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px;">
+                  <button class="view-code-btn open-code-btn" data-code="8C9D" data-time="4:00 PM"><i class="fa-solid fa-qrcode"></i> View Pickup Code</button>
               </div>
             </div>
           </div>
@@ -415,7 +422,6 @@
   <img src="../../images/burger.avif" alt="Food image" class="order-image">
   <div class="order-body-info">
     <div class="order-meta">
-                <span><i class="fa-solid fa-hashtag"></i> #078371928371</span>
                 <span><i class="fa-regular fa-calendar"></i> Mar 6, 2026 · 10:15 AM</span>
               </div>
     <div class="order-items">
@@ -423,13 +429,11 @@
   </div>
 </div>
               </div>
-              <p class="pickup-label"><i class="fa-regular fa-clock"></i> Pickup: 11:00 AM</p>
+              <p class="pickup-label" style="font-size: 12px; color: #94a3b8; margin-bottom: 12px"><i class="fa-regular fa-clock"></i> Pickup: 11:00 AM</p>
               <hr class="order-divider" />
-              <div class="order-total-row">
-                <span>Total: ₱16.50</span>
-                <div class="order-actions">
-                  <button class="btn-action btn-move-history" data-action="moveToHistory"><i class="fas fa-arrow-right"></i> Move</button>
-                </div>
+              <div class="order-total-row"><span>Total: ₱16.50</span></div>
+              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px;">
+                  <button class="remove-btn"><i class="fa-solid fa-trash-can"></i> Delete</button>
               </div>
             </div>
           </div>
@@ -450,7 +454,6 @@
   <img src="../../images/burger.avif" alt="Food image" class="order-image">
   <div class="order-body-info">
     <div class="order-meta">
-                <span><i class="fa-solid fa-hashtag"></i> #088371928371</span>
                 <span><i class="fa-regular fa-calendar"></i> Mar 5, 2026 · 5:45 PM</span>
               </div>
     <div class="order-items">
@@ -458,13 +461,11 @@
   </div>
 </div>
               </div>
-              <p class="pickup-label"><i class="fa-regular fa-clock"></i> Pickup: 6:30 PM</p>
+              <p class="pickup-label" style="font-size: 12px; color: #94a3b8; margin-bottom: 12px"><i class="fa-regular fa-clock"></i> Pickup: 6:30 PM</p>
               <hr class="order-divider" />
-              <div class="order-total-row">
-                <span>Total: ₱22.00</span>
-                <div class="order-actions">
-                  <button class="btn-action btn-move-history" data-action="moveToHistory"><i class="fas fa-arrow-right"></i> Move</button>
-                </div>
+              <div class="order-total-row"><span>Total: ₱22.00</span></div>
+              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px;">
+                  <button class="remove-btn"><i class="fa-solid fa-trash-can"></i> Delete</button>
               </div>
             </div>
           </div>
@@ -485,7 +486,6 @@
   <img src="../../images/burger.avif" alt="Food image" class="order-image">
   <div class="order-body-info">
     <div class="order-meta">
-                <span><i class="fa-solid fa-hashtag"></i> #098371928371</span>
                 <span><i class="fa-regular fa-calendar"></i> Mar 5, 2026 · 2:45 PM</span>
               </div>
     <div class="order-items">
@@ -493,13 +493,11 @@
   </div>
 </div>
               </div>
-              <p class="pickup-label"><i class="fa-regular fa-clock"></i> Pickup: 3:30 PM</p>
+              <p class="pickup-label" style="font-size: 12px; color: #94a3b8; margin-bottom: 12px"><i class="fa-regular fa-clock"></i> Pickup: 3:30 PM</p>
               <hr class="order-divider" />
-              <div class="order-total-row">
-                <span>Total: ₱8.50</span>
-                <div class="order-actions">
-                  <button class="btn-action btn-move-history" data-action="moveToHistory"><i class="fas fa-arrow-right"></i> Move</button>
-                </div>
+              <div class="order-total-row"><span>Total: ₱8.50</span></div>
+              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px;">
+                  <button class="remove-btn"><i class="fa-solid fa-trash-can"></i> Delete</button>
               </div>
             </div>
           </div>
@@ -514,9 +512,6 @@
       </div>
     </div>
   </div>
-  <!-- ════════════════════════════════════════
-         ACTION CONFIRMATION MODAL (all buttons)
-         ════════════════════════════════════════ -->
   <div class="modal" id="confirmModal">
     <div class="modal-overlay" id="confirmOverlay"></div>
     <div class="modal-content">
@@ -542,6 +537,107 @@
   </div>
 
   <script src="../../script/vendor-js/orders-filter.js"></script>
+  
+  <!-- PICKUP CODE MODAL -->
+  <div class="modal" id="pickupModal">
+    <div class="modal-overlay" id="pickupOverlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Pickup Code</h2>
+        <button class="modal-close" id="closePickupModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="pickup-code-card">
+          <div class="pickup-code-label">Customer pickup code</div>
+          <div class="pickup-code-value" id="modalCodeVal">A7C3</div>
+          <div class="pickup-code-order" id="modalCodeOrder">Order #02 · John Doe</div>
+        </div>
+        <img src="" id="modalFoodImage" class="modal-order-image" alt="Order items" style="display: none;" />
+        <div class="modal-info-row">
+          <span class="modal-info-label">Status</span>
+          <span class="modal-info-value" style="color: #22c55e">✔ Ready for Pickup</span>
+        </div>
+        <div class="modal-info-row">
+          <span class="modal-info-label">Estimated Pickup</span>
+          <span class="modal-info-value" id="modalPickupTime">2:00 PM</span>
+        </div>
+        <div class="modal-order-items" id="modalOrderItems"></div>
+        <div class="modal-total-price" id="modalTotalPrice">Total: ₱0.00</div>
+        
+        <div class="order-actions" style="margin-top: 24px;">
+          <button class="pickup-btn" id="markPickedBtn" style="width: 100%;">
+            <i class="fa-solid fa-bag-shopping"></i> Mark as Picked Up
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const pickupModal = document.getElementById("pickupModal");
+      const closePickupModal = document.getElementById("closePickupModal");
+      const pickupOverlay = document.getElementById("pickupOverlay");
+      const markPickedBtn = document.getElementById("markPickedBtn");
+
+      if (pickupModal && closePickupModal && pickupOverlay) {
+        document.querySelectorAll(".open-code-btn").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const card = btn.closest(".order-card");
+            const vendor = card.getAttribute("data-vendor") || "Customer";
+            const orderId = card.getAttribute("data-order-id") || "0000";
+            const price = card.getAttribute("data-price") || "0.00";
+            const time = btn.getAttribute("data-time") || "ASAP";
+            const code = btn.getAttribute("data-code") || "A7C3";
+            const image = card.getAttribute("data-image");
+
+            document.getElementById("modalCodeVal").textContent = code;
+            document.getElementById("modalCodeOrder").textContent = `Order #${orderId} · ${vendor}`;
+            document.getElementById("modalPickupTime").textContent = time;
+            document.getElementById("modalTotalPrice").textContent = `Total: ₱${price}`;
+
+            const modalImg = document.getElementById("modalFoodImage");
+            if (image) {
+              modalImg.src = image;
+              modalImg.style.display = 'block';
+            } else {
+              modalImg.style.display = 'none';
+            }
+
+            const itemsEl = document.getElementById("modalOrderItems");
+            itemsEl.innerHTML = "";
+            const itemsSource = card.querySelectorAll(".order-item-row");
+            itemsSource.forEach(row => {
+              const clone = row.cloneNode(true);
+              clone.style.display = 'flex';
+              clone.style.justifyContent = 'space-between';
+              clone.style.fontSize = '14px';
+              clone.style.padding = '4px 0';
+              clone.style.color = '#374151';
+              itemsEl.appendChild(clone);
+            });
+
+            pickupModal.classList.add("active");
+          });
+        });
+
+        closePickupModal.onclick = () => pickupModal.classList.remove("active");
+        pickupOverlay.onclick = () => pickupModal.classList.remove("active");
+        
+        if (markPickedBtn) {
+            markPickedBtn.onclick = () => {
+                pickupModal.classList.remove("active");
+                const card = document.querySelector(".order-card");
+                if (card) {
+                   card.style.opacity = ".5";
+                }
+            };
+        }
+      }
+    });
+  </script>
 </body>
 
 </html>
