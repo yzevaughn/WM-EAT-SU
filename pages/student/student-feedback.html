@@ -118,11 +118,7 @@
               <i class="fa-solid fa-wallet"></i><span>Wallet</span>
             </a>
           </li>
-          <li>
-            <a href="student-map.html" class="nav-link">
-              <i class="fa-solid fa-location-dot"></i><span>Campus Map</span>
-            </a>
-          </li>
+
           <li>
             <a href="student-feedback.html" class="nav-link active">
               <i class="fa-regular fa-star"></i><span>Feedback</span>
@@ -139,7 +135,6 @@
       <!-- MAIN CONTENT -->
       <div class="main-content">
         <div class="complaints-container">
-          
           <!-- Header -->
           <div class="complaints-header">
             <div class="header-text">
@@ -155,11 +150,20 @@
           <div class="controls-bar">
             <div class="search-box">
               <i class="fa-solid fa-search"></i>
-              <input type="text" class="search-input" id="searchInput" placeholder="Search reports...">
+              <input
+                type="text"
+                class="search-input"
+                id="searchInput"
+                placeholder="Search reports..."
+              />
             </div>
             <div class="filter-tabs">
-              <button class="filter-tab active" data-filter="review">Under Review</button>
-              <button class="filter-tab" data-filter="resolved">Resolved</button>
+              <button class="filter-tab active" data-filter="review">
+                Under Review
+              </button>
+              <button class="filter-tab" data-filter="resolved">
+                Resolved
+              </button>
             </div>
           </div>
 
@@ -167,7 +171,6 @@
           <div class="complaints-list" id="reportsList">
             <!-- Reports dynamically injected here -->
           </div>
-
         </div>
       </div>
     </div>
@@ -181,7 +184,9 @@
       <div class="modal-panel">
         <div class="modal-header">
           <h2>File a New Report</h2>
-          <button class="btn-close" onclick="closeModal('formModal')"><i class="fa-solid fa-xmark"></i></button>
+          <button class="btn-close" onclick="closeModal('formModal')">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
         <div class="modal-body">
           <form id="reportForm" onsubmit="handleReportSubmit(event)">
@@ -189,23 +194,43 @@
               <label>Related Order (Optional)</label>
               <select class="form-control" id="formOrder">
                 <option value="">No specific order</option>
-                <option value="#ORD-2026-1547 - Fries">#ORD-2026-1547 - Fries</option>
-                <option value="#ORD-2026-1548 - Shomai Rice">#ORD-2026-1548 - Shomai Rice</option>
+                <option value="#ORD-2026-1547 - Fries">
+                  #ORD-2026-1547 - Fries
+                </option>
+                <option value="#ORD-2026-1548 - Shomai Rice">
+                  #ORD-2026-1548 - Shomai Rice
+                </option>
               </select>
             </div>
             <div class="form-group">
               <label>Subject *</label>
-              <input type="text" class="form-control" id="formSubject" placeholder="Brief description of the issue" required />
+              <input
+                type="text"
+                class="form-control"
+                id="formSubject"
+                placeholder="Brief description of the issue"
+                required
+              />
             </div>
             <div class="form-group">
               <label>Contact Number (Optional)</label>
-              <input type="tel" class="form-control" id="formPhone" placeholder="Personal number" />
+              <input
+                type="tel"
+                class="form-control"
+                id="formPhone"
+                placeholder="Personal number"
+              />
             </div>
             <div class="form-group">
               <label>Description *</label>
-              <textarea class="form-control" id="formDesc" placeholder="Provide detailed information about your concern..." required></textarea>
+              <textarea
+                class="form-control"
+                id="formDesc"
+                placeholder="Provide detailed information about your concern..."
+                required
+              ></textarea>
             </div>
-            
+
             <div class="form-group">
               <label>Attach Photo (Optional)</label>
               <div class="upload-area" id="uploadArea">
@@ -215,8 +240,17 @@
                 <input type="file" id="fileInput" accept="image/*" />
               </div>
               <div class="preview-container" id="previewContainer">
-                <img src="" alt="Preview" class="preview-img" id="imagePreview" />
-                <button type="button" class="btn-remove-img" onclick="removeImage()">
+                <img
+                  src=""
+                  alt="Preview"
+                  class="preview-img"
+                  id="imagePreview"
+                />
+                <button
+                  type="button"
+                  class="btn-remove-img"
+                  onclick="removeImage()"
+                >
                   <i class="fa-solid fa-xmark"></i>
                 </button>
               </div>
@@ -224,8 +258,12 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button class="btn-ghost" onclick="closeModal('formModal')">Cancel</button>
-          <button class="btn-primary" type="submit" form="reportForm">Submit Report</button>
+          <button class="btn-ghost" onclick="closeModal('formModal')">
+            Cancel
+          </button>
+          <button class="btn-primary" type="submit" form="reportForm">
+            Submit Report
+          </button>
         </div>
       </div>
     </div>
@@ -235,7 +273,9 @@
       <div class="modal-panel">
         <div class="modal-header">
           <h2>Report Details</h2>
-          <button class="btn-close" onclick="closeModal('detailsModal')"><i class="fa-solid fa-xmark"></i></button>
+          <button class="btn-close" onclick="closeModal('detailsModal')">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
         <div class="modal-body">
           <div class="detail-grid">
@@ -256,23 +296,32 @@
               <span class="detail-value" id="detailOrder"></span>
             </div>
           </div>
-          
+
           <span class="detail-label">Description</span>
           <div class="detail-desc-box" id="detailDesc"></div>
 
-          <div id="detailConclusionSection" style="display: none;">
+          <div id="detailConclusionSection" style="display: none">
             <span class="detail-label">Resolution Conclusion</span>
             <div class="conclusion-box" id="detailConclusion"></div>
           </div>
 
           <span class="detail-label">Attachment</span>
-          <div id="detailAttachmentContainer" style="margin-top: 8px;">
+          <div id="detailAttachmentContainer" style="margin-top: 8px">
             <!-- Attached image or placeholder will go here -->
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn-ghost" onclick="closeModal('detailsModal')">Close</button>
-          <button class="btn-danger" id="btnRemoveReport" style="display:none;" onclick="deleteReport()">Delete Report</button>
+          <button class="btn-ghost" onclick="closeModal('detailsModal')">
+            Close
+          </button>
+          <button
+            class="btn-danger"
+            id="btnRemoveReport"
+            style="display: none"
+            onclick="deleteReport()"
+          >
+            Delete Report
+          </button>
         </div>
       </div>
     </div>
@@ -287,52 +336,53 @@
       // Mock Data
       let reports = [
         {
-          id: 'REP-002',
-          subject: 'Food Quality Issue',
-          order: '#ORD-2026-1549 - Salad Bar',
-          desc: 'The salad vegetables were not fresh and tasted slightly spoiled. I could not eat it.',
-          status: 'review', // 'review' or 'resolved'
-          date: 'March 4, 2026',
+          id: "REP-002",
+          subject: "Food Quality Issue",
+          order: "#ORD-2026-1549 - Salad Bar",
+          desc: "The salad vegetables were not fresh and tasted slightly spoiled. I could not eat it.",
+          status: "review", // 'review' or 'resolved'
+          date: "March 4, 2026",
           img: null,
-          phone: '09123456789'
+          phone: "09123456789",
         },
         {
-          id: 'REP-001',
-          subject: 'Wrong Order',
-          order: '#ORD-2026-1547 - Spicy Dragon Kitchen',
-          desc: 'I received the wrong food order. I ordered chicken but received beef instead. The vendor refused to change it when I asked.',
-          status: 'resolved',
-          date: 'March 1, 2026',
+          id: "REP-001",
+          subject: "Wrong Order",
+          order: "#ORD-2026-1547 - Spicy Dragon Kitchen",
+          desc: "I received the wrong food order. I ordered chicken but received beef instead. The vendor refused to change it when I asked.",
+          status: "resolved",
+          date: "March 1, 2026",
           img: null,
-          phone: '',
-          conclusion: 'We checked with Spicy Dragon Kitchen regarding your order. They apologized for the mistake and their staff has been re-trained on order accuracy. A refund of PHP 85 has been successfully credited back to your wallet and the issue is resolved.'
-        }
+          phone: "",
+          conclusion:
+            "We checked with Spicy Dragon Kitchen regarding your order. They apologized for the mistake and their staff has been re-trained on order accuracy. A refund of PHP 85 has been successfully credited back to your wallet and the issue is resolved.",
+        },
       ];
 
-      let currentFilter = 'review';
+      let currentFilter = "review";
       let currentViewId = null;
 
       // DOM Elements
-      const reportsList = document.getElementById('reportsList');
-      const searchInput = document.getElementById('searchInput');
-      const filterTabs = document.querySelectorAll('.filter-tab');
+      const reportsList = document.getElementById("reportsList");
+      const searchInput = document.getElementById("searchInput");
+      const filterTabs = document.querySelectorAll(".filter-tab");
 
       // Initialize
-      document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener("DOMContentLoaded", () => {
         renderReports();
 
         // Setup filter listeners
-        filterTabs.forEach(tab => {
-          tab.addEventListener('click', (e) => {
-            filterTabs.forEach(t => t.classList.remove('active'));
-            e.target.classList.add('active');
-            currentFilter = e.target.getAttribute('data-filter');
+        filterTabs.forEach((tab) => {
+          tab.addEventListener("click", (e) => {
+            filterTabs.forEach((t) => t.classList.remove("active"));
+            e.target.classList.add("active");
+            currentFilter = e.target.getAttribute("data-filter");
             renderReports();
           });
         });
 
         // Setup search listener
-        searchInput.addEventListener('input', () => {
+        searchInput.addEventListener("input", () => {
           renderReports();
         });
 
@@ -343,39 +393,42 @@
       // Render List
       function renderReports() {
         const searchTerm = searchInput.value.toLowerCase();
-        
-        const filtered = reports.filter(r => {
+
+        const filtered = reports.filter((r) => {
           const matchFilter = r.status === currentFilter;
-          const matchSearch = r.subject.toLowerCase().includes(searchTerm) || 
-                              r.id.toLowerCase().includes(searchTerm) ||
-                              (r.order && r.order.toLowerCase().includes(searchTerm));
+          const matchSearch =
+            r.subject.toLowerCase().includes(searchTerm) ||
+            r.id.toLowerCase().includes(searchTerm) ||
+            (r.order && r.order.toLowerCase().includes(searchTerm));
           return matchFilter && matchSearch;
         });
 
-        reportsList.innerHTML = '';
+        reportsList.innerHTML = "";
 
         if (filtered.length === 0) {
           reportsList.innerHTML = `
             <div class="empty-state">
               <i class="fa-solid fa-face-smile-beam"></i>
-              <h3>No ${currentFilter === 'review' ? 'active' : ''} reports found</h3>
+              <h3>No ${currentFilter === "review" ? "active" : ""} reports found</h3>
               <p>Everything looks good right now.</p>
-              ${currentFilter === 'review' ? `<button class="btn-primary" onclick="openModal('formModal')">Submit a Concern</button>` : ''}
+              ${currentFilter === "review" ? `<button class="btn-primary" onclick="openModal('formModal')">Submit a Concern</button>` : ""}
             </div>
           `;
           return;
         }
 
-        filtered.forEach(r => {
-          const isResolved = r.status === 'resolved';
-          const badgeClass = isResolved ? 'resolved' : 'review';
-          const badgeText = isResolved ? 'Resolved' : 'Under Review';
-          const orderHtml = r.order ? `<p class="complaint-order"><i class="fa-solid fa-receipt"></i> ${r.order}</p>` : '';
+        filtered.forEach((r) => {
+          const isResolved = r.status === "resolved";
+          const badgeClass = isResolved ? "resolved" : "review";
+          const badgeText = isResolved ? "Resolved" : "Under Review";
+          const orderHtml = r.order
+            ? `<p class="complaint-order"><i class="fa-solid fa-receipt"></i> ${r.order}</p>`
+            : "";
 
-          const item = document.createElement('div');
-          item.className = `complaint-item ${isResolved ? 'resolved' : ''}`;
+          const item = document.createElement("div");
+          item.className = `complaint-item ${isResolved ? "resolved" : ""}`;
           item.onclick = () => openDetails(r.id);
-          
+
           item.innerHTML = `
             <div class="complaint-header">
               <div class="complaint-title-group">
@@ -396,30 +449,33 @@
 
       // Modal Handlers
       function openModal(id) {
-        document.getElementById(id).classList.add('active');
-        document.body.style.overflow = 'hidden';
+        document.getElementById(id).classList.add("active");
+        document.body.style.overflow = "hidden";
       }
 
       function closeModal(id) {
-        document.getElementById(id).classList.remove('active');
-        document.body.style.overflow = 'auto';
+        document.getElementById(id).classList.remove("active");
+        document.body.style.overflow = "auto";
       }
 
       // Details View
       function openDetails(id) {
         currentViewId = id;
-        const r = reports.find(x => x.id === id);
+        const r = reports.find((x) => x.id === id);
         if (!r) return;
 
-        document.getElementById('detailStatus').className = `badge ${r.status}`;
-        document.getElementById('detailStatus').innerText = r.status === 'resolved' ? 'Resolved' : 'Under Review';
-        
-        document.getElementById('detailDate').innerText = r.date;
-        document.getElementById('detailSubject').innerText = r.subject;
-        document.getElementById('detailOrder').innerText = r.order || 'N/A';
-        document.getElementById('detailDesc').innerText = r.desc;
+        document.getElementById("detailStatus").className = `badge ${r.status}`;
+        document.getElementById("detailStatus").innerText =
+          r.status === "resolved" ? "Resolved" : "Under Review";
 
-        const attachmentContainer = document.getElementById('detailAttachmentContainer');
+        document.getElementById("detailDate").innerText = r.date;
+        document.getElementById("detailSubject").innerText = r.subject;
+        document.getElementById("detailOrder").innerText = r.order || "N/A";
+        document.getElementById("detailDesc").innerText = r.desc;
+
+        const attachmentContainer = document.getElementById(
+          "detailAttachmentContainer",
+        );
         if (r.img) {
           attachmentContainer.innerHTML = `<img src="${r.img}" class="detail-image" alt="Attachment" onclick="window.open('${r.img}', '_blank')"/>`;
         } else {
@@ -432,33 +488,41 @@
         }
 
         // Handle conclusion display & Buttons
-        const conclusionSec = document.getElementById('detailConclusionSection');
-        const btnRemove = document.getElementById('btnRemoveReport');
+        const conclusionSec = document.getElementById(
+          "detailConclusionSection",
+        );
+        const btnRemove = document.getElementById("btnRemoveReport");
 
-        if (r.status === 'resolved') {
-          btnRemove.style.display = 'inline-flex';
-          
+        if (r.status === "resolved") {
+          btnRemove.style.display = "inline-flex";
+
           if (r.conclusion) {
-            conclusionSec.style.display = 'block';
-            document.getElementById('detailConclusion').innerText = r.conclusion;
+            conclusionSec.style.display = "block";
+            document.getElementById("detailConclusion").innerText =
+              r.conclusion;
           } else {
-            conclusionSec.style.display = 'block';
-            document.getElementById('detailConclusion').innerText = 'This complaint has been reviewed and marked as resolved by the administration.';
+            conclusionSec.style.display = "block";
+            document.getElementById("detailConclusion").innerText =
+              "This complaint has been reviewed and marked as resolved by the administration.";
           }
         } else {
-          btnRemove.style.display = 'none';
-          conclusionSec.style.display = 'none';
+          btnRemove.style.display = "none";
+          conclusionSec.style.display = "none";
         }
 
-        openModal('detailsModal');
+        openModal("detailsModal");
       }
 
       function deleteReport() {
-        if(!currentViewId) return;
-        if(confirm("Are you sure you want to permanently remove this report record?")) {
-          reports = reports.filter(x => x.id !== currentViewId);
-          closeModal('detailsModal');
-          showToast('Report completely removed.');
+        if (!currentViewId) return;
+        if (
+          confirm(
+            "Are you sure you want to permanently remove this report record?",
+          )
+        ) {
+          reports = reports.filter((x) => x.id !== currentViewId);
+          closeModal("detailsModal");
+          showToast("Report completely removed.");
           renderReports();
         }
       }
@@ -466,44 +530,56 @@
       // Form Submission
       function handleReportSubmit(e) {
         e.preventDefault();
-        
+
         const newReport = {
-          id: 'REP-' + Math.floor(Math.random() * 1000).toString().padStart(3, '0'),
-          subject: document.getElementById('formSubject').value,
-          order: document.getElementById('formOrder').value,
-          phone: document.getElementById('formPhone').value,
-          desc: document.getElementById('formDesc').value,
-          status: 'review',
-          date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
-          img: document.getElementById('imagePreview').src || null
+          id:
+            "REP-" +
+            Math.floor(Math.random() * 1000)
+              .toString()
+              .padStart(3, "0"),
+          subject: document.getElementById("formSubject").value,
+          order: document.getElementById("formOrder").value,
+          phone: document.getElementById("formPhone").value,
+          desc: document.getElementById("formDesc").value,
+          status: "review",
+          date: new Date().toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          }),
+          img: document.getElementById("imagePreview").src || null,
         };
 
         // Don't save image if it's empty/placeholder
-        if(!document.getElementById('previewContainer').classList.contains('active')) {
-           newReport.img = null;
+        if (
+          !document
+            .getElementById("previewContainer")
+            .classList.contains("active")
+        ) {
+          newReport.img = null;
         }
 
         reports.unshift(newReport); // Add to top
 
-        closeModal('formModal');
+        closeModal("formModal");
         e.target.reset();
         removeImage();
-        showToast('Your report has been submitted successfully.');
-        
+        showToast("Your report has been submitted successfully.");
+
         // Ensure we are viewing "Under Review"
-        if(currentFilter !== 'review') {
-           document.querySelector('[data-filter="review"]').click();
+        if (currentFilter !== "review") {
+          document.querySelector('[data-filter="review"]').click();
         } else {
-           renderReports();
+          renderReports();
         }
       }
 
       // Drag & Drop Upload
       function setupDragDrop() {
-        const dropArea = document.getElementById('uploadArea');
-        const fileInput = document.getElementById('fileInput');
+        const dropArea = document.getElementById("uploadArea");
+        const fileInput = document.getElementById("fileInput");
 
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
           dropArea.addEventListener(eventName, preventDefaults, false);
         });
 
@@ -512,21 +588,29 @@
           e.stopPropagation();
         }
 
-        ['dragenter', 'dragover'].forEach(eventName => {
-          dropArea.addEventListener(eventName, () => dropArea.classList.add('dragover'), false);
+        ["dragenter", "dragover"].forEach((eventName) => {
+          dropArea.addEventListener(
+            eventName,
+            () => dropArea.classList.add("dragover"),
+            false,
+          );
         });
 
-        ['dragleave', 'drop'].forEach(eventName => {
-          dropArea.addEventListener(eventName, () => dropArea.classList.remove('dragover'), false);
+        ["dragleave", "drop"].forEach((eventName) => {
+          dropArea.addEventListener(
+            eventName,
+            () => dropArea.classList.remove("dragover"),
+            false,
+          );
         });
 
-        dropArea.addEventListener('drop', (e) => {
+        dropArea.addEventListener("drop", (e) => {
           const dt = e.dataTransfer;
           const files = dt.files;
           handleFiles(files);
         });
 
-        fileInput.addEventListener('change', function() {
+        fileInput.addEventListener("change", function () {
           handleFiles(this.files);
         });
       }
@@ -534,40 +618,40 @@
       function handleFiles(files) {
         if (files.length === 0) return;
         const file = files[0];
-        
-        if (!file.type.startsWith('image/')) {
-          alert('Please upload an image file.');
+
+        if (!file.type.startsWith("image/")) {
+          alert("Please upload an image file.");
           return;
         }
 
         const reader = new FileReader();
         reader.onload = (e) => {
-          document.getElementById('imagePreview').src = e.target.result;
-          document.getElementById('uploadArea').style.display = 'none';
-          document.getElementById('previewContainer').classList.add('active');
+          document.getElementById("imagePreview").src = e.target.result;
+          document.getElementById("uploadArea").style.display = "none";
+          document.getElementById("previewContainer").classList.add("active");
         };
         reader.readAsDataURL(file);
       }
 
       function removeImage() {
-        document.getElementById('fileInput').value = '';
-        document.getElementById('imagePreview').src = '';
-        document.getElementById('uploadArea').style.display = 'block';
-        document.getElementById('previewContainer').classList.remove('active');
+        document.getElementById("fileInput").value = "";
+        document.getElementById("imagePreview").src = "";
+        document.getElementById("uploadArea").style.display = "block";
+        document.getElementById("previewContainer").classList.remove("active");
       }
 
       // Toast System
       function showToast(message) {
-        const container = document.getElementById('toastContainer');
-        const toast = document.createElement('div');
-        toast.className = 'toast';
+        const container = document.getElementById("toastContainer");
+        const toast = document.createElement("div");
+        toast.className = "toast";
         toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${message}`;
         container.appendChild(toast);
 
         setTimeout(() => {
-          toast.style.opacity = '0';
-          toast.style.transform = 'translateX(100%)';
-          toast.style.transition = 'all 0.3s ease';
+          toast.style.opacity = "0";
+          toast.style.transform = "translateX(100%)";
+          toast.style.transition = "all 0.3s ease";
           setTimeout(() => toast.remove(), 300);
         }, 3000);
       }
