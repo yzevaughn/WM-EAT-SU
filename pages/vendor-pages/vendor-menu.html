@@ -117,6 +117,12 @@
             </a>
           </li>
           <li>
+            <a href="vendor-sales-payments.html" class="nav-link">
+              <i class="fa-solid fa-chart-line"></i>
+              <span>Sales & Payments</span>
+            </a>
+          </li>
+          <li>
             <a href="vendor-wallet.html" class="nav-link">
               <i class="fa-solid fa-wallet"></i>
               <span>Wallet</span>
@@ -156,6 +162,7 @@
             </div>
             <div class="item-footer">
               <div class="price">₱12.99</div>
+              <div class="stock-status">Stock: <span class="stock-count">15</span></div>
             </div>
             <div class="actions">
               <button class="edit-btn">
@@ -179,6 +186,7 @@
             </div>
             <div class="item-footer">
               <div class="price">₱3.99</div>
+              <div class="stock-status low-stock">Low Stock: <span class="stock-count">3</span></div>
             </div>
             <div class="actions">
               <button class="edit-btn">
@@ -215,6 +223,10 @@
                 <div class="form-group">
                   <label for="itemPrice">Price</label>
                   <input type="number" id="itemPrice" step="0.01" required />
+                </div>
+                <div class="form-group">
+                  <label for="itemQuantity">Available Quantity</label>
+                  <input type="number" id="itemQuantity" min="0" required />
                 </div>
                 <div class="form-group">
                   <label for="itemCategory">Category</label>
@@ -389,6 +401,13 @@
               let formPrice = priceText.replace(/[^0-9.]/g, ''); 
               
               const category = card.getAttribute("data-category") || "meals";
+              let qtyText = card.querySelector(".stock-count") ? card.querySelector(".stock-count").textContent : "0";
+              
+              document.getElementById("itemName").value = itemName;
+              document.getElementById("itemDescription").value = itemDesc;
+              document.getElementById("itemPrice").value = formPrice;
+              document.getElementById("itemCategory").value = category;
+              document.getElementById("itemQuantity").value = qtyText;
               document.getElementById("itemImage").value = "";
 
               modal.classList.add("active");
@@ -430,6 +449,11 @@
               const itemPrice = parseFloat(document.getElementById("itemPrice").value || "0.00").toFixed(2);
               let itemCat = document.getElementById("itemCategory").value || "meals";
               const itemCatDisplay = itemCat.charAt(0).toUpperCase() + itemCat.slice(1);
+              const itemQuantity = parseInt(document.getElementById("itemQuantity").value || "0", 10);
+              
+              const isLowStock = itemQuantity < 5;
+              const stockClass = isLowStock ? "stock-status low-stock" : "stock-status";
+              const stockLabel = isLowStock ? "Low Stock: " : "Stock: ";
               
               const itemImageEl = document.getElementById("itemImage");
               let itemImage = "../../images/burger.avif";
@@ -452,6 +476,13 @@
                 if(descEl) descEl.textContent = itemDesc;
                 const priceEl = editingCard.querySelector(".price");
                 if(priceEl) priceEl.textContent = "₱" + itemPrice;
+                let stockEl = editingCard.querySelector(".stock-status");
+                if (!stockEl) {
+                  stockEl = document.createElement("div");
+                  editingCard.querySelector(".item-footer").appendChild(stockEl);
+                }
+                stockEl.className = stockClass;
+                stockEl.innerHTML = `${stockLabel}<span class="stock-count">${itemQuantity}</span>`;
               } else {
                 const card = document.createElement("div");
                 card.className = "menu-item-card";
@@ -467,6 +498,7 @@
                   </div>
                   <div class="item-footer">
                     <div class="price">₱${itemPrice}</div>
+                    <div class="${stockClass}">${stockLabel}<span class="stock-count">${itemQuantity}</span></div>
                   </div>
                   <div class="actions">
                     <button class="edit-btn">

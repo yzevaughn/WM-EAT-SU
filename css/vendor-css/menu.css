@@ -150,6 +150,20 @@
   color: #059669;
 }
 
+.stock-status {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  background: #f3f4f6;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+.stock-status.low-stock {
+  color: #991b1b;
+  background: #fee2e2;
+}
+
 .stock-toggle {
   display: flex;
   align-items: center;

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU - Vendor Portal</title>
+    <title>WM EAT SU - Sales & Payments</title>
 
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
@@ -15,6 +15,7 @@
     />
     <link rel="stylesheet" href="../../css/navbar.css" />
     <link rel="stylesheet" href="../../css/vendor-css/dashboard.css" />
+    <link rel="stylesheet" href="../../css/vendor-css/sales.css" />
   </head>
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
@@ -89,11 +90,9 @@
     <div class="layout">
       <!-- ── SIDEBAR ── -->
       <div class="left-nav" id="sidebar">
-        <!-- logo shown on mobile inside sidebar -->
-
         <ul class="nav-list">
           <li>
-            <a href="vendor-dashboard.html" class="nav-link active">
+            <a href="vendor-dashboard.html" class="nav-link">
               <i class="fa-solid fa-house"></i>
               <span>Dashboard</span>
             </a>
@@ -117,7 +116,7 @@
             </a>
           </li>
           <li>
-            <a href="vendor-sales-payments.html" class="nav-link">
+            <a href="vendor-sales-payments.html" class="nav-link active">
               <i class="fa-solid fa-chart-line"></i>
               <span>Sales & Payments</span>
             </a>
@@ -132,18 +131,17 @@
       </div>
 
       <div class="main-content">
-        <!-- dashboard main content -->
         <div class="dashboard-content">
           <div class="dashboard-header">
-            <h1>Vendor Dashboard</h1>
-            <p>Manage your menu and orders</p>
+            <h1>Sales & Payments</h1>
+            <p>Track your revenue, sales trends, and payment history</p>
           </div>
 
           <div class="stats-grid">
             <div class="stat-card">
               <div class="stat-info">
                 <h3>Total Revenue</h3>
-                <p>₱12.99</p>
+                <p>₱24,600.00</p>
               </div>
               <div class="stat-icon icon-green">
                 <i class="fas fa-peso-sign"></i>
@@ -152,31 +150,21 @@
 
             <div class="stat-card">
               <div class="stat-info">
-                <h3>Active Orders</h3>
-                <p>0</p>
+                <h3>Total Orders</h3>
+                <p>1,248</p>
               </div>
-              <div class="stat-icon icon-orange">
+              <div class="stat-icon icon-blue">
                 <i class="fas fa-shopping-bag"></i>
               </div>
             </div>
 
             <div class="stat-card">
               <div class="stat-info">
-                <h3>Menu Items</h3>
-                <p>2</p>
+                <h3>Today's Sales</h3>
+                <p>₱1,400.00</p>
               </div>
-              <div class="stat-icon icon-blue">
-                <i class="fas fa-chart-line"></i>
-              </div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-info">
-                <h3>Average Rating</h3>
-                <p>0.0</p>
-              </div>
-              <div class="stat-icon icon-yellow">
-                <i class="fas fa-star"></i>
+              <div class="stat-icon icon-orange">
+                <i class="fas fa-chart-pie"></i>
               </div>
             </div>
           </div>
@@ -202,29 +190,112 @@
             </div>
           </div>
 
-          <h2 style="font-size: 20px; font-weight: 700; color: #1f2937; margin: 32px 0 16px 0;">Quick Actions</h2>
-          <div class="actions-grid">
-            <a href="vendor-menu.html" class="action-card">
-              <i class="fas fa-shopping-bag action-icon menu"></i>
-              <h3>Manage Menu</h3>
-              <p>Add or edit items</p>
-            </a>
+          <!-- Payment History -->
+          <div class="payment-history-wrapper">
+            <div class="history-header">
+              <h2>Payment History</h2>
+              <div class="export-actions">
+                <button class="export-btn"><i class="fas fa-file-csv"></i> Export CSV</button>
+                <button class="export-btn"><i class="fas fa-file-pdf"></i> Export PDF</button>
+              </div>
+            </div>
 
-            <a href="vendor-orders.html" class="action-card">
-              <i class="fas fa-archive action-icon orders"></i>
-              <h3>View Orders</h3>
-              <p>Manage incoming orders</p>
-            </a>
+            <div class="history-controls">
+              <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search Order ID or Customer..." />
+              </div>
+              
+              <div class="filters">
+                <select class="filter-dropdown">
+                  <option value="">All Dates</option>
+                  <option value="today">Today</option>
+                  <option value="week">This Week</option>
+                  <option value="month">This Month</option>
+                </select>
 
-            <a href="vendor-reviews.html" class="action-card">
-              <i class="fas fa-star action-icon reviews"></i>
-              <h3>Reviews</h3>
-              <p>See customer feedback</p>
-            </a>
+                <select class="filter-dropdown">
+                  <option value="">All Payment Methods</option>
+                  <option value="gcash">GCash</option>
+                  <option value="cash">Cash on Delivery</option>
+                  <option value="card">Credit/Debit Card</option>
+                </select>
+
+                <select class="sort-dropdown">
+                  <option value="latest">Sort by: Latest</option>
+                  <option value="oldest">Sort by: Oldest</option>
+                  <option value="highest">Sort by: Highest Amount</option>
+                  <option value="lowest">Sort by: Lowest Amount</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="history-table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Customer Name</th>
+                    <th>Items Ordered</th>
+                    <th>Payment Method</th>
+                    <th>Date & Time</th>
+                    <th class="text-right">Total Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="order-id">#ORD-1049</span></td>
+                    <td>Juan Dela Cruz</td>
+                    <td><span class="item-list">2x Classic Burger Meal, 1x Fries</span></td>
+                    <td><span class="pay-method gcash">GCash</span></td>
+                    <td>Oct 24, 2026<br><span class="time-sub">12:30 PM</span></td>
+                    <td class="text-right amount">₱29.97</td>
+                  </tr>
+                  <tr>
+                    <td><span class="order-id">#ORD-1048</span></td>
+                    <td>Maria Santos</td>
+                    <td><span class="item-list">1x Spicy Chicken Sandwich</span></td>
+                    <td><span class="pay-method cash">Cash</span></td>
+                    <td>Oct 24, 2026<br><span class="time-sub">11:15 AM</span></td>
+                    <td class="text-right amount">₱9.99</td>
+                  </tr>
+                  <tr>
+                    <td><span class="order-id">#ORD-1047</span></td>
+                    <td>Pedro Penduko</td>
+                    <td><span class="item-list">3x Softdrink, 1x Nachos</span></td>
+                    <td><span class="pay-method gcash">GCash</span></td>
+                    <td>Oct 24, 2026<br><span class="time-sub">10:45 AM</span></td>
+                    <td class="text-right amount">₱12.50</td>
+                  </tr>
+                  <tr>
+                    <td><span class="order-id">#ORD-1046</span></td>
+                    <td>Anna Reyes</td>
+                    <td><span class="item-list">1x Salad Bowl</span></td>
+                    <td><span class="pay-method card">Card</span></td>
+                    <td>Oct 23, 2026<br><span class="time-sub">02:20 PM</span></td>
+                    <td class="text-right amount">₱15.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="pagination">
+              <span class="page-info">Showing 1 to 4 of 124 entries</span>
+              <div class="page-controls">
+                <button class="page-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <span class="page-dots">...</span>
+                <button class="page-btn">31</button>
+                <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
