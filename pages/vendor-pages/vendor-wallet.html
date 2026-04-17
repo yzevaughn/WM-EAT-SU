@@ -117,6 +117,12 @@
             </a>
           </li>
           <li>
+            <a href="vendor-sales-payments.html" class="nav-link">
+              <i class="fa-solid fa-chart-line"></i>
+              <span>Sales & Payments</span>
+            </a>
+          </li>
+          <li>
             <a href="vendor-wallet.html" class="nav-link active">
               <i class="fa-solid fa-wallet"></i>
               <span>Wallet</span>
@@ -258,31 +264,74 @@
         </div>
         <div class="modal-footer">
           <label for="withdrawToggle" class="btn-cancel">Cancel</label>
-          <button id="confirmWithdrawBtn" class="btn-confirm" style="border:none; cursor:pointer;"
-            >Confirm Withdrawal</button
+          <button
+            id="confirmWithdrawBtn"
+            class="btn-confirm"
+            style="border: none; cursor: pointer"
           >
+            Confirm Withdrawal
+          </button>
         </div>
       </div>
     </div>
-    
+
     <!-- SECOND CONFIRMATION MODAL -->
-    <div class="modal" id="confirmWithdrawModal" style="z-index: 11000; display: none;">
+    <div
+      class="modal"
+      id="confirmWithdrawModal"
+      style="z-index: 11000; display: none"
+    >
       <div class="modal-overlay" id="confirmWithdrawOverlay"></div>
-      <div class="modal-content" style="max-width: 400px; text-align: center; border-radius: 20px;">
-        <div class="modal-header" style="justify-content: center; padding-bottom: 10px;">
-          <h2 style="font-size: 20px;">Confirm Transaction</h2>
+      <div
+        class="modal-content"
+        style="max-width: 400px; text-align: center; border-radius: 20px"
+      >
+        <div
+          class="modal-header"
+          style="justify-content: center; padding-bottom: 10px"
+        >
+          <h2 style="font-size: 20px">Confirm Transaction</h2>
         </div>
-        <div class="modal-body" style="padding-top: 10px;">
-          <p id="confirmWithdrawMessage">Are you sure you want to withdraw this amount?</p>
-          <p style="font-size: 12px; color: #64748b; margin-top: 8px;">This action cannot be undone.</p>
+        <div class="modal-body" style="padding-top: 10px">
+          <p id="confirmWithdrawMessage">
+            Are you sure you want to withdraw this amount?
+          </p>
+          <p style="font-size: 12px; color: #64748b; margin-top: 8px">
+            This action cannot be undone.
+          </p>
         </div>
-        <div class="modal-footer" style="gap: 12px; justify-content: center;">
-          <button class="btn-cancel" id="cancelFinalBtn" style="border: none; padding: 10px 24px; border-radius: 12px; cursor: pointer;">Go Back</button>
-          <button id="finalConfirmBtn" class="btn-confirm" style="background: #10b981; border: none; padding: 10px 24px; border-radius: 12px; color: white; cursor: pointer; font-weight: 600;">Yes, Withdraw</button>
+        <div class="modal-footer" style="gap: 12px; justify-content: center">
+          <button
+            class="btn-cancel"
+            id="cancelFinalBtn"
+            style="
+              border: none;
+              padding: 10px 24px;
+              border-radius: 12px;
+              cursor: pointer;
+            "
+          >
+            Go Back
+          </button>
+          <button
+            id="finalConfirmBtn"
+            class="btn-confirm"
+            style="
+              background: #10b981;
+              border: none;
+              padding: 10px 24px;
+              border-radius: 12px;
+              color: white;
+              cursor: pointer;
+              font-weight: 600;
+            "
+          >
+            Yes, Withdraw
+          </button>
         </div>
       </div>
     </div>
-    
+
     <script src="../../script/vendor-js/wallet.js"></script>
   </body>
 </html>

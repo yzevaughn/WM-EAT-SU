@@ -118,6 +118,12 @@
             </a>
           </li>
           <li>
+            <a href="vendor-sales-payments.html" class="nav-link">
+              <i class="fa-solid fa-chart-line"></i>
+              <span>Sales & Payments</span>
+            </a>
+          </li>
+          <li>
             <a href="vendor-wallet.html" class="nav-link">
               <i class="fa-solid fa-wallet"></i>
               <span>Wallet</span>
@@ -176,8 +182,21 @@
             </div>
           </div>
 
-          <h2 style="font-size: 20px; font-weight: 700; color: #1f2937; margin: 32px 0 16px 0;">Select Item to View Reviews</h2>
-          <div class="menu-grid" id="menuGrid" style="margin-left: 0; padding-left: 0; max-width: 100%;">
+          <h2
+            style="
+              font-size: 20px;
+              font-weight: 700;
+              color: #1f2937;
+              margin: 32px 0 16px 0;
+            "
+          >
+            Select Item to View Reviews
+          </h2>
+          <div
+            class="menu-grid"
+            id="menuGrid"
+            style="margin-left: 0; padding-left: 0; max-width: 100%"
+          >
             <div class="menu-item-card" data-category="meals">
               <div class="item-image">
                 <img src="../../images/burger.avif" alt="Classic Burger Meal" />
@@ -190,7 +209,27 @@
                 </p>
               </div>
               <div class="actions">
-                <button class="see-review-btn" style="width: 100%; background: #10b981; color: white; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s;" onmouseover="this.style.background='#059669'" onmouseout="this.style.background='#10b981'">
+                <button
+                  class="see-review-btn"
+                  style="
+                    width: 100%;
+                    background: #10b981;
+                    color: white;
+                    border: none;
+                    padding: 10px 16px;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-weight: 600;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    transition: background 0.2s;
+                  "
+                  onmouseover="this.style.background = '#059669'"
+                  onmouseout="this.style.background = '#10b981'"
+                >
                   <i class="fas fa-star"></i>
                   See Reviews
                 </button>
@@ -204,10 +243,32 @@
               </div>
               <div class="item-info">
                 <h3 class="item-name">Crispy French Fries</h3>
-                <p class="item-description">Golden crispy fries with sea salt</p>
+                <p class="item-description">
+                  Golden crispy fries with sea salt
+                </p>
               </div>
               <div class="actions">
-                <button class="see-review-btn" style="width: 100%; background: #10b981; color: white; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s;" onmouseover="this.style.background='#059669'" onmouseout="this.style.background='#10b981'">
+                <button
+                  class="see-review-btn"
+                  style="
+                    width: 100%;
+                    background: #10b981;
+                    color: white;
+                    border: none;
+                    padding: 10px 16px;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    font-weight: 600;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    transition: background 0.2s;
+                  "
+                  onmouseover="this.style.background = '#059669'"
+                  onmouseout="this.style.background = '#10b981'"
+                >
                   <i class="fas fa-star"></i>
                   See Reviews
                 </button>
@@ -221,7 +282,10 @@
     <!-- Reviews Modal -->
     <div class="modal" id="reviewsModal">
       <div class="modal-overlay" id="reviewsModalOverlay"></div>
-      <div class="modal-content" style="max-width: 600px; max-height: 90vh; overflow-y: auto;">
+      <div
+        class="modal-content"
+        style="max-width: 600px; max-height: 90vh; overflow-y: auto"
+      >
         <div class="modal-header">
           <h2 id="reviewsModalTitle">Item Reviews</h2>
           <button class="modal-close" id="reviewsModalClose">
@@ -247,10 +311,11 @@
               </div>
             </div>
             <div class="review-text">
-              "The food was absolutely delicious! Juicy and hot, perfectly cooked. Will definitely be back!"
+              "The food was absolutely delicious! Juicy and hot, perfectly
+              cooked. Will definitely be back!"
             </div>
           </div>
-          
+
           <div class="review-card">
             <div class="review-header">
               <div class="reviewer-info">
@@ -269,7 +334,8 @@
               </div>
             </div>
             <div class="review-text">
-              "Great taste, but preparation took a bit longer than expected. Still worth it!"
+              "Great taste, but preparation took a bit longer than expected.
+              Still worth it!"
             </div>
           </div>
         </div>
@@ -280,7 +346,9 @@
       document.addEventListener("DOMContentLoaded", function () {
         const seeReviewBtns = document.querySelectorAll(".see-review-btn");
         const reviewsModal = document.getElementById("reviewsModal");
-        const reviewsModalOverlay = document.getElementById("reviewsModalOverlay");
+        const reviewsModalOverlay = document.getElementById(
+          "reviewsModalOverlay",
+        );
         const reviewsModalClose = document.getElementById("reviewsModalClose");
         const reviewsModalTitle = document.getElementById("reviewsModalTitle");
 
@@ -296,16 +364,20 @@
           reviewsModal.classList.remove("active");
         }
 
-        seeReviewBtns.forEach(btn => {
+        seeReviewBtns.forEach((btn) => {
           btn.addEventListener("click", function () {
-            const card = this.closest('.menu-item-card');
-            const itemName = card ? card.querySelector('.item-name').textContent : "Item";
+            const card = this.closest(".menu-item-card");
+            const itemName = card
+              ? card.querySelector(".item-name").textContent
+              : "Item";
             openModal(itemName);
           });
         });
 
-        if (reviewsModalClose) reviewsModalClose.addEventListener("click", closeModal);
-        if (reviewsModalOverlay) reviewsModalOverlay.addEventListener("click", closeModal);
+        if (reviewsModalClose)
+          reviewsModalClose.addEventListener("click", closeModal);
+        if (reviewsModalOverlay)
+          reviewsModalOverlay.addEventListener("click", closeModal);
       });
     </script>
   </body>
