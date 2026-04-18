@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU - Create Vendor</title>
+    <title>WM EAT SU - Assign Vendor</title>
 
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="../../css/navbar.css" />
     <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css" />
-    <link rel="stylesheet" href="../../css/admin-css/create-vendor.css" />
+    <link rel="stylesheet" href="../../css/admin-css/assign-vendor.css" />
   </head>
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
@@ -91,9 +91,15 @@
             </a>
           </li>
           <li>
-            <a href="create-vendor.html" class="nav-link active">
+            <a href="assign-vendor.html" class="nav-link active">
               <i class="fa-solid fa-user-plus"></i>
-              <span>Create Vendor</span>
+              <span>Assign Vendor</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-approval.html" class="nav-link">
+              <i class="fa-solid fa-clipboard-check"></i>
+              <span>Content Approval</span>
             </a>
           </li>
         </ul>
@@ -102,29 +108,34 @@
       <div class="main-content">
         <div class="container">
           <header>
-            <h1>Create Vendor Account</h1>
-            <p class="subtitle">Set up new vendor accounts for the platform</p>
+            <h1>Assign Vendor Role</h1>
+            <p class="subtitle">Grant vendor access to an existing student account</p>
           </header>
 
           <div class="main-layout">
             <main class="form-card">
               <div class="section-header">
+                <i class="fa-solid fa-user"></i> Select Student Account
+              </div>
+              <div class="form-group" style="position: relative;">
+                <label>Search Existing Student *</label>
+                <div class="search-box">
+                  <i class="fa-solid fa-search" style="position: absolute; left: 12px; top: 40px; color: #64748b;"></i>
+                  <input type="text" placeholder="Search by name or email (e.g., vaughn.student@wm.edu.ph)" style="padding-left: 36px; width: 100%;" />
+                </div>
+              </div>
+
+              <hr />
+
+              <div class="section-header">
                 <i class="fa-solid fa-store"></i> Vendor Information
               </div>
 
               <!-- Basic information inputs for vendor name, owner, description, etc -->
-              <div class="sub-section-header">
-                <i class="fa-solid fa-store"></i> Basic Information
-              </div>
-
               <div class="grid-row">
                 <div class="form-group">
-                  <label>Vendor Name *</label>
+                  <label>Vendor Business Name *</label>
                   <input type="text" placeholder="e.g., Joe's Pizza" />
-                </div>
-                <div class="form-group">
-                  <label>Owner Name *</label>
-                  <input type="text" placeholder="e.g., John Doe" />
                 </div>
               </div>
 
@@ -146,29 +157,6 @@
                   <button class="icon-btn">
                     <i class="fa-regular fa-image"></i>
                   </button>
-                </div>
-              </div>
-
-              <hr />
-
-              <!-- Login credentials for the vendor account -->
-              <div class="section-header">
-                <i class="fa-solid fa-user-plus"></i> Account Credentials
-              </div>
-
-              <div class="form-group">
-                <label>Email Address *</label>
-                <input type="email" placeholder="vendor@example.com" />
-              </div>
-
-              <div class="grid-row">
-                <div class="form-group">
-                  <label>Password *</label>
-                  <input type="password" placeholder="Min. 6 characters" />
-                </div>
-                <div class="form-group">
-                  <label>Confirm Password *</label>
-                  <input type="password" placeholder="Re-enter password" />
                 </div>
               </div>
 
@@ -207,7 +195,7 @@
               </div>
 
               <button class="submit-btn">
-                <i class="fa-regular fa-circle-check"></i> Create Vendor Account
+                <i class="fa-regular fa-circle-check"></i> Assign Vendor Role
               </button>
             </main>
 
@@ -224,12 +212,12 @@
               <div class="sidebar-card">
                 <div class="sidebar-title">Quick Stats</div>
                 <div class="stat-row">
-                  <span class="stat-label">Total Created Today</span>
+                  <span class="stat-label">Roles Assigned Today</span>
                   <span class="stat-value">0</span>
                 </div>
                 <div class="stat-row">
                   <span class="stat-label">Active Vendors</span>
-                  <span class="stat-value val-green">0</span>
+                  <span class="stat-value val-green">12</span>
                 </div>
               </div>
             </aside>

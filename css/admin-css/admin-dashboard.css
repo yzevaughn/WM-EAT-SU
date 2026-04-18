@@ -263,6 +263,69 @@ p.subtitle {
     line-height: 1.2;
 }
 
+/* Revenue Section */
+.revenue-section {
+    background: white;
+    border-radius: 24px;
+    padding: 24px;
+    margin-bottom: 30px;
+    border: 1px solid #eef2f6;
+    box-shadow: 0 4px 24px 0 rgba(16,30,54,0.04);
+}
+
+.revenue-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.revenue-title h2 {
+    margin: 0 0 8px 0;
+    font-size: 1.4rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.revenue-title p {
+    margin: 0;
+    color: var(--text-sub);
+    font-size: 0.95rem;
+}
+
+.revenue-controls.filter-tabs {
+    display: flex;
+    gap: 8px;
+    background: #f8f9fa;
+    padding: 4px;
+    border-radius: 12px;
+}
+
+.revenue-controls .filter-tab {
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-sub);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.revenue-controls .filter-tab:hover {
+    color: var(--text-main);
+}
+
+.revenue-controls .filter-tab.active {
+    background: white;
+    color: var(--color-purple);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
 .card-body p {
     margin: 0 0 24px 0;
     color: var(--text-sub);

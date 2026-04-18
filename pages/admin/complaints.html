@@ -91,9 +91,15 @@
             </a>
           </li>
           <li>
-            <a href="create-vendor.html" class="nav-link">
+            <a href="assign-vendor.html" class="nav-link">
               <i class="fa-solid fa-user-plus"></i>
-              <span>Create Vendor</span>
+              <span>Assign Vendor</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-approval.html" class="nav-link">
+              <i class="fa-solid fa-clipboard-check"></i>
+              <span>Content Approval</span>
             </a>
           </li>
         </ul>
@@ -143,19 +149,40 @@
           <!-- filter section for status -->
           <div class="filter-controls">
             <div class="tabs-container" id="statusTabs">
-              <button class="tab active" data-status="In Progress">In Progress (<span id="count-progress">0</span>)</button>
-              <button class="tab" data-status="Resolved">Resolved (<span id="count-resolved">0</span>)</button>
-              <button class="tab" data-status="Closed">Closed (<span id="count-closed">0</span>)</button>
+              <button class="tab active" data-status="In Progress">
+                In Progress (<span id="count-progress">0</span>)
+              </button>
+              <button class="tab" data-status="Resolved">
+                Resolved (<span id="count-resolved">0</span>)
+              </button>
+              <button class="tab" data-status="Closed">
+                Closed (<span id="count-closed">0</span>)
+              </button>
             </div>
           </div>
 
           <!-- complaints display area -->
           <div id="complaintsList" class="complaints-list">
-             <!-- data populated by complaints.js -->
+            <!-- data populated by complaints.js -->
+          </div>
+
+          <!-- pagination -->
+          <div
+            class="pagination-controls"
+            id="paginationControls"
+            style="display: none"
+          >
+            <button class="btn-page" id="prevPage" disabled>
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="page-numbers" id="pageNumbers"></div>
+            <button class="btn-page" id="nextPage">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
           </div>
 
           <!-- when theres nothing, show empty state -->
-          <div class="empty-state" id="emptyState" style="display:none">
+          <div class="empty-state" id="emptyState" style="display: none">
             <div class="empty-icon">
               <i class="fa-solid fa-inbox"></i>
             </div>
@@ -164,7 +191,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Scripts -->
     <script src="../../script/admin-js/complaints.js"></script>
   </body>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU - Admin Student Applications</title>
+    <title>WM EAT SU - Admin Approval</title>
 
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
@@ -16,10 +16,7 @@
 
     <link rel="stylesheet" href="../../css/navbar.css" />
     <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css" />
-    <link
-      rel="stylesheet"
-      href="../../css/admin-css/student-applications.css"
-    />
+    <link rel="stylesheet" href="../../css/admin-css/admin-approval.css" />
   </head>
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
@@ -82,7 +79,7 @@
             </a>
           </li>
           <li>
-            <a href="student-applications.html" class="nav-link active">
+            <a href="student-applications.html" class="nav-link">
               <i class="fa-solid fa-user-check"></i>
               <span>Student Applications</span>
             </a>
@@ -100,7 +97,7 @@
             </a>
           </li>
           <li>
-            <a href="admin-approval.html" class="nav-link">
+            <a href="admin-approval.html" class="nav-link active">
               <i class="fa-solid fa-clipboard-check"></i>
               <span>Content Approval</span>
             </a>
@@ -109,74 +106,39 @@
       </div>
 
       <div class="main-content">
-        <div class="dashboard-section">
-          <!-- page title and description -->
-          <header class="header">
-            <h1>Student Applications</h1>
-            <p>Review and manage student vendor applications</p>
+        <div class="container">
+          <!-- title and description of the page -->
+          <header>
+            <h1>Content Approval</h1>
+            <p class="subtitle">Review and manage menus and posters submitted by vendors</p>
           </header>
 
-          <!-- shows pending, approved, rejected counts -->
-          <div class="stats-grid">
-            <div class="stat-card pending">
-              <div class="stat-content">
-                <span class="stat-label">Pending</span>
-                <span class="stat-value">0</span>
-              </div>
-              <div class="icon-wrapper">
-                <i class="fa-solid fa-clock"></i>
-              </div>
-            </div>
-
-            <div class="stat-card approved">
-              <div class="stat-content">
-                <span class="stat-label">Approved</span>
-                <span class="stat-value">0</span>
-              </div>
-              <div class="icon-wrapper">
-                <i class="fa-solid fa-circle-check"></i>
-              </div>
-            </div>
-
-            <div class="stat-card rejected">
-              <div class="stat-content">
-                <span class="stat-label">Rejected</span>
-                <span class="stat-value">0</span>
-              </div>
-              <div class="icon-wrapper">
-                <i class="fa-solid fa-circle-xmark"></i>
-              </div>
+          <!-- filter section for status -->
+          <div class="filter-controls">
+            <div class="tabs-container" id="approvalTabs">
+              <button class="tab active" data-tab="menus-pending">Menus Pending (<span id="count-menus">0</span>)</button>
+              <button class="tab" data-tab="posters-pending">Posters Pending (<span id="count-posters">0</span>)</button>
+              <button class="tab" data-tab="approved">Approved Content (<span id="count-approved">0</span>)</button>
             </div>
           </div>
 
-          <!-- list container -->
-          <div id="applicationsList" class="applications-list">
-            <!-- injected by js -->
+          <!-- display area -->
+          <div id="approvalList" class="approval-grid">
+             <!-- data populated by js -->
           </div>
 
-          <!-- pagination -->
-          <div
-            class="pagination-controls"
-            id="paginationControls"
-            style="display: none"
-          >
-            <button class="btn-page" id="prevPage" disabled>
-              <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <div class="page-numbers" id="pageNumbers"></div>
-            <button class="btn-page" id="nextPage">
-              <i class="fa-solid fa-chevron-right"></i>
-            </button>
-          </div>
-
-          <!-- if theres nothing to show, display this message -->
-          <div class="empty-state" id="emptyState" style="display: none">
-            <i class="fa-solid fa-file-circle-exclamation"></i>
-            <p>No student applications submitted yet</p>
+          <!-- when theres nothing, show empty state -->
+          <div class="empty-state" id="emptyState" style="display:none">
+            <div class="empty-icon">
+              <i class="fa-solid fa-clipboard"></i>
+            </div>
+            <p class="empty-text">No items looking for approval right now.</p>
           </div>
         </div>
       </div>
     </div>
-    <script src="../../script/admin-js/student-applications.js"></script>
+    
+    <!-- Scripts -->
+    <script src="../../script/admin-js/admin-approval.js"></script>
   </body>
 </html>

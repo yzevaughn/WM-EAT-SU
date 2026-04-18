@@ -87,7 +87,15 @@ document.addEventListener("DOMContentLoaded", function() {
         closed: document.querySelector(".card-closed .card-value")
     };
 
+    // Pagination Selectors
+    const paginationControls = document.getElementById("paginationControls");
+    const pPrev = document.getElementById("prevPage");
+    const pNext = document.getElementById("nextPage");
+    const pNumbers = document.getElementById("pageNumbers");
+
     let activeStatus = "In Progress";
+    let currentPage = 1;
+    const itemsPerPage = 3;
 
     // ════════════════════════════════════════
     // FUNCTIONS
@@ -124,65 +132,94 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (filtered.length === 0) {
             emptyState.style.display = "flex";
+            paginationControls.style.display = "none";
             const statusText = activeStatus.toLowerCase();
             emptyState.querySelector(".empty-text").textContent = `No ${statusText} complaints found`;
             return;
         }
 
         emptyState.style.display = "none";
+        
+        // Pagination logic
+        const totalPages = Math.ceil(filtered.length / itemsPerPage);
+        if (currentPage < 1) currentPage = 1;
+        if (currentPage > totalPages) currentPage = totalPages;
+        
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const currentItems = filtered.slice(startIndex, startIndex + itemsPerPage);
 
-        filtered.forEach(c => {
+        currentItems.forEach(c => {
             const card = document.createElement("div");
-            card.className = "complaint-item";
             
             const statusClass = c.status === "In Progress" ? "progress" : c.status.toLowerCase();
+            card.className = `complaint-item ${statusClass}`;
+            
+            const badgeText = c.status;
             
             card.innerHTML = `
                 <div class="complaint-header">
-                    <div class="complaint-user-info">
-                        <span class="user-name">${c.user}</span>
-                        <span class="complaint-id">${c.id}</span>
-                    </div>
-                    <span class="status-badge ${statusClass}">${c.status}</span>
+                  <div class="complaint-title-group">
+                    <h3>${c.subject}</h3>
+                    <p class="complaint-order"><i class="fa-solid fa-receipt"></i> ${c.orderId} • ${c.vendor}</p>
+                  </div>
+                  <span class="badge ${statusClass}">${badgeText}</span>
                 </div>
-                <div class="complaint-body">
-                    <div class="complaint-subject">
-                        <i class="fa-solid fa-triangle-exclamation" style="color: #f59e0b"></i>
-                        <span>${c.subject}</span>
-                    </div>
-                    <p class="complaint-message">${c.message}</p>
-                </div>
-                <div class="complaint-meta">
-                    <div class="meta-details">
-                        <span><i class="fa-solid fa-store"></i> ${c.vendor}</span>
-                        <span><i class="fa-solid fa-box"></i> ${c.orderId}</span>
-                        <span><i class="fa-solid fa-calendar-days"></i> ${c.date}</span>
-                    </div>
-                    <div class="action-buttons">
-                        <button class="btn-complaint btn-details">View Details</button>
-                        ${c.status === "In Progress" ? 
-                            `<button class="btn-complaint btn-resolve" data-id="${c.id}">Resolve</button>` : 
-                            ""}
-                    </div>
+                <p class="complaint-desc">${c.message}</p>
+                <div class="complaint-footer">
+                  <span>Filed by: ${c.user} • ${c.date}</span>
+                  <div class="action-buttons">
+                    <button class="btn-complaint btn-details">View Details</button>
+                    ${c.status === "In Progress" ? 
+                        `<button class="btn-complaint btn-resolve" data-id="${c.id}">Resolve</button>` : 
+                        ""}
+                  </div>
                 </div>
             `;
             complaintsList.appendChild(card);
         });
 
+        renderPagination(totalPages);
+
         // Re-attach resolve buttons listeners
         document.querySelectorAll(".btn-resolve").forEach(btn => {
-            btn.addEventListener("click", function() {
+            btn.addEventListener("click", function(e) {
+                e.stopPropagation(); // prevent clicking card if any
                 const id = this.getAttribute("data-id");
                 if (confirm(`Are you sure you want to mark ${id} as Resolved?`)) {
                     const comp = complaints.find(c => c.id === id);
                     if (comp) {
                         comp.status = "Resolved";
                         updateStats();
+                        // Reset to page 1 just in case, or stay
                         renderComplaints();
                     }
                 }
             });
         });
+    }
+
+    function renderPagination(totalPages) {
+        if (totalPages <= 1) {
+            paginationControls.style.display = 'none';
+            return;
+        }
+        
+        paginationControls.style.display = 'flex';
+        
+        pPrev.disabled = currentPage === 1;
+        pNext.disabled = currentPage === totalPages;
+
+        pNumbers.innerHTML = '';
+        for (let i = 1; i <= totalPages; i++) {
+            const btn = document.createElement('button');
+            btn.className = `page-num ${i === currentPage ? 'active' : ''}`;
+            btn.textContent = i;
+            btn.addEventListener('click', () => {
+                currentPage = i;
+                renderComplaints();
+            });
+            pNumbers.appendChild(btn);
+        }
     }
 
     // ════════════════════════════════════════
@@ -200,7 +237,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Update state
             activeStatus = tab.getAttribute("data-status");
+            currentPage = 1;
             renderComplaints();
+        });
+    }
+
+    if(pPrev && pNext) {
+        pPrev.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderComplaints();
+            }
+        });
+
+        pNext.addEventListener('click', () => {
+            const filtered = complaints.filter(c => c.status === activeStatus);
+            const totalPages = Math.ceil(filtered.length / itemsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderComplaints();
+            }
         });
     }
 

@@ -11,6 +11,7 @@
 
   <link rel="stylesheet" href="../../css/navbar.css" />
   <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -83,9 +84,15 @@
           </a>
         </li>
         <li>
-          <a href="create-vendor.html" class="nav-link">
+          <a href="assign-vendor.html" class="nav-link">
             <i class="fa-solid fa-user-plus"></i>
-            <span>Create Vendor</span>
+            <span>Assign Vendor</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin-approval.html" class="nav-link">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <span>Content Approval</span>
           </a>
         </li>
       </ul>
@@ -135,9 +142,9 @@
           <div class="fade-card yellow-fade">
             <span class="badge-minimal">0</span>
             <i class="fa-solid fa-user-plus" style="color: #b45309"></i>
-            <h3>Create Vendor Account</h3>
-            <p>Add new vendors</p>
-            <a href="create-vendor.html" class="link" style="color: #b45309">Create Vendor →</a>
+            <h3>Assign Vendor Role</h3>
+            <p>Grant access to students</p>
+            <a href="assign-vendor.html" class="link" style="color: #b45309">Assign Vendor →</a>
           </div>
           <div class="fade-card yellow-fade">
             <span class="badge-minimal">0</span>
@@ -145,6 +152,24 @@
             <h3>Open Complaints</h3>
             <p>Issues needing attention</p>
             <a href="complaints.html" class="link" style="color: #b45309">View Complaints →</a>
+          </div>
+        </div>
+
+        <!-- REVENUE ANALYTICS -->
+        <div class="revenue-section">
+          <div class="revenue-header">
+            <div class="revenue-title">
+              <h2><i class="fa-solid fa-chart-pie color-purple"></i> Revenue Analytics</h2>
+              <p>Platform earnings aggregated across all vendors</p>
+            </div>
+            <div class="revenue-controls filter-tabs">
+                <button class="filter-tab active" data-range="daily">Daily</button>
+                <button class="filter-tab" data-range="weekly">Weekly</button>
+                <button class="filter-tab" data-range="monthly">Monthly</button>
+            </div>
+          </div>
+          <div class="chart-container" style="position: relative; height:300px; width:100%; margin-top:1.5rem;">
+            <canvas id="revenueChart"></canvas>
           </div>
         </div>
 
@@ -216,6 +241,8 @@
       </div>
     </div>
   </div>
+
+  <script src="../../script/admin-js/admin-dashboard.js"></script>
 </body>
 
 </html>

@@ -2,23 +2,21 @@
 
 /* wallet main container */
 .wallet-container {
-  max-width: 900px;
+  max-width: 100%;
   margin: auto;
   padding: 30px;
   display: flex;
   flex-direction: column;
   gap: 30px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 /* BALANCE CARD */
 
 .balance-card {
   background:
-    linear-gradient(135deg,
-      rgba(239, 68, 68, 0.85),
-      rgba(220, 38, 38, 0.75)),
-    url('../../images/wmsu.jpg');
+    linear-gradient(135deg, rgba(239, 68, 68, 0.85), rgba(220, 38, 38, 0.75)),
+    url("../../images/wmsu.jpg");
 
   background-size: cover;
   background-position: center;
@@ -44,7 +42,7 @@
 
 .balance-header i {
   font-size: 22px;
-  opacity: .9;
+  opacity: 0.9;
 }
 
 .balance-amount {
@@ -57,7 +55,7 @@
 
 .currency-symbol {
   font-size: 30px;
-  opacity: .8;
+  opacity: 0.8;
 }
 
 /* button to add money */
@@ -66,12 +64,12 @@
   align-items: center;
   gap: 10px;
   padding: 10px 18px;
-  border: 2px solid rgba(255, 255, 255, .8);
+  border: 2px solid rgba(255, 255, 255, 0.8);
   border-radius: 10px;
   cursor: pointer;
   font-weight: 600;
   background: rgba(255, 255, 255, 0.15);
-  transition: .2s;
+  transition: 0.2s;
   width: fit-content;
 }
 
@@ -180,12 +178,12 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: .25s;
+  transition: 0.25s;
   z-index: 10000;
   backdrop-filter: blur(4px);
 }
 
-#topupToggle:checked~.modal {
+#topupToggle:checked ~ .modal {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -210,13 +208,12 @@
   display: flex;
   flex-direction: column;
   z-index: 5;
-  animation: modalPop .25s ease;
-  
+  animation: modalPop 0.25s ease;
 }
 
 @keyframes modalPop {
   from {
-    transform: scale(.9);
+    transform: scale(0.9);
     opacity: 0;
   }
 
@@ -286,7 +283,7 @@
   align-items: center;
   gap: 6px;
   font-size: 14px;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .payment-method-btn i {
@@ -301,7 +298,7 @@ input[name="payment"] {
   display: none;
 }
 
-input[name="payment"]:checked+.payment-method-btn {
+input[name="payment"]:checked + .payment-method-btn {
   background: #ef4444;
   border-color: #ef4444;
   color: white;
@@ -322,7 +319,7 @@ input[name="payment"]:checked+.payment-method-btn {
   text-align: center;
   cursor: pointer;
   font-weight: 500;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .quick-btn:hover {
@@ -330,14 +327,14 @@ input[name="payment"]:checked+.payment-method-btn {
   color: white;
   border-color: #ef4444;
   transform: scale(1.03);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 input[name="amount"] {
   display: none;
 }
 
-input[name="amount"]:checked+.quick-btn {
+input[name="amount"]:checked + .quick-btn {
   background: #ef4444;
   color: white;
   border-color: #ef4444;
@@ -401,7 +398,7 @@ input[name="amount"]:checked+.quick-btn {
   border-radius: 8px;
   font-size: 16px;
   font-family: inherit;
-  transition: .2s;
+  transition: 0.2s;
   box-sizing: border-box;
 }
 
@@ -530,7 +527,7 @@ select.form-control:focus {
   color: white;
   padding: 12px 20px;
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -539,14 +536,19 @@ select.form-control:focus {
 }
 
 @keyframes slideIn {
-  from { transform: translateX(100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 /* RESPONSIVE */
 
-@media(max-width:600px) {
-
+@media (max-width: 600px) {
   .wallet-container {
     padding: 20px;
   }
@@ -566,5 +568,4 @@ select.form-control:focus {
   .quick-amounts {
     grid-template-columns: repeat(2, 1fr);
   }
-
 }
