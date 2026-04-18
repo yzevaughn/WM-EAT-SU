@@ -10,7 +10,7 @@
 .main-content {
   margin-left: 250px;
   flex: 1;
-  padding-top: 20px;
+  padding: 0;
 }
 
 
@@ -98,12 +98,29 @@
   border-radius: 50%;
 }
 
-.filter-dot.Queue { background: #fbbf24; }
-.filter-dot.preparing { background: #94a3b8; }
-.filter-dot.ready { background: #22c55e; }
-.filter-dot.completed { background: #3b82f6; }
-.filter-dot.cancelled { background: #ef4444; }
-.filter-dot.history { background: #8b5cf6; }
+.filter-dot.Queue {
+  background: #fbbf24;
+}
+
+.filter-dot.preparing {
+  background: #94a3b8;
+}
+
+.filter-dot.ready {
+  background: #22c55e;
+}
+
+.filter-dot.completed {
+  background: #3b82f6;
+}
+
+.filter-dot.cancelled {
+  background: #ef4444;
+}
+
+.filter-dot.history {
+  background: #8b5cf6;
+}
 
 /* Counter badge within the filter pill */
 .tab-count {
@@ -117,6 +134,7 @@
   border-radius: 12px;
   margin-left: 4px;
 }
+
 .filter-btn.active .tab-count {
   background: rgba(255, 255, 255, 0.2);
 }
@@ -134,26 +152,50 @@
   background: #fff;
   border-radius: 18px;
   border: 1px solid #f0f4f8;
-  box-shadow: 0 2px 10px rgba(0,0,0,.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .05);
   overflow: hidden;
   transition: box-shadow .25s ease, transform .2s ease;
 }
-.order-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.1); transform: translateY(-2px); }
+
+.order-card:hover {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .1);
+  transform: translateY(-2px);
+}
 
 /* coloured top accent stripe — matches student page */
 .order-card-accent {
   height: 4px;
   border-radius: 18px 18px 0 0;
 }
-.accent-Queue   { background: #fbbf24; }
-.accent-preparing { background: #94a3b8; }
-.accent-ready     { background: #22c55e; }
-.accent-completed { background: #3b82f6; }
-.accent-cancelled { background: #ef4444; }
-.accent-history   { background: #8b5cf6; }
+
+.accent-Queue {
+  background: #fbbf24;
+}
+
+.accent-preparing {
+  background: #94a3b8;
+}
+
+.accent-ready {
+  background: #22c55e;
+}
+
+.accent-completed {
+  background: #3b82f6;
+}
+
+.accent-cancelled {
+  background: #ef4444;
+}
+
+.accent-history {
+  background: #8b5cf6;
+}
 
 /* padded inner wrapper */
-.order-card-inner { padding: 20px 22px; }
+.order-card-inner {
+  padding: 8px 22px 20px;
+}
 
 /* header row */
 .order-card-header {
@@ -171,48 +213,100 @@
 
 /* Coloured square icon (matches student .order-store-icon) */
 .order-store-icon {
-  width: 40px; height: 40px;
+  width: 40px;
+  height: 40px;
   border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 18px;
   background: #f8f9fa;
   color: #64748b;
   flex-shrink: 0;
 }
-.order-store-icon.ic-Queue   { background: #fef9c3; color: #b45309; }
-.order-store-icon.ic-preparing { background: #f3f4f6; color: #6b7280; }
-.order-store-icon.ic-ready     { background: #dcfce7; color: #15803d; }
-.order-store-icon.ic-cancelled { background: #fee2e2; color: #b91c1c; }
-.order-store-icon.ic-completed { background: #dbeafe; color: #1d4ed8; }
-.order-store-icon.ic-history   { background: #f3e8ff; color: #7c3aed; }
 
-.order-card-title { font-size: 15px; font-weight: 700; color: #0f172a; }
+.order-store-icon.ic-Queue {
+  background: #fef9c3;
+  color: #b45309;
+}
+
+.order-store-icon.ic-preparing {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.order-store-icon.ic-ready {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.order-store-icon.ic-cancelled {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.order-store-icon.ic-completed {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.order-store-icon.ic-history {
+  background: #f3e8ff;
+  color: #7c3aed;
+}
+
+.order-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+}
 
 /* meta (order # + date) */
-.order-meta { font-size: 12px; color: #94a3b8; margin-bottom: 12px; }
-.order-meta span { margin-right: 12px; }
+.order-meta {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-bottom: 12px;
+}
+
+.order-meta span {
+  margin-right: 12px;
+}
 
 /* line items */
-.order-items { margin-bottom: 12px; }
+.order-items {
+  margin-bottom: 12px;
+}
+
 .order-item-row {
   display: flex;
   justify-content: space-between;
-  font-size: 14px; color: #374151;
+  font-size: 14px;
+  color: #374151;
   padding: 4px 0;
 }
 
 /* pickup time label */
-.pickup-label { font-size: 12px; color: #94a3b8; margin-bottom: 12px; }
+.pickup-label {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-bottom: 12px;
+}
 
 /* divider */
-hr.order-divider { border: none; border-top: 1px solid #f1f5f9; margin: 12px 0; }
+hr.order-divider {
+  border: none;
+  border-top: 1px solid #f1f5f9;
+  margin: 12px 0;
+}
 
 /* total row */
 .order-total-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 15px; font-weight: 700; color: #0f172a;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
 }
 
 /* single order card */
@@ -221,7 +315,7 @@ hr.order-divider { border: none; border-top: 1px solid #f1f5f9; margin: 12px 0; 
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   width: 100%;
   min-height: 320px;
   display: flex;
@@ -424,15 +518,15 @@ hr {
     margin-left: 250px;
     padding-top: 16px;
   }
-  
+
   .orders-page {
     padding: 20px 16px;
   }
-  
+
   .orders-list {
     gap: 20px;
   }
-  
+
   .order-card {
     padding: 20px;
   }
@@ -444,7 +538,7 @@ hr {
     margin-left: 0;
     padding-top: 12px;
   }
-  
+
   .orders-page {
     padding: 16px;
   }
@@ -476,7 +570,7 @@ hr {
   .order-actions button {
     flex: 1;
   }
-  
+
   .order-title {
     font-size: 16px;
   }
@@ -488,38 +582,38 @@ hr {
     margin-left: 0;
     padding-top: 8px;
   }
-  
+
   .orders-page {
     padding: 12px;
   }
-  
+
   .filter-tabs {
     gap: 8px;
     margin-bottom: 16px;
   }
-  
+
   .tab-btn {
     padding: 8px 12px;
     font-size: 12px;
   }
-  
+
   .orders-list {
     gap: 12px;
   }
-  
+
   .order-card {
     padding: 12px;
     min-height: 280px;
   }
-  
+
   .order-title {
     font-size: 14px;
   }
-  
+
   .status-badge {
     font-size: 11px;
   }
-  
+
   .accept-btn,
   .decline-btn,
   .mark-ready-btn {
@@ -533,20 +627,20 @@ hr {
   .orders-page {
     padding: 8px;
   }
-  
+
   .order-card {
     padding: 10px;
   }
-  
+
   .tab-btn {
     padding: 6px 10px;
     font-size: 11px;
   }
 }
 
-  .order-card img {
-    object-fit: cover;
-  }
+.order-card img {
+  object-fit: cover;
+}
 
 
 .item-details h4 {
@@ -651,135 +745,157 @@ hr {
   .orders-content {
     padding: 16px;
   }
+
   .orders-header h1 {
     font-size: 28px;
   }
+
   .filter-tabs {
     flex-direction: column;
     align-items: center;
   }
+
   .tab-btn {
     width: 100%;
     max-width: 200px;
   }
+
   .order-header {
     flex-direction: column;
     gap: 12px;
   }
+
   .order-item {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
   }
+
   .pickup-info {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
   }
+
   .order-footer {
     flex-direction: column;
     gap: 12px;
     align-items: flex-start;
   }
+
   .order-actions {
     flex-direction: column-reverse;
     width: 100%;
   }
+
   .order-actions button {
     width: 100%;
   }
 }
-  
-  .order-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .pickup-info {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-  .filter-tabs {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    .tab-btn {
-      background: #f3f4f6;
-      border: 1px solid #e5e7eb;
-      color: #374151;
-      padding: 8px 18px;
-      border-radius: 8px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s, border 0.2s;
-      font-size: 15px;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-    .tab-btn.active {
-      background: #ef4444;
-      color: #fff;
-      border-color: #ef4444;
-    }
-    .tab-btn.all-tab {
-      background: #fff7ed;
-      color: #b45309;
-      border: 2px solid #fdba74;
-      font-weight: 700;
-      box-shadow: 0 2px 8px 0 rgba(253,186,116,0.08);
-    }
-    .tab-btn.all-tab.active {
-      background: #fdba74;
-      color: #fff;
-      border-color: #fdba74;
-    }
-    .tab-btn.all-tab i {
-      color: #b45309;
-    }
-    .tab-btn.all-tab.active i {
-      color: #fff;
-    }
-    .order-actions {
-      display: flex;
-      gap: 8px;
-    }
-    .decline-btn {
-      background: #f87171;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      padding: 7px 14px;
-      font-weight: 500;
-      cursor: pointer;
-      font-size: 15px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      transition: background 0.15s;
-    }
-    .decline-btn:hover {
-      background: #dc2626;
-    }
-    .accept-btn {
-      background: #4ade80;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      padding: 7px 14px;
-      font-weight: 500;
-      cursor: pointer;
-      font-size: 15px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      transition: background 0.15s;
-    }
-    .accept-btn:hover {
-      background: #16a34a;
-    }
+
+.order-item {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.pickup-info {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.tab-btn.active {
+  background: #ef4444;
+  color: #fff;
+  border-color: #ef4444;
+}
+
+.tab-btn.all-tab {
+  background: #fff7ed;
+  color: #b45309;
+  border: 2px solid #fdba74;
+  font-weight: 700;
+  box-shadow: 0 2px 8px 0 rgba(253, 186, 116, 0.08);
+}
+
+.tab-btn.all-tab.active {
+  background: #fdba74;
+  color: #fff;
+  border-color: #fdba74;
+}
+
+.tab-btn.all-tab i {
+  color: #b45309;
+}
+
+.tab-btn.all-tab.active i {
+  color: #fff;
+}
+
+.order-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.decline-btn {
+  background: #f87171;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.15s;
+}
+
+.decline-btn:hover {
+  background: #dc2626;
+}
+
+.accept-btn {
+  background: #4ade80;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.15s;
+}
+
+.accept-btn:hover {
+  background: #16a34a;
+}
 
 /* ── FILTER: tab count badges ────────────────────────────── */
 .tab-count {
@@ -820,13 +936,15 @@ hr {
 
 /* ── FILTER: empty-state message ─────────────────────────── */
 .no-orders-msg {
-  display: none;           /* hidden by default; JS adds .visible */
+  display: none;
+  /* hidden by default; JS adds .visible */
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 56px 24px;
-  grid-column: 1 / -1;    /* span full grid width */
+  grid-column: 1 / -1;
+  /* span full grid width */
   gap: 12px;
 }
 
@@ -866,9 +984,19 @@ hr {
 }
 
 @keyframes bounceIn {
-  0%   { transform: scale(0.5); opacity: 0; }
-  70%  { transform: scale(1.1); }
-  100% { transform: scale(1);   opacity: 1; }
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  70% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* ── ACTION BUTTONS: simple flat pill style ───────────────── */
@@ -886,7 +1014,7 @@ hr {
   cursor: pointer;
   border: 1.5px solid transparent;
   transition: background 0.18s ease, color 0.18s ease,
-              border-color 0.18s ease, transform 0.15s ease;
+    border-color 0.18s ease, transform 0.15s ease;
   white-space: nowrap;
 }
 
@@ -900,6 +1028,7 @@ hr {
   color: #dc2626;
   border-color: #fca5a5;
 }
+
 .btn-decline:hover {
   background: #fee2e2;
   border-color: #f87171;
@@ -911,6 +1040,7 @@ hr {
   color: #16a34a;
   border-color: #86efac;
 }
+
 .btn-accept:hover {
   background: #dcfce7;
   border-color: #4ade80;
@@ -922,6 +1052,7 @@ hr {
   color: #2563eb;
   border-color: #93c5fd;
 }
+
 .btn-ready:hover {
   background: #dbeafe;
   border-color: #60a5fa;
@@ -933,6 +1064,7 @@ hr {
   color: #7c3aed;
   border-color: #c4b5fd;
 }
+
 .btn-complete:hover {
   background: #ede9fe;
   border-color: #a78bfa;
@@ -944,6 +1076,7 @@ hr {
   color: #7c3aed;
   border-color: #c4b5fd;
 }
+
 .btn-move-history:hover {
   background: #ede9fe;
   border-color: #a78bfa;
@@ -955,6 +1088,7 @@ hr {
   color: #dc2626;
   border-color: #fca5a5;
 }
+
 .btn-delete-history:hover {
   background: #fee2e2;
   border-color: #f87171;
@@ -976,7 +1110,10 @@ hr {
   align-items: center;
   justify-content: center;
 }
-.modal.active { display: flex; }
+
+.modal.active {
+  display: flex;
+}
 
 .modal-overlay {
   position: absolute;
@@ -999,8 +1136,15 @@ hr {
 }
 
 @keyframes modalUp {
-  from { transform: translateY(24px); opacity: 0; }
-  to   { transform: translateY(0);    opacity: 1; }
+  from {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .modal-header {
@@ -1010,6 +1154,7 @@ hr {
   padding: 22px 24px;
   border-bottom: 1px solid #f1f5f9;
 }
+
 .modal-header h2 {
   font-size: 18px;
   font-weight: 800;
@@ -1020,7 +1165,8 @@ hr {
 }
 
 .modal-close {
-  width: 34px; height: 34px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   border: none;
   background: #f1f5f9;
@@ -1032,9 +1178,15 @@ hr {
   justify-content: center;
   transition: all 0.2s;
 }
-.modal-close:hover { background: #fee2e2; color: #ef4444; }
 
-.modal-body { padding: 24px; }
+.modal-close:hover {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+.modal-body {
+  padding: 24px;
+}
 
 /* ── order summary detail block inside the modal (matches student-order design) ── */
 .pickup-code-card {
@@ -1136,7 +1288,10 @@ hr {
   font-family: inherit;
   transition: background 0.2s;
 }
-.btn-cancel:hover { background: #e5e7eb; }
+
+.btn-cancel:hover {
+  background: #e5e7eb;
+}
 
 /* ── Shared confirm button base ─────────────────────────── */
 .btn-confirm-accept,
@@ -1160,53 +1315,83 @@ hr {
 /* Accept — green */
 .btn-confirm-accept {
   background: linear-gradient(135deg, #16a34a, #15803d);
-  box-shadow: 0 2px 8px rgba(22,163,74,0.25);
-}
-.btn-confirm-accept:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 5px 16px rgba(22,163,74,0.35);
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.25);
 }
 
-/* Decline / Delete — red */
-.btn-confirm-decline,
-.btn-confirm-delete {
-  background: linear-gradient(135deg, #ef4444, #b91c1c);
-  box-shadow: 0 2px 8px rgba(239,68,68,0.25);
-}
-.btn-confirm-decline:hover,
-.btn-confirm-delete:hover {
+.btn-confirm-accept:hover {
   transform: translateY(-1px);
-  box-shadow: 0 5px 16px rgba(239,68,68,0.35);
+  box-shadow: 0 5px 16px rgba(22, 163, 74, 0.35);
+}
+
+/* Decline — red */
+.btn-confirm-decline {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.25);
+}
+
+.btn-confirm-decline:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 16px rgba(239, 68, 68, 0.35);
+}
+
+/* Delete / Remove — matching the remove-btn style */
+.btn-confirm-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #fff;
+  color: #ef4444;
+  border: 1px solid #fecaca;
+  padding: 10px 20px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.btn-confirm-delete:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+}
+
+.btn-confirm-delete:active {
+  transform: scale(0.98);
 }
 
 /* Mark Ready — blue */
 .btn-confirm-ready {
   background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-  box-shadow: 0 2px 8px rgba(59,130,246,0.25);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
 }
+
 .btn-confirm-ready:hover {
   transform: translateY(-1px);
-  box-shadow: 0 5px 16px rgba(59,130,246,0.35);
+  box-shadow: 0 5px 16px rgba(59, 130, 246, 0.35);
 }
 
 /* Complete — violet */
 .btn-confirm-complete {
   background: linear-gradient(135deg, #8b5cf6, #6d28d9);
-  box-shadow: 0 2px 8px rgba(139,92,246,0.25);
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.25);
 }
+
 .btn-confirm-complete:hover {
   transform: translateY(-1px);
-  box-shadow: 0 5px 16px rgba(139,92,246,0.35);
+  box-shadow: 0 5px 16px rgba(139, 92, 246, 0.35);
 }
 
 /* History Move — violet */
 .btn-confirm-history {
   background: linear-gradient(135deg, #a78bfa, #8b5cf6);
-  box-shadow: 0 2px 8px rgba(139,92,246,0.25);
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.25);
 }
+
 .btn-confirm-history:hover {
   transform: translateY(-1px);
-  box-shadow: 0 5px 16px rgba(139,92,246,0.35);
+  box-shadow: 0 5px 16px rgba(139, 92, 246, 0.35);
 }
 
 /* Added for modernized card layout matching student portal */
@@ -1239,4 +1424,3 @@ hr {
   margin-bottom: 16px;
   border: 1px solid #f1f5f9;
 }
-

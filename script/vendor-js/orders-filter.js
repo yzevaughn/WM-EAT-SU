@@ -113,7 +113,7 @@
       subtitle:    "Are you sure you want to <strong>delete</strong> this order? This action cannot be undone.",
       btnClass:    "btn-confirm-delete",
       btnIconClass:"fas fa-trash",
-      btnLabel:    "Yes, Delete",
+      btnLabel:    "Yes, Remove",
     },
   };
 

@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WM EAT SU - Vendor Wallet</title>
-
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -89,8 +88,6 @@
     <div class="layout">
       <!-- ── SIDEBAR ── -->
       <div class="left-nav" id="sidebar">
-        <!-- logo shown on mobile inside sidebar -->
-
         <ul class="nav-list">
           <li>
             <a href="vendor-dashboard.html" class="nav-link">
@@ -119,7 +116,7 @@
           <li>
             <a href="vendor-sales-payments.html" class="nav-link">
               <i class="fa-solid fa-chart-line"></i>
-              <span>Sales & Payments</span>
+              <span>Sales &amp; Payments</span>
             </a>
           </li>
           <li>
@@ -130,10 +127,10 @@
           </li>
         </ul>
       </div>
-      <!-- wallet page content -->
+      <!-- MAIN CONTENT -->
       <div class="main-content">
         <div class="wallet-container">
-          <!-- big card showing how much money in wallet -->
+          <!-- BALANCE CARD -->
           <div class="balance-card">
             <div class="balance-header">
               <h1>Wallet Balance</h1>
@@ -141,17 +138,16 @@
             </div>
             <div class="balance-amount">
               <span class="currency-symbol">₱</span>
-              <span class="balance-value" id="walletBalance">2500.00</span>
+              <span class="balance-value">2500.00</span>
             </div>
             <label for="withdrawToggle" class="topup-btn">
               <i class="fa-solid fa-minus"></i> Withdraw Funds
             </label>
           </div>
-
-          <!-- list of all money transactions -->
+          <!-- TRANSACTIONS -->
           <div class="transaction-section">
             <h2>Transaction History</h2>
-            <div class="transaction-list" id="transactionList">
+            <div class="transaction-list">
               <div class="transaction-item">
                 <div class="transaction-icon topup">
                   <i class="fa-solid fa-shopping-cart"></i>
@@ -162,16 +158,24 @@
                 </div>
                 <div class="transaction-amount positive">+₱12.99</div>
               </div>
+              <div class="transaction-item">
+                <div class="transaction-icon payment">
+                  <i class="fa-solid fa-money-bill-transfer"></i>
+                </div>
+                <div class="transaction-details">
+                  <p class="transaction-type">Withdrawal via GCash</p>
+                  <p class="transaction-date">Mar 3, 2026 - 3:15 PM</p>
+                </div>
+                <div class="transaction-amount negative">-₱500.00</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <!-- checkbox to show/hide modal -->
-    <input type="checkbox" id="withdrawToggle" style="display: none" />
-
-    <!-- WITHDRAW FUNDS MODAL (CSS-only, student-wallet style, for vendor) -->
+    <!-- MODAL TOGGLE -->
+    <input type="checkbox" id="withdrawToggle" />
+    <!-- WITHDRAW MODAL -->
     <div class="modal">
       <label for="withdrawToggle" class="modal-overlay"></label>
       <div class="modal-content">
@@ -181,157 +185,393 @@
             <i class="fa-solid fa-times"></i>
           </label>
         </div>
-        <div class="modal-body">
-          <!-- PAYMENT METHOD -->
-          <!-- choose how to withdraw money -->
+        <div class="modal-body" id="step1Body">
+          <!-- WITHDRAWAL METHOD -->
           <div class="form-section">
-            <label class="form-label">Select Withdrawal Method</label>
-            <div class="payment-methods">
-              <input
-                type="radio"
-                name="withdraw-method"
-                id="gcash"
-                value="GCash"
-                style="display: none"
-              />
+            <div class="payment-methods" id="paymentMethods">
+              <input type="radio" name="payment" id="gcash" />
               <label for="gcash" class="payment-method-btn">
                 <img src="../../images/gcash-logo.png" class="method-logo" />
                 <span class="method-name">GCash</span>
               </label>
-              <input
-                type="radio"
-                name="withdraw-method"
-                id="maya"
-                value="Maya"
-                style="display: none"
-              />
+              <input type="radio" name="payment" id="maya" />
               <label for="maya" class="payment-method-btn">
                 <img src="../../images/paymaya-logo.png" class="method-logo" />
                 <span class="method-name">Maya</span>
               </label>
-              <input
-                type="radio"
-                name="withdraw-method"
-                id="bank"
-                value="Bank Transfer"
-                style="display: none"
-              />
-              <label for="bank" class="payment-method-btn">
+              <input type="radio" name="payment" id="card" />
+              <label for="card" class="payment-method-btn">
                 <i class="fa-solid fa-university"></i>
                 <span class="method-name">Bank Transfer</span>
               </label>
             </div>
+            <div id="methodError" class="error-message">
+              <i class="fa-solid fa-circle-exclamation"></i>
+              <span>Please select a withdrawal method</span>
+            </div>
           </div>
           <!-- QUICK AMOUNT -->
-          <!-- buttons for common withdraw amounts -->
           <div class="form-section">
-            <label class="form-label">Withdraw Amount</label>
+            <label class="form-label">Quick Amount</label>
             <div class="quick-amounts">
-              <input
-                type="radio"
-                name="withdraw-amount"
-                id="a500"
-                value="500"
-                style="display: none"
-              />
+              <input type="radio" name="amount" id="a500" />
               <label for="a500" class="quick-btn">₱500</label>
-              <input
-                type="radio"
-                name="withdraw-amount"
-                id="a1000"
-                value="1000"
-                style="display: none"
-              />
+              <input type="radio" name="amount" id="a1000" />
               <label for="a1000" class="quick-btn">₱1000</label>
-              <input
-                type="radio"
-                name="withdraw-amount"
-                id="a2000"
-                value="2000"
-                style="display: none"
-              />
+              <input type="radio" name="amount" id="a2000" />
               <label for="a2000" class="quick-btn">₱2000</label>
-              <input
-                type="radio"
-                name="withdraw-amount"
-                id="a5000"
-                value="5000"
-                style="display: none"
-              />
+              <input type="radio" name="amount" id="a5000" />
               <label for="a5000" class="quick-btn">₱5000</label>
+            </div>
+            <!-- CUSTOM AMOUNT -->
+            <div class="custom-amount-wrapper">
+              <label class="form-label">Enter amount</label>
+              <div class="custom-input-box">
+                <span class="currency-prefix">₱</span>
+                <input
+                  type="number"
+                  id="customAmount"
+                  class="custom-amount-input"
+                  placeholder="0.00"
+                  min="100"
+                />
+              </div>
+              <div id="amountError" class="error-message">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span>Please enter a valid amount (Min. ₱100.00)</span>
+              </div>
             </div>
           </div>
         </div>
-        <div class="modal-footer">
-          <label for="withdrawToggle" class="btn-cancel">Cancel</label>
-          <button
-            id="confirmWithdrawBtn"
-            class="btn-confirm"
-            style="border: none; cursor: pointer"
-          >
-            Confirm Withdrawal
-          </button>
-        </div>
-      </div>
-    </div>
 
-    <!-- SECOND CONFIRMATION MODAL -->
-    <div
-      class="modal"
-      id="confirmWithdrawModal"
-      style="z-index: 11000; display: none"
-    >
-      <div class="modal-overlay" id="confirmWithdrawOverlay"></div>
-      <div
-        class="modal-content"
-        style="max-width: 400px; text-align: center; border-radius: 20px"
-      >
+        <!-- STEP 2 (Hidden by Default) -->
+        <div class="modal-body hidden-step" id="step2Body">
+          <div class="step-details-container">
+            <div class="step-details-row">
+              <span>Withdrawal Method</span>
+              <span id="summaryMethod" style="font-weight: 600">GCash</span>
+            </div>
+            <div class="step-details-row">
+              <span>Amount</span>
+              <span id="summaryAmount">₱0.00</span>
+            </div>
+          </div>
+
+          <!-- Phone Input (For GCash / Maya) -->
+          <div class="form-section" id="phoneInputGroup">
+            <label class="form-label">Mobile Number</label>
+            <input
+              type="tel"
+              id="mobileNumber"
+              class="custom-amount-input"
+              placeholder="09XXXXXXXXX"
+            />
+            <div id="phoneError" class="error-message">
+              <i class="fa-solid fa-circle-exclamation"></i>
+              <span>Please enter a valid 11-digit mobile number</span>
+            </div>
+          </div>
+
+          <!-- Bank Input (For Bank Transfer) -->
+          <div class="form-section hidden-step" id="bankInputGroup">
+            <label class="form-label">Select Bank</label>
+            <select id="bankName" class="form-control">
+              <option value="BDO">BDO Unibank</option>
+              <option value="BPI">Bank of the Philippine Islands (BPI)</option>
+              <option value="Metrobank">Metrobank</option>
+              <option value="UnionBank">UnionBank of the Philippines</option>
+              <option value="SecurityBank">Security Bank</option>
+            </select>
+            <label class="form-label" style="margin-top: 10px"
+              >Account Number</label
+            >
+            >
+            <input
+              type="text"
+              id="bankAccount"
+              class="custom-amount-input"
+              placeholder="Enter bank account number"
+            />
+          </div>
+        </div>
+
+        <!-- STEP 3 OTP (Hidden by Default) -->
         <div
-          class="modal-header"
-          style="justify-content: center; padding-bottom: 10px"
+          class="modal-body hidden-step"
+          id="step3Body"
+          style="text-align: center"
         >
-          <h2 style="font-size: 20px">Confirm Transaction</h2>
-        </div>
-        <div class="modal-body" style="padding-top: 10px">
-          <p id="confirmWithdrawMessage">
-            Are you sure you want to withdraw this amount?
+          <h3 style="margin-top: 0">Enter OTP</h3>
+          <p style="color: #6b7280; font-size: 14px; margin-bottom: 20px">
+            A 4-digit PIN has been sent to your mobile number.
           </p>
-          <p style="font-size: 12px; color: #64748b; margin-top: 8px">
-            This action cannot be undone.
-          </p>
+
+          <div class="otp-container" id="otpContainer">
+            <input type="text" class="otp-digit" maxlength="1" />
+            <input type="text" class="otp-digit" maxlength="1" />
+            <input type="text" class="otp-digit" maxlength="1" />
+            <input type="text" class="otp-digit" maxlength="1" />
+          </div>
+          <div
+            id="otpError"
+            class="error-message"
+            style="justify-content: center"
+          >
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span>Please enter the 4-digit OTP</span>
+          </div>
         </div>
-        <div class="modal-footer" style="gap: 12px; justify-content: center">
-          <button
-            class="btn-cancel"
-            id="cancelFinalBtn"
-            style="
-              border: none;
-              padding: 10px 24px;
-              border-radius: 12px;
-              cursor: pointer;
-            "
-          >
-            Go Back
-          </button>
-          <button
-            id="finalConfirmBtn"
-            class="btn-confirm"
-            style="
-              background: #10b981;
-              border: none;
-              padding: 10px 24px;
-              border-radius: 12px;
-              color: white;
-              cursor: pointer;
-              font-weight: 600;
-            "
-          >
-            Yes, Withdraw
-          </button>
+
+        <div class="modal-footer" id="step1Footer">
+          <div class="btn-confirm" onclick="goToStep2()">Next</div>
+          <label for="withdrawToggle" class="btn-cancel">Cancel</label>
+        </div>
+        <div class="modal-footer hidden-step" id="step2Footer">
+          <div class="btn-cancel" onclick="goToStep1()">Back</div>
+          <div class="btn-confirm" onclick="processStep2()">Next</div>
+        </div>
+        <div class="modal-footer hidden-step" id="step3Footer">
+          <div class="btn-cancel" onclick="goToStep2()">Back</div>
+          <div class="btn-confirm" onclick="finalizeWithdraw()">Submit OTP</div>
         </div>
       </div>
     </div>
 
-    <script src="../../script/vendor-js/wallet.js"></script>
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+      const paymentMethods = document.getElementById("paymentMethods");
+
+      // QUICK AMOUNT LOGIC
+      const quickAmounts = document.querySelectorAll(".quick-btn");
+      const customInput = document.getElementById("customAmount");
+      const paymentInputs = document.querySelectorAll('input[name="payment"]');
+
+      function clearErrors() {
+        document
+          .querySelectorAll(".error-message")
+          .forEach((err) => err.classList.remove("show"));
+        document
+          .querySelectorAll(".invalid")
+          .forEach((el) => el.classList.remove("invalid"));
+      }
+
+      // Auto-clear error when user starts typing or selecting
+      customInput.addEventListener("input", () => {
+        customInput.classList.remove("invalid");
+        document.getElementById("amountError").classList.remove("show");
+      });
+
+      paymentInputs.forEach((input) => {
+        input.addEventListener("change", () => {
+          paymentMethods.classList.remove("invalid");
+          document.getElementById("methodError").classList.remove("show");
+        });
+      });
+
+      document.getElementById("mobileNumber").addEventListener("input", () => {
+        document.getElementById("mobileNumber").classList.remove("invalid");
+        document.getElementById("phoneError").classList.remove("show");
+      });
+
+      document.getElementById("bankAccount").addEventListener("input", () => {
+        document.getElementById("bankAccount").classList.remove("invalid");
+      });
+
+      quickAmounts.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          // Parse numbers from innerText like "₱500"
+          const val = parseInt(e.target.innerText.replace("₱", ""));
+          if (!isNaN(val)) {
+            customInput.value = val;
+            // Clear error when quick amount is picked
+            customInput.classList.remove("invalid");
+            document.getElementById("amountError").classList.remove("show");
+          }
+        });
+      });
+
+      // WIZARD LOGIC
+      function goToStep2() {
+        clearErrors();
+        let selectedMethod = null;
+        paymentInputs.forEach((i) => {
+          if (i.checked) selectedMethod = i.id;
+        });
+
+        let hasError = false;
+        if (!selectedMethod) {
+          paymentMethods.classList.add("invalid");
+          document.getElementById("methodError").classList.add("show");
+          hasError = true;
+        }
+
+        const amount = parseFloat(customInput.value);
+        if (!amount || amount < 100) {
+          customInput.classList.add("invalid");
+          document.getElementById("amountError").classList.add("show");
+          hasError = true;
+        }
+
+        if (hasError) return;
+
+        // Setup Summary Data
+        const summaryMethodText =
+          selectedMethod === "gcash"
+            ? "GCash"
+            : selectedMethod === "maya"
+              ? "Maya"
+              : "Bank Transfer";
+        document.getElementById("summaryMethod").innerText = summaryMethodText;
+        document.getElementById("summaryAmount").innerText =
+          "₱" + amount.toFixed(2);
+
+        // Setup Step 2 Fields
+        if (selectedMethod === "card") {
+          document
+            .getElementById("phoneInputGroup")
+            .classList.add("hidden-step");
+          document
+            .getElementById("bankInputGroup")
+            .classList.remove("hidden-step");
+        } else {
+          document
+            .getElementById("bankInputGroup")
+            .classList.add("hidden-step");
+          document
+            .getElementById("phoneInputGroup")
+            .classList.remove("hidden-step");
+        }
+
+        // Toggle Views
+        document.getElementById("step3Body").classList.add("hidden-step");
+        document.getElementById("step3Footer").classList.add("hidden-step");
+        document.getElementById("step1Body").classList.add("hidden-step");
+        document.getElementById("step1Footer").classList.add("hidden-step");
+        document.getElementById("step2Body").classList.remove("hidden-step");
+        document.getElementById("step2Footer").classList.remove("hidden-step");
+      }
+
+      function goToStep1() {
+        clearErrors();
+        document.getElementById("step3Body").classList.add("hidden-step");
+        document.getElementById("step3Footer").classList.add("hidden-step");
+        document.getElementById("step2Body").classList.add("hidden-step");
+        document.getElementById("step2Footer").classList.add("hidden-step");
+        document.getElementById("step1Body").classList.remove("hidden-step");
+        document.getElementById("step1Footer").classList.remove("hidden-step");
+      }
+
+      function goToStep3() {
+        clearErrors();
+        document.getElementById("step1Body").classList.add("hidden-step");
+        document.getElementById("step1Footer").classList.add("hidden-step");
+        document.getElementById("step2Body").classList.add("hidden-step");
+        document.getElementById("step2Footer").classList.add("hidden-step");
+        document.getElementById("step3Body").classList.remove("hidden-step");
+        document.getElementById("step3Footer").classList.remove("hidden-step");
+      }
+
+      function processStep2() {
+        clearErrors();
+        let selectedMethod = null;
+        paymentInputs.forEach((i) => {
+          if (i.checked) selectedMethod = i.id;
+        });
+
+        if (selectedMethod === "card") {
+          const accField = document.getElementById("bankAccount");
+          if (!accField.value.trim()) {
+            accField.classList.add("invalid");
+            return;
+          }
+          finalizeWithdraw(); // Bank jumps right to end
+        } else {
+          const phoneField = document.getElementById("mobileNumber");
+          const phoneVal = phoneField.value.trim();
+          // Basic 11 digit check for PH numbers
+          if (!phoneVal || phoneVal.length < 11) {
+            phoneField.classList.add("invalid");
+            document.getElementById("phoneError").classList.add("show");
+            return;
+          }
+          goToStep3(); // Mobile jumps to OTP
+        }
+      }
+
+      function finalizeWithdraw() {
+        // Verify OTP if mobile
+        let selectedMethod = null;
+        paymentInputs.forEach((i) => {
+          if (i.checked) selectedMethod = i.id;
+        });
+
+        if (selectedMethod !== "card") {
+          // Simple basic validation just checks if they typed into the 4 boxes generally
+          const boxes = document.querySelectorAll(".otp-digit");
+          let otpVal = "";
+          boxes.forEach((b) => (otpVal += b.value));
+          if (otpVal.length < 4) {
+            boxes.forEach((b) => b.classList.add("invalid"));
+            document.getElementById("otpError").classList.add("show");
+            return;
+          }
+        }
+
+        // Close Modal via Checkbox
+        document.getElementById("withdrawToggle").checked = false;
+
+        // Reset forms behind the scenes after animation
+        setTimeout(() => {
+          goToStep1();
+          customInput.value = "";
+          document.getElementById("mobileNumber").value = "";
+          document.getElementById("bankAccount").value = "";
+          document.querySelectorAll(".otp-digit").forEach((b) => {
+            b.value = "";
+            b.classList.remove("invalid");
+          });
+        }, 300);
+
+        // Show Toast
+        showToast("Withdrawal request submitted successfully!");
+      }
+
+      // Auto advance OTP boxes
+      const otpInputs = document.querySelectorAll(".otp-digit");
+      otpInputs.forEach((input, index) => {
+        input.addEventListener("input", (e) => {
+          // Clear errors when typing
+          input.classList.remove("invalid");
+          if (document.getElementById("otpError")) {
+            document.getElementById("otpError").classList.remove("show");
+          }
+
+          if (input.value.length === 1 && index < otpInputs.length - 1) {
+            otpInputs[index + 1].focus();
+          }
+        });
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Backspace" && input.value === "" && index > 0) {
+            otpInputs[index - 1].focus();
+          }
+        });
+      });
+
+      function showToast(message) {
+        const container = document.getElementById("toastContainer");
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color:white;"></i> ${message}`;
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.opacity = "0";
+          toast.style.transform = "translateX(100%)";
+          setTimeout(() => toast.remove(), 300);
+        }, 3000);
+      }
+    </script>
   </body>
 </html>
