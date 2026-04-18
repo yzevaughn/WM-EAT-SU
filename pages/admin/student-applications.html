@@ -3,8 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU - Admin Student Applications</title>
-
+    <title>WM EAT SU - Admin student applications</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -15,7 +14,6 @@
     />
 
     <link rel="stylesheet" href="../../css/navbar.css" />
-    <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css" />
     <link
       rel="stylesheet"
       href="../../css/admin-css/student-applications.css"
@@ -24,22 +22,18 @@
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
 
-    <!-- ════════════════════════════════════════
-         TOP NAVBAR
-         ════════════════════════════════════════ -->
+    <!-- TOP NAVBAR -->
     <div class="top-nav">
-      <!-- LEFT: hamburger + logo -->
       <div class="nav-left">
-        <label for="menu-checkbox" class="menu-toggle">
-          <i class="fa-solid fa-bars"></i>
-        </label>
+        <label for="menu-checkbox" class="menu-toggle"
+          ><i class="fa-solid fa-bars"></i
+        ></label>
         <a href="#" class="logo">
           <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
           <span class="logo-text">WM EAT SU</span>
         </a>
       </div>
       <div class="nav-center"></div>
-      <!-- RIGHT: profile -->
       <div class="nav-right">
         <div class="profile">
           <div class="profile-info">
@@ -52,19 +46,17 @@
                 src="../../images/pfp.jpg"
                 class="profile-pic"
                 alt="Profile"
-              />
-              <i class="fa-solid fa-chevron-down"></i>
+              /><i class="fa-solid fa-chevron-down"></i>
             </button>
             <div class="dropdown-menu">
-              <a href="../../index.html" class="dropdown-item">
-                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
-              </a>
+              <a href="../../index.html" class="dropdown-item"
+                ><i class="fas fa-sign-out-alt"></i><span>Log Out</span></a
+              >
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- /top-nav -->
 
     <!-- ════════════════════════════════════════
          LAYOUT
@@ -108,75 +100,572 @@
         </ul>
       </div>
 
+      <!-- MAIN CONTENT -->
       <div class="main-content">
-        <div class="dashboard-section">
-          <!-- page title and description -->
-          <header class="header">
-            <h1>Student Applications</h1>
-            <p>Review and manage student vendor applications</p>
-          </header>
-
-          <!-- shows pending, approved, rejected counts -->
-          <div class="stats-grid">
-            <div class="stat-card pending">
-              <div class="stat-content">
-                <span class="stat-label">Pending</span>
-                <span class="stat-value">0</span>
+        <div class="vendor-header" style="margin-bottom: 24px;">
+          <!-- Status Summaries -->
+          <div class="summary-cards">
+            <div class="summary-card">
+              <div class="summary-info">
+                <h3>Total Pending</h3>
+                <span id="totalPendingCount" class="summary-count">0</span>
               </div>
-              <div class="icon-wrapper">
-                <i class="fa-solid fa-clock"></i>
-              </div>
+              <div class="summary-icon" style="background:#fef3c7; color:#b45309;"><i class="fa-solid fa-clock"></i></div>
             </div>
-
-            <div class="stat-card approved">
-              <div class="stat-content">
-                <span class="stat-label">Approved</span>
-                <span class="stat-value">0</span>
+            <div class="summary-card">
+              <div class="summary-info">
+                <h3>Active Vendors</h3>
+                <span id="totalActiveCount" class="summary-count">0</span>
               </div>
-              <div class="icon-wrapper">
-                <i class="fa-solid fa-circle-check"></i>
-              </div>
-            </div>
-
-            <div class="stat-card rejected">
-              <div class="stat-content">
-                <span class="stat-label">Rejected</span>
-                <span class="stat-value">0</span>
-              </div>
-              <div class="icon-wrapper">
-                <i class="fa-solid fa-circle-xmark"></i>
-              </div>
+              <div class="summary-icon" style="background:#d1fae5; color:#059669;"><i class="fa-solid fa-store"></i></div>
             </div>
           </div>
+        </div>
 
-          <!-- list container -->
-          <div id="applicationsList" class="applications-list">
-            <!-- injected by js -->
+        <div class="applications-section">
+          <h2>Student Applications</h2>
+          
+          <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('pending')" id="tab-pending">Pending</button>
+            <button class="tab-btn" onclick="switchTab('review')" id="tab-review">Under Review</button>
+            <button class="tab-btn" onclick="switchTab('approved')" id="tab-approved">Active Vendors</button>
+            <button class="tab-btn" onclick="switchTab('rejected')" id="tab-rejected">Rejected</button>
           </div>
 
-          <!-- pagination -->
-          <div
-            class="pagination-controls"
-            id="paginationControls"
-            style="display: none"
-          >
-            <button class="btn-page" id="prevPage" disabled>
-              <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <div class="page-numbers" id="pageNumbers"></div>
-            <button class="btn-page" id="nextPage">
-              <i class="fa-solid fa-chevron-right"></i>
-            </button>
+          <div class="applications-list" id="applicationsList">
+            <!-- Dynamically injected applications -->
           </div>
-
-          <!-- if theres nothing to show, display this message -->
-          <div class="empty-state" id="emptyState" style="display: none">
-            <i class="fa-solid fa-file-circle-exclamation"></i>
-            <p>No student applications submitted yet</p>
+          
+          <!-- Pagination -->
+          <div class="pagination" id="paginationControls">
+            <!-- Pagination injected via JS -->
           </div>
         </div>
       </div>
     </div>
-    <script src="../../script/admin-js/student-applications.js"></script>
+
+    <!-- ==========================================
+         MODALS
+         ========================================== -->
+
+    <!-- Form Modal (Used for both Create and Edit) -->
+    <div class="modal-backdrop" id="applicationFormModal">
+      <div class="modal-panel">
+        <div class="modal-header">
+          <h2 id="formModalTitle">Vendor Application Form</h2>
+          <button
+            class="btn-close"
+            onclick="closeModal('applicationFormModal')"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form
+            class="application-form"
+            id="vendorForm"
+            onsubmit="handleFormSubmit(event)"
+          >
+            <input type="hidden" id="formEntryId" value="" />
+
+            <div class="form-group">
+              <label>Business Name <span class="required">*</span></label>
+              <input
+                type="text"
+                id="businessName"
+                class="form-control"
+                placeholder="e.g., Vaughn's Shomai Rice"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label>Owner Name <span class="required">*</span></label>
+              <input
+                type="text"
+                id="ownerName"
+                class="form-control"
+                placeholder="e.g., Vaughn Evangelista"
+                required
+              />
+            </div>
+
+            <div style="margin-top: 24px">
+              <label
+                style="
+                  font-weight: 600;
+                  font-size: 16px;
+                  display: block;
+                  border-bottom: 2px solid #e5e7eb;
+                  padding-bottom: 8px;
+                  margin-bottom: 12px;
+                "
+                >Products Catalog</label
+              >
+              <div id="productsContainer">
+                <!-- Product blocks will be injected here -->
+              </div>
+              <button
+                type="button"
+                class="btn-add-product"
+                onclick="addProductBlock()"
+              >
+                <i class="fa-solid fa-plus"></i> Add Another Product
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn-ghost"
+            onclick="closeModal('applicationFormModal')"
+          >
+            Cancel
+          </button>
+          <button class="btn-primary" type="submit" form="vendorForm">
+            Save Application
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- View Details Modal -->
+    <div class="modal-backdrop" id="detailsModal">
+      <div class="modal-panel">
+        <div class="modal-header">
+          <h2>Application Details</h2>
+          <button class="btn-close" onclick="closeModal('detailsModal')">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="detail-grid">
+            <div class="detail-item">
+              <span class="detail-label">Status</span>
+              <span class="badge" id="detStatusHtml"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Date Submitted</span>
+              <span class="detail-value" id="detDate"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Business Name</span>
+              <span class="detail-value" id="detBusiness"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Owner Name</span>
+              <span class="detail-value" id="detOwner"></span>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 24px">
+            <span
+              class="detail-label"
+              style="
+                font-size: 14px;
+                border-bottom: 1px solid #e5e7eb;
+                padding-bottom: 8px;
+                margin-bottom: 16px;
+              "
+              >Products Included</span
+            >
+            <div id="detProductsContainer">
+              <!-- Products rendered here -->
+            </div>
+          </div>
+
+          <div id="adminFeedbackSection" style="display: none">
+            <span class="detail-label">Admin Remarks</span>
+            <div class="feedback-box" id="detFeedbackBox"></div>
+          </div>
+        </div>
+        <div class="modal-footer" id="detailsFooter">
+          <!-- Dynamic buttons based on status -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Confirm/Input Modal -->
+    <div class="modal-backdrop" id="actionModal">
+      <div class="modal-panel" style="max-width: 450px;">
+        <div class="modal-header">
+          <h2 id="actionModalTitle">Action</h2>
+          <button class="btn-close" onclick="closeModal('actionModal')">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p id="actionModalDesc" style="margin-top:0; font-size:14px; color:#4b5563; margin-bottom:16px;"></p>
+          <div class="form-group" id="actionInputGroup">
+            <label id="actionInputLabel">Reason / Instructions <span class="required">*</span></label>
+            <textarea id="actionInput" class="form-control" rows="3" placeholder="Enter message here..." required></textarea>
+            <span id="actionErrorText" style="color:#ef4444; font-size:12px; margin-top:4px; display:none;">This field is required.</span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost" onclick="closeModal('actionModal')">Cancel</button>
+          <button class="btn-primary" id="actionSubmitBtn" onclick="submitAction()">Submit</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ==========================================
+         JAVASCRIPT
+         ========================================== -->
+    <script>
+      let applications = [
+        {
+          id: "APP-1001",
+          business: "Vaughn's Shomai Rice (New Location)",
+          owner: "Vaughn Evangelista",
+          products: [
+            {
+              name: "Shomai Rice",
+              ingredients: "Pork, Wrapper, Rice, Chili Oil, Soy Sauce",
+            },
+            {
+              name: "Pork Sisig",
+              ingredients: "Pork Face, Calamansi, Onions, Chilis, Egg",
+            },
+          ],
+          status: "pending",
+          date: "March 15, 2026",
+          feedback: "",
+        },
+        {
+          id: "APP-1002",
+          business: "Vaughn's Sweet Treats",
+          owner: "Vaughn Evangelista",
+          products: [
+            {
+              name: "Brownies",
+              ingredients: "Flour, Sugar, Cocoa Powder, Butter, Eggs",
+            },
+            {
+              name: "Chocolate Chip Cookies",
+              ingredients: "Flour, Sugar, Chocolate Chips, Baking Soda",
+            },
+          ],
+          status: "review",
+          date: "March 12, 2026",
+          feedback: "",
+        },
+        {
+          id: "APP-1003",
+          business: "Vaughn's Refreshments",
+          owner: "Vaughn Evangelista",
+          products: [
+            {
+              name: "Mango Shake",
+              ingredients: "Fresh Mango, Ice, Milk, Sugar",
+            },
+          ],
+          status: "approved",
+          date: "March 1, 2026",
+          feedback:
+            "Everything looks great! Please proceed to the Admin building to claim your vendor pass.",
+        },
+        {
+          id: "APP-1004",
+          business: "Vaughn's Kwek-Kwek Stand",
+          owner: "Vaughn Evangelista",
+          products: [
+            {
+              name: "Kwek-Kwek",
+              ingredients: "Quail Eggs, Flour mix, Orange Food Color, Oil",
+            },
+          ],
+          status: "rejected",
+          date: "February 20, 2026",
+          feedback:
+            "Application denied. We currently have too many vendors selling deep-fried street food items in this sector.",
+        },
+      ];
+
+      let currentViewId = null;
+      let currentTab = 'pending';
+      let currentPage = 1;
+      const itemsPerPage = 5;
+
+      let actionState = { id: null, type: null };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        renderList();
+      });
+
+      function switchTab(tab) {
+        currentTab = tab;
+        currentPage = 1;
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById(`tab-${tab}`).classList.add('active');
+        renderList();
+      }
+
+      function renderList() {
+        const pendingCount = applications.filter(a => a.status === 'pending').length;
+        const activeCount = applications.filter(a => a.status === 'approved').length;
+        document.getElementById('totalPendingCount').innerText = pendingCount;
+        document.getElementById('totalActiveCount').innerText = activeCount;
+
+        const listDiv = document.getElementById("applicationsList");
+        listDiv.innerHTML = "";
+
+        const filtered = applications.filter(app => app.status === currentTab);
+
+        const totalItems = filtered.length;
+        const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+        if (currentPage > totalPages) currentPage = totalPages;
+
+        const startIdx = (currentPage - 1) * itemsPerPage;
+        const endIdx = startIdx + itemsPerPage;
+        const paginatedApps = filtered.slice(startIdx, endIdx);
+
+        if (paginatedApps.length === 0) {
+          listDiv.innerHTML = `<div style="padding: 24px; text-align: center; color: #6b7280; background: white; border: 1px dashed #e5e7eb; border-radius: 12px;">No applications found in this category.</div>`;
+        }
+
+        paginatedApps.forEach((app) => {
+          const item = document.createElement("div");
+          item.className = `application-item ${app.status}`;
+          item.onclick = () => openDetails(app.id);
+
+          let statusText = "";
+          switch (app.status) {
+            case "pending": statusText = "Pending Review"; break;
+            case "review": statusText = "Under Review"; break;
+            case "approved": statusText = "Active Vendor"; break;
+            case "rejected": statusText = "Not Approved"; break;
+          }
+
+          const productNames = app.products.map((p) => p.name).join(", ");
+          
+          let actionButtonHtml = "";
+          if (app.status === 'approved') {
+              actionButtonHtml = `<button class="btn-danger" style="margin-left:auto; padding: 6px 12px; font-size: 12px;" onclick="event.stopPropagation(); requestAction('${app.id}', 'remove')">Remove Access</button>`;
+          }
+
+          item.innerHTML = `
+            <div class="application-header">
+              <h3>${app.business}</h3>
+              <span class="badge ${app.status}">${statusText}</span>
+            </div>
+            <p class="application-product"><strong>Products:</strong> ${productNames}</p>
+            <div class="application-footer" style="display:flex; align-items:center;">
+              <span>Submitted: ${app.date}</span>
+              ${actionButtonHtml}
+              <span class="view-details-text" style="${app.status === 'approved' ? 'margin-left: 12px;' : 'margin-left:auto;'}">View Details <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          `;
+          listDiv.appendChild(item);
+        });
+
+        renderPagination(totalPages);
+      }
+
+      function renderPagination(totalPages) {
+        const pagDiv = document.getElementById("paginationControls");
+        if (totalPages <= 1) {
+          pagDiv.style.display = "none";
+          return;
+        }
+        pagDiv.style.display = "flex";
+        pagDiv.innerHTML = "";
+
+        const prevBtn = document.createElement("button");
+        prevBtn.className = "page-btn";
+        prevBtn.disabled = currentPage === 1;
+        prevBtn.innerHTML = '<i class="fa-solid fa-chevron-left"></i> Prev';
+        prevBtn.onclick = () => { if(currentPage > 1) { currentPage--; renderList(); } };
+        pagDiv.appendChild(prevBtn);
+
+        const pageIndicator = document.createElement("span");
+        pageIndicator.style.margin = "0 12px";
+        pageIndicator.style.fontSize = "14px";
+        pageIndicator.style.fontWeight = "500";
+        pageIndicator.innerText = `Page ${currentPage} of ${totalPages}`;
+        pagDiv.appendChild(pageIndicator);
+
+        const nextBtn = document.createElement("button");
+        nextBtn.className = "page-btn";
+        nextBtn.disabled = currentPage === totalPages;
+        nextBtn.innerHTML = 'Next <i class="fa-solid fa-chevron-right"></i>';
+        nextBtn.onclick = () => { if(currentPage < totalPages) { currentPage++; renderList(); } };
+        pagDiv.appendChild(nextBtn);
+      }
+
+      function openModal(id) {
+        document.getElementById(id).classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal(id) {
+        document.getElementById(id).classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+
+      function openDetails(id) {
+        currentViewId = id;
+        const app = applications.find((x) => x.id === id);
+        if (!app) return;
+
+        let statusText = "";
+        switch (app.status) {
+          case "pending": statusText = "Pending Review"; break;
+          case "review": statusText = "Under Review"; break;
+          case "approved": statusText = "Active Vendor"; break;
+          case "rejected": statusText = "Not Approved"; break;
+        }
+
+        document.getElementById("detStatusHtml").className = `badge ${app.status}`;
+        document.getElementById("detStatusHtml").innerText = statusText;
+        document.getElementById("detDate").innerText = app.date;
+        document.getElementById("detBusiness").innerText = app.business;
+        document.getElementById("detOwner").innerText = app.owner;
+
+        const detProductsContainer = document.getElementById("detProductsContainer");
+        detProductsContainer.innerHTML = "";
+        app.products.forEach((prod) => {
+          const wrap = document.createElement("div");
+          wrap.className = "det-product-block";
+          wrap.innerHTML = `
+              <div class="det-product-title"><i class="fa-solid fa-box"></i> ${prod.name}</div>
+              <details class="product-details-dropdown" open>
+                <summary>Ingredients Provided</summary>
+                <div class="dropdown-content">
+                  <p style="margin: 0; line-height: 1.5; color: #4b5563;">${prod.ingredients}</p>
+                </div>
+              </details>
+              <details class="product-details-dropdown">
+                <summary>Step-by-Step Preparation Photos</summary>
+                <div class="dropdown-content">
+                  <div style="background: #f3f4f6; border-radius: 8px; padding: 24px; text-align: center; color: #9ca3af;">
+                    <i class="fa-regular fa-images" style="font-size: 24px;"></i>
+                    <p style="margin: 8px 0 0 0; font-size: 13px;">Photos securely attached to submission.</p>
+                  </div>
+                </div>
+              </details>
+           `;
+          detProductsContainer.appendChild(wrap);
+        });
+
+        const fbSection = document.getElementById("adminFeedbackSection");
+        const fbBox = document.getElementById("detFeedbackBox");
+        if (app.status === "approved" || app.status === "rejected") {
+          fbSection.style.display = "block";
+          fbBox.innerText = app.feedback || 'No remarks provided.';
+          fbBox.className = `feedback-box ${app.status}`;
+        } else {
+          fbSection.style.display = "none";
+        }
+
+        const footer = document.getElementById("detailsFooter");
+        footer.innerHTML = `<button class="btn-ghost" onclick="closeModal('detailsModal')">Close</button>`;
+
+        if (app.status === "pending" || app.status === "review") {
+          if (app.status === "pending") {
+              footer.innerHTML += `<button class="btn-primary" style="background:#0284c7; border-color:#0284c7;" onclick="requestAction('${app.id}', 'review')">Mark Under Review</button>`;
+          }
+          footer.innerHTML += `
+            <button class="btn-primary" style="background:#059669; border-color:#059669;" onclick="requestAction('${app.id}', 'approve')">Approve</button>
+            <button class="btn-danger" onclick="requestAction('${app.id}', 'reject')">Reject</button>
+          `;
+        } else if (app.status === "approved") {
+          footer.innerHTML += `<button class="btn-danger" onclick="requestAction('${app.id}', 'remove')">Remove Access</button>`;
+        }
+
+        openModal("detailsModal");
+      }
+
+      function requestAction(id, type) {
+        actionState = { id, type };
+        document.getElementById("actionInput").value = "";
+        document.getElementById("actionErrorText").style.display = "none";
+        
+        let title = "";
+        let desc = "";
+
+        if (type === 'approve') {
+          title = "Approve Application";
+          desc = "Please provide instructions for the approved student (e.g., where to claim the pass).";
+        } else if (type === 'reject') {
+          title = "Reject Application";
+          desc = "Please provide the reason for rejection.";
+        } else if (type === 'review') {
+          if (confirm("Mark this application as 'Under Review'?")) {
+             processAction();
+          }
+          return;
+        } else if (type === 'remove') {
+          if (confirm("Are you sure you want to revoke this vendor's access? This will move them to the Rejected list.")) {
+             processAction(true);
+          }
+          return;
+        }
+
+        document.getElementById("actionModalTitle").innerText = title;
+        document.getElementById("actionModalDesc").innerText = desc;
+        openModal('actionModal');
+      }
+
+      function submitAction() {
+         const input = document.getElementById("actionInput").value.trim();
+         if (!input) {
+            document.getElementById("actionErrorText").style.display = "block";
+            return;
+         }
+         processAction(false, input);
+      }
+
+      function processAction(skipInput = false, inputVal = "") {
+        const app = applications.find(x => x.id === actionState.id);
+        if (!app) return;
+
+        if (actionState.type === 'approve') {
+          app.status = 'approved';
+          app.feedback = inputVal;
+          showToast("Application approved.");
+        } else if (actionState.type === 'reject') {
+          app.status = 'rejected';
+          app.feedback = inputVal;
+          showToast("Application rejected.");
+        } else if (actionState.type === 'review') {
+          app.status = 'review';
+          showToast("Application marked as Under Review.");
+        } else if (actionState.type === 'remove') {
+          app.status = 'rejected';
+          app.feedback = "Vendor privileges have been revoked by Admin.";
+          showToast("Vendor access revoked.");
+        }
+
+        closeModal('actionModal');
+        closeModal('detailsModal');
+        
+        if (actionState.type === 'review') {
+           switchTab('review');
+        } else if (actionState.type === 'approve') {
+           switchTab('approved');
+        } else if (actionState.type === 'reject' || actionState.type === 'remove') {
+           switchTab('rejected');
+        } else {
+           renderList();
+        }
+      }
+
+      function showToast(message) {
+        const container = document.getElementById("toastContainer");
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> ${message}`;
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.opacity = "0";
+          toast.style.transform = "translateX(100%)";
+          setTimeout(() => toast.remove(), 300);
+        }, 3000);
+      }
+    </script>
   </body>
 </html>
