@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../../css/navbar.css" />
     <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css" />
     <link rel="stylesheet" href="../../css/admin-css/student-applications.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
@@ -142,6 +143,24 @@
                 <p style="margin: 0; color: #64748b; font-size: 14px; font-weight: 500;">Active Vendors</p>
                 <h3 id="countActive" style="margin: 4px 0 0; color: #0f172a; font-size: 24px; font-weight: 700;">0</h3>
               </div>
+            </div>
+          </div>
+
+          <!-- APPLICATION ANALYTICS CHART -->
+          <div class="revenue-section" style="margin-bottom: 24px;">
+            <div class="revenue-header">
+              <div class="revenue-title">
+                <h2><i class="fa-solid fa-chart-line color-purple"></i> Application Performance</h2>
+                <p>Trend of submitted, approved, and rejected applications</p>
+              </div>
+              <div class="revenue-controls filter-tabs">
+                <button class="filter-tab active" data-range="daily">Daily</button>
+                <button class="filter-tab" data-range="weekly">Weekly</button>
+                <button class="filter-tab" data-range="monthly">Monthly</button>
+              </div>
+            </div>
+            <div class="chart-container" style="position: relative; height:300px; width:100%; margin-top:1.5rem;">
+              <canvas id="applicationChart"></canvas>
             </div>
           </div>
 

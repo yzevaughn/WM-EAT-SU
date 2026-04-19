@@ -515,4 +515,135 @@ document.addEventListener("DOMContentLoaded", function() {
     // Initialize
     updateStats();
     renderComplaints();
+    initComplaintsChart();
 });
+
+/* ========================================================
+ * COMPLAINTS CHART LOGIC
+ * ======================================================== */
+function initComplaintsChart() {
+    const ctx = document.getElementById("complaintsChart");
+    if (!ctx) return;
+
+    const chartData = {
+        daily: {
+            labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            total: [4, 6, 3, 8, 5, 2, 1],
+            resolved: [2, 4, 3, 5, 4, 1, 1],
+            pending: [2, 2, 0, 3, 1, 1, 0],
+        },
+        weekly: {
+            labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+            total: [28, 35, 30, 42],
+            resolved: [20, 25, 28, 35],
+            pending: [8, 10, 2, 7],
+        },
+        monthly: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            total: [120, 140, 130, 150, 160, 155, 145, 150, 170, 180, 175, 190],
+            resolved: [100, 110, 115, 125, 135, 140, 130, 135, 145, 160, 165, 170],
+            pending: [20, 30, 15, 25, 25, 15, 15, 15, 25, 20, 10, 20],
+        },
+    };
+
+    const compChart = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: chartData.daily.labels,
+            datasets: [
+                {
+                    label: "Reported",
+                    data: chartData.daily.total,
+                    borderColor: "#3b82f6",
+                    backgroundColor: "rgba(59, 130, 246, 0.1)",
+                    borderWidth: 2,
+                    pointBackgroundColor: "#fff",
+                    pointBorderColor: "#3b82f6",
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    fill: true,
+                    tension: 0.4,
+                },
+                {
+                    label: "Resolved",
+                    data: chartData.daily.resolved,
+                    borderColor: "#22c55e",
+                    backgroundColor: "rgba(34, 197, 94, 0.1)",
+                    borderWidth: 2,
+                    pointBackgroundColor: "#fff",
+                    pointBorderColor: "#22c55e",
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    fill: true,
+                    tension: 0.4,
+                },
+                {
+                    label: "Pending",
+                    data: chartData.daily.pending,
+                    borderColor: "#f59e42",
+                    backgroundColor: "rgba(245, 158, 66, 0.1)",
+                    borderWidth: 2,
+                    pointBackgroundColor: "#fff",
+                    pointBorderColor: "#f59e42",
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    fill: true,
+                    tension: 0.4,
+                },
+            ],
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: "top",
+                    align: "end",
+                    labels: {
+                        boxWidth: 10,
+                        usePointStyle: true,
+                        pointStyle: "circle",
+                        font: { family: "'Inter', sans-serif", size: 12 },
+                    },
+                },
+                tooltip: {
+                    backgroundColor: "#1e293b",
+                    padding: 12,
+                    titleFont: { size: 13, family: "'Inter', sans-serif" },
+                    bodyFont: { size: 14, family: "'Inter', sans-serif" },
+                },
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: "#f1f5f9", drawBorder: false },
+                    ticks: { font: { family: "'Inter', sans-serif", size: 11 }, color: "#64748b" },
+                },
+                x: {
+                    grid: { display: false, drawBorder: false },
+                    ticks: { font: { family: "'Inter', sans-serif", size: 11 }, color: "#64748b" },
+                },
+            },
+            interaction: { intersect: false, mode: "index" },
+        },
+    });
+
+    // Handle Range Toggles
+    const toggles = document.querySelectorAll(".revenue-controls .filter-tab");
+    toggles.forEach((btn) => {
+        btn.addEventListener("click", function () {
+            toggles.forEach((t) => t.classList.remove("active"));
+            this.classList.add("active");
+
+            const range = this.getAttribute("data-range");
+            const targetData = chartData[range];
+
+            compChart.data.labels = targetData.labels;
+            compChart.data.datasets[0].data = targetData.total;
+            compChart.data.datasets[1].data = targetData.resolved;
+            compChart.data.datasets[2].data = targetData.pending;
+            compChart.update();
+        });
+    });
+}

@@ -108,7 +108,138 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initial render
   renderTable();
+  initApplicationChart();
 });
+
+/* ========================================================
+ * APPLICATION CHART LOGIC
+ * ======================================================== */
+function initApplicationChart() {
+  const ctx = document.getElementById("applicationChart");
+  if (!ctx) return;
+
+  const chartData = {
+    daily: {
+      labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      submitted: [5, 8, 4, 10, 12, 3, 2],
+      approved: [3, 5, 2, 7, 8, 2, 1],
+      rejected: [1, 2, 1, 2, 3, 1, 0],
+    },
+    weekly: {
+      labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+      submitted: [45, 52, 48, 60],
+      approved: [30, 38, 35, 42],
+      rejected: [10, 12, 9, 15],
+    },
+    monthly: {
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      submitted: [150, 180, 165, 200, 220, 210, 190, 205, 230, 250, 240, 260],
+      approved: [110, 130, 120, 150, 165, 155, 140, 150, 170, 190, 180, 195],
+      rejected: [30, 40, 35, 45, 40, 42, 38, 45, 50, 55, 48, 55],
+    },
+  };
+
+  const appChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: chartData.daily.labels,
+      datasets: [
+        {
+          label: "Submitted",
+          data: chartData.daily.submitted,
+          borderColor: "#a855f7",
+          backgroundColor: "rgba(168, 85, 247, 0.1)",
+          borderWidth: 2,
+          pointBackgroundColor: "#fff",
+          pointBorderColor: "#a855f7",
+          pointBorderWidth: 2,
+          pointRadius: 4,
+          fill: true,
+          tension: 0.4,
+        },
+        {
+          label: "Approved",
+          data: chartData.daily.approved,
+          borderColor: "#22c55e",
+          backgroundColor: "rgba(34, 197, 94, 0.1)",
+          borderWidth: 2,
+          pointBackgroundColor: "#fff",
+          pointBorderColor: "#22c55e",
+          pointBorderWidth: 2,
+          pointRadius: 4,
+          fill: true,
+          tension: 0.4,
+        },
+        {
+          label: "Rejected",
+          data: chartData.daily.rejected,
+          borderColor: "#ef4444",
+          backgroundColor: "rgba(239, 68, 68, 0.1)",
+          borderWidth: 2,
+          pointBackgroundColor: "#fff",
+          pointBorderColor: "#ef4444",
+          pointBorderWidth: 2,
+          pointRadius: 4,
+          fill: true,
+          tension: 0.4,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          position: "top",
+          align: "end",
+          labels: {
+            boxWidth: 10,
+            usePointStyle: true,
+            pointStyle: "circle",
+            font: { family: "'Inter', sans-serif", size: 12 },
+          },
+        },
+        tooltip: {
+          backgroundColor: "#1e293b",
+          padding: 12,
+          titleFont: { size: 13, family: "'Inter', sans-serif" },
+          bodyFont: { size: 14, family: "'Inter', sans-serif" },
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: { color: "#f1f5f9", drawBorder: false },
+          ticks: { font: { family: "'Inter', sans-serif", size: 11 }, color: "#64748b" },
+        },
+        x: {
+          grid: { display: false, drawBorder: false },
+          ticks: { font: { family: "'Inter', sans-serif", size: 11 }, color: "#64748b" },
+        },
+      },
+      interaction: { intersect: false, mode: "index" },
+    },
+  });
+
+  // Handle Range Toggles
+  const toggles = document.querySelectorAll(".revenue-controls .filter-tab");
+  toggles.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      toggles.forEach((t) => t.classList.remove("active"));
+      this.classList.add("active");
+
+      const range = this.getAttribute("data-range");
+      const targetData = chartData[range];
+
+      appChart.data.labels = targetData.labels;
+      appChart.data.datasets[0].data = targetData.submitted;
+      appChart.data.datasets[1].data = targetData.approved;
+      appChart.data.datasets[2].data = targetData.rejected;
+      appChart.update();
+    });
+  });
+}
 
 // Helper functions for filtering and sorting
 function getFilteredAndSortedData() {

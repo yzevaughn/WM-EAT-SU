@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css" />
   <link rel="stylesheet" href="../../css/admin-css/student-applications.css" />
   <link rel="stylesheet" href="../../css/admin-css/complaints.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -125,6 +126,24 @@
               <p>Closed</p>
               <h3 class="card-value">0</h3>
             </div>
+          </div>
+        </div>
+
+        <!-- COMPLAINTS ANALYTICS CHART -->
+        <div class="revenue-section" style="margin-bottom: 24px;">
+          <div class="revenue-header">
+            <div class="revenue-title">
+              <h2><i class="fa-solid fa-chart-line color-purple"></i> Complaints Overview</h2>
+              <p>Analysis of reported, resolved, and pending issues over time</p>
+            </div>
+            <div class="revenue-controls filter-tabs">
+              <button class="filter-tab active" data-range="daily">Daily</button>
+              <button class="filter-tab" data-range="weekly">Weekly</button>
+              <button class="filter-tab" data-range="monthly">Monthly</button>
+            </div>
+          </div>
+          <div class="chart-container" style="position: relative; height:300px; width:100%; margin-top:1.5rem;">
+            <canvas id="complaintsChart"></canvas>
           </div>
         </div>
 

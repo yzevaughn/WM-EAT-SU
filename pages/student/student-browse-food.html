@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WM EAT SU — Browse Food</title>
+    <meta
+      name="description"
+      content="Browse delicious food from campus vendors or explore all student canteens on WM EAT SU."
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -78,7 +82,10 @@
               <a href="student-vendor-applications.html" class="dropdown-item">
                 <i class="fa-solid fa-rss"></i><span>Vendor Applications</span>
               </a>
-              <a href="../../index.html" class="dropdown-item dropdown-item--danger">
+              <a
+                href="../../index.html"
+                class="dropdown-item dropdown-item--danger"
+              >
                 <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
               </a>
             </div>
@@ -94,8 +101,6 @@
     <div class="layout">
       <!-- ── SIDEBAR ── -->
       <div class="left-nav" id="sidebar">
-        <!-- logo shown on mobile inside sidebar -->
-
         <ul class="nav-list">
           <li>
             <a href="student-dashboard.html" class="nav-link">
@@ -125,39 +130,98 @@
           </li>
         </ul>
       </div>
+
       <!-- MAIN -->
       <div class="main-content">
         <div class="browse-food-section">
+          <!-- PAGE HEADER -->
           <div class="browse-header">
-            <h2>Browse Food</h2>
-            <p>Discover delicious meals from our campus vendors</p>
+            <h2 id="pageTitle">Browse Food</h2>
+            <p id="pageSubtitle">
+              Discover delicious meals from our campus vendors
+            </p>
           </div>
 
-          <div class="search-container">
-            <div class="search-bar">
-              <i class="fa-solid fa-search search-icon"></i>
-              <input
-                type="text"
-                placeholder="Search for food or vendor..."
-                class="search-input"
-                id="searchInput"
-              />
+          <!-- ── FOOD / SHOPS TOGGLE ── -->
+          <div class="view-toggle-wrapper">
+            <div class="view-toggle" role="tablist">
+              <button
+                class="toggle-btn active"
+                id="toggleFood"
+                role="tab"
+                aria-selected="true"
+                aria-controls="view-food"
+              >
+                <i class="fa-solid fa-utensils"></i> Food
+              </button>
+              <button
+                class="toggle-btn"
+                id="toggleShops"
+                role="tab"
+                aria-selected="false"
+                aria-controls="view-shops"
+              >
+                <i class="fa-solid fa-store"></i> Shops
+              </button>
             </div>
           </div>
 
-          <div class="category-filters">
-            <button class="filter-btn active" data-cat="all">All</button>
-            <button class="filter-btn" data-cat="meals">Meals</button>
-            <button class="filter-btn" data-cat="snacks">Snacks</button>
-            <button class="filter-btn" data-cat="drinks">Drinks</button>
-            <button class="filter-btn" data-cat="desserts">Desserts</button>
-            <button class="filter-btn" data-cat="healthy">Healthy</button>
+          <!-- ══════ FOOD VIEW ══════ -->
+          <div id="view-food" role="tabpanel">
+            <div class="search-container">
+              <div class="search-bar">
+                <i class="fa-solid fa-search search-icon"></i>
+                <input
+                  type="text"
+                  placeholder="Search for food..."
+                  class="search-input"
+                  id="searchInput"
+                />
+              </div>
+            </div>
+
+            <div class="category-filters">
+              <button class="filter-btn active" data-cat="all">All</button>
+              <button class="filter-btn" data-cat="meals">Meals</button>
+              <button class="filter-btn" data-cat="snacks">Snacks</button>
+              <button class="filter-btn" data-cat="drinks">Drinks</button>
+              <button class="filter-btn" data-cat="desserts">Desserts</button>
+              <button class="filter-btn" data-cat="healthy">Healthy</button>
+            </div>
+
+            <div class="food-grid" id="foodGrid"></div>
+
+            <!-- PAGINATION -->
+            <div class="pagination" id="pagination"></div>
           </div>
 
-          <div class="food-grid" id="foodGrid"></div>
+          <!-- ══════ SHOPS VIEW ══════ -->
+          <div id="view-shops" role="tabpanel" style="display: none">
+            <div class="search-container">
+              <div class="search-bar">
+                <i class="fa-solid fa-search search-icon"></i>
+                <input
+                  type="text"
+                  placeholder="Search shops or vendor..."
+                  class="search-input"
+                  id="shopSearchInput"
+                />
+              </div>
+            </div>
 
-          <!-- PAGINATION -->
-          <div class="pagination" id="pagination"></div>
+            <div class="category-filters" id="shopCategoryFilters">
+              <button class="filter-btn active" data-shopcat="all">All</button>
+              <button class="filter-btn" data-shopcat="Meals">Meals</button>
+              <button class="filter-btn" data-shopcat="Snacks">Snacks</button>
+              <button class="filter-btn" data-shopcat="Drinks">Drinks</button>
+              <button class="filter-btn" data-shopcat="Desserts">
+                Desserts
+              </button>
+              <button class="filter-btn" data-shopcat="Healthy">Healthy</button>
+            </div>
+
+            <div class="shop-grid" id="shopGrid"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -214,7 +278,7 @@
     <div id="toast-container"></div>
 
     <script>
-      /* ─────────── DATA ─────────── */
+      /* ─────────── DATA — FOODS ─────────── */
       const foods = [
         {
           id: 1,
@@ -373,12 +437,135 @@
         },
       ];
 
+      /* ─────────── DATA — SHOPS ─────────── */
+      const shops = [
+        {
+          id: 1,
+          name: "Mang Tino's Canteen",
+          category: "Meals",
+          img: "../../images/silog.avif",
+          rating: 4.5,
+          foodIds: [1, 2],
+        },
+        {
+          id: 2,
+          name: "Street Bites Corner",
+          category: "Snacks",
+          img: "../../images/kwek.jpg",
+          rating: 4.7,
+          foodIds: [3, 5],
+        },
+        {
+          id: 3,
+          name: "Sip & Chill Beverages",
+          category: "Drinks",
+          img: "../../images/milktea.avif",
+          rating: 4.8,
+          foodIds: [4, 6],
+        },
+        {
+          id: 4,
+          name: "Sweet Tooth Desserts",
+          category: "Desserts",
+          img: "../../images/halo.avif",
+          rating: 4.6,
+          foodIds: [],
+        },
+        {
+          id: 5,
+          name: "Green Bowl — Healthy Eats",
+          category: "Healthy",
+          img: "../../images/pancit.avif",
+          rating: 4.9,
+          foodIds: [],
+        },
+        {
+          id: 6,
+          name: "Campus Pizza Hub",
+          category: "Meals",
+          img: "../../images/pizza.avif",
+          rating: 4.4,
+          foodIds: [],
+        },
+      ];
+
       /* ─────────── STATE ─────────── */
       const PER_PAGE = 4;
       let filtered = [...foods];
       let page = 1;
       let activeCat = "all";
       let activeFood = null;
+      let activeView = "food"; // 'food' | 'shops'
+      let activeShopCat = "all";
+      let filteredShops = [...shops];
+
+      /* ─────────── HELPERS ─────────── */
+      function starHtml(r) {
+        let h = "";
+        const full = Math.floor(r);
+        const half = r % 1 >= 0.5;
+        for (let i = 0; i < full; i++) h += '<i class="fa-solid fa-star"></i>';
+        if (half) h += '<i class="fa-solid fa-star-half-stroke"></i>';
+        return h;
+      }
+
+      const catBadgeClass = {
+        Meals: "meals",
+        Snacks: "snacks",
+        Drinks: "drinks",
+        Desserts: "desserts",
+        Healthy: "healthy",
+      };
+
+      /* ─────────── TOGGLE ─────────── */
+      document
+        .getElementById("toggleFood")
+        .addEventListener("click", () => switchView("food"));
+      document
+        .getElementById("toggleShops")
+        .addEventListener("click", () => switchView("shops"));
+
+      function switchView(view) {
+        activeView = view;
+
+        const foodView = document.getElementById("view-food");
+        const shopsView = document.getElementById("view-shops");
+        const btnFood = document.getElementById("toggleFood");
+        const btnShops = document.getElementById("toggleShops");
+        const title = document.getElementById("pageTitle");
+        const subtitle = document.getElementById("pageSubtitle");
+
+        if (view === "food") {
+          foodView.style.display = "";
+          shopsView.style.display = "none";
+          btnFood.classList.add("active");
+          btnShops.classList.remove("active");
+          btnFood.setAttribute("aria-selected", "true");
+          btnShops.setAttribute("aria-selected", "false");
+          title.textContent = "Browse Food";
+          subtitle.textContent =
+            "Discover delicious meals from our campus vendors";
+        } else {
+          foodView.style.display = "none";
+          shopsView.style.display = "";
+          btnFood.classList.remove("active");
+          btnShops.classList.add("active");
+          btnFood.setAttribute("aria-selected", "false");
+          btnShops.setAttribute("aria-selected", "true");
+          title.textContent = "Browse Shops";
+          subtitle.textContent =
+            "Explore all student vendor canteens and businesses";
+          renderShops();
+        }
+      }
+
+      /* ─────────── READ URL PARAM ON LOAD ─────────── */
+      (function () {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("tab") === "shops") switchView("shops");
+      })();
+
+      /* ════════════ FOOD SECTION ════════════ */
 
       /* ─────────── RENDER GRID ─────────── */
       function renderGrid() {
@@ -538,11 +725,11 @@
         );
       };
 
-      /* ─────────── FILTERS ─────────── */
-      document.querySelectorAll(".filter-btn").forEach((btn) => {
+      /* ─────────── FOOD FILTERS ─────────── */
+      document.querySelectorAll(".filter-btn[data-cat]").forEach((btn) => {
         btn.addEventListener("click", () => {
           document
-            .querySelectorAll(".filter-btn")
+            .querySelectorAll(".filter-btn[data-cat]")
             .forEach((b) => b.classList.remove("active"));
           btn.classList.add("active");
           activeCat = btn.dataset.cat;
@@ -568,6 +755,95 @@
         renderGrid();
       }
 
+      /* ════════════ SHOPS SECTION ════════════ */
+
+      /* ─────────── RENDER SHOPS ─────────── */
+      function renderShops() {
+        const grid = document.getElementById("shopGrid");
+
+        if (filteredShops.length === 0) {
+          grid.innerHTML =
+            '<p style="color:#94a3b8;padding:60px 20px;text-align:center;grid-column:1/-1;font-size:15px;background:#f8fafc;border-radius:16px;border:1.5px dashed #e2e8f0;">No shops found.</p>';
+          return;
+        }
+
+        grid.innerHTML = filteredShops
+          .map((s) => {
+            const itemCount = s.foodIds.length;
+            const catClass = catBadgeClass[s.category] || "meals";
+            return `
+              <a
+                class="shop-card"
+                href="student-shop-details.html?id=${s.id}"
+                id="shop-card-${s.id}"
+                aria-label="View ${s.name}"
+              >
+                <div class="shop-card-image">
+                  <img
+                    src="${s.img}"
+                    alt="${s.name}"
+                    onerror="this.src='https://placehold.co/400x175/f8f9fa/94a3b8?text=${encodeURIComponent(s.name)}'"
+                  />
+                  <div class="shop-card-image-overlay"></div>
+                  <span class="shop-cat-badge ${catClass}">${s.category}</span>
+                  <div class="shop-card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </div>
+                <div class="shop-card-body">
+                  <div class="shop-card-name">${s.name}</div>
+                  <div class="shop-card-meta">
+                    <div class="shop-card-rating">
+                      <i class="fa-solid fa-star"></i>
+                      ${s.rating.toFixed(1)}
+                    </div>
+                    <div class="shop-card-items">
+                      <i class="fa-solid fa-bowl-food"></i>
+                      ${itemCount} item${itemCount !== 1 ? "s" : ""}
+                    </div>
+                  </div>
+                  <div class="shop-card-divider"></div>
+                  <div class="shop-card-cta">
+                    <span class="shop-card-cta-text">View Menu</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                  </div>
+                </div>
+              </a>
+            `;
+          })
+          .join("");
+      }
+
+      /* ─────────── SHOP FILTERS ─────────── */
+      document.querySelectorAll(".filter-btn[data-shopcat]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn[data-shopcat]")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          activeShopCat = btn.dataset.shopcat;
+          applyShopFilters();
+        });
+      });
+
+      document
+        .getElementById("shopSearchInput")
+        .addEventListener("input", applyShopFilters);
+
+      function applyShopFilters() {
+        const q = document
+          .getElementById("shopSearchInput")
+          .value.toLowerCase();
+        filteredShops = shops.filter((s) => {
+          const matchCat =
+            activeShopCat === "all" || s.category === activeShopCat;
+          const matchQ =
+            !q ||
+            s.name.toLowerCase().includes(q) ||
+            s.category.toLowerCase().includes(q);
+          return matchCat && matchQ;
+        });
+        renderShops();
+      }
+
       /* ─────────── TOAST ─────────── */
       function showToast(type, icon, msg) {
         const el = document.createElement("div");
@@ -578,16 +854,6 @@
           el.classList.add("fade-out");
           setTimeout(() => el.remove(), 300);
         }, 3000);
-      }
-
-      /* ─────────── HELPERS ─────────── */
-      function starHtml(r) {
-        let h = "";
-        const full = Math.floor(r);
-        const half = r % 1 >= 0.5;
-        for (let i = 0; i < full; i++) h += '<i class="fa-solid fa-star"></i>';
-        if (half) h += '<i class="fa-solid fa-star-half-stroke"></i>';
-        return h;
       }
 
       /* ─────────── INIT ─────────── */
