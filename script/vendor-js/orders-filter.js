@@ -63,7 +63,7 @@
       subtitle:    "Are you sure you want to <strong>accept</strong> this order? It will move to <strong>Preparing</strong> status.",
       btnClass:    "btn-confirm-accept",
       btnIconClass:"fas fa-check",
-      btnLabel:    "Yes, Accept Order",
+      btnLabel:    "Confirm",
     },
 
     decline: {
@@ -73,7 +73,7 @@
       subtitle:    "Are you sure you want to <strong>decline</strong> this order? It will be marked as <strong>Cancelled</strong>. This cannot be undone.",
       btnClass:    "btn-confirm-decline",
       btnIconClass:"fas fa-times",
-      btnLabel:    "Yes, Decline Order",
+      btnLabel:    "Confirm",
     },
 
     markReady: {
@@ -83,7 +83,7 @@
       subtitle:    "Mark this order as <strong>Ready for Pickup</strong>? The customer will be notified to collect their order.",
       btnClass:    "btn-confirm-ready",
       btnIconClass:"fas fa-bell",
-      btnLabel:    "Yes, Mark Ready",
+      btnLabel:    "Confirm",
     },
 
     complete: {
@@ -93,17 +93,7 @@
       subtitle:    "Mark this order as <strong>Completed</strong>? This confirms the customer has received their order.",
       btnClass:    "btn-confirm-complete",
       btnIconClass:"fas fa-bag-shopping",
-      btnLabel:    "Yes, Complete Order",
-    },
-
-    moveToHistory: {
-      title:       "Move to History",
-      iconClass:   "fa-solid fa-clock-rotate-left",
-      iconColor:   "#8b5cf6",
-      subtitle:    "Move this order to <strong>History</strong>? It will no longer be listed here.",
-      btnClass:    "btn-confirm-history",
-      btnIconClass:"fas fa-arrow-right",
-      btnLabel:    "Yes, Move",
+      btnLabel:    "Confirm",
     },
 
     deleteHistory: {
@@ -113,7 +103,7 @@
       subtitle:    "Are you sure you want to <strong>delete</strong> this order? This action cannot be undone.",
       btnClass:    "btn-confirm-delete",
       btnIconClass:"fas fa-trash",
-      btnLabel:    "Yes, Remove",
+      btnLabel:    "Remove",
     },
   };
 
@@ -140,9 +130,7 @@
       accentClass: "accent-cancelled",
       iconClass:   "fa-solid fa-ban",
       iconBgClass: "ic-cancelled",
-      nextButtons: `<button class="btn-action btn-move-history" data-action="moveToHistory">
-                     <i class="fas fa-arrow-right"></i> Move
-                   </button>`,
+      nextButtons: null,
     },
 
     markReady: {
@@ -152,8 +140,11 @@
       accentClass: "accent-ready",
       iconClass:   "fa-solid fa-check-circle",
       iconBgClass: "ic-ready",
-      nextButtons: `<button class="btn-action btn-complete" data-action="complete">
-                     <i class="fas fa-bag-shopping"></i> Complete
+      nextButtons: `<button class="pickup-btn" data-action="complete">
+                     <i class="fas fa-bag-shopping"></i> Mark as Picked Up
+                   </button>
+                   <button class="view-code-btn open-code-btn" data-code="A7C3">
+                     <i class="fa-solid fa-qrcode"></i> View Pickup Code
                    </button>`,
     },
 
@@ -164,22 +155,9 @@
       accentClass: "accent-completed",
       iconClass:   "fa-solid fa-check-double",
       iconBgClass: "ic-completed",
-      nextButtons: `<button class="btn-action btn-move-history" data-action="moveToHistory">
-                     <i class="fas fa-arrow-right"></i> Move
-                   </button>`,
+      nextButtons: null,
     },
 
-    moveToHistory: {
-      newStatus:   "History",
-      badgeClass:  "history",
-      badgeText:   "History",
-      accentClass: "accent-history",
-      iconClass:   "fa-solid fa-clock-rotate-left",
-      iconBgClass: "ic-history",
-      nextButtons: `<button class="btn-action btn-delete-history" data-action="deleteHistory">
-                     <i class="fas fa-trash"></i> Delete
-                   </button>`,
-    },
   };
 
   /* ── 5. HELPERS ────────────────────────────────────────── */
@@ -193,7 +171,7 @@
   }
 
   function refreshCounts() {
-    ["All","Queue","Preparing","Ready","Completed","Cancelled","History"].forEach((s) => {
+    ["Queue","Preparing","Ready","Completed","Cancelled"].forEach((s) => {
       const badge = document.getElementById("count-" + s);
       if (badge) badge.textContent = countByStatus(s);
     });
@@ -227,14 +205,8 @@
   function getCardDetails(card) {
     const name = card.querySelector(".order-card-title")?.textContent?.trim() || "—";
 
-    const metaSpans = card.querySelectorAll(".order-meta span");
-    const orderId = metaSpans[0]
-      ? [...metaSpans[0].childNodes]
-          .filter((n) => n.nodeType === Node.TEXT_NODE)
-          .map((n) => n.textContent.trim())
-          .join("")
-          .replace(/^#?\s*/, "#")
-      : "—";
+    const idSpan = card.querySelector(".order-id-val");
+    const orderId = idSpan ? idSpan.textContent.trim() : "—";
 
     const items = [...card.querySelectorAll(".order-item-row")]
       .map((r) => r.textContent.trim().replace(/\s{2,}/g, " "))
@@ -269,23 +241,47 @@
     modalSubtitle.innerHTML = cfg.subtitle;
 
     // ── Populate order detail card ─────────────────────────
-    // Styled consistently with the student order modal design
     modalDetail.innerHTML = `
-        <div class="pickup-code-card" style="background: ${cfg.iconColor}">
-          <div class="pickup-code-label">Order ID</div>
-          <div class="pickup-code-value" style="font-size:32px">${det.orderId}</div>
-          <div class="pickup-code-order">Customer: ${det.name}</div>
-        </div>
-        ${det.image ? '<img src="' + det.image + '" class="modal-order-image" alt="Order image" />' : ""}
-        <div class="modal-order-items">
-          <div style="display:flex; justify-content:space-between; font-size:14px; padding:4px 0; color:#374151;">
-            <span>${det.items}</span>
+        <div class="pickup-code-card" style="background: ${cfg.iconColor}; padding: 20px;">
+          <div class="pickup-code-label" style="opacity: 0.9; font-size: 13px;">CONFIRM ORDER ID</div>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin: 12px 0;">
+            <div class="pickup-code-value" style="font-size: 36px; margin: 0; letter-spacing: 2px; font-family: monospace;">${det.orderId}</div>
+            <button id="modalCopyIdBtn" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: white; padding: 10px; border-radius: 8px; cursor: pointer; transition: all 0.2s;" title="Copy ID">
+              <i class="fa-regular fa-copy"></i>
+            </button>
+          </div>
+          <div class="pickup-code-order" style="opacity: 0.9; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 12px; margin-top: 4px;">
+            <i class="fa-solid fa-user" style="margin-right: 6px; font-size: 12px;"></i> ${det.name}
           </div>
         </div>
-        <div class="modal-total-price" style="margin-bottom: 0;">
-          ${det.total}
+        <div style="padding: 16px; background: #fff; border: 1px solid #e2e8f0; border-top: none; border-radius: 0 0 12px 12px;">
+          ${det.image ? '<img src="' + det.image + '" style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 12px;" alt="Order image" />' : ""}
+          <div style="font-size: 14px; color: #475569; margin-bottom: 8px; font-weight: 500;">Order Items:</div>
+          <div style="font-size: 14px; color: #1e293b; background: #f8fafc; padding: 10px; border-radius: 6px; border: 1px solid #f1f5f9; line-height: 1.5;">
+            ${det.items}
+          </div>
+          <div style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: 600; color: #64748b; font-size: 13px;">Total Amount:</span>
+            <span style="font-weight: 800; color: #1e293b; font-size: 18px;">${det.total}</span>
+          </div>
         </div>
     `;
+
+    // Add copy listener for the modal button
+    const copyBtn = document.getElementById("modalCopyIdBtn");
+    if (copyBtn) {
+      copyBtn.addEventListener("click", () => {
+        navigator.clipboard.writeText(det.orderId).then(() => {
+          const icon = copyBtn.querySelector("i");
+          icon.className = "fa-solid fa-check";
+          copyBtn.style.background = "#16a34a";
+          setTimeout(() => {
+            icon.className = "fa-regular fa-copy";
+            copyBtn.style.background = "rgba(255,255,255,0.2)";
+          }, 2000);
+        });
+      });
+    }
 
     // ── Style & label the confirm button ───────────────────
     confirmActionBtn.className    = cfg.btnClass;

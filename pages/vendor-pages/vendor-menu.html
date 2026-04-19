@@ -105,15 +105,15 @@
             </a>
           </li>
           <li>
-            <a href="vendor-reviews.html" class="nav-link">
-              <i class="fa-solid fa-star"></i>
-              <span>Reviews</span>
-            </a>
-          </li>
-          <li>
             <a href="vendor-menu.html" class="nav-link active">
               <i class="fa-solid fa-utensils"></i>
               <span>Menu</span>
+            </a>
+          </li>
+          <li>
+            <a href="vendor-reviews.html" class="nav-link">
+              <i class="fa-solid fa-star"></i>
+              <span>Reviews</span>
             </a>
           </li>
           <li>
@@ -149,15 +149,16 @@
         </div>
 
         <div class="menu-grid" id="menuGrid">
+          <!-- 1. Burger Meal -->
           <div class="menu-item-card" data-category="meals">
             <div class="item-image">
               <img src="../../images/burger.avif" alt="Classic Burger Meal" />
               <span class="category-badge">Meals</span>
             </div>
-            <div class="item-info">
+            <div class="item-info" style="flex: 1">
               <h3 class="item-name">Classic Burger Meal</h3>
               <p class="item-description">
-                Juicy beef burger with fries and a drink
+                Juicy beef burger with fresh lettuce, tomatoes, and cheese, served with crispy golden fries and a refreshing cold drink.
               </p>
             </div>
             <div class="item-footer">
@@ -166,8 +167,7 @@
             </div>
             <div class="actions">
               <button class="edit-btn">
-                <i class="fas fa-pencil"></i>
-                Edit
+                <i class="fas fa-pencil"></i> Edit
               </button>
               <button class="delete-btn">
                 <i class="fas fa-trash"></i>
@@ -175,23 +175,97 @@
             </div>
           </div>
 
-          <div class="menu-item-card" data-category="snacks">
+          <!-- 2. Siomai Rice -->
+          <div class="menu-item-card" data-category="meals">
             <div class="item-image">
-              <img src="../../images/burger.avif" alt="Crispy French Fries" />
-              <span class="category-badge">Snacks</span>
+              <img src="../../images/Shomai-rice.jpg" alt="Siomai Rice" />
+              <span class="category-badge">Meals</span>
             </div>
-            <div class="item-info">
-              <h3 class="item-name">Crispy French Fries</h3>
-              <p class="item-description">Golden crispy fries with sea salt</p>
+            <div class="item-info" style="flex: 1">
+              <h3 class="item-name">Siomai Rice Special</h3>
+              <p class="item-description">
+                4 pieces of our signature steamed pork siomai, served with a generous portion of garlic rice and spicy chili oil.
+              </p>
             </div>
             <div class="item-footer">
-              <div class="price">₱3.99</div>
+              <div class="price">₱45.00</div>
+              <div class="stock-status">Stock: <span class="stock-count">50</span></div>
+            </div>
+            <div class="actions">
+              <button class="edit-btn">
+                <i class="fas fa-pencil"></i> Edit
+              </button>
+              <button class="delete-btn">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- 3. Fries -->
+          <div class="menu-item-card" data-category="snacks">
+            <div class="item-image">
+              <img src="../../images/Fries.jpg" alt="Crispy French Fries" />
+              <span class="category-badge">Snacks</span>
+            </div>
+            <div class="item-info" style="flex: 1">
+              <h3 class="item-name">Crispy French Fries</h3>
+              <p class="item-description">Golden crispy deep-fried potato strips seasoned with premium sea salt and special spices.</p>
+            </div>
+            <div class="item-footer">
+              <div class="price">₱35.00</div>
               <div class="stock-status low-stock">Low Stock: <span class="stock-count">3</span></div>
             </div>
             <div class="actions">
               <button class="edit-btn">
-                <i class="fas fa-pencil"></i>
-                Edit
+                <i class="fas fa-pencil"></i> Edit
+              </button>
+              <button class="delete-btn">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- 4. Iced Coffee -->
+          <div class="menu-item-card" data-category="drinks">
+            <div class="item-image">
+              <img src="../../images/Iced-coffee.png" alt="Iced Coffee" />
+              <span class="category-badge">Drinks</span>
+            </div>
+            <div class="item-info" style="flex: 1">
+              <h3 class="item-name">Signature Iced Coffee</h3>
+              <p class="item-description">Premium cold brewed coffee blended with creamy fresh milk and our secret house-made syrup.</p>
+            </div>
+            <div class="item-footer">
+              <div class="price">₱25.00</div>
+              <div class="stock-status">Stock: <span class="stock-count">20</span></div>
+            </div>
+            <div class="actions">
+              <button class="edit-btn">
+                <i class="fas fa-pencil"></i> Edit
+              </button>
+              <button class="delete-btn">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- 5. Bibingka -->
+          <div class="menu-item-card" data-category="snacks">
+            <div class="item-image">
+              <img src="../../images/bibingka.jpg" alt="Special Bibingka" />
+              <span class="category-badge">Snacks</span>
+            </div>
+            <div class="item-info" style="flex: 1">
+              <h3 class="item-name">Special Bibingka</h3>
+              <p class="item-description">Traditional freshly baked rice cake topped with premium salted egg, cheese, and grated coconut.</p>
+            </div>
+            <div class="item-footer">
+              <div class="price">₱20.00</div>
+              <div class="stock-status">Stock: <span class="stock-count">10</span></div>
+            </div>
+            <div class="actions">
+              <button class="edit-btn">
+                <i class="fas fa-pencil"></i> Edit
               </button>
               <button class="delete-btn">
                 <i class="fas fa-trash"></i>
@@ -243,8 +317,8 @@
               </form>
             </div>
             <div class="modal-footer">
-              <button class="btn-cancel" id="cancelBtn">Cancel</button>
               <button class="btn-save" id="saveBtn">Save Item</button>
+              <button class="btn-cancel" id="cancelBtn">Cancel</button>
             </div>
           </div>
         </div>
@@ -271,8 +345,8 @@
               </form>
             </div>
             <div class="modal-footer">
-              <button class="btn-cancel" id="cancelPosterBtn">Cancel</button>
               <button class="btn-save" id="savePosterBtn" style="background: #ef4444;">Add Poster</button>
+              <button class="btn-cancel" id="cancelPosterBtn">Cancel</button>
             </div>
           </div>
         </div>
@@ -281,15 +355,18 @@
         <div class="modal" id="confirmSaveModal" style="z-index: 3000;">
           <div class="modal-overlay" id="confirmSaveOverlay"></div>
           <div class="modal-content" style="max-width: 400px; text-align: center;">
-            <div class="modal-header" style="justify-content: center; padding-bottom: 10px;">
+            <div class="modal-header" style="justify-content: center; padding-bottom: 10px; position: relative;">
               <h2 style="font-size: 20px;">Confirm Changes</h2>
+              <button class="modal-close" id="confirmSaveClose" style="position: absolute; right: 16px; top: 16px;">
+                <i class="fas fa-times"></i>
+              </button>
             </div>
             <div class="modal-body" style="padding-top: 10px;">
               <p>Are you sure you want to save these changes?</p>
             </div>
             <div class="modal-footer">
-              <button class="btn-cancel" id="cancelConfirmBtn">Cancel</button>
               <button class="btn-save" id="confirmSaveBtn" style="background: #10b981;">Confirm</button>
+              <button class="btn-cancel" id="cancelConfirmBtn">Cancel</button>
             </div>
           </div>
         </div>
@@ -323,6 +400,7 @@
         }
 
         if(openModalBtn) openModalBtn.addEventListener("click", openModal);
+        if(modalClose) modalClose.addEventListener("click", closeModal);
         if(cancelBtn) cancelBtn.addEventListener("click", closeModal);
         if(modalOverlay) modalOverlay.addEventListener("click", closeModal);
 
@@ -365,6 +443,8 @@
         const confirmSaveModal = document.getElementById("confirmSaveModal");
         const confirmSaveBtn = document.getElementById("confirmSaveBtn");
         const cancelConfirmBtn = document.getElementById("cancelConfirmBtn");
+        const confirmSaveOverlay = document.getElementById("confirmSaveOverlay");
+        const confirmSaveClose = document.getElementById("confirmSaveClose");
         
         function closeConfirm(e) {
           if (e) e.preventDefault();
@@ -372,8 +452,8 @@
         }
         
         if(cancelConfirmBtn) cancelConfirmBtn.addEventListener("click", closeConfirm);
-        const confirmSaveOverlay = document.getElementById("confirmSaveOverlay");
         if(confirmSaveOverlay) confirmSaveOverlay.addEventListener("click", closeConfirm);
+        if(confirmSaveClose) confirmSaveClose.addEventListener("click", closeConfirm);
 
         if(menuGrid) {
           menuGrid.addEventListener("click", function(e) {

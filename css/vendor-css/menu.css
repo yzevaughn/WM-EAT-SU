@@ -65,6 +65,9 @@
   transition:
     transform 0.2s,
     box-shadow 0.2s;
+  height: 420px;
+  display: flex;
+  flex-direction: column;
 }
 
 .menu-item-card:hover {
@@ -115,6 +118,11 @@
   color: #6b7280;
   line-height: 1.5;
   margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .item-footer {

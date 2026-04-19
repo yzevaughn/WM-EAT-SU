@@ -102,15 +102,15 @@
             </a>
           </li>
           <li>
-            <a href="vendor-reviews.html" class="nav-link">
-              <i class="fa-solid fa-star"></i>
-              <span>Reviews</span>
-            </a>
-          </li>
-          <li>
             <a href="vendor-menu.html" class="nav-link">
               <i class="fa-solid fa-utensils"></i>
               <span>Menu</span>
+            </a>
+          </li>
+          <li>
+            <a href="vendor-reviews.html" class="nav-link">
+              <i class="fa-solid fa-star"></i>
+              <span>Reviews</span>
             </a>
           </li>
           <li>
@@ -138,7 +138,7 @@
             </div>
             <div class="balance-amount">
               <span class="currency-symbol">₱</span>
-              <span class="balance-value">2500.00</span>
+              <span class="balance-value" id="balanceValue">2500.00</span>
             </div>
             <label for="withdrawToggle" class="topup-btn">
               <i class="fa-solid fa-minus"></i> Withdraw Funds
@@ -147,7 +147,17 @@
           <!-- TRANSACTIONS -->
           <div class="transaction-section">
             <h2>Transaction History</h2>
-            <div class="transaction-list">
+            <div class="transaction-list" id="transactionList">
+              <div class="transaction-item">
+                <div class="transaction-icon topup">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+                <div class="transaction-details">
+                  <p class="transaction-type">Daily Sales Payout</p>
+                  <p class="transaction-date">Mar 6, 2026 - 06:00 PM</p>
+                </div>
+                <div class="transaction-amount positive">+₱1,250.00</div>
+              </div>
               <div class="transaction-item">
                 <div class="transaction-icon topup">
                   <i class="fa-solid fa-shopping-cart"></i>
@@ -167,6 +177,16 @@
                   <p class="transaction-date">Mar 3, 2026 - 3:15 PM</p>
                 </div>
                 <div class="transaction-amount negative">-₱500.00</div>
+              </div>
+              <div class="transaction-item">
+                <div class="transaction-icon payment">
+                  <i class="fa-solid fa-file-invoice-dollar"></i>
+                </div>
+                <div class="transaction-details">
+                  <p class="transaction-type">Platform Service Fee</p>
+                  <p class="transaction-date">Mar 1, 2026 - 12:00 AM</p>
+                </div>
+                <div class="transaction-amount negative">-₱50.00</div>
               </div>
             </div>
           </div>
@@ -265,6 +285,7 @@
               id="mobileNumber"
               class="custom-amount-input"
               placeholder="09XXXXXXXXX"
+              oninput="this.value = this.value.replace(/[^0-9]/g, '')"
             />
             <div id="phoneError" class="error-message">
               <i class="fa-solid fa-circle-exclamation"></i>
@@ -284,7 +305,6 @@
             </select>
             <label class="form-label" style="margin-top: 10px"
               >Account Number</label
-            >
             >
             <input
               type="text"
@@ -327,12 +347,12 @@
           <label for="withdrawToggle" class="btn-cancel">Cancel</label>
         </div>
         <div class="modal-footer hidden-step" id="step2Footer">
-          <div class="btn-cancel" onclick="goToStep1()">Back</div>
           <div class="btn-confirm" onclick="processStep2()">Next</div>
+          <div class="btn-cancel" onclick="goToStep1()">Back</div>
         </div>
         <div class="modal-footer hidden-step" id="step3Footer">
-          <div class="btn-cancel" onclick="goToStep2()">Back</div>
           <div class="btn-confirm" onclick="finalizeWithdraw()">Submit OTP</div>
+          <div class="btn-cancel" onclick="goToStep2()">Back</div>
         </div>
       </div>
     </div>
@@ -490,12 +510,32 @@
         } else {
           const phoneField = document.getElementById("mobileNumber");
           const phoneVal = phoneField.value.trim();
-          // Basic 11 digit check for PH numbers
-          if (!phoneVal || phoneVal.length < 11) {
+          const phoneError = document.getElementById("phoneError");
+          const phoneErrorText = phoneError.querySelector("span");
+
+          if (!phoneVal) {
             phoneField.classList.add("invalid");
-            document.getElementById("phoneError").classList.add("show");
+            phoneErrorText.innerText = "Please enter your mobile number";
+            phoneError.classList.add("show");
             return;
           }
+
+          if (phoneVal.length < 11) {
+            phoneField.classList.add("invalid");
+            phoneErrorText.innerText = "Number is too short (exactly 11 digits required)";
+            phoneError.classList.add("show");
+            showToast("Number is too short!");
+            return;
+          }
+
+          if (phoneVal.length > 11) {
+            phoneField.classList.add("invalid");
+            phoneErrorText.innerText = "Number is too long (exactly 11 digits required)";
+            phoneError.classList.add("show");
+            showToast("Number exceeds 11 digits!");
+            return;
+          }
+
           goToStep3(); // Mobile jumps to OTP
         }
       }
@@ -508,7 +548,6 @@
         });
 
         if (selectedMethod !== "card") {
-          // Simple basic validation just checks if they typed into the 4 boxes generally
           const boxes = document.querySelectorAll(".otp-digit");
           let otpVal = "";
           boxes.forEach((b) => (otpVal += b.value));
@@ -518,6 +557,38 @@
             return;
           }
         }
+
+        // --- DYNAMIC UPDATE LOGIC ---
+        const amount = parseFloat(customInput.value);
+        const balanceEl = document.getElementById("balanceValue");
+        let currentBalance = parseFloat(balanceEl.innerText.replace(",", ""));
+        
+        // Update Balance
+        const newBalance = currentBalance - amount;
+        balanceEl.innerText = newBalance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+        // Add to Transaction List
+        const list = document.getElementById("transactionList");
+        const methodText = selectedMethod === "gcash" ? "GCash" : selectedMethod === "maya" ? "Maya" : "Bank Transfer";
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + 
+                       " - " + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+        const newItem = document.createElement("div");
+        newItem.className = "transaction-item";
+        newItem.style.animation = "slideIn 0.3s ease-out";
+        newItem.innerHTML = `
+          <div class="transaction-icon payment">
+            <i class="fa-solid fa-money-bill-transfer"></i>
+          </div>
+          <div class="transaction-details">
+            <p class="transaction-type">Withdrawal via ${methodText}</p>
+            <p class="transaction-date">${dateStr}</p>
+          </div>
+          <div class="transaction-amount negative">-₱${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+        `;
+        list.prepend(newItem);
+        // ----------------------------
 
         // Close Modal via Checkbox
         document.getElementById("withdrawToggle").checked = false;
