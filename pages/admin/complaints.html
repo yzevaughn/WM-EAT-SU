@@ -1,198 +1,280 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU - Admin Complaints</title>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WM EAT SU - Complaints Management</title>
 
-    <link rel="stylesheet" href="../../css/navbar.css" />
-    <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css" />
-    <link rel="stylesheet" href="../../css/admin-css/complaints.css" />
-  </head>
-  <body>
-    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <!-- ════════════════════════════════════════
+  <link rel="stylesheet" href="../../css/navbar.css" />
+  <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css" />
+  <link rel="stylesheet" href="../../css/admin-css/student-applications.css" />
+  <link rel="stylesheet" href="../../css/admin-css/complaints.css" />
+</head>
+
+<body>
+  <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+
+  <!-- ════════════════════════════════════════
          TOP NAVBAR
          ════════════════════════════════════════ -->
-    <div class="top-nav">
-      <!-- LEFT: hamburger + logo -->
-      <div class="nav-left">
-        <label for="menu-checkbox" class="menu-toggle">
-          <i class="fa-solid fa-bars"></i>
-        </label>
-        <a href="#" class="logo">
-          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-          <span class="logo-text">WM EAT SU</span>
-        </a>
-      </div>
-      <div class="nav-center"></div>
-      <!-- RIGHT: profile -->
-      <div class="nav-right">
-        <div class="profile">
-          <div class="profile-info">
-            <span class="profile-name">Vaughn Evangelista</span>
-            <span class="email">vaughn.student@wm.edu.ph</span>
-          </div>
-          <div class="profile-dropdown">
-            <button class="profile-btn">
-              <img
-                src="../../images/pfp.jpg"
-                class="profile-pic"
-                alt="Profile"
-              />
-              <i class="fa-solid fa-chevron-down"></i>
-            </button>
-            <div class="dropdown-menu">
-              <a href="../../index.html" class="dropdown-item">
-                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
-              </a>
-            </div>
+  <div class="top-nav">
+    <div class="nav-left">
+      <label for="menu-checkbox" class="menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </label>
+      <a href="#" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
+    </div>
+
+    <div class="nav-center"></div>
+    <div class="nav-right">
+      <div class="profile">
+        <div class="profile-info">
+          <span class="profile-name">Vaughn Evangelista</span>
+          <span class="email">vaughn.student@wm.edu.ph</span>
+        </div>
+        <div class="profile-dropdown">
+          <button class="profile-btn">
+            <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" />
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-menu">
+            <a href="../../index.html" class="dropdown-item">
+              <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+            </a>
           </div>
         </div>
       </div>
     </div>
-    <!-- /top-nav -->
+  </div>
 
-    <!-- ════════════════════════════════════════
+  <!-- ════════════════════════════════════════
          LAYOUT
          ════════════════════════════════════════ -->
-    <div class="layout">
-      <!-- ── SIDEBAR ── -->
-      <div class="left-nav" id="sidebar">
-        <!-- logo shown on mobile inside sidebar -->
-
-        <ul class="nav-list">
-          <li>
-            <a href="admin-dashboard.html" class="nav-link">
-              <i class="fa-solid fa-house"></i>
-              <span>Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-applications.html" class="nav-link">
-              <i class="fa-solid fa-user-check"></i>
-              <span>Student Applications</span>
-            </a>
-          </li>
-          <li>
-            <a href="complaints.html" class="nav-link active">
-              <i class="fa-solid fa-comment-dots"></i>
-              <span>Complaints</span>
-            </a>
-          </li>
-          <li>
-            <a href="assign-vendor.html" class="nav-link">
-              <i class="fa-solid fa-user-plus"></i>
-              <span>Assign Vendor</span>
-            </a>
-          </li>
-          <li>
-            <a href="admin-approval.html" class="nav-link">
-              <i class="fa-solid fa-clipboard-check"></i>
-              <span>Content Approval</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="main-content">
-        <div class="container">
-          <!-- title and description of the page -->
-          <header>
-            <h1>Complaints Management</h1>
-            <p class="subtitle">View, track, and resolve customer complaints</p>
-          </header>
-
-          <!-- cards showing complaint status counts -->
-          <div class="cards-grid">
-            <div class="card card-progress">
-              <div class="card-info">
-                <span class="card-label">In Progress</span>
-                <span class="card-value">0</span>
-              </div>
-              <div class="icon-wrapper">
-                <i class="fa-solid fa-spinner"></i>
-              </div>
-            </div>
-
-            <div class="card card-resolved">
-              <div class="card-info">
-                <span class="card-label">Resolved</span>
-                <span class="card-value">0</span>
-              </div>
-              <div class="icon-wrapper">
-                <i class="fa-solid fa-circle-check"></i>
-              </div>
-            </div>
-
-            <div class="card card-closed">
-              <div class="card-info">
-                <span class="card-label">Closed</span>
-                <span class="card-value">0</span>
-              </div>
-              <div class="icon-wrapper">
-                <i class="fa-solid fa-box-archive"></i>
-              </div>
-            </div>
-          </div>
-
-          <!-- filter section for status -->
-          <div class="filter-controls">
-            <div class="tabs-container" id="statusTabs">
-              <button class="tab active" data-status="In Progress">
-                In Progress (<span id="count-progress">0</span>)
-              </button>
-              <button class="tab" data-status="Resolved">
-                Resolved (<span id="count-resolved">0</span>)
-              </button>
-              <button class="tab" data-status="Closed">
-                Closed (<span id="count-closed">0</span>)
-              </button>
-            </div>
-          </div>
-
-          <!-- complaints display area -->
-          <div id="complaintsList" class="complaints-list">
-            <!-- data populated by complaints.js -->
-          </div>
-
-          <!-- pagination -->
-          <div
-            class="pagination-controls"
-            id="paginationControls"
-            style="display: none"
-          >
-            <button class="btn-page" id="prevPage" disabled>
-              <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <div class="page-numbers" id="pageNumbers"></div>
-            <button class="btn-page" id="nextPage">
-              <i class="fa-solid fa-chevron-right"></i>
-            </button>
-          </div>
-
-          <!-- when theres nothing, show empty state -->
-          <div class="empty-state" id="emptyState" style="display: none">
-            <div class="empty-icon">
-              <i class="fa-solid fa-inbox"></i>
-            </div>
-            <p class="empty-text">No complaints matching this filter</p>
-          </div>
-        </div>
-      </div>
+  <div class="layout">
+    <!-- ── SIDEBAR ── -->
+    <div class="left-nav" id="sidebar">
+      <ul class="nav-list">
+        <li>
+          <a href="admin-dashboard.html" class="nav-link">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-applications.html" class="nav-link">
+            <i class="fa-solid fa-user-check"></i>
+            <span>Student Applications</span>
+          </a>
+        </li>
+        <li>
+          <a href="complaints.html" class="nav-link active">
+            <i class="fa-solid fa-comment-dots"></i>
+            <span>Complaints</span>
+          </a>
+        </li>
+        <li>
+          <a href="assign-vendor.html" class="nav-link">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>Assign Vendor</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin-approval.html" class="nav-link">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <span>Content Approval</span>
+          </a>
+        </li>
+      </ul>
     </div>
 
-    <!-- Scripts -->
-    <script src="../../script/admin-js/complaints.js"></script>
-  </body>
+    <div class="main-content">
+      <header class="page-header">
+        <div>
+          <h1>User Complaints</h1>
+          <p class="subtitle">Manage and resolve reported issues from students and vendors.</p>
+        </div>
+      </header>
+
+      <div class="dashboard-container" style="padding-top: 0;">
+        <!-- Metrics Cards -->
+        <div class="metrics-cards">
+          <div class="metrics-card progress card-progress">
+            <div class="icon-box"><i class="fa-solid fa-clock-rotate-left"></i></div>
+            <div class="card-info">
+              <p>In Progress</p>
+              <h3 class="card-value">0</h3>
+            </div>
+          </div>
+          <div class="metrics-card resolved card-resolved">
+            <div class="icon-box"><i class="fa-solid fa-check-circle"></i></div>
+            <div class="card-info">
+              <p>Resolved</p>
+              <h3 class="card-value">0</h3>
+            </div>
+          </div>
+          <div class="metrics-card closed card-closed">
+            <div class="icon-box"><i class="fa-solid fa-folder-closed"></i></div>
+            <div class="card-info">
+              <p>Closed</p>
+              <h3 class="card-value">0</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- data table -->
+        <div class="table-container">
+          <!-- table controls section -->
+          <div class="table-controls" style="padding: 24px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div class="search-box">
+              <i class="fa-solid fa-search"></i>
+              <input type="text" id="searchInput" placeholder="Search Complaint ID or Title..." />
+            </div>
+            <div class="filter-group">
+              <div class="filter-item">
+                <label for="statusFilter"><i class="fa-solid fa-filter"></i> Status:</label>
+                <select id="statusFilter" class="custom-select">
+                  <option value="All">All</option>
+                  <option value="In Progress" selected>In Progress</option>
+                  <option value="Resolved">Resolved</option>
+                  <option value="Closed">Closed</option>
+                </select>
+              </div>
+              <div class="filter-item">
+                <label for="sortFilter"><i class="fa-solid fa-sort"></i> Sort:</label>
+                <select id="sortFilter" class="custom-select">
+                  <option value="Latest">Latest</option>
+                  <option value="Oldest">Oldest</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <table class="data-grid">
+            <thead>
+              <tr>
+                <th>Complaint ID</th>
+                <th>Student</th>
+                <th>Subject</th>
+                <th>Vendor & Order</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th class="actions-col">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="complaintsList">
+              <!-- Data populated by JS -->
+            </tbody>
+          </table>
+
+          <div class="table-footer">
+            <div class="table-info">
+              Showing <span id="pageStart">0</span> to <span id="pageEnd">0</span> of
+              <span id="totalEntries">0</span> entries
+            </div>
+            <div class="pagination" id="paginationControls">
+              <button class="btn-page" id="prevPage" disabled>
+                <i class="fa-solid fa-chevron-left"></i> Previous
+              </button>
+              <button class="btn-page" id="nextPage">
+                Next <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+          <i class="fa-solid fa-clipboard-check"></i>
+          <div class="empty-text">No complaints found</div>
+        </div>
+
+        <!-- ════════════════════════════════════════
+             DETAIL VIEW PANEL
+        ════════════════════════════════════════ -->
+        <div class="detail-panel" id="complaintDetailPanel">
+          <!-- Header -->
+          <div class="dp-header">
+            <div class="dp-header-info">
+              <span class="dp-id" id="dpIdLocation">RPT-081 &bull; Canteen A</span>
+              <h2 id="dpTitle">Food quality issue</h2>
+            </div>
+            <button class="btn-close-dp" id="closeDetailPanel"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+
+          <div class="dp-body">
+            <!-- Student Information Section -->
+            <div class="dp-section-title">Student Information</div>
+            <div class="dp-info-grid">
+              <div class="dp-info-item">
+                <label>Student Name</label>
+                <div id="dpStudentName">John Doe</div>
+              </div>
+              <div class="dp-info-item">
+                <label>Email</label>
+                <div id="dpEmail">john.doe@wm.edu.ph</div>
+              </div>
+              <div class="dp-info-item">
+                <label>Contact Number</label>
+                <div id="dpContact">0912 345 6789</div>
+              </div>
+              <div class="dp-info-item">
+                <label>Order Reference</label>
+                <div id="dpOrderRef">#ORD-2026-0000</div>
+              </div>
+              <div class="dp-info-item">
+                <label>Submission Date & Time</label>
+                <div id="dpDate">Mar 01, 2026</div>
+              </div>
+            </div>
+
+            <!-- Description Section -->
+            <div class="dp-section-title">Description</div>
+            <div class="dp-description">
+              <p id="dpDescriptionText">Full complaint message goes here.</p>
+            </div>
+
+            <!-- Evidence Section -->
+            <div class="dp-section-title">Evidence</div>
+            <div class="dp-evidence" id="dpEvidenceContainer">
+              <a href="#" class="evidence-card">
+                <div class="evidence-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                <div class="evidence-details">
+                  <span class="evidence-name" id="dpEvidenceName">photo_evidence.jpg</span>
+                  <span class="evidence-size" id="dpEvidenceSize">1.2 MB</span>
+                </div>
+              </a>
+            </div>
+
+            <!-- Activity Timeline Section -->
+            <div class="dp-section-title">Activity</div>
+            <div class="dp-timeline" id="dpTimelineContainer">
+              <!-- Chronological Logs -->
+            </div>
+
+            <!-- Reply / Note Section -->
+            <div class="dp-reply">
+              <textarea rows="3" placeholder="Write a note or reply to student..." id="dpReplyInput"></textarea>
+              <div class="dp-actions">
+                <button class="dp-btn btn-note" id="dpAddNote"><i class="fa-regular fa-clipboard"></i> Add Internal Note</button>
+                <button class="dp-btn btn-send" id="dpSendReply"><i class="fa-regular fa-paper-plane"></i> Send Reply</button>
+                <button class="dp-btn btn-mark-resolved" id="dpMarkResolved"><i class="fa-solid fa-check"></i> Mark Resolved</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../script/admin-js/complaints.js"></script>
+</body>
 </html>

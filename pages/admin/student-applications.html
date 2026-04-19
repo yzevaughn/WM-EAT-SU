@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU - Admin student applications</title>
+    <title>WM EAT SU - Student Applications</title>
+
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -14,26 +15,28 @@
     />
 
     <link rel="stylesheet" href="../../css/navbar.css" />
-    <link
-      rel="stylesheet"
-      href="../../css/admin-css/student-applications.css"
-    />
+    <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css" />
+    <link rel="stylesheet" href="../../css/admin-css/student-applications.css" />
   </head>
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
 
-    <!-- TOP NAVBAR -->
+    <!-- ════════════════════════════════════════
+         TOP NAVBAR
+         ════════════════════════════════════════ -->
     <div class="top-nav">
+      <!-- LEFT: hamburger + logo -->
       <div class="nav-left">
-        <label for="menu-checkbox" class="menu-toggle"
-          ><i class="fa-solid fa-bars"></i
-        ></label>
+        <label for="menu-checkbox" class="menu-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </label>
         <a href="#" class="logo">
           <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
           <span class="logo-text">WM EAT SU</span>
         </a>
       </div>
       <div class="nav-center"></div>
+      <!-- RIGHT: profile -->
       <div class="nav-right">
         <div class="profile">
           <div class="profile-info">
@@ -46,17 +49,19 @@
                 src="../../images/pfp.jpg"
                 class="profile-pic"
                 alt="Profile"
-              /><i class="fa-solid fa-chevron-down"></i>
+              />
+              <i class="fa-solid fa-chevron-down"></i>
             </button>
             <div class="dropdown-menu">
-              <a href="../../index.html" class="dropdown-item"
-                ><i class="fas fa-sign-out-alt"></i><span>Log Out</span></a
-              >
+              <a href="../../index.html" class="dropdown-item">
+                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- /top-nav -->
 
     <!-- ════════════════════════════════════════
          LAYOUT
@@ -100,134 +105,121 @@
         </ul>
       </div>
 
-      <!-- MAIN CONTENT -->
       <div class="main-content">
-        <div class="vendor-header" style="margin-bottom: 24px;">
-          <!-- Status Summaries -->
-          <div class="summary-cards">
-            <div class="summary-card">
-              <div class="summary-info">
-                <h3>Total Pending</h3>
-                <span id="totalPendingCount" class="summary-count">0</span>
-              </div>
-              <div class="summary-icon" style="background:#fef3c7; color:#b45309;"><i class="fa-solid fa-clock"></i></div>
+        <div class="container">
+          <!-- header section -->
+          <header class="page-header">
+            <div>
+              <h1>Student Applications</h1>
+              <p class="subtitle">Manage and review student vendor applications.</p>
             </div>
-            <div class="summary-card">
-              <div class="summary-info">
-                <h3>Active Vendors</h3>
-                <span id="totalActiveCount" class="summary-count">0</span>
-              </div>
-              <div class="summary-icon" style="background:#d1fae5; color:#059669;"><i class="fa-solid fa-store"></i></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="applications-section">
-          <h2>Student Applications</h2>
-          
-          <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('pending')" id="tab-pending">Pending</button>
-            <button class="tab-btn" onclick="switchTab('review')" id="tab-review">Under Review</button>
-            <button class="tab-btn" onclick="switchTab('approved')" id="tab-approved">Active Vendors</button>
-            <button class="tab-btn" onclick="switchTab('rejected')" id="tab-rejected">Rejected</button>
-          </div>
-
-          <div class="applications-list" id="applicationsList">
-            <!-- Dynamically injected applications -->
-          </div>
-          
-          <!-- Pagination -->
-          <div class="pagination" id="paginationControls">
-            <!-- Pagination injected via JS -->
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ==========================================
-         MODALS
-         ========================================== -->
-
-    <!-- Form Modal (Used for both Create and Edit) -->
-    <div class="modal-backdrop" id="applicationFormModal">
-      <div class="modal-panel">
-        <div class="modal-header">
-          <h2 id="formModalTitle">Vendor Application Form</h2>
-          <button
-            class="btn-close"
-            onclick="closeModal('applicationFormModal')"
-          >
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form
-            class="application-form"
-            id="vendorForm"
-            onsubmit="handleFormSubmit(event)"
-          >
-            <input type="hidden" id="formEntryId" value="" />
-
-            <div class="form-group">
-              <label>Business Name <span class="required">*</span></label>
-              <input
-                type="text"
-                id="businessName"
-                class="form-control"
-                placeholder="e.g., Vaughn's Shomai Rice"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label>Owner Name <span class="required">*</span></label>
-              <input
-                type="text"
-                id="ownerName"
-                class="form-control"
-                placeholder="e.g., Vaughn Evangelista"
-                required
-              />
-            </div>
-
-            <div style="margin-top: 24px">
-              <label
-                style="
-                  font-weight: 600;
-                  font-size: 16px;
-                  display: block;
-                  border-bottom: 2px solid #e5e7eb;
-                  padding-bottom: 8px;
-                  margin-bottom: 12px;
-                "
-                >Products Catalog</label
-              >
-              <div id="productsContainer">
-                <!-- Product blocks will be injected here -->
-              </div>
-              <button
-                type="button"
-                class="btn-add-product"
-                onclick="addProductBlock()"
-              >
-                <i class="fa-solid fa-plus"></i> Add Another Product
+            <div class="header-actions">
+              <button class="btn-export csv">
+                <i class="fa-solid fa-file-csv"></i> Export CSV
+              </button>
+              <button class="btn-export pdf">
+                <i class="fa-solid fa-file-pdf"></i> Export PDF
               </button>
             </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button
-            class="btn-ghost"
-            onclick="closeModal('applicationFormModal')"
-          >
-            Cancel
-          </button>
-          <button class="btn-primary" type="submit" form="vendorForm">
-            Save Application
-          </button>
+          </header>
+
+          <!-- summary counters -->
+          <div class="summary-cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 24px;">
+            <div class="summary-card" style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); border: 1px solid #e2e8f0; display: flex; align-items: center; gap: 16px;">
+              <div style="width: 48px; height: 48px; border-radius: 50%; background: #fef9c3; color: #ca8a04; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+                <i class="fa-solid fa-clock"></i>
+              </div>
+              <div>
+                <p style="margin: 0; color: #64748b; font-size: 14px; font-weight: 500;">Pending Vendors</p>
+                <h3 id="countPending" style="margin: 4px 0 0; color: #0f172a; font-size: 24px; font-weight: 700;">0</h3>
+              </div>
+            </div>
+            <div class="summary-card" style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); border: 1px solid #e2e8f0; display: flex; align-items: center; gap: 16px;">
+              <div style="width: 48px; height: 48px; border-radius: 50%; background: #dcfce7; color: #16a34a; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+                <i class="fa-solid fa-check-double"></i>
+              </div>
+              <div>
+                <p style="margin: 0; color: #64748b; font-size: 14px; font-weight: 500;">Active Vendors</p>
+                <h3 id="countActive" style="margin: 4px 0 0; color: #0f172a; font-size: 24px; font-weight: 700;">0</h3>
+              </div>
+            </div>
+          </div>
+
+          <!-- data table -->
+          <div class="table-container">
+            <!-- table controls section -->
+            <div class="table-controls" style="padding: 24px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+              <div class="search-box">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search Student Name or Application ID..." />
+              </div>
+              <div class="filter-group">
+                <div class="filter-item">
+                  <label for="statusFilter"><i class="fa-solid fa-filter"></i> Status:</label>
+                  <select id="statusFilter" class="custom-select">
+                    <option value="All">All</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Under Review">Under Review</option>
+                    <option value="Active Vendor">Active Vendors</option>
+                    <option value="Rejected">Rejected</option>
+                  </select>
+                </div>
+                <div class="filter-item">
+                  <label for="dateFilter"><i class="fa-solid fa-calendar-alt"></i> Date:</label>
+                  <select id="dateFilter" class="custom-select">
+                    <option value="All">All Dates</option>
+                    <option value="Today">Today</option>
+                    <option value="This Week">This Week</option>
+                    <option value="This Month">This Month</option>
+                  </select>
+                </div>
+                <div class="filter-item">
+                  <label for="sortFilter"><i class="fa-solid fa-sort"></i> Sort:</label>
+                  <select id="sortFilter" class="custom-select">
+                    <option value="Latest">Latest</option>
+                    <option value="Oldest">Oldest</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <table class="data-grid">
+              <thead>
+                <tr>
+                  <th>App ID</th>
+                  <th>Student Name</th>
+                  <th>Business Name</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Date Submitted</th>
+                  <th class="actions-col">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="applicationsTableBody">
+                <!-- Rows will be injected by JavaScript -->
+              </tbody>
+            </table>
+
+            <!-- pagination -->
+            <div class="pagination-controls">
+              <div class="pagination-info">
+                Showing <span id="pageStart">1</span> to <span id="pageEnd">10</span> of <span id="totalEntries">120</span> entries
+              </div>
+              <div class="pagination-nav">
+                <button class="page-btn disabled" id="prevPage"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <span class="page-dots">...</span>
+                <button class="page-btn">12</button>
+                <button class="page-btn" id="nextPage"><i class="fa-solid fa-chevron-right"></i></button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
-
+    
     <!-- View Details Modal -->
     <div class="modal-backdrop" id="detailsModal">
       <div class="modal-panel">
@@ -241,7 +233,7 @@
           <div class="detail-grid">
             <div class="detail-item">
               <span class="detail-label">Status</span>
-              <span class="badge" id="detStatusHtml"></span>
+              <span class="status-pill" id="detStatusHtml"></span>
             </div>
             <div class="detail-item">
               <span class="detail-label">Date Submitted</span>
@@ -274,7 +266,7 @@
           </div>
 
           <div id="adminFeedbackSection" style="display: none">
-            <span class="detail-label">Admin Remarks</span>
+            <span class="detail-label" id="adminFeedbackLabel">Admin Remarks</span>
             <div class="feedback-box" id="detFeedbackBox"></div>
           </div>
         </div>
@@ -283,389 +275,61 @@
         </div>
       </div>
     </div>
-
-    <!-- Action Confirm/Input Modal -->
-    <div class="modal-backdrop" id="actionModal">
-      <div class="modal-panel" style="max-width: 450px;">
-        <div class="modal-header">
-          <h2 id="actionModalTitle">Action</h2>
-          <button class="btn-close" onclick="closeModal('actionModal')">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p id="actionModalDesc" style="margin-top:0; font-size:14px; color:#4b5563; margin-bottom:16px;"></p>
-          <div class="form-group" id="actionInputGroup">
-            <label id="actionInputLabel">Reason / Instructions <span class="required">*</span></label>
-            <textarea id="actionInput" class="form-control" rows="3" placeholder="Enter message here..." required></textarea>
-            <span id="actionErrorText" style="color:#ef4444; font-size:12px; margin-top:4px; display:none;">This field is required.</span>
+    
+    <!-- Confirmation Modal -->
+    <div class="modal-backdrop" id="confirmModal">
+      <div class="modal-panel" style="max-width: 400px; text-align: center">
+        <div class="modal-body" style="padding-top: 32px">
+          <div
+            class="modal-icon"
+            style="font-size: 48px; color: #ef4444; margin-bottom: 16px"
+            id="confirmIcon"
+          >
+            <i class="fa-solid fa-circle-exclamation"></i>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn-ghost" onclick="closeModal('actionModal')">Cancel</button>
-          <button class="btn-primary" id="actionSubmitBtn" onclick="submitAction()">Submit</button>
+          <h2
+            style="
+              font-size: 20px;
+              font-weight: 800;
+              color: #0f172a;
+              margin-bottom: 8px;
+            "
+            id="confirmTitle"
+          >
+            Confirm Action
+          </h2>
+          <p
+            style="font-size: 14px; color: #64748b; margin-bottom: 24px"
+            id="confirmMessage"
+          >
+            Are you sure you want to do this?
+          </p>
+
+          <div id="confirmInputContainer" style="display: none; margin-bottom: 24px; text-align: left;">
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 8px;" id="confirmInputLabel">Reason</label>
+            <textarea id="confirmInput" class="form-control" rows="3" placeholder="Enter reason here..." style="width: 100%; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; font-family: inherit; font-size: 14px; resize: vertical; box-sizing: border-box; outline: none; transition: border-color 0.2s;"></textarea>
+          </div>
+
+          <div class="form-actions" style="display: flex; justify-content: center; gap: 12px">
+             <button
+              class="btn-submit"
+              id="submitConfirmBtn"
+              style="
+                padding: 10px 24px; border: none; color: white; border-radius: 8px; font-weight: 600; cursor: pointer;
+                background: linear-gradient(135deg, #10b981, #059669);
+                box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+              "
+            >
+              Confirm
+            </button>
+            <button class="btn-ghost" id="cancelConfirmBtn" style="padding: 10px 24px; border: 1px solid #cbd5e1; background: transparent; color: #475569; border-radius: 8px; font-weight: 600; cursor: pointer;">Cancel</button>
+           
+          </div>
         </div>
       </div>
     </div>
-
-    <!-- Toast Container -->
-    <div class="toast-container" id="toastContainer"></div>
-
-    <!-- ==========================================
-         JAVASCRIPT
-         ========================================== -->
-    <script>
-      let applications = [
-        {
-          id: "APP-1001",
-          business: "Vaughn's Shomai Rice (New Location)",
-          owner: "Vaughn Evangelista",
-          products: [
-            {
-              name: "Shomai Rice",
-              ingredients: "Pork, Wrapper, Rice, Chili Oil, Soy Sauce",
-            },
-            {
-              name: "Pork Sisig",
-              ingredients: "Pork Face, Calamansi, Onions, Chilis, Egg",
-            },
-          ],
-          status: "pending",
-          date: "March 15, 2026",
-          feedback: "",
-        },
-        {
-          id: "APP-1002",
-          business: "Vaughn's Sweet Treats",
-          owner: "Vaughn Evangelista",
-          products: [
-            {
-              name: "Brownies",
-              ingredients: "Flour, Sugar, Cocoa Powder, Butter, Eggs",
-            },
-            {
-              name: "Chocolate Chip Cookies",
-              ingredients: "Flour, Sugar, Chocolate Chips, Baking Soda",
-            },
-          ],
-          status: "review",
-          date: "March 12, 2026",
-          feedback: "",
-        },
-        {
-          id: "APP-1003",
-          business: "Vaughn's Refreshments",
-          owner: "Vaughn Evangelista",
-          products: [
-            {
-              name: "Mango Shake",
-              ingredients: "Fresh Mango, Ice, Milk, Sugar",
-            },
-          ],
-          status: "approved",
-          date: "March 1, 2026",
-          feedback:
-            "Everything looks great! Please proceed to the Admin building to claim your vendor pass.",
-        },
-        {
-          id: "APP-1004",
-          business: "Vaughn's Kwek-Kwek Stand",
-          owner: "Vaughn Evangelista",
-          products: [
-            {
-              name: "Kwek-Kwek",
-              ingredients: "Quail Eggs, Flour mix, Orange Food Color, Oil",
-            },
-          ],
-          status: "rejected",
-          date: "February 20, 2026",
-          feedback:
-            "Application denied. We currently have too many vendors selling deep-fried street food items in this sector.",
-        },
-      ];
-
-      let currentViewId = null;
-      let currentTab = 'pending';
-      let currentPage = 1;
-      const itemsPerPage = 5;
-
-      let actionState = { id: null, type: null };
-
-      document.addEventListener("DOMContentLoaded", () => {
-        renderList();
-      });
-
-      function switchTab(tab) {
-        currentTab = tab;
-        currentPage = 1;
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        document.getElementById(`tab-${tab}`).classList.add('active');
-        renderList();
-      }
-
-      function renderList() {
-        const pendingCount = applications.filter(a => a.status === 'pending').length;
-        const activeCount = applications.filter(a => a.status === 'approved').length;
-        document.getElementById('totalPendingCount').innerText = pendingCount;
-        document.getElementById('totalActiveCount').innerText = activeCount;
-
-        const listDiv = document.getElementById("applicationsList");
-        listDiv.innerHTML = "";
-
-        const filtered = applications.filter(app => app.status === currentTab);
-
-        const totalItems = filtered.length;
-        const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
-        if (currentPage > totalPages) currentPage = totalPages;
-
-        const startIdx = (currentPage - 1) * itemsPerPage;
-        const endIdx = startIdx + itemsPerPage;
-        const paginatedApps = filtered.slice(startIdx, endIdx);
-
-        if (paginatedApps.length === 0) {
-          listDiv.innerHTML = `<div style="padding: 24px; text-align: center; color: #6b7280; background: white; border: 1px dashed #e5e7eb; border-radius: 12px;">No applications found in this category.</div>`;
-        }
-
-        paginatedApps.forEach((app) => {
-          const item = document.createElement("div");
-          item.className = `application-item ${app.status}`;
-          item.onclick = () => openDetails(app.id);
-
-          let statusText = "";
-          switch (app.status) {
-            case "pending": statusText = "Pending Review"; break;
-            case "review": statusText = "Under Review"; break;
-            case "approved": statusText = "Active Vendor"; break;
-            case "rejected": statusText = "Not Approved"; break;
-          }
-
-          const productNames = app.products.map((p) => p.name).join(", ");
-          
-          let actionButtonHtml = "";
-          if (app.status === 'approved') {
-              actionButtonHtml = `<button class="btn-danger" style="margin-left:auto; padding: 6px 12px; font-size: 12px;" onclick="event.stopPropagation(); requestAction('${app.id}', 'remove')">Remove Access</button>`;
-          }
-
-          item.innerHTML = `
-            <div class="application-header">
-              <h3>${app.business}</h3>
-              <span class="badge ${app.status}">${statusText}</span>
-            </div>
-            <p class="application-product"><strong>Products:</strong> ${productNames}</p>
-            <div class="application-footer" style="display:flex; align-items:center;">
-              <span>Submitted: ${app.date}</span>
-              ${actionButtonHtml}
-              <span class="view-details-text" style="${app.status === 'approved' ? 'margin-left: 12px;' : 'margin-left:auto;'}">View Details <i class="fa-solid fa-arrow-right"></i></span>
-            </div>
-          `;
-          listDiv.appendChild(item);
-        });
-
-        renderPagination(totalPages);
-      }
-
-      function renderPagination(totalPages) {
-        const pagDiv = document.getElementById("paginationControls");
-        if (totalPages <= 1) {
-          pagDiv.style.display = "none";
-          return;
-        }
-        pagDiv.style.display = "flex";
-        pagDiv.innerHTML = "";
-
-        const prevBtn = document.createElement("button");
-        prevBtn.className = "page-btn";
-        prevBtn.disabled = currentPage === 1;
-        prevBtn.innerHTML = '<i class="fa-solid fa-chevron-left"></i> Prev';
-        prevBtn.onclick = () => { if(currentPage > 1) { currentPage--; renderList(); } };
-        pagDiv.appendChild(prevBtn);
-
-        const pageIndicator = document.createElement("span");
-        pageIndicator.style.margin = "0 12px";
-        pageIndicator.style.fontSize = "14px";
-        pageIndicator.style.fontWeight = "500";
-        pageIndicator.innerText = `Page ${currentPage} of ${totalPages}`;
-        pagDiv.appendChild(pageIndicator);
-
-        const nextBtn = document.createElement("button");
-        nextBtn.className = "page-btn";
-        nextBtn.disabled = currentPage === totalPages;
-        nextBtn.innerHTML = 'Next <i class="fa-solid fa-chevron-right"></i>';
-        nextBtn.onclick = () => { if(currentPage < totalPages) { currentPage++; renderList(); } };
-        pagDiv.appendChild(nextBtn);
-      }
-
-      function openModal(id) {
-        document.getElementById(id).classList.add("active");
-        document.body.style.overflow = "hidden";
-      }
-
-      function closeModal(id) {
-        document.getElementById(id).classList.remove("active");
-        document.body.style.overflow = "auto";
-      }
-
-      function openDetails(id) {
-        currentViewId = id;
-        const app = applications.find((x) => x.id === id);
-        if (!app) return;
-
-        let statusText = "";
-        switch (app.status) {
-          case "pending": statusText = "Pending Review"; break;
-          case "review": statusText = "Under Review"; break;
-          case "approved": statusText = "Active Vendor"; break;
-          case "rejected": statusText = "Not Approved"; break;
-        }
-
-        document.getElementById("detStatusHtml").className = `badge ${app.status}`;
-        document.getElementById("detStatusHtml").innerText = statusText;
-        document.getElementById("detDate").innerText = app.date;
-        document.getElementById("detBusiness").innerText = app.business;
-        document.getElementById("detOwner").innerText = app.owner;
-
-        const detProductsContainer = document.getElementById("detProductsContainer");
-        detProductsContainer.innerHTML = "";
-        app.products.forEach((prod) => {
-          const wrap = document.createElement("div");
-          wrap.className = "det-product-block";
-          wrap.innerHTML = `
-              <div class="det-product-title"><i class="fa-solid fa-box"></i> ${prod.name}</div>
-              <details class="product-details-dropdown" open>
-                <summary>Ingredients Provided</summary>
-                <div class="dropdown-content">
-                  <p style="margin: 0; line-height: 1.5; color: #4b5563;">${prod.ingredients}</p>
-                </div>
-              </details>
-              <details class="product-details-dropdown">
-                <summary>Step-by-Step Preparation Photos</summary>
-                <div class="dropdown-content">
-                  <div style="background: #f3f4f6; border-radius: 8px; padding: 24px; text-align: center; color: #9ca3af;">
-                    <i class="fa-regular fa-images" style="font-size: 24px;"></i>
-                    <p style="margin: 8px 0 0 0; font-size: 13px;">Photos securely attached to submission.</p>
-                  </div>
-                </div>
-              </details>
-           `;
-          detProductsContainer.appendChild(wrap);
-        });
-
-        const fbSection = document.getElementById("adminFeedbackSection");
-        const fbBox = document.getElementById("detFeedbackBox");
-        if (app.status === "approved" || app.status === "rejected") {
-          fbSection.style.display = "block";
-          fbBox.innerText = app.feedback || 'No remarks provided.';
-          fbBox.className = `feedback-box ${app.status}`;
-        } else {
-          fbSection.style.display = "none";
-        }
-
-        const footer = document.getElementById("detailsFooter");
-        footer.innerHTML = `<button class="btn-ghost" onclick="closeModal('detailsModal')">Close</button>`;
-
-        if (app.status === "pending" || app.status === "review") {
-          if (app.status === "pending") {
-              footer.innerHTML += `<button class="btn-primary" style="background:#0284c7; border-color:#0284c7;" onclick="requestAction('${app.id}', 'review')">Mark Under Review</button>`;
-          }
-          footer.innerHTML += `
-            <button class="btn-primary" style="background:#059669; border-color:#059669;" onclick="requestAction('${app.id}', 'approve')">Approve</button>
-            <button class="btn-danger" onclick="requestAction('${app.id}', 'reject')">Reject</button>
-          `;
-        } else if (app.status === "approved") {
-          footer.innerHTML += `<button class="btn-danger" onclick="requestAction('${app.id}', 'remove')">Remove Access</button>`;
-        }
-
-        openModal("detailsModal");
-      }
-
-      function requestAction(id, type) {
-        actionState = { id, type };
-        document.getElementById("actionInput").value = "";
-        document.getElementById("actionErrorText").style.display = "none";
-        
-        let title = "";
-        let desc = "";
-
-        if (type === 'approve') {
-          title = "Approve Application";
-          desc = "Please provide instructions for the approved student (e.g., where to claim the pass).";
-        } else if (type === 'reject') {
-          title = "Reject Application";
-          desc = "Please provide the reason for rejection.";
-        } else if (type === 'review') {
-          if (confirm("Mark this application as 'Under Review'?")) {
-             processAction();
-          }
-          return;
-        } else if (type === 'remove') {
-          if (confirm("Are you sure you want to revoke this vendor's access? This will move them to the Rejected list.")) {
-             processAction(true);
-          }
-          return;
-        }
-
-        document.getElementById("actionModalTitle").innerText = title;
-        document.getElementById("actionModalDesc").innerText = desc;
-        openModal('actionModal');
-      }
-
-      function submitAction() {
-         const input = document.getElementById("actionInput").value.trim();
-         if (!input) {
-            document.getElementById("actionErrorText").style.display = "block";
-            return;
-         }
-         processAction(false, input);
-      }
-
-      function processAction(skipInput = false, inputVal = "") {
-        const app = applications.find(x => x.id === actionState.id);
-        if (!app) return;
-
-        if (actionState.type === 'approve') {
-          app.status = 'approved';
-          app.feedback = inputVal;
-          showToast("Application approved.");
-        } else if (actionState.type === 'reject') {
-          app.status = 'rejected';
-          app.feedback = inputVal;
-          showToast("Application rejected.");
-        } else if (actionState.type === 'review') {
-          app.status = 'review';
-          showToast("Application marked as Under Review.");
-        } else if (actionState.type === 'remove') {
-          app.status = 'rejected';
-          app.feedback = "Vendor privileges have been revoked by Admin.";
-          showToast("Vendor access revoked.");
-        }
-
-        closeModal('actionModal');
-        closeModal('detailsModal');
-        
-        if (actionState.type === 'review') {
-           switchTab('review');
-        } else if (actionState.type === 'approve') {
-           switchTab('approved');
-        } else if (actionState.type === 'reject' || actionState.type === 'remove') {
-           switchTab('rejected');
-        } else {
-           renderList();
-        }
-      }
-
-      function showToast(message) {
-        const container = document.getElementById("toastContainer");
-        const toast = document.createElement("div");
-        toast.className = "toast";
-        toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> ${message}`;
-        container.appendChild(toast);
-
-        setTimeout(() => {
-          toast.style.opacity = "0";
-          toast.style.transform = "translateX(100%)";
-          setTimeout(() => toast.remove(), 300);
-        }, 3000);
-      }
-    </script>
+    
+    <!-- Scripts -->
+    <script src="../../script/admin-js/student-applications.js"></script>
   </body>
 </html>
