@@ -173,18 +173,19 @@
             </tbody>
           </table>
 
-          <div class="table-footer">
-            <div class="table-info">
-              Showing <span id="pageStart">0</span> to <span id="pageEnd">0</span> of
-              <span id="totalEntries">0</span> entries
+          <!-- pagination -->
+          <div class="pagination-controls">
+            <div class="pagination-info">
+              Showing <span id="pageStart">1</span> to <span id="pageEnd">10</span> of <span id="totalEntries">120</span> entries
             </div>
-            <div class="pagination" id="paginationControls">
-              <button class="btn-page" id="prevPage" disabled>
-                <i class="fa-solid fa-chevron-left"></i> Previous
-              </button>
-              <button class="btn-page" id="nextPage">
-                Next <i class="fa-solid fa-chevron-right"></i>
-              </button>
+            <div class="pagination-nav" id="paginationControls">
+              <button class="page-btn disabled" id="prevPage"><i class="fa-solid fa-chevron-left"></i></button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <span class="page-dots">...</span>
+              <button class="page-btn">12</button>
+              <button class="page-btn" id="nextPage"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
           </div>
         </div>
@@ -195,53 +196,56 @@
           <div class="empty-text">No complaints found</div>
         </div>
 
-        <!-- ════════════════════════════════════════
-             DETAIL VIEW PANEL
-        ════════════════════════════════════════ -->
-        <div class="detail-panel" id="complaintDetailPanel">
-          <!-- Header -->
-          <div class="dp-header">
-            <div class="dp-header-info">
-              <span class="dp-id" id="dpIdLocation">RPT-081 &bull; Canteen A</span>
-              <h2 id="dpTitle">Food quality issue</h2>
+    <!-- View Details Modal -->
+    <div class="modal-backdrop" id="detailsModal">
+      <div class="modal-panel">
+        <div class="modal-header">
+          <h2 id="dpTitle">Complaint Details</h2>
+          <button class="btn-close" onclick="closeModal('detailsModal')">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="detail-grid">
+            <div class="detail-item">
+              <span class="detail-label">Complaint ID</span>
+              <span class="detail-value" id="dpIdLocation"></span>
             </div>
-            <button class="btn-close-dp" id="closeDetailPanel"><i class="fa-solid fa-xmark"></i></button>
+            <div class="detail-item">
+              <span class="detail-label">Status</span>
+              <span class="status-pill" id="detStatusHtml"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Date Submitted</span>
+              <span class="detail-value" id="dpDate"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Student Name</span>
+              <span class="detail-value" id="dpStudentName"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Email</span>
+              <span class="detail-value" id="dpEmail"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Contact Number</span>
+              <span class="detail-value" id="dpContact"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Order Reference</span>
+              <span class="detail-value" id="dpOrderRef"></span>
+            </div>
           </div>
 
-          <div class="dp-body">
-            <!-- Student Information Section -->
-            <div class="dp-section-title">Student Information</div>
-            <div class="dp-info-grid">
-              <div class="dp-info-item">
-                <label>Student Name</label>
-                <div id="dpStudentName">John Doe</div>
-              </div>
-              <div class="dp-info-item">
-                <label>Email</label>
-                <div id="dpEmail">john.doe@wm.edu.ph</div>
-              </div>
-              <div class="dp-info-item">
-                <label>Contact Number</label>
-                <div id="dpContact">0912 345 6789</div>
-              </div>
-              <div class="dp-info-item">
-                <label>Order Reference</label>
-                <div id="dpOrderRef">#ORD-2026-0000</div>
-              </div>
-              <div class="dp-info-item">
-                <label>Submission Date & Time</label>
-                <div id="dpDate">Mar 01, 2026</div>
-              </div>
-            </div>
-
-            <!-- Description Section -->
-            <div class="dp-section-title">Description</div>
+          <div style="margin-bottom: 24px">
+            <span class="detail-label" style="font-size: 14px; border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; margin-bottom: 16px; display: block;">Description</span>
             <div class="dp-description">
-              <p id="dpDescriptionText">Full complaint message goes here.</p>
+              <p id="dpDescriptionText"></p>
             </div>
+          </div>
 
-            <!-- Evidence Section -->
-            <div class="dp-section-title">Evidence</div>
+          <div style="margin-bottom: 24px">
+            <span class="detail-label" style="font-size: 14px; border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; margin-bottom: 16px; display: block;">Evidence</span>
             <div class="dp-evidence" id="dpEvidenceContainer">
               <a href="#" class="evidence-card">
                 <div class="evidence-icon"><i class="fa-solid fa-file-pdf"></i></div>
@@ -251,26 +255,53 @@
                 </div>
               </a>
             </div>
+          </div>
 
-            <!-- Activity Timeline Section -->
-            <div class="dp-section-title">Activity</div>
+          <div style="margin-bottom: 24px">
+            <span class="detail-label" style="font-size: 14px; border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; margin-bottom: 16px; display: block;">Activity</span>
             <div class="dp-timeline" id="dpTimelineContainer">
               <!-- Chronological Logs -->
             </div>
+          </div>
 
-            <!-- Reply / Note Section -->
+          <div style="margin-bottom: 24px">
+            <span class="detail-label" style="font-size: 14px; border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; margin-bottom: 16px; display: block;">Add Reply / Note</span>
             <div class="dp-reply">
               <textarea rows="3" placeholder="Write a note or reply to student..." id="dpReplyInput"></textarea>
               <div class="dp-actions">
                 <button class="dp-btn btn-note" id="dpAddNote"><i class="fa-regular fa-clipboard"></i> Add Internal Note</button>
                 <button class="dp-btn btn-send" id="dpSendReply"><i class="fa-regular fa-paper-plane"></i> Send Reply</button>
-                <button class="dp-btn btn-mark-resolved" id="dpMarkResolved"><i class="fa-solid fa-check"></i> Mark Resolved</button>
               </div>
             </div>
+          </div>
 
+        </div>
+        <div class="modal-footer" id="detailsFooter" style="display: flex; justify-content: flex-end;">
+           <button class="dp-btn btn-mark-resolved" id="dpMarkResolved"><i class="fa-solid fa-check"></i> Mark Resolved</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal-backdrop" id="confirmModal">
+      <div class="modal-panel" style="max-width: 400px; text-align: center">
+        <div class="modal-body" style="padding-top: 32px">
+          <div class="modal-icon" style="font-size: 48px; color: #ef4444; margin-bottom: 16px" id="confirmIcon">
+            <i class="fa-solid fa-circle-exclamation"></i>
+          </div>
+          <h2 style="font-size: 20px; font-weight: 800; color: #0f172a; margin-bottom: 8px;" id="confirmTitle">Confirm Action</h2>
+          <p style="font-size: 14px; color: #64748b; margin-bottom: 24px" id="confirmMessage">Are you sure you want to do this?</p>
+          
+          <div id="confirmInputContainer" style="display: none; margin-bottom: 24px; text-align: left;">
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 8px;" id="confirmInputLabel">Reason</label>
+            <textarea id="confirmInput" class="form-control" rows="3" placeholder="Enter reason here..." style="width: 100%; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; font-family: inherit; font-size: 14px; resize: vertical; box-sizing: border-box; outline: none; transition: border-color 0.2s;"></textarea>
+          </div>
+
+          <div class="form-actions" style="display: flex; justify-content: center; gap: 12px">
+             <button class="btn-submit" id="submitConfirmBtn" style="padding: 10px 24px; border: none; color: white; border-radius: 8px; font-weight: 600; cursor: pointer; background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);">Confirm</button>
+            <button class="btn-ghost" id="cancelConfirmBtn" style="padding: 10px 24px; border: 1px solid #cbd5e1; background: transparent; color: #475569; border-radius: 8px; font-weight: 600; cursor: pointer;">Cancel</button>
           </div>
         </div>
-
       </div>
     </div>
   </div>

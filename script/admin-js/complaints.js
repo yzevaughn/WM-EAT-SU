@@ -207,10 +207,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 <td>${c.date}</td>
                 <td class="actions-col">
                   <div class="action-buttons">
-                    <button class="btn-action btn-details" data-id="${c.id}">View Details</button>
                     ${c.status === "In Progress" ? 
                         `<button class="btn-action btn-approve btn-resolve" data-id="${c.id}">Resolve</button>` : 
                         ""}
+                    <button class="btn-action btn-details" data-id="${c.id}">View Details</button>
                   </div>
                 </td>
             `;
@@ -231,30 +231,44 @@ document.addEventListener("DOMContentLoaded", function() {
             btn.addEventListener("click", function(e) {
                 e.stopPropagation();
                 const id = this.getAttribute("data-id");
-                if (confirm(`Are you sure you want to mark ${id} as Resolved?`)) {
-                    const comp = complaints.find(c => c.id === id);
-                    if (comp) {
-                        comp.status = "Resolved";
-                        updateStats();
-                        renderComplaints();
+                
+                showConfirmModal({
+                    title: "Resolve Complaint",
+                    message: `Are you sure you want to mark complaint ${id} as Resolved?`,
+                    icon: "fa-solid fa-check-circle",
+                    iconColor: "#10b981",
+                    confirmText: "Resolve",
+                    requireInput: false,
+                    onConfirm: () => {
+                        const comp = complaints.find(c => c.id === id);
+                        if (comp) {
+                            comp.status = "Resolved";
+                            updateStats();
+                            renderComplaints();
+                        }
                     }
-                }
+                });
             });
         });
 
         // Update Pagination UI
-        document.getElementById("pageStart").innerText = startIndex + 1;
-        document.getElementById("pageEnd").innerText = endIndex;
+        if (filtered.length === 0) {
+            document.getElementById("pageStart").innerText = 0;
+            document.getElementById("pageEnd").innerText = 0;
+        } else {
+            document.getElementById("pageStart").innerText = startIndex + 1;
+            document.getElementById("pageEnd").innerText = endIndex;
+        }
         document.getElementById("totalEntries").innerText = filtered.length;
 
         const prevBtn = document.getElementById("prevPage");
         const nextBtn = document.getElementById("nextPage");
 
-        if (currentPage <= 1) prevBtn.disabled = true;
-        else prevBtn.disabled = false;
+        if (currentPage <= 1) prevBtn.classList.add("disabled");
+        else prevBtn.classList.remove("disabled");
 
-        if (currentPage >= totalPages || filtered.length === 0) nextBtn.disabled = true;
-        else nextBtn.disabled = false;
+        if (currentPage >= totalPages || filtered.length === 0) nextBtn.classList.add("disabled");
+        else nextBtn.classList.remove("disabled");
     }
 
     // ════════════════════════════════════════
@@ -300,16 +314,83 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (pNext) {
         pNext.addEventListener('click', () => {
-            currentPage++;
-            renderComplaints();
+            const searchTerm = document.getElementById("searchInput")?.value.toLowerCase() || "";
+            let filtered = complaints.filter(c => {
+                const matchStatus = activeStatus === "All" || c.status === activeStatus;
+                const matchSearch = c.subject.toLowerCase().includes(searchTerm) || c.id.toLowerCase().includes(searchTerm) || c.user.toLowerCase().includes(searchTerm) || c.vendor.toLowerCase().includes(searchTerm);
+                return matchStatus && matchSearch;
+            });
+            const totalPages = Math.ceil(filtered.length / itemsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderComplaints();
+            }
         });
     }
+
+    // ════════════════════════════════════════
+    // MODAL LOGIC
+    // ════════════════════════════════════════
+
+    window.closeModal = function(modalId) {
+        document.getElementById(modalId).classList.remove('active');
+    };
+
+    let confirmCallback = null;
+
+    function showConfirmModal(options) {
+        const modal = document.getElementById("confirmModal");
+        const title = document.getElementById("confirmTitle");
+        const message = document.getElementById("confirmMessage");
+        const icon = document.getElementById("confirmIcon");
+        const submitBtn = document.getElementById("submitConfirmBtn");
+        const inputContainer = document.getElementById("confirmInputContainer");
+        const confirmInput = document.getElementById("confirmInput");
+        
+        title.textContent = options.title || "Confirm Action";
+        message.textContent = options.message || "Are you sure you want to do this?";
+        submitBtn.textContent = options.confirmText || "Confirm";
+        
+        if (options.icon) {
+            icon.innerHTML = `<i class="${options.icon}"></i>`;
+            icon.style.color = options.iconColor || "#ef4444";
+        }
+        
+        if (options.requireInput) {
+            inputContainer.style.display = "block";
+            confirmInput.value = "";
+        } else {
+            inputContainer.style.display = "none";
+        }
+        
+        confirmCallback = options.onConfirm;
+        modal.classList.add("active");
+    }
+
+    document.getElementById("cancelConfirmBtn").addEventListener("click", () => {
+        closeModal("confirmModal");
+        confirmCallback = null;
+    });
+
+    document.getElementById("submitConfirmBtn").addEventListener("click", () => {
+        const inputContainer = document.getElementById("confirmInputContainer");
+        const confirmInput = document.getElementById("confirmInput");
+        
+        if (inputContainer.style.display === "block" && !confirmInput.value.trim()) {
+            alert("Please provide a reason.");
+            return;
+        }
+        
+        if (confirmCallback) {
+            confirmCallback(confirmInput.value.trim());
+        }
+        closeModal("confirmModal");
+    });
 
     // ════════════════════════════════════════
     // DETAIL PANEL LOGIC
     // ════════════════════════════════════════
 
-    const detailPanel = document.getElementById("complaintDetailPanel");
     let currentDetailId = null;
 
     function openDetailPanel(id) {
@@ -320,7 +401,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Populate header
         document.getElementById("dpIdLocation").innerHTML = `${c.id} &bull; ${c.vendor}`;
-        document.getElementById("dpTitle").textContent = c.subject;
 
         // Populate student info
         document.getElementById("dpStudentName").textContent = c.user;
@@ -328,6 +408,13 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("dpContact").textContent = detailMocks.contactNumber;
         document.getElementById("dpOrderRef").textContent = c.orderId;
         document.getElementById("dpDate").textContent = c.date;
+
+        // Populate status pill
+        let statusClass = "status-review";
+        if (c.status === "Resolved") statusClass = "status-active";
+        else if (c.status === "Closed") statusClass = "status-rejected";
+        document.getElementById("detStatusHtml").className = `status-pill ${statusClass}`;
+        document.getElementById("detStatusHtml").textContent = c.status;
 
         // Populate description
         document.getElementById("dpDescriptionText").textContent = c.message;
@@ -362,30 +449,30 @@ document.addEventListener("DOMContentLoaded", function() {
             markResolvedBtn.style.display = "none";
         }
 
-        // Show panel and scroll into view
-        detailPanel.style.display = "block";
-        
-        // Scroll slightly after a small delay to ensure rendering
-        setTimeout(() => {
-            detailPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 50);
+        // Show modal
+        document.getElementById("detailsModal").classList.add('active');
     }
-
-    document.getElementById("closeDetailPanel").addEventListener("click", () => {
-        detailPanel.style.display = "none";
-    });
 
     document.getElementById("dpMarkResolved").addEventListener("click", () => {
         if(!currentDetailId) return;
-        if(confirm(`Are you sure you want to mark ${currentDetailId} as Resolved?`)) {
-            const comp = complaints.find(c => c.id === currentDetailId);
-            if(comp) {
-                comp.status = "Resolved";
-                updateStats();
-                renderComplaints();
-                detailPanel.style.display = "none";
+        
+        showConfirmModal({
+            title: "Resolve Complaint",
+            message: `Are you sure you want to mark complaint ${currentDetailId} as Resolved?`,
+            icon: "fa-solid fa-check-circle",
+            iconColor: "#10b981",
+            confirmText: "Resolve",
+            requireInput: false,
+            onConfirm: () => {
+                const comp = complaints.find(c => c.id === currentDetailId);
+                if(comp) {
+                    comp.status = "Resolved";
+                    updateStats();
+                    renderComplaints();
+                    closeModal("detailsModal");
+                }
             }
-        }
+        });
     });
 
     document.getElementById("dpSendReply").addEventListener("click", () => {
