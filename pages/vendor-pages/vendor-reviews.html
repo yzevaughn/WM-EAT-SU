@@ -14,8 +14,14 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="stylesheet" href="../../css/navbar.css" />
+    <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="../../css/admin-css/student-applications.css"
+    />
     <link rel="stylesheet" href="../../css/vendor-css/reviews.css" />
     <link rel="stylesheet" href="../../css/vendor-css/menu.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
@@ -150,7 +156,7 @@
             <div class="metric-card">
               <div class="metric-info">
                 <h3>Total Reviews</h3>
-                <p>6</p>
+                <p id="totalReviewsCount">0</p>
               </div>
               <div class="metric-icon icon-blue">
                 <i class="fas fa-star"></i>
@@ -160,7 +166,7 @@
             <div class="metric-card">
               <div class="metric-info">
                 <h3>Average Rating</h3>
-                <p>4.3</p>
+                <p id="avgRatingValue">0.0</p>
               </div>
               <div class="metric-icon icon-gold">
                 <i class="fas fa-chart-line"></i>
@@ -170,7 +176,7 @@
             <div class="metric-card">
               <div class="metric-info">
                 <h3>Positive Feedback</h3>
-                <p>83%</p>
+                <p id="positivePercentage">0%</p>
               </div>
               <div class="metric-icon icon-green">
                 <i class="fas fa-thumbs-up"></i>
@@ -180,7 +186,7 @@
             <div class="metric-card">
               <div class="metric-info">
                 <h3>Pending Responses</h3>
-                <p>4</p>
+                <p id="pendingCount">0</p>
               </div>
               <div class="metric-icon icon-orange">
                 <i class="fas fa-clock"></i>
@@ -188,96 +194,125 @@
             </div>
           </div>
 
-          <h2
-            style="
-              font-size: 20px;
-              font-weight: 700;
-              color: #1f2937;
-              margin: 32px 0 16px 0;
-            "
-          >
-            Select Item to View Reviews
-          </h2>
-          <div
-            class="menu-grid"
-            id="menuGrid"
-            style="margin-left: 0; padding-left: 0; max-width: 100%"
-          >
-            <div class="menu-item-card" data-category="meals">
-              <div class="item-image">
-                <img src="../../images/burger.avif" alt="Classic Burger Meal" />
-                <span class="category-badge">Meals</span>
+          <!-- REVIEW ANALYTICS CHART -->
+          <div class="revenue-section" style="margin-bottom: 32px">
+            <div class="revenue-header">
+              <div class="revenue-title">
+                <h2>
+                  <i class="fa-solid fa-chart-line color-purple"></i> Review
+                  Performance
+                </h2>
+                <p>Average rating and review count over time</p>
               </div>
-              <div class="item-info">
-                <h3 class="item-name">Classic Burger Meal</h3>
-                <p class="item-description">
-                  Juicy beef burger with fries and a drink
-                </p>
-              </div>
-              <div class="actions">
-                <button
-                  class="see-review-btn"
-                  style="
-                    width: 100%;
-                    background: #10b981;
-                    color: white;
-                    border: none;
-                    padding: 10px 16px;
-                    border-radius: 8px;
-                    cursor: pointer;
-                    font-size: 14px;
-                    font-weight: 600;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 8px;
-                    transition: background 0.2s;
-                  "
-                  onmouseover="this.style.background = '#059669'"
-                  onmouseout="this.style.background = '#10b981'"
-                >
-                  <i class="fas fa-star"></i>
-                  See Reviews
+              <div class="revenue-controls filter-tabs">
+                <button class="filter-tab active" data-range="daily">
+                  Daily
                 </button>
+                <button class="filter-tab" data-range="weekly">Weekly</button>
+                <button class="filter-tab" data-range="monthly">Monthly</button>
               </div>
             </div>
+            <div
+              class="chart-container"
+              style="
+                position: relative;
+                height: 300px;
+                width: 100%;
+                margin-top: 1.5rem;
+              "
+            >
+              <canvas id="reviewChart"></canvas>
+            </div>
+          </div>
 
-            <div class="menu-item-card" data-category="snacks">
-              <div class="item-image">
-                <img src="../../images/burger.avif" alt="Crispy French Fries" />
-                <span class="category-badge">Snacks</span>
+          <!-- ALL REVIEWS DATA GRID -->
+          <div class="reviews-list-section">
+            <h2
+              style="
+                font-size: 20px;
+                font-weight: 700;
+                color: #1f2937;
+                margin: 0 0 16px 0;
+              "
+            >
+              All Reviews
+            </h2>
+
+            <div class="table-container">
+              <div
+                class="table-controls"
+                style="
+                  padding: 24px;
+                  border-bottom: 1px solid #e2e8f0;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  flex-wrap: wrap;
+                  gap: 16px;
+                "
+              >
+                <div class="search-box">
+                  <i class="fa-solid fa-search"></i>
+                  <input
+                    type="text"
+                    id="reviewSearchInput"
+                    placeholder="Search customer or review keyword..."
+                  />
+                </div>
+                <div class="filter-group">
+                  <div class="filter-item">
+                    <label for="foodFilter"
+                      ><i class="fa-solid fa-utensils"></i> Food Item:</label
+                    >
+                    <select id="foodFilter" class="custom-select">
+                      <option value="All">All Items</option>
+                      <!-- Dynamic options -->
+                    </select>
+                  </div>
+                  <div class="filter-item">
+                    <label for="ratingFilter"
+                      ><i class="fa-solid fa-filter"></i> Rating:</label
+                    >
+                    <select id="ratingFilter" class="custom-select">
+                      <option value="All">All Ratings</option>
+                      <option value="5">5 stars</option>
+                      <option value="4">4 stars</option>
+                      <option value="3">3 stars</option>
+                      <option value="2">2 stars</option>
+                      <option value="1">1 star</option>
+                    </select>
+                  </div>
+                </div>
               </div>
-              <div class="item-info">
-                <h3 class="item-name">Crispy French Fries</h3>
-                <p class="item-description">
-                  Golden crispy fries with sea salt
-                </p>
-              </div>
-              <div class="actions">
-                <button
-                  class="see-review-btn"
-                  style="
-                    width: 100%;
-                    background: #10b981;
-                    color: white;
-                    border: none;
-                    padding: 10px 16px;
-                    border-radius: 8px;
-                    cursor: pointer;
-                    font-size: 14px;
-                    font-weight: 600;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 8px;
-                    transition: background 0.2s;
-                  "
-                  onmouseover="this.style.background = '#059669'"
-                  onmouseout="this.style.background = '#10b981'"
-                >
-                  <i class="fas fa-star"></i>
-                  See Reviews
-                </button>
+              <table class="data-grid">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Item</th>
+                    <th>Rating</th>
+                    <th>Review</th>
+                  </tr>
+                </thead>
+                <tbody id="reviewsTableBody">
+                  <!-- Rows injected by JS -->
+                </tbody>
+              </table>
+              <div class="pagination-controls">
+                <div class="pagination-info">
+                  Showing <span id="pageStart">1</span> to
+                  <span id="pageEnd">10</span> of
+                  <span id="totalEntries">0</span> entries
+                </div>
+                <div class="pagination-nav">
+                  <button class="page-btn disabled" id="prevPage">
+                    <i class="fa-solid fa-chevron-left"></i>
+                  </button>
+                  <div id="pageNumbers" style="display: flex; gap: 4px"></div>
+                  <button class="page-btn" id="nextPage">
+                    <i class="fa-solid fa-chevron-right"></i>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -285,106 +320,6 @@
       </div>
     </div>
 
-    <!-- Reviews Modal -->
-    <div class="modal" id="reviewsModal">
-      <div class="modal-overlay" id="reviewsModalOverlay"></div>
-      <div
-        class="modal-content"
-        style="max-width: 600px; max-height: 90vh; overflow-y: auto"
-      >
-        <div class="modal-header">
-          <h2 id="reviewsModalTitle">Item Reviews</h2>
-          <button class="modal-close" id="reviewsModalClose">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="review-card">
-            <div class="review-header">
-              <div class="reviewer-info">
-                <h3>Sarah Johnson</h3>
-                <p>March 5, 2026</p>
-              </div>
-              <div class="rating">
-                <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                </div>
-                <span>5.0</span>
-              </div>
-            </div>
-            <div class="review-text">
-              "The food was absolutely delicious! Juicy and hot, perfectly
-              cooked. Will definitely be back!"
-            </div>
-          </div>
-
-          <div class="review-card">
-            <div class="review-header">
-              <div class="reviewer-info">
-                <h3>Michael Smith</h3>
-                <p>March 3, 2026</p>
-              </div>
-              <div class="rating">
-                <div class="stars">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="far fa-star"></i>
-                </div>
-                <span>4.0</span>
-              </div>
-            </div>
-            <div class="review-text">
-              "Great taste, but preparation took a bit longer than expected.
-              Still worth it!"
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const seeReviewBtns = document.querySelectorAll(".see-review-btn");
-        const reviewsModal = document.getElementById("reviewsModal");
-        const reviewsModalOverlay = document.getElementById(
-          "reviewsModalOverlay",
-        );
-        const reviewsModalClose = document.getElementById("reviewsModalClose");
-        const reviewsModalTitle = document.getElementById("reviewsModalTitle");
-
-        function openModal(itemName) {
-          if (reviewsModalTitle) {
-            reviewsModalTitle.textContent = "Reviews for " + itemName;
-          }
-          reviewsModal.classList.add("active");
-        }
-
-        function closeModal(e) {
-          if (e) e.preventDefault();
-          reviewsModal.classList.remove("active");
-        }
-
-        seeReviewBtns.forEach((btn) => {
-          btn.addEventListener("click", function () {
-            const card = this.closest(".menu-item-card");
-            const itemName = card
-              ? card.querySelector(".item-name").textContent
-              : "Item";
-            openModal(itemName);
-          });
-        });
-
-        if (reviewsModalClose)
-          reviewsModalClose.addEventListener("click", closeModal);
-        if (reviewsModalOverlay)
-          reviewsModalOverlay.addEventListener("click", closeModal);
-      });
-    </script>
+    <script src="../../script/vendor-js/vendor-reviews.js"></script>
   </body>
 </html>
