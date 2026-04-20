@@ -605,7 +605,7 @@
         <div class="food-vendor"><i class="fa-solid fa-store"></i> ${f.vendor}</div>
         <div class="food-footer">
           <div class="food-price">${f.price}</div>
-          <button class="add-btn add-cart-btn" data-id="${f.id}">
+          <button class="add-btn add-cart-btn" data-id="${f.id}" data-name="${f.name}">
             <i class="fa-solid fa-plus"></i> Add to Cart
           </button>
         </div>
@@ -627,11 +627,25 @@
         grid.querySelectorAll(".add-cart-btn").forEach((btn) => {
           btn.addEventListener("click", (e) => {
             e.stopPropagation();
-            showToast(
-              "success",
-              "fa-check-circle",
-              "Item added to cart successfully!",
-            );
+
+            const itemName = btn.getAttribute("data-name");
+
+            // Visual button feedback
+            const originalHTML =
+              '<i class="fa-solid fa-plus"></i> Add to Cart';
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Added!';
+            btn.style.background = "#16a34a";
+            btn.style.boxShadow = "0 4px 14px rgba(22, 163, 74, 0.35)";
+
+            // Show success toast
+            showToast("success", "fa-cart-plus", `"${itemName}" added to cart!`);
+
+            // Reset button after delay
+            setTimeout(() => {
+              btn.innerHTML = originalHTML;
+              btn.style.background = "";
+              btn.style.boxShadow = "";
+            }, 2000);
           });
         });
 
@@ -717,12 +731,12 @@
           document.getElementById("foodModal").classList.remove("open");
       });
       document.getElementById("modalAddBtn").onclick = () => {
-        document.getElementById("foodModal").classList.remove("open");
         showToast(
           "success",
-          "fa-check-circle",
-          "Item added to cart successfully!",
+          "fa-cart-plus",
+          `"${activeFood.name}" added to cart!`,
         );
+        document.getElementById("foodModal").classList.remove("open");
       };
 
       /* ─────────── FOOD FILTERS ─────────── */

@@ -345,44 +345,33 @@ document.addEventListener("DOMContentLoaded", () => {
      ============================================================ */
   document.querySelectorAll(".add-to-cart-btn").forEach((btn) => {
     btn.addEventListener("click", function (e) {
-      e.stopPropagation(); // Stop click from bubbling up to the slider track
+      e.stopPropagation();
 
       const itemName = this.getAttribute("data-item");
-      const isRecentOrder = itemName !== null;
+      const isRecentOrder = this.closest(".recent-orders-section") !== null;
 
-      if (isRecentOrder) {
-        // For recent orders: add to cart and show toast
-        const price = this.getAttribute("data-price");
-        const quantity = this.getAttribute("data-quantity") || 1;
+      // Visual button feedback
+      const originalIcon = '<i class="fa-solid fa-cart-shopping"></i>';
+      const originalText = isRecentOrder ? "Add to Cart Again" : "Add to Cart";
+      const originalHTML = `${originalIcon} ${originalText}`;
 
-        // Visual button feedback
-        const original = this.innerHTML;
-        this.innerHTML = '<i class="fa-solid fa-check"></i> Added!';
-        this.style.background = "#16a34a";
-        this.style.boxShadow = "0 4px 14px rgba(22, 163, 74, 0.35)";
+      this.innerHTML = '<i class="fa-solid fa-check"></i> Added!';
+      this.style.background = "#16a34a";
+      this.style.boxShadow = "0 4px 14px rgba(22, 163, 74, 0.35)";
 
-        // Show success toast
-        showToast(
-          "success",
-          "fa-cart-plus",
-          `"${itemName}" added to cart again!`,
-        );
+      // Show success toast
+      const toastMsg = isRecentOrder
+        ? `"${itemName}" added to cart again!`
+        : `"${itemName}" added to cart!`;
 
-        // Reset button after delay
-        setTimeout(() => {
-          this.innerHTML = original;
-          this.style.background = "";
-          this.style.boxShadow = "";
-        }, 2000);
-      } else {
-        // For food slider: original behavior
-        showToast("success", "fa-check-circle", "Item added to cart!");
+      showToast("success", "fa-cart-plus", toastMsg);
 
-        // Redirect after a short delay
-        setTimeout(() => {
-          window.location.href = "student-browse-food.html";
-        }, 600);
-      }
+      // Reset button after delay
+      setTimeout(() => {
+        this.innerHTML = originalHTML;
+        this.style.background = "";
+        this.style.boxShadow = "";
+      }, 2000);
     });
   });
   /* ============================================================
