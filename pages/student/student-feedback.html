@@ -111,7 +111,7 @@
           <li>
             <a href="student-cart.html" class="nav-link">
               <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
-              <span class="nav-badge">3</span>
+              <span class="nav-badge" style="display:none">0</span>
             </a>
           </li>
           <li>
@@ -327,6 +327,8 @@
     <!-- ════════════════════════════════════════
          JAVASCRIPT
          ════════════════════════════════════════ -->
+    <!-- Shared cart module -->
+    <script src="../../script/student/cart.js"></script>
     <script>
       // Mock Data
       let reports = [
@@ -364,6 +366,7 @@
 
       // Initialize
       document.addEventListener("DOMContentLoaded", () => {
+        updateAllCartBadges();
         renderReports();
 
         // Setup filter listeners

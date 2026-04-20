@@ -110,7 +110,7 @@
           <li>
             <a href="student-cart.html" class="nav-link">
               <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
-              <span class="nav-badge">3</span>
+              <span class="nav-badge" style="display:none">0</span>
             </a>
           </li>
           <li>
@@ -208,7 +208,10 @@
     <!-- TOAST CONTAINER -->
     <div id="toast-container"></div>
 
+    <!-- Shared cart module -->
+    <script src="../../script/student/cart.js"></script>
     <script>
+      let activeShopFood = null;
       /* ─────────── SHARED DATA ─────────── */
       const shops = [
         {
@@ -395,6 +398,7 @@
             '<div style="padding:60px;text-align:center;color:#94a3b8;font-size:18px;">Shop not found.</div>';
           return;
         }
+        updateAllCartBadges();
 
         document.title = `WM EAT SU — ${shop.name}`;
 
@@ -470,7 +474,17 @@
         grid.querySelectorAll(".add-cart-btn").forEach(btn => {
           btn.addEventListener("click", e => {
             e.stopPropagation();
-            showToast("success", "fa-check-circle", "Item added to cart successfully!");
+            const foodId  = parseInt(btn.getAttribute("data-id"));
+            const f       = foods.find(x => x.id === foodId);
+            if (!f) return;
+            const priceNum = parseFloat(f.price.replace(/[^\d.]/g, "")) || 0;
+            addToCart({ id: makeItemId(f.name, f.vendor), name: f.name, price: priceNum, vendor: f.vendor, img: f.img, qty: 1 });
+            const orig = '<i class="fa-solid fa-plus"></i> Add to Cart';
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Added!';
+            btn.style.background = "#16a34a";
+            btn.style.boxShadow  = "0 4px 14px rgba(22,163,74,.35)";
+            showToast("success", "fa-cart-plus", `"${f.name}" added to cart!`);
+            setTimeout(() => { btn.innerHTML = orig; btn.style.background = ""; btn.style.boxShadow = ""; }, 2000);
           });
         });
       }
@@ -479,6 +493,7 @@
       function openModal(id) {
         const f = foods.find(x => x.id === id);
         if (!f) return;
+        activeShopFood = f;
         document.getElementById("modalImg").src = f.img;
         document.getElementById("modalName").textContent = f.name;
         document.getElementById("modalPrice").textContent = f.price;
@@ -510,8 +525,12 @@
           document.getElementById("foodModal").classList.remove("open");
       });
       document.getElementById("modalAddBtn").onclick = () => {
+        if (activeShopFood) {
+          const priceNum = parseFloat(activeShopFood.price.replace(/[^\d.]/g, "")) || 0;
+          addToCart({ id: makeItemId(activeShopFood.name, activeShopFood.vendor), name: activeShopFood.name, price: priceNum, vendor: activeShopFood.vendor, img: activeShopFood.img, qty: 1 });
+        }
         document.getElementById("foodModal").classList.remove("open");
-        showToast("success", "fa-check-circle", "Item added to cart successfully!");
+        showToast("success", "fa-cart-plus", `"${activeShopFood?.name ?? "Item"}" added to cart!`);
       };
 
       /* ─────────── TOAST ─────────── */

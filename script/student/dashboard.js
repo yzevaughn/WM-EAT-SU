@@ -1,3 +1,4 @@
+/* Load shared cart module functions inline — cart.js must be loaded before dashboard.js */
 document.addEventListener("DOMContentLoaded", () => {
   /* ============================================================
      1. FOOD SLIDER
@@ -341,14 +342,35 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ============================================================
-     4. ADD TO CART LOGIC
+     4. ADD TO CART LOGIC (localStorage-backed)
      ============================================================ */
+
+  // Sync badge on page load
+  updateAllCartBadges();
+
   document.querySelectorAll(".add-to-cart-btn").forEach((btn) => {
     btn.addEventListener("click", function (e) {
       e.stopPropagation();
 
       const itemName = this.getAttribute("data-item");
+      const itemPrice = parseFloat(this.getAttribute("data-price")) || 0;
+      const itemQty   = parseInt(this.getAttribute("data-quantity")) || 1;
       const isRecentOrder = this.closest(".recent-orders-section") !== null;
+
+      // Derive vendor from sibling element if present
+      const card = this.closest(".food-card");
+      const vendorEl = card ? card.querySelector(".food-vendor") : null;
+      const vendor = vendorEl ? vendorEl.textContent.trim().replace(/^[^\w]+/, "") : "";
+
+      // Derive image
+      const imgEl = card ? card.querySelector("img") : null;
+      const img = imgEl ? imgEl.src : "";
+
+      // Build a stable ID
+      const itemId = makeItemId(itemName, vendor);
+
+      // Persist to localStorage
+      addToCart({ id: itemId, name: itemName, price: itemPrice, vendor, img, qty: itemQty });
 
       // Visual button feedback
       const originalIcon = '<i class="fa-solid fa-cart-shopping"></i>';
@@ -363,7 +385,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const toastMsg = isRecentOrder
         ? `"${itemName}" added to cart again!`
         : `"${itemName}" added to cart!`;
-
       showToast("success", "fa-cart-plus", toastMsg);
 
       // Reset button after delay
@@ -498,11 +519,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Modal add to cart
   modalAddBtn.addEventListener("click", () => {
-    showToast(
-      "success",
-      "fa-cart-plus",
-      `"${modalName.textContent}" added to cart!`,
-    );
+    const name   = modalName.textContent;
+    const price  = parseFloat(modalPrice.textContent.replace(/[^\d.]/g, "")) || 0;
+    const vendor = modalVendor.textContent.trim().replace(/^[^\w]+/, "");
+    const img    = modalImg.src;
+    const itemId = makeItemId(name, vendor);
+
+    addToCart({ id: itemId, name, price, vendor, img, qty: 1 });
+
+    showToast("success", "fa-cart-plus", `"${name}" added to cart!`);
     foodModal.classList.remove("open");
     document.body.style.overflow = "";
   });

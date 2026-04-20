@@ -13,7 +13,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="stylesheet" href="../../css/navbar.css" />
-
     <link rel="stylesheet" href="../../css/student/cart.css" />
   </head>
   <body>
@@ -98,8 +97,6 @@
     <div class="layout">
       <!-- ── SIDEBAR ── -->
       <div class="left-nav" id="sidebar">
-        <!-- logo shown on mobile inside sidebar -->
-
         <ul class="nav-list">
           <li>
             <a href="student-dashboard.html" class="nav-link">
@@ -114,7 +111,7 @@
           <li>
             <a href="student-cart.html" class="nav-link active">
               <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
-              <span class="nav-badge">3</span>
+              <span class="nav-badge" style="display:none">0</span>
             </a>
           </li>
           <li>
@@ -132,95 +129,11 @@
 
       <div class="main-content">
         <p class="cart-page-title">Cart</p>
-        <p class="cart-page-sub" id="cartSubtitle">3 item(s) in your cart</p>
+        <p class="cart-page-sub" id="cartSubtitle">0 item(s) in your cart</p>
 
         <div class="cart-container">
           <!-- ITEMS -->
-          <div class="cart-items" id="cartItems">
-            <div class="cart-item" data-price="30" data-prep="8">
-              <button class="item-remove" title="Remove item">
-                <i class="fa-solid fa-trash"></i>
-              </button>
-              <div class="item-image">
-                <img src="../../images/burger.avif" alt="Burger" />
-              </div>
-              <div class="item-details">
-                <h3>Burger</h3>
-                <p class="canteen-name">
-                  <i class="fa-solid fa-store"></i> Canteen 1
-                </p>
-                <div class="item-price-unit">₱30.00 / item</div>
-                <div class="item-meta">
-                  <div class="item-quantity">
-                    <button class="qty-btn minus">
-                      <i class="fa-solid fa-minus"></i>
-                    </button>
-                    <span class="qty-number">1</span>
-                    <button class="qty-btn plus">
-                      <i class="fa-solid fa-plus"></i>
-                    </button>
-                  </div>
-                  <div class="item-total-price">₱30.00</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="cart-item" data-price="20" data-prep="5">
-              <button class="item-remove" title="Remove item">
-                <i class="fa-solid fa-trash"></i>
-              </button>
-              <div class="item-image">
-                <img src="../../images/Shomai-rice.jpg" alt="Shomai Rice" />
-              </div>
-              <div class="item-details">
-                <h3>Shomai Rice</h3>
-                <p class="canteen-name">
-                  <i class="fa-solid fa-store"></i> Student Vendor
-                </p>
-                <div class="item-price-unit">₱20.00 / item</div>
-                <div class="item-meta">
-                  <div class="item-quantity">
-                    <button class="qty-btn minus">
-                      <i class="fa-solid fa-minus"></i>
-                    </button>
-                    <span class="qty-number">1</span>
-                    <button class="qty-btn plus">
-                      <i class="fa-solid fa-plus"></i>
-                    </button>
-                  </div>
-                  <div class="item-total-price">₱20.00</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="cart-item" data-price="15.99" data-prep="6">
-              <button class="item-remove" title="Remove item">
-                <i class="fa-solid fa-trash"></i>
-              </button>
-              <div class="item-image">
-                <img src="../../images/Shomai.jpg" alt="Shomai" />
-              </div>
-              <div class="item-details">
-                <h3>Shomai</h3>
-                <p class="canteen-name">
-                  <i class="fa-solid fa-store"></i> Canteen 3
-                </p>
-                <div class="item-price-unit">₱15.99 / item</div>
-                <div class="item-meta">
-                  <div class="item-quantity">
-                    <button class="qty-btn minus">
-                      <i class="fa-solid fa-minus"></i>
-                    </button>
-                    <span class="qty-number">1</span>
-                    <button class="qty-btn plus">
-                      <i class="fa-solid fa-plus"></i>
-                    </button>
-                  </div>
-                  <div class="item-total-price">₱15.99</div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div class="cart-items" id="cartItems"></div>
           <!-- /cart-items -->
 
           <!-- ORDER SUMMARY -->
@@ -247,13 +160,13 @@
 
             <div class="summary-details">
               <div class="summary-row">
-                <span>Subtotal</span><span id="subtotalAmt">₱65.99</span>
+                <span>Subtotal</span><span id="subtotalAmt">₱0.00</span>
               </div>
               <div class="summary-row">
                 <span>Wallet Balance</span><span>₱245.50</span>
               </div>
               <div class="summary-row total">
-                <span>Total</span><span id="totalAmt">₱65.99</span>
+                <span>Total</span><span id="totalAmt">₱0.00</span>
               </div>
             </div>
 
@@ -267,80 +180,164 @@
 
     <div id="toast-container"></div>
 
+    <!-- Shared cart module must load first -->
+    <script src="../../script/student/cart.js"></script>
+
     <script>
-      /* ── Qty & total logic ── */
-      function recalc() {
-        let grandTotal = 0;
-        let maxPrep = 0;
-        const items = document.querySelectorAll(".cart-item");
-        items.forEach((item) => {
-          const unitPrice = parseFloat(item.dataset.price);
-          const prepTime = parseInt(item.dataset.prep || "10");
-          const qtyEl = item.querySelector(".qty-number");
-          const totalEl = item.querySelector(".item-total-price");
-          const qty = parseInt(qtyEl.textContent);
-          const lineTotal = unitPrice * qty;
-          totalEl.textContent = "₱" + lineTotal.toFixed(2);
-          grandTotal += lineTotal;
-          if (prepTime > maxPrep) maxPrep = prepTime;
-        });
+      /* ══════════════════════════════════════════════
+         CART PAGE — fully driven by localStorage
+         ══════════════════════════════════════════════ */
 
-        document.getElementById("subtotalAmt").textContent =
-          "₱" + grandTotal.toFixed(2);
-        document.getElementById("totalAmt").textContent =
-          "₱" + grandTotal.toFixed(2);
+      const FALLBACK_IMG = "https://placehold.co/80x80/f8fafc/94a3b8?text=Food";
+
+      /* ── Render the cart items from localStorage ── */
+      function renderCart() {
+        const cart      = getCart();
+        const container = document.getElementById("cartItems");
+
+        // Update subtitle + badge
+        const totalQty = cart.reduce((s, c) => s + c.qty, 0);
         document.getElementById("cartSubtitle").textContent =
-          items.length + " item(s) in your cart";
+          `${totalQty} item(s) in your cart`;
+        updateAllCartBadges();
 
-        // auto pickup time = now + maxPrep + 5 min buffer
-        const pickup = new Date(Date.now() + (maxPrep + 5) * 60000);
-        const timeStr = pickup.toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        });
-        document.getElementById("pickupTime").textContent =
-          "Estimated pickup: " + timeStr;
+        if (cart.length === 0) {
+          container.innerHTML = `
+            <div style="
+              display:flex;flex-direction:column;align-items:center;
+              justify-content:center;gap:16px;padding:60px 20px;
+              color:#94a3b8;text-align:center;">
+              <i class="fa-solid fa-cart-shopping" style="font-size:3rem;opacity:.35;"></i>
+              <p style="font-size:15px;margin:0;">Your cart is empty.</p>
+              <a href="student-browse-food.html"
+                 style="padding:10px 22px;border-radius:10px;background:#e61524;
+                        color:#fff;font-weight:600;font-size:14px;text-decoration:none;">
+                Browse Food
+              </a>
+            </div>`;
+          recalc();
+          return;
+        }
+
+        container.innerHTML = cart.map((item) => `
+          <div class="cart-item" data-id="${escHtml(item.id)}" data-price="${item.price}">
+            <button class="item-remove" title="Remove item" data-id="${escHtml(item.id)}">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+            <div class="item-image">
+              <img
+                src="${escHtml(item.img || FALLBACK_IMG)}"
+                alt="${escHtml(item.name)}"
+                onerror="this.src='${FALLBACK_IMG}'"
+              />
+            </div>
+            <div class="item-details">
+              <h3>${escHtml(item.name)}</h3>
+              <p class="canteen-name">
+                <i class="fa-solid fa-store"></i> ${escHtml(item.vendor || "Campus Vendor")}
+              </p>
+              <div class="item-price-unit">₱${item.price.toFixed(2)} / item</div>
+              <div class="item-meta">
+                <div class="item-quantity">
+                  <button class="qty-btn minus" data-id="${escHtml(item.id)}">
+                    <i class="fa-solid fa-minus"></i>
+                  </button>
+                  <span class="qty-number">${item.qty}</span>
+                  <button class="qty-btn plus" data-id="${escHtml(item.id)}">
+                    <i class="fa-solid fa-plus"></i>
+                  </button>
+                </div>
+                <div class="item-total-price">₱${(item.price * item.qty).toFixed(2)}</div>
+              </div>
+            </div>
+          </div>
+        `).join("");
+
+        recalc();
+        attachEvents();
       }
 
-      document.getElementById("cartItems").addEventListener("click", (e) => {
-        const btn = e.target.closest("button");
-        if (!btn) return;
+      /* ── Recalculate totals from DOM ── */
+      function recalc() {
+        let grandTotal = 0;
+        document.querySelectorAll(".cart-item").forEach((item) => {
+          const unitPrice = parseFloat(item.dataset.price) || 0;
+          const qty       = parseInt(item.querySelector(".qty-number")?.textContent || 1);
+          const totalEl   = item.querySelector(".item-total-price");
+          const lineTotal = unitPrice * qty;
+          if (totalEl) totalEl.textContent = "₱" + lineTotal.toFixed(2);
+          grandTotal += lineTotal;
+        });
+        document.getElementById("subtotalAmt").textContent = "₱" + grandTotal.toFixed(2);
+        document.getElementById("totalAmt").textContent    = "₱" + grandTotal.toFixed(2);
+      }
 
-        if (btn.classList.contains("plus")) {
-          const qEl = btn
-            .closest(".item-quantity")
-            .querySelector(".qty-number");
-          qEl.textContent = parseInt(qEl.textContent) + 1;
-          recalc();
-        }
-        if (btn.classList.contains("minus")) {
-          const qEl = btn
-            .closest(".item-quantity")
-            .querySelector(".qty-number");
-          const cur = parseInt(qEl.textContent);
-          if (cur > 1) {
-            qEl.textContent = cur - 1;
-            recalc();
-          }
-        }
-        if (btn.classList.contains("item-remove")) {
-          btn.closest(".cart-item").remove();
-          recalc();
-          if (!document.querySelector(".cart-item")) {
-            document.getElementById("cartItems").innerHTML =
-              '<p style="color:#94a3b8;padding:40px 0;text-align:center;">Your cart is empty.</p>';
-          }
-        }
-      });
+      /* ── Attach qty / remove event handlers ── */
+      function attachEvents() {
+        document.querySelectorAll(".qty-btn.plus").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const id   = btn.dataset.id;
+            const cart = getCart();
+            const item = cart.find((c) => c.id === id);
+            if (item) {
+              updateQty(id, item.qty + 1);
+              renderCart();
+            }
+          });
+        });
 
+        document.querySelectorAll(".qty-btn.minus").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const id   = btn.dataset.id;
+            const cart = getCart();
+            const item = cart.find((c) => c.id === id);
+            if (item) {
+              if (item.qty <= 1) {
+                removeFromCart(id);
+              } else {
+                updateQty(id, item.qty - 1);
+              }
+              renderCart();
+            }
+          });
+        });
+
+        document.querySelectorAll(".item-remove").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            removeFromCart(btn.dataset.id);
+            renderCart();
+            showToast("info", "fa-trash", "Item removed from cart.");
+          });
+        });
+      }
+
+      /* ── HTML escape helper ── */
+      function escHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      /* ── Place Order ── */
       document.getElementById("placeOrderBtn").onclick = () => {
-        showToast(
-          "success",
-          "fa-check-circle",
-          "Order placed successfully! Check your orders.",
-        );
+        const cart = getCart();
+        if (cart.length === 0) {
+          showToast("error", "fa-circle-exclamation", "Your cart is empty!");
+          return;
+        }
+        const instructions = document.getElementById("special-instructions").value.trim();
+        const payment      = document.getElementById("payment-method").value;
+        const order        = placeOrder(instructions, payment);
+        if (order) {
+          renderCart(); // cart is now empty; re-render shows empty state
+          showToast("success", "fa-check-circle", "Order placed! Redirecting to Orders…");
+          setTimeout(() => { window.location.href = "student-order.html"; }, 1600);
+        }
       };
 
+      /* ── Toast ── */
       function showToast(type, icon, msg) {
         const el = document.createElement("div");
         el.className = `toast ${type}`;
@@ -352,7 +349,8 @@
         }, 3200);
       }
 
-      recalc();
+      /* ── Init ── */
+      renderCart();
     </script>
   </body>
 </html>

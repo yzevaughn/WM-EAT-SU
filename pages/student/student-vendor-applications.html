@@ -94,7 +94,7 @@
           <li>
             <a href="student-cart.html" class="nav-link"
               ><i class="fa-solid fa-cart-shopping"></i><span>Cart</span
-              ><span class="nav-badge">3</span></a
+              ><span class="nav-badge" style="display:none">0</span></a
             >
           </li>
           <li>
@@ -293,6 +293,8 @@
     <!-- ==========================================
          JAVASCRIPT
          ========================================== -->
+    <!-- Shared cart module -->
+    <script src="../../script/student/cart.js"></script>
     <script>
       let applications = [
         {
@@ -366,6 +368,7 @@
       let currentViewId = null;
 
       document.addEventListener("DOMContentLoaded", () => {
+        updateAllCartBadges();
         renderList();
       });
 

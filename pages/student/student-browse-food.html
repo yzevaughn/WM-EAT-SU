@@ -115,7 +115,7 @@
           <li>
             <a href="student-cart.html" class="nav-link">
               <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
-              <span class="nav-badge">3</span>
+              <span class="nav-badge" style="display:none">0</span>
             </a>
           </li>
           <li>
@@ -277,6 +277,7 @@
     <!-- TOAST CONTAINER -->
     <div id="toast-container"></div>
 
+    <script src="../../script/student/cart.js"></script>
     <script>
       /* ─────────── DATA — FOODS ─────────── */
       const foods = [
@@ -628,11 +629,18 @@
           btn.addEventListener("click", (e) => {
             e.stopPropagation();
 
+            const foodId   = parseInt(btn.getAttribute("data-id"));
             const itemName = btn.getAttribute("data-name");
+            const food     = foods.find((f) => f.id === foodId);
+            if (!food) return;
+
+            // Persist to localStorage
+            const priceNum = parseFloat(food.price.replace(/[^\d.]/g, "")) || 0;
+            const itemId   = makeItemId(food.name, food.vendor);
+            addToCart({ id: itemId, name: food.name, price: priceNum, vendor: food.vendor, img: food.img, qty: 1 });
 
             // Visual button feedback
-            const originalHTML =
-              '<i class="fa-solid fa-plus"></i> Add to Cart';
+            const originalHTML = '<i class="fa-solid fa-plus"></i> Add to Cart';
             btn.innerHTML = '<i class="fa-solid fa-check"></i> Added!';
             btn.style.background = "#16a34a";
             btn.style.boxShadow = "0 4px 14px rgba(22, 163, 74, 0.35)";
@@ -731,11 +739,12 @@
           document.getElementById("foodModal").classList.remove("open");
       });
       document.getElementById("modalAddBtn").onclick = () => {
-        showToast(
-          "success",
-          "fa-cart-plus",
-          `"${activeFood.name}" added to cart!`,
-        );
+        if (activeFood) {
+          const priceNum = parseFloat(activeFood.price.replace(/[^\d.]/g, "")) || 0;
+          const itemId   = makeItemId(activeFood.name, activeFood.vendor);
+          addToCart({ id: itemId, name: activeFood.name, price: priceNum, vendor: activeFood.vendor, img: activeFood.img, qty: 1 });
+        }
+        showToast("success", "fa-cart-plus", `"${activeFood.name}" added to cart!`);
         document.getElementById("foodModal").classList.remove("open");
       };
 
@@ -871,6 +880,7 @@
       }
 
       /* ─────────── INIT ─────────── */
+      updateAllCartBadges();
       renderGrid();
     </script>
   </body>

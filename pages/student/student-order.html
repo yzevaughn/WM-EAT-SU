@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WM EAT SU - Order History</title>
-
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -20,12 +19,12 @@
 
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- ════════════════════════════════════════
          TOP NAVBAR
          ════════════════════════════════════════ -->
     <div class="top-nav">
-      <!-- LEFT: hamburger + logo -->
       <div class="nav-left">
         <label for="menu-checkbox" class="menu-toggle">
           <i class="fa-solid fa-bars"></i>
@@ -38,27 +37,17 @@
 
       <div class="nav-center">
         <div class="role-switcher" id="roleSwitcher">
-          <a
-            href="student-dashboard.html"
-            class="role-btn active"
-            id="roleStudent"
-          >
+          <a href="student-dashboard.html" class="role-btn active" id="roleStudent">
             <i class="fa-solid fa-graduation-cap"></i>
             <span>Student</span>
           </a>
-
-          <a
-            href="../vendor-pages/vendor-dashboard.html"
-            class="role-btn"
-            id="roleVendor"
-          >
+          <a href="../vendor-pages/vendor-dashboard.html" class="role-btn" id="roleVendor">
             <i class="fa-solid fa-store"></i>
             <span>Vendor</span>
           </a>
         </div>
       </div>
 
-      <!-- RIGHT: profile -->
       <div class="nav-right">
         <div class="profile">
           <div class="profile-info">
@@ -67,11 +56,7 @@
           </div>
           <div class="profile-dropdown">
             <button class="profile-btn">
-              <img
-                src="../../images/pfp.jpg"
-                class="profile-pic"
-                alt="Profile"
-              />
+              <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" />
               <i class="fa-solid fa-chevron-down"></i>
             </button>
             <div class="dropdown-menu">
@@ -89,16 +74,13 @@
         </div>
       </div>
     </div>
-    <!-- /top-nav -->
 
     <!-- ════════════════════════════════════════
          LAYOUT
          ════════════════════════════════════════ -->
     <div class="layout">
-      <!-- ── SIDEBAR ── -->
+      <!-- SIDEBAR -->
       <div class="left-nav" id="sidebar">
-        <!-- logo shown on mobile inside sidebar -->
-
         <ul class="nav-list">
           <li>
             <a href="student-dashboard.html" class="nav-link">
@@ -113,7 +95,7 @@
           <li>
             <a href="student-cart.html" class="nav-link">
               <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
-              <span class="nav-badge">3</span>
+              <span class="nav-badge" style="display:none">0</span>
             </a>
           </li>
           <li>
@@ -162,322 +144,7 @@
               <h3>No orders found</h3>
               <p>We couldn't find any orders matching your filters.</p>
             </div>
-            <!-- PENDING ORDER -->
-            <div
-              class="order-card"
-              data-status="pending"
-              data-vendor="Canteen 1"
-              data-order-id="033213123123"
-              data-price="30.00"
-              data-image="../../images/burger.avif"
-            >
-              <div class="order-card-accent accent-pending"></div>
-              <div class="order-card-inner">
-                <div class="order-card-header">
-                  <div class="order-title">
-                    <div class="order-store-icon ic-pending">
-                      <i class="fa-solid fa-clock"></i>
-                    </div>
-                    <span class="order-card-title">Canteen 1</span>
-                  </div>
-                  <span class="status-badge pending">Pending</span>
-                </div>
-                <div class="order-body-wrapper">
-                  <img
-                    src="../../images/burger.avif"
-                    alt="Food image"
-                    class="order-image"
-                  />
-                  <div class="order-body-info">
-                    <div class="order-meta">
-                      <span
-                        ><i class="fa-regular fa-calendar"></i> Mar 4, 2026 ·
-                        9:15 AM</span
-                      >
-                    </div>
-                    <div class="order-items">
-                      <div class="order-item-row">
-                        <span>1× Burger</span><span>₱30.00</span>
-                      </div>
-                    </div>
-                    <div
-                      class="order-instruction"
-                      style="
-                        font-size: 12px;
-                        color: #64748b;
-                        margin-top: 8px;
-                        padding: 6px 8px;
-                        background: #f8fafc;
-                        border-radius: 4px;
-                        border-left: 2px solid #cbd5e1;
-                      "
-                    >
-                      <i
-                        class="fa-regular fa-comment-dots"
-                        style="margin-right: 4px; color: #94a3b8"
-                      ></i>
-                      <strong>Note:</strong> No pickles please.
-                    </div>
-                  </div>
-                </div>
-
-                <hr class="order-divider" />
-                <div class="order-total-row"><span>Total: ₱30.00</span></div>
-                <div class="order-actions" style="margin-top: 14px">
-                  <button class="cancel-btn">
-                    <i class="fa-solid fa-times"></i> Cancel Order
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <!-- READY FOR PICKUP -->
-            <div
-              class="order-card"
-              data-status="ready"
-              data-vendor="Canteen 5"
-              data-order-id="02"
-              data-price="60.00"
-              data-image="../../images/Iced-coffee.png"
-            >
-              <div class="order-card-accent accent-ready"></div>
-              <div class="order-card-inner">
-                <div class="order-card-header">
-                  <div class="order-title">
-                    <div class="order-store-icon ic-ready">
-                      <i class="fa-solid fa-check-circle"></i>
-                    </div>
-                    <span class="order-card-title">Canteen 5</span>
-                  </div>
-                  <span class="status-badge ready">Ready for Pickup</span>
-                </div>
-                <div class="order-body-wrapper">
-                  <img
-                    src="../../images/Iced-coffee.png"
-                    alt="Food image"
-                    class="order-image"
-                  />
-                  <div class="order-body-info">
-                    <div class="order-meta">
-                      <span
-                        ><i class="fa-regular fa-calendar"></i> Mar 7, 2026 ·
-                        11:59 AM</span
-                      >
-                    </div>
-                    <div class="order-items">
-                      <div class="order-item-row">
-                        <span>2× Iced Coffee</span><span>₱60.00</span>
-                      </div>
-                    </div>
-                    <div
-                      class="order-instruction"
-                      style="
-                        font-size: 12px;
-                        color: #64748b;
-                        margin-top: 8px;
-                        padding: 6px 8px;
-                        background: #f8fafc;
-                        border-radius: 4px;
-                        border-left: 2px solid #cbd5e1;
-                      "
-                    >
-                      <i
-                        class="fa-regular fa-comment-dots"
-                        style="margin-right: 4px; color: #94a3b8"
-                      ></i>
-                      <strong>Note:</strong> Less ice for both.
-                    </div>
-                  </div>
-                </div>
-
-                <hr class="order-divider" />
-                <div class="order-total-row"><span>Total: ₱60.00</span></div>
-                <div class="order-actions" style="margin-top: 14px">
-                  <button class="pickup-btn" id="markPickedBtn">
-                    <i class="fa-solid fa-bag-shopping"></i> Mark as Picked Up
-                  </button>
-                  <button class="view-code-btn open-code-btn" data-code="A7C3">
-                    <i class="fa-solid fa-qrcode"></i> View Pickup Code
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <!-- PREPARING -->
-            <div
-              class="order-card"
-              data-status="preparing"
-              data-vendor="Canteen 1"
-              data-order-id="1772861172498"
-              data-price="30.00"
-              data-image="../../images/burger.avif"
-            >
-              <div class="order-card-accent accent-preparing"></div>
-              <div class="order-card-inner">
-                <div class="order-card-header">
-                  <div class="order-title">
-                    <div class="order-store-icon ic-preparing">
-                      <i class="fa-solid fa-fire-burner"></i>
-                    </div>
-                    <span class="order-card-title">Canteen 1</span>
-                  </div>
-                  <span class="status-badge preparing">Preparing</span>
-                </div>
-                <div class="order-body-wrapper">
-                  <img
-                    src="../../images/burger.avif"
-                    alt="Food image"
-                    class="order-image"
-                  />
-                  <div class="order-body-info">
-                    <div class="order-meta">
-                      <span
-                        ><i class="fa-regular fa-calendar"></i> Mar 7, 2026 ·
-                        1:26 PM</span
-                      >
-                    </div>
-                    <div class="order-items">
-                      <div class="order-item-row">
-                        <span>1× Burger</span><span>₱30.00</span>
-                      </div>
-                    </div>
-                    <div
-                      class="order-instruction"
-                      style="
-                        font-size: 12px;
-                        color: #64748b;
-                        margin-top: 8px;
-                        padding: 6px 8px;
-                        background: #f8fafc;
-                        border-radius: 4px;
-                        border-left: 2px solid #cbd5e1;
-                      "
-                    >
-                      <i
-                        class="fa-regular fa-comment-dots"
-                        style="margin-right: 4px; color: #94a3b8"
-                      ></i>
-                      <strong>Note:</strong> Add extra cheese.
-                    </div>
-                  </div>
-                </div>
-
-                <hr class="order-divider" />
-                <div class="order-total-row"><span>Total: ₱30.00</span></div>
-              </div>
-            </div>
-
-            <!-- COMPLETED -->
-            <div
-              class="order-card"
-              data-status="completed"
-              data-vendor="Student Vendor"
-              data-order-id="12345"
-              data-price="20.00"
-              data-image="../../images/Shomai-rice.jpg"
-            >
-              <div class="order-card-accent accent-completed"></div>
-              <div class="order-card-inner">
-                <div class="order-card-header">
-                  <div class="order-title">
-                    <div class="order-store-icon ic-completed">
-                      <i class="fa-solid fa-check-double"></i>
-                    </div>
-                    <span class="order-card-title">Student Vendor</span>
-                  </div>
-                  <span class="status-badge completed">Completed</span>
-                </div>
-                <div class="order-body-wrapper">
-                  <img
-                    src="../../images/Shomai-rice.jpg"
-                    alt="Food image"
-                    class="order-image"
-                  />
-                  <div class="order-body-info">
-                    <div class="order-meta">
-                      <span
-                        ><i class="fa-regular fa-calendar"></i> Mar 6, 2026 ·
-                        10:15 AM</span
-                      >
-                    </div>
-                    <div class="order-items">
-                      <div class="order-item-row">
-                        <span>1× Shomai Rice</span><span>₱20.00</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="order-divider" />
-                <div class="order-total-row"><span>Total: ₱20.00</span></div>
-                <div class="order-actions" style="margin-top: 14px">
-                  <button class="order-again-btn">
-                    <i class="fa-solid fa-cart-plus"></i> Order Again
-                  </button>
-                  <button class="leave-review-btn">
-                    <i class="fa-regular fa-star"></i> Leave a Review
-                  </button>
-                  <button class="remove-btn">
-                    <i class="fa-solid fa-trash-can"></i> Remove
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <!-- CANCELLED BY VENDOR -->
-            <div
-              class="order-card"
-              data-status="cancelled"
-              data-vendor="Canteen 4"
-              data-order-id="54321"
-              data-price="25.00"
-              data-image="../../images/Fries.jpg"
-            >
-              <div class="order-card-accent accent-cancelled"></div>
-              <div class="order-card-inner">
-                <div class="order-card-header">
-                  <div class="order-title">
-                    <div class="order-store-icon ic-cancelled">
-                      <i class="fa-solid fa-ban"></i>
-                    </div>
-                    <span class="order-card-title">Canteen 4</span>
-                  </div>
-                  <span class="status-badge cancelled"
-                    >Cancelled by Vendor</span
-                  >
-                </div>
-                <div class="order-body-wrapper">
-                  <img
-                    src="../../images/Fries.jpg"
-                    alt="Food image"
-                    class="order-image"
-                  />
-                  <div class="order-body-info">
-                    <div class="order-meta">
-                      <span
-                        ><i class="fa-regular fa-calendar"></i> Mar 5, 2026 ·
-                        4:00 PM</span
-                      >
-                    </div>
-                    <div class="order-items">
-                      <div class="order-item-row">
-                        <span>1× Fries</span><span>₱25.00</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <p style="font-size: 12px; color: #ef4444; margin-bottom: 8px">
-                  <i class="fa-solid fa-circle-info"></i> The vendor has
-                  cancelled this order. A refund will be processed.
-                </p>
-                <hr class="order-divider" />
-                <div class="order-total-row"><span>Total: ₱25.00</span></div>
-                <div class="order-actions" style="margin-top: 14px">
-                  <button class="remove-btn">
-                    <i class="fa-solid fa-trash-can"></i> Remove
-                  </button>
-                </div>
-              </div>
-            </div>
+            <!-- Dynamic order cards injected here by JS -->
           </div>
         </div>
       </div>
@@ -496,40 +163,24 @@
         <div class="modal-body">
           <div class="pickup-code-card">
             <div class="pickup-code-label">Your pickup code</div>
-            <div class="pickup-code-value" id="modalCodeVal">A7C3</div>
-            <div class="pickup-code-order" id="modalCodeOrder">
-              Order #02 · Canteen 5
-            </div>
+            <div class="pickup-code-value" id="modalCodeVal">----</div>
+            <div class="pickup-code-order" id="modalCodeOrder"></div>
           </div>
-          <img
-            src=""
-            id="modalFoodImage"
-            class="modal-order-image"
-            alt="Order items"
-            style="display: none"
-          />
+          <img src="" id="modalFoodImage" class="modal-order-image" alt="Order items" style="display:none" />
           <div class="modal-info-row">
             <span class="modal-info-label">Status</span>
-            <span class="modal-info-value" style="color: #22c55e"
-              >✔ Ready for Pickup</span
-            >
+            <span class="modal-info-value" style="color:#22c55e">✔ Ready for Pickup</span>
           </div>
-          <div class="modal-order-items" id="modalOrderItems">
-            <!-- items injected here -->
-          </div>
-          <div class="modal-total-price" id="modalTotalPrice">
-            Total: ₱60.00
-          </div>
-          <p
-            style="
-              font-size: 12px;
-              color: #94a3b8;
-              margin-top: 16px;
-              text-align: center;
-            "
-          >
+          <div class="modal-order-items" id="modalOrderItems"></div>
+          <div class="modal-total-price" id="modalTotalPrice">Total: ₱0.00</div>
+          <p style="font-size:12px;color:#94a3b8;margin-top:16px;text-align:center;">
             Show this code to the vendor when picking up your order.
           </p>
+          <div style="margin-top:16px;text-align:center;">
+            <button class="pickup-btn" id="markPickedBtn" style="width:100%">
+              <i class="fa-solid fa-bag-shopping"></i> Mark as Picked Up
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -548,35 +199,21 @@
           <div class="form-group">
             <label>Rate your experience</label>
             <div class="star-rating" id="starRating">
-              <button type="button" class="star-btn">
-                <i class="fa-solid fa-star"></i>
-              </button>
-              <button type="button" class="star-btn">
-                <i class="fa-solid fa-star"></i>
-              </button>
-              <button type="button" class="star-btn">
-                <i class="fa-solid fa-star"></i>
-              </button>
-              <button type="button" class="star-btn">
-                <i class="fa-solid fa-star"></i>
-              </button>
-              <button type="button" class="star-btn">
-                <i class="fa-solid fa-star"></i>
-              </button>
+              <button type="button" class="star-btn"><i class="fa-solid fa-star"></i></button>
+              <button type="button" class="star-btn"><i class="fa-solid fa-star"></i></button>
+              <button type="button" class="star-btn"><i class="fa-solid fa-star"></i></button>
+              <button type="button" class="star-btn"><i class="fa-solid fa-star"></i></button>
+              <button type="button" class="star-btn"><i class="fa-solid fa-star"></i></button>
               <span class="rating-text">Click to rate</span>
             </div>
           </div>
           <div class="form-group">
             <label>Comment</label>
-            <textarea
-              class="form-control"
-              rows="4"
-              placeholder="Share your thoughts..."
-            ></textarea>
+            <textarea class="form-control" rows="4" placeholder="Share your thoughts…"></textarea>
           </div>
           <div class="form-actions">
             <button class="btn-cancel" id="cancelReview">Cancel</button>
-            <button class="btn-submit">Submit Review</button>
+            <button class="btn-submit" id="submitReviewBtn">Submit Review</button>
           </div>
         </div>
       </div>
@@ -585,41 +222,21 @@
     <!-- CONFIRMATION MODAL -->
     <div class="modal" id="confirmModal">
       <div class="modal-overlay" id="confirmOverlay"></div>
-      <div class="modal-content" style="max-width: 400px; text-align: center">
-        <div class="modal-body" style="padding-top: 32px">
-          <div
-            class="modal-icon"
-            style="font-size: 48px; color: #ef4444; margin-bottom: 16px"
-          >
+      <div class="modal-content" style="max-width:400px;text-align:center">
+        <div class="modal-body" style="padding-top:32px">
+          <div class="modal-icon" style="font-size:48px;color:#ef4444;margin-bottom:16px">
             <i class="fa-solid fa-circle-exclamation"></i>
           </div>
-          <h2
-            style="
-              font-size: 20px;
-              font-weight: 800;
-              color: #0f172a;
-              margin-bottom: 8px;
-            "
-            id="confirmTitle"
-          >
+          <h2 style="font-size:20px;font-weight:800;color:#0f172a;margin-bottom:8px" id="confirmTitle">
             Confirm Action
           </h2>
-          <p
-            style="font-size: 14px; color: #64748b; margin-bottom: 24px"
-            id="confirmMessage"
-          >
+          <p style="font-size:14px;color:#64748b;margin-bottom:24px" id="confirmMessage">
             Are you sure you want to do this?
           </p>
-          <div class="form-actions" style="justify-content: center; gap: 12px">
+          <div class="form-actions" style="justify-content:center;gap:12px">
             <button class="btn-cancel" id="cancelConfirmBtn">Cancel</button>
-            <button
-              class="btn-submit"
-              id="submitConfirmBtn"
-              style="
-                background: linear-gradient(135deg, #ef4444, #dc2626);
-                box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
-              "
-            >
+            <button class="btn-submit" id="submitConfirmBtn"
+              style="background:linear-gradient(135deg,#ef4444,#dc2626);box-shadow:0 2px 8px rgba(239,68,68,.2)">
               Confirm
             </button>
           </div>
@@ -629,69 +246,311 @@
 
     <div id="toast-container"></div>
 
+    <!-- Shared cart/orders module -->
+    <script src="../../script/student/cart.js"></script>
+
     <script>
-      /* ── Pickup Code Modal ── */
-      const pickupModal = document.getElementById("pickupModal");
+      /* ══════════════════════════════════════════════════════════════════
+         STUDENT ORDERS PAGE — fully localStorage-driven
+         ══════════════════════════════════════════════════════════════════ */
 
-      document.querySelectorAll(".open-code-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const card = btn.closest(".order-card");
-          const vendor = card.getAttribute("data-vendor");
-          const orderId = card.getAttribute("data-order-id");
-          const price = card.getAttribute("data-price");
-          const code = btn.getAttribute("data-code") || "A7C3";
-          const image = card.getAttribute("data-image");
-
-          document.getElementById("modalCodeVal").textContent = code;
-          document.getElementById("modalCodeOrder").textContent =
-            `Order #${orderId} · ${vendor}`;
-          document.getElementById("modalTotalPrice").textContent =
-            `Total: ₱${price}`;
-
-          const modalImg = document.getElementById("modalFoodImage");
-          if (image) {
-            modalImg.src = image;
-            modalImg.style.display = "block";
-          } else {
-            modalImg.style.display = "none";
+      /* ── Seed demo orders on first visit (only once) ── */
+      (function seedDemoOrders() {
+        const SEED_KEY = "wm_eat_su_orders_seeded";
+        if (localStorage.getItem(SEED_KEY)) return;
+        if (getOrders().length > 0) { localStorage.setItem(SEED_KEY, "1"); return; }
+        saveOrders([
+          {
+            id: "ORD-SEED-001",
+            items: [{ id: "burger|canteen_1", name: "Burger", price: 30, vendor: "Canteen 1", img: "../../images/burger.avif", qty: 1 }],
+            total: 30, status: "pending", placedAt: "2026-03-04T09:15:00",
+            instructions: "No pickles please.", payment: "Wallet",
+            vendor: "Canteen 1", pickupCode: "A7C3", img: "../../images/burger.avif"
+          },
+          {
+            id: "ORD-SEED-002",
+            items: [{ id: "iced_coffee|canteen_5", name: "Iced Coffee", price: 30, vendor: "Canteen 5", img: "../../images/Iced-coffee.png", qty: 2 }],
+            total: 60, status: "ready", placedAt: "2026-03-07T11:59:00",
+            instructions: "Less ice for both.", payment: "Wallet",
+            vendor: "Canteen 5", pickupCode: "B2F9", img: "../../images/Iced-coffee.png"
+          },
+          {
+            id: "ORD-SEED-003",
+            items: [{ id: "burger|canteen_1b", name: "Burger", price: 30, vendor: "Canteen 1", img: "../../images/burger.avif", qty: 1 }],
+            total: 30, status: "preparing", placedAt: "2026-03-07T13:26:00",
+            instructions: "Add extra cheese.", payment: "Wallet",
+            vendor: "Canteen 1", pickupCode: "C4D1", img: "../../images/burger.avif"
+          },
+          {
+            id: "ORD-SEED-004",
+            items: [{ id: "shomai_rice|student_vendor", name: "Shomai Rice", price: 20, vendor: "Student Vendor", img: "../../images/Shomai-rice.jpg", qty: 1 }],
+            total: 20, status: "completed", placedAt: "2026-03-06T10:15:00",
+            instructions: "", payment: "Wallet",
+            vendor: "Student Vendor", pickupCode: "D9E2", img: "../../images/Shomai-rice.jpg"
+          },
+          {
+            id: "ORD-SEED-005",
+            items: [{ id: "fries|canteen_4", name: "Fries", price: 25, vendor: "Canteen 4", img: "../../images/Fries.jpg", qty: 1 }],
+            total: 25, status: "cancelled", placedAt: "2026-03-05T16:00:00",
+            instructions: "", payment: "Cash on Pickup",
+            vendor: "Canteen 4", pickupCode: "E5F3", img: "../../images/Fries.jpg",
+            cancelledByVendor: true
           }
+        ]);
+        localStorage.setItem(SEED_KEY, "1");
+      })();
 
-          // Duplicate items visually
-          const itemsEl = document.getElementById("modalOrderItems");
-          itemsEl.innerHTML = "";
-          const itemsSource = card.querySelectorAll(".order-item-row");
-          itemsSource.forEach((row) => {
-            const clone = row.cloneNode(true);
-            // ensure styling consistency
-            clone.style.display = "flex";
-            clone.style.justifyContent = "space-between";
-            clone.style.fontSize = "14px";
-            clone.style.padding = "4px 0";
-            clone.style.color = "#374151";
-            itemsEl.appendChild(clone);
-          });
+      /* ── Status display config ── */
+      const STATUS_CFG = {
+        pending:   { icon: "fa-clock",        cls: "ic-pending",   accent: "accent-pending",   label: "Pending",          badge: "pending"   },
+        preparing: { icon: "fa-fire-burner",   cls: "ic-preparing", accent: "accent-preparing", label: "Preparing",        badge: "preparing" },
+        ready:     { icon: "fa-check-circle",  cls: "ic-ready",     accent: "accent-ready",     label: "Ready for Pickup", badge: "ready"     },
+        completed: { icon: "fa-check-double",  cls: "ic-completed", accent: "accent-completed", label: "Completed",        badge: "completed" },
+        cancelled: { icon: "fa-ban",           cls: "ic-cancelled", accent: "accent-cancelled", label: "Cancelled",        badge: "cancelled" }
+      };
 
-          pickupModal.classList.add("active");
+      /* ── HTML escape ── */
+      function esc(s) {
+        return String(s)
+          .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+      }
+
+      /* ── Build one order card HTML string ── */
+      function buildCard(o) {
+        const cfg      = STATUS_CFG[o.status] || STATUS_CFG.pending;
+        const FALLBACK = "https://placehold.co/80x80/f8fafc/94a3b8?text=Food";
+
+        const itemsHtml = o.items.map(it =>
+          `<div class="order-item-row">
+            <span>${it.qty}× ${esc(it.name)}</span>
+            <span>₱${(it.price * it.qty).toFixed(2)}</span>
+          </div>`
+        ).join("");
+
+        const noteHtml = o.instructions ? `
+          <div class="order-instruction"
+            style="font-size:12px;color:#64748b;margin-top:8px;padding:6px 8px;
+                   background:#f8fafc;border-radius:4px;border-left:2px solid #cbd5e1;">
+            <i class="fa-regular fa-comment-dots" style="margin-right:4px;color:#94a3b8"></i>
+            <strong>Note:</strong> ${esc(o.instructions)}
+          </div>` : "";
+
+        /* Action buttons per status */
+        let actHtml = "";
+        if (o.status === "pending") {
+          actHtml = `
+            <button class="cancel-btn js-cancel" data-id="${esc(o.id)}">
+              <i class="fa-solid fa-times"></i> Cancel Order
+            </button>`;
+        } else if (o.status === "ready") {
+          actHtml = `
+            <button class="pickup-btn js-mark-picked" data-id="${esc(o.id)}">
+              <i class="fa-solid fa-bag-shopping"></i> Mark as Picked Up
+            </button>
+            <button class="view-code-btn js-view-code" data-id="${esc(o.id)}">
+              <i class="fa-solid fa-qrcode"></i> View Pickup Code
+            </button>`;
+        } else if (o.status === "completed") {
+          actHtml = `
+            <button class="order-again-btn js-order-again" data-id="${esc(o.id)}">
+              <i class="fa-solid fa-cart-plus"></i> Order Again
+            </button>
+            <button class="leave-review-btn js-review" data-id="${esc(o.id)}">
+              <i class="fa-regular fa-star"></i> Leave a Review
+            </button>
+            <button class="remove-btn js-remove" data-id="${esc(o.id)}">
+              <i class="fa-solid fa-trash-can"></i> Remove
+            </button>`;
+        } else if (o.status === "cancelled") {
+          const vendorMsg = o.cancelledByVendor
+            ? `<p style="font-size:12px;color:#ef4444;margin-bottom:8px;">
+                 <i class="fa-solid fa-circle-info"></i>
+                 The vendor has cancelled this order. A refund will be processed.
+               </p>`
+            : "";
+          actHtml = vendorMsg + `
+            <button class="remove-btn js-remove" data-id="${esc(o.id)}">
+              <i class="fa-solid fa-trash-can"></i> Remove
+            </button>`;
+        }
+
+        return `
+          <div class="order-card"
+            data-id="${esc(o.id)}"
+            data-status="${esc(o.status)}"
+            data-vendor="${esc(o.vendor)}"
+            data-price="${o.total.toFixed(2)}"
+            data-image="${esc(o.img || "")}"
+            style="display:none">
+            <div class="order-card-accent ${cfg.accent}"></div>
+            <div class="order-card-inner">
+              <div class="order-card-header">
+                <div class="order-title">
+                  <div class="order-store-icon ${cfg.cls}">
+                    <i class="fa-solid ${cfg.icon}"></i>
+                  </div>
+                  <span class="order-card-title">${esc(o.vendor)}</span>
+                </div>
+                <span class="status-badge ${cfg.badge}">${cfg.label}</span>
+              </div>
+
+              <div class="order-body-wrapper">
+                <img
+                  src="${esc(o.img || FALLBACK)}"
+                  alt="Food image"
+                  class="order-image"
+                  onerror="this.src='${FALLBACK}'"
+                />
+                <div class="order-body-info">
+                  <div class="order-meta">
+                    <span><i class="fa-regular fa-calendar"></i> ${formatDate(o.placedAt)}</span>
+                  </div>
+                  <div class="order-items">${itemsHtml}</div>
+                  ${noteHtml}
+                </div>
+              </div>
+
+              <hr class="order-divider" />
+              <div class="order-total-row"><span>Total: ₱${o.total.toFixed(2)}</span></div>
+              ${actHtml ? `<div class="order-actions" style="margin-top:14px">${actHtml}</div>` : ""}
+            </div>
+          </div>`;
+      }
+
+      /* ── Render all orders from localStorage ── */
+      function renderOrders() {
+        const list = document.getElementById("ordersList");
+        // Remove previously rendered cards (keep emptyState)
+        list.querySelectorAll(".order-card").forEach(c => c.remove());
+
+        const orders = getOrders();
+        const html   = orders.map(buildCard).join("");
+        document.getElementById("emptyState").insertAdjacentHTML("afterend", html);
+
+        applyFilters();
+        wireEvents();
+        updateAllCartBadges();
+      }
+
+      /* ── Show / hide cards based on active filter tab ── */
+      function applyFilters() {
+        const af = document.querySelector(".filter-btn.active")?.getAttribute("data-filter") || "pending";
+        let visible = 0;
+        document.querySelectorAll(".order-card").forEach(card => {
+          const show = (card.dataset.status === af);
+          card.style.display = show ? "block" : "none";
+          if (show) visible++;
         });
-      });
+        const es = document.getElementById("emptyState");
+        visible === 0 ? es.classList.add("active") : es.classList.remove("active");
+      }
 
+      /* ── Wire interactive buttons on dynamically-rendered cards ── */
+      function wireEvents() {
+
+        /* Cancel Order */
+        document.querySelectorAll(".js-cancel").forEach(btn => {
+          btn.addEventListener("click", () => {
+            showConfirmation(
+              "Cancel Order",
+              "Are you sure you want to cancel this order?",
+              () => {
+                cancelOrder(btn.dataset.id);
+                renderOrders();
+                showToast("success", "fa-check", "Order cancelled.");
+              }
+            );
+          });
+        });
+
+        /* Mark as Picked Up (card button) */
+        document.querySelectorAll(".js-mark-picked").forEach(btn => {
+          btn.addEventListener("click", () => {
+            updateOrderStatus(btn.dataset.id, "completed");
+            renderOrders();
+            showToast("success", "fa-bag-shopping", "Order marked as picked up!");
+          });
+        });
+
+        /* View Pickup Code */
+        document.querySelectorAll(".js-view-code").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const order = getOrders().find(o => o.id === btn.dataset.id);
+            if (!order) return;
+
+            document.getElementById("modalCodeVal").textContent  = order.pickupCode;
+            document.getElementById("modalCodeOrder").textContent =
+              `Order #${order.id.slice(-6).toUpperCase()} · ${order.vendor}`;
+            document.getElementById("modalTotalPrice").textContent =
+              `Total: ₱${order.total.toFixed(2)}`;
+
+            const mImg = document.getElementById("modalFoodImage");
+            if (order.img) { mImg.src = order.img; mImg.style.display = "block"; }
+            else { mImg.style.display = "none"; }
+
+            document.getElementById("modalOrderItems").innerHTML = order.items.map(it =>
+              `<div class="order-item-row"
+                style="display:flex;justify-content:space-between;font-size:14px;padding:4px 0;color:#374151;">
+                <span>${it.qty}× ${esc(it.name)}</span>
+                <span>₱${(it.price * it.qty).toFixed(2)}</span>
+              </div>`
+            ).join("");
+
+            /* Wire modal's "Mark as Picked Up" to THIS order */
+            document.getElementById("markPickedBtn").onclick = () => {
+              updateOrderStatus(order.id, "completed");
+              pickupModal.classList.remove("active");
+              renderOrders();
+              showToast("success", "fa-bag-shopping", "Order marked as picked up!");
+            };
+
+            pickupModal.classList.add("active");
+          });
+        });
+
+        /* Remove from history */
+        document.querySelectorAll(".js-remove").forEach(btn => {
+          btn.addEventListener("click", () => {
+            showConfirmation(
+              "Remove Transaction",
+              "Remove this order from your history?",
+              () => {
+                const card = document.querySelector(`.order-card[data-id="${btn.dataset.id}"]`);
+                if (card) card.classList.add("removing");
+                setTimeout(() => { removeOrder(btn.dataset.id); renderOrders(); }, 300);
+                showToast("success", "fa-check", "Removed from history.");
+              }
+            );
+          });
+        });
+
+        /* Order Again — re-add items to cart */
+        document.querySelectorAll(".js-order-again").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const order = getOrders().find(o => o.id === btn.dataset.id);
+            if (!order) return;
+            order.items.forEach(it => addToCart({ ...it }));
+            showToast("success", "fa-cart-plus", "Items added back to cart!");
+          });
+        });
+
+        /* Leave Review */
+        document.querySelectorAll(".js-review").forEach(btn => {
+          btn.addEventListener("click", () => {
+            document.getElementById("reviewModal").classList.add("active");
+          });
+        });
+      }
+
+      /* ── Pickup Modal ── */
+      const pickupModal = document.getElementById("pickupModal");
       document.getElementById("closePickupModal").onclick = () =>
         pickupModal.classList.remove("active");
       document.getElementById("pickupOverlay").onclick = () =>
         pickupModal.classList.remove("active");
 
-      /* ── Mark as Picked Up ── */
-      document.getElementById("markPickedBtn").onclick = () => {
-        pickupModal.classList.remove("active");
-        showToast("success", "fa-check", "Order marked as picked up");
-      };
-
-      /* ── Leave Review ── */
-      document.querySelectorAll(".leave-review-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          document.getElementById("reviewModal").classList.add("active");
-        });
-      });
+      /* ── Review Modal ── */
       document.getElementById("closeReviewModal").onclick = () =>
         document.getElementById("reviewModal").classList.remove("active");
       document.getElementById("reviewOverlay").onclick = () =>
@@ -699,142 +558,59 @@
       document.getElementById("cancelReview").onclick = () =>
         document.getElementById("reviewModal").classList.remove("active");
 
-      /* ── Star rating ── */
-      const stars = document.querySelectorAll(".star-btn");
+      /* ── Star Rating ── */
+      const stars      = document.querySelectorAll(".star-btn");
       const ratingText = document.querySelector(".rating-text");
-      const labels = ["", "Poor", "Fair", "Good", "Very Good", "Excellent"];
-      let selected = 0;
+      const starLabels = ["", "Poor", "Fair", "Good", "Very Good", "Excellent"];
+      let selectedStar = 0;
       stars.forEach((btn, i) => {
-        btn.addEventListener("mouseenter", () => highlight(i + 1));
-        btn.addEventListener("mouseleave", () => highlight(selected));
+        btn.addEventListener("mouseenter", () => highlightStars(i + 1));
+        btn.addEventListener("mouseleave", () => highlightStars(selectedStar));
         btn.addEventListener("click", () => {
-          selected = i + 1;
-          highlight(selected);
-          ratingText.textContent = labels[selected];
+          selectedStar = i + 1;
+          highlightStars(selectedStar);
+          ratingText.textContent = starLabels[selectedStar];
         });
       });
-      function highlight(n) {
-        stars.forEach((b, i) => b.classList.toggle("active", i < n));
-      }
+      function highlightStars(n) { stars.forEach((b, i) => b.classList.toggle("active", i < n)); }
 
-      /* ── Confirmation Modal Logic ── */
+      /* ── Review Submit ── */
+      document.getElementById("submitReviewBtn").addEventListener("click", () => {
+        document.getElementById("reviewModal").classList.remove("active");
+        showToast("success", "fa-star", "Review submitted! Thank you.");
+      });
+
+      /* ── Confirmation Modal ── */
       const confirmModal = document.getElementById("confirmModal");
       let confirmCallback = null;
 
       function showConfirmation(title, message, callback) {
-        document.getElementById("confirmTitle").textContent = title;
+        document.getElementById("confirmTitle").textContent   = title;
         document.getElementById("confirmMessage").textContent = message;
         confirmCallback = callback;
         confirmModal.classList.add("active");
       }
-
       document.getElementById("cancelConfirmBtn").onclick = () => {
-        confirmModal.classList.remove("active");
-        confirmCallback = null;
+        confirmModal.classList.remove("active"); confirmCallback = null;
       };
       document.getElementById("confirmOverlay").onclick = () => {
-        confirmModal.classList.remove("active");
-        confirmCallback = null;
+        confirmModal.classList.remove("active"); confirmCallback = null;
       };
       document.getElementById("submitConfirmBtn").onclick = () => {
         if (confirmCallback) confirmCallback();
-        confirmModal.classList.remove("active");
-        confirmCallback = null;
+        confirmModal.classList.remove("active"); confirmCallback = null;
       };
 
-      /* ── Cancel order ── */
-      document.querySelectorAll(".cancel-btn").forEach((btn) => {
+      /* ── Filter Tabs ── */
+      document.querySelectorAll(".filter-btn").forEach(btn => {
         btn.addEventListener("click", () => {
-          showConfirmation(
-            "Cancel Order",
-            "Are you sure you want to cancel and remove this order?",
-            () => {
-              const card = btn.closest(".order-card");
-              card.style.opacity = ".5";
-              btn.textContent = "Cancelled";
-              btn.disabled = true;
-              card.setAttribute("data-status", "cancelled"); // Update status so filter works
-              applyFilters();
-              showToast("success", "fa-check", "Order cancelled");
-            },
-          );
-        });
-      });
-
-      /* ── Remove Order ── */
-      document.querySelectorAll(".remove-btn").forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-          const card = e.target.closest(".order-card");
-          showConfirmation(
-            "Remove Transaction",
-            "Are you sure you want to remove this transaction from your history?",
-            () => {
-              card.classList.add("removing");
-              setTimeout(() => {
-                card.remove();
-                showToast("success", "fa-check", "Transaction removed");
-                applyFilters(); // Recheck if empty
-              }, 300);
-            },
-          );
-        });
-      });
-
-      /* ── Order Again ── */
-      document.querySelectorAll(".order-again-btn").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          showToast("success", "fa-cart-plus", "Added to cart again");
-        });
-      });
-
-      /* ── Filtering ── */
-      const filterBtns = document.querySelectorAll(".filter-btn");
-      const emptyState = document.getElementById("emptyState");
-
-      function applyFilters() {
-        const activeFilter = document
-          .querySelector(".filter-btn.active")
-          .getAttribute("data-filter");
-        let visibleCount = 0;
-
-        document.querySelectorAll(".order-card").forEach((card) => {
-          const status = card.getAttribute("data-status");
-
-          const matchesFilter =
-            activeFilter === "all" || status === activeFilter;
-
-          if (matchesFilter) {
-            card.style.display = "block";
-            visibleCount++;
-          } else {
-            card.style.display = "none";
-          }
-        });
-
-        if (visibleCount === 0) {
-          emptyState.classList.add("active");
-        } else {
-          emptyState.classList.remove("active");
-        }
-      }
-
-      filterBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          filterBtns.forEach((b) => b.classList.remove("active"));
+          document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
           btn.classList.add("active");
           applyFilters();
         });
       });
 
-      // Apply initial filter state
-      applyFilters();
-
-      /* ── Review submit ── */
-      document.querySelector(".btn-submit").addEventListener("click", () => {
-        document.getElementById("reviewModal").classList.remove("active");
-        showToast("success", "fa-star", "Review submitted! Thank you.");
-      });
-
+      /* ── Toast ── */
       function showToast(type, icon, msg) {
         const el = document.createElement("div");
         el.className = `toast ${type}`;
@@ -846,9 +622,16 @@
         }, 3200);
       }
 
-      document.getElementById("sidebarOverlay").onclick = () => {
-        document.getElementById("menu-checkbox").checked = false;
-      };
+      /* ── Sidebar overlay (mobile) ── */
+      const sidebarOverlay = document.getElementById("sidebarOverlay");
+      if (sidebarOverlay) {
+        sidebarOverlay.onclick = () => {
+          document.getElementById("menu-checkbox").checked = false;
+        };
+      }
+
+      /* ── Init ── */
+      renderOrders();
     </script>
   </body>
 </html>

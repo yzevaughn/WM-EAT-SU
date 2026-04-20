@@ -111,7 +111,7 @@
           <li>
             <a href="student-cart.html" class="nav-link">
               <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
-              <span class="nav-badge">3</span>
+              <span class="nav-badge" style="display:none">0</span>
             </a>
           </li>
           <li>
@@ -338,7 +338,10 @@
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
+    <!-- Shared cart module -->
+    <script src="../../script/student/cart.js"></script>
     <script>
+      updateAllCartBadges();
       const paymentMethods = document.getElementById("paymentMethods");
 
       // QUICK AMOUNT LOGIC
