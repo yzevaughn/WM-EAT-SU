@@ -221,6 +221,9 @@
             </div>
 
             <div class="shop-grid" id="shopGrid"></div>
+
+            <!-- PAGINATION -->
+            <div class="pagination" id="shopPagination"></div>
           </div>
         </div>
       </div>
@@ -436,6 +439,90 @@
             },
           ],
         },
+        {
+          id: 7,
+          name: "Bibingka",
+          price: "₱40.00",
+          category: "snacks",
+          img: "../../images/bibingka.jpg",
+          badge: "new",
+          rating: 4.8,
+          vendor: "Native Delights",
+          prepTime: "10 min",
+          desc: "Traditional rice cake topped with salted egg and cheese.",
+          ingredients: ["Rice flour", "Coconut milk", "Egg", "Cheese"],
+          reviews: [{ name: "Lola E.", stars: 5, comment: "Lutong bahay na sarap!" }]
+        },
+        {
+          id: 8,
+          name: "Mango Shake",
+          price: "₱35.00",
+          category: "drinks",
+          img: "../../images/mangoshake.jpg",
+          badge: "popular",
+          rating: 4.9,
+          vendor: "Sip & Chill Beverages",
+          prepTime: "5 min",
+          desc: "Fresh mango blended with milk and ice.",
+          ingredients: ["Mango", "Milk", "Ice", "Sugar"],
+          reviews: [{ name: "Gab V.", stars: 5, comment: "The best shake on campus!" }]
+        },
+        {
+          id: 9,
+          name: "Kwek-Kwek",
+          price: "₱15.00",
+          category: "snacks",
+          img: "../../images/kwek.jpg",
+          badge: "popular",
+          rating: 4.7,
+          vendor: "Street Bites Corner",
+          prepTime: "2 min",
+          desc: "Fried orange-coated quail eggs served with vinegar sauce.",
+          ingredients: ["Quail eggs", "Flour", "Food color", "Vinegar"],
+          reviews: [{ name: "Pau L.", stars: 4, comment: "Masarap lalo na yung sawsawan." }]
+        },
+        {
+          id: 10,
+          name: "Spicy Chicken Fillet",
+          price: "₱45.00",
+          category: "meals",
+          img: "../../images/spciy.jpg",
+          badge: "",
+          rating: 4.6,
+          vendor: "The Gourmet Grill",
+          prepTime: "12 min",
+          desc: "Crispy chicken fillet with a spicy kick.",
+          ingredients: ["Chicken", "Breadcrumbs", "Spices", "Rice"],
+          reviews: [{ name: "Dan O.", stars: 5, comment: "Hot and crispy!" }]
+        },
+        {
+          id: 11,
+          name: "Hotdog with Bun",
+          price: "₱20.00",
+          category: "snacks",
+          img: "../../images/hotdog.avif",
+          badge: "",
+          rating: 4.2,
+          vendor: "Canteen 1",
+          prepTime: "3 min",
+          desc: "Classic hotdog in a toasted bun with condiments.",
+          ingredients: ["Hotdog", "Bun", "Ketchup", "Mustard"],
+          reviews: []
+        },
+        {
+          id: 12,
+          name: "Milktea",
+          price: "₱45.00",
+          category: "drinks",
+          img: "../../images/milktea.avif",
+          badge: "",
+          rating: 4.5,
+          vendor: "Sip & Chill Beverages",
+          prepTime: "5 min",
+          desc: "Creamy milk tea with chewy tapioca pearls.",
+          ingredients: ["Black tea", "Milk", "Pearls", "Sugar"],
+          reviews: []
+        }
       ];
 
       /* ─────────── DATA — SHOPS ─────────── */
@@ -488,10 +575,59 @@
           rating: 4.4,
           foodIds: [],
         },
+        {
+          id: 7,
+          name: "The Coffee Dock",
+          category: "Drinks",
+          img: "../../images/Iced-coffee.png",
+          rating: 4.3,
+          foodIds: [],
+        },
+        {
+          id: 8,
+          name: "Veggie Vibes",
+          category: "Healthy",
+          img: "../../images/gulaman.avif",
+          rating: 4.2,
+          foodIds: [],
+        },
+        {
+          id: 9,
+          name: "Grill Master",
+          category: "Snacks",
+          img: "../../images/hotdog.avif",
+          rating: 4.1,
+          foodIds: [],
+        },
+        {
+          id: 10,
+          name: "Pasta Paradise",
+          category: "Meals",
+          img: "../../images/pancit.avif",
+          rating: 4.6,
+          foodIds: [],
+        },
+        {
+          id: 11,
+          name: "The Gourmet Grill",
+          category: "Healthy",
+          img: "../../images/spciy.jpg",
+          rating: 4.4,
+          foodIds: [10],
+        },
+        {
+          id: 12,
+          name: "Native Delights",
+          category: "Snacks",
+          img: "../../images/bibingka.jpg",
+          rating: 4.7,
+          foodIds: [7],
+        }
       ];
 
       /* ─────────── STATE ─────────── */
-      const PER_PAGE = 4;
+      const FOOD_PER_PAGE = 6;
+      const SHOPS_PER_PAGE = 6;
       let filtered = [...foods];
       let page = 1;
       let activeCat = "all";
@@ -499,6 +635,7 @@
       let activeView = "food"; // 'food' | 'shops'
       let activeShopCat = "all";
       let filteredShops = [...shops];
+      let shopPage = 1;
 
       /* ─────────── HELPERS ─────────── */
       function starHtml(r) {
@@ -571,8 +708,8 @@
       /* ─────────── RENDER GRID ─────────── */
       function renderGrid() {
         const grid = document.getElementById("foodGrid");
-        const start = (page - 1) * PER_PAGE;
-        const pageItems = filtered.slice(start, start + PER_PAGE);
+        const start = (page - 1) * FOOD_PER_PAGE;
+        const pageItems = filtered.slice(start, start + FOOD_PER_PAGE);
 
         if (pageItems.length === 0) {
           grid.innerHTML =
@@ -662,7 +799,7 @@
 
       /* ─────────── PAGINATION ─────────── */
       function renderPagination() {
-        const total = Math.ceil(filtered.length / PER_PAGE);
+        const total = Math.ceil(filtered.length / FOOD_PER_PAGE);
         const pag = document.getElementById("pagination");
         if (total <= 1) {
           pag.innerHTML = "";
@@ -783,14 +920,17 @@
       /* ─────────── RENDER SHOPS ─────────── */
       function renderShops() {
         const grid = document.getElementById("shopGrid");
+        const start = (shopPage - 1) * SHOPS_PER_PAGE;
+        const pageItems = filteredShops.slice(start, start + SHOPS_PER_PAGE);
 
-        if (filteredShops.length === 0) {
+        if (pageItems.length === 0) {
           grid.innerHTML =
             '<p style="color:#94a3b8;padding:60px 20px;text-align:center;grid-column:1/-1;font-size:15px;background:#f8fafc;border-radius:16px;border:1.5px dashed #e2e8f0;">No shops found.</p>';
+          renderShopsPagination();
           return;
         }
 
-        grid.innerHTML = filteredShops
+        grid.innerHTML = pageItems
           .map((s) => {
             const itemCount = s.foodIds.length;
             const catClass = catBadgeClass[s.category] || "meals";
@@ -833,6 +973,45 @@
             `;
           })
           .join("");
+
+        renderShopsPagination();
+      }
+
+      /* ─────────── SHOP PAGINATION ─────────── */
+      function renderShopsPagination() {
+        const total = Math.ceil(filteredShops.length / SHOPS_PER_PAGE);
+        const pag = document.getElementById("shopPagination");
+        if (total <= 1) {
+          pag.innerHTML = "";
+          return;
+        }
+
+        let html = `<button class="page-btn arrow" ${shopPage === 1 ? "disabled" : ""} id="shopPgPrev"><i class="fa-solid fa-chevron-left"></i></button>`;
+        for (let i = 1; i <= total; i++) {
+          html += `<button class="page-btn${i === shopPage ? " active" : ""}" data-sp="${i}">${i}</button>`;
+        }
+        html += `<button class="page-btn arrow" ${shopPage === total ? "disabled" : ""} id="shopPgNext"><i class="fa-solid fa-chevron-right"></i></button>`;
+        pag.innerHTML = html;
+
+        pag.querySelectorAll("[data-sp]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              shopPage = +b.dataset.sp;
+              renderShops();
+            }),
+        );
+        pag.querySelector("#shopPgPrev").onclick = () => {
+          if (shopPage > 1) {
+            shopPage--;
+            renderShops();
+          }
+        };
+        pag.querySelector("#shopPgNext").onclick = () => {
+          if (shopPage < total) {
+            shopPage++;
+            renderShops();
+          }
+        };
       }
 
       /* ─────────── SHOP FILTERS ─────────── */
@@ -864,6 +1043,7 @@
             s.category.toLowerCase().includes(q);
           return matchCat && matchQ;
         });
+        shopPage = 1;
         renderShops();
       }
 

@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Mock Data
     const approvalItems = [
-        { id: "APP-M-01", type: "menu", vendor: "The Sweet Spot", title: "Strawberry Cake", desc: "A fresh strawberry cake slice with cream.", img: "../../images/vendor1.jpg", status: "pending" },
-        { id: "APP-M-02", type: "menu", vendor: "Burger Joint", title: "Double Cheese Burger", desc: "Double patty burger with extra cheddar cheese.", img: "../../images/vendor2.jpg", status: "pending" },
-        { id: "APP-P-01", type: "poster", vendor: "Campus Grill", title: "Back to School Promo", desc: "10% off all grilled items starting next week.", img: "../../images/poster1.jpg", status: "pending" },
-        { id: "APP-M-03", type: "menu", vendor: "Healthy Bites", title: "Caesar Salad", desc: "Fresh romaine lettuce, croutons, parmesan cheese, and Caesar dressing.", img: "https://via.placeholder.com/400x300?text=Caesar+Salad", status: "approved" },
-        { id: "APP-P-02", type: "poster", vendor: "Pizza Corner", title: "New Pizza Flavors", desc: "Check out our premium pepperoni and supreme flavors.", img: "https://via.placeholder.com/400x300?text=Pizza+Poster", status: "approved" }
+        { id: "APP-M-01", type: "menu", vendor: "The Sweet Spot", title: "Strawberry Cake", desc: "A fresh strawberry cake slice with cream.", img: "../../images/strawberry.avif", status: "pending" },
+        { id: "APP-M-02", type: "menu", vendor: "Burger Joint", title: "Double Cheese Burger", desc: "Double patty burger with extra cheddar cheese.", img: "../../images/burger.avif", status: "pending" },
+        { id: "APP-P-01", type: "poster", vendor: "Campus Grill", title: "Back to School Promo", desc: "10% off all grilled items starting next week.", img: "../../images/banner4.avif", status: "pending" },
+        { id: "APP-M-04", type: "menu", vendor: "Healthy Bites", title: "Caesar Salad", desc: "Fresh romaine lettuce, croutons, parmesan cheese, and Caesar dressing.", img: "../../images/pancit.avif", status: "pending" },
+        { id: "APP-P-02", type: "poster", vendor: "Pizza Corner", title: "New Pizza Flavors", desc: "Check out our premium pepperoni and supreme flavors.", img: "../../images/pizza.avif", status: "pending" }
     ];
 
     let currentTab = "menus-pending"; // menus-pending, posters-pending, approved
@@ -18,8 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Header count selectors
     const counts = {
         menus: document.getElementById("count-menus"),
-        posters: document.getElementById("count-posters"),
-        approved: document.getElementById("count-approved")
+        posters: document.getElementById("count-posters")
     };
 
     function updateStats() {
@@ -28,12 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
         approvalItems.forEach(item => {
             if(item.status === 'pending' && item.type === 'menu') menusCount++;
             if(item.status === 'pending' && item.type === 'poster') postersCount++;
-            if(item.status === 'approved') approvedCount++;
         });
 
         if(counts.menus) counts.menus.textContent = menusCount;
         if(counts.posters) counts.posters.textContent = postersCount;
-        if(counts.approved) counts.approved.textContent = approvedCount;
     }
 
     function renderList() {
@@ -43,8 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
             filtered = approvalItems.filter(i => i.status === 'pending' && i.type === 'menu');
         } else if (currentTab === 'posters-pending') {
             filtered = approvalItems.filter(i => i.status === 'pending' && i.type === 'poster');
-        } else if (currentTab === 'approved') {
-            filtered = approvalItems.filter(i => i.status === 'approved');
         }
         
         approvalList.innerHTML = "";
@@ -66,8 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (item.status === 'pending') {
                 footerHtml = `
                     <div class="ac-footer">
-                        <button class="btn-appr decline" data-id="${item.id}" data-action="decline"><i class="fa-solid fa-xmark"></i> Decline</button>
                         <button class="btn-appr approve" data-id="${item.id}" data-action="approve"><i class="fa-solid fa-check"></i> Approve</button>
+                        <button class="btn-appr decline" data-id="${item.id}" data-action="decline"><i class="fa-solid fa-xmark"></i> Decline</button>
                     </div>
                 `;
             } else {

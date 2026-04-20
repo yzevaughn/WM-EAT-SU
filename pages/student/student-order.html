@@ -256,10 +256,8 @@
 
       /* ── Seed demo orders on first visit (only once) ── */
       (function seedDemoOrders() {
-        const SEED_KEY = "wm_eat_su_orders_seeded";
-        if (localStorage.getItem(SEED_KEY)) return;
-        if (getOrders().length > 0) { localStorage.setItem(SEED_KEY, "1"); return; }
-        saveOrders([
+        const currentOrders = getOrders();
+        const demoOrders = [
           {
             id: "ORD-SEED-001",
             items: [{ id: "burger|canteen_1", name: "Burger", price: 30, vendor: "Canteen 1", img: "../../images/burger.avif", qty: 1 }],
@@ -295,9 +293,43 @@
             instructions: "", payment: "Cash on Pickup",
             vendor: "Canteen 4", pickupCode: "E5F3", img: "../../images/Fries.jpg",
             cancelledByVendor: true
+          },
+          {
+            id: "ORD-SEED-006",
+            items: [{ id: "pizza|canteen_2", name: "Pepperoni Pizza (Slice)", price: 45, vendor: "Canteen 2", img: "../../images/pizza.avif", qty: 2 }],
+            total: 90, status: "preparing", placedAt: "2026-04-20T14:15:00",
+            instructions: "Make it extra crispy.", payment: "Wallet",
+            vendor: "Canteen 2", pickupCode: "F6G7", img: "../../images/pizza.avif"
+          },
+          {
+            id: "ORD-SEED-007",
+            items: [{ id: "shomai|student_vendor_2", name: "Pork Siomai (4pcs)", price: 25, vendor: "Student Vendor", img: "../../images/Shomai.jpg", qty: 1 }],
+            total: 25, status: "ready", placedAt: "2026-04-20T14:20:00",
+            instructions: "Extra chili sauce please.", payment: "Wallet",
+            vendor: "Student Vendor", pickupCode: "H8I9", img: "../../images/Shomai.jpg"
+          },
+          {
+            id: "ORD-SEED-008",
+            items: [{ id: "mango_shake|canteen_3", name: "Mango Shake", price: 35, vendor: "Canteen 3", img: "../../images/shake.avif", qty: 1 }],
+            total: 35, status: "completed", placedAt: "2026-03-08T14:20:00",
+            instructions: "", payment: "Wallet",
+            vendor: "Canteen 3", pickupCode: "J0K1", img: "../../images/shake.avif"
           }
-        ]);
-        localStorage.setItem(SEED_KEY, "1");
+        ];
+
+        let updated = false;
+        const finalOrders = [...currentOrders];
+
+        demoOrders.forEach(demo => {
+          if (!finalOrders.some(o => o.id === demo.id)) {
+            finalOrders.push(demo);
+            updated = true;
+          }
+        });
+
+        if (updated) {
+          saveOrders(finalOrders);
+        }
       })();
 
       /* ── Status display config ── */

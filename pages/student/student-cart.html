@@ -128,8 +128,15 @@
       </div>
 
       <div class="main-content">
-        <p class="cart-page-title">Cart</p>
-        <p class="cart-page-sub" id="cartSubtitle">0 item(s) in your cart</p>
+        <div class="cart-header">
+          <div class="cart-title-info">
+            <p class="cart-page-title">Cart</p>
+            <p class="cart-page-sub" id="cartSubtitle">0 item(s) in your cart</p>
+          </div>
+          <button class="clear-cart-btn" id="clearCartBtn" style="display:none">
+            <i class="fa-solid fa-trash-can"></i> Clear All
+          </button>
+        </div>
 
         <div class="cart-container">
           <!-- ITEMS -->
@@ -180,6 +187,28 @@
 
     <div id="toast-container"></div>
 
+    <!-- CONFIRMATION MODAL -->
+    <div class="modal" id="confirmModal">
+      <div class="modal-overlay" id="confirmOverlay"></div>
+      <div class="modal-content" style="max-width:400px;text-align:center">
+        <div class="modal-body" style="padding-top:32px">
+          <div class="modal-icon">
+            <i class="fa-solid fa-circle-exclamation"></i>
+          </div>
+          <h2 style="font-size:20px;font-weight:800;color:#0f172a;margin-bottom:8px" id="confirmTitle">
+            Confirm Action
+          </h2>
+          <p style="font-size:14px;color:#64748b;margin-bottom:24px" id="confirmMessage">
+            Are you sure you want to do this?
+          </p>
+          <div class="form-actions" style="justify-content:center;gap:12px">
+            <button class="btn-cancel" id="cancelConfirmBtn">Cancel</button>
+            <button class="btn-submit" id="submitConfirmBtn">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Shared cart module must load first -->
     <script src="../../script/student/cart.js"></script>
 
@@ -199,6 +228,13 @@
         const totalQty = cart.reduce((s, c) => s + c.qty, 0);
         document.getElementById("cartSubtitle").textContent =
           `${totalQty} item(s) in your cart`;
+
+        // Toggle 'Clear All' button visibility
+        const clearBtn = document.getElementById("clearCartBtn");
+        if (clearBtn) {
+          clearBtn.style.display = cart.length > 0 ? "flex" : "none";
+        }
+
         updateAllCartBadges();
 
         if (cart.length === 0) {
@@ -309,7 +345,49 @@
             showToast("info", "fa-trash", "Item removed from cart.");
           });
         });
+
+        // Clear All
+        const clearBtn = document.getElementById("clearCartBtn");
+        if (clearBtn) {
+          clearBtn.onclick = () => {
+            showConfirmation(
+              "Clear Cart",
+              "Are you sure you want to clear your entire cart? This cannot be undone.",
+              () => {
+                clearCart();
+                renderCart();
+                showToast("info", "fa-trash-can", "Cart cleared.");
+              }
+            );
+          };
+        }
       }
+
+      /* ── Confirmation Modal Logic ── */
+      const confirmModal    = document.getElementById("confirmModal");
+      const confirmOverlay  = document.getElementById("confirmOverlay");
+      const cancelBtn       = document.getElementById("cancelConfirmBtn");
+      const submitBtn       = document.getElementById("submitConfirmBtn");
+      let confirmCallback   = null;
+
+      function showConfirmation(title, message, callback) {
+        document.getElementById("confirmTitle").textContent   = title;
+        document.getElementById("confirmMessage").textContent = message;
+        confirmCallback = callback;
+        confirmModal.classList.add("active");
+      }
+
+      function closeConfirm() {
+        confirmModal.classList.remove("active");
+        confirmCallback = null;
+      }
+
+      cancelBtn.onclick      = closeConfirm;
+      confirmOverlay.onclick = closeConfirm;
+      submitBtn.onclick = () => {
+        if (confirmCallback) confirmCallback();
+        closeConfirm();
+      };
 
       /* ── HTML escape helper ── */
       function escHtml(str) {
