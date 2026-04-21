@@ -1,263 +1,481 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WM EAT SU — Campus Map</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../../css/navbar.css">
-    <link rel="stylesheet" href="../../css/student/campus-map.css">
-</head>
-<body>
-    <input type="checkbox" id="menu-checkbox" class="menu-checkbox">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../css/navbar.css" />
+    <link rel="stylesheet" href="../../css/student/campus-map.css" />
+  </head>
+  <body>
+    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
 
     <!-- TOP NAVBAR -->
     <div class="top-nav">
-        <div class="nav-left">
-            <label for="menu-checkbox" class="menu-toggle">
-                <i class="fa-solid fa-bars"></i>
-            </label>
-            <a href="student-dashboard.html" class="logo">
-                <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-                <span class="logo-text">WM EAT SU</span>
-            </a>
-        </div>
+      <div class="nav-left">
+        <label for="menu-checkbox" class="menu-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </label>
+        <a href="student-dashboard.html" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
+        </a>
+      </div>
 
-        <div class="nav-center">
-            <div class="role-switcher">
-                <a href="student-dashboard.html" class="role-btn active">
-                    <i class="fa-solid fa-graduation-cap"></i>
-                    <span>Student</span>
-                </a>
-                <a href="../vendor-pages/vendor-dashboard.html" class="role-btn">
-                    <i class="fa-solid fa-store"></i>
-                    <span>Vendor</span>
-                </a>
-            </div>
+      <div class="nav-center">
+        <div class="role-switcher">
+          <a href="student-dashboard.html" class="role-btn active">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Student</span>
+          </a>
+          <a href="../vendor-pages/vendor-dashboard.html" class="role-btn">
+            <i class="fa-solid fa-store"></i>
+            <span>Vendor</span>
+          </a>
         </div>
+      </div>
 
-        <div class="nav-right">
-            <div class="profile">
-                <div class="profile-info">
-                    <span class="profile-name">Vaughn Evangelista</span>
-                    <span class="email">vaughn.student@wm.edu.ph</span>
-                </div>
-                <div class="profile-dropdown">
-                    <button class="profile-btn">
-                        <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile">
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="student-feedback.html" class="dropdown-item">
-                            <i class="fa-solid fa-flag"></i><span>Reports</span>
-                        </a>
-                        <a href="student-vendor-applications.html" class="dropdown-item">
-                            <i class="fa-solid fa-rss"></i><span>Vendor Applications</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="../../index.html" class="dropdown-item dropdown-item--danger">
-                            <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
-                        </a>
-                    </div>
-                </div>
+      <div class="nav-right">
+        <div class="profile">
+          <div class="profile-info">
+            <span class="profile-name">Vaughn Evangelista</span>
+            <span class="email">vaughn.student@wm.edu.ph</span>
+          </div>
+          <div class="profile-dropdown">
+            <button class="profile-btn">
+              <img
+                src="../../images/pfp.jpg"
+                class="profile-pic"
+                alt="Profile"
+              />
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="student-feedback.html" class="dropdown-item">
+                <i class="fa-solid fa-flag"></i><span>Reports</span>
+              </a>
+              <a href="student-vendor-applications.html" class="dropdown-item">
+                <i class="fa-solid fa-rss"></i><span>Vendor Applications</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a
+                href="../../index.html"
+                class="dropdown-item dropdown-item--danger"
+              >
+                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+              </a>
             </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- LAYOUT -->
     <div class="layout">
-        <!-- SIDEBAR -->
-        <div class="left-nav">
-            <ul class="nav-list">
-                <li><a href="student-dashboard.html" class="nav-link"><i class="fa-solid fa-house"></i><span>Dashboard</span></a></li>
-                <li><a href="student-browse-food.html" class="nav-link"><i class="fa-solid fa-utensils"></i><span>Browse Food</span></a></li>
-                <li><a href="student-cart.html" class="nav-link"><i class="fa-solid fa-cart-shopping"></i><span>Cart</span></a></li>
-                <li><a href="student-order.html" class="nav-link"><i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span></a></li>
-                <li><a href="student-wallet.html" class="nav-link"><i class="fa-solid fa-wallet"></i><span>Wallet</span></a></li>
-                <li><a href="student-campus-map.html" class="nav-link active"><i class="fa-solid fa-map-location-dot"></i><span>Campus Map</span></a></li>
-            </ul>
+      <!-- SIDEBAR -->
+      <div class="left-nav">
+        <ul class="nav-list">
+          <li>
+            <a href="student-dashboard.html" class="nav-link"
+              ><i class="fa-solid fa-house"></i><span>Dashboard</span></a
+            >
+          </li>
+          <li>
+            <a href="student-browse-food.html" class="nav-link"
+              ><i class="fa-solid fa-utensils"></i><span>Browse Food</span></a
+            >
+          </li>
+          <li>
+            <a href="student-cart.html" class="nav-link"
+              ><i class="fa-solid fa-cart-shopping"></i><span>Cart</span></a
+            >
+          </li>
+          <li>
+            <a href="student-order.html" class="nav-link"
+              ><i class="fa-solid fa-clock-rotate-left"></i
+              ><span>Orders</span></a
+            >
+          </li>
+          <li>
+            <a href="student-wallet.html" class="nav-link"
+              ><i class="fa-solid fa-wallet"></i><span>Wallet</span></a
+            >
+          </li>
+          <li>
+            <a href="student-campus-map.html" class="nav-link active"
+              ><i class="fa-solid fa-map-location-dot"></i
+              ><span>Campus Map</span></a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div class="main-content">
+        <div class="page-header" style="margin-bottom: 20px">
+          <h1 style="font-size: 24px; font-weight: 800; color: #0f172a">
+            Campus Map
+          </h1>
+          <p style="color: #64748b; font-size: 14px">
+            Locate your favorite canteens and food stalls with precision.
+          </p>
         </div>
 
-        <!-- MAIN CONTENT -->
-        <div class="main-content">
-            <div class="page-header" style="margin-bottom: 20px;">
-                <h1 style="font-size: 24px; font-weight: 800; color: #0f172a;">Campus Map</h1>
-                <p style="color: #64748b; font-size: 14px;">Locate your favorite canteens and food stalls with precision.</p>
+        <div class="map-container">
+          <!-- Map Legend -->
+          <div class="map-overlay">
+            <div class="legend-item">
+              <div
+                class="legend-dot"
+                style="background: var(--marker-canteen)"
+              ></div>
+              <span>Canteens</span>
             </div>
-
-            <div class="map-container">
-                <!-- Map Legend -->
-                <div class="map-overlay">
-                    <div class="legend-item">
-                        <div class="legend-dot" style="background: var(--marker-canteen);"></div>
-                        <span>Canteens</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-dot" style="background: var(--marker-vendor);"></div>
-                        <span>Student Vendors</span>
-                    </div>
-                </div>
-
-                <!-- Map Controls -->
-                <div class="map-controls">
-                    <button class="control-btn" title="Zoom In" onclick="map.setZoom(map.getZoom() + 1)">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
-                    <button class="control-btn" title="Zoom Out" onclick="map.setZoom(map.getZoom() - 1)">
-                        <i class="fa-solid fa-minus"></i>
-                    </button>
-                    <div class="control-divider"></div>
-                    <button class="control-btn" title="Rotate Left" onclick="rotateMap(-30)">
-                        <i class="fa-solid fa-rotate-left"></i>
-                    </button>
-                    <button class="control-btn" title="Rotate Right" onclick="rotateMap(30)">
-                        <i class="fa-solid fa-rotate-right"></i>
-                    </button>
-                    <button class="control-btn" title="Toggle Tilt" onclick="toggleTilt()">
-                        <i class="fa-solid fa-cube"></i>
-                    </button>
-                    <button class="control-btn" title="Reset View" onclick="resetView()">
-                        <i class="fa-solid fa-location-crosshairs"></i>
-                    </button>
-                </div>
-
-                <!-- Google Map Container -->
-                <div id="map"></div>
-
-                <!-- Vendor Info Panel -->
-                <div class="map-info-panel" id="vendorPanel">
-                    <div class="info-header">
-                        <h2 class="info-title" id="vName">Vendor Name</h2>
-                        <div class="info-close" onclick="closePanel()">
-                            <i class="fa-solid fa-xmark"></i>
-                        </div>
-                    </div>
-                    <div class="info-details">
-                        <div class="detail-row">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <span id="vLoc">Location Info</span>
-                        </div>
-                        <div class="detail-row">
-                            <i class="fa-solid fa-star"></i>
-                            <span id="vRate">4.5 · Highly Rated</span>
-                        </div>
-                        <div class="detail-row">
-                            <i class="fa-solid fa-tags"></i>
-                            <span id="vCat">Category</span>
-                        </div>
-                    </div>
-                    <div class="info-actions">
-                        <a href="#" class="btn-view-shop" id="vLink">
-                            <i class="fa-solid fa-utensils"></i> View Menu & Order
-                        </a>
-                    </div>
-                </div>
+            <div class="legend-item">
+              <div
+                class="legend-dot"
+                style="background: var(--marker-vendor)"
+              ></div>
+              <span>Student Vendors</span>
             </div>
+          </div>
+
+          <!-- Map Controls -->
+          <div class="map-controls">
+            <button
+              class="control-btn"
+              title="Zoom In"
+              onclick="map.setZoom(map.getZoom() + 1)"
+            >
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            <button
+              class="control-btn"
+              title="Zoom Out"
+              onclick="map.setZoom(map.getZoom() - 1)"
+            >
+              <i class="fa-solid fa-minus"></i>
+            </button>
+            <div class="control-divider"></div>
+            <button
+              class="control-btn"
+              title="Rotate Left"
+              onclick="rotateMap(-30)"
+            >
+              <i class="fa-solid fa-rotate-left"></i>
+            </button>
+            <button
+              class="control-btn"
+              title="Rotate Right"
+              onclick="rotateMap(30)"
+            >
+              <i class="fa-solid fa-rotate-right"></i>
+            </button>
+            <button
+              class="control-btn"
+              title="Toggle Tilt"
+              onclick="toggleTilt()"
+            >
+              <i class="fa-solid fa-cube"></i>
+            </button>
+            <button
+              class="control-btn"
+              title="Reset View"
+              onclick="resetView()"
+            >
+              <i class="fa-solid fa-location-crosshairs"></i>
+            </button>
+          </div>
+
+          <!-- Google Map Container -->
+          <div id="map"></div>
+
+          <!-- Vendor Info Panel -->
+          <div class="map-info-panel" id="vendorPanel">
+            <div class="info-header">
+              <h2 class="info-title" id="vName">Vendor Name</h2>
+              <div class="info-close" onclick="closePanel()">
+                <i class="fa-solid fa-xmark"></i>
+              </div>
+            </div>
+            <div class="info-details">
+              <div class="detail-row">
+                <i class="fa-solid fa-location-dot"></i>
+                <span id="vLoc">Location Info</span>
+              </div>
+              <div class="detail-row">
+                <i class="fa-solid fa-star"></i>
+                <span id="vRate">4.5 · Highly Rated</span>
+              </div>
+              <div class="detail-row">
+                <i class="fa-solid fa-tags"></i>
+                <span id="vCat">Category</span>
+              </div>
+            </div>
+            <div class="info-actions">
+              <a href="#" class="btn-view-shop" id="vLink">
+                <i class="fa-solid fa-utensils"></i> View Menu & Order
+              </a>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Google Maps API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO6gC7V8EijyHtXjb4Iypbpvi0Z-ih1S0"></script>
     <script>
-        let map;
-        const wmsuPos = { lat: 6.9136, lng: 122.0614 };
-        
-        const vendors = [
-            { id: '1', name: "Mang Tino's", loc: "Canteen 1 Hall", rate: "4.5", cat: "Meals", lat: 6.9138, lng: 122.0620, type: 'canteen' },
-            { id: '2', name: "Street Bites Corner", loc: "Science Hall Entrance", rate: "4.7", cat: "Snacks", lat: 6.9135, lng: 122.0605, type: 'vendor' },
-            { id: '3', name: "Sip & Chill Beverages", loc: "Beside University Pond", rate: "4.8", cat: "Drinks", lat: 6.9142, lng: 122.0610, type: 'vendor' },
-            { id: '4', name: "Sweet Tooth Desserts", loc: "Engineering Bldg G/F", rate: "4.6", cat: "Desserts", lat: 6.9130, lng: 122.0612, type: 'vendor' },
-            { id: '5', name: "Green Bowl", loc: "Main Library Garden", rate: "4.9", cat: "Healthy", lat: 6.9128, lng: 122.0625, type: 'vendor' },
-            { id: '6', name: "Pizza Hub", loc: "Gym Food Court", rate: "4.4", cat: "Meals", lat: 6.9145, lng: 122.0628, type: 'canteen' }
-        ];
+      let map;
+      const wmsuPos = { lat: 6.9136, lng: 122.0614 };
 
-        function initMap() {
-            map = new google.maps.Map(document.getElementById("map"), {
-                center: wmsuPos,
-                zoom: 18,
-                minZoom: 17,
-                restriction: {
-                    latLngBounds: {
-                        north: 6.920,
-                        south: 6.905,
-                        east: 122.070,
-                        west: 122.050
-                    },
-                    strictBounds: false
-                },
-                heading: 0,
-                tilt: 45,
-                mapId: "DEMO_MAP_ID", // Using a demo ID for development. Rotation requires a valid Map ID.
-                disableDefaultUI: true,
-                gestureHandling: "greedy"
-            });
+      const vendors = [
+        {
+          id: "1",
+          name: "Mang Tino's",
+          loc: "Canteen 1 Hall",
+          rate: "4.5",
+          cat: "Meals",
+          lat: 6.91243320596896,
+          lng: 122.06345799098618,
+          type: "canteen",
+        },
+        {
+          id: "2",
+          name: "Street Bites Corner",
+          loc: "Science Hall Entrance",
+          rate: "4.7",
+          cat: "Snacks",
+          lat: 6.913187183190812,
+          lng: 122.06339479576178,
+          type: "canteen",
+        },
+        {
+          id: "3",
+          name: "Sip & Chill Beverages",
+          loc: "Beside University Pond",
+          rate: "4.8",
+          cat: "Drinks",
+          lat: 6.913773971170068,
+          lng: 122.06165556183369,
+          type: "canteen",
+        },
+        {
+          id: "4",
+          name: "Sweet Tooth Desserts",
+          loc: "Engineering Bldg G/F",
+          rate: "4.6",
+          cat: "Desserts",
+          lat: 6.913552464390463,
+          lng: 122.0608910942802,
+          type: "canteen",
+        },
+        {
+          id: "5",
+          name: "Sweet Tooth Desserts",
+          loc: "Engineering Bldg G/F",
+          rate: "4.6",
+          cat: "Desserts",
+          lat: 6.912850720564993,
+          lng: 122.06175222757005,
+          type: "canteen",
+        },
+        {
+          id: "6",
+          name: "Sweet Tooth Desserts",
+          loc: "Engineering Bldg G/F",
+          rate: "4.6",
+          cat: "Desserts",
+          lat: 6.912861371406072,
+          lng: 122.06177569689841,
+          type: "canteen",
+        },
+        {
+          id: "7",
+          name: "Sweet Tooth Desserts",
+          loc: "Engineering Bldg G/F",
+          rate: "4.6",
+          cat: "Desserts",
+          lat: 6.912876016312175,
+          lng: 122.06179514291333,
+          type: "canteen",
+        },
+        {
+          id: "8",
+          name: "Sweet Tooth Desserts",
+          loc: "Engineering Bldg G/F",
+          rate: "4.6",
+          cat: "Desserts",
+          lat: 6.912892658250371,
+          lng: 122.06185012819688,
+          type: "canteen",
+        },
+        {
+          id: "9",
+          name: "Sweet Tooth Desserts",
+          loc: "Engineering Bldg G/F",
+          rate: "4.6",
+          cat: "Desserts",
+          lat: 6.912905971800495,
+          lng: 122.06186018648046,
+          type: "canteen",
+        },
+        {
+          id: "10",
+          name: "Sweet Tooth Desserts",
+          loc: "Engineering Bldg G/F",
+          rate: "4.6",
+          cat: "Desserts",
+          lat: 6.912921282382685,
+          lng: 122.06187359752525,
+          type: "canteen",
+        },
+        {
+          id: "11",
+          name: "Sweet Tooth Desserts",
+          loc: "Engineering Bldg G/F",
+          rate: "4.6",
+          cat: "Desserts",
+          lat: 6.912933264577098,
+          lng: 122.0618937140924,
+          type: "canteen",
+        },
+        {
+          id: "12",
+          name: "Sweet Tooth Desserts",
+          loc: "Engineering Bldg G/F",
+          rate: "4.6",
+          cat: "Desserts",
+          lat: 6.912963020964882,
+          lng: 122.061914844922,
+          type: "canteen",
+        },
+        {
+          id: "13",
+          name: "Sweet Tooth Desserts",
+          loc: "Engineering Bldg G/F",
+          rate: "4.6",
+          cat: "Desserts",
+          lat: 6.912952370126093,
+          lng: 122.06190880995187,
+          type: "canteen",
+        },
+        {
+          id: "14",
+          name: "Sweet Tooth Desserts",
+          loc: "Engineering Bldg G/F",
+          rate: "4.6",
+          cat: "Desserts",
+          lat: 6.9129756688356485,
+          lng: 122.06193496148916,
+          type: "canteen",
+        },
+      ];
 
-            vendors.forEach(v => {
-                const marker = new google.maps.Marker({
-                    position: { lat: v.lat, lng: v.lng },
-                    map: map,
-                    title: v.name,
-                    icon: {
-                        path: google.maps.SymbolPath.CIRCLE,
-                        fillColor: v.type === 'canteen' ? '#e61524' : '#3b82f6',
-                        fillOpacity: 1,
-                        strokeColor: '#ffffff',
-                        strokeWeight: 2,
-                        scale: 10
-                    }
-                });
+      function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: wmsuPos,
+          zoom: 18,
+          minZoom: 17.5,
+          restriction: {
+            latLngBounds: {
+              north: 6.9165,
+              south: 6.9105,
+              east: 122.0665,
+              west: 122.0585,
+            },
+            strictBounds: false,
+          },
+          heading: 0,
+          tilt: 45,
 
-                marker.addListener("click", () => {
-                    showVendorInfo(v);
-                    map.panTo(marker.getPosition());
-                });
-            });
+          disableDefaultUI: true,
+          gestureHandling: "greedy",
+          styles: [
+            { featureType: "poi", stylers: [{ visibility: "off" }] },
+            { featureType: "transit", stylers: [{ visibility: "off" }] },
+            {
+              featureType: "road",
+              elementType: "labels.icon",
+              stylers: [{ visibility: "off" }],
+            },
+          ],
+        });
+
+        vendors.forEach((v) => {
+          const marker = new google.maps.Marker({
+            position: { lat: v.lat, lng: v.lng },
+            map: map,
+            title: v.name,
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              fillColor: v.type === "canteen" ? "#e61524" : "#3b82f6",
+              fillOpacity: 1,
+              strokeColor: "#ffffff",
+              strokeWeight: 2,
+              scale: 10,
+            },
+          });
+
+          marker.addListener("click", () => {
+            showVendorInfo(v);
+            map.panTo(marker.getPosition());
+          });
+        });
+      }
+
+      function rotateMap(deg) {
+        if (map && typeof map.getHeading === "function") {
+          const current = map.getHeading() || 0;
+          map.setHeading(current + deg);
+        } else {
+          console.warn("Rotation requires a valid Google Maps Vector Map ID.");
         }
+      }
 
-        function rotateMap(deg) {
-            if (map && typeof map.getHeading === 'function') {
-                const current = map.getHeading() || 0;
-                map.setHeading(current + deg);
-            } else {
-                console.warn("Rotation requires a valid Google Maps Vector Map ID.");
-            }
+      function toggleTilt() {
+        if (map && typeof map.getTilt === "function") {
+          const current = map.getTilt() || 0;
+          map.setTilt(current === 0 ? 45 : 0);
         }
+      }
 
-        function toggleTilt() {
-            if (map && typeof map.getTilt === 'function') {
-                const current = map.getTilt() || 0;
-                map.setTilt(current === 0 ? 45 : 0);
-            }
-        }
+      function resetView() {
+        map.setCenter(wmsuPos);
+        map.setZoom(18);
+        map.setHeading(0);
+        map.setTilt(45);
+      }
 
-        function resetView() {
-            map.setCenter(wmsuPos);
-            map.setZoom(18);
-            map.setHeading(0);
-            map.setTilt(45);
-        }
+      function showVendorInfo(v) {
+        document.getElementById("vName").textContent = v.name;
+        document.getElementById("vLoc").textContent = v.loc;
+        document.getElementById("vRate").textContent =
+          v.rate + " · Highly Rated";
+        document.getElementById("vCat").textContent = v.cat;
+        document.getElementById("vLink").href =
+          "student-shop-details.html?id=" + v.id;
+        document.getElementById("vendorPanel").classList.add("active");
+      }
 
-        function showVendorInfo(v) {
-            document.getElementById('vName').textContent = v.name;
-            document.getElementById('vLoc').textContent = v.loc;
-            document.getElementById('vRate').textContent = v.rate + ' · Highly Rated';
-            document.getElementById('vCat').textContent = v.cat;
-            document.getElementById('vLink').href = 'student-shop-details.html?id=' + v.id;
-            document.getElementById('vendorPanel').classList.add('active');
-        }
+      function closePanel() {
+        document.getElementById("vendorPanel").classList.remove("active");
+      }
 
-        function closePanel() {
-            document.getElementById('vendorPanel').classList.remove('active');
-        }
-
-        window.onload = initMap;
+      window.onload = initMap;
     </script>
-    <script src="../../script/student/cart.js"></script>
+
     <script>
       if (typeof updateAllCartBadges === "function") {
         updateAllCartBadges();
       }
     </script>
-</body>
+  </body>
 </html>
