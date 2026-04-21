@@ -172,6 +172,10 @@
               <div class="stock-status">Stock: <span class="stock-count">15</span></div>
             </div>
             <div class="actions">
+              <label class="stock-toggle" style="margin-right: auto;" title="Toggle Availability">
+                <input type="checkbox" checked>
+                <div class="toggle-slider"></div>
+              </label>
               <button class="edit-btn">
                 <i class="fas fa-pencil"></i> Edit
               </button>
@@ -198,6 +202,10 @@
               <div class="stock-status">Stock: <span class="stock-count">50</span></div>
             </div>
             <div class="actions">
+              <label class="stock-toggle" style="margin-right: auto;" title="Toggle Availability">
+                <input type="checkbox" checked>
+                <div class="toggle-slider"></div>
+              </label>
               <button class="edit-btn">
                 <i class="fas fa-pencil"></i> Edit
               </button>
@@ -222,6 +230,10 @@
               <div class="stock-status low-stock">Low Stock: <span class="stock-count">3</span></div>
             </div>
             <div class="actions">
+              <label class="stock-toggle" style="margin-right: auto;" title="Toggle Availability">
+                <input type="checkbox" checked>
+                <div class="toggle-slider"></div>
+              </label>
               <button class="edit-btn">
                 <i class="fas fa-pencil"></i> Edit
               </button>
@@ -246,6 +258,10 @@
               <div class="stock-status">Stock: <span class="stock-count">20</span></div>
             </div>
             <div class="actions">
+              <label class="stock-toggle" style="margin-right: auto;" title="Toggle Availability">
+                <input type="checkbox" checked>
+                <div class="toggle-slider"></div>
+              </label>
               <button class="edit-btn">
                 <i class="fas fa-pencil"></i> Edit
               </button>
@@ -270,6 +286,10 @@
               <div class="stock-status">Stock: <span class="stock-count">10</span></div>
             </div>
             <div class="actions">
+              <label class="stock-toggle" style="margin-right: auto;" title="Toggle Availability">
+                <input type="checkbox" checked>
+                <div class="toggle-slider"></div>
+              </label>
               <button class="edit-btn">
                 <i class="fas fa-pencil"></i> Edit
               </button>
@@ -344,10 +364,7 @@
                   <label for="posterImage">Upload Poster Image</label>
                   <input type="file" id="posterImage" accept="image/*" required />
                 </div>
-                <div class="form-group">
-                  <label for="posterLink">Optional Link (on click)</label>
-                  <input type="url" id="posterLink" placeholder="https://" />
-                </div>
+
               </form>
             </div>
             <div class="modal-footer">
@@ -358,7 +375,7 @@
         </div>
       </div>
     </div>
-        <div class="modal" id="confirmSaveModal" style="z-index: 3000;">
+        <div class="modal" id="confirmSaveModal" style="z-index: 100002;">
           <div class="modal-overlay" id="confirmSaveOverlay"></div>
           <div class="modal-content" style="max-width: 400px; text-align: center;">
             <div class="modal-header" style="justify-content: center; padding-bottom: 10px; position: relative;">
@@ -587,6 +604,10 @@
                     <div class="${stockClass}">${stockLabel}<span class="stock-count">${itemQuantity}</span></div>
                   </div>
                   <div class="actions">
+                    <label class="stock-toggle" style="margin-right: auto;" title="Toggle Availability">
+                      <input type="checkbox" checked>
+                      <div class="toggle-slider"></div>
+                    </label>
                     <button class="edit-btn">
                       <i class="fas fa-pencil"></i>
                       Edit

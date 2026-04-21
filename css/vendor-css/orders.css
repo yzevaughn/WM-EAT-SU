@@ -17,6 +17,13 @@
   margin-bottom: 24px;
 }
 
+.subtitle {
+  margin-top: 10px;
+  margin-bottom: 24px;
+  color: #64748b;
+  font-size: 15px;
+}
+
 /* ── Controls (Filter & Search) ── */
 .order-controls {
   display: flex;
