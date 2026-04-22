@@ -101,6 +101,23 @@
   background: #ef4444;
 }
 
+/* Counter badge within the filter pill */
+.tab-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.05);
+  color: inherit;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 12px;
+  margin-left: 4px;
+}
+
+.filter-btn.active .tab-count {
+  background: rgba(255, 255, 255, 0.2);
+}
+
 /* ── grid of order cards ── */
 .orders-list {
   display: grid;
@@ -617,14 +634,14 @@ hr.order-divider {
 }
 
 .pickup-code-value {
-  font-size: 42px;
+  font-size: 32px;
   font-weight: 800;
-  letter-spacing: 6px;
+  letter-spacing: 2px;
 }
 
 .pickup-code-order {
-  font-size: 12px;
-  opacity: .75;
+  font-size: 14px;
+  opacity: 0.9;
   margin-top: 6px;
 }
 
@@ -809,8 +826,35 @@ hr.order-divider {
 }
 
 .btn-submit:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(230, 21, 36, .3);
+  background: linear-gradient(135deg, #c41318, #a00f13);
+  box-shadow: 0 4px 12px rgba(230, 21, 36, .2);
+}
+
+/* ── Shared btn styles for generic confirmation modal ── */
+.btn-confirm-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #fff;
+  color: #ef4444;
+  border: 1px solid #fecaca;
+  padding: 10px 20px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.btn-confirm-delete:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+}
+
+.btn-confirm-delete:active {
+  transform: scale(0.98);
 }
 
 @media (max-width: 768px) {

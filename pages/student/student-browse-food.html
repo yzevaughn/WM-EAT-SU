@@ -147,6 +147,9 @@
               <a href="student-browse-food.html?tab=shops" class="shop-profile-back">
                 <i class="fa-solid fa-arrow-left"></i> Back to Shops
               </a>
+              <a href="#" class="shop-profile-map-btn" id="spMapBtn">
+                <i class="fa-solid fa-map-location-dot"></i> View on Map
+              </a>
             </div>
             <div class="shop-profile-info">
               <div class="shop-profile-details">
@@ -411,6 +414,7 @@
             document.getElementById("spLoc").textContent  = shop.loc || "Campus";
             document.getElementById("spRate").textContent = shop.rating.toFixed(1);
             document.getElementById("spCover").src        = shop.img;
+            document.getElementById("spMapBtn").href      = "student-campus-map.html?focus=" + shop.id;
           }
         }
       })();

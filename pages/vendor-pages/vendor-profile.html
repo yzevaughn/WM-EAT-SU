@@ -4,147 +4,406 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WM EAT SU - Vendor Profile</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <link rel="stylesheet" href="../../css/navbar.css" />
     <style>
-      * { box-sizing: border-box; margin: 0; padding: 0; }
-      body { font-family: "Inter", sans-serif; background: #f9fafb; color: #1f2937; }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Inter", sans-serif;
+        background: #f9fafb;
+        color: #1f2937;
+      }
 
-      .profile-page { padding: 1.5rem 2rem; width: 100%; display: flex; flex-direction: column; gap: 1.25rem; }
+      .profile-page {
+        padding: 1.5rem 2rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
 
       /* ── HERO CARD ── */
       .profile-hero {
-        background: linear-gradient(135deg, rgba(239,68,68,0.88), rgba(185,28,28,0.82)), url("../../images/wmsu.jpg");
-        background-size: cover; background-position: center;
-        border-radius: 1.5rem; padding: 2.5rem; color: white;
-        display: flex; align-items: center; gap: 2rem;
-        box-shadow: 0 10px 30px rgba(239,68,68,0.35);
-        position: relative; overflow: hidden;
+        background:
+          linear-gradient(
+            135deg,
+            rgba(239, 68, 68, 0.88),
+            rgba(185, 28, 28, 0.82)
+          ),
+          url("../../images/wmsu.jpg");
+        background-size: cover;
+        background-position: center;
+        border-radius: 1.5rem;
+        padding: 2.5rem;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        box-shadow: 0 10px 30px rgba(239, 68, 68, 0.35);
+        position: relative;
+        overflow: hidden;
       }
       .profile-hero::after {
-        content: ""; position: absolute; inset: 0;
-        background: radial-gradient(ellipse at top right, rgba(255,255,255,0.08) 0%, transparent 70%);
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse at top right,
+          rgba(255, 255, 255, 0.08) 0%,
+          transparent 70%
+        );
         pointer-events: none;
       }
-      .avatar-wrap { position: relative; flex-shrink: 0; }
+      .avatar-wrap {
+        position: relative;
+        flex-shrink: 0;
+      }
       .avatar-img {
-        width: 110px; height: 110px; border-radius: 50%;
-        border: 4px solid rgba(255,255,255,0.8);
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        border: 4px solid rgba(255, 255, 255, 0.8);
         object-fit: cover;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
       }
       .avatar-badge {
-        position: absolute; bottom: 4px; right: 4px;
-        background: #22c55e; color: white;
-        width: 22px; height: 22px; border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
-        font-size: 11px; border: 2px solid white;
+        position: absolute;
+        bottom: 4px;
+        right: 4px;
+        background: #22c55e;
+        color: white;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        border: 2px solid white;
       }
-      .hero-info { flex: 1; }
-      .hero-info h1 { font-size: 1.7rem; font-weight: 700; margin-bottom: 4px; }
+      .hero-info {
+        flex: 1;
+      }
+      .hero-info h1 {
+        font-size: 1.7rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
       .hero-info .store-tag {
-        font-size: 0.9rem; opacity: 0.85; margin-bottom: 12px;
-        display: flex; align-items: center; gap: 6px;
+        font-size: 0.9rem;
+        opacity: 0.85;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
       }
-      .hero-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+      .hero-badges {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
       .hero-badge {
-        background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35);
-        padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;
-        display: flex; align-items: center; gap: 5px;
+        background: rgba(255, 255, 255, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 5px;
       }
       .edit-hero-btn {
-        background: rgba(255,255,255,0.2); border: 1.5px solid rgba(255,255,255,0.5);
-        color: white; padding: 9px 20px; border-radius: 10px;
-        font-size: 0.88rem; font-weight: 600; cursor: pointer;
-        display: flex; align-items: center; gap: 7px;
-        transition: background 0.2s; white-space: nowrap;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1.5px solid rgba(255, 255, 255, 0.5);
+        color: white;
+        padding: 9px 20px;
+        border-radius: 10px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        transition: background 0.2s;
+        white-space: nowrap;
         align-self: flex-start;
       }
-      .edit-hero-btn:hover { background: rgba(255,255,255,0.32); }
+      .edit-hero-btn:hover {
+        background: rgba(255, 255, 255, 0.32);
+      }
 
       /* ── STAT ROW ── */
-      .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-      .stat-card {
-        background: white; border-radius: 1rem; padding: 1.25rem 1rem;
-        text-align: center; border: 1px solid #e5e7eb;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        transition: transform 0.2s, box-shadow 0.2s;
+      .stat-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
       }
-      .stat-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.1); }
-      .stat-icon { font-size: 1.4rem; margin-bottom: 8px; }
-      .stat-value { font-size: 1.5rem; font-weight: 700; color: #1f2937; line-height: 1; }
-      .stat-label { font-size: 0.78rem; color: #6b7280; margin-top: 4px; font-weight: 500; }
+      .stat-card {
+        background: white;
+        border-radius: 1rem;
+        padding: 1.25rem 1rem;
+        text-align: center;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      }
+      .stat-icon {
+        font-size: 1.4rem;
+        margin-bottom: 8px;
+      }
+      .stat-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1f2937;
+        line-height: 1;
+      }
+      .stat-label {
+        font-size: 0.78rem;
+        color: #6b7280;
+        margin-top: 4px;
+        font-weight: 500;
+      }
 
       /* ── TWO-COL LAYOUT ── */
-      .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+      }
 
       /* ── SECTION CARD ── */
       .section-card {
-        background: white; border-radius: 1rem; border: 1px solid #e5e7eb;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05); overflow: hidden;
+        background: white;
+        border-radius: 1rem;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
       }
       .section-header {
-        display: flex; justify-content: space-between; align-items: center;
-        padding: 1.1rem 1.25rem; border-bottom: 1px solid #f3f4f6;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.1rem 1.25rem;
+        border-bottom: 1px solid #f3f4f6;
       }
-      .section-header h2 { font-size: 1rem; font-weight: 700; color: #1f2937; display: flex; align-items: center; gap: 8px; }
-      .section-header h2 i { color: #ef4444; font-size: 0.95rem; }
+      .section-header h2 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #1f2937;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .section-header h2 i {
+        color: #ef4444;
+        font-size: 0.95rem;
+      }
       .section-edit-btn {
-        background: none; border: 1px solid #d1d5db; color: #6b7280;
-        padding: 5px 12px; border-radius: 7px; font-size: 0.8rem;
-        cursor: pointer; display: flex; align-items: center; gap: 5px;
+        background: none;
+        border: 1px solid #d1d5db;
+        color: #6b7280;
+        padding: 5px 12px;
+        border-radius: 7px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
         transition: all 0.2s;
       }
-      .section-edit-btn:hover { border-color: #ef4444; color: #ef4444; }
-      .section-body { padding: 1.25rem; }
+      .section-edit-btn:hover {
+        border-color: #ef4444;
+        color: #ef4444;
+      }
+      .section-body {
+        padding: 1.25rem;
+      }
 
       /* INFO ROWS */
-      .info-row { display: flex; align-items: flex-start; gap: 10px; padding: 9px 0; border-bottom: 1px solid #f3f4f6; }
-      .info-row:last-child { border-bottom: none; padding-bottom: 0; }
-      .info-icon { width: 32px; height: 32px; border-radius: 8px; background: #fef2f2; color: #ef4444; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; flex-shrink: 0; }
-      .info-content { flex: 1; }
-      .info-label { font-size: 0.72rem; color: #9ca3af; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
-      .info-value { font-size: 0.9rem; font-weight: 500; color: #1f2937; }
+      .info-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 9px 0;
+        border-bottom: 1px solid #f3f4f6;
+      }
+      .info-row:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .info-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: #fef2f2;
+        color: #ef4444;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+      }
+      .info-content {
+        flex: 1;
+      }
+      .info-label {
+        font-size: 0.72rem;
+        color: #9ca3af;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 2px;
+      }
+      .info-value {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #1f2937;
+      }
 
       /* OPERATING HOURS */
-      .hours-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid #f3f4f6; font-size: 0.88rem; }
-      .hours-row:last-child { border-bottom: none; }
-      .hours-day { font-weight: 500; color: #374151; }
-      .hours-time { color: #6b7280; }
-      .hours-time.closed { color: #dc2626; font-weight: 600; }
-      .hours-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
-      .hours-dot.closed { background: #e5e7eb; }
+      .hours-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 7px 0;
+        border-bottom: 1px solid #f3f4f6;
+        font-size: 0.88rem;
+      }
+      .hours-row:last-child {
+        border-bottom: none;
+      }
+      .hours-day {
+        font-weight: 500;
+        color: #374151;
+      }
+      .hours-time {
+        color: #6b7280;
+      }
+      .hours-time.closed {
+        color: #dc2626;
+        font-weight: 600;
+      }
+      .hours-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #22c55e;
+      }
+      .hours-dot.closed {
+        background: #e5e7eb;
+      }
 
       /* TAGS */
-      .tags-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+      .tags-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
       .tag {
-        background: #fef2f2; color: #dc2626; padding: 5px 12px;
-        border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+        background: #fef2f2;
+        color: #dc2626;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
         border: 1px solid #fecaca;
       }
 
       /* RATING BAR */
-      .rating-summary { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1rem; }
-      .rating-big { font-size: 3rem; font-weight: 800; color: #1f2937; line-height: 1; }
-      .rating-stars { display: flex; gap: 3px; color: #f59e0b; font-size: 1.1rem; margin-bottom: 4px; }
-      .rating-count { font-size: 0.8rem; color: #9ca3af; }
-      .rating-bars { flex: 1; }
-      .rating-bar-row { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; margin-bottom: 5px; }
-      .rating-bar-row:last-child { margin-bottom: 0; }
-      .bar-track { flex: 1; height: 6px; background: #f3f4f6; border-radius: 3px; overflow: hidden; }
-      .bar-fill { height: 100%; border-radius: 3px; background: #f59e0b; }
-      .bar-count { width: 20px; text-align: right; color: #6b7280; }
+      .rating-summary {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .rating-big {
+        font-size: 3rem;
+        font-weight: 800;
+        color: #1f2937;
+        line-height: 1;
+      }
+      .rating-stars {
+        display: flex;
+        gap: 3px;
+        color: #f59e0b;
+        font-size: 1.1rem;
+        margin-bottom: 4px;
+      }
+      .rating-count {
+        font-size: 0.8rem;
+        color: #9ca3af;
+      }
+      .rating-bars {
+        flex: 1;
+      }
+      .rating-bar-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.78rem;
+        margin-bottom: 5px;
+      }
+      .rating-bar-row:last-child {
+        margin-bottom: 0;
+      }
+      .bar-track {
+        flex: 1;
+        height: 6px;
+        background: #f3f4f6;
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .bar-fill {
+        height: 100%;
+        border-radius: 3px;
+        background: #f59e0b;
+      }
+      .bar-count {
+        width: 20px;
+        text-align: right;
+        color: #6b7280;
+      }
 
       /* FULL-WIDTH CARD */
-      .full-card { grid-column: 1 / -1; }
+      .full-card {
+        grid-column: 1 / -1;
+      }
 
       @media (max-width: 768px) {
-        .profile-page { padding: 1rem; }
-        .profile-hero { flex-direction: column; text-align: center; }
-        .hero-badges { justify-content: center; }
-        .stat-row { grid-template-columns: repeat(2, 1fr); }
-        .two-col { grid-template-columns: 1fr; }
+        .profile-page {
+          padding: 1rem;
+        }
+        .profile-hero {
+          flex-direction: column;
+          text-align: center;
+        }
+        .hero-badges {
+          justify-content: center;
+        }
+        .stat-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .two-col {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -154,7 +413,9 @@
     <!-- TOP NAVBAR -->
     <div class="top-nav">
       <div class="nav-left">
-        <label for="menu-checkbox" class="menu-toggle"><i class="fa-solid fa-bars"></i></label>
+        <label for="menu-checkbox" class="menu-toggle"
+          ><i class="fa-solid fa-bars"></i
+        ></label>
         <a href="#" class="logo">
           <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
           <span class="logo-text">WM EAT SU</span>
@@ -162,10 +423,18 @@
       </div>
       <div class="nav-center">
         <div class="role-switcher" id="roleSwitcher">
-          <a href="../student/student-dashboard.html" class="role-btn" id="roleStudent">
+          <a
+            href="../student/student-dashboard.html"
+            class="role-btn"
+            id="roleStudent"
+          >
             <i class="fa-solid fa-graduation-cap"></i><span>Student</span>
           </a>
-          <a href="vendor-dashboard.html" class="role-btn active" id="roleVendor">
+          <a
+            href="vendor-dashboard.html"
+            class="role-btn active"
+            id="roleVendor"
+          >
             <i class="fa-solid fa-store"></i><span>Vendor</span>
           </a>
         </div>
@@ -178,7 +447,11 @@
           </div>
           <div class="profile-dropdown">
             <button class="profile-btn">
-              <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" />
+              <img
+                src="../../images/pfp.jpg"
+                class="profile-pic"
+                alt="Profile"
+              />
               <i class="fa-solid fa-chevron-down"></i>
             </button>
             <div class="dropdown-menu">
@@ -196,69 +469,119 @@
       <!-- SIDEBAR -->
       <div class="left-nav" id="sidebar">
         <ul class="nav-list">
-          <li><a href="vendor-dashboard.html" class="nav-link"><i class="fa-solid fa-house"></i><span>Dashboard</span></a></li>
-          <li><a href="vendor-orders.html" class="nav-link"><i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span></a></li>
-          <li><a href="vendor-menu.html" class="nav-link"><i class="fa-solid fa-utensils"></i><span>Menu</span></a></li>
-          <li><a href="vendor-reviews.html" class="nav-link"><i class="fa-solid fa-star"></i><span>Reviews</span></a></li>
-          <li><a href="vendor-sales-payments.html" class="nav-link"><i class="fa-solid fa-chart-line"></i><span>Sales &amp; Payments</span></a></li>
-          <li><a href="vendor-wallet.html" class="nav-link"><i class="fa-solid fa-wallet"></i><span>Wallet</span></a></li>
-          <li><a href="vendor-profile.html" class="nav-link active"><i class="fa-solid fa-user-tie"></i><span>Profile</span></a></li>
+          <li>
+            <a href="vendor-dashboard.html" class="nav-link"
+              ><i class="fa-solid fa-house"></i><span>Dashboard</span></a
+            >
+          </li>
+          <li>
+            <a href="vendor-orders.html" class="nav-link"
+              ><i class="fa-solid fa-clock-rotate-left"></i
+              ><span>Orders</span></a
+            >
+          </li>
+          <li>
+            <a href="vendor-menu.html" class="nav-link"
+              ><i class="fa-solid fa-utensils"></i><span>Menu</span></a
+            >
+          </li>
+          <li>
+            <a href="vendor-reviews.html" class="nav-link"
+              ><i class="fa-solid fa-star"></i><span>Reviews</span></a
+            >
+          </li>
+          <li>
+            <a href="vendor-sales-payments.html" class="nav-link"
+              ><i class="fa-solid fa-chart-line"></i
+              ><span>Sales &amp; Payments</span></a
+            >
+          </li>
+          <li>
+            <a href="vendor-wallet.html" class="nav-link"
+              ><i class="fa-solid fa-wallet"></i><span>Wallet</span></a
+            >
+          </li>
+          <li>
+            <a href="vendor-profile.html" class="nav-link active"
+              ><i class="fa-solid fa-user-tie"></i><span>Profile</span></a
+            >
+          </li>
         </ul>
       </div>
 
       <!-- MAIN CONTENT -->
       <div class="main-content">
         <div class="profile-page">
-
           <!-- HERO -->
           <div class="profile-hero">
             <div class="avatar-wrap">
               <img src="../../images/pfp.jpg" alt="Vendor" class="avatar-img" />
-              <span class="avatar-badge"><i class="fa-solid fa-check"></i></span>
+              <span class="avatar-badge"
+                ><i class="fa-solid fa-check"></i
+              ></span>
             </div>
             <div class="hero-info">
               <h1>Vaughn Evangelista</h1>
-              <p class="store-tag"><i class="fa-solid fa-store"></i> Vaughn's Corner Eatery &nbsp;·&nbsp; Stall 04, Building B</p>
+              <p class="store-tag">
+                <i class="fa-solid fa-store"></i> Vaughn's Corner Eatery
+                &nbsp;·&nbsp; Stall 04, Building B
+              </p>
               <div class="hero-badges">
-                <span class="hero-badge"><i class="fa-solid fa-circle-check"></i> Verified Vendor</span>
-                <span class="hero-badge"><i class="fa-solid fa-star"></i> 4.8 Rating</span>
+                <span class="hero-badge"
+                  ><i class="fa-solid fa-circle-check"></i> Verified
+                  Vendor</span
+                >
+                <span class="hero-badge"
+                  ><i class="fa-solid fa-star"></i> 4.8 Rating</span
+                >
               </div>
             </div>
-            <button class="edit-hero-btn"><i class="fas fa-pencil"></i> Edit Profile</button>
+            <button class="edit-hero-btn">
+              <i class="fas fa-pencil"></i> Edit Profile
+            </button>
           </div>
 
           <!-- STATS -->
           <div class="stat-row">
             <div class="stat-card">
-              <div class="stat-icon" style="color:#ef4444;"><i class="fa-solid fa-cart-shopping"></i></div>
+              <div class="stat-icon" style="color: #ef4444">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </div>
               <div class="stat-value">1,248</div>
               <div class="stat-label">Total Orders</div>
             </div>
             <div class="stat-card">
-              <div class="stat-icon" style="color:#f59e0b;"><i class="fa-solid fa-star"></i></div>
+              <div class="stat-icon" style="color: #f59e0b">
+                <i class="fa-solid fa-star"></i>
+              </div>
               <div class="stat-value">4.8</div>
               <div class="stat-label">Avg. Rating</div>
             </div>
             <div class="stat-card">
-              <div class="stat-icon" style="color:#10b981;"><i class="fa-solid fa-peso-sign"></i></div>
+              <div class="stat-icon" style="color: #10b981">
+                <i class="fa-solid fa-peso-sign"></i>
+              </div>
               <div class="stat-value">₱38,450</div>
               <div class="stat-label">Total Revenue</div>
             </div>
             <div class="stat-card">
-              <div class="stat-icon" style="color:#6366f1;"><i class="fa-solid fa-calendar-days"></i></div>
+              <div class="stat-icon" style="color: #6366f1">
+                <i class="fa-solid fa-calendar-days"></i>
+              </div>
               <div class="stat-value">Mar 2025</div>
-              <div class="stat-label">Member Since</div>
+              <div class="stat-label">Vendor Since</div>
             </div>
           </div>
 
           <!-- TWO-COL -->
           <div class="two-col">
-
             <!-- STORE INFO -->
             <div class="section-card">
               <div class="section-header">
                 <h2><i class="fa-solid fa-store"></i> Store Information</h2>
-                <button class="section-edit-btn"><i class="fas fa-pencil"></i> Edit</button>
+                <button class="section-edit-btn">
+                  <i class="fas fa-pencil"></i> Edit
+                </button>
               </div>
               <div class="section-body">
                 <div class="info-row">
@@ -269,10 +592,14 @@
                   </div>
                 </div>
                 <div class="info-row">
-                  <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                  <div class="info-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                  </div>
                   <div class="info-content">
                     <div class="info-label">Location</div>
-                    <div class="info-value">Stall 04, Building B, WM Campus</div>
+                    <div class="info-value">
+                      Stall 04, Building B, WM Campus
+                    </div>
                   </div>
                 </div>
                 <div class="info-row">
@@ -283,17 +610,24 @@
                   </div>
                 </div>
                 <div class="info-row">
-                  <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                  <div class="info-icon">
+                    <i class="fa-solid fa-envelope"></i>
+                  </div>
                   <div class="info-content">
                     <div class="info-label">Email</div>
                     <div class="info-value">vaughn.vendor@wm.edu.ph</div>
                   </div>
                 </div>
                 <div class="info-row">
-                  <div class="info-icon"><i class="fa-solid fa-align-left"></i></div>
+                  <div class="info-icon">
+                    <i class="fa-solid fa-align-left"></i>
+                  </div>
                   <div class="info-content">
                     <div class="info-label">Description</div>
-                    <div class="info-value">Serving affordable Filipino meals and snacks for WM students since 2025.</div>
+                    <div class="info-value">
+                      Serving affordable Filipino meals and snacks for WM
+                      students since 2025.
+                    </div>
                   </div>
                 </div>
               </div>
@@ -309,25 +643,59 @@
                   <div>
                     <div class="rating-big">4.8</div>
                     <div class="rating-stars">
-                      <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                      <i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                      <i class="fas fa-star"></i><i class="fas fa-star"></i
+                      ><i class="fas fa-star"></i> <i class="fas fa-star"></i
+                      ><i class="fas fa-star-half-alt"></i>
                     </div>
                     <div class="rating-count">Based on 312 reviews</div>
                   </div>
                   <div class="rating-bars">
-                    <div class="rating-bar-row"><span>5★</span><div class="bar-track"><div class="bar-fill" style="width:78%"></div></div><span class="bar-count">243</span></div>
-                    <div class="rating-bar-row"><span>4★</span><div class="bar-track"><div class="bar-fill" style="width:14%"></div></div><span class="bar-count">44</span></div>
-                    <div class="rating-bar-row"><span>3★</span><div class="bar-track"><div class="bar-fill" style="width:5%"></div></div><span class="bar-count">16</span></div>
-                    <div class="rating-bar-row"><span>2★</span><div class="bar-track"><div class="bar-fill" style="width:2%"></div></div><span class="bar-count">6</span></div>
-                    <div class="rating-bar-row"><span>1★</span><div class="bar-track"><div class="bar-fill" style="width:1%"></div></div><span class="bar-count">3</span></div>
+                    <div class="rating-bar-row">
+                      <span>5★</span>
+                      <div class="bar-track">
+                        <div class="bar-fill" style="width: 78%"></div>
+                      </div>
+                      <span class="bar-count">243</span>
+                    </div>
+                    <div class="rating-bar-row">
+                      <span>4★</span>
+                      <div class="bar-track">
+                        <div class="bar-fill" style="width: 14%"></div>
+                      </div>
+                      <span class="bar-count">44</span>
+                    </div>
+                    <div class="rating-bar-row">
+                      <span>3★</span>
+                      <div class="bar-track">
+                        <div class="bar-fill" style="width: 5%"></div>
+                      </div>
+                      <span class="bar-count">16</span>
+                    </div>
+                    <div class="rating-bar-row">
+                      <span>2★</span>
+                      <div class="bar-track">
+                        <div class="bar-fill" style="width: 2%"></div>
+                      </div>
+                      <span class="bar-count">6</span>
+                    </div>
+                    <div class="rating-bar-row">
+                      <span>1★</span>
+                      <div class="bar-track">
+                        <div class="bar-fill" style="width: 1%"></div>
+                      </div>
+                      <span class="bar-count">3</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-
-          </div><!-- /two-col -->
-        </div><!-- /profile-page -->
-      </div><!-- /main-content -->
-    </div><!-- /layout -->
+          </div>
+          <!-- /two-col -->
+        </div>
+        <!-- /profile-page -->
+      </div>
+      <!-- /main-content -->
+    </div>
+    <!-- /layout -->
   </body>
 </html>

@@ -237,487 +237,12 @@
         </div>
 
         <div class="orders-list" id="ordersList">
-          <!-- ── Queue: John Doe ── -->
-          <div class="order-card" data-status="Queue">
-            <div class="order-card-inner">
-              <div class="order-card-header">
-                <div class="order-title">
-                  <div class="order-store-icon ic-Queue">
-                    <i class="fa-solid fa-clock"></i>
-                  </div>
-                  <span class="order-card-title">John Doe</span>
-                </div>
-                <span class="status-badge Queue">Queue</span>
-              </div>
-              <div class="order-body-wrapper">
-                <img src="../../images/burger.avif" alt="Food image" class="order-image" />
-                <div class="order-body-info">
-                  <div class="order-meta">
-                    <span style="display: flex; align-items: center; gap: 4px; margin-bottom: 4px;">
-                      <i class="fa-solid fa-hashtag"></i> <span class="order-id-val" style="font-weight: 700; color: #1e293b; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13px;">J8D2</span>
-                      <i class="fa-regular fa-copy copy-id-btn" style="cursor: pointer; color: #94a3b8; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'"></i>
-                    </span>
-                    <span><i class="fa-regular fa-calendar"></i> Mar 9, 2026 ·
-                      9:15 AM</span>
-                  </div>
-                  <div class="order-items">
-                    <div class="order-item-row">
-                      <span>1× Classic Burger Meal</span><span>₱12.99</span>
-                    </div>
-                  </div>
-                  <div class="order-instruction" style="
-                        font-size: 12px;
-                        color: #64748b;
-                        margin-top: 8px;
-                        padding: 6px 8px;
-                        background: #f8fafc;
-                        border-radius: 4px;
-                        border-left: 2px solid #cbd5e1;
-                      ">
-                    <i class="fa-regular fa-comment-dots" style="margin-right: 4px; color: #94a3b8"></i>
-                    <strong>Note:</strong> No mayo, extra napkins.
-                  </div>
-                </div>
-              </div>
-
-              <div class="order-total-row"><span>Total: ₱12.99</span></div>
-              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px">
-                <button class="pickup-btn" data-action="accept">
-                  <i class="fas fa-check"></i> Accept
-                </button>
-                <button class="cancel-btn" data-action="decline">
-                  <i class="fas fa-times"></i> Decline
-                </button>
-              </div>
-            </div>
+          <div class="no-orders-msg visible" id="noOrdersMsg" style="display: none; grid-column: 1 / -1; width: 100%; padding: 60px 40px; text-align: center; color: #64748b; background: #fff; border-radius: 16px; border: 1px dashed #cbd5e1; flex-direction: column; align-items: center; justify-content: center; margin-top: 20px;">
+            <div class="no-orders-icon" style="font-size: 48px; color: #94a3b8; margin-bottom: 20px;"><i class="fa-solid fa-box-open"></i></div>
+            <p class="no-orders-title" style="font-weight: 700; font-size: 18px; color: #334155; margin-bottom: 8px;">No orders yet</p>
+            <p class="no-orders-sub" style="font-size: 14px; line-height: 1.5;">Student orders will appear here in real-time. Keep an eye out for new incoming requests!</p>
           </div>
-
-          <!-- ── Queue: Emily Chang ── -->
-          <div class="order-card" data-status="Queue">
-            <div class="order-card-inner">
-              <div class="order-card-header">
-                <div class="order-title">
-                  <div class="order-store-icon ic-Queue">
-                    <i class="fa-solid fa-clock"></i>
-                  </div>
-                  <span class="order-card-title">Emily Chang</span>
-                </div>
-                <span class="status-badge Queue">Queue</span>
-              </div>
-              <div class="order-body-wrapper">
-                <img src="../../images/burger.avif" alt="Food image" class="order-image" />
-                <div class="order-body-info">
-                  <div class="order-meta">
-                    <span style="display: flex; align-items: center; gap: 4px; margin-bottom: 4px;">
-                      <i class="fa-solid fa-hashtag"></i> <span class="order-id-val" style="font-weight: 700; color: #1e293b; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13px;">E4K9</span>
-                      <i class="fa-regular fa-copy copy-id-btn" style="cursor: pointer; color: #94a3b8; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'"></i>
-                    </span>
-                    <span><i class="fa-regular fa-calendar"></i> Mar 8, 2026 ·
-                      2:30 PM</span>
-                  </div>
-                  <div class="order-items">
-                    <div class="order-item-row">
-                      <span>1× Chicken Sandwich</span><span>₱18.50</span>
-                    </div>
-                  </div>
-                  <div class="order-instruction" style="
-                        font-size: 12px;
-                        color: #64748b;
-                        margin-top: 8px;
-                        padding: 6px 8px;
-                        background: #f8fafc;
-                        border-radius: 4px;
-                        border-left: 2px solid #cbd5e1;
-                      ">
-                    <i class="fa-regular fa-comment-dots" style="margin-right: 4px; color: #94a3b8"></i>
-                    <strong>Note:</strong> No onions, extra spicy sauce.
-                  </div>
-                </div>
-              </div>
-
-              <div class="order-total-row"><span>Total: ₱18.50</span></div>
-              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px">
-                <button class="pickup-btn" data-action="accept">
-                  <i class="fas fa-check"></i> Accept
-                </button>
-                <button class="cancel-btn" data-action="decline">
-                  <i class="fas fa-times"></i> Decline
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- ── PREPARING: Alice Wong ── -->
-          <div class="order-card" data-status="Preparing">
-            <div class="order-card-inner">
-              <div class="order-card-header">
-                <div class="order-title">
-                  <div class="order-store-icon ic-preparing">
-                    <i class="fa-solid fa-fire-burner"></i>
-                  </div>
-                  <span class="order-card-title">Alice Wong</span>
-                </div>
-                <span class="status-badge preparing">Preparing</span>
-              </div>
-              <div class="order-body-wrapper">
-                <img src="../../images/burger.avif" alt="Food image" class="order-image" />
-                <div class="order-body-info">
-                  <div class="order-meta">
-                    <span style="display: flex; align-items: center; gap: 4px; margin-bottom: 4px;">
-                      <i class="fa-solid fa-hashtag"></i> <span class="order-id-val" style="font-weight: 700; color: #1e293b; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13px;">A1W5</span>
-                      <i class="fa-regular fa-copy copy-id-btn" style="cursor: pointer; color: #94a3b8; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'"></i>
-                    </span>
-                    <span><i class="fa-regular fa-calendar"></i> Mar 8, 2026 ·
-                      1:26 PM</span>
-                  </div>
-                  <div class="order-items">
-                    <div class="order-item-row">
-                      <span>1× Avocado Toast</span><span>₱9.75</span>
-                    </div>
-                  </div>
-                  <div class="order-instruction" style="
-                        font-size: 12px;
-                        color: #64748b;
-                        margin-top: 8px;
-                        padding: 6px 8px;
-                        background: #f8fafc;
-                        border-radius: 4px;
-                        border-left: 2px solid #cbd5e1;
-                      ">
-                    <i class="fa-regular fa-comment-dots" style="margin-right: 4px; color: #94a3b8"></i>
-                    <strong>Note:</strong> Less salt and more avocado, please!
-                  </div>
-                </div>
-              </div>
-
-              <div class="order-total-row"><span>Total: ₱9.75</span></div>
-              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px">
-                <button class="pickup-btn" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3);" data-action="markReady">
-                  <i class="fa-solid fa-bell"></i> Mark Ready
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- ── PREPARING: David Lee ── -->
-          <div class="order-card" data-status="Preparing">
-            <div class="order-card-inner">
-              <div class="order-card-header">
-                <div class="order-title">
-                  <div class="order-store-icon ic-preparing">
-                    <i class="fa-solid fa-fire-burner"></i>
-                  </div>
-                  <span class="order-card-title">David Lee</span>
-                </div>
-                <span class="status-badge preparing">Preparing</span>
-              </div>
-              <div class="order-body-wrapper">
-                <img src="../../images/burger.avif" alt="Food image" class="order-image" />
-                <div class="order-body-info">
-                  <div class="order-meta">
-                    <span style="display: flex; align-items: center; gap: 4px; margin-bottom: 4px;">
-                      <i class="fa-solid fa-hashtag"></i> <span class="order-id-val" style="font-weight: 700; color: #1e293b; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13px;">D3L8</span>
-                      <i class="fa-regular fa-copy copy-id-btn" style="cursor: pointer; color: #94a3b8; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'"></i>
-                    </span>
-                    <span><i class="fa-regular fa-calendar"></i> Mar 8, 2026 ·
-                      1:45 PM</span>
-                  </div>
-                  <div class="order-items">
-                    <div class="order-item-row">
-                      <span>3× Fried Chicken</span><span>₱24.75</span>
-                    </div>
-                  </div>
-                  <div class="order-instruction" style="
-                        font-size: 12px;
-                        color: #64748b;
-                        margin-top: 8px;
-                        padding: 6px 8px;
-                        background: #f8fafc;
-                        border-radius: 4px;
-                        border-left: 2px solid #cbd5e1;
-                      ">
-                    <i class="fa-regular fa-comment-dots" style="margin-right: 4px; color: #94a3b8"></i>
-                    <strong>Note:</strong> Make it extra spicy!
-                  </div>
-                </div>
-              </div>
-
-              <div class="order-total-row"><span>Total: ₱24.75</span></div>
-              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px">
-                <button class="pickup-btn" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); box-shadow: 0 3px 10px rgba(37, 99, 235, 0.3);" data-action="markReady">
-                  <i class="fas fa-bell"></i> Mark Ready
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- ── READY: Mike Johnson ── -->
-          <div class="order-card" data-status="Ready" data-vendor="Mike Johnson" data-order-id="M7B2"
-            data-price="9.00" data-image="../../images/burger.avif">
-            <div class="order-card-inner">
-              <div class="order-card-header">
-                <div class="order-title">
-                  <div class="order-store-icon ic-ready">
-                    <i class="fa-solid fa-check-circle"></i>
-                  </div>
-                  <span class="order-card-title">Mike Johnson</span>
-                </div>
-                <span class="status-badge ready">Ready</span>
-              </div>
-              <div class="order-body-wrapper">
-                <img src="../../images/burger.avif" alt="Food image" class="order-image" />
-                <div class="order-body-info">
-                  <div class="order-meta">
-                    <span style="display: flex; align-items: center; gap: 4px; margin-bottom: 4px;">
-                      <i class="fa-solid fa-hashtag"></i> <span class="order-id-val" style="font-weight: 700; color: #1e293b; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13px;">M7B2</span>
-                      <i class="fa-regular fa-copy copy-id-btn" style="cursor: pointer; color: #94a3b8; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'"></i>
-                    </span>
-                    <span><i class="fa-regular fa-calendar"></i> Mar 7, 2026 ·
-                      11:59 AM</span>
-                  </div>
-                  <div class="order-items">
-                    <div class="order-item-row">
-                      <span>2× Iced Coffee</span><span>₱9.00</span>
-                    </div>
-                  </div>
-                  <div class="order-instruction" style="
-                        font-size: 12px;
-                        color: #64748b;
-                        margin-top: 8px;
-                        padding: 6px 8px;
-                        background: #f8fafc;
-                        border-radius: 4px;
-                        border-left: 2px solid #cbd5e1;
-                      ">
-                    <i class="fa-regular fa-comment-dots" style="margin-right: 4px; color: #94a3b8"></i>
-                    <strong>Note:</strong> Extra ice, half sugar.
-                  </div>
-                </div>
-              </div>
-
-              <div class="order-total-row"><span>Total: ₱9.00</span></div>
-              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px">
-                <button class="pickup-btn" data-action="complete">
-                  <i class="fas fa-bag-shopping"></i> Mark as Picked Up
-                </button>
-                <button class="view-code-btn open-code-btn" data-code="B4X2">
-                  <i class="fa-solid fa-qrcode"></i> View Pickup Code
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- ── READY: Rachel Brown ── -->
-          <div class="order-card" data-status="Ready" data-vendor="Rachel Brown" data-order-id="R1B9"
-            data-price="15.50" data-image="../../images/burger.avif">
-            <div class="order-card-inner">
-              <div class="order-card-header">
-                <div class="order-title">
-                  <div class="order-store-icon ic-ready">
-                    <i class="fa-solid fa-check-circle"></i>
-                  </div>
-                  <span class="order-card-title">Rachel Brown</span>
-                </div>
-                <span class="status-badge ready">Ready</span>
-              </div>
-              <div class="order-body-wrapper">
-                <img src="../../images/burger.avif" alt="Food image" class="order-image" />
-                <div class="order-body-info">
-                  <div class="order-meta">
-                    <span style="display: flex; align-items: center; gap: 4px; margin-bottom: 4px;">
-                      <i class="fa-solid fa-hashtag"></i> <span class="order-id-val" style="font-weight: 700; color: #1e293b; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13px;">R1B9</span>
-                      <i class="fa-regular fa-copy copy-id-btn" style="cursor: pointer; color: #94a3b8; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'"></i>
-                    </span>
-                    <span><i class="fa-regular fa-calendar"></i> Mar 6, 2026 ·
-                      3:15 PM</span>
-                  </div>
-                  <div class="order-items">
-                    <div class="order-item-row">
-                      <span>1× Pasta Carbonara</span><span>₱15.50</span>
-                    </div>
-                  </div>
-                  <div class="order-instruction" style="
-                        font-size: 12px;
-                        color: #64748b;
-                        margin-top: 8px;
-                        padding: 6px 8px;
-                        background: #f8fafc;
-                        border-radius: 4px;
-                        border-left: 2px solid #cbd5e1;
-                      ">
-                    <i class="fa-regular fa-comment-dots" style="margin-right: 4px; color: #94a3b8"></i>
-                    <strong>Note:</strong> Extra parmesan cheese please.
-                  </div>
-                </div>
-              </div>
-
-              <div class="order-total-row"><span>Total: ₱15.50</span></div>
-              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px">
-                <button class="pickup-btn" data-action="complete">
-                  <i class="fas fa-bag-shopping"></i> Mark as Picked Up
-                </button>
-                <button class="view-code-btn open-code-btn" data-code="8C9D">
-                  <i class="fa-solid fa-qrcode"></i> View Pickup Code
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- ── COMPLETED: Sarah Lee ── -->
-          <div class="order-card" data-status="Completed">
-            <div class="order-card-inner">
-              <div class="order-card-header">
-                <div class="order-title">
-                  <div class="order-store-icon ic-completed">
-                    <i class="fa-solid fa-check-double"></i>
-                  </div>
-                  <span class="order-card-title">Sarah Lee</span>
-                </div>
-                <span class="status-badge completed">Completed</span>
-              </div>
-              <div class="order-body-wrapper">
-                <img src="../../images/burger.avif" alt="Food image" class="order-image" />
-                <div class="order-body-info">
-                  <div class="order-meta">
-                    <span style="display: flex; align-items: center; gap: 4px; margin-bottom: 4px;">
-                      <i class="fa-solid fa-hashtag"></i> <span class="order-id-val" style="font-weight: 700; color: #1e293b; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13px;">S7L1</span>
-                      <i class="fa-regular fa-copy copy-id-btn" style="cursor: pointer; color: #94a3b8; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'"></i>
-                    </span>
-                    <span><i class="fa-regular fa-calendar"></i> Mar 6, 2026 ·
-                      10:15 AM</span>
-                  </div>
-                  <div class="order-items">
-                    <div class="order-item-row">
-                      <span>2× Avocado Salad</span><span>₱16.50</span>
-                    </div>
-                  </div>
-                  <div class="order-instruction" style="
-                        font-size: 12px;
-                        color: #64748b;
-                        margin-top: 8px;
-                        padding: 6px 8px;
-                        background: #f8fafc;
-                        border-radius: 4px;
-                        border-left: 2px solid #cbd5e1;
-                      ">
-                    <i class="fa-regular fa-comment-dots" style="margin-right: 4px; color: #94a3b8"></i>
-                    <strong>Note:</strong> Dressing on the side.
-                  </div>
-                </div>
-              </div>
-
-              <div class="order-total-row"><span>Total: ₱16.50</span></div>
-              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px">
-                <button class="remove-btn" data-action="deleteHistory">
-                  <i class="fa-solid fa-trash-can"></i> Delete
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- ── COMPLETED: Mark Wilson ── -->
-          <div class="order-card" data-status="Completed">
-            <div class="order-card-inner">
-              <div class="order-card-header">
-                <div class="order-title">
-                  <div class="order-store-icon ic-completed">
-                    <i class="fa-solid fa-check-double"></i>
-                  </div>
-                  <span class="order-card-title">Mark Wilson</span>
-                </div>
-                <span class="status-badge completed">Completed</span>
-              </div>
-              <div class="order-body-wrapper">
-                <img src="../../images/burger.avif" alt="Food image" class="order-image" />
-                <div class="order-body-info">
-                  <div class="order-meta">
-                    <span style="display: flex; align-items: center; gap: 4px; margin-bottom: 4px;">
-                      <i class="fa-solid fa-hashtag"></i> <span class="order-id-val" style="font-weight: 700; color: #1e293b; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13px;">M4W8</span>
-                      <i class="fa-regular fa-copy copy-id-btn" style="cursor: pointer; color: #94a3b8; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'"></i>
-                    </span>
-                    <span><i class="fa-regular fa-calendar"></i> Mar 5, 2026 ·
-                      5:45 PM</span>
-                  </div>
-                  <div class="order-items">
-                    <div class="order-item-row">
-                      <span>1× Grilled Fish</span><span>₱22.00</span>
-                    </div>
-                  </div>
-                  <div class="order-instruction" style="
-                        font-size: 12px;
-                        color: #64748b;
-                        margin-top: 8px;
-                        padding: 6px 8px;
-                        background: #f8fafc;
-                        border-radius: 4px;
-                        border-left: 2px solid #cbd5e1;
-                      ">
-                    <i class="fa-regular fa-comment-dots" style="margin-right: 4px; color: #94a3b8"></i>
-                    <strong>Note:</strong> Please include lemon wedges.
-                  </div>
-                </div>
-              </div>
-
-              <div class="order-total-row"><span>Total: ₱22.00</span></div>
-              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px">
-                <button class="remove-btn" data-action="deleteHistory">
-                  <i class="fa-solid fa-trash-can"></i> Delete
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- ── CANCELLED: Tom Wilson ── -->
-          <div class="order-card" data-status="Cancelled">
-            <div class="order-card-inner">
-              <div class="order-card-header">
-                <div class="order-title">
-                  <div class="order-store-icon ic-cancelled">
-                    <i class="fa-solid fa-ban"></i>
-                  </div>
-                  <span class="order-card-title">Tom Wilson</span>
-                </div>
-                <span class="status-badge cancelled">Cancelled</span>
-              </div>
-              <div class="order-body-wrapper">
-                <img src="../../images/burger.avif" alt="Food image" class="order-image" />
-                <div class="order-body-info">
-                  <div class="order-meta">
-                    <span style="display: flex; align-items: center; gap: 4px; margin-bottom: 4px;">
-                      <i class="fa-solid fa-hashtag"></i> <span class="order-id-val" style="font-weight: 700; color: #1e293b; background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13px;">T3W2</span>
-                      <i class="fa-regular fa-copy copy-id-btn" style="cursor: pointer; color: #94a3b8; transition: color 0.2s;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#94a3b8'"></i>
-                    </span>
-                    <span><i class="fa-regular fa-calendar"></i> Mar 5, 2026 ·
-                      2:45 PM</span>
-                  </div>
-                  <div class="order-items">
-                    <div class="order-item-row">
-                      <span>1× Caesar Salad</span><span>₱8.50</span>
-                    </div>
-                  </div>
-                  <div class="order-instruction" style="
-                        font-size: 12px;
-                        color: #64748b;
-                        margin-top: 8px;
-                        padding: 6px 8px;
-                        background: #f8fafc;
-                        border-radius: 4px;
-                        border-left: 2px solid #cbd5e1;
-                      ">
-                    <i class="fa-regular fa-comment-dots" style="margin-right: 4px; color: #94a3b8"></i>
-                    <strong>Note:</strong> No croutons.
-                  </div>
-                </div>
-              </div>
-
-              <div class="order-total-row"><span>Total: ₱8.50</span></div>
-              <div class="order-actions" style="margin-top: 14px; display: flex; gap: 8px">
-                <button class="remove-btn" data-action="deleteHistory">
-                  <i class="fa-solid fa-trash-can"></i> Delete
-                </button>
-              </div>
-            </div>
-          </div>
+        </div>
 
   <!-- Toast container -->
   <div id="toast-container" style="position:fixed;bottom:24px;right:24px;z-index:999999;display:flex;flex-direction:column;gap:10px;pointer-events:none;"></div>
@@ -786,14 +311,24 @@
       const el = document.createElement("div");
       el.style.cssText = `display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:10px;
         font-size:14px;font-weight:600;color:#fff;box-shadow:0 4px 20px rgba(0,0,0,.15);
-        background:${colours[type]||"#64748b"};pointer-events:auto;`;
+        background:${colours[type]||"#64748b"};pointer-events:none;
+        position:fixed;bottom:24px;right:24px;z-index:999999;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transform:translateY(20px);opacity:0;`;
       el.innerHTML = `<i class="fa-solid ${icon}"></i><span>${msg}</span>`;
-      document.getElementById("toast-container").appendChild(el);
-      setTimeout(() => { el.style.transition="opacity .3s"; el.style.opacity="0"; setTimeout(()=>el.remove(),300); }, 3200);
+      document.body.appendChild(el);
+      requestAnimationFrame(() => {
+        el.style.transform = "translateY(0)";
+        el.style.opacity = "1";
+      });
+      setTimeout(() => { 
+        el.style.transform = "translateY(20px)"; 
+        el.style.opacity = "0"; 
+        setTimeout(() => el.remove(), 300); 
+      }, 3200);
     }
 
     /* ─── Map student status → vendor tab name ─── */
-    const STATUS_MAP = {
+    window.STATUS_MAP = {
       pending:   "Queue",
       preparing: "Preparing",
       ready:     "Ready",
@@ -830,14 +365,14 @@
 
     /* ─── Build one order card HTML ─── */
     function buildVendorCard(order) {
-      const tab = STATUS_MAP[order.status] || "Queue";
+      const tab = window.STATUS_MAP[order.status] || "Queue";
       const cfg = STATUS_CFG[tab] || STATUS_CFG.Queue;
       const dt  = new Date(order.placedAt);
       const dateStr = dt.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})
                     + " · " + dt.toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit"});
       const shortId = order.id.slice(-6).toUpperCase();
       const itemsHtml = (order.items||[]).map(it =>
-        `<div class="order-item-row"><span>${it.qty}× ${it.name}</span><span>₱${(it.price*it.qty).toFixed(2)}</span></div>`
+        `<div class="order-item-row" style="display:flex;justify-content:space-between;color:#334155;font-weight:600;font-size:14px;padding:3px 0;"><span>${it.qty}× ${it.name}</span><span>₱${(it.price*it.qty).toFixed(2)}</span></div>`
       ).join("");
       const noteHtml = order.instructions ? `
         <div class="order-instruction" style="font-size:12px;color:#64748b;margin-top:8px;padding:6px 8px;background:#f8fafc;border-radius:4px;border-left:2px solid #cbd5e1;">
@@ -847,24 +382,22 @@
 
       return `
         <div class="order-card" data-status="${tab}" data-vendor="${order.vendor}" data-order-id="${shortId}"
-             data-price="${order.total.toFixed(2)}" data-image="${order.img||''}">
+             data-order-full-id="${order.id}" data-price="${order.total.toFixed(2)}" data-image="${order.img||''}">
           <div class="order-card-inner">
             <div class="order-card-header">
               <div class="order-title">
                 <div class="order-store-icon ${cfg.cls}"><i class="fa-solid ${cfg.icon}"></i></div>
-                <span class="order-card-title">${order.vendor}</span>
+                <span class="order-card-title">${order.payment ? order.payment : 'Wallet'}</span>
               </div>
               <span class="status-badge ${cfg.badge}">${cfg.label}</span>
             </div>
             <div class="order-body-wrapper">
-              <img src="${order.img||'../../images/burger.avif'}" alt="Food image" class="order-image"
-                   onerror="this.src='../../images/burger.avif'" />
+              <img src="${order.img||'../../images/burger.avif'}" alt="Food image" class="order-image" onerror="this.style.display='none'" />
               <div class="order-body-info">
                 <div class="order-meta">
                   <span style="display:flex;align-items:center;gap:4px;margin-bottom:4px;">
                     <i class="fa-solid fa-hashtag"></i>
                     <span class="order-id-val" style="font-weight:700;color:#1e293b;background:#f1f5f9;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:13px;">${shortId}</span>
-                    <i class="fa-regular fa-copy copy-id-btn" style="cursor:pointer;color:#94a3b8;" title="Copy ID"></i>
                   </span>
                   <span><i class="fa-regular fa-calendar"></i> ${dateStr}</span>
                 </div>
@@ -880,129 +413,92 @@
         </div>`;
     }
 
-    /* ─── Render all orders ─── */
-    function renderVendorOrders() {
-      const orders  = getOrders();
-      const list    = document.getElementById("ordersList") || document.querySelector(".orders-list");
+    /* ─── Global Render engine ─── */
+    window.renderVendorOrders = function() {
+      const orders  = typeof getOrders === 'function' ? getOrders() : []; // from cart.js
+      const list    = document.getElementById("ordersList");
       if (!list) return;
 
-      // Clear only dynamically-added cards
-      list.querySelectorAll(".order-card[data-ls]").forEach(c => c.remove());
-
-      // Remove all static cards and replace fully
+      const emptyDiv = list.querySelector(".no-orders-msg");
       list.querySelectorAll(".order-card").forEach(c => c.remove());
 
-      // Build and inject
       if (orders.length === 0) {
-        list.innerHTML = `<div class="no-orders-msg" style="display:block;">
-          <div class="no-orders-icon"><i class="fa-solid fa-box-open"></i></div>
-          <p class="no-orders-title">No orders yet</p>
-          <p class="no-orders-sub">Student orders will appear here in real-time.</p>
-        </div>`;
+        if(emptyDiv) emptyDiv.style.display = "flex";
       } else {
-        // Remove empty state div if present
-        const emptyDiv = list.querySelector(".no-orders-msg");
-        const html = orders.map(buildVendorCard).join("");
-        if (emptyDiv) {
-          emptyDiv.insertAdjacentHTML("afterend", html);
-        } else {
-          list.innerHTML += html;
-        }
+        const htmlCards = orders.map(buildVendorCard).join("");
+        if(emptyDiv) emptyDiv.style.display = "none";
+        list.insertAdjacentHTML("beforeend", htmlCards);
       }
 
-      updateTabCounts();
-      applyVendorFilter();
-      wireVendorActions();
-    }
-
-    /* ─── Update tab badges ─── */
-    function updateTabCounts() {
-      const orders = getOrders();
+      // Update the badge counters next to tabs
       const counts = { Queue:0, Preparing:0, Ready:0, Completed:0, Cancelled:0 };
       orders.forEach(o => {
-        const tab = STATUS_MAP[o.status];
+        const tab = window.STATUS_MAP[o.status];
         if (tab) counts[tab]++;
       });
       Object.entries(counts).forEach(([tab, n]) => {
         const el = document.getElementById(`count-${tab}`);
         if (el) el.textContent = n;
       });
-    }
 
-    /* ─── Filter by active tab ─── */
-    let activeVendorTab = "Queue";
-
-    function applyVendorFilter() {
-      document.querySelectorAll(".order-card").forEach(card => {
-        card.style.display = (card.dataset.status === activeVendorTab) ? "" : "none";
-      });
-      const noMsg = document.getElementById("noOrdersMsg");
-      const visible = document.querySelectorAll(`.order-card[data-status="${activeVendorTab}"]`).length;
-      if (noMsg) noMsg.style.display = visible === 0 ? "block" : "none";
-    }
-
-    /* ─── Wire action buttons ─── */
-    function wireVendorActions() {
-      /* Accept */
-      document.querySelectorAll('[data-action="accept"]').forEach(btn =>
-        btn.addEventListener("click", () => {
-          updateOrderStatus(btn.dataset.id, "preparing");
-          renderVendorOrders();
-          showVendorToast("success", "fa-check", "Order accepted — now preparing.");
-        }));
-
-      /* Decline */
-      document.querySelectorAll('[data-action="decline"]').forEach(btn =>
-        btn.addEventListener("click", () => {
-          updateOrderStatus(btn.dataset.id, "cancelled", { cancelledByVendor: true });
-          renderVendorOrders();
-          showVendorToast("info", "fa-ban", "Order declined.");
-        }));
-
-      /* Mark Ready */
-      document.querySelectorAll('[data-action="markReady"]').forEach(btn =>
-        btn.addEventListener("click", () => {
-          updateOrderStatus(btn.dataset.id, "ready");
-          renderVendorOrders();
-          showVendorToast("success", "fa-bell", "Order marked as ready for pickup!");
-        }));
-
-      /* Mark Picked Up */
-      document.querySelectorAll('[data-action="complete"]').forEach(btn =>
-        btn.addEventListener("click", () => {
-          updateOrderStatus(btn.dataset.id, "completed");
-          renderVendorOrders();
-          showVendorToast("success", "fa-bag-shopping", "Order completed!");
-        }));
-
-      /* Delete history */
-      document.querySelectorAll('[data-action="deleteHistory"]').forEach(btn =>
-        btn.addEventListener("click", () => {
-          removeOrder(btn.dataset.id);
-          renderVendorOrders();
-          showVendorToast("info", "fa-trash-can", "Order removed from history.");
-        }));
-
-      /* View Pickup Code */
-      document.querySelectorAll(".open-code-btn").forEach(btn =>
-        btn.addEventListener("click", () => {
-          const order = getOrders().find(o => o.id === btn.dataset.id ||
-            o.id.slice(-6).toUpperCase() === (btn.dataset.id||"").toUpperCase());
-          const code = btn.dataset.code || (order && order.pickupCode) || "----";
-          const card = btn.closest(".order-card");
-          document.getElementById("modalCodeVal").textContent  = code;
-          document.getElementById("modalCodeOrder").textContent = `Order #${card.dataset.orderId} · ${card.dataset.vendor}`;
-          document.getElementById("modalTotalPrice").textContent = `Total: ₱${card.dataset.price}`;
-          const mImg = document.getElementById("modalFoodImage");
-          if (card.dataset.image) { mImg.src = card.dataset.image; mImg.style.display = "block"; }
-          else mImg.style.display = "none";
-          document.getElementById("modalOrderItems").innerHTML = "";
-          card.querySelectorAll(".order-item-row").forEach(row => {
-            const clone = row.cloneNode(true);
-              }, 2000);
-            });
-          };
+      // Show hide cards based on currently active tab
+      const activeBtn = document.querySelector(".filter-btn.active");
+      const activeTab = activeBtn ? activeBtn.dataset.tab : "Queue";
+      let hasVisible = false;
+      document.querySelectorAll(".order-card").forEach(c => {
+        if (c.dataset.status === activeTab) {
+          c.style.display = "";
+          hasVisible = true;
+        } else {
+          c.style.display = "none";
         }
+      });
+
+      if (orders.length > 0) {
+        if(emptyDiv) emptyDiv.style.display = hasVisible ? "none" : "flex";
+      }
+
+      wirePickupModal();
+    };
+
+    function wirePickupModal() {
+      document.querySelectorAll(".open-code-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const card = btn.closest(".order-card");
+          const code = btn.dataset.code;
+          document.getElementById("modalCodeVal").textContent = code;
+          document.getElementById("modalCodeOrder").textContent = "Order #" + card.dataset.orderId;
+          document.getElementById("modalTotalPrice").textContent = "Total: ₱" + card.dataset.price;
+          
+          let img = document.getElementById("modalFoodImage");
+          if(card.dataset.image) {
+            img.src = card.dataset.image;
+            img.style.display = "block";
+          } else {
+            img.style.display = "none";
+          }
+          
+          let itemsList = document.getElementById("modalOrderItems");
+          itemsList.innerHTML = "";
+          card.querySelectorAll(".order-item-row").forEach(r => itemsList.appendChild(r.cloneNode(true)));
+          
+          document.getElementById("pickupModal").classList.add("active");
+          document.body.style.overflow = "hidden";
+        });
+      });
+    }
+
+    const cmClose = () => { document.getElementById("pickupModal").classList.remove("active"); document.body.style.overflow = ""; };
+    document.getElementById("closePickupModal")?.addEventListener("click", cmClose);
+    document.getElementById("pickupOverlay")?.addEventListener("click", cmClose);
+
+    // Initial render
+    window.renderVendorOrders();
+    
+    // Auto sync when students place orders
+    window.addEventListener("storage", (e) => {
+      if (e.key === "wm_eat_su_orders") {
+        window.renderVendorOrders();
       }
     });
   </script>

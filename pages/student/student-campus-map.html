@@ -234,7 +234,7 @@
     <!-- Load shared data (seeds shops + menu on first visit) -->
     <script src="../../script/student/cart.js"></script>
     <!-- Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO6gC7V8EijyHtXjb4Iypbpvi0Z-ih1S0"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO6gC7V8EijyHtXjb4Iypbpvi0Z-ih1S0&callback=initMap" async defer></script>
     <script>
       let map;
       const wmsuPos = { lat: 6.9136, lng: 122.0614 };
@@ -262,6 +262,11 @@
           ],
         });
 
+        let focusMarker = null;
+        let focusVendor = null;
+        const urlParams = new URLSearchParams(window.location.search);
+        const focusId = urlParams.get("focus") ? parseInt(urlParams.get("focus")) : null;
+
         vendors.forEach((v) => {
           if (!v.lat || !v.lng) return; // skip shops without map coordinates
           const marker = new google.maps.Marker({
@@ -277,12 +282,28 @@
               scale: 10,
             },
           });
+          
+          if (focusId && v.id === focusId) {
+             focusMarker = marker;
+             focusVendor = v;
+          }
+
           marker.addListener("click", () => {
             showVendorInfo(v);
             map.panTo(marker.getPosition());
           });
         });
         updateAllCartBadges();
+
+        if (focusMarker && focusVendor) {
+          google.maps.event.addListenerOnce(map, 'idle', function(){
+            map.panTo(focusMarker.getPosition());
+            map.setZoom(20);
+            focusMarker.setAnimation(google.maps.Animation.BOUNCE);
+            setTimeout(() => { focusMarker.setAnimation(null); }, 2100);
+            showVendorInfo(focusVendor);
+          });
+        }
       }
 
       function rotateMap(deg) {
@@ -318,7 +339,6 @@
         document.getElementById("vendorPanel").classList.remove("active");
       }
 
-      window.onload = initMap;
     </script>
   </body>
 </html>

@@ -323,48 +323,78 @@
 
   /** Mutates the card DOM to reflect its new status. */
   function handleAction(card, action) {
+    // If cart.js data driver is available, use it!
+    const orderId = card.dataset.orderFullId || card.dataset.orderId || card.querySelector(".order-id-val")?.innerText;
+
     if (action === "deleteHistory") {
-      card.remove();
+      if (window.removeOrder) window.removeOrder(orderId);
+      else {
+        card.remove();
+        applyFilter();
+        refreshCounts();
+      }
+    } else {
+      let nextStatus = "";
+      let isCancel = false;
+      if (action === "accept") nextStatus = "preparing";
+      else if (action === "decline") { nextStatus = "cancelled"; isCancel = true; }
+      else if (action === "markReady") nextStatus = "ready";
+      else if (action === "complete") nextStatus = "completed";
+
+      if (window.updateOrderStatus && nextStatus) {
+        window.updateOrderStatus(orderId, nextStatus, isCancel ? { cancelledByVendor: true } : {});
+      } else {
+        // Fallback static mutation
+        const t = STATUS_TRANSITIONS[action];
+        if (t) {
+          card.dataset.status = t.newStatus;
+          const accent = card.querySelector(".order-card-accent");
+          if (accent) accent.className = "order-card-accent " + t.accentClass;
+          const badge = card.querySelector(".status-badge");
+          if (badge) { badge.className = "status-badge " + t.badgeClass; badge.textContent = t.badgeText; }
+          const iconWrap = card.querySelector(".order-store-icon");
+          if (iconWrap) {
+            iconWrap.className = "order-store-icon " + t.iconBgClass;
+            const iEl = iconWrap.querySelector("i");
+            if (iEl) iEl.className = t.iconClass;
+          }
+          const actionsDiv = card.querySelector(".order-actions");
+          if (actionsDiv) {
+            if (t.nextButtons) { actionsDiv.innerHTML = t.nextButtons; }
+            else               { actionsDiv.remove(); }
+          }
+        }
+      }
+    }
+
+    // Trigger full dynamic repaint if driver exists
+    if (window.renderVendorOrders) {
+      window.renderVendorOrders();
+      // Toast notifications
+      const msgs = {
+        accept: "Order accepted — now preparing.",
+        decline: "Order declined.",
+        markReady: "Order marked as ready for pickup!",
+        complete: "Order completed!",
+        deleteHistory: "Order removed from history."
+      };
+      if(window.showVendorToast) {
+        window.showVendorToast(
+          (action==='decline' || action==='deleteHistory') ? 'info' : 'success', 
+          (action==='decline' || action==='deleteHistory') ? 'fa-info-circle' : 'fa-check', 
+          msgs[action] || "Status updated."
+        );
+      }
+    } else {
       applyFilter();
       refreshCounts();
-      return;
     }
-
-    const t = STATUS_TRANSITIONS[action];
-    if (!t) return;
-
-    card.dataset.status = t.newStatus;
-
-    // Accent bar
-    const accent = card.querySelector(".order-card-accent");
-    if (accent) accent.className = "order-card-accent " + t.accentClass;
-
-    // Status badge
-    const badge = card.querySelector(".status-badge");
-    if (badge) { badge.className = "status-badge " + t.badgeClass; badge.textContent = t.badgeText; }
-
-    // Store icon
-    const iconWrap = card.querySelector(".order-store-icon");
-    if (iconWrap) {
-      iconWrap.className = "order-store-icon " + t.iconBgClass;
-      const iEl = iconWrap.querySelector("i");
-      if (iEl) iEl.className = t.iconClass;
-    }
-
-    // Action buttons
-    const actionsDiv = card.querySelector(".order-actions");
-    if (actionsDiv) {
-      if (t.nextButtons) { actionsDiv.innerHTML = t.nextButtons; }
-      else               { actionsDiv.remove(); }
-    }
-
-    applyFilter();
-    refreshCounts();
   }
 
   /* ── 8. EVENT DELEGATION ───────────────────────────────── */
 
   function initFilterTabs() {
+    if (!filterTabs) return;
     filterTabs.addEventListener("click", (e) => {
       const btn = e.target.closest(".filter-btn");
       if (!btn) return;
@@ -372,7 +402,14 @@
       if (newFilter === activeFilter) return;
       activeFilter = newFilter;
       syncTabHighlight();
-      applyFilter();
+      
+      // If our dynamic LS driver exists, trigger a re-render.
+      // This ensures cards are built for the new category.
+      if (window.renderVendorOrders) {
+        window.renderVendorOrders();
+      } else {
+        applyFilter();
+      }
     });
   }
 
