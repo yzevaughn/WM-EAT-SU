@@ -259,12 +259,12 @@
                   id="customAmount"
                   class="custom-amount-input"
                   placeholder="0.00"
-                  min="100"
+                  min="1"
                 />
               </div>
               <div id="amountError" class="error-message">
                 <i class="fa-solid fa-circle-exclamation"></i>
-                <span>Please enter a valid amount (Min. ₱100.00)</span>
+                <span>Please enter a valid amount</span>
               </div>
             </div>
           </div>
@@ -434,7 +434,7 @@
         }
 
         const amount = parseFloat(customInput.value);
-        if (!amount || amount < 100) {
+        if (!amount || amount <= 0) {
           customInput.classList.add("invalid");
           document.getElementById("amountError").classList.add("show");
           hasError = true;
