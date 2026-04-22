@@ -236,7 +236,7 @@
           </div>
         </div>
 
-        <div class="orders-list">
+        <div class="orders-list" id="ordersList">
           <!-- ── Queue: John Doe ── -->
           <div class="order-card" data-status="Queue">
             <div class="order-card-inner">
@@ -719,47 +719,8 @@
             </div>
           </div>
 
-          <!-- Empty state: shown via JS when no orders match the active filter -->
-          <div class="no-orders-msg" id="noOrdersMsg" aria-live="polite">
-            <div class="no-orders-icon">
-              <i class="fa-solid fa-box-open"></i>
-            </div>
-            <p class="no-orders-title">No orders found</p>
-            <p class="no-orders-sub">
-              There are no orders matching this status right now.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal" id="confirmModal">
-    <div class="modal-overlay" id="confirmOverlay"></div>
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>
-          <i id="modalHeaderIcon" style="margin-right: 8px"></i>
-          <span id="modalHeaderTitle"></span>
-        </h2>
-        <button class="modal-close" id="closeConfirmModal">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p id="modalSubtitle" style="font-size: 14px; color: #374151; margin-bottom: 20px"></p>
-        <div class="modal-confirm-detail" id="modalDetail"></div>
-        <div class="form-actions">
-          <button id="confirmActionBtn">
-            <i id="confirmBtnIcon"></i>
-            <span id="confirmBtnText"></span>
-          </button>
-          <button class="btn-cancel" id="cancelConfirmModal">Cancel</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="../../script/vendor-js/orders-filter.js"></script>
+  <!-- Toast container -->
+  <div id="toast-container" style="position:fixed;bottom:24px;right:24px;z-index:999999;display:flex;flex-direction:column;gap:10px;pointer-events:none;"></div>
 
   <!-- PICKUP CODE MODAL -->
   <div class="modal" id="pickupModal">
@@ -767,133 +728,277 @@
     <div class="modal-content">
       <div class="modal-header">
         <h2>Pickup Code</h2>
-        <button class="modal-close" id="closePickupModal">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+        <button class="modal-close" id="closePickupModal"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="modal-body">
         <div class="pickup-code-card">
           <div class="pickup-code-label">Customer pickup code</div>
-          <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin: 10px 0;">
-            <div class="pickup-code-value" id="modalCodeVal" style="margin: 0;">A7C3</div>
-            <button id="copyCodeBtn" style="background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: white; padding: 8px; border-radius: 6px; cursor: pointer; transition: all 0.2s;">
+          <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin:10px 0;">
+            <div class="pickup-code-value" id="modalCodeVal" style="margin:0;">----</div>
+            <button id="copyCodeBtn" style="background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);color:#fff;padding:8px;border-radius:6px;cursor:pointer;">
               <i class="fa-regular fa-copy"></i>
             </button>
           </div>
-          <div class="pickup-code-order" id="modalCodeOrder">
-            Order #02 · John Doe
-          </div>
+          <div class="pickup-code-order" id="modalCodeOrder">Order #--</div>
         </div>
-        <img src="" id="modalFoodImage" class="modal-order-image" alt="Order items" style="display: none" />
+        <img src="" id="modalFoodImage" class="modal-order-image" alt="Order items" style="display:none;" />
         <div class="modal-info-row">
           <span class="modal-info-label">Status</span>
-          <span class="modal-info-value" style="color: #22c55e">✔ Ready for Pickup</span>
+          <span class="modal-info-value" style="color:#22c55e;">✔ Ready for Pickup</span>
         </div>
         <div class="modal-order-items" id="modalOrderItems"></div>
-        <div class="modal-total-price" id="modalTotalPrice" style="margin-bottom: 0;">Total: ₱0.00</div>
+        <div class="modal-total-price" id="modalTotalPrice" style="margin-bottom:0;">Total: ₱0.00</div>
       </div>
     </div>
   </div>
 
+  <!-- CONFIRM MODAL -->
+  <div class="modal" id="confirmModal">
+    <div class="modal-overlay" id="confirmOverlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i id="modalHeaderIcon" style="margin-right:8px;"></i><span id="modalHeaderTitle"></span></h2>
+        <button class="modal-close" id="closeConfirmModal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <p id="modalSubtitle" style="font-size:14px;color:#374151;margin-bottom:20px;"></p>
+        <div class="modal-confirm-detail" id="modalDetail"></div>
+        <div class="form-actions">
+          <button id="confirmActionBtn"><i id="confirmBtnIcon"></i><span id="confirmBtnText"></span></button>
+          <button class="btn-cancel" id="cancelConfirmModal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared data module -->
+  <script src="../../script/student/cart.js"></script>
+  <script src="../../script/vendor-js/orders-filter.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const pickupModal = document.getElementById("pickupModal");
-      const closePickupModal = document.getElementById("closePickupModal");
-      const pickupOverlay = document.getElementById("pickupOverlay");
-      const markPickedBtn = document.getElementById("markPickedBtn");
+    /* ══════════════════════════════════════════════════════════
+       VENDOR ORDERS — localStorage-driven
+       Reads student orders from the shared LS key and renders them
+       ══════════════════════════════════════════════════════════ */
 
-      if (pickupModal && closePickupModal && pickupOverlay) {
-        // Event delegation for View Pickup Code buttons
-        document.addEventListener("click", (e) => {
-          const btn = e.target.closest(".open-code-btn");
-          if (!btn) return;
+    /* ─── Toast ─── */
+    function showVendorToast(type, icon, msg) {
+      const colours = { success:"#10b981", error:"#ef4444", info:"#3b82f6" };
+      const el = document.createElement("div");
+      el.style.cssText = `display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:10px;
+        font-size:14px;font-weight:600;color:#fff;box-shadow:0 4px 20px rgba(0,0,0,.15);
+        background:${colours[type]||"#64748b"};pointer-events:auto;`;
+      el.innerHTML = `<i class="fa-solid ${icon}"></i><span>${msg}</span>`;
+      document.getElementById("toast-container").appendChild(el);
+      setTimeout(() => { el.style.transition="opacity .3s"; el.style.opacity="0"; setTimeout(()=>el.remove(),300); }, 3200);
+    }
 
-          const card = btn.closest(".order-card");
-          const vendor = card.getAttribute("data-vendor") || "Customer";
-          const orderId = card.getAttribute("data-order-id") || "0000";
-          const price = card.getAttribute("data-price") || "0.00";
-          const code = btn.getAttribute("data-code") || "A7C3";
-          const image = card.getAttribute("data-image");
+    /* ─── Map student status → vendor tab name ─── */
+    const STATUS_MAP = {
+      pending:   "Queue",
+      preparing: "Preparing",
+      ready:     "Ready",
+      completed: "Completed",
+      cancelled: "Cancelled"
+    };
 
-          document.getElementById("modalCodeVal").textContent = code;
-          document.getElementById("modalCodeOrder").textContent =
-            `Order #${orderId} · ${vendor}`;
-          document.getElementById("modalTotalPrice").textContent =
-            `Total: ₱${price}`;
+    /* ─── Status UI config ─── */
+    const STATUS_CFG = {
+      Queue:     { icon:"fa-clock",       cls:"ic-Queue",     badge:"Queue",     label:"Queue" },
+      Preparing: { icon:"fa-fire-burner", cls:"ic-preparing", badge:"preparing", label:"Preparing" },
+      Ready:     { icon:"fa-check-circle",cls:"ic-ready",     badge:"ready",     label:"Ready" },
+      Completed: { icon:"fa-check-double",cls:"ic-completed", badge:"completed", label:"Completed" },
+      Cancelled: { icon:"fa-ban",         cls:"ic-cancelled", badge:"cancelled", label:"Cancelled" }
+    };
 
-          const modalImg = document.getElementById("modalFoodImage");
-          if (image) {
-            modalImg.src = image;
-            modalImg.style.display = "block";
-          } else {
-            modalImg.style.display = "none";
-          }
+    /* ─── Build action buttons for each status ─── */
+    function buildActions(order, tab) {
+      if (tab === "Queue") return `
+        <button class="pickup-btn"  data-action="accept"  data-id="${order.id}"><i class="fas fa-check"></i> Accept</button>
+        <button class="cancel-btn"  data-action="decline" data-id="${order.id}"><i class="fas fa-times"></i> Decline</button>`;
+      if (tab === "Preparing") return `
+        <button class="pickup-btn" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);box-shadow:0 3px 10px rgba(37,99,235,.3);"
+                data-action="markReady" data-id="${order.id}"><i class="fa-solid fa-bell"></i> Mark Ready</button>`;
+      if (tab === "Ready") return `
+        <button class="pickup-btn" data-action="complete" data-id="${order.id}"><i class="fas fa-bag-shopping"></i> Mark as Picked Up</button>
+        <button class="view-code-btn open-code-btn" data-id="${order.id}" data-code="${order.pickupCode||'----'}">
+          <i class="fa-solid fa-qrcode"></i> View Pickup Code</button>`;
+      if (tab === "Completed" || tab === "Cancelled") return `
+        <button class="remove-btn" data-action="deleteHistory" data-id="${order.id}">
+          <i class="fa-solid fa-trash-can"></i> Delete</button>`;
+      return "";
+    }
 
-          const itemsEl = document.getElementById("modalOrderItems");
-          itemsEl.innerHTML = "";
-          const itemsSource = card.querySelectorAll(".order-item-row");
-          itemsSource.forEach((row) => {
-            const clone = row.cloneNode(true);
-            clone.style.display = "flex";
-            clone.style.justifyContent = "space-between";
-            clone.style.fontSize = "14px";
-            clone.style.padding = "4px 0";
-            clone.style.color = "#374151";
-            itemsEl.appendChild(clone);
-          });
+    /* ─── Build one order card HTML ─── */
+    function buildVendorCard(order) {
+      const tab = STATUS_MAP[order.status] || "Queue";
+      const cfg = STATUS_CFG[tab] || STATUS_CFG.Queue;
+      const dt  = new Date(order.placedAt);
+      const dateStr = dt.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})
+                    + " · " + dt.toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit"});
+      const shortId = order.id.slice(-6).toUpperCase();
+      const itemsHtml = (order.items||[]).map(it =>
+        `<div class="order-item-row"><span>${it.qty}× ${it.name}</span><span>₱${(it.price*it.qty).toFixed(2)}</span></div>`
+      ).join("");
+      const noteHtml = order.instructions ? `
+        <div class="order-instruction" style="font-size:12px;color:#64748b;margin-top:8px;padding:6px 8px;background:#f8fafc;border-radius:4px;border-left:2px solid #cbd5e1;">
+          <i class="fa-regular fa-comment-dots" style="margin-right:4px;color:#94a3b8"></i>
+          <strong>Note:</strong> ${order.instructions}
+        </div>` : "";
 
-          pickupModal.classList.add("active");
-          document.body.style.overflow = "hidden";
-        });
+      return `
+        <div class="order-card" data-status="${tab}" data-vendor="${order.vendor}" data-order-id="${shortId}"
+             data-price="${order.total.toFixed(2)}" data-image="${order.img||''}">
+          <div class="order-card-inner">
+            <div class="order-card-header">
+              <div class="order-title">
+                <div class="order-store-icon ${cfg.cls}"><i class="fa-solid ${cfg.icon}"></i></div>
+                <span class="order-card-title">${order.vendor}</span>
+              </div>
+              <span class="status-badge ${cfg.badge}">${cfg.label}</span>
+            </div>
+            <div class="order-body-wrapper">
+              <img src="${order.img||'../../images/burger.avif'}" alt="Food image" class="order-image"
+                   onerror="this.src='../../images/burger.avif'" />
+              <div class="order-body-info">
+                <div class="order-meta">
+                  <span style="display:flex;align-items:center;gap:4px;margin-bottom:4px;">
+                    <i class="fa-solid fa-hashtag"></i>
+                    <span class="order-id-val" style="font-weight:700;color:#1e293b;background:#f1f5f9;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:13px;">${shortId}</span>
+                    <i class="fa-regular fa-copy copy-id-btn" style="cursor:pointer;color:#94a3b8;" title="Copy ID"></i>
+                  </span>
+                  <span><i class="fa-regular fa-calendar"></i> ${dateStr}</span>
+                </div>
+                <div class="order-items">${itemsHtml}</div>
+                ${noteHtml}
+              </div>
+            </div>
+            <div class="order-total-row"><span>Total: ₱${order.total.toFixed(2)}</span></div>
+            <div class="order-actions" style="margin-top:14px;display:flex;gap:8px;">
+              ${buildActions(order, tab)}
+            </div>
+          </div>
+        </div>`;
+    }
 
-        // Event delegation for Copy Order ID buttons
-        document.addEventListener("click", (e) => {
-          const btn = e.target.closest(".copy-id-btn");
-          if (!btn) return;
+    /* ─── Render all orders ─── */
+    function renderVendorOrders() {
+      const orders  = getOrders();
+      const list    = document.getElementById("ordersList") || document.querySelector(".orders-list");
+      if (!list) return;
 
-          const meta = btn.closest(".order-meta");
-          const code = meta.querySelector(".order-id-val").textContent;
+      // Clear only dynamically-added cards
+      list.querySelectorAll(".order-card[data-ls]").forEach(c => c.remove());
 
-          navigator.clipboard.writeText(code).then(() => {
-            btn.className = "fa-solid fa-check";
-            btn.style.color = "#22c55e";
-            setTimeout(() => {
-              btn.className = "fa-regular fa-copy";
-              btn.style.color = "#94a3b8";
-            }, 2000);
-          });
-        });
+      // Remove all static cards and replace fully
+      list.querySelectorAll(".order-card").forEach(c => c.remove());
 
-        // Close modal triggers
-        closePickupModal.onclick = () => {
-          pickupModal.classList.remove("active");
-          document.body.style.overflow = "auto";
-        };
-        pickupOverlay.onclick = () => {
-          pickupModal.classList.remove("active");
-          document.body.style.overflow = "auto";
-        };
-
-        // Mark as Picked Up button inside the modal
-        if (markPickedBtn) {
-          markPickedBtn.onclick = () => {
-            pickupModal.classList.remove("active");
-            document.body.style.overflow = "auto";
-          };
+      // Build and inject
+      if (orders.length === 0) {
+        list.innerHTML = `<div class="no-orders-msg" style="display:block;">
+          <div class="no-orders-icon"><i class="fa-solid fa-box-open"></i></div>
+          <p class="no-orders-title">No orders yet</p>
+          <p class="no-orders-sub">Student orders will appear here in real-time.</p>
+        </div>`;
+      } else {
+        // Remove empty state div if present
+        const emptyDiv = list.querySelector(".no-orders-msg");
+        const html = orders.map(buildVendorCard).join("");
+        if (emptyDiv) {
+          emptyDiv.insertAdjacentHTML("afterend", html);
+        } else {
+          list.innerHTML += html;
         }
+      }
 
-        // Copy Code Logic
-        const copyCodeBtn = document.getElementById("copyCodeBtn");
-        if (copyCodeBtn) {
-          copyCodeBtn.onclick = () => {
-            const code = document.getElementById("modalCodeVal").textContent;
-            navigator.clipboard.writeText(code).then(() => {
-              const icon = copyCodeBtn.querySelector("i");
-              icon.className = "fa-solid fa-check";
-              copyCodeBtn.style.background = "#22c55e";
-              setTimeout(() => {
-                icon.className = "fa-regular fa-copy";
-                copyCodeBtn.style.background = "rgba(255,255,255,0.2)";
+      updateTabCounts();
+      applyVendorFilter();
+      wireVendorActions();
+    }
+
+    /* ─── Update tab badges ─── */
+    function updateTabCounts() {
+      const orders = getOrders();
+      const counts = { Queue:0, Preparing:0, Ready:0, Completed:0, Cancelled:0 };
+      orders.forEach(o => {
+        const tab = STATUS_MAP[o.status];
+        if (tab) counts[tab]++;
+      });
+      Object.entries(counts).forEach(([tab, n]) => {
+        const el = document.getElementById(`count-${tab}`);
+        if (el) el.textContent = n;
+      });
+    }
+
+    /* ─── Filter by active tab ─── */
+    let activeVendorTab = "Queue";
+
+    function applyVendorFilter() {
+      document.querySelectorAll(".order-card").forEach(card => {
+        card.style.display = (card.dataset.status === activeVendorTab) ? "" : "none";
+      });
+      const noMsg = document.getElementById("noOrdersMsg");
+      const visible = document.querySelectorAll(`.order-card[data-status="${activeVendorTab}"]`).length;
+      if (noMsg) noMsg.style.display = visible === 0 ? "block" : "none";
+    }
+
+    /* ─── Wire action buttons ─── */
+    function wireVendorActions() {
+      /* Accept */
+      document.querySelectorAll('[data-action="accept"]').forEach(btn =>
+        btn.addEventListener("click", () => {
+          updateOrderStatus(btn.dataset.id, "preparing");
+          renderVendorOrders();
+          showVendorToast("success", "fa-check", "Order accepted — now preparing.");
+        }));
+
+      /* Decline */
+      document.querySelectorAll('[data-action="decline"]').forEach(btn =>
+        btn.addEventListener("click", () => {
+          updateOrderStatus(btn.dataset.id, "cancelled", { cancelledByVendor: true });
+          renderVendorOrders();
+          showVendorToast("info", "fa-ban", "Order declined.");
+        }));
+
+      /* Mark Ready */
+      document.querySelectorAll('[data-action="markReady"]').forEach(btn =>
+        btn.addEventListener("click", () => {
+          updateOrderStatus(btn.dataset.id, "ready");
+          renderVendorOrders();
+          showVendorToast("success", "fa-bell", "Order marked as ready for pickup!");
+        }));
+
+      /* Mark Picked Up */
+      document.querySelectorAll('[data-action="complete"]').forEach(btn =>
+        btn.addEventListener("click", () => {
+          updateOrderStatus(btn.dataset.id, "completed");
+          renderVendorOrders();
+          showVendorToast("success", "fa-bag-shopping", "Order completed!");
+        }));
+
+      /* Delete history */
+      document.querySelectorAll('[data-action="deleteHistory"]').forEach(btn =>
+        btn.addEventListener("click", () => {
+          removeOrder(btn.dataset.id);
+          renderVendorOrders();
+          showVendorToast("info", "fa-trash-can", "Order removed from history.");
+        }));
+
+      /* View Pickup Code */
+      document.querySelectorAll(".open-code-btn").forEach(btn =>
+        btn.addEventListener("click", () => {
+          const order = getOrders().find(o => o.id === btn.dataset.id ||
+            o.id.slice(-6).toUpperCase() === (btn.dataset.id||"").toUpperCase());
+          const code = btn.dataset.code || (order && order.pickupCode) || "----";
+          const card = btn.closest(".order-card");
+          document.getElementById("modalCodeVal").textContent  = code;
+          document.getElementById("modalCodeOrder").textContent = `Order #${card.dataset.orderId} · ${card.dataset.vendor}`;
+          document.getElementById("modalTotalPrice").textContent = `Total: ₱${card.dataset.price}`;
+          const mImg = document.getElementById("modalFoodImage");
+          if (card.dataset.image) { mImg.src = card.dataset.image; mImg.style.display = "block"; }
+          else mImg.style.display = "none";
+          document.getElementById("modalOrderItems").innerHTML = "";
+          card.querySelectorAll(".order-item-row").forEach(row => {
+            const clone = row.cloneNode(true);
               }, 2000);
             });
           };

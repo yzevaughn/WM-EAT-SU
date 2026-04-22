@@ -4,59 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WM EAT SU - Vendor Menu</title>
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="../../css/navbar.css" />
     <link rel="stylesheet" href="../../css/vendor-css/menu.css" />
   </head>
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
 
-    <!-- ════════════════════════════════════════
-         TOP NAVBAR
-         ════════════════════════════════════════ -->
+    <!-- TOP NAVBAR -->
     <div class="top-nav">
-      <!-- LEFT: hamburger + logo -->
       <div class="nav-left">
-        <label for="menu-checkbox" class="menu-toggle">
-          <i class="fa-solid fa-bars"></i>
-        </label>
+        <label for="menu-checkbox" class="menu-toggle"><i class="fa-solid fa-bars"></i></label>
         <a href="#" class="logo">
           <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
           <span class="logo-text">WM EAT SU</span>
         </a>
       </div>
-
       <div class="nav-center">
         <div class="role-switcher" id="roleSwitcher">
-          <a
-            href="../student/student-dashboard.html"
-            class="role-btn"
-            id="roleStudent"
-          >
-            <i class="fa-solid fa-graduation-cap"></i>
-            <span>Student</span>
+          <a href="../student/student-dashboard.html" class="role-btn" id="roleStudent">
+            <i class="fa-solid fa-graduation-cap"></i><span>Student</span>
           </a>
-
-          <a
-            href="vendor-dashboard.html"
-            class="role-btn active"
-            id="roleVendor"
-          >
-            <i class="fa-solid fa-store"></i>
-            <span>Vendor</span>
+          <a href="vendor-dashboard.html" class="role-btn active" id="roleVendor">
+            <i class="fa-solid fa-store"></i><span>Vendor</span>
           </a>
         </div>
       </div>
-
-      <!-- RIGHT: profile -->
       <div class="nav-right">
         <div class="profile">
           <div class="profile-info">
@@ -65,11 +39,7 @@
           </div>
           <div class="profile-dropdown">
             <button class="profile-btn">
-              <img
-                src="../../images/pfp.jpg"
-                class="profile-pic"
-                alt="Profile"
-              />
+              <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" />
               <i class="fa-solid fa-chevron-down"></i>
             </button>
             <div class="dropdown-menu">
@@ -81,71 +51,30 @@
         </div>
       </div>
     </div>
-    <!-- /top-nav -->
 
-    <!-- ════════════════════════════════════════
-         LAYOUT
-         ════════════════════════════════════════ -->
+    <!-- LAYOUT -->
     <div class="layout">
-      <!-- ── SIDEBAR ── -->
+      <!-- SIDEBAR -->
       <div class="left-nav" id="sidebar">
-        <!-- logo shown on mobile inside sidebar -->
-
         <ul class="nav-list">
-          <li>
-            <a href="vendor-dashboard.html" class="nav-link">
-              <i class="fa-solid fa-house"></i>
-              <span>Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <a href="vendor-orders.html" class="nav-link">
-              <i class="fa-solid fa-clock-rotate-left"></i>
-              <span>Orders</span>
-            </a>
-          </li>
-          <li>
-            <a href="vendor-menu.html" class="nav-link active">
-              <i class="fa-solid fa-utensils"></i>
-              <span>Menu</span>
-            </a>
-          </li>
-          <li>
-            <a href="vendor-reviews.html" class="nav-link">
-              <i class="fa-solid fa-star"></i>
-              <span>Reviews</span>
-            </a>
-          </li>
-          <li>
-            <a href="vendor-sales-payments.html" class="nav-link">
-              <i class="fa-solid fa-chart-line"></i>
-              <span>Sales & Payments</span>
-            </a>
-          </li>
-          <li>
-            <a href="vendor-wallet.html" class="nav-link">
-              <i class="fa-solid fa-wallet"></i>
-              <span>Wallet</span>
-            </a>
-          </li>
-          <li>
-            <a href="vendor-profile.html" class="nav-link">
-              <i class="fa-solid fa-user-tie"></i>
-              <span>Profile</span>
-            </a>
-          </li>
+          <li><a href="vendor-dashboard.html" class="nav-link"><i class="fa-solid fa-house"></i><span>Dashboard</span></a></li>
+          <li><a href="vendor-orders.html" class="nav-link"><i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span></a></li>
+          <li><a href="vendor-menu.html" class="nav-link active"><i class="fa-solid fa-utensils"></i><span>Menu</span></a></li>
+          <li><a href="vendor-reviews.html" class="nav-link"><i class="fa-solid fa-star"></i><span>Reviews</span></a></li>
+          <li><a href="vendor-sales-payments.html" class="nav-link"><i class="fa-solid fa-chart-line"></i><span>Sales &amp; Payments</span></a></li>
+          <li><a href="vendor-wallet.html" class="nav-link"><i class="fa-solid fa-wallet"></i><span>Wallet</span></a></li>
+          <li><a href="vendor-profile.html" class="nav-link"><i class="fa-solid fa-user-tie"></i><span>Profile</span></a></li>
         </ul>
       </div>
 
       <div class="main-content">
-        <!-- menu items display area -->
-                <div class="menu-header">
+        <div class="menu-header">
           <div class="header-left">
             <h1>Menu Management</h1>
-            <p>Add and manage your food items</p>
+            <p>Add and manage your food items. Toggle availability to show/hide from students.</p>
           </div>
-          <div class="header-right" style="display: flex; gap: 12px; align-items: center;">
-            <button id="openPosterModalBtn" style="background-color: #ef4444; color: white; border: none; padding: 10px 18px; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; font-family: inherit; font-size: 15px; transition: opacity 0.2s; box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.2);" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+          <div class="header-right" style="display:flex;gap:12px;align-items:center;">
+            <button id="openPosterModalBtn" style="background:#ef4444;color:#fff;border:none;padding:10px 18px;border-radius:8px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;font-family:inherit;font-size:15px;transition:opacity .2s;box-shadow:0 4px 6px -1px rgba(239,68,68,.2);" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='1'">
               <i class="fas fa-image"></i> Add Poster
             </button>
             <button class="add-item-btn" id="openModalBtn">
@@ -154,164 +83,19 @@
           </div>
         </div>
 
-        <div class="menu-grid" id="menuGrid">
-          <!-- 1. Burger Meal -->
-          <div class="menu-item-card" data-category="meals">
-            <div class="item-image">
-              <img src="../../images/burger.avif" alt="Classic Burger Meal" />
-              <span class="category-badge">Meals</span>
-            </div>
-            <div class="item-info" style="flex: 1">
-              <h3 class="item-name">Classic Burger Meal</h3>
-              <p class="item-description">
-                Juicy beef burger with fresh lettuce, tomatoes, and cheese, served with crispy golden fries and a refreshing cold drink.
-              </p>
-            </div>
-            <div class="item-footer">
-              <div class="price">₱12.99</div>
-              <div class="stock-status">Stock: <span class="stock-count">15</span></div>
-            </div>
-            <div class="actions">
-              <label class="stock-toggle" style="margin-right: auto;" title="Toggle Availability">
-                <input type="checkbox" checked>
-                <div class="toggle-slider"></div>
-              </label>
-              <button class="edit-btn">
-                <i class="fas fa-pencil"></i> Edit
-              </button>
-              <button class="delete-btn">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>
-          </div>
+        <!-- Menu grid (dynamically rendered from localStorage) -->
+        <div class="menu-grid" id="menuGrid"></div>
 
-          <!-- 2. Siomai Rice -->
-          <div class="menu-item-card" data-category="meals">
-            <div class="item-image">
-              <img src="../../images/Shomai-rice.jpg" alt="Siomai Rice" />
-              <span class="category-badge">Meals</span>
-            </div>
-            <div class="item-info" style="flex: 1">
-              <h3 class="item-name">Siomai Rice Special</h3>
-              <p class="item-description">
-                4 pieces of our signature steamed pork siomai, served with a generous portion of garlic rice and spicy chili oil.
-              </p>
-            </div>
-            <div class="item-footer">
-              <div class="price">₱45.00</div>
-              <div class="stock-status">Stock: <span class="stock-count">50</span></div>
-            </div>
-            <div class="actions">
-              <label class="stock-toggle" style="margin-right: auto;" title="Toggle Availability">
-                <input type="checkbox" checked>
-                <div class="toggle-slider"></div>
-              </label>
-              <button class="edit-btn">
-                <i class="fas fa-pencil"></i> Edit
-              </button>
-              <button class="delete-btn">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- 3. Fries -->
-          <div class="menu-item-card" data-category="snacks">
-            <div class="item-image">
-              <img src="../../images/Fries.jpg" alt="Crispy French Fries" />
-              <span class="category-badge">Snacks</span>
-            </div>
-            <div class="item-info" style="flex: 1">
-              <h3 class="item-name">Crispy French Fries</h3>
-              <p class="item-description">Golden crispy deep-fried potato strips seasoned with premium sea salt and special spices.</p>
-            </div>
-            <div class="item-footer">
-              <div class="price">₱35.00</div>
-              <div class="stock-status low-stock">Low Stock: <span class="stock-count">3</span></div>
-            </div>
-            <div class="actions">
-              <label class="stock-toggle" style="margin-right: auto;" title="Toggle Availability">
-                <input type="checkbox" checked>
-                <div class="toggle-slider"></div>
-              </label>
-              <button class="edit-btn">
-                <i class="fas fa-pencil"></i> Edit
-              </button>
-              <button class="delete-btn">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- 4. Iced Coffee -->
-          <div class="menu-item-card" data-category="drinks">
-            <div class="item-image">
-              <img src="../../images/Iced-coffee.png" alt="Iced Coffee" />
-              <span class="category-badge">Drinks</span>
-            </div>
-            <div class="item-info" style="flex: 1">
-              <h3 class="item-name">Signature Iced Coffee</h3>
-              <p class="item-description">Premium cold brewed coffee blended with creamy fresh milk and our secret house-made syrup.</p>
-            </div>
-            <div class="item-footer">
-              <div class="price">₱25.00</div>
-              <div class="stock-status">Stock: <span class="stock-count">20</span></div>
-            </div>
-            <div class="actions">
-              <label class="stock-toggle" style="margin-right: auto;" title="Toggle Availability">
-                <input type="checkbox" checked>
-                <div class="toggle-slider"></div>
-              </label>
-              <button class="edit-btn">
-                <i class="fas fa-pencil"></i> Edit
-              </button>
-              <button class="delete-btn">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>
-          </div>
-
-          <!-- 5. Bibingka -->
-          <div class="menu-item-card" data-category="snacks">
-            <div class="item-image">
-              <img src="../../images/bibingka.jpg" alt="Special Bibingka" />
-              <span class="category-badge">Snacks</span>
-            </div>
-            <div class="item-info" style="flex: 1">
-              <h3 class="item-name">Special Bibingka</h3>
-              <p class="item-description">Traditional freshly baked rice cake topped with premium salted egg, cheese, and grated coconut.</p>
-            </div>
-            <div class="item-footer">
-              <div class="price">₱20.00</div>
-              <div class="stock-status">Stock: <span class="stock-count">10</span></div>
-            </div>
-            <div class="actions">
-              <label class="stock-toggle" style="margin-right: auto;" title="Toggle Availability">
-                <input type="checkbox" checked>
-                <div class="toggle-slider"></div>
-              </label>
-              <button class="edit-btn">
-                <i class="fas fa-pencil"></i> Edit
-              </button>
-              <button class="delete-btn">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-
+        <!-- ADD/EDIT MODAL -->
         <div class="modal" id="itemModal">
-          <!-- modal popup for adding/editing menu items -->
           <div class="modal-overlay" id="modalOverlay"></div>
           <div class="modal-content">
             <div class="modal-header">
               <h2 id="modalTitle">Add New Item</h2>
-              <button class="modal-close" id="modalClose">
-                <i class="fas fa-times"></i>
-              </button>
+              <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body">
-              <form id="itemForm">
+              <form id="itemForm" novalidate>
                 <div class="form-group">
                   <label for="itemName">Item Name</label>
                   <input type="text" id="itemName" required />
@@ -321,8 +105,8 @@
                   <textarea id="itemDescription" required></textarea>
                 </div>
                 <div class="form-group">
-                  <label for="itemPrice">Price</label>
-                  <input type="number" id="itemPrice" step="0.01" required />
+                  <label for="itemPrice">Price (₱)</label>
+                  <input type="number" id="itemPrice" step="0.01" min="0" required />
                 </div>
                 <div class="form-group">
                   <label for="itemQuantity">Available Quantity</label>
@@ -334,12 +118,16 @@
                     <option value="meals">Meals</option>
                     <option value="snacks">Snacks</option>
                     <option value="drinks">Drinks</option>
+                    <option value="desserts">Desserts</option>
+                    <option value="healthy">Healthy</option>
                   </select>
                 </div>
                 <div class="form-group">
-                  <label for="itemImage">Image URL</label>
+                  <label for="itemImage">Image (upload or leave blank to keep existing)</label>
                   <input type="file" id="itemImage" accept="image/*" />
                 </div>
+                <input type="hidden" id="itemEditId" />
+                <input type="hidden" id="itemExistingImg" />
               </form>
             </div>
             <div class="modal-footer">
@@ -349,14 +137,13 @@
           </div>
         </div>
 
+        <!-- POSTER MODAL -->
         <div class="modal" id="posterModal">
           <div class="modal-overlay" id="posterModalOverlay"></div>
           <div class="modal-content">
             <div class="modal-header">
               <h2>Add Dashboard Poster</h2>
-              <button class="modal-close" id="posterModalClose">
-                <i class="fas fa-times"></i>
-              </button>
+              <button class="modal-close" id="posterModalClose"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body">
               <form id="posterForm">
@@ -364,274 +151,272 @@
                   <label for="posterImage">Upload Poster Image</label>
                   <input type="file" id="posterImage" accept="image/*" required />
                 </div>
-
               </form>
             </div>
             <div class="modal-footer">
-              <button class="btn-save" id="savePosterBtn" style="background: #ef4444;">Add Poster</button>
+              <button class="btn-save" id="savePosterBtn" style="background:#ef4444;">Add Poster</button>
               <button class="btn-cancel" id="cancelPosterBtn">Cancel</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-        <div class="modal" id="confirmSaveModal" style="z-index: 100002;">
-          <div class="modal-overlay" id="confirmSaveOverlay"></div>
-          <div class="modal-content" style="max-width: 400px; text-align: center;">
-            <div class="modal-header" style="justify-content: center; padding-bottom: 10px; position: relative;">
-              <h2 style="font-size: 20px;">Confirm Changes</h2>
-              <button class="modal-close" id="confirmSaveClose" style="position: absolute; right: 16px; top: 16px;">
-                <i class="fas fa-times"></i>
-              </button>
-            </div>
-            <div class="modal-body" style="padding-top: 10px;">
-              <p>Are you sure you want to save these changes?</p>
-            </div>
-            <div class="modal-footer">
-              <button class="btn-save" id="confirmSaveBtn" style="background: #10b981;">Confirm</button>
-              <button class="btn-cancel" id="cancelConfirmBtn">Cancel</button>
-            </div>
-          </div>
+
+    <!-- CONFIRM MODAL -->
+    <div class="modal" id="confirmSaveModal" style="z-index:100002;">
+      <div class="modal-overlay" id="confirmSaveOverlay"></div>
+      <div class="modal-content" style="max-width:400px;text-align:center;">
+        <div class="modal-header" style="justify-content:center;padding-bottom:10px;position:relative;">
+          <h2 style="font-size:20px;">Confirm Action</h2>
+          <button class="modal-close" id="confirmSaveClose" style="position:absolute;right:16px;top:16px;"><i class="fas fa-times"></i></button>
         </div>
-            <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        const modal = document.getElementById("itemModal");
-        const openModalBtn = document.getElementById("openModalBtn");
-        const modalClose = document.getElementById("modalClose");
-        const cancelBtn = document.getElementById("cancelBtn");
-        const saveBtn = document.getElementById("saveBtn");
-        const modalOverlay = document.getElementById("modalOverlay");
-        const menuGrid = document.getElementById("menuGrid");
+        <div class="modal-body" style="padding-top:10px;">
+          <p id="confirmSaveMsg">Are you sure?</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-save" id="confirmSaveBtn" style="background:#10b981;">Confirm</button>
+          <button class="btn-cancel" id="cancelConfirmBtn">Cancel</button>
+        </div>
+      </div>
+    </div>
 
-        let editingCard = null;
-        let pendingAction = null;
-        let pendingCard = null;
+    <!-- Toast container -->
+    <div id="toast-container" style="position:fixed;bottom:24px;right:24px;z-index:999999;display:flex;flex-direction:column;gap:10px;"></div>
 
-        function openModal() {
-          const titleEl = document.getElementById("modalTitle");
-          if(titleEl) titleEl.textContent = "Add New Item";
-          editingCard = null;
-          const form = document.getElementById("itemForm");
-          if(form) form.reset();
-          modal.classList.add("active");
+    <!-- Shared data module -->
+    <script src="../../script/student/cart.js"></script>
+    <script>
+      /* ══════════════════════════════════════════════════════
+         VENDOR MENU — fully localStorage-driven
+         ══════════════════════════════════════════════════════ */
+
+      /* ─── Toast ─── */
+      function showToast(type, icon, msg) {
+        const colours = { success:"#10b981", error:"#ef4444", info:"#3b82f6" };
+        const el = document.createElement("div");
+        el.style.cssText = `display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:10px;
+          font-size:14px;font-weight:600;color:#fff;box-shadow:0 4px 20px rgba(0,0,0,.15);
+          background:${colours[type] || "#64748b"};`;
+        el.innerHTML = `<i class="fa-solid ${icon}"></i><span>${msg}</span>`;
+        document.getElementById("toast-container").appendChild(el);
+        setTimeout(() => {
+          el.style.transition = "opacity .3s";
+          el.style.opacity = "0";
+          setTimeout(() => el.remove(), 300);
+        }, 3000);
+      }
+
+      /* ─── Render the menu grid ─── */
+      function renderMenu() {
+        const menu = getMenu();
+        const grid = document.getElementById("menuGrid");
+
+        if (menu.length === 0) {
+          grid.innerHTML = `<p style="color:#94a3b8;grid-column:1/-1;text-align:center;padding:60px 0;font-size:15px;">
+            No menu items yet. Click <strong>Create</strong> to add your first item.</p>`;
+          return;
         }
 
-        function closeModal(e) {
-          if (e) e.preventDefault();
-          modal.classList.remove("active");
-          editingCard = null;
-        }
+        grid.innerHTML = menu.map(item => {
+          const isLow   = (item.stock || 0) < 5;
+          const sCls    = isLow ? "stock-status low-stock" : "stock-status";
+          const sLbl    = isLow ? "Low Stock: " : "Stock: ";
+          const catDisp = item.category
+            ? item.category.charAt(0).toUpperCase() + item.category.slice(1)
+            : "Meals";
+          const avail = item.available !== false;
 
-        if(openModalBtn) openModalBtn.addEventListener("click", openModal);
-        if(modalClose) modalClose.addEventListener("click", closeModal);
-        if(cancelBtn) cancelBtn.addEventListener("click", closeModal);
-        if(modalOverlay) modalOverlay.addEventListener("click", closeModal);
+          return `
+            <div class="menu-item-card" data-id="${item.id}" data-category="${item.category || 'meals'}">
+              <div class="item-image" style="position:relative;">
+                <img src="${item.img || '../../images/burger.avif'}" alt="${item.name}"
+                     onerror="this.src='../../images/burger.avif'" />
+                <span class="category-badge">${catDisp}</span>
+                ${!avail ? '<span style="position:absolute;top:8px;right:8px;background:#ef4444;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;">OFF</span>' : ''}
+              </div>
+              <div class="item-info" style="flex:1">
+                <h3 class="item-name" style="${!avail ? 'opacity:.45;text-decoration:line-through;' : ''}">${item.name}</h3>
+                <p class="item-description">${item.desc || ""}</p>
+              </div>
+              <div class="item-footer">
+                <div class="price">₱${Number(item.price).toFixed(2)}</div>
+                <div class="${sCls}">${sLbl}<span class="stock-count">${item.stock || 0}</span></div>
+              </div>
+              <div class="actions">
+                <label class="stock-toggle" style="margin-right:auto;" title="${avail ? 'Disable (hide from students)' : 'Enable (show to students)'}">
+                  <input type="checkbox" class="avail-check" data-id="${item.id}" ${avail ? "checked" : ""}>
+                  <div class="toggle-slider"></div>
+                </label>
+                <button class="edit-btn" data-id="${item.id}"><i class="fas fa-pencil"></i> Edit</button>
+                <button class="delete-btn" data-id="${item.id}"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>`;
+        }).join("");
 
-        const posterModal = document.getElementById("posterModal");
-        const openPosterModalBtn = document.getElementById("openPosterModalBtn");
-        const posterModalClose = document.getElementById("posterModalClose");
-        const cancelPosterBtn = document.getElementById("cancelPosterBtn");
-        const posterModalOverlay = document.getElementById("posterModalOverlay");
-        const savePosterBtn = document.getElementById("savePosterBtn");
-
-        function openPosterModal() {
-          const form = document.getElementById("posterForm");
-          if(form) form.reset();
-          if(posterModal) posterModal.classList.add("active");
-        }
-
-        function closePosterModal(e) {
-          if (e) e.preventDefault();
-          if(posterModal) posterModal.classList.remove("active");
-        }
-
-        if(openPosterModalBtn) openPosterModalBtn.addEventListener("click", openPosterModal);
-        if(posterModalClose) posterModalClose.addEventListener("click", closePosterModal);
-        if(cancelPosterBtn) cancelPosterBtn.addEventListener("click", closePosterModal);
-        if(posterModalOverlay) posterModalOverlay.addEventListener("click", closePosterModal);
-
-        if(savePosterBtn) {
-          savePosterBtn.addEventListener("click", function(e) {
-            e.preventDefault();
-            const form = document.getElementById("posterForm");
-            if (form && !form.checkValidity()) {
-                form.reportValidity();
-                return;
-            }
-            alert("Poster successfully added to student dashboard!");
-            closePosterModal();
+        /* Availability toggles — write to localStorage immediately */
+        grid.querySelectorAll(".avail-check").forEach(chk => {
+          chk.addEventListener("change", () => {
+            toggleMenuItemAvailability(chk.dataset.id);
+            const on = chk.checked;
+            showToast(
+              on ? "success" : "info",
+              on ? "fa-eye" : "fa-eye-slash",
+              `Item ${on ? "enabled" : "disabled"} — students ${on ? "can" : "cannot"} see it.`
+            );
+            renderMenu();
           });
+        });
+
+        /* Edit buttons */
+        grid.querySelectorAll(".edit-btn").forEach(btn =>
+          btn.addEventListener("click", () => openEditModal(btn.dataset.id)));
+
+        /* Delete buttons */
+        grid.querySelectorAll(".delete-btn").forEach(btn =>
+          btn.addEventListener("click", () => {
+            pendingAction = "delete";
+            pendingItemId = btn.dataset.id;
+            document.getElementById("confirmSaveMsg").textContent =
+              "Are you sure you want to delete this menu item?";
+            document.getElementById("confirmSaveModal").classList.add("active");
+          }));
+      }
+
+      /* ─── State ─── */
+      let pendingAction = null;
+      let pendingItemId = null;
+
+      /* ─── Add/Edit Modal ─── */
+      const itemModal = document.getElementById("itemModal");
+
+      function openAddModal() {
+        document.getElementById("modalTitle").textContent = "Add New Item";
+        document.getElementById("itemForm").reset();
+        document.getElementById("itemEditId").value      = "";
+        document.getElementById("itemExistingImg").value = "";
+        itemModal.classList.add("active");
+      }
+
+      function openEditModal(id) {
+        const item = getMenu().find(m => m.id === id);
+        if (!item) return;
+        document.getElementById("modalTitle").textContent   = "Edit Item";
+        document.getElementById("itemName").value           = item.name;
+        document.getElementById("itemDescription").value   = item.desc || "";
+        document.getElementById("itemPrice").value         = item.price;
+        document.getElementById("itemCategory").value      = item.category || "meals";
+        document.getElementById("itemQuantity").value      = item.stock || 0;
+        document.getElementById("itemEditId").value        = item.id;
+        document.getElementById("itemExistingImg").value   = item.img || "";
+        document.getElementById("itemImage").value         = "";
+        itemModal.classList.add("active");
+      }
+
+      function closeItemModal() { itemModal.classList.remove("active"); }
+
+      document.getElementById("openModalBtn").addEventListener("click",  openAddModal);
+      document.getElementById("modalClose").addEventListener("click",   closeItemModal);
+      document.getElementById("cancelBtn").addEventListener("click",    closeItemModal);
+      document.getElementById("modalOverlay").addEventListener("click", closeItemModal);
+
+      /* ─── Save item (ask confirm first) ─── */
+      document.getElementById("saveBtn").addEventListener("click", e => {
+        e.preventDefault();
+        const name = document.getElementById("itemName").value.trim();
+        const price = document.getElementById("itemPrice").value;
+        const qty   = document.getElementById("itemQuantity").value;
+        const desc  = document.getElementById("itemDescription").value.trim();
+        if (!name || !price || qty === "" || !desc) {
+          showToast("error", "fa-circle-exclamation", "Please fill in all required fields.");
+          return;
+        }
+        pendingAction = "save";
+        document.getElementById("confirmSaveMsg").textContent = "Save changes to this menu item?";
+        document.getElementById("confirmSaveModal").classList.add("active");
+      });
+
+      /* ─── Confirm modal ─── */
+      function closeConfirm() {
+        document.getElementById("confirmSaveModal").classList.remove("active");
+      }
+      document.getElementById("cancelConfirmBtn").addEventListener("click",   closeConfirm);
+      document.getElementById("confirmSaveOverlay").addEventListener("click", closeConfirm);
+      document.getElementById("confirmSaveClose").addEventListener("click",   closeConfirm);
+
+      document.getElementById("confirmSaveBtn").addEventListener("click", () => {
+        /* Handle delete */
+        if (pendingAction === "delete" && pendingItemId) {
+          deleteMenuItem(pendingItemId);
+          pendingItemId = null;
+          pendingAction = null;
+          closeConfirm();
+          renderMenu();
+          showToast("info", "fa-trash", "Item deleted.");
+          return;
         }
 
-        const confirmSaveModal = document.getElementById("confirmSaveModal");
-        const confirmSaveBtn = document.getElementById("confirmSaveBtn");
-        const cancelConfirmBtn = document.getElementById("cancelConfirmBtn");
-        const confirmSaveOverlay = document.getElementById("confirmSaveOverlay");
-        const confirmSaveClose = document.getElementById("confirmSaveClose");
-        
-        function closeConfirm(e) {
-          if (e) e.preventDefault();
-          if(confirmSaveModal) confirmSaveModal.classList.remove("active");
-        }
-        
-        if(cancelConfirmBtn) cancelConfirmBtn.addEventListener("click", closeConfirm);
-        if(confirmSaveOverlay) confirmSaveOverlay.addEventListener("click", closeConfirm);
-        if(confirmSaveClose) confirmSaveClose.addEventListener("click", closeConfirm);
+        /* Handle save */
+        if (pendingAction === "save") {
+          const name     = document.getElementById("itemName").value.trim();
+          const desc     = document.getElementById("itemDescription").value.trim();
+          const price    = parseFloat(document.getElementById("itemPrice").value) || 0;
+          const category = document.getElementById("itemCategory").value || "meals";
+          const stock    = parseInt(document.getElementById("itemQuantity").value) || 0;
+          const fileEl   = document.getElementById("itemImage");
+          const existImg = document.getElementById("itemExistingImg").value;
+          const existId  = document.getElementById("itemEditId").value;
 
-        if(menuGrid) {
-          menuGrid.addEventListener("click", function(e) {
-            const deleteBtn = e.target.closest(".delete-btn");
-            const editBtn = e.target.closest(".edit-btn");
-            const card = e.target.closest(".menu-item-card");
+          function persistItem(imgSrc) {
+            const id = existId || (name + "|mang_tinos_canteen").toLowerCase().replace(/\s+/g, "_");
+            const old = getMenu().find(m => m.id === id) || {};
+            updateMenuItem({
+              id, name, desc, price, category, stock,
+              img:         imgSrc || "../../images/burger.avif",
+              vendor:      "Mang Tino's Canteen",
+              shopId:      1,
+              available:   old.available !== false,
+              rating:      old.rating    || 4.5,
+              badge:       old.badge     || "",
+              prepTime:    old.prepTime  || "10 min",
+              ingredients: old.ingredients || [],
+              reviews:     old.reviews     || []
+            });
+            closeItemModal();
+            closeConfirm();
+            pendingAction = null;
+            renderMenu();
+            showToast("success", "fa-check", `"${name}" saved!`);
+          }
 
-            if (deleteBtn && card) {
-              pendingAction = "delete";
-              pendingCard = card;
-              if (confirmSaveModal) {
-                  confirmSaveModal.querySelector(".modal-body p").textContent = "Are you sure you want to delete this menu item?";
-                  confirmSaveModal.classList.add("active");
-              }
-            }
-
-            if (editBtn && card) {
-              editingCard = card;
-              const titleEl = document.getElementById("modalTitle");
-              if(titleEl) titleEl.textContent = "Edit Item";
-              
-              const itemName = card.querySelector(".item-name").textContent.trim();
-              const itemDesc = card.querySelector(".item-description").textContent.trim();
-              let priceText = card.querySelector(".price").textContent.trim();
-              let formPrice = priceText.replace(/[^0-9.]/g, ''); 
-              
-              const category = card.getAttribute("data-category") || "meals";
-              let qtyText = card.querySelector(".stock-count") ? card.querySelector(".stock-count").textContent : "0";
-              
-              document.getElementById("itemName").value = itemName;
-              document.getElementById("itemDescription").value = itemDesc;
-              document.getElementById("itemPrice").value = formPrice;
-              document.getElementById("itemCategory").value = category;
-              document.getElementById("itemQuantity").value = qtyText;
-              document.getElementById("itemImage").value = "";
-
-              modal.classList.add("active");
-            }
-          });
-        }
-
-        if(saveBtn) {
-          saveBtn.addEventListener("click", function(e) {
-            e.preventDefault();
-            
-            const form = document.getElementById("itemForm");
-            if (form && !form.checkValidity()) {
-                form.reportValidity();
-                return;
-            }
-
-            pendingAction = "save";
-            if(confirmSaveModal) {
-               confirmSaveModal.querySelector(".modal-body p").textContent = "Are you sure you want to save these changes?";
-               confirmSaveModal.classList.add("active");
-            }
-          });
-        }
-        
-        if(confirmSaveBtn) {
-          confirmSaveBtn.addEventListener("click", function() {
-            if (pendingAction === "delete" && pendingCard) {
-                pendingCard.remove();
-                pendingCard = null;
-                pendingAction = null;
-                closeConfirm();
-                return;
-            }
-
-            if (pendingAction === "save") {
-              const itemName = document.getElementById("itemName").value || "New Item";
-              const itemDesc = document.getElementById("itemDescription").value || "Delicious food item";
-              const itemPrice = parseFloat(document.getElementById("itemPrice").value || "0.00").toFixed(2);
-              let itemCat = document.getElementById("itemCategory").value || "meals";
-              const itemCatDisplay = itemCat.charAt(0).toUpperCase() + itemCat.slice(1);
-              const itemQuantity = parseInt(document.getElementById("itemQuantity").value || "0", 10);
-              
-              const isLowStock = itemQuantity < 5;
-              const stockClass = isLowStock ? "stock-status low-stock" : "stock-status";
-              const stockLabel = isLowStock ? "Low Stock: " : "Stock: ";
-              
-              const itemImageEl = document.getElementById("itemImage");
-              let itemImage = "../../images/burger.avif";
-              if (itemImageEl.files && itemImageEl.files[0]) {
-                  itemImage = URL.createObjectURL(itemImageEl.files[0]);
-              } else if (editingCard) {
-                  const existingImg = editingCard.querySelector(".item-image img");
-                  if (existingImg) itemImage = existingImg.src;
-              }
-              
-              if (editingCard) {
-                editingCard.setAttribute("data-category", itemCat);
-                const imgEl = editingCard.querySelector(".item-image img");
-                if(imgEl) imgEl.src = itemImage;
-                const badge = editingCard.querySelector(".category-badge");
-                if(badge) badge.textContent = itemCatDisplay;
-                const nameEl = editingCard.querySelector(".item-name");
-                if(nameEl) nameEl.textContent = itemName;
-                const descEl = editingCard.querySelector(".item-description");
-                if(descEl) descEl.textContent = itemDesc;
-                const priceEl = editingCard.querySelector(".price");
-                if(priceEl) priceEl.textContent = "₱" + itemPrice;
-                let stockEl = editingCard.querySelector(".stock-status");
-                if (!stockEl) {
-                  stockEl = document.createElement("div");
-                  editingCard.querySelector(".item-footer").appendChild(stockEl);
-                }
-                stockEl.className = stockClass;
-                stockEl.innerHTML = `${stockLabel}<span class="stock-count">${itemQuantity}</span>`;
-              } else {
-                const card = document.createElement("div");
-                card.className = "menu-item-card";
-                card.setAttribute("data-category", itemCat);
-                card.innerHTML = `
-                  <div class="item-image">
-                    <img src="${itemImage}" alt="${itemName}" />
-                    <span class="category-badge">${itemCatDisplay}</span>
-                  </div>
-                  <div class="item-info">
-                    <h3 class="item-name">${itemName}</h3>
-                    <p class="item-description">${itemDesc}</p>
-                  </div>
-                  <div class="item-footer">
-                    <div class="price">₱${itemPrice}</div>
-                    <div class="${stockClass}">${stockLabel}<span class="stock-count">${itemQuantity}</span></div>
-                  </div>
-                  <div class="actions">
-                    <label class="stock-toggle" style="margin-right: auto;" title="Toggle Availability">
-                      <input type="checkbox" checked>
-                      <div class="toggle-slider"></div>
-                    </label>
-                    <button class="edit-btn">
-                      <i class="fas fa-pencil"></i>
-                      Edit
-                    </button>
-                    <button class="delete-btn">
-                      <i class="fas fa-trash"></i>
-                    </button>
-                  </div>
-                `;
-                if(menuGrid) menuGrid.appendChild(card);
-              }
-              closeModal();
-              document.getElementById("itemForm").reset();
-              closeConfirm();
-            }
-          });
+          if (fileEl.files && fileEl.files[0]) {
+            const reader = new FileReader();
+            reader.onload = ev => persistItem(ev.target.result);
+            reader.readAsDataURL(fileEl.files[0]);
+          } else {
+            persistItem(existImg || "../../images/burger.avif");
+          }
         }
       });
-      </script>
+
+      /* ─── Poster Modal ─── */
+      const posterModal = document.getElementById("posterModal");
+      document.getElementById("openPosterModalBtn").addEventListener("click",  () => {
+        document.getElementById("posterForm").reset();
+        posterModal.classList.add("active");
+      });
+      document.getElementById("posterModalClose").addEventListener("click",    () => posterModal.classList.remove("active"));
+      document.getElementById("cancelPosterBtn").addEventListener("click",     () => posterModal.classList.remove("active"));
+      document.getElementById("posterModalOverlay").addEventListener("click",  () => posterModal.classList.remove("active"));
+      document.getElementById("savePosterBtn").addEventListener("click", e => {
+        e.preventDefault();
+        const f = document.getElementById("posterForm");
+        if (f && !f.checkValidity()) { f.reportValidity(); return; }
+        showToast("success", "fa-image", "Poster added to student dashboard!");
+        posterModal.classList.remove("active");
+      });
+
+      /* ─── Init ─── */
+      renderMenu();
+    </script>
   </body>
 </html>
-
-
-
-
-
-

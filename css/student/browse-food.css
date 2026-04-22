@@ -714,3 +714,117 @@
   transform: translateX(4px);
 }
 
+/* ══════════════════════════════════════════════════════
+   SHOP PROFILE HEADER
+   ══════════════════════════════════════════════════════ */
+.shop-profile-header {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  margin-bottom: 28px;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+}
+.shop-profile-cover {
+  height: 200px;
+  width: 100%;
+  position: relative;
+}
+.shop-profile-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.shop-profile-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+}
+.shop-profile-back {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.shop-profile-back:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+.shop-profile-info {
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.shop-profile-details {
+  flex: 1;
+}
+.shop-profile-name {
+  font-size: 26px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+.shop-profile-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #64748b;
+  font-size: 14px;
+}
+.shop-profile-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.shop-profile-meta-item i {
+  color: #3b82f6;
+}
+.shop-profile-rating-box {
+  background: #fdfbf7;
+  border: 1px solid #fbeeb8;
+  padding: 12px 20px;
+  border-radius: 16px;
+  text-align: center;
+  min-width: 100px;
+}
+.shop-profile-rating-val {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fbbf24;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.shop-profile-rating-val i {
+  font-size: 18px;
+}
+.shop-profile-rating-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+  margin-top: 2px;
+}
+
+@media (max-width: 600px) {
+  .shop-profile-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

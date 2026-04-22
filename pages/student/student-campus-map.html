@@ -94,9 +94,10 @@
             >
           </li>
           <li>
-            <a href="student-cart.html" class="nav-link"
-              ><i class="fa-solid fa-cart-shopping"></i><span>Cart</span></a
-            >
+            <a href="student-cart.html" class="nav-link">
+              <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
+              <span class="nav-badge" style="display: none">0</span>
+            </a>
           </li>
           <li>
             <a href="student-order.html" class="nav-link"
@@ -222,7 +223,7 @@
             </div>
             <div class="info-actions">
               <a href="#" class="btn-view-shop" id="vLink">
-                <i class="fa-solid fa-utensils"></i> View Menu & Order
+                <i class="fa-solid fa-utensils"></i> View Menu
               </a>
             </div>
           </div>
@@ -230,154 +231,16 @@
       </div>
     </div>
 
+    <!-- Load shared data (seeds shops + menu on first visit) -->
+    <script src="../../script/student/cart.js"></script>
     <!-- Google Maps API -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO6gC7V8EijyHtXjb4Iypbpvi0Z-ih1S0"></script>
     <script>
       let map;
       const wmsuPos = { lat: 6.9136, lng: 122.0614 };
 
-      const vendors = [
-        {
-          id: "1",
-          name: "Mang Tino's",
-          loc: "Canteen 1 Hall",
-          rate: "4.5",
-          cat: "Meals",
-          lat: 6.91243320596896,
-          lng: 122.06345799098618,
-          type: "canteen",
-        },
-        {
-          id: "2",
-          name: "Street Bites Corner",
-          loc: "Science Hall Entrance",
-          rate: "4.7",
-          cat: "Snacks",
-          lat: 6.913187183190812,
-          lng: 122.06339479576178,
-          type: "canteen",
-        },
-        {
-          id: "3",
-          name: "Sip & Chill Beverages",
-          loc: "Beside University Pond",
-          rate: "4.8",
-          cat: "Drinks",
-          lat: 6.913773971170068,
-          lng: 122.06165556183369,
-          type: "canteen",
-        },
-        {
-          id: "4",
-          name: "Sweet Tooth Desserts",
-          loc: "Engineering Bldg G/F",
-          rate: "4.6",
-          cat: "Desserts",
-          lat: 6.913552464390463,
-          lng: 122.0608910942802,
-          type: "canteen",
-        },
-        {
-          id: "5",
-          name: "Sweet Tooth Desserts",
-          loc: "Engineering Bldg G/F",
-          rate: "4.6",
-          cat: "Desserts",
-          lat: 6.912850720564993,
-          lng: 122.06175222757005,
-          type: "canteen",
-        },
-        {
-          id: "6",
-          name: "Sweet Tooth Desserts",
-          loc: "Engineering Bldg G/F",
-          rate: "4.6",
-          cat: "Desserts",
-          lat: 6.912861371406072,
-          lng: 122.06177569689841,
-          type: "canteen",
-        },
-        {
-          id: "7",
-          name: "Sweet Tooth Desserts",
-          loc: "Engineering Bldg G/F",
-          rate: "4.6",
-          cat: "Desserts",
-          lat: 6.912876016312175,
-          lng: 122.06179514291333,
-          type: "canteen",
-        },
-        {
-          id: "8",
-          name: "Sweet Tooth Desserts",
-          loc: "Engineering Bldg G/F",
-          rate: "4.6",
-          cat: "Desserts",
-          lat: 6.912892658250371,
-          lng: 122.06185012819688,
-          type: "canteen",
-        },
-        {
-          id: "9",
-          name: "Sweet Tooth Desserts",
-          loc: "Engineering Bldg G/F",
-          rate: "4.6",
-          cat: "Desserts",
-          lat: 6.912905971800495,
-          lng: 122.06186018648046,
-          type: "canteen",
-        },
-        {
-          id: "10",
-          name: "Sweet Tooth Desserts",
-          loc: "Engineering Bldg G/F",
-          rate: "4.6",
-          cat: "Desserts",
-          lat: 6.912921282382685,
-          lng: 122.06187359752525,
-          type: "canteen",
-        },
-        {
-          id: "11",
-          name: "Sweet Tooth Desserts",
-          loc: "Engineering Bldg G/F",
-          rate: "4.6",
-          cat: "Desserts",
-          lat: 6.912933264577098,
-          lng: 122.0618937140924,
-          type: "canteen",
-        },
-        {
-          id: "12",
-          name: "Sweet Tooth Desserts",
-          loc: "Engineering Bldg G/F",
-          rate: "4.6",
-          cat: "Desserts",
-          lat: 6.912963020964882,
-          lng: 122.061914844922,
-          type: "canteen",
-        },
-        {
-          id: "13",
-          name: "Sweet Tooth Desserts",
-          loc: "Engineering Bldg G/F",
-          rate: "4.6",
-          cat: "Desserts",
-          lat: 6.912952370126093,
-          lng: 122.06190880995187,
-          type: "canteen",
-        },
-        {
-          id: "14",
-          name: "Sweet Tooth Desserts",
-          loc: "Engineering Bldg G/F",
-          rate: "4.6",
-          cat: "Desserts",
-          lat: 6.9129756688356485,
-          lng: 122.06193496148916,
-          type: "canteen",
-        },
-      ];
+      // Load shops from localStorage (seeded by cart.js)
+      const vendors = getShops();
 
       function initMap() {
         map = new google.maps.Map(document.getElementById("map"), {
@@ -385,65 +248,52 @@
           zoom: 18,
           minZoom: 17.5,
           restriction: {
-            latLngBounds: {
-              north: 6.9165,
-              south: 6.9105,
-              east: 122.0665,
-              west: 122.0585,
-            },
+            latLngBounds: { north: 6.9165, south: 6.9105, east: 122.0665, west: 122.0585 },
             strictBounds: false,
           },
           heading: 0,
           tilt: 45,
-
           disableDefaultUI: true,
           gestureHandling: "greedy",
           styles: [
-            { featureType: "poi", stylers: [{ visibility: "off" }] },
+            { featureType: "poi",     stylers: [{ visibility: "off" }] },
             { featureType: "transit", stylers: [{ visibility: "off" }] },
-            {
-              featureType: "road",
-              elementType: "labels.icon",
-              stylers: [{ visibility: "off" }],
-            },
+            { featureType: "road", elementType: "labels.icon", stylers: [{ visibility: "off" }] },
           ],
         });
 
         vendors.forEach((v) => {
+          if (!v.lat || !v.lng) return; // skip shops without map coordinates
           const marker = new google.maps.Marker({
             position: { lat: v.lat, lng: v.lng },
             map: map,
             title: v.name,
             icon: {
               path: google.maps.SymbolPath.CIRCLE,
-              fillColor: v.type === "canteen" ? "#e61524" : "#3b82f6",
+              fillColor:   v.type === "canteen" ? "#e61524" : "#3b82f6",
               fillOpacity: 1,
               strokeColor: "#ffffff",
               strokeWeight: 2,
               scale: 10,
             },
           });
-
           marker.addListener("click", () => {
             showVendorInfo(v);
             map.panTo(marker.getPosition());
           });
         });
+        updateAllCartBadges();
       }
 
       function rotateMap(deg) {
         if (map && typeof map.getHeading === "function") {
-          const current = map.getHeading() || 0;
-          map.setHeading(current + deg);
-        } else {
-          console.warn("Rotation requires a valid Google Maps Vector Map ID.");
+          map.setHeading((map.getHeading() || 0) + deg);
         }
       }
 
       function toggleTilt() {
         if (map && typeof map.getTilt === "function") {
-          const current = map.getTilt() || 0;
-          map.setTilt(current === 0 ? 45 : 0);
+          map.setTilt(map.getTilt() === 0 ? 45 : 0);
         }
       }
 
@@ -456,12 +306,11 @@
 
       function showVendorInfo(v) {
         document.getElementById("vName").textContent = v.name;
-        document.getElementById("vLoc").textContent = v.loc;
-        document.getElementById("vRate").textContent =
-          v.rate + " · Highly Rated";
-        document.getElementById("vCat").textContent = v.cat;
-        document.getElementById("vLink").href =
-          "student-shop-details.html?id=" + v.id;
+        document.getElementById("vLoc").textContent  = v.loc || "Campus";
+        document.getElementById("vRate").textContent = v.rating + " · Highly Rated";
+        document.getElementById("vCat").textContent  = v.category;
+        // Link to browse-food filtered by this shop's id
+        document.getElementById("vLink").href = "student-browse-food.html?shop=" + v.id;
         document.getElementById("vendorPanel").classList.add("active");
       }
 
@@ -470,12 +319,6 @@
       }
 
       window.onload = initMap;
-    </script>
-
-    <script>
-      if (typeof updateAllCartBadges === "function") {
-        updateAllCartBadges();
-      }
     </script>
   </body>
 </html>

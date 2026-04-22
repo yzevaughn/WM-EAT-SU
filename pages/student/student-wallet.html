@@ -748,6 +748,7 @@
       "
     ></div>
 
+    <script src="../../script/student/cart.js"></script>
     <script>
       // Make checkboxes styled as active buttons
       const styleRadioButtons = (inputsSelector) => {
@@ -1237,26 +1238,7 @@
         });
 
       // Update cart count for consistency with rest of app
-      function initCartCount() {
-        const cartString = localStorage.getItem("student_cart");
-        if (cartString) {
-          try {
-            const cart = JSON.parse(cartString);
-            const totalCount = cart.reduce(
-              (sum, item) => sum + item.quantity,
-              0,
-            );
-            const badge = document.getElementById("cartBadge");
-            if (totalCount > 0) {
-              badge.textContent = totalCount;
-              badge.style.display = "inline-flex";
-            } else {
-              badge.style.display = "none";
-            }
-          } catch (e) {}
-        }
-      }
-      initCartCount();
+      updateAllCartBadges();
     </script>
   </body>
 </html>

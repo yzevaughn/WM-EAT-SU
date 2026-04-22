@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU — Browse Food</title>
+    <title>WM EAT SU - Browse Food</title>
     <meta
       name="description"
       content="Browse delicious food from campus vendors or explore all student canteens on WM EAT SU."
@@ -22,9 +22,8 @@
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
 
-    <!-- ════════════════════════════════════════
-         TOP NAVBAR
-         ════════════════════════════════════════ -->
+    <!--
+         TOP NAVBAR-->
     <div class="top-nav">
       <!-- LEFT: hamburger + logo -->
       <div class="nav-left">
@@ -95,11 +94,11 @@
     </div>
     <!-- /top-nav -->
 
-    <!-- ════════════════════════════════════════
+    <!--
          LAYOUT
-         ════════════════════════════════════════ -->
+        -->
     <div class="layout">
-      <!-- ── SIDEBAR ── -->
+      <!-- â”€â”€ SIDEBAR â”€â”€ -->
       <div class="left-nav" id="sidebar">
         <ul class="nav-list">
           <li>
@@ -115,7 +114,7 @@
           <li>
             <a href="student-cart.html" class="nav-link">
               <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
-              <span class="nav-badge" style="display:none">0</span>
+              <span class="nav-badge" style="display: none">0</span>
             </a>
           </li>
           <li>
@@ -130,7 +129,8 @@
           </li>
           <li>
             <a href="student-campus-map.html" class="nav-link">
-              <i class="fa-solid fa-map-location-dot"></i><span>Campus Map</span>
+              <i class="fa-solid fa-map-location-dot"></i
+              ><span>Campus Map</span>
             </a>
           </li>
         </ul>
@@ -139,16 +139,41 @@
       <!-- MAIN -->
       <div class="main-content">
         <div class="browse-food-section">
+          <!-- SHOP PROFILE HEADER (Initially hidden) -->
+          <div class="shop-profile-header" id="shopProfileHeader" style="display: none;">
+            <div class="shop-profile-cover">
+              <img id="spCover" src="" alt="Shop Cover" onerror="this.src='../../images/silog.avif'"/>
+              <div class="shop-profile-overlay"></div>
+              <a href="student-browse-food.html?tab=shops" class="shop-profile-back">
+                <i class="fa-solid fa-arrow-left"></i> Back to Shops
+              </a>
+            </div>
+            <div class="shop-profile-info">
+              <div class="shop-profile-details">
+                <h2 class="shop-profile-name" id="spName">Shop Name</h2>
+                <div class="shop-profile-meta">
+                  <span class="shop-profile-meta-item"><i class="fa-solid fa-tags"></i> <span id="spCat">Category</span></span>
+                  <span>·</span>
+                  <span class="shop-profile-meta-item"><i class="fa-solid fa-location-dot"></i> <span id="spLoc">Location</span></span>
+                </div>
+              </div>
+              <div class="shop-profile-rating-box">
+                <div class="shop-profile-rating-val"><i class="fa-solid fa-star"></i> <span id="spRate">0.0</span></div>
+                <div class="shop-profile-rating-label">Rating</div>
+              </div>
+            </div>
+          </div>
+
           <!-- PAGE HEADER -->
-          <div class="browse-header">
+          <div class="browse-header" id="browseHeader">
             <h2 id="pageTitle">Browse Food</h2>
             <p id="pageSubtitle">
               Discover delicious meals from our campus vendors
             </p>
           </div>
 
-          <!-- ── FOOD / SHOPS TOGGLE ── -->
-          <div class="view-toggle-wrapper">
+          <!-- -- FOOD / SHOPS TOGGLE -- -->
+          <div class="view-toggle-wrapper" id="viewToggleWrapper">
             <div class="view-toggle" role="tablist">
               <button
                 class="toggle-btn active"
@@ -171,7 +196,7 @@
             </div>
           </div>
 
-          <!-- ══════ FOOD VIEW ══════ -->
+          <!-- FOOD VIEW -->
           <div id="view-food" role="tabpanel">
             <div class="search-container">
               <div class="search-bar">
@@ -200,7 +225,7 @@
             <div class="pagination" id="pagination"></div>
           </div>
 
-          <!-- ══════ SHOPS VIEW ══════ -->
+          <!--SHOPS VIEW-->
           <div id="view-shops" role="tabpanel" style="display: none">
             <div class="search-container">
               <div class="search-bar">
@@ -287,362 +312,26 @@
 
     <script src="../../script/student/cart.js"></script>
     <script>
-      /* ─────────── DATA — FOODS ─────────── */
-      const foods = [
-        {
-          id: 1,
-          name: "Burger",
-          price: "₱30.00",
-          category: "meals",
-          img: "../../images/burger.avif",
-          badge: "popular",
-          rating: 4.5,
-          vendor: "Canteen 1",
-          prepTime: "8 min",
-          desc: "Juicy beef patty with lettuce, tomato, cheese, and our special sauce.",
-          ingredients: [
-            "Beef patty",
-            "Lettuce",
-            "Tomato",
-            "Cheese",
-            "Special sauce",
-            "Bun",
-          ],
-          reviews: [
-            {
-              name: "Ana R.",
-              stars: 5,
-              comment: "Best burger on campus! Always fresh.",
-            },
-            {
-              name: "Mark T.",
-              stars: 4,
-              comment: "Great taste, a bit small for the price.",
-            },
-          ],
-        },
-        {
-          id: 2,
-          name: "Shomai Rice",
-          price: "₱20.00",
-          category: "meals",
-          img: "../../images/Shomai-rice.jpg",
-          badge: "",
-          rating: 5.0,
-          vendor: "Student Vendor",
-          prepTime: "5 min",
-          desc: "Steamed dumplings served over warm rice with savory sauce.",
-          ingredients: [
-            "Shomai",
-            "White rice",
-            "Soy sauce",
-            "Sesame oil",
-            "Green onion",
-          ],
-          reviews: [
-            {
-              name: "Lisa M.",
-              stars: 5,
-              comment: "Absolutely love this! Perfect comfort food.",
-            },
-            {
-              name: "Jake P.",
-              stars: 5,
-              comment: "Worth every peso. Filling and delicious.",
-            },
-          ],
-        },
-        {
-          id: 3,
-          name: "Shomai",
-          price: "₱15.99",
-          category: "snacks",
-          img: "../../images/Shomai.jpg",
-          badge: "new",
-          rating: 4.7,
-          vendor: "Canteen 3",
-          prepTime: "6 min",
-          desc: "Classic steamed dumplings with pork and prawn filling.",
-          ingredients: ["Pork", "Shrimp", "Wrapper", "Ginger", "Soy sauce"],
-          reviews: [
-            { name: "Carla S.", stars: 5, comment: "Mapapa wow ka sa sarap!" },
-          ],
-        },
-        {
-          id: 4,
-          name: "Iced Coffee",
-          price: "₱30.00",
-          category: "drinks",
-          img: "../../images/Iced-coffee.png",
-          badge: "",
-          rating: 4.8,
-          vendor: "Canteen 5",
-          prepTime: "3 min",
-          desc: "Cold brewed coffee with milk and a hint of vanilla.",
-          ingredients: [
-            "Cold brew",
-            "Fresh milk",
-            "Vanilla syrup",
-            "Ice",
-            "Sugar",
-          ],
-          reviews: [
-            {
-              name: "Ryan B.",
-              stars: 5,
-              comment: "Perfect pick-me-up between classes!",
-            },
-            {
-              name: "Sofia D.",
-              stars: 4,
-              comment: "Really smooth and not too sweet.",
-            },
-          ],
-        },
-        {
-          id: 5,
-          name: "Fries",
-          price: "₱25.00",
-          category: "snacks",
-          img: "../../images/Fries.jpg",
-          badge: "",
-          rating: 4.6,
-          vendor: "Canteen 7",
-          prepTime: "7 min",
-          desc: "Crispy on the outside and fluffy on the inside, perfectly seasoned fries.",
-          ingredients: ["Potato", "Vegetable oil", "Salt", "Seasoning"],
-          reviews: [
-            {
-              name: "Ken A.",
-              stars: 5,
-              comment: "Always crispy. Never disappoints!",
-            },
-          ],
-        },
-        {
-          id: 6,
-          name: "Coke",
-          price: "₱25.00",
-          category: "drinks",
-          img: "../../images/coke.png",
-          badge: "popular",
-          rating: 4.9,
-          vendor: "Canteen 2",
-          prepTime: "1 min",
-          desc: "Icy-cold classic that delivers the perfect refreshing kick.",
-          ingredients: [
-            "Carbonated water",
-            "Sugar",
-            "Caramel color",
-            "Caffeine",
-          ],
-          reviews: [
-            {
-              name: "Mia C.",
-              stars: 5,
-              comment: "Ice cold and perfectly chilled!",
-            },
-          ],
-        },
-        {
-          id: 7,
-          name: "Bibingka",
-          price: "₱40.00",
-          category: "snacks",
-          img: "../../images/bibingka.jpg",
-          badge: "new",
-          rating: 4.8,
-          vendor: "Native Delights",
-          prepTime: "10 min",
-          desc: "Traditional rice cake topped with salted egg and cheese.",
-          ingredients: ["Rice flour", "Coconut milk", "Egg", "Cheese"],
-          reviews: [{ name: "Lola E.", stars: 5, comment: "Lutong bahay na sarap!" }]
-        },
-        {
-          id: 8,
-          name: "Mango Shake",
-          price: "₱35.00",
-          category: "drinks",
-          img: "../../images/mangoshake.jpg",
-          badge: "popular",
-          rating: 4.9,
-          vendor: "Sip & Chill Beverages",
-          prepTime: "5 min",
-          desc: "Fresh mango blended with milk and ice.",
-          ingredients: ["Mango", "Milk", "Ice", "Sugar"],
-          reviews: [{ name: "Gab V.", stars: 5, comment: "The best shake on campus!" }]
-        },
-        {
-          id: 9,
-          name: "Kwek-Kwek",
-          price: "₱15.00",
-          category: "snacks",
-          img: "../../images/kwek.jpg",
-          badge: "popular",
-          rating: 4.7,
-          vendor: "Street Bites Corner",
-          prepTime: "2 min",
-          desc: "Fried orange-coated quail eggs served with vinegar sauce.",
-          ingredients: ["Quail eggs", "Flour", "Food color", "Vinegar"],
-          reviews: [{ name: "Pau L.", stars: 4, comment: "Masarap lalo na yung sawsawan." }]
-        },
-        {
-          id: 10,
-          name: "Spicy Chicken Fillet",
-          price: "₱45.00",
-          category: "meals",
-          img: "../../images/spciy.jpg",
-          badge: "",
-          rating: 4.6,
-          vendor: "The Gourmet Grill",
-          prepTime: "12 min",
-          desc: "Crispy chicken fillet with a spicy kick.",
-          ingredients: ["Chicken", "Breadcrumbs", "Spices", "Rice"],
-          reviews: [{ name: "Dan O.", stars: 5, comment: "Hot and crispy!" }]
-        },
-        {
-          id: 11,
-          name: "Hotdog with Bun",
-          price: "₱20.00",
-          category: "snacks",
-          img: "../../images/hotdog.avif",
-          badge: "",
-          rating: 4.2,
-          vendor: "Canteen 1",
-          prepTime: "3 min",
-          desc: "Classic hotdog in a toasted bun with condiments.",
-          ingredients: ["Hotdog", "Bun", "Ketchup", "Mustard"],
-          reviews: []
-        },
-        {
-          id: 12,
-          name: "Milktea",
-          price: "₱45.00",
-          category: "drinks",
-          img: "../../images/milktea.avif",
-          badge: "",
-          rating: 4.5,
-          vendor: "Sip & Chill Beverages",
-          prepTime: "5 min",
-          desc: "Creamy milk tea with chewy tapioca pearls.",
-          ingredients: ["Black tea", "Milk", "Pearls", "Sugar"],
-          reviews: []
-        }
-      ];
+      let foods = getAvailableMenu(); // only available items shown
+      let shops = getShops();
 
-      /* ─────────── DATA — SHOPS ─────────── */
-      const shops = [
-        {
-          id: 1,
-          name: "Mang Tino's Canteen",
-          category: "Meals",
-          img: "../../images/silog.avif",
-          rating: 4.5,
-          foodIds: [1, 2],
-        },
-        {
-          id: 2,
-          name: "Street Bites Corner",
-          category: "Snacks",
-          img: "../../images/kwek.jpg",
-          rating: 4.7,
-          foodIds: [3, 5],
-        },
-        {
-          id: 3,
-          name: "Sip & Chill Beverages",
-          category: "Drinks",
-          img: "../../images/milktea.avif",
-          rating: 4.8,
-          foodIds: [4, 6],
-        },
-        {
-          id: 4,
-          name: "Sweet Tooth Desserts",
-          category: "Desserts",
-          img: "../../images/halo.avif",
-          rating: 4.6,
-          foodIds: [],
-        },
-        {
-          id: 5,
-          name: "Green Bowl — Healthy Eats",
-          category: "Healthy",
-          img: "../../images/pancit.avif",
-          rating: 4.9,
-          foodIds: [],
-        },
-        {
-          id: 6,
-          name: "Campus Pizza Hub",
-          category: "Meals",
-          img: "../../images/pizza.avif",
-          rating: 4.4,
-          foodIds: [],
-        },
-        {
-          id: 7,
-          name: "The Coffee Dock",
-          category: "Drinks",
-          img: "../../images/Iced-coffee.png",
-          rating: 4.3,
-          foodIds: [],
-        },
-        {
-          id: 8,
-          name: "Veggie Vibes",
-          category: "Healthy",
-          img: "../../images/gulaman.avif",
-          rating: 4.2,
-          foodIds: [],
-        },
-        {
-          id: 9,
-          name: "Grill Master",
-          category: "Snacks",
-          img: "../../images/hotdog.avif",
-          rating: 4.1,
-          foodIds: [],
-        },
-        {
-          id: 10,
-          name: "Pasta Paradise",
-          category: "Meals",
-          img: "../../images/pancit.avif",
-          rating: 4.6,
-          foodIds: [],
-        },
-        {
-          id: 11,
-          name: "The Gourmet Grill",
-          category: "Healthy",
-          img: "../../images/spciy.jpg",
-          rating: 4.4,
-          foodIds: [10],
-        },
-        {
-          id: 12,
-          name: "Native Delights",
-          category: "Snacks",
-          img: "../../images/bibingka.jpg",
-          rating: 4.7,
-          foodIds: [7],
-        }
-      ];
+      /* Enrich shops: count how many available menu items belong to each shop */
+      shops = shops.map((s) => ({
+        ...s,
+        foodIds: foods.filter((f) => f.shopId === s.id).map((f) => f.id),
+      }));
 
-      /* ─────────── STATE ─────────── */
       const FOOD_PER_PAGE = 6;
       const SHOPS_PER_PAGE = 6;
       let filtered = [...foods];
       let page = 1;
       let activeCat = "all";
       let activeFood = null;
-      let activeView = "food"; // 'food' | 'shops'
+      let activeView = "food";
       let activeShopCat = "all";
       let filteredShops = [...shops];
       let shopPage = 1;
 
-      /* ─────────── HELPERS ─────────── */
       function starHtml(r) {
         let h = "";
         const full = Math.floor(r);
@@ -660,7 +349,6 @@
         Healthy: "healthy",
       };
 
-      /* ─────────── TOGGLE ─────────── */
       document
         .getElementById("toggleFood")
         .addEventListener("click", () => switchView("food"));
@@ -670,14 +358,12 @@
 
       function switchView(view) {
         activeView = view;
-
         const foodView = document.getElementById("view-food");
         const shopsView = document.getElementById("view-shops");
         const btnFood = document.getElementById("toggleFood");
         const btnShops = document.getElementById("toggleShops");
         const title = document.getElementById("pageTitle");
         const subtitle = document.getElementById("pageSubtitle");
-
         if (view === "food") {
           foodView.style.display = "";
           shopsView.style.display = "none";
@@ -702,15 +388,33 @@
         }
       }
 
-      /* ─────────── READ URL PARAM ON LOAD ─────────── */
+      /* ----------- READ URL PARAMS ON LOAD ----------- */
       (function () {
         const params = new URLSearchParams(window.location.search);
-        if (params.get("tab") === "shops") switchView("shops");
+        if (params.get("tab") === "shops") {
+          switchView("shops");
+        } else if (params.get("shop")) {
+          const shopId = parseInt(params.get("shop"));
+          const shop   = shops.find(s => s.id === shopId);
+          if (shop) {
+            foods    = foods.filter(f => f.shopId === shopId);
+            filtered = [...foods];
+            
+            // Hide standard headers
+            document.getElementById("browseHeader").style.display = "none";
+            if(document.getElementById("viewToggleWrapper")) document.getElementById("viewToggleWrapper").style.display = "none";
+            
+            // Show new profile header
+            document.getElementById("shopProfileHeader").style.display = "flex";
+            document.getElementById("spName").textContent = shop.name;
+            document.getElementById("spCat").textContent  = shop.category;
+            document.getElementById("spLoc").textContent  = shop.loc || "Campus";
+            document.getElementById("spRate").textContent = shop.rating.toFixed(1);
+            document.getElementById("spCover").src        = shop.img;
+          }
+        }
       })();
 
-      /* ════════════ FOOD SECTION ════════════ */
-
-      /* ─────────── RENDER GRID ─────────── */
       function renderGrid() {
         const grid = document.getElementById("foodGrid");
         const start = (page - 1) * FOOD_PER_PAGE;
@@ -726,73 +430,69 @@
         grid.innerHTML = pageItems
           .map(
             (f) => `
-    <div class="food-card" data-id="${f.id}">
-      <div class="food-image">
-        <img src="${f.img}" alt="${f.name}" onerror="this.src='https://placehold.co/300x195/fff0f1/E61524?text=${encodeURIComponent(f.name)}'">
-        ${f.badge ? `<span class="food-badge ${f.badge}">${f.badge === "popular" ? "⭐ Popular" : f.badge === "new" ? "✨ New" : f.badge}</span>` : ""}
-      </div>
-      <div class="food-content">
-        <div class="food-header">
-          <h3>${f.name}</h3>
-          <div class="food-rating">${starHtml(f.rating)}<span>${f.rating}</span></div>
-        </div>
-        <p class="food-description">${f.desc}</p>
-        <div class="food-ingredients">
-          ${f.ingredients
-            .slice(0, 3)
-            .map((i) => `<span class="ingredient-tag">${i}</span>`)
-            .join("")}
-          ${f.ingredients.length > 3 ? `<span class="ingredient-tag">+${f.ingredients.length - 3} more</span>` : ""}
-        </div>
-        <div class="food-prep-time"><i class="fa-regular fa-clock"></i> Ready in ${f.prepTime}</div>
-        <div class="food-vendor"><i class="fa-solid fa-store"></i> ${f.vendor}</div>
-        <div class="food-footer">
-          <div class="food-price">${f.price}</div>
-          <button class="add-btn add-cart-btn" data-id="${f.id}" data-name="${f.name}">
-            <i class="fa-solid fa-plus"></i> Add to Cart
-          </button>
-        </div>
-      </div>
-    </div>
-  `,
+          <div class="food-card" data-id="${f.id}">
+            <div class="food-image">
+              <img src="${f.img}" alt="${f.name}" onerror="this.src='../../images/burger.avif'">
+              ${f.badge ? `<span class="food-badge ${f.badge}">${f.badge === "popular" ? "â­ Popular" : f.badge === "new" ? "âœ¨ New" : f.badge}</span>` : ""}
+            </div>
+            <div class="food-content">
+              <div class="food-header">
+                <h3>${f.name}</h3>
+                <div class="food-rating">${starHtml(f.rating)}<span>${f.rating}</span></div>
+              </div>
+              <p class="food-description">${f.desc}</p>
+              <div class="food-ingredients">
+                ${(f.ingredients || [])
+                  .slice(0, 3)
+                  .map((i) => `<span class="ingredient-tag">${i}</span>`)
+                  .join("")}
+                ${(f.ingredients || []).length > 3 ? `<span class="ingredient-tag">+${f.ingredients.length - 3} more</span>` : ""}
+              </div>
+              <div class="food-prep-time"><i class="fa-regular fa-clock"></i> Ready in ${f.prepTime}</div>
+              <div class="food-vendor"><i class="fa-solid fa-store"></i> ${f.vendor}</div>
+              <div class="food-footer">
+                <div class="food-price">₱${Number(f.price).toFixed(2)}</div>
+                <button class="add-btn add-cart-btn" data-id="${f.id}" data-name="${f.name}">
+                  <i class="fa-solid fa-plus"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        `,
           )
           .join("");
 
-        // card click → modal
         grid.querySelectorAll(".food-card").forEach((card) => {
           card.addEventListener("click", (e) => {
             if (e.target.closest(".add-cart-btn")) return;
-            openModal(+card.dataset.id);
+            openModal(card.dataset.id);
           });
         });
 
-        // add to cart buttons
         grid.querySelectorAll(".add-cart-btn").forEach((btn) => {
           btn.addEventListener("click", (e) => {
             e.stopPropagation();
-
-            const foodId   = parseInt(btn.getAttribute("data-id"));
-            const itemName = btn.getAttribute("data-name");
-            const food     = foods.find((f) => f.id === foodId);
+            const food = foods.find((f) => f.id === btn.dataset.id);
             if (!food) return;
-
-            // Persist to localStorage
-            const priceNum = parseFloat(food.price.replace(/[^\d.]/g, "")) || 0;
-            const itemId   = makeItemId(food.name, food.vendor);
-            addToCart({ id: itemId, name: food.name, price: priceNum, vendor: food.vendor, img: food.img, qty: 1 });
-
-            // Visual button feedback
-            const originalHTML = '<i class="fa-solid fa-plus"></i> Add to Cart';
+            addToCart({
+              id: food.id,
+              name: food.name,
+              price: Number(food.price),
+              vendor: food.vendor,
+              img: food.img,
+              qty: 1,
+            });
+            const orig = '<i class="fa-solid fa-plus"></i> Add to Cart';
             btn.innerHTML = '<i class="fa-solid fa-check"></i> Added!';
             btn.style.background = "#16a34a";
-            btn.style.boxShadow = "0 4px 14px rgba(22, 163, 74, 0.35)";
-
-            // Show success toast
-            showToast("success", "fa-cart-plus", `"${itemName}" added to cart!`);
-
-            // Reset button after delay
+            btn.style.boxShadow = "0 4px 14px rgba(22,163,74,.35)";
+            showToast(
+              "success",
+              "fa-cart-plus",
+              `"${food.name}" added to cart!`,
+            );
             setTimeout(() => {
-              btn.innerHTML = originalHTML;
+              btn.innerHTML = orig;
               btn.style.background = "";
               btn.style.boxShadow = "";
             }, 2000);
@@ -802,7 +502,6 @@
         renderPagination();
       }
 
-      /* ─────────── PAGINATION ─────────── */
       function renderPagination() {
         const total = Math.ceil(filtered.length / FOOD_PER_PAGE);
         const pag = document.getElementById("pagination");
@@ -810,14 +509,11 @@
           pag.innerHTML = "";
           return;
         }
-
         let html = `<button class="page-btn arrow" ${page === 1 ? "disabled" : ""} id="pgPrev"><i class="fa-solid fa-chevron-left"></i></button>`;
-        for (let i = 1; i <= total; i++) {
+        for (let i = 1; i <= total; i++)
           html += `<button class="page-btn${i === page ? " active" : ""}" data-p="${i}">${i}</button>`;
-        }
         html += `<button class="page-btn arrow" ${page === total ? "disabled" : ""} id="pgNext"><i class="fa-solid fa-chevron-right"></i></button>`;
         pag.innerHTML = html;
-
         pag.querySelectorAll("[data-p]").forEach(
           (b) =>
             (b.onclick = () => {
@@ -839,14 +535,14 @@
         };
       }
 
-      /* ─────────── MODAL ─────────── */
       function openModal(id) {
         const f = foods.find((x) => x.id === id);
         if (!f) return;
         activeFood = f;
         document.getElementById("modalImg").src = f.img;
         document.getElementById("modalName").textContent = f.name;
-        document.getElementById("modalPrice").textContent = f.price;
+        document.getElementById("modalPrice").textContent =
+          "₱" + Number(f.price).toFixed(2);
         document.getElementById("modalVendor").innerHTML =
           `<i class="fa-solid fa-store" style="color:#3b82f6;margin-right:4px;"></i>${f.vendor}`;
         document.getElementById("modalPrep").innerHTML =
@@ -854,21 +550,22 @@
         document.getElementById("modalRating").innerHTML =
           starHtml(f.rating) + ` ${f.rating}`;
         document.getElementById("modalDesc").textContent = f.desc;
-        document.getElementById("modalIngredients").innerHTML = f.ingredients
+        document.getElementById("modalIngredients").innerHTML = (
+          f.ingredients || []
+        )
           .map((i) => `<span class="ingredient-tag">${i}</span>`)
           .join("");
-        document.getElementById("modalReviews").innerHTML = f.reviews
+        document.getElementById("modalReviews").innerHTML = (f.reviews || [])
           .map(
             (r) => `
-    <div class="review-item">
-      <div class="review-avatar">${r.name[0]}</div>
-      <div>
-        <div class="review-name">${r.name}</div>
-        <div class="review-stars">${"★".repeat(r.stars)}${"☆".repeat(5 - r.stars)}</div>
-        <div class="review-comment">${r.comment}</div>
-      </div>
-    </div>
-  `,
+          <div class="review-item">
+            <div class="review-avatar">${r.name[0]}</div>
+            <div>
+              <div class="review-name">${r.name}</div>
+              <div class="review-stars">${"★".repeat(r.stars)}${"☆".repeat(5 - r.stars)}</div>
+              <div class="review-comment">${r.comment}</div>
+            </div>
+          </div>`,
           )
           .join("");
         document.getElementById("foodModal").classList.add("open");
@@ -882,15 +579,23 @@
       });
       document.getElementById("modalAddBtn").onclick = () => {
         if (activeFood) {
-          const priceNum = parseFloat(activeFood.price.replace(/[^\d.]/g, "")) || 0;
-          const itemId   = makeItemId(activeFood.name, activeFood.vendor);
-          addToCart({ id: itemId, name: activeFood.name, price: priceNum, vendor: activeFood.vendor, img: activeFood.img, qty: 1 });
+          addToCart({
+            id: activeFood.id,
+            name: activeFood.name,
+            price: Number(activeFood.price),
+            vendor: activeFood.vendor,
+            img: activeFood.img,
+            qty: 1,
+          });
+          showToast(
+            "success",
+            "fa-cart-plus",
+            `"${activeFood.name}" added to cart!`,
+          );
         }
-        showToast("success", "fa-cart-plus", `"${activeFood.name}" added to cart!`);
         document.getElementById("foodModal").classList.remove("open");
       };
 
-      /* ─────────── FOOD FILTERS ─────────── */
       document.querySelectorAll(".filter-btn[data-cat]").forEach((btn) => {
         btn.addEventListener("click", () => {
           document
@@ -901,11 +606,9 @@
           applyFilters();
         });
       });
-
       document
         .getElementById("searchInput")
         .addEventListener("input", applyFilters);
-
       function applyFilters() {
         const q = document.getElementById("searchInput").value.toLowerCase();
         filtered = foods.filter((f) => {
@@ -920,69 +623,45 @@
         renderGrid();
       }
 
-      /* ════════════ SHOPS SECTION ════════════ */
+      /* â•â•â•â•â•â•â•â•â•â•â•â• SHOPS SECTION â•â•â•â•â•â•â•â•â•â•â•â• */
 
-      /* ─────────── RENDER SHOPS ─────────── */
       function renderShops() {
         const grid = document.getElementById("shopGrid");
         const start = (shopPage - 1) * SHOPS_PER_PAGE;
         const pageItems = filteredShops.slice(start, start + SHOPS_PER_PAGE);
-
         if (pageItems.length === 0) {
           grid.innerHTML =
-            '<p style="color:#94a3b8;padding:60px 20px;text-align:center;grid-column:1/-1;font-size:15px;background:#f8fafc;border-radius:16px;border:1.5px dashed #e2e8f0;">No shops found.</p>';
+            '<p style="color:#94a3b8;padding:60px 20px;text-align:center;grid-column:1/-1;">No shops found.</p>';
           renderShopsPagination();
           return;
         }
-
         grid.innerHTML = pageItems
           .map((s) => {
-            const itemCount = s.foodIds.length;
-            const catClass = catBadgeClass[s.category] || "meals";
+            const n = s.foodIds.length;
+            const c = catBadgeClass[s.category] || "meals";
             return `
-              <a
-                class="shop-card"
-                href="student-shop-details.html?id=${s.id}"
-                id="shop-card-${s.id}"
-                aria-label="View ${s.name}"
-              >
-                <div class="shop-card-image">
-                  <img
-                    src="${s.img}"
-                    alt="${s.name}"
-                    onerror="this.src='https://placehold.co/400x175/f8f9fa/94a3b8?text=${encodeURIComponent(s.name)}'"
-                  />
-                  <div class="shop-card-image-overlay"></div>
-                  <span class="shop-cat-badge ${catClass}">${s.category}</span>
-                  <div class="shop-card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <a class="shop-card" href="student-browse-food.html?shop=${s.id}" id="shop-card-${s.id}" aria-label="View ${s.name}">
+              <div class="shop-card-image">
+                <img src="${s.img}" alt="${s.name}" onerror="this.src='https://placehold.co/400x175/f8f9fa/94a3b8?text=${encodeURIComponent(s.name)}'"/>
+                <div class="shop-card-image-overlay"></div>
+                <span class="shop-cat-badge ${c}">${s.category}</span>
+                <div class="shop-card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+              </div>
+              <div class="shop-card-body">
+                <div class="shop-card-name">${s.name}</div>
+                <div class="shop-card-meta">
+                  <div class="shop-card-rating"><i class="fa-solid fa-star"></i> ${s.rating.toFixed(1)}</div>
+                  <div class="shop-card-items"><i class="fa-solid fa-bowl-food"></i> ${n} item${n !== 1 ? "s" : ""}</div>
                 </div>
-                <div class="shop-card-body">
-                  <div class="shop-card-name">${s.name}</div>
-                  <div class="shop-card-meta">
-                    <div class="shop-card-rating">
-                      <i class="fa-solid fa-star"></i>
-                      ${s.rating.toFixed(1)}
-                    </div>
-                    <div class="shop-card-items">
-                      <i class="fa-solid fa-bowl-food"></i>
-                      ${itemCount} item${itemCount !== 1 ? "s" : ""}
-                    </div>
-                  </div>
-                  <div class="shop-card-divider"></div>
-                  <div class="shop-card-cta">
-                    <span class="shop-card-cta-text">View Menu</span>
-                    <i class="fa-solid fa-chevron-right"></i>
-                  </div>
-                </div>
-              </a>
-            `;
+                <div class="shop-card-divider"></div>
+                <div class="shop-card-cta"><span class="shop-card-cta-text">View Menu</span><i class="fa-solid fa-chevron-right"></i></div>
+              </div>
+            </a>`;
           })
           .join("");
-
         renderShopsPagination();
       }
 
-      /* ─────────── SHOP PAGINATION ─────────── */
       function renderShopsPagination() {
         const total = Math.ceil(filteredShops.length / SHOPS_PER_PAGE);
         const pag = document.getElementById("shopPagination");
@@ -990,14 +669,11 @@
           pag.innerHTML = "";
           return;
         }
-
         let html = `<button class="page-btn arrow" ${shopPage === 1 ? "disabled" : ""} id="shopPgPrev"><i class="fa-solid fa-chevron-left"></i></button>`;
-        for (let i = 1; i <= total; i++) {
+        for (let i = 1; i <= total; i++)
           html += `<button class="page-btn${i === shopPage ? " active" : ""}" data-sp="${i}">${i}</button>`;
-        }
         html += `<button class="page-btn arrow" ${shopPage === total ? "disabled" : ""} id="shopPgNext"><i class="fa-solid fa-chevron-right"></i></button>`;
         pag.innerHTML = html;
-
         pag.querySelectorAll("[data-sp]").forEach(
           (b) =>
             (b.onclick = () => {
@@ -1019,7 +695,6 @@
         };
       }
 
-      /* ─────────── SHOP FILTERS ─────────── */
       document.querySelectorAll(".filter-btn[data-shopcat]").forEach((btn) => {
         btn.addEventListener("click", () => {
           document
@@ -1030,11 +705,9 @@
           applyShopFilters();
         });
       });
-
       document
         .getElementById("shopSearchInput")
         .addEventListener("input", applyShopFilters);
-
       function applyShopFilters() {
         const q = document
           .getElementById("shopSearchInput")
@@ -1052,7 +725,6 @@
         renderShops();
       }
 
-      /* ─────────── TOAST ─────────── */
       function showToast(type, icon, msg) {
         const el = document.createElement("div");
         el.className = `toast ${type}`;
@@ -1064,7 +736,6 @@
         }, 3000);
       }
 
-      /* ─────────── INIT ─────────── */
       updateAllCartBadges();
       renderGrid();
     </script>
