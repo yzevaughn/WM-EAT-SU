@@ -1,0 +1,291 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WM EAT SU — Notifications</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../css/navbar.css" />
+
+    <link rel="stylesheet" href="../../css/student/dashboard.css" />
+  <link rel="stylesheet" href="../../css/notifications.css" /></head>
+  <body>
+    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ----------------------------------------
+         TOP NAVBAR
+         ---------------------------------------- -->
+    <div class="top-nav">
+      <!-- LEFT: hamburger + logo -->
+      <div class="nav-left">
+        <label for="menu-checkbox" class="menu-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </label>
+        <a href="#" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
+        </a>
+      </div>
+      <div class="nav-center">
+        <div class="role-switcher" id="roleSwitcher">
+          <a
+            href="student-dashboard.html"
+            class="role-btn active"
+            id="roleStudent"
+          >
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Student</span>
+          </a>
+
+          <a
+            href="../vendor-pages/vendor-dashboard.html"
+            class="role-btn"
+            id="roleVendor"
+          >
+            <i class="fa-solid fa-store"></i>
+            <span>Vendor</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT: profile -->
+            <div class="nav-right">
+        <!-- Notifications -->
+        <div class="notification-dropdown">
+          <button class="nav-icon-btn" aria-label="Notifications">
+            <i class="fa-regular fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="notification-menu">
+            <div class="notification-header">
+              <h3>Notifications</h3>
+              <button class="mark-read-btn">Mark all as read</button>
+            </div>
+            <div class="notification-list">
+              <a href="student-order.html" class="notification-item unread">
+                <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
+                <div class="notif-content">
+                  <p class="notif-title">Order #1234 Ready</p>
+                  <p class="notif-desc">Your order from Canteen 1 is ready for pickup.</p>
+                  <span class="notif-time">2 mins ago</span>
+                </div>
+              </a>
+              <a href="student-wallet.html" class="notification-item unread">
+                <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
+                <div class="notif-content">
+                  <p class="notif-title">Wallet Top-up</p>
+                  <p class="notif-desc">Successfully added &#8369;500.00 to your wallet.</p>
+                  <span class="notif-time">1 hour ago</span>
+                </div>
+              </a>
+              <a href="student-order.html" class="notification-item">
+                <div class="notif-icon orange"><i class="fa-solid fa-fire-burner"></i></div>
+                <div class="notif-content">
+                  <p class="notif-title">Order Preparing</p>
+                  <p class="notif-desc">Vendor has started preparing your order.</p>
+                  <span class="notif-time">2 hours ago</span>
+                </div>
+              </a>
+            </div>
+            <div class="notification-footer">
+              <a href="student-notifications.html">View all notifications</a>
+            </div>
+          </div>
+        </div>
+        <div class="profile">
+          <div class="profile-info">
+            <span class="profile-name">Vaughn Evangelista</span>
+            <span class="email">vaughn.student@wm.edu.ph</span>
+          </div>
+          <div class="profile-dropdown">
+            <button class="profile-btn">
+              <img
+                src="../../images/pfp.jpg"
+                class="profile-pic"
+                alt="Profile"
+              />
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="student-feedback.html" class="dropdown-item">
+                <i class="fa-solid fa-flag"></i><span>Reports</span>
+              </a>
+              <a href="student-vendor-applications.html" class="dropdown-item">
+                <i class="fa-solid fa-rss"></i><span>Vendor Applications</span>
+              </a>
+              <a href="../../index.html" class="dropdown-item dropdown-item--danger">
+                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /top-nav -->
+
+    <!-- ----------------------------------------
+         LAYOUT
+         ---------------------------------------- -->
+    <div class="layout">
+      <!-- -- SIDEBAR -- -->
+      <div class="left-nav" id="sidebar">
+        <ul class="nav-list">
+          <li>
+            <a href="student-dashboard.html" class="nav-link active">
+              <i class="fa-solid fa-house"></i><span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-browse-food.html" class="nav-link">
+              <i class="fa-solid fa-utensils"></i><span>Browse Food</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-cart.html" class="nav-link">
+              <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
+              <span class="nav-badge" style="display:none">0</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-order.html" class="nav-link">
+              <i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-wallet.html" class="nav-link">
+              <i class="fa-solid fa-wallet"></i><span>Wallet</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-campus-map.html" class="nav-link">
+              <i class="fa-solid fa-map-location-dot"></i><span>Campus Map</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- MAIN CONTENT -->
+      <div class="main-content">
+
+      <!-- Notifications Component -->
+      <div class="notifications-container" style="margin-top: 20px;">
+        <div class="notifications-header">
+          <h1>All Notifications</h1>
+          <div class="notifications-filters">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">Unread</button>
+          </div>
+        </div>
+        <div class="notifications-list">
+          <a href="student-order.html" class="notification-page-item unread">
+            <div class="notif-page-icon green"><i class="fa-solid fa-check"></i></div>
+            <div class="notif-page-content">
+              <div class="notif-page-header">
+                <span class="notif-page-title">Order #1234 Ready</span>
+                <span class="notif-page-time">2 mins ago</span>
+              </div>
+              <p class="notif-page-desc">Your order from Canteen 1 is ready for pickup.</p>
+              <div class="notif-page-actions">
+                <span class="notif-action-btn">View Order</span>
+              </div>
+            </div>
+          </a>
+          <a href="student-wallet.html" class="notification-page-item unread">
+            <div class="notif-page-icon blue"><i class="fa-solid fa-info"></i></div>
+            <div class="notif-page-content">
+              <div class="notif-page-header">
+                <span class="notif-page-title">Wallet Top-up</span>
+                <span class="notif-page-time">1 hour ago</span>
+              </div>
+              <p class="notif-page-desc">Successfully added &#8369;500.00 to your wallet.</p>
+            </div>
+          </a>
+          <a href="student-order.html" class="notification-page-item">
+            <div class="notif-page-icon orange"><i class="fa-solid fa-fire-burner"></i></div>
+            <div class="notif-page-content">
+              <div class="notif-page-header">
+                <span class="notif-page-title">Order Preparing</span>
+                <span class="notif-page-time">2 hours ago</span>
+              </div>
+              <p class="notif-page-desc">Vendor has started preparing your order.</p>
+              <div class="notif-page-actions">
+                <span class="notif-action-btn">Track Order</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <!-- /Notifications Component -->
+
+      </div>
+      <!-- /layout -->
+
+      <!-- FOOD DETAIL MODAL -->
+      <div class="food-modal-overlay" id="foodModal">
+        <div class="food-modal">
+          <img id="modalImg" class="modal-img" src="" alt="" />
+          <div class="modal-body">
+            <div class="modal-header-row">
+              <div>
+                <div class="modal-food-name" id="modalName"></div>
+                <div class="modal-food-price" id="modalPrice"></div>
+              </div>
+              <button class="modal-close-btn" id="modalClose">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+            <div
+              style="
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+                margin-bottom: 10px;
+              "
+            >
+              <span
+                id="modalVendor"
+                style="font-size: 13px; color: #64748b"
+              ></span>
+              <span
+                id="modalPrep"
+                style="font-size: 13px; color: #f97316"
+              ></span>
+              <span
+                id="modalRating"
+                style="font-size: 13px; color: #fbbf24; font-weight: 700"
+              ></span>
+            </div>
+            <div class="modal-section-label">Description</div>
+            <p
+              id="modalDesc"
+              style="font-size: 14px; color: #64748b; line-height: 1.6"
+            ></p>
+            <div class="modal-section-label">Ingredients</div>
+            <div id="modalIngredients" class="food-ingredients"></div>
+            <div class="modal-section-label">Customer Reviews</div>
+            <div id="modalReviews"></div>
+            <button class="modal-add-btn" id="modalAddBtn">
+              <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container"></div>
+    <script src="../../script/student/cart.js"></script>
+    <script src="../../script/student/dashboard.js"></script>
+  </body>
+</html>
+
+
+
+

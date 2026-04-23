@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -78,7 +78,49 @@
       </div>
 
       <!-- RIGHT: profile -->
-      <div class="nav-right">
+            <div class="nav-right">
+        <!-- Notifications -->
+        <div class="notification-dropdown">
+          <button class="nav-icon-btn" aria-label="Notifications">
+            <i class="fa-regular fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="notification-menu">
+            <div class="notification-header">
+              <h3>Notifications</h3>
+              <button class="mark-read-btn">Mark all as read</button>
+            </div>
+            <div class="notification-list">
+              <a href="student-order.html" class="notification-item unread">
+                <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
+                <div class="notif-content">
+                  <p class="notif-title">Order #1234 Ready</p>
+                  <p class="notif-desc">Your order from Canteen 1 is ready for pickup.</p>
+                  <span class="notif-time">2 mins ago</span>
+                </div>
+              </a>
+              <a href="student-wallet.html" class="notification-item unread">
+                <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
+                <div class="notif-content">
+                  <p class="notif-title">Wallet Top-up</p>
+                  <p class="notif-desc">Successfully added &#8369;500.00 to your wallet.</p>
+                  <span class="notif-time">1 hour ago</span>
+                </div>
+              </a>
+              <a href="student-order.html" class="notification-item">
+                <div class="notif-icon orange"><i class="fa-solid fa-fire-burner"></i></div>
+                <div class="notif-content">
+                  <p class="notif-title">Order Preparing</p>
+                  <p class="notif-desc">Vendor has started preparing your order.</p>
+                  <span class="notif-time">2 hours ago</span>
+                </div>
+              </a>
+            </div>
+            <div class="notification-footer">
+              <a href="student-notifications.html">View all notifications</a>
+            </div>
+          </div>
+        </div>
         <div class="profile">
           <div class="profile-info">
             <span class="profile-name">Vaughn Evangelista</span>
@@ -1242,3 +1284,7 @@
     </script>
   </body>
 </html>
+
+
+
+
