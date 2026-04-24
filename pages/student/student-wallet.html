@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -32,6 +32,21 @@
         }
       }
       #cashInToggle:checked ~ #cashInModal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .btn-qr {
+        display: none;
+        background-color: #3b82f6 !important;
+        border-color: #3b82f6 !important;
+      }
+      @media (max-width: 480px) {
+        .btn-qr {
+          display: flex !important;
+        }
+      }
+      #qrToggle:checked ~ #qrModal {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -226,6 +241,13 @@
                 style="justify-content: center"
               >
                 <i class="fa-solid fa-minus"></i> Withdraw
+              </label>
+              <label
+                for="qrToggle"
+                class="topup-btn btn-qr"
+                style="justify-content: center"
+              >
+                <i class="fa-solid fa-qrcode"></i> Scan to Pay
               </label>
             </div>
           </div>
@@ -775,6 +797,66 @@
       </div>
     </div>
 
+    <!-- ════════════════════════════════════════
+         QR CODE MODAL
+         ════════════════════════════════════════ -->
+    <input type="checkbox" id="qrToggle" style="display: none" />
+    <div class="modal" id="qrModal">
+      <label for="qrToggle" class="modal-overlay"></label>
+      <div class="modal-content" style="text-align: center; padding: 30px; max-width: 400px;">
+        <div class="modal-header" style="justify-content: center; position: relative;">
+          <h2 style="margin: 0;">Scan to Pay</h2>
+          <label for="qrToggle" class="modal-close" style="position: absolute; right: 0; top: 0;">
+            <i class="fa-solid fa-times"></i>
+          </label>
+        </div>
+        <div class="modal-body" style="padding-top: 20px;">
+          <!-- Scanner UI -->
+          <div id="qrScannerState">
+            <p style="color: #64748b; margin-bottom: 20px;">Position the vendor's QR code within the frame.</p>
+            <div style="background: #0f172a; position: relative; padding: 15px; border-radius: 12px; display: inline-block; width: 250px; height: 250px; cursor: pointer; overflow: hidden;" onclick="simulateScanSuccess()">
+              <!-- Simulated camera feed with scan line -->
+              <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); border: 2px dashed #3b82f6; border-radius: 12px;"></div>
+              <div style="position: absolute; top: 10%; left: 10%; right: 10%; bottom: 10%; border: 2px solid rgba(255,255,255,0.5); border-radius: 8px;"></div>
+              <!-- Animated Scan Line -->
+              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: #22c55e; box-shadow: 0 0 10px #22c55e; animation: scanAnim 2s infinite linear;"></div>
+              <p style="position: absolute; bottom: 20px; width: 100%; left: 0; text-align: center; color: white; font-size: 12px;">Tap to simulate scan</p>
+            </div>
+            <style>
+              @keyframes scanAnim {
+                0% { top: 10%; }
+                50% { top: 90%; }
+                100% { top: 10%; }
+              }
+            </style>
+          </div>
+
+          <!-- Review & Confirm UI (hidden initially) -->
+          <div id="qrConfirmState" style="display: none; text-align: center;">
+            <div style="font-size: 40px; color: #22c55e; margin-bottom: 10px;"><i class="fa-solid fa-circle-check"></i></div>
+            <h3 style="margin-top: 0;">Vendor Found!</h3>
+            <p style="color: #64748b;">You are about to pay <strong>Canteen 1</strong>.</p>
+            <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; margin: 20px 0;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span style="color: #64748b;">Current Balance:</span>
+                <span style="font-weight: bold;">₱<span id="qrBalanceValue">0.00</span></span>
+              </div>
+              <div style="text-align: left; margin-bottom: 15px;">
+                <label style="font-size: 14px; color: #475569; display: block; margin-bottom: 5px;">Enter Amount:</label>
+                <div style="display: flex; align-items: center; background: white; border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px;">
+                  <span style="color: #64748b; margin-right: 8px;">₱</span>
+                  <input type="number" id="qrPayAmount" placeholder="0.00" style="border: none; outline: none; width: 100%; font-size: 16px; font-weight: 600;" />
+                </div>
+              </div>
+            </div>
+            <button onclick="confirmQrPayment()" style="background: #22c55e; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 16px;">
+              Confirm Payment
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Toast Container -->
     <div
       class="toast-container"
@@ -1281,6 +1363,40 @@
 
       // Update cart count for consistency with rest of app
       updateAllCartBadges();
+
+      // QR Code functionality
+      document.getElementById('qrToggle').addEventListener('change', function() {
+        if(this.checked) {
+          const balance = getBalance();
+          document.getElementById('qrBalanceValue').innerText = balance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+          document.getElementById('qrScannerState').style.display = 'block';
+          document.getElementById('qrConfirmState').style.display = 'none';
+          document.getElementById('qrPayAmount').value = '';
+        }
+      });
+
+      function simulateScanSuccess() {
+        document.getElementById('qrScannerState').style.display = 'none';
+        document.getElementById('qrConfirmState').style.display = 'block';
+      }
+
+      function confirmQrPayment() {
+        const amount = parseFloat(document.getElementById('qrPayAmount').value);
+        if (!amount || amount <= 0) {
+          showToast("Please enter a valid amount");
+          return;
+        }
+        const balance = getBalance();
+        if (amount > balance) {
+          showToast("Insufficient balance");
+          return;
+        }
+        updateBalance(amount, false);
+        addTransactionRow("QR Payment - Canteen 1", amount, false);
+        document.getElementById('qrToggle').checked = false;
+        showToast("Payment successful!");
+        updateAllCartBadges(); // To update navbar balance
+      }
     </script>
   </body>
 </html>

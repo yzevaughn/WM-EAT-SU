@@ -43,7 +43,7 @@
         </div>
       </div>
 
-            <div class="nav-right">
+      <div class="nav-right">
         <!-- Notifications -->
         <div class="notification-dropdown">
           <button class="nav-icon-btn" aria-label="Notifications">
@@ -57,26 +57,38 @@
             </div>
             <div class="notification-list">
               <a href="student-order.html" class="notification-item unread">
-                <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
+                <div class="notif-icon green">
+                  <i class="fa-solid fa-check"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Order #1234 Ready</p>
-                  <p class="notif-desc">Your order from Canteen 1 is ready for pickup.</p>
+                  <p class="notif-desc">
+                    Your order from Canteen 1 is ready for pickup.
+                  </p>
                   <span class="notif-time">2 mins ago</span>
                 </div>
               </a>
               <a href="student-wallet.html" class="notification-item unread">
-                <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
+                <div class="notif-icon blue">
+                  <i class="fa-solid fa-info"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Wallet Top-up</p>
-                  <p class="notif-desc">Successfully added &#8369;500.00 to your wallet.</p>
+                  <p class="notif-desc">
+                    Successfully added &#8369;500.00 to your wallet.
+                  </p>
                   <span class="notif-time">1 hour ago</span>
                 </div>
               </a>
               <a href="student-order.html" class="notification-item">
-                <div class="notif-icon orange"><i class="fa-solid fa-fire-burner"></i></div>
+                <div class="notif-icon orange">
+                  <i class="fa-solid fa-fire-burner"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Order Preparing</p>
-                  <p class="notif-desc">Vendor has started preparing your order.</p>
+                  <p class="notif-desc">
+                    Vendor has started preparing your order.
+                  </p>
                   <span class="notif-time">2 hours ago</span>
                 </div>
               </a>
@@ -208,27 +220,7 @@
               <i class="fa-solid fa-minus"></i>
             </button>
             <div class="control-divider"></div>
-            <button
-              class="control-btn"
-              title="Rotate Left"
-              onclick="rotateMap(-30)"
-            >
-              <i class="fa-solid fa-rotate-left"></i>
-            </button>
-            <button
-              class="control-btn"
-              title="Rotate Right"
-              onclick="rotateMap(30)"
-            >
-              <i class="fa-solid fa-rotate-right"></i>
-            </button>
-            <button
-              class="control-btn"
-              title="Toggle Tilt"
-              onclick="toggleTilt()"
-            >
-              <i class="fa-solid fa-cube"></i>
-            </button>
+
             <button
               class="control-btn"
               title="Reset View"
@@ -276,7 +268,11 @@
     <!-- Load shared data (seeds shops + menu on first visit) -->
     <script src="../../script/student/cart.js"></script>
     <!-- Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO6gC7V8EijyHtXjb4Iypbpvi0Z-ih1S0&callback=initMap" async defer></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO6gC7V8EijyHtXjb4Iypbpvi0Z-ih1S0&callback=initMap"
+      async
+      defer
+    ></script>
     <script>
       let map;
       const wmsuPos = { lat: 6.9136, lng: 122.0614 };
@@ -290,7 +286,12 @@
           zoom: 18,
           minZoom: 17.5,
           restriction: {
-            latLngBounds: { north: 6.9165, south: 6.9105, east: 122.0665, west: 122.0585 },
+            latLngBounds: {
+              north: 6.9165,
+              south: 6.9105,
+              east: 122.0665,
+              west: 122.0585,
+            },
             strictBounds: false,
           },
           heading: 0,
@@ -298,16 +299,22 @@
           disableDefaultUI: true,
           gestureHandling: "greedy",
           styles: [
-            { featureType: "poi",     stylers: [{ visibility: "off" }] },
+            { featureType: "poi", stylers: [{ visibility: "off" }] },
             { featureType: "transit", stylers: [{ visibility: "off" }] },
-            { featureType: "road", elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+            {
+              featureType: "road",
+              elementType: "labels.icon",
+              stylers: [{ visibility: "off" }],
+            },
           ],
         });
 
         let focusMarker = null;
         let focusVendor = null;
         const urlParams = new URLSearchParams(window.location.search);
-        const focusId = urlParams.get("focus") ? parseInt(urlParams.get("focus")) : null;
+        const focusId = urlParams.get("focus")
+          ? parseInt(urlParams.get("focus"))
+          : null;
 
         vendors.forEach((v) => {
           if (!v.lat || !v.lng) return; // skip shops without map coordinates
@@ -317,17 +324,17 @@
             title: v.name,
             icon: {
               path: google.maps.SymbolPath.CIRCLE,
-              fillColor:   v.type === "canteen" ? "#e61524" : "#3b82f6",
+              fillColor: v.type === "canteen" ? "#e61524" : "#3b82f6",
               fillOpacity: 1,
               strokeColor: "#ffffff",
               strokeWeight: 2,
               scale: 10,
             },
           });
-          
+
           if (focusId && v.id === focusId) {
-             focusMarker = marker;
-             focusVendor = v;
+            focusMarker = marker;
+            focusVendor = v;
           }
 
           marker.addListener("click", () => {
@@ -338,25 +345,15 @@
         updateAllCartBadges();
 
         if (focusMarker && focusVendor) {
-          google.maps.event.addListenerOnce(map, 'idle', function(){
+          google.maps.event.addListenerOnce(map, "idle", function () {
             map.panTo(focusMarker.getPosition());
             map.setZoom(20);
             focusMarker.setAnimation(google.maps.Animation.BOUNCE);
-            setTimeout(() => { focusMarker.setAnimation(null); }, 2100);
+            setTimeout(() => {
+              focusMarker.setAnimation(null);
+            }, 2100);
             showVendorInfo(focusVendor);
           });
-        }
-      }
-
-      function rotateMap(deg) {
-        if (map && typeof map.getHeading === "function") {
-          map.setHeading((map.getHeading() || 0) + deg);
-        }
-      }
-
-      function toggleTilt() {
-        if (map && typeof map.getTilt === "function") {
-          map.setTilt(map.getTilt() === 0 ? 45 : 0);
         }
       }
 
@@ -369,22 +366,19 @@
 
       function showVendorInfo(v) {
         document.getElementById("vName").textContent = v.name;
-        document.getElementById("vLoc").textContent  = v.loc || "Campus";
-        document.getElementById("vRate").textContent = v.rating + " · Highly Rated";
-        document.getElementById("vCat").textContent  = v.category;
+        document.getElementById("vLoc").textContent = v.loc || "Campus";
+        document.getElementById("vRate").textContent =
+          v.rating + " · Highly Rated";
+        document.getElementById("vCat").textContent = v.category;
         // Link to browse-food filtered by this shop's id
-        document.getElementById("vLink").href = "student-browse-food.html?shop=" + v.id;
+        document.getElementById("vLink").href =
+          "student-browse-food.html?shop=" + v.id;
         document.getElementById("vendorPanel").classList.add("active");
       }
 
       function closePanel() {
         document.getElementById("vendorPanel").classList.remove("active");
       }
-
     </script>
   </body>
 </html>
-
-
-
-

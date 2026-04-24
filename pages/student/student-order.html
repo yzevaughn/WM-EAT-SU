@@ -234,9 +234,7 @@
             Show this code to the vendor when picking up your order.
           </p>
           <div style="margin-top:16px;text-align:center;">
-            <button class="pickup-btn" id="markPickedBtn" style="width:100%">
-              <i class="fa-solid fa-bag-shopping"></i> Mark as Picked Up
-            </button>
+            <!-- "Mark as Picked Up" button removed per request -->
           </div>
         </div>
       </div>
@@ -604,13 +602,7 @@
               </div>`
             ).join("");
 
-            /* Wire modal's "Mark as Picked Up" to THIS order */
-            document.getElementById("markPickedBtn").onclick = () => {
-              updateOrderStatus(order.id, "completed");
-              pickupModal.classList.remove("active");
-              renderOrders();
-              showToast("success", "fa-bag-shopping", "Order marked as picked up!");
-            };
+            /* Modal "Mark as Picked Up" logic removed */
 
             pickupModal.classList.add("active");
           });

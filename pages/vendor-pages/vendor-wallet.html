@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -14,6 +14,18 @@
     />
     <link rel="stylesheet" href="../../css/navbar.css" />
     <link rel="stylesheet" href="../../css/vendor-css/wallet.css" />
+    <style>
+      .btn-qr-receive {
+        background-color: #3b82f6 !important;
+        border-color: #3b82f6 !important;
+        margin-top: 10px;
+      }
+      #qrReceiveToggle:checked ~ #qrReceiveModal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
   </head>
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
@@ -190,6 +202,9 @@
             </div>
             <label for="withdrawToggle" class="topup-btn">
               <i class="fa-solid fa-minus"></i> Withdraw Funds
+            </label>
+            <label for="qrReceiveToggle" class="topup-btn btn-qr-receive" style="justify-content: center;">
+              <i class="fa-solid fa-qrcode"></i> Receive QR Payment
             </label>
           </div>
           <!-- TRANSACTIONS -->
@@ -401,6 +416,32 @@
         <div class="modal-footer hidden-step" id="step3Footer">
           <div class="btn-confirm" onclick="finalizeWithdraw()">Submit OTP</div>
           <div class="btn-cancel" onclick="goToStep2()">Back</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECEIVE QR MODAL -->
+    <input type="checkbox" id="qrReceiveToggle" style="display: none;" />
+    <div class="modal" id="qrReceiveModal">
+      <label for="qrReceiveToggle" class="modal-overlay"></label>
+      <div class="modal-content" style="text-align: center; padding: 30px; max-width: 400px;">
+        <div class="modal-header" style="justify-content: center; position: relative;">
+          <h2 style="margin: 0;">Receive Payment</h2>
+          <label for="qrReceiveToggle" class="modal-close" style="position: absolute; right: 0; top: 0;">
+            <i class="fa-solid fa-times"></i>
+          </label>
+        </div>
+        <div class="modal-body" style="padding-top: 20px;">
+          <p style="color: #64748b; margin-bottom: 20px;">Show this QR code to the student for them to scan and pay.</p>
+          <div style="background: white; padding: 15px; border-radius: 12px; display: inline-block; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=vendor_payment:Canteen1" alt="Vendor QR Code" style="width: 250px; height: 250px;" />
+          </div>
+          <div style="margin-top: 20px; font-size: 16px; color: #1e293b;">
+            Waiting for payment scan...
+            <div style="margin-top: 10px;">
+              <i class="fa-solid fa-spinner fa-spin" style="color: #3b82f6; font-size: 24px;"></i>
+            </div>
+          </div>
         </div>
       </div>
     </div>
