@@ -53,11 +53,12 @@ function submitStep1() {
   let valid = true;
 
   // Clear all previous errors
-  ["firstName", "lastName", "email", "password"].forEach(clearError);
+  ["firstName", "lastName", "email", "mobile", "password"].forEach(clearError);
 
   const firstName = getValue("firstName");
   const lastName = getValue("lastName");
   const email = getValue("email");
+  const mobile = getValue("mobile");
   const password = document.getElementById("password").value;
 
   // FIRST NAME
@@ -84,6 +85,17 @@ function submitStep1() {
     valid = false;
   } else {
     setOk("email");
+  }
+
+  // MOBILE
+  if (!mobile) {
+    setError("mobile", "Mobile number is required.");
+    valid = false;
+  } else if (!/^09\d{9}$/.test(mobile.replace(/\s+/g, ""))) {
+    setError("mobile", "Enter a valid 11-digit number.");
+    valid = false;
+  } else {
+    setOk("mobile");
   }
 
   // PASSWORD

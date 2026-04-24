@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -103,9 +103,9 @@
 <body>
   <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
 
-  <!-- ════════════════════════════════════════
+  <!-- ----------------------------------------
          TOP NAVBAR
-         ════════════════════════════════════════ -->
+         ---------------------------------------- -->
   <div class="top-nav">
     <!-- LEFT: hamburger + logo -->
     <div class="nav-left">
@@ -187,21 +187,24 @@
             <i class="fa-solid fa-chevron-down"></i>
           </button>
           <div class="dropdown-menu">
-            <a href="../../index.html" class="dropdown-item">
-              <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
-            </a>
-          </div>
+              <a href="vendor-profile.html" class="dropdown-item">
+                <i class="fa-solid fa-gear"></i><span>Settings</span>
+              </a>
+              <a href="../../index.html" class="dropdown-item">
+                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+              </a>
+            </div>
         </div>
       </div>
     </div>
   </div>
   <!-- /top-nav -->
 
-  <!-- ════════════════════════════════════════
+  <!-- ----------------------------------------
          LAYOUT
-         ════════════════════════════════════════ -->
+         ---------------------------------------- -->
   <div class="layout">
-    <!-- ── SIDEBAR ── -->
+    <!-- -- SIDEBAR -- -->
     <div class="left-nav" id="sidebar">
       <ul class="nav-list">
         <li>
@@ -234,12 +237,7 @@
             <i class="fa-solid fa-wallet"></i><span>Wallet</span>
           </a>
         </li>
-        <li>
-          <a href="vendor-profile.html" class="nav-link">
-            <i class="fa-solid fa-user-tie"></i><span>Profile</span>
-          </a>
-        </li>
-      </ul>
+        </ul>
     </div>
 
     <!-- MAIN CONTENT -->
@@ -311,10 +309,10 @@
         <img src="" id="modalFoodImage" class="modal-order-image" alt="Order items" style="display:none;" />
         <div class="modal-info-row">
           <span class="modal-info-label">Status</span>
-          <span class="modal-info-value" style="color:#22c55e;">✔ Ready for Pickup</span>
+          <span class="modal-info-value" style="color:#22c55e;">? Ready for Pickup</span>
         </div>
         <div class="modal-order-items" id="modalOrderItems"></div>
-        <div class="modal-total-price" id="modalTotalPrice" style="margin-bottom:0;">Total: ₱0.00</div>
+        <div class="modal-total-price" id="modalTotalPrice" style="margin-bottom:0;">Total: &#8369;0.00</div>
       </div>
     </div>
   </div>
@@ -342,12 +340,12 @@
   <script src="../../script/student/cart.js"></script>
   <script src="../../script/vendor-js/orders-filter.js"></script>
   <script>
-    /* ══════════════════════════════════════════════════════════
-       VENDOR ORDERS — localStorage-driven
+    /* ----------------------------------------------------------
+       VENDOR ORDERS ï¿½ localStorage-driven
        Reads student orders from the shared LS key and renders them
-       ══════════════════════════════════════════════════════════ */
+       ---------------------------------------------------------- */
 
-    /* ─── Toast ─── */
+    /* --- Toast --- */
     function showVendorToast(type, icon, msg) {
       const colours = { success:"#10b981", error:"#ef4444", info:"#3b82f6" };
       const el = document.createElement("div");
@@ -369,7 +367,7 @@
       }, 3200);
     }
 
-    /* ─── Map student status → vendor tab name ─── */
+    /* --- Map student status ? vendor tab name --- */
     window.STATUS_MAP = {
       pending:   "Queue",
       preparing: "Preparing",
@@ -378,7 +376,7 @@
       cancelled: "Cancelled"
     };
 
-    /* ─── Status UI config ─── */
+    /* --- Status UI config --- */
     const STATUS_CFG = {
       Queue:     { icon:"fa-clock",       cls:"ic-Queue",     badge:"Queue",     label:"Queue" },
       Preparing: { icon:"fa-fire-burner", cls:"ic-preparing", badge:"preparing", label:"Preparing" },
@@ -387,7 +385,7 @@
       Cancelled: { icon:"fa-ban",         cls:"ic-cancelled", badge:"cancelled", label:"Cancelled" }
     };
 
-    /* ─── Build action buttons for each status ─── */
+    /* --- Build action buttons for each status --- */
     function buildActions(order, tab) {
       if (tab === "Queue") return `
         <button class="pickup-btn"  data-action="accept"  data-id="${order.id}"><i class="fas fa-check"></i> Accept</button>
@@ -405,16 +403,16 @@
       return "";
     }
 
-    /* ─── Build one order card HTML ─── */
+    /* --- Build one order card HTML --- */
     function buildVendorCard(order) {
       const tab = window.STATUS_MAP[order.status] || "Queue";
       const cfg = STATUS_CFG[tab] || STATUS_CFG.Queue;
       const dt  = new Date(order.placedAt);
       const dateStr = dt.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})
-                    + " · " + dt.toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit"});
+                    + " • " + dt.toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit"});
       const shortId = order.id.slice(-6).toUpperCase();
       const itemsHtml = (order.items||[]).map(it =>
-        `<div class="order-item-row" style="display:flex;justify-content:space-between;color:#334155;font-weight:600;font-size:14px;padding:3px 0;"><span>${it.qty}× ${it.name}</span><span>₱${(it.price*it.qty).toFixed(2)}</span></div>`
+        `<div class="order-item-row" style="display:flex;justify-content:space-between;color:#334155;font-weight:600;font-size:14px;padding:3px 0;"><span>${it.qty} × ${it.name}</span><span>&#8369;${(it.price*it.qty).toFixed(2)}</span></div>`
       ).join("");
       const noteHtml = order.instructions ? `
         <div class="order-instruction" style="font-size:12px;color:#64748b;margin-top:8px;padding:6px 8px;background:#f8fafc;border-radius:4px;border-left:2px solid #cbd5e1;">
@@ -447,7 +445,7 @@
                 ${noteHtml}
               </div>
             </div>
-            <div class="order-total-row"><span>Total: ₱${order.total.toFixed(2)}</span></div>
+            <div class="order-total-row"><span>Total: &#8369;${order.total.toFixed(2)}</span></div>
             <div class="order-actions" style="margin-top:14px;display:flex;gap:8px;">
               ${buildActions(order, tab)}
             </div>
@@ -455,7 +453,7 @@
         </div>`;
     }
 
-    /* ─── Global Render engine ─── */
+    /* --- Global Render engine --- */
     window.renderVendorOrders = function() {
       const orders  = typeof getOrders === 'function' ? getOrders() : []; // from cart.js
       const list    = document.getElementById("ordersList");
@@ -510,7 +508,7 @@
           const code = btn.dataset.code;
           document.getElementById("modalCodeVal").textContent = code;
           document.getElementById("modalCodeOrder").textContent = "Order #" + card.dataset.orderId;
-          document.getElementById("modalTotalPrice").textContent = "Total: ₱" + card.dataset.price;
+          document.getElementById("modalTotalPrice").textContent = "Total: &#8369;" + card.dataset.price;
           
           let img = document.getElementById("modalFoodImage");
           if(card.dataset.image) {

@@ -35,9 +35,9 @@
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
 
-    <!-- ════════════════════════════════════════
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
          TOP NAVBAR
-         ════════════════════════════════════════ -->
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
     <div class="top-nav">
       <!-- LEFT: hamburger + logo -->
       <div class="nav-left">
@@ -131,6 +131,9 @@
               <i class="fa-solid fa-chevron-down"></i>
             </button>
             <div class="dropdown-menu">
+              <a href="vendor-profile.html" class="dropdown-item">
+                <i class="fa-solid fa-gear"></i><span>Settings</span>
+              </a>
               <a href="../../index.html" class="dropdown-item">
                 <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
               </a>
@@ -141,9 +144,9 @@
     </div>
     <!-- /top-nav -->
 
-    <!-- ════════════════════════════════════════
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
          LAYOUT
-         ════════════════════════════════════════ -->
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
     <div class="layout">
       <!-- ── SIDEBAR ── -->
       <div class="left-nav" id="sidebar">
@@ -184,13 +187,7 @@
               <span>Wallet</span>
             </a>
           </li>
-          <li>
-            <a href="vendor-profile.html" class="nav-link">
-              <i class="fa-solid fa-user-tie"></i>
-              <span>Profile</span>
-            </a>
-          </li>
-        </ul>
+          </ul>
       </div>
       <!-- MAIN CONTENT -->
       <div class="main-content">
@@ -202,7 +199,7 @@
               <i class="fa-solid fa-wallet"></i>
             </div>
             <div class="balance-amount">
-              <span class="currency-symbol">₱</span>
+              <span class="currency-symbol">&#8369;</span>
               <span class="balance-value" id="balanceValue">2500.00</span>
             </div>
             <label for="withdrawToggle" class="topup-btn">
@@ -224,7 +221,7 @@
                   <p class="transaction-type">Daily Sales Payout</p>
                   <p class="transaction-date">Mar 6, 2026 - 06:00 PM</p>
                 </div>
-                <div class="transaction-amount positive">+₱1,250.00</div>
+                <div class="transaction-amount positive">+&#8369;1,250.00</div>
               </div>
               <div class="transaction-item">
                 <div class="transaction-icon topup">
@@ -234,7 +231,7 @@
                   <p class="transaction-type">Order Payment - Burger Meal</p>
                   <p class="transaction-date">Mar 5, 2026 - 12:30 PM</p>
                 </div>
-                <div class="transaction-amount positive">+₱12.99</div>
+                <div class="transaction-amount positive">+&#8369;12.99</div>
               </div>
               <div class="transaction-item">
                 <div class="transaction-icon payment">
@@ -244,7 +241,7 @@
                   <p class="transaction-type">Withdrawal via GCash</p>
                   <p class="transaction-date">Mar 3, 2026 - 3:15 PM</p>
                 </div>
-                <div class="transaction-amount negative">-₱500.00</div>
+                <div class="transaction-amount negative">-&#8369;500.00</div>
               </div>
               <div class="transaction-item">
                 <div class="transaction-icon payment">
@@ -254,7 +251,7 @@
                   <p class="transaction-type">Platform Service Fee</p>
                   <p class="transaction-date">Mar 1, 2026 - 12:00 AM</p>
                 </div>
-                <div class="transaction-amount negative">-₱50.00</div>
+                <div class="transaction-amount negative">-&#8369;50.00</div>
               </div>
             </div>
           </div>
@@ -303,19 +300,19 @@
             <label class="form-label">Quick Amount</label>
             <div class="quick-amounts">
               <input type="radio" name="amount" id="a500" />
-              <label for="a500" class="quick-btn">₱500</label>
+              <label for="a500" class="quick-btn">&#8369;500</label>
               <input type="radio" name="amount" id="a1000" />
-              <label for="a1000" class="quick-btn">₱1000</label>
+              <label for="a1000" class="quick-btn">&#8369;1000</label>
               <input type="radio" name="amount" id="a2000" />
-              <label for="a2000" class="quick-btn">₱2000</label>
+              <label for="a2000" class="quick-btn">&#8369;2000</label>
               <input type="radio" name="amount" id="a5000" />
-              <label for="a5000" class="quick-btn">₱5000</label>
+              <label for="a5000" class="quick-btn">&#8369;5000</label>
             </div>
             <!-- CUSTOM AMOUNT -->
             <div class="custom-amount-wrapper">
               <label class="form-label">Enter amount</label>
               <div class="custom-input-box">
-                <span class="currency-prefix">₱</span>
+                <span class="currency-prefix">&#8369;</span>
                 <input
                   type="number"
                   id="customAmount"
@@ -341,7 +338,7 @@
             </div>
             <div class="step-details-row">
               <span>Amount</span>
-              <span id="summaryAmount">₱0.00</span>
+              <span id="summaryAmount">&#8369;0.00</span>
             </div>
           </div>
 
@@ -495,8 +492,8 @@
 
       quickAmounts.forEach((btn) => {
         btn.addEventListener("click", (e) => {
-          // Parse numbers from innerText like "₱500"
-          const val = parseInt(e.target.innerText.replace("₱", ""));
+          // Parse numbers from innerText like "&#8369;500"
+          const val = parseInt(e.target.innerText.replace("&#8369;", ""));
           if (!isNaN(val)) {
             customInput.value = val;
             // Clear error when quick amount is picked
@@ -539,7 +536,7 @@
               : "Bank Transfer";
         document.getElementById("summaryMethod").innerText = summaryMethodText;
         document.getElementById("summaryAmount").innerText =
-          "₱" + amount.toFixed(2);
+          "&#8369;" + amount.toFixed(2);
 
         // Setup Step 2 Fields
         if (selectedMethod === "card") {
@@ -679,7 +676,7 @@
             <p class="transaction-type">Withdrawal via ${methodText}</p>
             <p class="transaction-date">${dateStr}</p>
           </div>
-          <div class="transaction-amount negative">-₱${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+          <div class="transaction-amount negative">-&#8369;${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
         `;
         list.prepend(newItem);
         // ----------------------------

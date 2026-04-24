@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU — Notifications</title>
+    <title>WM EAT SU ï¿½ Notifications</title>
 
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
@@ -115,6 +115,9 @@
               <i class="fa-solid fa-chevron-down"></i>
             </button>
             <div class="dropdown-menu">
+              <a href="vendor-profile.html" class="dropdown-item">
+                <i class="fa-solid fa-gear"></i><span>Settings</span>
+              </a>
               <a href="../../index.html" class="dropdown-item">
                 <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
               </a>
@@ -170,13 +173,7 @@
               <span>Wallet</span>
             </a>
           </li>
-          <li>
-            <a href="vendor-profile.html" class="nav-link">
-              <i class="fa-solid fa-user-tie"></i>
-              <span>Profile</span>
-            </a>
-          </li>
-        </ul>
+          </ul>
       </div>
 
       <div class="main-content">
@@ -230,21 +227,21 @@
           daily: {
             labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
             data: [120, 190, 150, 220, 180, 250, 290],
-            total: '?1,400.00',
+            total: '&#8369;1,400.00',
             growth: '+12%',
             growthType: 'positive'
           },
           weekly: {
             labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
             data: [850, 920, 1100, 1400],
-            total: '?4,270.00',
+            total: '&#8369;4,270.00',
             growth: '+8%',
             growthType: 'positive'
           },
           monthly: {
             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
             data: [3200, 3800, 3500, 4100, 4800, 5200],
-            total: '?24,600.00',
+            total: '&#8369;24,600.00',
             growth: '+15%',
             growthType: 'positive'
           }
@@ -260,7 +257,7 @@
           data: {
             labels: chartData.daily.labels,
             datasets: [{
-              label: 'Revenue (?)',
+              label: 'Revenue (&#8369;)',
               data: chartData.daily.data,
               borderColor: '#ea580c',
               backgroundColor: gradient,
@@ -289,7 +286,7 @@
                 displayColors: false,
                 callbacks: {
                   label: function(context) {
-                    return '?' + context.parsed.y.toLocaleString();
+                    return '&#8369;' + context.parsed.y.toLocaleString();
                   }
                 }
               }
@@ -304,7 +301,7 @@
                 ticks: {
                   color: '#6b7280',
                   callback: function(value) {
-                    return '?' + value;
+                    return '&#8369;' + value;
                   }
                 }
               },
