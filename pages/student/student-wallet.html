@@ -1,9 +1,9 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU — Student Wallet</title>
+    <title>WM EAT SU â€” Student Wallet</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -55,9 +55,9 @@
   </head>
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
-    <!-- ════════════════════════════════════════
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
          TOP NAVBAR
-         ════════════════════════════════════════ -->
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
     <div class="top-nav">
       <!-- LEFT: hamburger + logo -->
       <div class="nav-left">
@@ -151,6 +151,9 @@
               <i class="fa-solid fa-chevron-down"></i>
             </button>
             <div class="dropdown-menu">
+              <a href="student-profile.html" class="dropdown-item">
+                <i class="fa-solid fa-gear"></i><span>Settings</span>
+              </a>
               <a href="student-feedback.html" class="dropdown-item">
                 <i class="fa-solid fa-flag"></i><span>Reports</span>
               </a>
@@ -170,11 +173,11 @@
     </div>
     <!-- /top-nav -->
 
-    <!-- ════════════════════════════════════════
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
          LAYOUT
-         ════════════════════════════════════════ -->
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
     <div class="layout">
-      <!-- ── SIDEBAR ── -->
+      <!-- â”€â”€ SIDEBAR â”€â”€ -->
       <div class="left-nav" id="sidebar">
         <ul class="nav-list">
           <li>
@@ -224,7 +227,7 @@
               <i class="fa-solid fa-wallet"></i>
             </div>
             <div class="balance-amount">
-              <span class="currency-symbol">₱</span>
+              <span class="currency-symbol">â‚±</span>
               <span class="balance-value" id="balanceValue">245.50</span>
             </div>
             <div class="wallet-actions">
@@ -263,7 +266,7 @@
                   <p class="transaction-type">Payment - Shomai Rice</p>
                   <p class="transaction-date">Apr 22, 2026 - 12:35 PM</p>
                 </div>
-                <div class="transaction-amount negative">-₱45.00</div>
+                <div class="transaction-amount negative">-â‚±45.00</div>
               </div>
               <div class="transaction-item">
                 <div class="transaction-icon topup">
@@ -273,7 +276,7 @@
                   <p class="transaction-type">Cash In via GCash</p>
                   <p class="transaction-date">Apr 21, 2026 - 03:15 PM</p>
                 </div>
-                <div class="transaction-amount positive">+₱500.00</div>
+                <div class="transaction-amount positive">+â‚±500.00</div>
               </div>
               <div class="transaction-item">
                 <div class="transaction-icon payment">
@@ -283,7 +286,7 @@
                   <p class="transaction-type">Payment - Burger & Fries</p>
                   <p class="transaction-date">Apr 20, 2026 - 10:00 AM</p>
                 </div>
-                <div class="transaction-amount negative">-₱120.00</div>
+                <div class="transaction-amount negative">-â‚±120.00</div>
               </div>
               <div class="transaction-item">
                 <div class="transaction-icon topup">
@@ -293,7 +296,7 @@
                   <p class="transaction-type">Initial Wallet Bonus</p>
                   <p class="transaction-date">Apr 15, 2026 - 08:00 AM</p>
                 </div>
-                <div class="transaction-amount positive">+₱100.00</div>
+                <div class="transaction-amount positive">+â‚±100.00</div>
               </div>
             </div>
           </div>
@@ -301,9 +304,9 @@
       </div>
     </div>
 
-    <!-- ════════════════════════════════════════
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
          CASH IN MODAL
-         ════════════════════════════════════════ -->
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
     <input type="checkbox" id="cashInToggle" style="display: none" />
     <div class="modal" id="cashInModal">
       <label for="cashInToggle" class="modal-overlay"></label>
@@ -363,34 +366,34 @@
                 id="cia100"
                 style="display: none"
               />
-              <label for="cia100" class="quick-btn">₱100</label>
+              <label for="cia100" class="quick-btn">â‚±100</label>
               <input
                 type="radio"
                 name="ciamount"
                 id="cia500"
                 style="display: none"
               />
-              <label for="cia500" class="quick-btn">₱500</label>
+              <label for="cia500" class="quick-btn">â‚±500</label>
               <input
                 type="radio"
                 name="ciamount"
                 id="cia1000"
                 style="display: none"
               />
-              <label for="cia1000" class="quick-btn">₱1000</label>
+              <label for="cia1000" class="quick-btn">â‚±1000</label>
               <input
                 type="radio"
                 name="ciamount"
                 id="cia2000"
                 style="display: none"
               />
-              <label for="cia2000" class="quick-btn">₱2000</label>
+              <label for="cia2000" class="quick-btn">â‚±2000</label>
             </div>
             <!-- CUSTOM AMOUNT -->
             <div class="custom-amount-wrapper">
               <label class="form-label">Enter amount</label>
               <div class="custom-input-box">
-                <span class="currency-prefix">₱</span>
+                <span class="currency-prefix">â‚±</span>
                 <input
                   type="number"
                   id="ciCustomAmount"
@@ -400,7 +403,7 @@
                 />
               </div>
               <div id="ciAmountError" class="error-message">
-                <span>Please enter a valid amount (Min. ₱50.00)</span>
+                <span>Please enter a valid amount (Min. â‚±50.00)</span>
               </div>
             </div>
           </div>
@@ -415,7 +418,7 @@
             </div>
             <div class="step-details-row">
               <span>Amount to Cash In</span>
-              <span id="ciSummaryAmount">₱0.00</span>
+              <span id="ciSummaryAmount">â‚±0.00</span>
             </div>
           </div>
 
@@ -548,9 +551,9 @@
       </div>
     </div>
 
-    <!-- ════════════════════════════════════════
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
          WITHDRAW MODAL
-         ════════════════════════════════════════ -->
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
     <input type="checkbox" id="withdrawToggle" style="display: none" />
     <div class="modal" id="withdrawModal">
       <label for="withdrawToggle" class="modal-overlay"></label>
@@ -610,34 +613,34 @@
                 id="wda50"
                 style="display: none"
               />
-              <label for="wda50" class="quick-btn">₱50</label>
+              <label for="wda50" class="quick-btn">â‚±50</label>
               <input
                 type="radio"
                 name="wdamount"
                 id="wda100"
                 style="display: none"
               />
-              <label for="wda100" class="quick-btn">₱100</label>
+              <label for="wda100" class="quick-btn">â‚±100</label>
               <input
                 type="radio"
                 name="wdamount"
                 id="wda200"
                 style="display: none"
               />
-              <label for="wda200" class="quick-btn">₱200</label>
+              <label for="wda200" class="quick-btn">â‚±200</label>
               <input
                 type="radio"
                 name="wdamount"
                 id="wda500"
                 style="display: none"
               />
-              <label for="wda500" class="quick-btn">₱500</label>
+              <label for="wda500" class="quick-btn">â‚±500</label>
             </div>
             <!-- CUSTOM AMOUNT -->
             <div class="custom-amount-wrapper">
               <label class="form-label">Enter amount</label>
               <div class="custom-input-box">
-                <span class="currency-prefix">₱</span>
+                <span class="currency-prefix">â‚±</span>
                 <input
                   type="number"
                   id="wdCustomAmount"
@@ -664,7 +667,7 @@
             </div>
             <div class="step-details-row">
               <span>Amount</span>
-              <span id="wdSummaryAmount">₱0.00</span>
+              <span id="wdSummaryAmount">â‚±0.00</span>
             </div>
           </div>
 
@@ -797,9 +800,9 @@
       </div>
     </div>
 
-    <!-- ════════════════════════════════════════
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
          QR CODE MODAL
-         ════════════════════════════════════════ -->
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
     <input type="checkbox" id="qrToggle" style="display: none" />
     <div class="modal" id="qrModal">
       <label for="qrToggle" class="modal-overlay"></label>
@@ -839,12 +842,12 @@
             <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; margin: 20px 0;">
               <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                 <span style="color: #64748b;">Current Balance:</span>
-                <span style="font-weight: bold;">₱<span id="qrBalanceValue">0.00</span></span>
+                <span style="font-weight: bold;">â‚±<span id="qrBalanceValue">0.00</span></span>
               </div>
               <div style="text-align: left; margin-bottom: 15px;">
                 <label style="font-size: 14px; color: #475569; display: block; margin-bottom: 5px;">Enter Amount:</label>
                 <div style="display: flex; align-items: center; background: white; border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px;">
-                  <span style="color: #64748b; margin-right: 8px;">₱</span>
+                  <span style="color: #64748b; margin-right: 8px;">â‚±</span>
                   <input type="number" id="qrPayAmount" placeholder="0.00" style="border: none; outline: none; width: 100%; font-size: 16px; font-weight: 600;" />
                 </div>
               </div>
@@ -1027,7 +1030,7 @@
             <p class="transaction-type">${typeText}</p>
             <p class="transaction-date">${dateStr}</p>
           </div>
-          <div class="transaction-amount ${colorClass}">${sign}₱${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+          <div class="transaction-amount ${colorClass}">${sign}â‚±${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
         `;
         list.prepend(newItem);
       }
@@ -1062,7 +1065,7 @@
         if (!amount || amount < 50) {
           showError(
             "ciAmountError",
-            "Please enter a valid amount (Min. ₱50.00)",
+            "Please enter a valid amount (Min. â‚±50.00)",
           );
           document.getElementById("ciCustomAmount").classList.add("invalid");
           return;
@@ -1076,7 +1079,7 @@
               ? "Maya"
               : "Bank Transfer";
         document.getElementById("ciSummaryAmount").innerText =
-          "₱" + amount.toFixed(2);
+          "â‚±" + amount.toFixed(2);
 
         if (methodId.includes("card")) {
           document
@@ -1220,7 +1223,7 @@
         if (amount > maxBalance) {
           showError(
             "wdAmountError",
-            `Insufficient balance. Max withdrawable: ₱${maxBalance.toFixed(2)}`,
+            `Insufficient balance. Max withdrawable: â‚±${maxBalance.toFixed(2)}`,
           );
           document.getElementById("wdCustomAmount").classList.add("invalid");
           return;
@@ -1234,7 +1237,7 @@
               ? "Maya"
               : "Bank Transfer";
         document.getElementById("wdSummaryAmount").innerText =
-          "₱" + amount.toFixed(2);
+          "â‚±" + amount.toFixed(2);
 
         if (methodId.includes("card")) {
           document
@@ -1400,6 +1403,7 @@
     </script>
   </body>
 </html>
+
 
 
 
