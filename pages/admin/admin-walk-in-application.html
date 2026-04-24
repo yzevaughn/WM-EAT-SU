@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WM EAT SU - Walk-In Application</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="../../css/navbar.css" />
+    <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css" />
+    <link rel="stylesheet" href="../../css/admin-css/admin-walk-in.css" />
+  </head>
+  <body>
+    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+
+    <!-- ════════════════════════════════════════
+         TOP NAVBAR
+         ════════════════════════════════════════ -->
+    <div class="top-nav">
+      <!-- LEFT: hamburger + logo -->
+      <div class="nav-left">
+        <label for="menu-checkbox" class="menu-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </label>
+        <a href="#" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
+        </a>
+      </div>
+      <div class="nav-center"></div>
+      <!-- RIGHT: profile -->
+      <div class="nav-right">
+        <!-- Notifications -->
+        <div class="notification-dropdown">
+          <button class="nav-icon-btn" aria-label="Notifications">
+            <i class="fa-regular fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="notification-menu">
+            <div class="notification-header">
+              <h3>Notifications</h3>
+              <button class="mark-read-btn">Mark all as read</button>
+            </div>
+            <div class="notification-list">
+              <a href="admin-dashboard.html" class="notification-item unread">
+                <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
+                <div class="notif-content">
+                  <p class="notif-title">System Update</p>
+                  <p class="notif-desc">New features deployed.</p>
+                  <span class="notif-time">2 mins ago</span>
+                </div>
+              </a>
+            </div>
+            <div class="notification-footer">
+              <a href="admin-notifications.html">View all notifications</a>
+            </div>
+          </div>
+        </div>
+        <div class="profile">
+          <div class="profile-info">
+            <span class="profile-name">Admin User</span>
+            <span class="email">admin@wm.edu.ph</span>
+          </div>
+          <div class="profile-dropdown">
+            <button class="profile-btn">
+              <img
+                src="../../images/pfp.jpg"
+                class="profile-pic"
+                alt="Profile"
+              />
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="../../index.html" class="dropdown-item">
+                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /top-nav -->
+
+    <!-- ════════════════════════════════════════
+         LAYOUT
+         ════════════════════════════════════════ -->
+    <div class="layout">
+      <!-- ── SIDEBAR ── -->
+      <div class="left-nav" id="sidebar">
+        <!-- logo shown on mobile inside sidebar -->
+
+        <ul class="nav-list">
+          <li>
+            <a href="admin-dashboard.html" class="nav-link">
+              <i class="fa-solid fa-house"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-applications.html" class="nav-link">
+              <i class="fa-solid fa-user-check"></i>
+              <span>Student Applications</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-walk-in-application.html" class="nav-link active">
+              <i class="fa-solid fa-file-signature"></i>
+              <span>Walk-In Application</span>
+            </a>
+          </li>
+          <li>
+            <a href="complaints.html" class="nav-link">
+              <i class="fa-solid fa-comment-dots"></i>
+              <span>Complaints</span>
+            </a>
+          </li>
+          <li>
+            <a href="assign-vendor.html" class="nav-link">
+              <i class="fa-solid fa-user-plus"></i>
+              <span>Assign Vendor</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-approval.html" class="nav-link">
+              <i class="fa-solid fa-clipboard-check"></i>
+              <span>Content Approval</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="main-content">
+        <div class="container">
+          <!-- header section -->
+          <header class="page-header" style="margin-bottom: 30px;">
+            <div>
+              <h1>Walk-In Application</h1>
+              <p class="subtitle">Manually process a vendor application for a student applying in person.</p>
+            </div>
+          </header>
+
+          <div class="form-container">
+            <!-- Step Indicators -->
+            <div class="step-indicators" style="display:flex; justify-content:center; gap: 40px; margin-bottom:30px; font-size: 15px;">
+               <div id="ind-step1" style="font-weight:700; color:#3b82f6; border-bottom: 2px solid #3b82f6; padding-bottom: 5px;">1. Application Details</div>
+               <div id="ind-step2" style="font-weight:500; color:#94a3b8; padding-bottom: 5px;">2. Account Setup</div>
+            </div>
+
+            <form id="walkInForm">
+              <!-- ================= STEP 1 ================= -->
+              <div id="step1">
+              <div class="form-section-title">Student Information</div>
+              <div class="form-group">
+                <label>Student Name (Applicant) <span class="required">*</span></label>
+                <input
+                  type="text"
+                  id="studentName"
+                  class="form-control"
+                  placeholder="e.g., Juan Dela Cruz"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label>Student ID or Email <span class="required">*</span></label>
+                <input
+                  type="text"
+                  id="studentId"
+                  class="form-control"
+                  placeholder="e.g., 2021-12345 or juan@wm.edu.ph"
+                  required
+                />
+              </div>
+              
+              <div class="form-section-title" style="margin-top: 30px;">Business Information</div>
+              <div class="form-group">
+                <label>Proposed Business Name <span class="required">*</span></label>
+                <input
+                  type="text"
+                  id="businessName"
+                  class="form-control"
+                  placeholder="e.g., Juan's Siomai Hub"
+                  required
+                />
+              </div>
+              
+              <div class="form-section-title" style="margin-top: 30px;">Products Catalog</div>
+              <p style="font-size: 13px; color: #64748b; margin-bottom: 15px;">List the products the student intends to sell. Photo uploads are skipped for walk-in applications.</p>
+              
+              <div id="productsContainer">
+                <!-- Dynamic product blocks will be injected here -->
+              </div>
+              
+              <button
+                type="button"
+                class="btn-add-product"
+                onclick="addProductBlock()"
+              >
+                <i class="fa-solid fa-plus"></i> Add Product
+              </button>
+              
+              <div class="form-section-title" style="margin-top: 20px;">Admin Remarks</div>
+              <div class="form-group">
+                <label>Internal Notes (Optional)</label>
+                <textarea
+                  id="adminRemarks"
+                  class="form-control"
+                  rows="3"
+                  placeholder="Add any internal notes regarding this application..."
+                ></textarea>
+              </div>
+              
+              <div class="form-actions">
+                <button type="button" class="btn-cancel" onclick="resetForm()">Clear Form</button>
+                <button type="button" class="btn-submit" onclick="goToStep2()">Next <i class="fa-solid fa-arrow-right" style="margin-left:5px;"></i></button>
+              </div>
+              </div>
+
+              <!-- ================= STEP 2 ================= -->
+              <div id="step2" style="display: none;">
+                <div class="form-section-title">Account Setup</div>
+                <p style="font-size: 14px; color: #475569; margin-bottom: 24px; line-height: 1.5;">
+                  Application details are ready. Please provide the student's email address to automatically create their vendor account and grant them access to the vendor dashboard.
+                </p>
+                <div class="form-group">
+                  <label>Student Email Address <span class="required">*</span></label>
+                  <input
+                    type="email"
+                    id="accountEmail"
+                    class="form-control"
+                    placeholder="e.g., student@wm.edu.ph"
+                  />
+                  <div id="emailError" style="color: #ef4444; font-size: 13px; display: none; margin-top: 6px;">
+                    <i class="fa-solid fa-circle-exclamation"></i> Please enter a valid email address.
+                  </div>
+                </div>
+                
+                <div class="form-actions">
+                  <button type="button" class="btn-cancel" onclick="goToStep1()"><i class="fa-solid fa-arrow-left" style="margin-right:5px;"></i> Back</button>
+                  <button type="button" class="btn-submit" onclick="submitFinal()">Grant Vendor Access <i class="fa-solid fa-check" style="margin-left:5px;"></i></button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Initialize with one product block
+        addProductBlock();
+      });
+
+      function addProductBlock() {
+        const container = document.getElementById("productsContainer");
+        const index = container.children.length;
+
+        const box = document.createElement("div");
+        box.className = "product-entry-box";
+
+        box.innerHTML = `
+          <h4>Product #${index + 1} ${index > 0 ? `<button type="button" class="btn-remove-product" onclick="this.parentElement.parentElement.remove()"><i class="fa-solid fa-trash"></i> Remove</button>` : ''}</h4>
+          <div class="form-group">
+            <label>Product Name <span class="required">*</span></label>
+            <input type="text" class="form-control prod-name" placeholder="e.g., Pork Siomai" required />
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label>Ingredients <span class="required">*</span></label>
+            <textarea class="form-control prod-ingredients" rows="2" placeholder="List the main ingredients..." required></textarea>
+          </div>
+        `;
+
+        container.appendChild(box);
+      }
+
+      function goToStep2() {
+        // Basic validation for Step 1
+        const sName = document.getElementById("studentName").value.trim();
+        const sId = document.getElementById("studentId").value.trim();
+        const bName = document.getElementById("businessName").value.trim();
+        
+        if (!sName || !sId || !bName) {
+          alert("Please fill in all required fields (Student Name, Student ID, Business Name).");
+          return;
+        }
+
+        const productsContainer = document.getElementById("productsContainer");
+        if (productsContainer.children.length === 0) {
+          alert("Please add at least one product.");
+          return;
+        }
+
+        let productsValid = true;
+        productsContainer.querySelectorAll(".product-entry-box").forEach(box => {
+           if(!box.querySelector(".prod-name").value.trim() || !box.querySelector(".prod-ingredients").value.trim()) {
+             productsValid = false;
+           }
+        });
+
+        if (!productsValid) {
+          alert("Please fill in all product names and ingredients.");
+          return;
+        }
+
+        // Auto-fill email in step 2 if they provided an email in step 1
+        if (sId.includes("@")) {
+           document.getElementById("accountEmail").value = sId;
+        }
+
+        document.getElementById("step1").style.display = "none";
+        document.getElementById("step2").style.display = "block";
+        
+        document.getElementById("ind-step1").style.color = "#94a3b8";
+        document.getElementById("ind-step1").style.borderBottom = "none";
+        document.getElementById("ind-step1").style.fontWeight = "500";
+        
+        document.getElementById("ind-step2").style.color = "#3b82f6";
+        document.getElementById("ind-step2").style.borderBottom = "2px solid #3b82f6";
+        document.getElementById("ind-step2").style.fontWeight = "700";
+      }
+
+      function goToStep1() {
+        document.getElementById("step2").style.display = "none";
+        document.getElementById("step1").style.display = "block";
+        
+        document.getElementById("ind-step2").style.color = "#94a3b8";
+        document.getElementById("ind-step2").style.borderBottom = "none";
+        document.getElementById("ind-step2").style.fontWeight = "500";
+        
+        document.getElementById("ind-step1").style.color = "#3b82f6";
+        document.getElementById("ind-step1").style.borderBottom = "2px solid #3b82f6";
+        document.getElementById("ind-step1").style.fontWeight = "700";
+      }
+
+      function submitFinal() {
+        const emailInput = document.getElementById("accountEmail");
+        const emailError = document.getElementById("emailError");
+        const emailVal = emailInput.value.trim();
+
+        // Simple email regex validation
+        const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+
+        if (!emailVal || !emailRegex.test(emailVal)) {
+          emailInput.style.borderColor = "#ef4444";
+          emailError.style.display = "block";
+          return;
+        }
+
+        emailInput.style.borderColor = "#cbd5e1";
+        emailError.style.display = "none";
+
+        // Simulate API call and success
+        showToast("Success! Vendor account created and access granted to " + emailVal);
+        
+        // Reset form
+        setTimeout(() => {
+          resetForm();
+          goToStep1();
+        }, 2000);
+      }
+
+      function resetForm() {
+        document.getElementById("walkInForm").reset();
+        document.getElementById("productsContainer").innerHTML = "";
+        addProductBlock(); // Add back one empty block
+      }
+
+      function showToast(message) {
+        const container = document.getElementById("toastContainer");
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> <span>${message}</span>`;
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.opacity = "0";
+          toast.style.transform = "translateX(100%)";
+          setTimeout(() => toast.remove(), 300);
+        }, 3000);
+      }
+    </script>
+  </body>
+</html>
