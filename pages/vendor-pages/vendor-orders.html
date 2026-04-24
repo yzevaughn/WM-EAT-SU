@@ -253,9 +253,9 @@
         <!-- Filter Tabs -->
         <div class="filter-tabs-wrapper">
           <div class="filter-tabs" id="filterTabs">
-            <button class="filter-btn active" data-tab="Queue" id="tab-Queue">
-              <span class="filter-dot Queue"></span> Queue
-              <span class="tab-count" id="count-Queue">2</span>
+            <button class="filter-btn active" data-tab="Pending" id="tab-Pending">
+              <span class="filter-dot Pending"></span> Pending
+              <span class="tab-count" id="count-Pending">2</span>
             </button>
             <button class="filter-btn" data-tab="Preparing" id="tab-Preparing">
               <span class="filter-dot preparing"></span> Preparing
@@ -369,7 +369,7 @@
 
     /* --- Map student status ? vendor tab name --- */
     window.STATUS_MAP = {
-      pending:   "Queue",
+      pending:   "Pending",
       preparing: "Preparing",
       ready:     "Ready",
       completed: "Completed",
@@ -378,7 +378,7 @@
 
     /* --- Status UI config --- */
     const STATUS_CFG = {
-      Queue:     { icon:"fa-clock",       cls:"ic-Queue",     badge:"Queue",     label:"Queue" },
+      Pending:   { icon:"fa-clock",       cls:"ic-Pending",   badge:"Pending",   label:"Pending" },
       Preparing: { icon:"fa-fire-burner", cls:"ic-preparing", badge:"preparing", label:"Preparing" },
       Ready:     { icon:"fa-check-circle",cls:"ic-ready",     badge:"ready",     label:"Ready" },
       Completed: { icon:"fa-check-double",cls:"ic-completed", badge:"completed", label:"Completed" },
@@ -387,7 +387,7 @@
 
     /* --- Build action buttons for each status --- */
     function buildActions(order, tab) {
-      if (tab === "Queue") return `
+      if (tab === "Pending") return `
         <button class="pickup-btn"  data-action="accept"  data-id="${order.id}"><i class="fas fa-check"></i> Accept</button>
         <button class="cancel-btn"  data-action="decline" data-id="${order.id}"><i class="fas fa-times"></i> Decline</button>`;
       if (tab === "Preparing") return `
@@ -405,8 +405,8 @@
 
     /* --- Build one order card HTML --- */
     function buildVendorCard(order) {
-      const tab = window.STATUS_MAP[order.status] || "Queue";
-      const cfg = STATUS_CFG[tab] || STATUS_CFG.Queue;
+      const tab = window.STATUS_MAP[order.status] || "Pending";
+      const cfg = STATUS_CFG[tab] || STATUS_CFG.Pending;
       const dt  = new Date(order.placedAt);
       const dateStr = dt.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})
                     + " • " + dt.toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit"});
@@ -471,7 +471,7 @@
       }
 
       // Update the badge counters next to tabs
-      const counts = { Queue:0, Preparing:0, Ready:0, Completed:0, Cancelled:0 };
+      const counts = { Pending:0, Preparing:0, Ready:0, Completed:0, Cancelled:0 };
       orders.forEach(o => {
         const tab = window.STATUS_MAP[o.status];
         if (tab) counts[tab]++;
@@ -483,7 +483,7 @@
 
       // Show hide cards based on currently active tab
       const activeBtn = document.querySelector(".filter-btn.active");
-      const activeTab = activeBtn ? activeBtn.dataset.tab : "Queue";
+      const activeTab = activeBtn ? activeBtn.dataset.tab : "Pending";
       let hasVisible = false;
       document.querySelectorAll(".order-card").forEach(c => {
         if (c.dataset.status === activeTab) {

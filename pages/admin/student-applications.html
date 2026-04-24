@@ -141,16 +141,16 @@
             <div class="form-section-title">Admin Summary</div>
             <div class="admin-summary-box">
               <div class="summary-row">
-                <span class="summary-label">Applicant Name</span>
-                <span id="sum-name" class="summary-value">-</span>
+                <span class="summary-label">Applicant Email</span>
+                <span id="sum-email" class="summary-value highlight">-</span>
               </div>
               <div class="summary-row">
                 <span class="summary-label">Proposed Business</span>
                 <span id="sum-biz" class="summary-value">-</span>
               </div>
               <div class="summary-row">
-                <span class="summary-label">Access Email</span>
-                <span id="sum-email" class="summary-value highlight">-</span>
+                <span class="summary-label">Applicant Name</span>
+                <span id="sum-name" class="summary-value">-</span>
               </div>
             </div>
 
@@ -214,15 +214,19 @@
             <span style="font-weight: 600; font-size: 14px; color: #1e293b;">Product #${idx}</span>
             ${idx > 1 ? `<button type="button" onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: #ef4444; cursor: pointer; font-size: 12px; font-weight: 600;">Remove</button>` : ''}
           </div>
-          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 12px;">
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin-bottom: 12px;">
             <div class="form-group">
               <label>Item Name</label>
-              <input type="text" class="form-control wi-p-name" placeholder="e.g. Pork Siomai" required />
+              <input type="text" class="form-control wi-p-name" placeholder="e.g. Siomai" required />
             </div>
             <div class="form-group">
               <label>Initial Qty</label>
               <input type="number" class="form-control wi-p-qty" placeholder="50" min="1" required />
             </div>
+          </div>
+          <div class="form-group">
+            <label>Product Image</label>
+            <input type="file" class="form-control wi-p-image" accept="image/*" required />
           </div>
         `;
       container.appendChild(box);
@@ -251,6 +255,7 @@
 
         const prodNames = document.querySelectorAll(".wi-p-name");
         const prodQtys = document.querySelectorAll(".wi-p-qty");
+        const prodImages = document.querySelectorAll(".wi-p-image");
         let valid = true;
 
         if (prodNames.length === 0) {
@@ -259,11 +264,11 @@
         }
 
         prodNames.forEach((p, i) => {
-          if (!p.value.trim() || !prodQtys[i].value) valid = false;
+          if (!p.value.trim() || !prodQtys[i].value || !prodImages[i].value) valid = false;
         });
 
         if (!valid) {
-          showToast("Missing Info", "Please fill in all product names and initial quantities.", "warning");
+          showToast("Missing Info", "Please fill in all product names, quantities, and upload images.", "warning");
           return;
         }
 
@@ -299,10 +304,13 @@
       // Show Success
       showToast("Success!", `Access granted to ${email}`, "success");
 
+      // Close modal immediately
+      document.getElementById("walkInModalToggle").checked = false;
+
+      // Reset form after closing transition
       setTimeout(() => {
-        document.getElementById("walkInModalToggle").checked = false;
         resetWalkInForm();
-      }, 3000);
+      }, 500);
     }
 
     function resetWalkInForm() {
