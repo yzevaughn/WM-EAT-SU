@@ -19,11 +19,8 @@
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <!-- ════════════════════════════════════════
-         TOP NAVBAR
-         ════════════════════════════════════════ -->
+    <!-- TOP NAVBAR -->
     <div class="top-nav">
-      <!-- LEFT: hamburger + logo -->
       <div class="nav-left">
         <label for="menu-checkbox" class="menu-toggle">
           <i class="fa-solid fa-bars"></i>
@@ -45,10 +42,7 @@
           </a>
         </div>
       </div>
-
-      <!-- RIGHT: profile -->
       <div class="nav-right">
-        <!-- Notifications -->
         <div class="notification-dropdown">
           <button class="nav-icon-btn" aria-label="Notifications">
             <i class="fa-regular fa-bell"></i>
@@ -76,14 +70,6 @@
                   <span class="notif-time">1 hour ago</span>
                 </div>
               </a>
-              <a href="student-order.html" class="notification-item">
-                <div class="notif-icon orange"><i class="fa-solid fa-fire-burner"></i></div>
-                <div class="notif-content">
-                  <p class="notif-title">Order Preparing</p>
-                  <p class="notif-desc">Vendor has started preparing your order.</p>
-                  <span class="notif-time">2 hours ago</span>
-                </div>
-              </a>
             </div>
             <div class="notification-footer">
               <a href="student-notifications.html">View all notifications</a>
@@ -107,9 +93,6 @@
               <a href="student-feedback.html" class="dropdown-item">
                 <i class="fa-solid fa-flag"></i><span>Reports</span>
               </a>
-              <a href="student-vendor-applications.html" class="dropdown-item">
-                <i class="fa-solid fa-rss"></i><span>Vendor Applications</span>
-              </a>
               <a href="../../index.html" class="dropdown-item dropdown-item--danger">
                 <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
               </a>
@@ -118,13 +101,10 @@
         </div>
       </div>
     </div>
-    <!-- /top-nav -->
 
-    <!-- ════════════════════════════════════════
-         LAYOUT
-         ════════════════════════════════════════ -->
+    <!-- LAYOUT -->
     <div class="layout">
-      <!-- ── SIDEBAR ── -->
+      <!-- SIDEBAR -->
       <div class="left-nav" id="sidebar">
         <ul class="nav-list">
           <li>
@@ -163,52 +143,130 @@
 
       <!-- MAIN CONTENT -->
       <div class="main-content">
-        <div class="profile-settings-page">
-          <h2>Profile Settings</h2>
-          <p class="page-subtitle" style="color: #64748b; margin-top: -10px; margin-bottom: 24px;">View and manage your personal information</p>
-
-          <div class="profile-card">
-            <div class="profile-header-section">
-              <div class="profile-photo-container">
-                <img src="../../images/pfp.jpg" alt="Profile Photo" id="mainProfilePic" class="profile-photo-lg" />
-                <button class="change-photo-btn" id="changePhotoBtn">
-                  <i class="fa-solid fa-camera"></i> Change Photo
-                </button>
-                <input type="file" id="photoUpload" accept="image/*" style="display:none;" />
+        <div class="profile-page">
+          <!-- HERO -->
+          <div class="profile-hero">
+            <div class="avatar-wrap">
+              <img src="../../images/pfp.jpg" alt="Profile" class="avatar-img" id="mainProfilePic" />
+              <span class="avatar-badge"><i class="fa-solid fa-check"></i></span>
+            </div>
+            <div class="hero-info">
+              <h1>Vaughn Evangelista</h1>
+              <p class="store-tag">
+                <i class="fa-solid fa-graduation-cap"></i> Student Account &nbsp;·&nbsp; College of Computing Studies
+              </p>
+              <div class="hero-badges">
+                <span class="hero-badge"><i class="fa-solid fa-circle-check"></i> Verified Student</span>
+                <span class="hero-badge"><i class="fa-solid fa-id-card"></i> ID: 2021-01234</span>
               </div>
-              <div class="profile-name-section">
-                <h3>Vaughn Evangelista</h3>
-                <span class="profile-badge">Student Account</span>
+            </div>
+            <button class="edit-hero-btn" id="changePhotoBtn">
+              <i class="fas fa-camera"></i> Change Photo
+            </button>
+            <input type="file" id="photoUpload" accept="image/*" style="display:none;" />
+          </div>
+
+          <!-- STATS -->
+          <div class="stat-row">
+            <div class="stat-card">
+              <div class="stat-icon" style="color: #ef4444">
+                <i class="fa-solid fa-wallet"></i>
+              </div>
+              <div class="stat-value">₱245.50</div>
+              <div class="stat-label">Wallet Balance</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon" style="color: #3b82f6">
+                <i class="fa-solid fa-receipt"></i>
+              </div>
+              <div class="stat-value">24</div>
+              <div class="stat-label">Total Orders</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon" style="color: #f59e0b">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </div>
+              <div class="stat-value">3</div>
+              <div class="stat-label">Items in Cart</div>
+            </div>
+          </div>
+
+          <!-- TWO-COL -->
+          <div class="two-col">
+            <!-- PERSONAL INFO -->
+            <div class="section-card">
+              <div class="section-header">
+                <h2><i class="fa-solid fa-user"></i> Personal Information</h2>
+              </div>
+              <div class="section-body">
+                <div class="info-row">
+                  <div class="info-icon"><i class="fa-solid fa-signature"></i></div>
+                  <div class="info-content">
+                    <div class="info-label">Full Name</div>
+                    <div class="info-value">Vaughn M. Evangelista</div>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                  <div class="info-content">
+                    <div class="info-label">Email Address</div>
+                    <div class="info-value">vaughn.student@wm.edu.ph</div>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                  <div class="info-content">
+                    <div class="info-label">Contact Number</div>
+                    <div class="info-value">+63 912 345 6789</div>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <div class="info-icon"><i class="fa-solid fa-building"></i></div>
+                  <div class="info-content">
+                    <div class="info-label">College / Department</div>
+                    <div class="info-value">College of Computing Studies</div>
+                  </div>
+                </div>
+                <div class="info-row">
+                  <div class="info-icon"><i class="fa-solid fa-circle-info"></i></div>
+                  <div class="info-content">
+                    <p style="font-size: 11px; color: #94a3b8; margin-top: 5px;">
+                      To update your personal information, please contact the WMSU administration office.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div class="profile-details-section">
-              <h4>Personal Information</h4>
-              <div class="profile-form-grid">
-                <div class="form-group">
-                  <label>First Name</label>
-                  <input type="text" value="Vaughn" readonly class="form-control read-only" />
+            <!-- ACCOUNT SETTINGS / SECURITY -->
+            <div class="section-card">
+              <div class="section-header">
+                <h2><i class="fa-solid fa-shield-halved"></i> Account Security</h2>
+              </div>
+              <div class="section-body">
+                <div class="info-row">
+                  <div class="info-icon"><i class="fa-solid fa-lock"></i></div>
+                  <div class="info-content">
+                    <div class="info-label">Password</div>
+                    <div class="info-value">••••••••••••</div>
+                  </div>
+                  <button class="hero-badge" style="background: #f3f4f6; color: #6b7280; border: none; cursor: pointer;">Change</button>
                 </div>
-                <div class="form-group">
-                  <label>Last Name</label>
-                  <input type="text" value="Evangelista" readonly class="form-control read-only" />
+                <div class="info-row">
+                  <div class="info-icon"><i class="fa-solid fa-fingerprint"></i></div>
+                  <div class="info-content">
+                    <div class="info-label">Two-Factor Authentication</div>
+                    <div class="info-value">Enabled</div>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label>Middle Initial</label>
-                  <input type="text" value="M." readonly class="form-control read-only" />
-                </div>
-                <div class="form-group">
-                  <label>Email Address</label>
-                  <input type="email" value="vaughn.student@wm.edu.ph" readonly class="form-control read-only" />
-                </div>
-                <div class="form-group">
-                  <label>Contact Number</label>
-                  <input type="text" value="+63 912 345 6789" readonly class="form-control read-only" />
+                <div class="info-row">
+                  <div class="info-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+                  <div class="info-content">
+                    <div class="info-label">Linked Devices</div>
+                    <div class="info-value">1 Active Device</div>
+                  </div>
                 </div>
               </div>
-              <p style="font-size: 13px; color: #94a3b8; margin-top: 20px;">
-                <i class="fa-solid fa-circle-info"></i> To update your personal information, please contact the WMSU administration office.
-              </p>
             </div>
           </div>
         </div>
@@ -220,17 +278,17 @@
 
     <script src="../../script/student/cart.js"></script>
     <script>
-      // Load saved profile picture from localStorage if exists
       document.addEventListener("DOMContentLoaded", () => {
         const savedPic = localStorage.getItem("userProfilePic");
         if (savedPic) {
           document.getElementById("mainProfilePic").src = savedPic;
           document.getElementById("navProfilePic").src = savedPic;
         }
-        updateAllCartBadges();
+        if (typeof updateAllCartBadges === 'function') {
+          updateAllCartBadges();
+        }
       });
 
-      // Handle photo upload preview and save
       const changePhotoBtn = document.getElementById('changePhotoBtn');
       const photoUpload = document.getElementById('photoUpload');
       const mainProfilePic = document.getElementById('mainProfilePic');
@@ -246,10 +304,8 @@
           const reader = new FileReader();
           reader.onload = (event) => {
             const dataUrl = event.target.result;
-            // Update preview
             mainProfilePic.src = dataUrl;
             navProfilePic.src = dataUrl;
-            // Save to localStorage
             localStorage.setItem("userProfilePic", dataUrl);
             showToast("Profile picture updated successfully!");
           };
@@ -265,7 +321,6 @@
         toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #22c55e; font-size: 20px;"></i><span style="font-weight: 500; color: #1e293b;">${msg}</span>`;
         container.appendChild(toast);
         
-        // Trigger animation
         setTimeout(() => {
           toast.style.transform = "translateX(0)";
         }, 10);
