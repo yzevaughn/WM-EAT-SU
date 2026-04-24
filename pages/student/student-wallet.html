@@ -1,870 +1,689 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU â€” Student Wallet</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="../../css/navbar.css" />
-    <link rel="stylesheet" href="../../css/vendor-css/wallet.css" />
-    <style>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WM EAT SU - Student Wallet</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/navbar.css" />
+  <link rel="stylesheet" href="../../css/vendor-css/wallet.css" />
+  <style>
+    .wallet-actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .btn-cashin {
+      background-color: #22c55e !important;
+      border-color: #22c55e !important;
+    }
+
+    @media (max-width: 480px) {
       .wallet-actions {
-        display: flex;
-        gap: 15px;
-        margin-top: 10px;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
       }
-      .btn-cashin {
-        background-color: #22c55e !important;
-        border-color: #22c55e !important;
-      }
-      @media (max-width: 480px) {
-        .wallet-actions {
-          flex-direction: column;
-          align-items: stretch;
-          width: 100%;
-        }
-      }
-      #cashInToggle:checked ~ #cashInModal {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
+    }
+
+    #cashInToggle:checked~#cashInModal {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-qr {
+      display: none;
+      background-color: #3b82f6 !important;
+      border-color: #3b82f6 !important;
+    }
+
+    @media (max-width: 480px) {
       .btn-qr {
-        display: none;
-        background-color: #3b82f6 !important;
-        border-color: #3b82f6 !important;
+        display: flex !important;
       }
-      @media (max-width: 480px) {
-        .btn-qr {
-          display: flex !important;
-        }
-      }
-      #qrToggle:checked ~ #qrModal {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-    </style>
-  </head>
-  <body>
-    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    }
+
+    #qrToggle:checked~#qrModal {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+  <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
          TOP NAVBAR
          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-    <div class="top-nav">
-      <!-- LEFT: hamburger + logo -->
-      <div class="nav-left">
-        <label for="menu-checkbox" class="menu-toggle">
-          <i class="fa-solid fa-bars"></i>
-        </label>
-        <a href="student-dashboard.html" class="logo">
-          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-          <span class="logo-text">WM EAT SU</span>
+  <div class="top-nav">
+    <!-- LEFT: hamburger + logo -->
+    <div class="nav-left">
+      <label for="menu-checkbox" class="menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </label>
+      <a href="student-dashboard.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
+    </div>
+
+    <div class="nav-center">
+      <div class="role-switcher" id="roleSwitcher">
+        <a href="student-dashboard.html" class="role-btn active" id="roleStudent">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span>Student</span>
+        </a>
+
+        <a href="../vendor-pages/vendor-dashboard.html" class="role-btn" id="roleVendor">
+          <i class="fa-solid fa-store"></i>
+          <span>Vendor</span>
         </a>
       </div>
+    </div>
 
-      <div class="nav-center">
-        <div class="role-switcher" id="roleSwitcher">
-          <a
-            href="student-dashboard.html"
-            class="role-btn active"
-            id="roleStudent"
-          >
-            <i class="fa-solid fa-graduation-cap"></i>
-            <span>Student</span>
-          </a>
-
-          <a
-            href="../vendor-pages/vendor-dashboard.html"
-            class="role-btn"
-            id="roleVendor"
-          >
-            <i class="fa-solid fa-store"></i>
-            <span>Vendor</span>
-          </a>
+    <!-- RIGHT: profile -->
+    <div class="nav-right">
+      <!-- Notifications -->
+      <div class="notification-dropdown">
+        <button class="nav-icon-btn" aria-label="Notifications">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notification-badge">3</span>
+        </button>
+        <div class="notification-menu">
+          <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="mark-read-btn">Mark all as read</button>
+          </div>
+          <div class="notification-list">
+            <a href="student-order.html" class="notification-item unread">
+              <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
+              <div class="notif-content">
+                <p class="notif-title">Order #1234 Ready</p>
+                <p class="notif-desc">Your order from Canteen 1 is ready for pickup.</p>
+                <span class="notif-time">2 mins ago</span>
+              </div>
+            </a>
+            <a href="student-wallet.html" class="notification-item unread">
+              <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
+              <div class="notif-content">
+                <p class="notif-title">Wallet Top-up</p>
+                <p class="notif-desc">Successfully added &#8369;500.00 to your wallet.</p>
+                <span class="notif-time">1 hour ago</span>
+              </div>
+            </a>
+            <a href="student-order.html" class="notification-item">
+              <div class="notif-icon orange"><i class="fa-solid fa-fire-burner"></i></div>
+              <div class="notif-content">
+                <p class="notif-title">Order Preparing</p>
+                <p class="notif-desc">Vendor has started preparing your order.</p>
+                <span class="notif-time">2 hours ago</span>
+              </div>
+            </a>
+          </div>
+          <div class="notification-footer">
+            <a href="student-notifications.html">View all notifications</a>
+          </div>
         </div>
       </div>
-
-      <!-- RIGHT: profile -->
-            <div class="nav-right">
-        <!-- Notifications -->
-        <div class="notification-dropdown">
-          <button class="nav-icon-btn" aria-label="Notifications">
-            <i class="fa-regular fa-bell"></i>
-            <span class="notification-badge">3</span>
-          </button>
-          <div class="notification-menu">
-            <div class="notification-header">
-              <h3>Notifications</h3>
-              <button class="mark-read-btn">Mark all as read</button>
-            </div>
-            <div class="notification-list">
-              <a href="student-order.html" class="notification-item unread">
-                <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
-                <div class="notif-content">
-                  <p class="notif-title">Order #1234 Ready</p>
-                  <p class="notif-desc">Your order from Canteen 1 is ready for pickup.</p>
-                  <span class="notif-time">2 mins ago</span>
-                </div>
-              </a>
-              <a href="student-wallet.html" class="notification-item unread">
-                <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
-                <div class="notif-content">
-                  <p class="notif-title">Wallet Top-up</p>
-                  <p class="notif-desc">Successfully added &#8369;500.00 to your wallet.</p>
-                  <span class="notif-time">1 hour ago</span>
-                </div>
-              </a>
-              <a href="student-order.html" class="notification-item">
-                <div class="notif-icon orange"><i class="fa-solid fa-fire-burner"></i></div>
-                <div class="notif-content">
-                  <p class="notif-title">Order Preparing</p>
-                  <p class="notif-desc">Vendor has started preparing your order.</p>
-                  <span class="notif-time">2 hours ago</span>
-                </div>
-              </a>
-            </div>
-            <div class="notification-footer">
-              <a href="student-notifications.html">View all notifications</a>
-            </div>
-          </div>
+      <div class="profile">
+        <div class="profile-info">
+          <span class="profile-name">Vaughn Evangelista</span>
+          <span class="email">vaughn.student@wm.edu.ph</span>
         </div>
-        <div class="profile">
-          <div class="profile-info">
-            <span class="profile-name">Vaughn Evangelista</span>
-            <span class="email">vaughn.student@wm.edu.ph</span>
-          </div>
-          <div class="profile-dropdown">
-            <button class="profile-btn">
-              <img
-                src="../../images/pfp.jpg"
-                class="profile-pic"
-                alt="Profile"
-              />
-              <i class="fa-solid fa-chevron-down"></i>
-            </button>
-            <div class="dropdown-menu">
-              <a href="student-profile.html" class="dropdown-item">
-                <i class="fa-solid fa-gear"></i><span>Settings</span>
-              </a>
-              <a href="student-feedback.html" class="dropdown-item">
-                <i class="fa-solid fa-flag"></i><span>Reports</span>
-              </a>
-              <a href="student-vendor-applications.html" class="dropdown-item">
-                <i class="fa-solid fa-rss"></i><span>Vendor Applications</span>
-              </a>
-              <a
-                href="../../index.html"
-                class="dropdown-item dropdown-item--danger"
-              >
-                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
-              </a>
-            </div>
+        <div class="profile-dropdown">
+          <button class="profile-btn">
+            <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" />
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-menu">
+            <a href="student-profile.html" class="dropdown-item">
+              <i class="fa-solid fa-gear"></i><span>Settings</span>
+            </a>
+            <a href="student-feedback.html" class="dropdown-item">
+              <i class="fa-solid fa-flag"></i><span>Reports</span>
+            </a>
+            <a href="student-vendor-applications.html" class="dropdown-item">
+              <i class="fa-solid fa-rss"></i><span>Vendor Applications</span>
+            </a>
+            <a href="../../index.html" class="dropdown-item dropdown-item--danger">
+              <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+            </a>
           </div>
         </div>
       </div>
     </div>
-    <!-- /top-nav -->
+  </div>
+  <!-- /top-nav -->
 
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
          LAYOUT
          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-    <div class="layout">
-      <!-- â”€â”€ SIDEBAR â”€â”€ -->
-      <div class="left-nav" id="sidebar">
-        <ul class="nav-list">
-          <li>
-            <a href="student-dashboard.html" class="nav-link">
-              <i class="fa-solid fa-house"></i><span>Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-browse-food.html" class="nav-link">
-              <i class="fa-solid fa-utensils"></i><span>Browse Food</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-cart.html" class="nav-link">
-              <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
-              <span class="nav-badge" style="display: none" id="cartBadge"
-                >0</span
-              >
-            </a>
-          </li>
-          <li>
-            <a href="student-order.html" class="nav-link">
-              <i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-wallet.html" class="nav-link active">
-              <i class="fa-solid fa-wallet"></i><span>Wallet</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-campus-map.html" class="nav-link">
-              <i class="fa-solid fa-map-location-dot"></i
-              ><span>Campus Map</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+  <div class="layout">
+    <!-- â”€â”€ SIDEBAR â”€â”€ -->
+    <div class="left-nav" id="sidebar">
+      <ul class="nav-list">
+        <li>
+          <a href="student-dashboard.html" class="nav-link">
+            <i class="fa-solid fa-house"></i><span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-browse-food.html" class="nav-link">
+            <i class="fa-solid fa-utensils"></i><span>Browse Food</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-cart.html" class="nav-link">
+            <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
+            <span class="nav-badge" style="display: none" id="cartBadge">0</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-order.html" class="nav-link">
+            <i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-wallet.html" class="nav-link active">
+            <i class="fa-solid fa-wallet"></i><span>Wallet</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-campus-map.html" class="nav-link">
+            <i class="fa-solid fa-map-location-dot"></i><span>Campus Map</span>
+          </a>
+        </li>
+      </ul>
+    </div>
 
-      <!-- MAIN CONTENT -->
-      <div class="main-content">
-        <div class="wallet-container">
-          <!-- BALANCE CARD -->
-          <div class="balance-card">
-            <div class="balance-header">
-              <h1>Wallet Balance</h1>
-              <i class="fa-solid fa-wallet"></i>
-            </div>
-            <div class="balance-amount">
-              <span class="currency-symbol">â‚±</span>
-              <span class="balance-value" id="balanceValue">245.50</span>
-            </div>
-            <div class="wallet-actions">
-              <label
-                for="cashInToggle"
-                class="topup-btn btn-cashin"
-                style="justify-content: center"
-              >
-                <i class="fa-solid fa-plus"></i> Cash In
-              </label>
-              <label
-                for="withdrawToggle"
-                class="topup-btn"
-                style="justify-content: center"
-              >
-                <i class="fa-solid fa-minus"></i> Withdraw
-              </label>
-              <label
-                for="qrToggle"
-                class="topup-btn btn-qr"
-                style="justify-content: center"
-              >
-                <i class="fa-solid fa-qrcode"></i> Scan to Pay
-              </label>
-            </div>
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <div class="wallet-container">
+        <!-- BALANCE CARD -->
+        <div class="balance-card">
+          <div class="balance-header">
+            <h1>Wallet Balance</h1>
+            <i class="fa-solid fa-wallet"></i>
           </div>
-          <!-- TRANSACTIONS -->
-          <div class="transaction-section">
-            <h2>Transaction History</h2>
-            <div class="transaction-list" id="transactionList">
-              <div class="transaction-item">
-                <div class="transaction-icon payment">
-                  <i class="fa-solid fa-utensils"></i>
-                </div>
-                <div class="transaction-details">
-                  <p class="transaction-type">Payment - Shomai Rice</p>
-                  <p class="transaction-date">Apr 22, 2026 - 12:35 PM</p>
-                </div>
-                <div class="transaction-amount negative">-â‚±45.00</div>
+          <div class="balance-amount">
+            <span class="currency-symbol">₱</span>
+            <span class="balance-value" id="balanceValue">245.50</span>
+          </div>
+          <div class="wallet-actions">
+            <label for="cashInToggle" class="topup-btn btn-cashin" style="justify-content: center">
+              <i class="fa-solid fa-plus"></i> Cash In
+            </label>
+            <label for="withdrawToggle" class="topup-btn" style="justify-content: center">
+              <i class="fa-solid fa-minus"></i> Withdraw
+            </label>
+            <label for="qrToggle" class="topup-btn btn-qr" style="justify-content: center">
+              <i class="fa-solid fa-qrcode"></i> Scan to Pay
+            </label>
+          </div>
+        </div>
+        <!-- TRANSACTIONS -->
+        <div class="transaction-section">
+          <h2>Transaction History</h2>
+          <div class="transaction-list" id="transactionList">
+            <div class="transaction-item">
+              <div class="transaction-icon payment">
+                <i class="fa-solid fa-utensils"></i>
               </div>
-              <div class="transaction-item">
-                <div class="transaction-icon topup">
-                  <i class="fa-solid fa-money-bill"></i>
-                </div>
-                <div class="transaction-details">
-                  <p class="transaction-type">Cash In via GCash</p>
-                  <p class="transaction-date">Apr 21, 2026 - 03:15 PM</p>
-                </div>
-                <div class="transaction-amount positive">+â‚±500.00</div>
+              <div class="transaction-details">
+                <p class="transaction-type">Payment - Shomai Rice</p>
+                <p class="transaction-date">Apr 22, 2026 - 12:35 PM</p>
               </div>
-              <div class="transaction-item">
-                <div class="transaction-icon payment">
-                  <i class="fa-solid fa-burger"></i>
-                </div>
-                <div class="transaction-details">
-                  <p class="transaction-type">Payment - Burger & Fries</p>
-                  <p class="transaction-date">Apr 20, 2026 - 10:00 AM</p>
-                </div>
-                <div class="transaction-amount negative">-â‚±120.00</div>
+              <div class="transaction-amount negative">-₱45.00</div>
+            </div>
+            <div class="transaction-item">
+              <div class="transaction-icon topup">
+                <i class="fa-solid fa-money-bill"></i>
               </div>
-              <div class="transaction-item">
-                <div class="transaction-icon topup">
-                  <i class="fa-solid fa-piggy-bank"></i>
-                </div>
-                <div class="transaction-details">
-                  <p class="transaction-type">Initial Wallet Bonus</p>
-                  <p class="transaction-date">Apr 15, 2026 - 08:00 AM</p>
-                </div>
-                <div class="transaction-amount positive">+â‚±100.00</div>
+              <div class="transaction-details">
+                <p class="transaction-type">Cash In via GCash</p>
+                <p class="transaction-date">Apr 21, 2026 - 03:15 PM</p>
               </div>
+              <div class="transaction-amount positive">+₱500.00</div>
+            </div>
+            <div class="transaction-item">
+              <div class="transaction-icon payment">
+                <i class="fa-solid fa-burger"></i>
+              </div>
+              <div class="transaction-details">
+                <p class="transaction-type">Payment - Burger & Fries</p>
+                <p class="transaction-date">Apr 20, 2026 - 10:00 AM</p>
+              </div>
+              <div class="transaction-amount negative">-₱120.00</div>
+            </div>
+            <div class="transaction-item">
+              <div class="transaction-icon topup">
+                <i class="fa-solid fa-piggy-bank"></i>
+              </div>
+              <div class="transaction-details">
+                <p class="transaction-type">Initial Wallet Bonus</p>
+                <p class="transaction-date">Apr 15, 2026 - 08:00 AM</p>
+              </div>
+              <div class="transaction-amount positive">+₱100.00</div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
          CASH IN MODAL
          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-    <input type="checkbox" id="cashInToggle" style="display: none" />
-    <div class="modal" id="cashInModal">
-      <label for="cashInToggle" class="modal-overlay"></label>
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>Cash In Funds</h2>
-          <label for="cashInToggle" class="modal-close">
-            <i class="fa-solid fa-times"></i>
-          </label>
-        </div>
-        <div class="modal-body" id="ciStep1Body">
-          <!-- CASH IN METHOD -->
-          <div class="form-section">
-            <div class="payment-methods" id="ciPaymentMethods">
-              <input
-                type="radio"
-                name="cipayment"
-                id="cigcash"
-                style="display: none"
-              />
-              <label for="cigcash" class="payment-method-btn">
-                <img src="../../images/gcash-logo.png" class="method-logo" />
-                <span class="method-name">GCash</span>
-              </label>
-              <input
-                type="radio"
-                name="cipayment"
-                id="cimaya"
-                style="display: none"
-              />
-              <label for="cimaya" class="payment-method-btn">
-                <img src="../../images/paymaya-logo.png" class="method-logo" />
-                <span class="method-name">Maya</span>
-              </label>
-              <input
-                type="radio"
-                name="cipayment"
-                id="cicard"
-                style="display: none"
-              />
-              <label for="cicard" class="payment-method-btn">
-                <i class="fa-solid fa-university"></i>
-                <span class="method-name">Bank Transfer</span>
-              </label>
-            </div>
-            <div id="ciMethodError" class="error-message">
-              <span>Please select a cash in method</span>
-            </div>
+  <input type="checkbox" id="cashInToggle" style="display: none" />
+  <div class="modal" id="cashInModal">
+    <label for="cashInToggle" class="modal-overlay"></label>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Cash In Funds</h2>
+        <label for="cashInToggle" class="modal-close">
+          <i class="fa-solid fa-times"></i>
+        </label>
+      </div>
+      <div class="modal-body" id="ciStep1Body">
+        <!-- CASH IN METHOD -->
+        <div class="form-section">
+          <div class="payment-methods" id="ciPaymentMethods">
+            <input type="radio" name="cipayment" id="cigcash" style="display: none" />
+            <label for="cigcash" class="payment-method-btn">
+              <img src="../../images/gcash-logo.png" class="method-logo" />
+              <span class="method-name">GCash</span>
+            </label>
+            <input type="radio" name="cipayment" id="cimaya" style="display: none" />
+            <label for="cimaya" class="payment-method-btn">
+              <img src="../../images/paymaya-logo.png" class="method-logo" />
+              <span class="method-name">Maya</span>
+            </label>
+            <input type="radio" name="cipayment" id="cicard" style="display: none" />
+            <label for="cicard" class="payment-method-btn">
+              <i class="fa-solid fa-university"></i>
+              <span class="method-name">Bank Transfer</span>
+            </label>
           </div>
-          <!-- QUICK AMOUNT -->
-          <div class="form-section">
-            <label class="form-label">Quick Amount</label>
-            <div class="quick-amounts">
-              <input
-                type="radio"
-                name="ciamount"
-                id="cia100"
-                style="display: none"
-              />
-              <label for="cia100" class="quick-btn">â‚±100</label>
-              <input
-                type="radio"
-                name="ciamount"
-                id="cia500"
-                style="display: none"
-              />
-              <label for="cia500" class="quick-btn">â‚±500</label>
-              <input
-                type="radio"
-                name="ciamount"
-                id="cia1000"
-                style="display: none"
-              />
-              <label for="cia1000" class="quick-btn">â‚±1000</label>
-              <input
-                type="radio"
-                name="ciamount"
-                id="cia2000"
-                style="display: none"
-              />
-              <label for="cia2000" class="quick-btn">â‚±2000</label>
-            </div>
-            <!-- CUSTOM AMOUNT -->
-            <div class="custom-amount-wrapper">
-              <label class="form-label">Enter amount</label>
-              <div class="custom-input-box">
-                <span class="currency-prefix">â‚±</span>
-                <input
-                  type="number"
-                  id="ciCustomAmount"
-                  class="custom-amount-input"
-                  placeholder="0.00"
-                  min="50"
-                />
-              </div>
-              <div id="ciAmountError" class="error-message">
-                <span>Please enter a valid amount (Min. â‚±50.00)</span>
-              </div>
-            </div>
+          <div id="ciMethodError" class="error-message">
+            <span>Please select a cash in method</span>
           </div>
         </div>
-
-        <!-- STEP 2 (Hidden by Default) -->
-        <div class="modal-body hidden-step" id="ciStep2Body">
-          <div class="step-details-container">
-            <div class="step-details-row">
-              <span>Payment Method</span>
-              <span id="ciSummaryMethod" style="font-weight: 600">GCash</span>
-            </div>
-            <div class="step-details-row">
-              <span>Amount to Cash In</span>
-              <span id="ciSummaryAmount">â‚±0.00</span>
-            </div>
+        <!-- QUICK AMOUNT -->
+        <div class="form-section">
+          <label class="form-label">Quick Amount</label>
+          <div class="quick-amounts">
+            <input type="radio" name="ciamount" id="cia100" style="display: none" />
+            <label for="cia100" class="quick-btn">₱100</label>
+            <input type="radio" name="ciamount" id="cia500" style="display: none" />
+            <label for="cia500" class="quick-btn">₱500</label>
+            <input type="radio" name="ciamount" id="cia1000" style="display: none" />
+            <label for="cia1000" class="quick-btn">₱1000</label>
+            <input type="radio" name="ciamount" id="cia2000" style="display: none" />
+            <label for="cia2000" class="quick-btn">₱2000</label>
           </div>
-
-          <!-- Phone Input (For GCash / Maya) -->
-          <div class="form-section" id="ciPhoneInputGroup">
-            <label class="form-label">Mobile Number</label>
-            <input
-              type="tel"
-              id="ciMobileNumber"
-              class="custom-amount-input"
-              placeholder="09XXXXXXXXX"
-              oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-            />
-            <div id="ciPhoneError" class="error-message">
-              <span>Please enter a valid 11-digit mobile number</span>
+          <!-- CUSTOM AMOUNT -->
+          <div class="custom-amount-wrapper">
+            <label class="form-label">Enter amount</label>
+            <div class="custom-input-box">
+              <span class="currency-prefix">₱</span>
+              <input type="number" id="ciCustomAmount" class="custom-amount-input" placeholder="0.00" min="50" />
+            </div>
+            <div id="ciAmountError" class="error-message">
+              <span>Please enter a valid amount (Min. ₱50.00)</span>
             </div>
           </div>
-
-          <!-- Bank Input (For Bank Transfer) -->
-          <div class="form-section hidden-step" id="ciBankInputGroup">
-            <label class="form-label">Select Bank</label>
-            <select id="ciBankName" class="form-control">
-              <option value="BDO">BDO Unibank</option>
-              <option value="BPI">Bank of the Philippine Islands (BPI)</option>
-              <option value="Metrobank">Metrobank</option>
-              <option value="UnionBank">UnionBank of the Philippines</option>
-            </select>
-            <label class="form-label" style="margin-top: 10px"
-              >Account Number</label
-            >
-            <input
-              type="text"
-              id="ciBankAccount"
-              class="custom-amount-input"
-              placeholder="Enter bank account number"
-            />
-          </div>
-        </div>
-
-        <!-- STEP 3 OTP (Hidden by Default) -->
-        <div
-          class="modal-body hidden-step"
-          id="ciStep3Body"
-          style="text-align: center"
-        >
-          <h3 style="margin-top: 0">Enter OTP</h3>
-          <p style="color: #6b7280; font-size: 14px; margin-bottom: 20px">
-            A 4-digit PIN has been sent to your mobile number.
-          </p>
-
-          <div
-            class="otp-container"
-            id="ciOtpContainer"
-            style="display: flex; justify-content: center; gap: 10px"
-          >
-            <input
-              type="text"
-              class="otp-digit ci-otp"
-              maxlength="1"
-              style="
-                width: 50px;
-                height: 60px;
-                font-size: 24px;
-                text-align: center;
-                border: 1px solid #ccc;
-                border-radius: 8px;
-              "
-            />
-            <input
-              type="text"
-              class="otp-digit ci-otp"
-              maxlength="1"
-              style="
-                width: 50px;
-                height: 60px;
-                font-size: 24px;
-                text-align: center;
-                border: 1px solid #ccc;
-                border-radius: 8px;
-              "
-            />
-            <input
-              type="text"
-              class="otp-digit ci-otp"
-              maxlength="1"
-              style="
-                width: 50px;
-                height: 60px;
-                font-size: 24px;
-                text-align: center;
-                border: 1px solid #ccc;
-                border-radius: 8px;
-              "
-            />
-            <input
-              type="text"
-              class="otp-digit ci-otp"
-              maxlength="1"
-              style="
-                width: 50px;
-                height: 60px;
-                font-size: 24px;
-                text-align: center;
-                border: 1px solid #ccc;
-                border-radius: 8px;
-              "
-            />
-          </div>
-          <div
-            id="ciOtpError"
-            class="error-message"
-            style="justify-content: center; margin-top: 10px"
-          >
-            <span>Please enter the full 4-digit OTP</span>
-          </div>
-        </div>
-
-        <div class="modal-footer" id="ciStep1Footer">
-          <div class="btn-confirm" onclick="ciGoToStep2()">Next</div>
-          <label for="cashInToggle" class="btn-cancel">Cancel</label>
-        </div>
-        <div class="modal-footer hidden-step" id="ciStep2Footer">
-          <div class="btn-confirm" onclick="ciProcessStep2()">Next</div>
-          <div class="btn-cancel" onclick="ciGoToStep1()">Back</div>
-        </div>
-        <div class="modal-footer hidden-step" id="ciStep3Footer">
-          <div class="btn-confirm" onclick="processCashIn()">Submit OTP</div>
-          <div class="btn-cancel" onclick="ciGoToStep2()">Back</div>
         </div>
       </div>
-    </div>
 
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+      <!-- STEP 2 (Hidden by Default) -->
+      <div class="modal-body hidden-step" id="ciStep2Body">
+        <div class="step-details-container">
+          <div class="step-details-row">
+            <span>Payment Method</span>
+            <span id="ciSummaryMethod" style="font-weight: 600">GCash</span>
+          </div>
+          <div class="step-details-row">
+            <span>Amount to Cash In</span>
+            <span id="ciSummaryAmount">₱0.00</span>
+          </div>
+        </div>
+
+        <!-- Phone Input (For GCash / Maya) -->
+        <div class="form-section" id="ciPhoneInputGroup">
+          <label class="form-label">Mobile Number</label>
+          <input type="tel" id="ciMobileNumber" class="custom-amount-input" placeholder="09XXXXXXXXX"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+          <div id="ciPhoneError" class="error-message">
+            <span>Please enter a valid 11-digit mobile number</span>
+          </div>
+        </div>
+
+        <!-- Bank Input (For Bank Transfer) -->
+        <div class="form-section hidden-step" id="ciBankInputGroup">
+          <label class="form-label">Select Bank</label>
+          <select id="ciBankName" class="form-control">
+            <option value="BDO">BDO Unibank</option>
+            <option value="BPI">Bank of the Philippine Islands (BPI)</option>
+            <option value="Metrobank">Metrobank</option>
+            <option value="UnionBank">UnionBank of the Philippines</option>
+          </select>
+          <label class="form-label" style="margin-top: 10px">Account Number</label>
+          <input type="text" id="ciBankAccount" class="custom-amount-input" placeholder="Enter bank account number" />
+        </div>
+      </div>
+
+      <!-- STEP 3 OTP (Hidden by Default) -->
+      <div class="modal-body hidden-step" id="ciStep3Body" style="text-align: center">
+        <h3 style="margin-top: 0">Enter OTP</h3>
+        <p style="color: #6b7280; font-size: 14px; margin-bottom: 20px">
+          A 4-digit PIN has been sent to your mobile number.
+        </p>
+
+        <div class="otp-container" id="ciOtpContainer" style="display: flex; justify-content: center; gap: 10px">
+          <input type="text" class="otp-digit ci-otp" maxlength="1" style="
+                width: 50px;
+                height: 60px;
+                font-size: 24px;
+                text-align: center;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+              " />
+          <input type="text" class="otp-digit ci-otp" maxlength="1" style="
+                width: 50px;
+                height: 60px;
+                font-size: 24px;
+                text-align: center;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+              " />
+          <input type="text" class="otp-digit ci-otp" maxlength="1" style="
+                width: 50px;
+                height: 60px;
+                font-size: 24px;
+                text-align: center;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+              " />
+          <input type="text" class="otp-digit ci-otp" maxlength="1" style="
+                width: 50px;
+                height: 60px;
+                font-size: 24px;
+                text-align: center;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+              " />
+        </div>
+        <div id="ciOtpError" class="error-message" style="justify-content: center; margin-top: 10px">
+          <span>Please enter the full 4-digit OTP</span>
+        </div>
+      </div>
+
+      <div class="modal-footer" id="ciStep1Footer">
+        <div class="btn-confirm" onclick="ciGoToStep2()">Next</div>
+        <label for="cashInToggle" class="btn-cancel">Cancel</label>
+      </div>
+      <div class="modal-footer hidden-step" id="ciStep2Footer">
+        <div class="btn-confirm" onclick="ciProcessStep2()">Next</div>
+        <div class="btn-cancel" onclick="ciGoToStep1()">Back</div>
+      </div>
+      <div class="modal-footer hidden-step" id="ciStep3Footer">
+        <div class="btn-confirm" onclick="processCashIn()">Submit OTP</div>
+        <div class="btn-cancel" onclick="ciGoToStep2()">Back</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
          WITHDRAW MODAL
          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-    <input type="checkbox" id="withdrawToggle" style="display: none" />
-    <div class="modal" id="withdrawModal">
-      <label for="withdrawToggle" class="modal-overlay"></label>
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>Withdraw Funds</h2>
-          <label for="withdrawToggle" class="modal-close">
-            <i class="fa-solid fa-times"></i>
-          </label>
-        </div>
-        <div class="modal-body" id="wdStep1Body">
-          <!-- WITHDRAWAL METHOD -->
-          <div class="form-section">
-            <div class="payment-methods" id="wdPaymentMethods">
-              <input
-                type="radio"
-                name="wdpayment"
-                id="wdgcash"
-                style="display: none"
-              />
-              <label for="wdgcash" class="payment-method-btn">
-                <img src="../../images/gcash-logo.png" class="method-logo" />
-                <span class="method-name">GCash</span>
-              </label>
-              <input
-                type="radio"
-                name="wdpayment"
-                id="wdmaya"
-                style="display: none"
-              />
-              <label for="wdmaya" class="payment-method-btn">
-                <img src="../../images/paymaya-logo.png" class="method-logo" />
-                <span class="method-name">Maya</span>
-              </label>
-              <input
-                type="radio"
-                name="wdpayment"
-                id="wdcard"
-                style="display: none"
-              />
-              <label for="wdcard" class="payment-method-btn">
-                <i class="fa-solid fa-university"></i>
-                <span class="method-name">Bank Transfer</span>
-              </label>
-            </div>
-            <div id="wdMethodError" class="error-message">
-              <span>Please select a withdrawal method</span>
-            </div>
+  <input type="checkbox" id="withdrawToggle" style="display: none" />
+  <div class="modal" id="withdrawModal">
+    <label for="withdrawToggle" class="modal-overlay"></label>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Withdraw Funds</h2>
+        <label for="withdrawToggle" class="modal-close">
+          <i class="fa-solid fa-times"></i>
+        </label>
+      </div>
+      <div class="modal-body" id="wdStep1Body">
+        <!-- WITHDRAWAL METHOD -->
+        <div class="form-section">
+          <div class="payment-methods" id="wdPaymentMethods">
+            <input type="radio" name="wdpayment" id="wdgcash" style="display: none" />
+            <label for="wdgcash" class="payment-method-btn">
+              <img src="../../images/gcash-logo.png" class="method-logo" />
+              <span class="method-name">GCash</span>
+            </label>
+            <input type="radio" name="wdpayment" id="wdmaya" style="display: none" />
+            <label for="wdmaya" class="payment-method-btn">
+              <img src="../../images/paymaya-logo.png" class="method-logo" />
+              <span class="method-name">Maya</span>
+            </label>
+            <input type="radio" name="wdpayment" id="wdcard" style="display: none" />
+            <label for="wdcard" class="payment-method-btn">
+              <i class="fa-solid fa-university"></i>
+              <span class="method-name">Bank Transfer</span>
+            </label>
           </div>
-          <!-- QUICK AMOUNT -->
-          <div class="form-section">
-            <label class="form-label">Quick Amount</label>
-            <div class="quick-amounts">
-              <input
-                type="radio"
-                name="wdamount"
-                id="wda50"
-                style="display: none"
-              />
-              <label for="wda50" class="quick-btn">â‚±50</label>
-              <input
-                type="radio"
-                name="wdamount"
-                id="wda100"
-                style="display: none"
-              />
-              <label for="wda100" class="quick-btn">â‚±100</label>
-              <input
-                type="radio"
-                name="wdamount"
-                id="wda200"
-                style="display: none"
-              />
-              <label for="wda200" class="quick-btn">â‚±200</label>
-              <input
-                type="radio"
-                name="wdamount"
-                id="wda500"
-                style="display: none"
-              />
-              <label for="wda500" class="quick-btn">â‚±500</label>
-            </div>
-            <!-- CUSTOM AMOUNT -->
-            <div class="custom-amount-wrapper">
-              <label class="form-label">Enter amount</label>
-              <div class="custom-input-box">
-                <span class="currency-prefix">â‚±</span>
-                <input
-                  type="number"
-                  id="wdCustomAmount"
-                  class="custom-amount-input"
-                  placeholder="0.00"
-                  min="1"
-                />
-              </div>
-              <div id="wdAmountError" class="error-message">
-                <span
-                  >Please enter a valid amount (Max Available)</span
-                >
-              </div>
-            </div>
+          <div id="wdMethodError" class="error-message">
+            <span>Please select a withdrawal method</span>
           </div>
         </div>
-
-        <!-- STEP 2 (Hidden by Default) -->
-        <div class="modal-body hidden-step" id="wdStep2Body">
-          <div class="step-details-container">
-            <div class="step-details-row">
-              <span>Withdrawal Method</span>
-              <span id="wdSummaryMethod" style="font-weight: 600">GCash</span>
-            </div>
-            <div class="step-details-row">
-              <span>Amount</span>
-              <span id="wdSummaryAmount">â‚±0.00</span>
-            </div>
+        <!-- QUICK AMOUNT -->
+        <div class="form-section">
+          <label class="form-label">Quick Amount</label>
+          <div class="quick-amounts">
+            <input type="radio" name="wdamount" id="wda50" style="display: none" />
+            <label for="wda50" class="quick-btn">₱50</label>
+            <input type="radio" name="wdamount" id="wda100" style="display: none" />
+            <label for="wda100" class="quick-btn">₱100</label>
+            <input type="radio" name="wdamount" id="wda200" style="display: none" />
+            <label for="wda200" class="quick-btn">₱200</label>
+            <input type="radio" name="wdamount" id="wda500" style="display: none" />
+            <label for="wda500" class="quick-btn">₱500</label>
           </div>
-
-          <!-- Phone Input (For GCash / Maya) -->
-          <div class="form-section" id="wdPhoneInputGroup">
-            <label class="form-label">Mobile Number</label>
-            <input
-              type="tel"
-              id="wdMobileNumber"
-              class="custom-amount-input"
-              placeholder="09XXXXXXXXX"
-              oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-            />
-            <div id="wdPhoneError" class="error-message">
-              <span>Please enter a valid 11-digit mobile number</span>
+          <!-- CUSTOM AMOUNT -->
+          <div class="custom-amount-wrapper">
+            <label class="form-label">Enter amount</label>
+            <div class="custom-input-box">
+              <span class="currency-prefix">₱</span>
+              <input type="number" id="wdCustomAmount" class="custom-amount-input" placeholder="0.00" min="1" />
+            </div>
+            <div id="wdAmountError" class="error-message">
+              <span>Please enter a valid amount (Max Available)</span>
             </div>
           </div>
-
-          <!-- Bank Input (For Bank Transfer) -->
-          <div class="form-section hidden-step" id="wdBankInputGroup">
-            <label class="form-label">Select Bank</label>
-            <select id="wdBankName" class="form-control">
-              <option value="BDO">BDO Unibank</option>
-              <option value="BPI">Bank of the Philippine Islands (BPI)</option>
-              <option value="Metrobank">Metrobank</option>
-              <option value="UnionBank">UnionBank of the Philippines</option>
-            </select>
-            <label class="form-label" style="margin-top: 10px"
-              >Account Number</label
-            >
-            <input
-              type="text"
-              id="wdBankAccount"
-              class="custom-amount-input"
-              placeholder="Enter bank account number"
-            />
-          </div>
-        </div>
-
-        <!-- STEP 3 OTP (Hidden by Default) -->
-        <div
-          class="modal-body hidden-step"
-          id="wdStep3Body"
-          style="text-align: center"
-        >
-          <h3 style="margin-top: 0">Enter OTP</h3>
-          <p style="color: #6b7280; font-size: 14px; margin-bottom: 20px">
-            A 4-digit PIN has been sent to your mobile number.
-          </p>
-
-          <div
-            class="otp-container"
-            id="wdOtpContainer"
-            style="display: flex; justify-content: center; gap: 10px"
-          >
-            <input
-              type="text"
-              class="otp-digit wd-otp"
-              maxlength="1"
-              style="
-                width: 50px;
-                height: 60px;
-                font-size: 24px;
-                text-align: center;
-                border: 1px solid #ccc;
-                border-radius: 8px;
-              "
-            />
-            <input
-              type="text"
-              class="otp-digit wd-otp"
-              maxlength="1"
-              style="
-                width: 50px;
-                height: 60px;
-                font-size: 24px;
-                text-align: center;
-                border: 1px solid #ccc;
-                border-radius: 8px;
-              "
-            />
-            <input
-              type="text"
-              class="otp-digit wd-otp"
-              maxlength="1"
-              style="
-                width: 50px;
-                height: 60px;
-                font-size: 24px;
-                text-align: center;
-                border: 1px solid #ccc;
-                border-radius: 8px;
-              "
-            />
-            <input
-              type="text"
-              class="otp-digit wd-otp"
-              maxlength="1"
-              style="
-                width: 50px;
-                height: 60px;
-                font-size: 24px;
-                text-align: center;
-                border: 1px solid #ccc;
-                border-radius: 8px;
-              "
-            />
-          </div>
-          <div
-            id="wdOtpError"
-            class="error-message"
-            style="justify-content: center; margin-top: 10px"
-          >
-            <span>Please enter the full 4-digit OTP</span>
-          </div>
-        </div>
-
-        <div class="modal-footer" id="wdStep1Footer">
-          <div class="btn-confirm" onclick="wdGoToStep2()">Next</div>
-          <label for="withdrawToggle" class="btn-cancel">Cancel</label>
-        </div>
-        <div class="modal-footer hidden-step" id="wdStep2Footer">
-          <div class="btn-confirm" onclick="wdProcessStep2()">Next</div>
-          <div class="btn-cancel" onclick="wdGoToStep1()">Back</div>
-        </div>
-        <div class="modal-footer hidden-step" id="wdStep3Footer">
-          <div class="btn-confirm" onclick="processWithdraw()">Submit OTP</div>
-          <div class="btn-cancel" onclick="wdGoToStep2()">Back</div>
         </div>
       </div>
-    </div>
 
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+      <!-- STEP 2 (Hidden by Default) -->
+      <div class="modal-body hidden-step" id="wdStep2Body">
+        <div class="step-details-container">
+          <div class="step-details-row">
+            <span>Withdrawal Method</span>
+            <span id="wdSummaryMethod" style="font-weight: 600">GCash</span>
+          </div>
+          <div class="step-details-row">
+            <span>Amount</span>
+            <span id="wdSummaryAmount">₱0.00</span>
+          </div>
+        </div>
+
+        <!-- Phone Input (For GCash / Maya) -->
+        <div class="form-section" id="wdPhoneInputGroup">
+          <label class="form-label">Mobile Number</label>
+          <input type="tel" id="wdMobileNumber" class="custom-amount-input" placeholder="09XXXXXXXXX"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+          <div id="wdPhoneError" class="error-message">
+            <span>Please enter a valid 11-digit mobile number</span>
+          </div>
+        </div>
+
+        <!-- Bank Input (For Bank Transfer) -->
+        <div class="form-section hidden-step" id="wdBankInputGroup">
+          <label class="form-label">Select Bank</label>
+          <select id="wdBankName" class="form-control">
+            <option value="BDO">BDO Unibank</option>
+            <option value="BPI">Bank of the Philippine Islands (BPI)</option>
+            <option value="Metrobank">Metrobank</option>
+            <option value="UnionBank">UnionBank of the Philippines</option>
+          </select>
+          <label class="form-label" style="margin-top: 10px">Account Number</label>
+          <input type="text" id="wdBankAccount" class="custom-amount-input" placeholder="Enter bank account number" />
+        </div>
+      </div>
+
+      <!-- STEP 3 OTP (Hidden by Default) -->
+      <div class="modal-body hidden-step" id="wdStep3Body" style="text-align: center">
+        <h3 style="margin-top: 0">Enter OTP</h3>
+        <p style="color: #6b7280; font-size: 14px; margin-bottom: 20px">
+          A 4-digit PIN has been sent to your mobile number.
+        </p>
+
+        <div class="otp-container" id="wdOtpContainer" style="display: flex; justify-content: center; gap: 10px">
+          <input type="text" class="otp-digit wd-otp" maxlength="1" style="
+                width: 50px;
+                height: 60px;
+                font-size: 24px;
+                text-align: center;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+              " />
+          <input type="text" class="otp-digit wd-otp" maxlength="1" style="
+                width: 50px;
+                height: 60px;
+                font-size: 24px;
+                text-align: center;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+              " />
+          <input type="text" class="otp-digit wd-otp" maxlength="1" style="
+                width: 50px;
+                height: 60px;
+                font-size: 24px;
+                text-align: center;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+              " />
+          <input type="text" class="otp-digit wd-otp" maxlength="1" style="
+                width: 50px;
+                height: 60px;
+                font-size: 24px;
+                text-align: center;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+              " />
+        </div>
+        <div id="wdOtpError" class="error-message" style="justify-content: center; margin-top: 10px">
+          <span>Please enter the full 4-digit OTP</span>
+        </div>
+      </div>
+
+      <div class="modal-footer" id="wdStep1Footer">
+        <div class="btn-confirm" onclick="wdGoToStep2()">Next</div>
+        <label for="withdrawToggle" class="btn-cancel">Cancel</label>
+      </div>
+      <div class="modal-footer hidden-step" id="wdStep2Footer">
+        <div class="btn-confirm" onclick="wdProcessStep2()">Next</div>
+        <div class="btn-cancel" onclick="wdGoToStep1()">Back</div>
+      </div>
+      <div class="modal-footer hidden-step" id="wdStep3Footer">
+        <div class="btn-confirm" onclick="processWithdraw()">Submit OTP</div>
+        <div class="btn-cancel" onclick="wdGoToStep2()">Back</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
          QR CODE MODAL
          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
-    <input type="checkbox" id="qrToggle" style="display: none" />
-    <div class="modal" id="qrModal">
-      <label for="qrToggle" class="modal-overlay"></label>
-      <div class="modal-content" style="text-align: center; padding: 30px; max-width: 400px;">
-        <div class="modal-header" style="justify-content: center; position: relative;">
-          <h2 style="margin: 0;">Scan to Pay</h2>
-          <label for="qrToggle" class="modal-close" style="position: absolute; right: 0; top: 0;">
-            <i class="fa-solid fa-times"></i>
-          </label>
-        </div>
-        <div class="modal-body" style="padding-top: 20px;">
-          <!-- Scanner UI -->
-          <div id="qrScannerState">
-            <p style="color: #64748b; margin-bottom: 20px;">Position the vendor's QR code within the frame.</p>
-            <div style="background: #0f172a; position: relative; padding: 15px; border-radius: 12px; display: inline-block; width: 250px; height: 250px; cursor: pointer; overflow: hidden;" onclick="simulateScanSuccess()">
-              <!-- Simulated camera feed with scan line -->
-              <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); border: 2px dashed #3b82f6; border-radius: 12px;"></div>
-              <div style="position: absolute; top: 10%; left: 10%; right: 10%; bottom: 10%; border: 2px solid rgba(255,255,255,0.5); border-radius: 8px;"></div>
-              <!-- Animated Scan Line -->
-              <div style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: #22c55e; box-shadow: 0 0 10px #22c55e; animation: scanAnim 2s infinite linear;"></div>
-              <p style="position: absolute; bottom: 20px; width: 100%; left: 0; text-align: center; color: white; font-size: 12px;">Tap to simulate scan</p>
+  <input type="checkbox" id="qrToggle" style="display: none" />
+  <div class="modal" id="qrModal">
+    <label for="qrToggle" class="modal-overlay"></label>
+    <div class="modal-content" style="text-align: center; padding: 30px; max-width: 400px;">
+      <div class="modal-header" style="justify-content: center; position: relative;">
+        <h2 style="margin: 0;">Scan to Pay</h2>
+        <label for="qrToggle" class="modal-close" style="position: absolute; right: 0; top: 0;">
+          <i class="fa-solid fa-times"></i>
+        </label>
+      </div>
+      <div class="modal-body" style="padding-top: 20px;">
+        <!-- Scanner UI -->
+        <div id="qrScannerState">
+          <p style="color: #64748b; margin-bottom: 20px;">Position the vendor's QR code within the frame.</p>
+          <div
+            style="background: #0f172a; position: relative; padding: 15px; border-radius: 12px; display: inline-block; width: 250px; height: 250px; cursor: pointer; overflow: hidden;"
+            onclick="simulateScanSuccess()">
+            <!-- Simulated camera feed with scan line -->
+            <div
+              style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); border: 2px dashed #3b82f6; border-radius: 12px;">
             </div>
-            <style>
-              @keyframes scanAnim {
-                0% { top: 10%; }
-                50% { top: 90%; }
-                100% { top: 10%; }
+            <div
+              style="position: absolute; top: 10%; left: 10%; right: 10%; bottom: 10%; border: 2px solid rgba(255,255,255,0.5); border-radius: 8px;">
+            </div>
+            <!-- Animated Scan Line -->
+            <div
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: #22c55e; box-shadow: 0 0 10px #22c55e; animation: scanAnim 2s infinite linear;">
+            </div>
+            <p
+              style="position: absolute; bottom: 20px; width: 100%; left: 0; text-align: center; color: white; font-size: 12px;">
+              Tap to simulate scan</p>
+          </div>
+          <style>
+            @keyframes scanAnim {
+              0% {
+                top: 10%;
               }
-            </style>
-          </div>
 
-          <!-- Review & Confirm UI (hidden initially) -->
-          <div id="qrConfirmState" style="display: none; text-align: center;">
-            <div style="font-size: 40px; color: #22c55e; margin-bottom: 10px;"><i class="fa-solid fa-circle-check"></i></div>
-            <h3 style="margin-top: 0;">Vendor Found!</h3>
-            <p style="color: #64748b;">You are about to pay <strong>Canteen 1</strong>.</p>
-            <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; margin: 20px 0;">
-              <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                <span style="color: #64748b;">Current Balance:</span>
-                <span style="font-weight: bold;">â‚±<span id="qrBalanceValue">0.00</span></span>
-              </div>
-              <div style="text-align: left; margin-bottom: 15px;">
-                <label style="font-size: 14px; color: #475569; display: block; margin-bottom: 5px;">Enter Amount:</label>
-                <div style="display: flex; align-items: center; background: white; border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px;">
-                  <span style="color: #64748b; margin-right: 8px;">â‚±</span>
-                  <input type="number" id="qrPayAmount" placeholder="0.00" style="border: none; outline: none; width: 100%; font-size: 16px; font-weight: 600;" />
-                </div>
+              50% {
+                top: 90%;
+              }
+
+              100% {
+                top: 10%;
+              }
+            }
+          </style>
+        </div>
+
+        <!-- Review & Confirm UI (hidden initially) -->
+        <div id="qrConfirmState" style="display: none; text-align: center;">
+          <div style="font-size: 40px; color: #22c55e; margin-bottom: 10px;"><i class="fa-solid fa-circle-check"></i>
+          </div>
+          <h3 style="margin-top: 0;">Vendor Found!</h3>
+          <p style="color: #64748b;">You are about to pay <strong>Canteen 1</strong>.</p>
+          <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; margin: 20px 0;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+              <span style="color: #64748b;">Current Balance:</span>
+              <span style="font-weight: bold;">₱<span id="qrBalanceValue">0.00</span></span>
+            </div>
+            <div style="text-align: left; margin-bottom: 15px;">
+              <label style="font-size: 14px; color: #475569; display: block; margin-bottom: 5px;">Enter Amount:</label>
+              <div
+                style="display: flex; align-items: center; background: white; border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px;">
+                <span style="color: #64748b; margin-right: 8px;">₱</span>
+                <input type="number" id="qrPayAmount" placeholder="0.00"
+                  style="border: none; outline: none; width: 100%; font-size: 16px; font-weight: 600;" />
               </div>
             </div>
-            <button onclick="confirmQrPayment()" style="background: #22c55e; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 16px;">
-              Confirm Payment
-            </button>
           </div>
+          <button onclick="confirmQrPayment()"
+            style="background: #22c55e; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 16px;">
+            Confirm Payment
+          </button>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Toast Container -->
-    <div
-      class="toast-container"
-      id="toastContainer"
-      style="
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer" style="
         position: fixed;
         bottom: 20px;
         right: 20px;
@@ -872,157 +691,156 @@
         flex-direction: column;
         gap: 10px;
         z-index: 9999;
-      "
-    ></div>
+      "></div>
 
-    <script src="../../script/student/cart.js"></script>
-    <script>
-      // Make checkboxes styled as active buttons
-      const styleRadioButtons = (inputsSelector) => {
-        const inputs = document.querySelectorAll(inputsSelector);
-        inputs.forEach((input) => {
-          input.addEventListener("change", (e) => {
-            // Remove active class from all siblings
-            const name = e.target.name;
-            document
-              .querySelectorAll(`input[name="${name}"]`)
-              .forEach((sibling) => {
-                const label = document.querySelector(
-                  `label[for="${sibling.id}"]`,
-                );
-                if (label) label.classList.remove("active");
-              });
-            // Add to current
-            const label = document.querySelector(`label[for="${e.target.id}"]`);
-            if (label) label.classList.add("active");
-          });
-        });
-      };
-      styleRadioButtons('input[name="cipayment"]');
-      styleRadioButtons('input[name="wdpayment"]');
-      styleRadioButtons('input[name="ciamount"]');
-      styleRadioButtons('input[name="wdamount"]');
-
-      // Helper function to clear errors
-      function clearErrors(prefix) {
-        document
-          .querySelectorAll(
-            `#${prefix}MethodError, #${prefix}AmountError, #${prefix}PhoneError, #${prefix}OtpError`,
-          )
-          .forEach((el) => {
-            if (el) el.classList.remove("show");
-            if (el) el.style.opacity = "0";
-            if (el) el.style.height = "0";
-          });
-        document
-          .querySelectorAll(".invalid")
-          .forEach((el) => el.classList.remove("invalid"));
-      }
-
-      function showError(elId, msg) {
-        const el = document.getElementById(elId);
-        if (el) {
-          el.querySelector("span").innerText = msg;
-          el.classList.add("show");
-          el.style.opacity = "1";
-          el.style.height = "auto";
-          el.style.padding = "10px";
-        }
-      }
-
-      function setupQuickAmounts(prefix) {
-        document
-          .querySelectorAll(`input[name="${prefix}amount"]`)
-          .forEach((radio) => {
-            radio.addEventListener("change", (e) => {
-              const val = e.target.id.replace(prefix + "a", "");
-              document.getElementById(`${prefix}CustomAmount`).value = val;
-              clearErrors(prefix);
+  <script src="../../script/student/cart.js"></script>
+  <script>
+    // Make checkboxes styled as active buttons
+    const styleRadioButtons = (inputsSelector) => {
+      const inputs = document.querySelectorAll(inputsSelector);
+      inputs.forEach((input) => {
+        input.addEventListener("change", (e) => {
+          // Remove active class from all siblings
+          const name = e.target.name;
+          document
+            .querySelectorAll(`input[name="${name}"]`)
+            .forEach((sibling) => {
+              const label = document.querySelector(
+                `label[for="${sibling.id}"]`,
+              );
+              if (label) label.classList.remove("active");
             });
-          });
-      }
-      setupQuickAmounts("ci");
-      setupQuickAmounts("wd");
+          // Add to current
+          const label = document.querySelector(`label[for="${e.target.id}"]`);
+          if (label) label.classList.add("active");
+        });
+      });
+    };
+    styleRadioButtons('input[name="cipayment"]');
+    styleRadioButtons('input[name="wdpayment"]');
+    styleRadioButtons('input[name="ciamount"]');
+    styleRadioButtons('input[name="wdamount"]');
 
-      // OTP Auto-advance
-      function setupOtpAutoAdvance(selector) {
-        const otpInputs = document.querySelectorAll(selector);
-        otpInputs.forEach((input, index) => {
-          input.addEventListener("input", (e) => {
-            input.classList.remove("invalid");
-            if (input.value.length === 1 && index < otpInputs.length - 1) {
-              otpInputs[index + 1].focus();
-            }
-          });
-          input.addEventListener("keydown", (e) => {
-            if (e.key === "Backspace" && input.value === "" && index > 0) {
-              otpInputs[index - 1].focus();
-            }
+    // Helper function to clear errors
+    function clearErrors(prefix) {
+      document
+        .querySelectorAll(
+          `#${prefix}MethodError, #${prefix}AmountError, #${prefix}PhoneError, #${prefix}OtpError`,
+        )
+        .forEach((el) => {
+          if (el) el.classList.remove("show");
+          if (el) el.style.opacity = "0";
+          if (el) el.style.height = "0";
+        });
+      document
+        .querySelectorAll(".invalid")
+        .forEach((el) => el.classList.remove("invalid"));
+    }
+
+    function showError(elId, msg) {
+      const el = document.getElementById(elId);
+      if (el) {
+        el.querySelector("span").innerText = msg;
+        el.classList.add("show");
+        el.style.opacity = "1";
+        el.style.height = "auto";
+        el.style.padding = "10px";
+      }
+    }
+
+    function setupQuickAmounts(prefix) {
+      document
+        .querySelectorAll(`input[name="${prefix}amount"]`)
+        .forEach((radio) => {
+          radio.addEventListener("change", (e) => {
+            const val = e.target.id.replace(prefix + "a", "");
+            document.getElementById(`${prefix}CustomAmount`).value = val;
+            clearErrors(prefix);
           });
         });
-      }
-      setupOtpAutoAdvance(".ci-otp");
-      setupOtpAutoAdvance(".wd-otp");
+    }
+    setupQuickAmounts("ci");
+    setupQuickAmounts("wd");
 
-      function showToast(message) {
-        const container = document.getElementById("toastContainer");
-        const toast = document.createElement("div");
-        toast.className = "toast";
-        toast.style.background = "#22c55e";
-        toast.style.color = "white";
-        toast.style.padding = "15px 20px";
-        toast.style.borderRadius = "8px";
-        toast.style.boxShadow = "0 4px 6px rgba(0,0,0,0.1)";
-        toast.style.transition = "all 0.3s ease";
-        toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> &nbsp; ${message}`;
-        container.appendChild(toast);
+    // OTP Auto-advance
+    function setupOtpAutoAdvance(selector) {
+      const otpInputs = document.querySelectorAll(selector);
+      otpInputs.forEach((input, index) => {
+        input.addEventListener("input", (e) => {
+          input.classList.remove("invalid");
+          if (input.value.length === 1 && index < otpInputs.length - 1) {
+            otpInputs[index + 1].focus();
+          }
+        });
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Backspace" && input.value === "" && index > 0) {
+            otpInputs[index - 1].focus();
+          }
+        });
+      });
+    }
+    setupOtpAutoAdvance(".ci-otp");
+    setupOtpAutoAdvance(".wd-otp");
 
-        setTimeout(() => {
-          toast.style.opacity = "0";
-          toast.style.transform = "translateX(100px)";
-          setTimeout(() => toast.remove(), 300);
-        }, 3000);
-      }
+    function showToast(message) {
+      const container = document.getElementById("toastContainer");
+      const toast = document.createElement("div");
+      toast.className = "toast";
+      toast.style.background = "#22c55e";
+      toast.style.color = "white";
+      toast.style.padding = "15px 20px";
+      toast.style.borderRadius = "8px";
+      toast.style.boxShadow = "0 4px 6px rgba(0,0,0,0.1)";
+      toast.style.transition = "all 0.3s ease";
+      toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> &nbsp; ${message}`;
+      container.appendChild(toast);
 
-      function getBalance() {
-        return parseFloat(
-          document.getElementById("balanceValue").innerText.replace(/,/g, ""),
-        );
-      }
-      function updateBalance(amount, isAdd) {
-        let current = getBalance();
-        let newBal = isAdd ? current + amount : current - amount;
-        document.getElementById("balanceValue").innerText =
-          newBal.toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          });
-      }
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        toast.style.transform = "translateX(100px)";
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
 
-      function addTransactionRow(typeText, amount, isAdd) {
-        const list = document.getElementById("transactionList");
-        const now = new Date();
-        const dateStr =
-          now.toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          }) +
-          " - " +
-          now.toLocaleTimeString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-          });
+    function getBalance() {
+      return parseFloat(
+        document.getElementById("balanceValue").innerText.replace(/,/g, ""),
+      );
+    }
+    function updateBalance(amount, isAdd) {
+      let current = getBalance();
+      let newBal = isAdd ? current + amount : current - amount;
+      document.getElementById("balanceValue").innerText =
+        newBal.toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
+    }
 
-        const sign = isAdd ? "+" : "-";
-        const colorClass = isAdd ? "positive" : "negative";
-        const iconClass = isAdd ? "topup" : "payment";
-        const faIcon = isAdd ? "fa-money-bill" : "fa-money-bill-transfer";
+    function addTransactionRow(typeText, amount, isAdd) {
+      const list = document.getElementById("transactionList");
+      const now = new Date();
+      const dateStr =
+        now.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        }) +
+        " - " +
+        now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
 
-        const newItem = document.createElement("div");
-        newItem.className = "transaction-item";
-        newItem.style.animation = "slideIn 0.3s ease-out";
-        newItem.innerHTML = `
+      const sign = isAdd ? "+" : "-";
+      const colorClass = isAdd ? "positive" : "negative";
+      const iconClass = isAdd ? "topup" : "payment";
+      const faIcon = isAdd ? "fa-money-bill" : "fa-money-bill-transfer";
+
+      const newItem = document.createElement("div");
+      newItem.className = "transaction-item";
+      newItem.style.animation = "slideIn 0.3s ease-out";
+      newItem.innerHTML = `
           <div class="transaction-icon ${iconClass}">
             <i class="fa-solid ${faIcon}"></i>
           </div>
@@ -1030,381 +848,377 @@
             <p class="transaction-type">${typeText}</p>
             <p class="transaction-date">${dateStr}</p>
           </div>
-          <div class="transaction-amount ${colorClass}">${sign}â‚±${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+          <div class="transaction-amount ${colorClass}">${sign}₱${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
         `;
-        list.prepend(newItem);
+      list.prepend(newItem);
+    }
+
+    // ==========================================
+    // CASH IN LOGIC
+    // ==========================================
+    function ciGoToStep1() {
+      document.getElementById("ciStep3Body").classList.add("hidden-step");
+      document.getElementById("ciStep3Footer").classList.add("hidden-step");
+      document.getElementById("ciStep2Body").classList.add("hidden-step");
+      document.getElementById("ciStep2Footer").classList.add("hidden-step");
+      document.getElementById("ciStep1Body").classList.remove("hidden-step");
+      document
+        .getElementById("ciStep1Footer")
+        .classList.remove("hidden-step");
+    }
+
+    function ciGoToStep2() {
+      clearErrors("ci");
+      const selected = document.querySelector(
+        'input[name="cipayment"]:checked',
+      );
+      const amount = parseFloat(
+        document.getElementById("ciCustomAmount").value,
+      );
+
+      if (!selected) {
+        showError("ciMethodError", "Please select a cash in method");
+        return;
+      }
+      if (!amount || amount < 50) {
+        showError(
+          "ciAmountError",
+          "Please enter a valid amount (Min. ₱50.00)",
+        );
+        document.getElementById("ciCustomAmount").classList.add("invalid");
+        return;
       }
 
-      // ==========================================
-      // CASH IN LOGIC
-      // ==========================================
-      function ciGoToStep1() {
-        document.getElementById("ciStep3Body").classList.add("hidden-step");
-        document.getElementById("ciStep3Footer").classList.add("hidden-step");
+      const methodId = selected.id;
+      document.getElementById("ciSummaryMethod").innerText =
+        methodId.includes("gcash")
+          ? "GCash"
+          : methodId.includes("maya")
+            ? "Maya"
+            : "Bank Transfer";
+      document.getElementById("ciSummaryAmount").innerText =
+        "₱" + amount.toFixed(2);
+
+      if (methodId.includes("card")) {
+        document
+          .getElementById("ciPhoneInputGroup")
+          .classList.add("hidden-step");
+        document
+          .getElementById("ciBankInputGroup")
+          .classList.remove("hidden-step");
+      } else {
+        document
+          .getElementById("ciBankInputGroup")
+          .classList.add("hidden-step");
+        document
+          .getElementById("ciPhoneInputGroup")
+          .classList.remove("hidden-step");
+      }
+
+      document.getElementById("ciStep1Body").classList.add("hidden-step");
+      document.getElementById("ciStep1Footer").classList.add("hidden-step");
+      document.getElementById("ciStep2Body").classList.remove("hidden-step");
+      document
+        .getElementById("ciStep2Footer")
+        .classList.remove("hidden-step");
+    }
+
+    function ciProcessStep2() {
+      clearErrors("ci");
+      const selected = document.querySelector(
+        'input[name="cipayment"]:checked',
+      );
+
+      if (selected.id.includes("card")) {
+        const accField = document.getElementById("ciBankAccount");
+        if (!accField.value.trim()) {
+          accField.classList.add("invalid");
+          return;
+        }
+        processCashIn();
+      } else {
+        const phoneField = document.getElementById("ciMobileNumber");
+        if (phoneField.value.trim().length !== 11) {
+          phoneField.classList.add("invalid");
+          showError(
+            "ciPhoneError",
+            "Please enter a valid 11-digit mobile number",
+          );
+          return;
+        }
         document.getElementById("ciStep2Body").classList.add("hidden-step");
         document.getElementById("ciStep2Footer").classList.add("hidden-step");
-        document.getElementById("ciStep1Body").classList.remove("hidden-step");
         document
-          .getElementById("ciStep1Footer")
+          .getElementById("ciStep3Body")
+          .classList.remove("hidden-step");
+        document
+          .getElementById("ciStep3Footer")
           .classList.remove("hidden-step");
       }
+    }
 
-      function ciGoToStep2() {
-        clearErrors("ci");
-        const selected = document.querySelector(
-          'input[name="cipayment"]:checked',
-        );
-        const amount = parseFloat(
-          document.getElementById("ciCustomAmount").value,
-        );
+    function processCashIn() {
+      clearErrors("ci");
+      const selected = document.querySelector(
+        'input[name="cipayment"]:checked',
+      );
 
-        if (!selected) {
-          showError("ciMethodError", "Please select a cash in method");
+      if (!selected.id.includes("card")) {
+        const boxes = document.querySelectorAll(".ci-otp");
+        let otpVal = "";
+        boxes.forEach((b) => (otpVal += b.value));
+        if (otpVal.length < 4) {
+          boxes.forEach((b) => b.classList.add("invalid"));
+          showError("ciOtpError", "Please enter the full 4-digit OTP");
           return;
         }
-        if (!amount || amount < 50) {
-          showError(
-            "ciAmountError",
-            "Please enter a valid amount (Min. â‚±50.00)",
-          );
-          document.getElementById("ciCustomAmount").classList.add("invalid");
-          return;
-        }
+      }
 
-        const methodId = selected.id;
-        document.getElementById("ciSummaryMethod").innerText =
-          methodId.includes("gcash")
-            ? "GCash"
-            : methodId.includes("maya")
-              ? "Maya"
-              : "Bank Transfer";
-        document.getElementById("ciSummaryAmount").innerText =
-          "â‚±" + amount.toFixed(2);
+      const amount = parseFloat(
+        document.getElementById("ciCustomAmount").value,
+      );
+      updateBalance(amount, true);
 
-        if (methodId.includes("card")) {
-          document
-            .getElementById("ciPhoneInputGroup")
-            .classList.add("hidden-step");
-          document
-            .getElementById("ciBankInputGroup")
-            .classList.remove("hidden-step");
-        } else {
-          document
-            .getElementById("ciBankInputGroup")
-            .classList.add("hidden-step");
-          document
-            .getElementById("ciPhoneInputGroup")
-            .classList.remove("hidden-step");
-        }
+      const methodText = selected.id.includes("gcash")
+        ? "GCash"
+        : selected.id.includes("maya")
+          ? "Maya"
+          : "Bank Transfer";
+      addTransactionRow(`Cash In via ${methodText}`, amount, true);
 
-        document.getElementById("ciStep1Body").classList.add("hidden-step");
-        document.getElementById("ciStep1Footer").classList.add("hidden-step");
-        document.getElementById("ciStep2Body").classList.remove("hidden-step");
+      // Reset and close
+      document.getElementById("cashInToggle").checked = false;
+      setTimeout(() => {
+        ciGoToStep1();
+        document.getElementById("ciCustomAmount").value = "";
+        document.querySelectorAll(".ci-otp").forEach((b) => (b.value = ""));
         document
-          .getElementById("ciStep2Footer")
-          .classList.remove("hidden-step");
+          .querySelectorAll('input[name="cipayment"]')
+          .forEach((r) => (r.checked = false));
+        document
+          .querySelectorAll(".payment-method-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+      }, 300);
+      showToast("Cash In successful!");
+    }
+
+    // ==========================================
+    // WITHDRAW LOGIC
+    // ==========================================
+    function wdGoToStep1() {
+      document.getElementById("wdStep3Body").classList.add("hidden-step");
+      document.getElementById("wdStep3Footer").classList.add("hidden-step");
+      document.getElementById("wdStep2Body").classList.add("hidden-step");
+      document.getElementById("wdStep2Footer").classList.add("hidden-step");
+      document.getElementById("wdStep1Body").classList.remove("hidden-step");
+      document
+        .getElementById("wdStep1Footer")
+        .classList.remove("hidden-step");
+    }
+
+    function wdGoToStep2() {
+      clearErrors("wd");
+      const selected = document.querySelector(
+        'input[name="wdpayment"]:checked',
+      );
+      const amount = parseFloat(
+        document.getElementById("wdCustomAmount").value,
+      );
+      const maxBalance = getBalance();
+
+      if (!selected) {
+        showError("wdMethodError", "Please select a withdrawal method");
+        return;
+      }
+      if (!amount || amount <= 0) {
+        showError(
+          "wdAmountError",
+          "Please enter a valid amount",
+        );
+        document.getElementById("wdCustomAmount").classList.add("invalid");
+        return;
+      }
+      if (amount > maxBalance) {
+        showError(
+          "wdAmountError",
+          `Insufficient balance. Max withdrawable: ₱${maxBalance.toFixed(2)}`,
+        );
+        document.getElementById("wdCustomAmount").classList.add("invalid");
+        return;
       }
 
-      function ciProcessStep2() {
-        clearErrors("ci");
-        const selected = document.querySelector(
-          'input[name="cipayment"]:checked',
-        );
-
-        if (selected.id.includes("card")) {
-          const accField = document.getElementById("ciBankAccount");
-          if (!accField.value.trim()) {
-            accField.classList.add("invalid");
-            return;
-          }
-          processCashIn();
-        } else {
-          const phoneField = document.getElementById("ciMobileNumber");
-          if (phoneField.value.trim().length !== 11) {
-            phoneField.classList.add("invalid");
-            showError(
-              "ciPhoneError",
-              "Please enter a valid 11-digit mobile number",
-            );
-            return;
-          }
-          document.getElementById("ciStep2Body").classList.add("hidden-step");
-          document.getElementById("ciStep2Footer").classList.add("hidden-step");
-          document
-            .getElementById("ciStep3Body")
-            .classList.remove("hidden-step");
-          document
-            .getElementById("ciStep3Footer")
-            .classList.remove("hidden-step");
-        }
-      }
-
-      function processCashIn() {
-        clearErrors("ci");
-        const selected = document.querySelector(
-          'input[name="cipayment"]:checked',
-        );
-
-        if (!selected.id.includes("card")) {
-          const boxes = document.querySelectorAll(".ci-otp");
-          let otpVal = "";
-          boxes.forEach((b) => (otpVal += b.value));
-          if (otpVal.length < 4) {
-            boxes.forEach((b) => b.classList.add("invalid"));
-            showError("ciOtpError", "Please enter the full 4-digit OTP");
-            return;
-          }
-        }
-
-        const amount = parseFloat(
-          document.getElementById("ciCustomAmount").value,
-        );
-        updateBalance(amount, true);
-
-        const methodText = selected.id.includes("gcash")
+      const methodId = selected.id;
+      document.getElementById("wdSummaryMethod").innerText =
+        methodId.includes("gcash")
           ? "GCash"
-          : selected.id.includes("maya")
+          : methodId.includes("maya")
             ? "Maya"
             : "Bank Transfer";
-        addTransactionRow(`Cash In via ${methodText}`, amount, true);
+      document.getElementById("wdSummaryAmount").innerText =
+        "₱" + amount.toFixed(2);
 
-        // Reset and close
-        document.getElementById("cashInToggle").checked = false;
-        setTimeout(() => {
-          ciGoToStep1();
-          document.getElementById("ciCustomAmount").value = "";
-          document.querySelectorAll(".ci-otp").forEach((b) => (b.value = ""));
-          document
-            .querySelectorAll('input[name="cipayment"]')
-            .forEach((r) => (r.checked = false));
-          document
-            .querySelectorAll(".payment-method-btn")
-            .forEach((btn) => btn.classList.remove("active"));
-        }, 300);
-        showToast("Cash In successful!");
+      if (methodId.includes("card")) {
+        document
+          .getElementById("wdPhoneInputGroup")
+          .classList.add("hidden-step");
+        document
+          .getElementById("wdBankInputGroup")
+          .classList.remove("hidden-step");
+      } else {
+        document
+          .getElementById("wdBankInputGroup")
+          .classList.add("hidden-step");
+        document
+          .getElementById("wdPhoneInputGroup")
+          .classList.remove("hidden-step");
       }
 
-      // ==========================================
-      // WITHDRAW LOGIC
-      // ==========================================
-      function wdGoToStep1() {
-        document.getElementById("wdStep3Body").classList.add("hidden-step");
-        document.getElementById("wdStep3Footer").classList.add("hidden-step");
+      document.getElementById("wdStep1Body").classList.add("hidden-step");
+      document.getElementById("wdStep1Footer").classList.add("hidden-step");
+      document.getElementById("wdStep2Body").classList.remove("hidden-step");
+      document
+        .getElementById("wdStep2Footer")
+        .classList.remove("hidden-step");
+    }
+
+    function wdProcessStep2() {
+      clearErrors("wd");
+      const selected = document.querySelector(
+        'input[name="wdpayment"]:checked',
+      );
+
+      if (selected.id.includes("card")) {
+        const accField = document.getElementById("wdBankAccount");
+        if (!accField.value.trim()) {
+          accField.classList.add("invalid");
+          return;
+        }
+        processWithdraw();
+      } else {
+        const phoneField = document.getElementById("wdMobileNumber");
+        if (phoneField.value.trim().length !== 11) {
+          phoneField.classList.add("invalid");
+          showError(
+            "wdPhoneError",
+            "Please enter a valid 11-digit mobile number",
+          );
+          return;
+        }
         document.getElementById("wdStep2Body").classList.add("hidden-step");
         document.getElementById("wdStep2Footer").classList.add("hidden-step");
-        document.getElementById("wdStep1Body").classList.remove("hidden-step");
         document
-          .getElementById("wdStep1Footer")
+          .getElementById("wdStep3Body")
+          .classList.remove("hidden-step");
+        document
+          .getElementById("wdStep3Footer")
           .classList.remove("hidden-step");
       }
+    }
 
-      function wdGoToStep2() {
-        clearErrors("wd");
-        const selected = document.querySelector(
-          'input[name="wdpayment"]:checked',
-        );
-        const amount = parseFloat(
-          document.getElementById("wdCustomAmount").value,
-        );
-        const maxBalance = getBalance();
+    function processWithdraw() {
+      clearErrors("wd");
+      const selected = document.querySelector(
+        'input[name="wdpayment"]:checked',
+      );
 
-        if (!selected) {
-          showError("wdMethodError", "Please select a withdrawal method");
+      if (!selected.id.includes("card")) {
+        const boxes = document.querySelectorAll(".wd-otp");
+        let otpVal = "";
+        boxes.forEach((b) => (otpVal += b.value));
+        if (otpVal.length < 4) {
+          boxes.forEach((b) => b.classList.add("invalid"));
+          showError("wdOtpError", "Please enter the full 4-digit OTP");
           return;
         }
-        if (!amount || amount <= 0) {
-          showError(
-            "wdAmountError",
-            "Please enter a valid amount",
-          );
-          document.getElementById("wdCustomAmount").classList.add("invalid");
-          return;
-        }
-        if (amount > maxBalance) {
-          showError(
-            "wdAmountError",
-            `Insufficient balance. Max withdrawable: â‚±${maxBalance.toFixed(2)}`,
-          );
-          document.getElementById("wdCustomAmount").classList.add("invalid");
-          return;
-        }
+      }
 
-        const methodId = selected.id;
-        document.getElementById("wdSummaryMethod").innerText =
-          methodId.includes("gcash")
-            ? "GCash"
-            : methodId.includes("maya")
-              ? "Maya"
-              : "Bank Transfer";
-        document.getElementById("wdSummaryAmount").innerText =
-          "â‚±" + amount.toFixed(2);
+      const amount = parseFloat(
+        document.getElementById("wdCustomAmount").value,
+      );
+      updateBalance(amount, false);
 
-        if (methodId.includes("card")) {
-          document
-            .getElementById("wdPhoneInputGroup")
-            .classList.add("hidden-step");
-          document
-            .getElementById("wdBankInputGroup")
-            .classList.remove("hidden-step");
-        } else {
-          document
-            .getElementById("wdBankInputGroup")
-            .classList.add("hidden-step");
-          document
-            .getElementById("wdPhoneInputGroup")
-            .classList.remove("hidden-step");
-        }
+      const methodText = selected.id.includes("gcash")
+        ? "GCash"
+        : selected.id.includes("maya")
+          ? "Maya"
+          : "Bank Transfer";
+      addTransactionRow(`Withdrawal via ${methodText}`, amount, false);
 
-        document.getElementById("wdStep1Body").classList.add("hidden-step");
-        document.getElementById("wdStep1Footer").classList.add("hidden-step");
-        document.getElementById("wdStep2Body").classList.remove("hidden-step");
+      // Reset and close
+      document.getElementById("withdrawToggle").checked = false;
+      setTimeout(() => {
+        wdGoToStep1();
+        document.getElementById("wdCustomAmount").value = "";
+        document.querySelectorAll(".wd-otp").forEach((b) => (b.value = ""));
         document
-          .getElementById("wdStep2Footer")
-          .classList.remove("hidden-step");
-      }
+          .querySelectorAll('input[name="wdpayment"]')
+          .forEach((r) => (r.checked = false));
+        document
+          .querySelectorAll(".payment-method-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+      }, 300);
+      showToast("Withdrawal request submitted!");
+    }
 
-      function wdProcessStep2() {
-        clearErrors("wd");
-        const selected = document.querySelector(
-          'input[name="wdpayment"]:checked',
-        );
-
-        if (selected.id.includes("card")) {
-          const accField = document.getElementById("wdBankAccount");
-          if (!accField.value.trim()) {
-            accField.classList.add("invalid");
-            return;
+    // Add functionality to clear input errors when typing
+    document
+      .querySelectorAll(
+        'input[type="number"], input[type="tel"], input[type="text"]',
+      )
+      .forEach((input) => {
+        input.addEventListener("input", (e) => {
+          e.target.classList.remove("invalid");
+          const errorContainer =
+            e.target.parentElement.nextElementSibling ||
+            e.target.nextElementSibling;
+          if (
+            errorContainer &&
+            errorContainer.classList.contains("error-message")
+          ) {
+            errorContainer.classList.remove("show");
+            errorContainer.style.opacity = "0";
+            errorContainer.style.height = "0";
           }
-          processWithdraw();
-        } else {
-          const phoneField = document.getElementById("wdMobileNumber");
-          if (phoneField.value.trim().length !== 11) {
-            phoneField.classList.add("invalid");
-            showError(
-              "wdPhoneError",
-              "Please enter a valid 11-digit mobile number",
-            );
-            return;
-          }
-          document.getElementById("wdStep2Body").classList.add("hidden-step");
-          document.getElementById("wdStep2Footer").classList.add("hidden-step");
-          document
-            .getElementById("wdStep3Body")
-            .classList.remove("hidden-step");
-          document
-            .getElementById("wdStep3Footer")
-            .classList.remove("hidden-step");
-        }
-      }
-
-      function processWithdraw() {
-        clearErrors("wd");
-        const selected = document.querySelector(
-          'input[name="wdpayment"]:checked',
-        );
-
-        if (!selected.id.includes("card")) {
-          const boxes = document.querySelectorAll(".wd-otp");
-          let otpVal = "";
-          boxes.forEach((b) => (otpVal += b.value));
-          if (otpVal.length < 4) {
-            boxes.forEach((b) => b.classList.add("invalid"));
-            showError("wdOtpError", "Please enter the full 4-digit OTP");
-            return;
-          }
-        }
-
-        const amount = parseFloat(
-          document.getElementById("wdCustomAmount").value,
-        );
-        updateBalance(amount, false);
-
-        const methodText = selected.id.includes("gcash")
-          ? "GCash"
-          : selected.id.includes("maya")
-            ? "Maya"
-            : "Bank Transfer";
-        addTransactionRow(`Withdrawal via ${methodText}`, amount, false);
-
-        // Reset and close
-        document.getElementById("withdrawToggle").checked = false;
-        setTimeout(() => {
-          wdGoToStep1();
-          document.getElementById("wdCustomAmount").value = "";
-          document.querySelectorAll(".wd-otp").forEach((b) => (b.value = ""));
-          document
-            .querySelectorAll('input[name="wdpayment"]')
-            .forEach((r) => (r.checked = false));
-          document
-            .querySelectorAll(".payment-method-btn")
-            .forEach((btn) => btn.classList.remove("active"));
-        }, 300);
-        showToast("Withdrawal request submitted!");
-      }
-
-      // Add functionality to clear input errors when typing
-      document
-        .querySelectorAll(
-          'input[type="number"], input[type="tel"], input[type="text"]',
-        )
-        .forEach((input) => {
-          input.addEventListener("input", (e) => {
-            e.target.classList.remove("invalid");
-            const errorContainer =
-              e.target.parentElement.nextElementSibling ||
-              e.target.nextElementSibling;
-            if (
-              errorContainer &&
-              errorContainer.classList.contains("error-message")
-            ) {
-              errorContainer.classList.remove("show");
-              errorContainer.style.opacity = "0";
-              errorContainer.style.height = "0";
-            }
-          });
         });
-
-      // Update cart count for consistency with rest of app
-      updateAllCartBadges();
-
-      // QR Code functionality
-      document.getElementById('qrToggle').addEventListener('change', function() {
-        if(this.checked) {
-          const balance = getBalance();
-          document.getElementById('qrBalanceValue').innerText = balance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-          document.getElementById('qrScannerState').style.display = 'block';
-          document.getElementById('qrConfirmState').style.display = 'none';
-          document.getElementById('qrPayAmount').value = '';
-        }
       });
 
-      function simulateScanSuccess() {
-        document.getElementById('qrScannerState').style.display = 'none';
-        document.getElementById('qrConfirmState').style.display = 'block';
-      }
+    // Update cart count for consistency with rest of app
+    updateAllCartBadges();
 
-      function confirmQrPayment() {
-        const amount = parseFloat(document.getElementById('qrPayAmount').value);
-        if (!amount || amount <= 0) {
-          showToast("Please enter a valid amount");
-          return;
-        }
+    // QR Code functionality
+    document.getElementById('qrToggle').addEventListener('change', function () {
+      if (this.checked) {
         const balance = getBalance();
-        if (amount > balance) {
-          showToast("Insufficient balance");
-          return;
-        }
-        updateBalance(amount, false);
-        addTransactionRow("QR Payment - Canteen 1", amount, false);
-        document.getElementById('qrToggle').checked = false;
-        showToast("Payment successful!");
-        updateAllCartBadges(); // To update navbar balance
+        document.getElementById('qrBalanceValue').innerText = balance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('qrScannerState').style.display = 'block';
+        document.getElementById('qrConfirmState').style.display = 'none';
+        document.getElementById('qrPayAmount').value = '';
       }
-    </script>
-  </body>
+    });
+
+    function simulateScanSuccess() {
+      document.getElementById('qrScannerState').style.display = 'none';
+      document.getElementById('qrConfirmState').style.display = 'block';
+    }
+
+    function confirmQrPayment() {
+      const amount = parseFloat(document.getElementById('qrPayAmount').value);
+      if (!amount || amount <= 0) {
+        showToast("Please enter a valid amount");
+        return;
+      }
+      const balance = getBalance();
+      if (amount > balance) {
+        showToast("Insufficient balance");
+        return;
+      }
+      updateBalance(amount, false);
+      addTransactionRow("QR Payment - Canteen 1", amount, false);
+      document.getElementById('qrToggle').checked = false;
+      showToast("Payment successful!");
+      updateAllCartBadges(); // To update navbar balance
+    }
+  </script>
+</body>
+
 </html>
-
-
-
-
-

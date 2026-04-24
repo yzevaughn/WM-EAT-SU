@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -232,7 +232,7 @@
             <span class="modal-info-value" style="color:#22c55e">âœ” Ready for Pickup</span>
           </div>
           <div class="modal-order-items" id="modalOrderItems"></div>
-          <div class="modal-total-price" id="modalTotalPrice">Total: â‚±0.00</div>
+          <div class="modal-total-price" id="modalTotalPrice">Total: ₱0.00</div>
           <p style="font-size:12px;color:#94a3b8;margin-top:16px;text-align:center;">
             Show this code to the vendor when picking up your order.
           </p>
@@ -402,22 +402,22 @@
         cancelled: { icon: "fa-ban",           cls: "ic-cancelled", accent: "accent-cancelled", label: "Cancelled",        badge: "cancelled" }
       };
 
-      /* â”€â”€ HTML escape â”€â”€ */
+      /* ── HTML escape ── */
       function esc(s) {
         return String(s)
           .replace(/&/g, "&amp;").replace(/</g, "&lt;")
           .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
       }
 
-      /* â”€â”€ Build one order card HTML string â”€â”€ */
+      /* ── Build one order card HTML string ── */
       function buildCard(o) {
         const cfg      = STATUS_CFG[o.status] || STATUS_CFG.pending;
         const FALLBACK = "https://placehold.co/80x80/f8fafc/94a3b8?text=Food";
 
         const itemsHtml = o.items.map(it =>
           `<div class="order-item-row">
-            <span>${it.qty}Ã— ${esc(it.name)}</span>
-            <span>â‚±${(it.price * it.qty).toFixed(2)}</span>
+            <span>${it.qty} × ${esc(it.name)}</span>
+            <span>₱${(it.price * it.qty).toFixed(2)}</span>
           </div>`
         ).join("");
 
@@ -509,13 +509,13 @@
               </div>
 
               <hr class="order-divider" />
-              <div class="order-total-row"><span>Total: â‚±${o.total.toFixed(2)}</span></div>
+              <div class="order-total-row"><span>Total: ₱${o.total.toFixed(2)}</span></div>
               ${actHtml ? `<div class="order-actions" style="margin-top:14px">${actHtml}</div>` : ""}
             </div>
           </div>`;
       }
 
-      /* â”€â”€ Render all orders from localStorage â”€â”€ */
+      /* ── Render all orders from localStorage ── */
       function renderOrders() {
         const list = document.getElementById("ordersList");
         // Remove previously rendered cards (keep emptyState)
@@ -530,7 +530,7 @@
         updateAllCartBadges();
       }
 
-      /* â”€â”€ Show / hide cards based on active filter tab â”€â”€ */
+      /* ── Show / hide cards based on active filter tab ── */
       function applyFilters() {
         const af = document.querySelector(".filter-btn.active")?.getAttribute("data-filter") || "pending";
         let visible = 0;
@@ -552,7 +552,7 @@
         });
       }
 
-      /* â”€â”€ Wire interactive buttons on dynamically-rendered cards â”€â”€ */
+      /* ── Wire interactive buttons on dynamically-rendered cards ── */
       function wireEvents() {
 
         /* Cancel Order */
@@ -591,7 +591,7 @@
             document.getElementById("modalCodeOrder").textContent =
               `Order #${order.id.slice(-6).toUpperCase()} Â· ${order.vendor}`;
             document.getElementById("modalTotalPrice").textContent =
-              `Total: â‚±${order.total.toFixed(2)}`;
+              `Total: ₱${order.total.toFixed(2)}`;
 
             const mImg = document.getElementById("modalFoodImage");
             if (order.img) { mImg.src = order.img; mImg.style.display = "block"; }
@@ -600,8 +600,8 @@
             document.getElementById("modalOrderItems").innerHTML = order.items.map(it =>
               `<div class="order-item-row"
                 style="display:flex;justify-content:space-between;font-size:14px;padding:4px 0;color:#374151;">
-                <span>${it.qty}Ã— ${esc(it.name)}</span>
-                <span>â‚±${(it.price * it.qty).toFixed(2)}</span>
+                <span>${it.qty} × ${esc(it.name)}</span>
+                <span>₱${(it.price * it.qty).toFixed(2)}</span>
               </div>`
             ).join("");
 
@@ -629,7 +629,7 @@
           });
         });
 
-        /* Order Again â€” re-add items to cart */
+        /* Order Again — re-add items to cart */
         document.querySelectorAll(".js-order-again").forEach(btn => {
           btn.addEventListener("click", () => {
             const order = getOrders().find(o => o.id === btn.dataset.id);
@@ -647,7 +647,7 @@
         });
       }
 
-      /* â”€â”€ Pickup Modal â”€â”€ */
+      /* ── Pickup Modal ── */
       const pickupModal = document.getElementById("pickupModal");
       document.getElementById("closePickupModal").onclick = () =>
         pickupModal.classList.remove("active");
@@ -663,7 +663,7 @@
         };
       }
 
-      /* â”€â”€ Review Modal â”€â”€ */
+      /* ── Review Modal ── */
       document.getElementById("closeReviewModal").onclick = () =>
         document.getElementById("reviewModal").classList.remove("active");
       document.getElementById("reviewOverlay").onclick = () =>
@@ -671,7 +671,7 @@
       document.getElementById("cancelReview").onclick = () =>
         document.getElementById("reviewModal").classList.remove("active");
 
-      /* â”€â”€ Star Rating â”€â”€ */
+      /* ── Star Rating ── */
       const stars      = document.querySelectorAll(".star-btn");
       const ratingText = document.querySelector(".rating-text");
       const starLabels = ["", "Poor", "Fair", "Good", "Very Good", "Excellent"];
@@ -687,13 +687,13 @@
       });
       function highlightStars(n) { stars.forEach((b, i) => b.classList.toggle("active", i < n)); }
 
-      /* â”€â”€ Review Submit â”€â”€ */
+      /* ── Review Submit ── */
       document.getElementById("submitReviewBtn").addEventListener("click", () => {
         document.getElementById("reviewModal").classList.remove("active");
         showToast("success", "fa-star", "Review submitted! Thank you.");
       });
 
-      /* â”€â”€ Confirmation Modal â”€â”€ */
+      /* ── Confirmation Modal ── */
       const confirmModal = document.getElementById("confirmModal");
       let confirmCallback = null;
 
@@ -704,7 +704,7 @@
         let detailHtml = "";
         if (order) {
             const itemsHtml = order.items.map(it => 
-              `<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:14px;color:#334155;font-weight:500;"><span>${it.qty}Ã— ${esc(it.name)}</span><span>â‚±${(it.price * it.qty).toFixed(2)}</span></div>`
+              `<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:14px;color:#334155;font-weight:500;"><span>${it.qty} × ${esc(it.name)}</span><span>₱${(it.price * it.qty).toFixed(2)}</span></div>`
             ).join("");
             
             detailHtml = `
@@ -725,7 +725,7 @@
                 </div>
                 <div style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
                   <span style="font-weight: 600; color: #64748b; font-size: 13px;">Total Amount:</span>
-                  <span style="font-weight: 800; color: #1e293b; font-size: 18px;">â‚±${order.total.toFixed(2)}</span>
+                  <span style="font-weight: 800; color: #1e293b; font-size: 18px;">₱${order.total.toFixed(2)}</span>
                 </div>
               </div>
             `;
@@ -746,7 +746,7 @@
         confirmModal.classList.remove("active"); confirmCallback = null;
       };
 
-      /* â”€â”€ Filter Tabs â”€â”€ */
+      /* ── Filter Tabs ── */
       document.querySelectorAll(".filter-btn").forEach(btn => {
         btn.addEventListener("click", () => {
           document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
