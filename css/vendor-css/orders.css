@@ -86,7 +86,7 @@
   border-radius: 50%;
 }
 
-.filter-dot.Queue {
+.filter-dot.Pending {
   background: #fbbf24;
 }
 
@@ -158,7 +158,7 @@
   border-radius: 18px 18px 0 0;
 }
 
-.accent-Queue {
+.accent-Pending {
   background: #fbbf24;
 }
 
@@ -215,7 +215,7 @@
   flex-shrink: 0;
 }
 
-.order-store-icon.ic-Queue {
+.order-store-icon.ic-Pending {
   background: #fef9c3;
   color: #b45309;
 }
@@ -345,7 +345,7 @@ hr.order-divider {
   justify-content: center;
 }
 
-.status-icon.Queue-icon {
+.status-icon.Pending-icon {
   color: #d97706;
   border-color: #d97706;
 }
@@ -372,7 +372,7 @@ hr.order-divider {
   color: #6b7280;
 }
 
-.status-badge.Queue {
+.status-badge.Pending {
   background: #fef3c7;
   color: #92400e;
 }
