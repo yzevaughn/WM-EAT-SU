@@ -196,7 +196,7 @@
 }
 
 .modal.active,
-#withdrawToggle:checked~.modal {
+#withdrawToggle:checked~#withdrawModal {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -692,7 +692,7 @@
   pointer-events: none;
 }
 
-#withdrawToggle:checked ~ .modal {
+#withdrawToggle:checked ~ #withdrawModal {
   display: flex;
   align-items: center;
   justify-content: center;
