@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU - Admin Approval</title>
+    <title>WM EAT SU - Admin Menu</title>
 
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
@@ -37,7 +37,7 @@
       </div>
       <div class="nav-center"></div>
       <!-- RIGHT: profile -->
-            <div class="nav-right">
+      <div class="nav-right">
         <!-- Notifications -->
         <div class="notification-dropdown">
           <button class="nav-icon-btn" aria-label="Notifications">
@@ -51,26 +51,38 @@
             </div>
             <div class="notification-list">
               <a href="admin-dashboard.html" class="notification-item unread">
-                <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
+                <div class="notif-icon green">
+                  <i class="fa-solid fa-check"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Order #1234 Ready</p>
-                  <p class="notif-desc">Your order from Canteen 1 is ready for pickup.</p>
+                  <p class="notif-desc">
+                    Your order from Canteen 1 is ready for pickup.
+                  </p>
                   <span class="notif-time">2 mins ago</span>
                 </div>
               </a>
               <a href="admin-dashboard.html" class="notification-item unread">
-                <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
+                <div class="notif-icon blue">
+                  <i class="fa-solid fa-info"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Wallet Top-up</p>
-                  <p class="notif-desc">Successfully added &#8369;500.00 to your wallet.</p>
+                  <p class="notif-desc">
+                    Successfully added &#8369;500.00 to your wallet.
+                  </p>
                   <span class="notif-time">1 hour ago</span>
                 </div>
               </a>
               <a href="admin-dashboard.html" class="notification-item">
-                <div class="notif-icon orange"><i class="fa-solid fa-fire-burner"></i></div>
+                <div class="notif-icon orange">
+                  <i class="fa-solid fa-fire-burner"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Order Preparing</p>
-                  <p class="notif-desc">Vendor has started preparing your order.</p>
+                  <p class="notif-desc">
+                    Vendor has started preparing your order.
+                  </p>
                   <span class="notif-time">2 hours ago</span>
                 </div>
               </a>
@@ -134,8 +146,8 @@
           </li>
           <li>
             <a href="admin-approval.html" class="nav-link active">
-              <i class="fa-solid fa-clipboard-check"></i>
-              <span>Content Approval</span>
+              <i class="fa-solid fa-utensils"></i>
+              <span>Menu</span>
             </a>
           </li>
         </ul>
@@ -145,25 +157,35 @@
         <div class="container">
           <!-- title and description of the page -->
           <header>
-            <h1>Content Approval</h1>
-            <p class="subtitle">Review and manage menus and posters submitted by vendors</p>
+            <h1>Menu Management</h1>
+            <p class="subtitle">
+              Review pending content and manage active food items across the
+              platform
+            </p>
           </header>
 
           <!-- filter section for status -->
           <div class="filter-controls">
             <div class="tabs-container" id="approvalTabs">
-              <button class="tab active" data-tab="menus-pending">Menus Pending (<span id="count-menus">0</span>)</button>
-              <button class="tab" data-tab="posters-pending">Posters Pending (<span id="count-posters">0</span>)</button>
+              <button class="tab active" data-tab="menus-pending">
+                Menus Pending (<span id="count-menus">0</span>)
+              </button>
+              <button class="tab" data-tab="posters-pending">
+                Posters Pending (<span id="count-posters">0</span>)
+              </button>
+              <button class="tab" data-tab="all-food">
+                All Active Food (<span id="count-all-food">0</span>)
+              </button>
             </div>
           </div>
 
           <!-- display area -->
           <div id="approvalList" class="approval-grid">
-             <!-- data populated by js -->
+            <!-- data populated by js -->
           </div>
 
           <!-- when theres nothing, show empty state -->
-          <div class="empty-state" id="emptyState" style="display:none">
+          <div class="empty-state" id="emptyState" style="display: none">
             <div class="empty-icon">
               <i class="fa-solid fa-clipboard"></i>
             </div>
@@ -172,12 +194,215 @@
         </div>
       </div>
     </div>
-    
+
+    <!-- View Details Modal -->
+    <div class="modal-backdrop" id="detailsModal">
+      <div class="modal-panel">
+        <div class="modal-header">
+          <h2>Item Details</h2>
+          <button class="btn-close" onclick="closeModal()">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="detail-grid">
+            <div class="detail-item">
+              <span class="detail-label">Status</span>
+              <span class="status-pill" id="detStatusHtml"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Date Submitted</span>
+              <span class="detail-value" id="detDate"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Vendor</span>
+              <span class="detail-value" id="detVendor"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Item Name</span>
+              <span class="detail-value" id="detTitle"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Price</span>
+              <span class="detail-value" id="detPrice" style="color: var(--brand-red); font-weight: 700;"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Tags</span>
+              <div id="detTags" class="ac-tags" style="display: flex; gap: 4px; margin-top: 4px;"></div>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 24px">
+            <span class="detail-label" style="
+                  font-size: 14px;
+                  border-bottom: 1px solid #e5e7eb;
+                  padding-bottom: 8px;
+                  margin-bottom: 16px;
+                  display: block;
+                ">Description</span>
+            <div id="detDescContainer">
+              <p id="detDesc" style="margin: 0; line-height: 1.5; color: #4b5563;"></p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 24px">
+            <span class="detail-label" style="
+                  font-size: 14px;
+                  border-bottom: 1px solid #e5e7eb;
+                  padding-bottom: 8px;
+                  margin-bottom: 16px;
+                  display: block;
+                ">Ingredients</span>
+            <div id="detIngredientsContainer">
+              <p id="detIngredients" style="margin: 0; line-height: 1.5; color: #4b5563; font-style: italic;"></p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 24px">
+            <span class="detail-label" style="
+                  font-size: 14px;
+                  border-bottom: 1px solid #e5e7eb;
+                  padding-bottom: 8px;
+                  margin-bottom: 16px;
+                  display: block;
+                ">Step-by-Step Images</span>
+            <div style="display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px;">
+              <div style="flex: 0 0 160px; height: 120px; background: #f3f4f6; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed #e2e8f0;">
+                <span style="font-size: 24px; font-weight: 800; color: #cbd5e1;">01</span>
+                <span style="font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; margin-top: 4px;">Step One</span>
+              </div>
+              <div style="flex: 0 0 160px; height: 120px; background: #f3f4f6; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed #e2e8f0;">
+                <span style="font-size: 24px; font-weight: 800; color: #cbd5e1;">02</span>
+                <span style="font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; margin-top: 4px;">Step Two</span>
+              </div>
+              <div style="flex: 0 0 160px; height: 120px; background: #f3f4f6; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed #e2e8f0;">
+                <span style="font-size: 24px; font-weight: 800; color: #cbd5e1;">03</span>
+                <span style="font-size: 11px; font-weight: 600; color: #94a3b8; text-transform: uppercase; margin-top: 4px;">Step Three</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="modal-footer"
+          id="detailsFooter"
+          style="
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            padding: 16px 24px;
+            border-top: 1px solid #e5e7eb;
+          "
+        >
+          <!-- Action buttons injected by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal-backdrop" id="confirmModal">
+      <div class="modal-panel" style="max-width: 400px; text-align: center">
+        <div class="modal-body" style="padding-top: 32px">
+          <div
+            class="modal-icon"
+            style="font-size: 48px; color: #ef4444; margin-bottom: 16px"
+            id="confirmIcon"
+          >
+            <i class="fa-solid fa-circle-exclamation"></i>
+          </div>
+          <h2
+            style="
+              font-size: 20px;
+              font-weight: 800;
+              color: #0f172a;
+              margin-bottom: 8px;
+            "
+            id="confirmTitle"
+          >
+            Confirm Action
+          </h2>
+          <p
+            style="font-size: 14px; color: #64748b; margin-bottom: 24px"
+            id="confirmMessage"
+          >
+            Are you sure you want to do this?
+          </p>
+
+          <div
+            id="confirmInputContainer"
+            style="display: none; margin-bottom: 24px; text-align: left"
+          >
+            <label
+              style="
+                display: block;
+                font-size: 13px;
+                font-weight: 600;
+                color: #475569;
+                margin-bottom: 8px;
+              "
+              id="confirmInputLabel"
+              >Reason</label
+            >
+            <textarea
+              id="confirmInput"
+              class="form-control"
+              rows="3"
+              placeholder="Enter reason here..."
+              style="
+                width: 100%;
+                border: 1px solid #cbd5e1;
+                border-radius: 8px;
+                padding: 12px;
+                font-family: inherit;
+                font-size: 14px;
+                resize: vertical;
+                box-sizing: border-box;
+                outline: none;
+                transition: border-color 0.2s;
+              "
+            ></textarea>
+          </div>
+
+          <div
+            class="form-actions"
+            style="display: flex; justify-content: center; gap: 12px"
+          >
+            <button
+              class="btn-submit"
+              id="submitConfirmBtn"
+              style="
+                padding: 10px 24px;
+                border: none;
+                color: white;
+                border-radius: 8px;
+                font-weight: 600;
+                cursor: pointer;
+                background: linear-gradient(135deg, #10b981, #059669);
+                box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+              "
+            >
+              Confirm
+            </button>
+            <button
+              class="btn-ghost"
+              id="cancelConfirmBtn"
+              style="
+                padding: 10px 24px;
+                border: 1px solid #cbd5e1;
+                background: transparent;
+                color: #475569;
+                border-radius: 8px;
+                font-weight: 600;
+                cursor: pointer;
+              "
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Scripts -->
     <script src="../../script/admin-js/admin-approval.js"></script>
   </body>
 </html>
-
-
-
-
