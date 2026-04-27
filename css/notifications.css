@@ -7,9 +7,9 @@
   max-width: 800px;
   margin: 0 auto;
   background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, .05);
-  border: 1px solid #f0f0f5;
+  border-radius: var(--radius-lg, 28px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .04);
+  border: 1px solid #f1f5f9;
   overflow: hidden;
 }
 
@@ -50,9 +50,10 @@
 }
 
 .filter-btn.active {
-  background: var(--red);
+  background: var(--brand-red, #ea333f);
   color: #fff;
-  border-color: var(--red);
+  border-color: var(--brand-red, #ea333f);
+  box-shadow: 0 4px 12px rgba(234, 51, 63, 0.25);
 }
 
 .notifications-list {
