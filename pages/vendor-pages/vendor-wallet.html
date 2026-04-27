@@ -520,11 +520,23 @@
         document.getElementById("amountError").classList.remove("show");
       });
 
-      paymentInputs.forEach((input) => {
+      paymentInputs.forEach((input, index) => {
         input.addEventListener("change", () => {
+          // Add active class to the selected method's label
+          const labels = document.querySelectorAll(".payment-method-btn");
+          labels.forEach((l) => l.classList.remove("active"));
+          labels[index].classList.add("active");
+
           paymentMethods.classList.remove("invalid");
           document.getElementById("methodError").classList.remove("show");
         });
+      });
+
+      // Reset modal when opened
+      document.getElementById("withdrawToggle").addEventListener("change", (e) => {
+        if (e.target.checked) {
+          goToStep1();
+        }
       });
 
       document.getElementById("mobileNumber").addEventListener("input", () => {
@@ -538,15 +550,28 @@
 
       quickAmounts.forEach((btn) => {
         btn.addEventListener("click", (e) => {
-          // Parse numbers from innerText like "&#8369;500"
-          const val = parseInt(e.target.innerText.replace("&#8369;", ""));
+          // Extract only numbers from the button text
+          const val = parseInt(btn.textContent.replace(/[^0-9]/g, ""));
           if (!isNaN(val)) {
             customInput.value = val;
+            
+            // Manage active class
+            quickAmounts.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
             // Clear error when quick amount is picked
             customInput.classList.remove("invalid");
             document.getElementById("amountError").classList.remove("show");
           }
         });
+      });
+
+      // Clear quick amount selection when typing a custom amount
+      customInput.addEventListener("input", () => {
+        if (customInput.value) {
+          quickAmounts.forEach(b => b.classList.remove("active"));
+          document.querySelectorAll('input[name="amount"]').forEach(i => i.checked = false);
+        }
       });
 
       // WIZARD LOGIC
@@ -581,8 +606,8 @@
               ? "Maya"
               : "Bank Transfer";
         document.getElementById("summaryMethod").innerText = summaryMethodText;
-        document.getElementById("summaryAmount").innerText =
-          "&#8369;" + amount.toFixed(2);
+        document.getElementById("summaryAmount").innerHTML =
+          "&#8369;" + amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
         // Setup Step 2 Fields
         if (selectedMethod === "card") {
@@ -612,6 +637,10 @@
 
       function goToStep1() {
         clearErrors();
+        // Reset payment methods UI if needed (uncomment if you want to clear selection on back)
+        // paymentInputs.forEach(i => i.checked = false);
+        // document.querySelectorAll(".payment-method-btn").forEach(b => b.classList.remove("active"));
+
         document.getElementById("step3Body").classList.add("hidden-step");
         document.getElementById("step3Footer").classList.add("hidden-step");
         document.getElementById("step2Body").classList.add("hidden-step");
@@ -753,6 +782,10 @@
         setTimeout(() => {
           goToStep1();
           customInput.value = "";
+          quickAmounts.forEach(b => b.classList.remove("active"));
+          paymentInputs.forEach(i => i.checked = false);
+          document.querySelectorAll(".payment-method-btn").forEach(b => b.classList.remove("active"));
+          
           document.getElementById("mobileNumber").value = "";
           document.getElementById("bankAccount").value = "";
           document.querySelectorAll(".otp-digit").forEach((b) => {
