@@ -397,6 +397,249 @@
         grid-column: 1 / -1;
       }
 
+      /* LOCATION MAP SECTION */
+      .location-map-section {
+        background: white;
+        border-radius: 1rem;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        grid-column: 1 / -1;
+        position: relative;
+      }
+      .location-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.1rem 1.25rem;
+        border-bottom: 1px solid #f3f4f6;
+      }
+      .location-header h2 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #1f2937;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .location-header h2 i {
+        color: #ef4444;
+        font-size: 0.95rem;
+      }
+      .location-body {
+        padding: 0;
+        position: relative;
+      }
+      #vendorMap {
+        width: 100%;
+        height: 500px;
+        border-radius: 0;
+        margin: 0;
+        border: none;
+      }
+      /* Map Overlay & Legend */
+      .map-overlay {
+        position: absolute;
+        top: 1.25rem;
+        left: 1.25rem;
+        background: white;
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        padding: 0.75rem 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        z-index: 10;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.85rem;
+        color: #6b7280;
+      }
+      .legend-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      /* Map Controls */
+      .map-controls {
+        position: absolute;
+        bottom: 1.25rem;
+        right: 1.25rem;
+        background: white;
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 10;
+      }
+      .control-btn {
+        width: 40px;
+        height: 40px;
+        border: none;
+        background: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6b7280;
+        transition: all 0.2s;
+        font-size: 0.95rem;
+      }
+      .control-btn:hover {
+        background: #f3f4f6;
+        color: #ef4444;
+      }
+      .control-divider {
+        height: 1px;
+        background: #e5e7eb;
+      }
+      /* Info Panel */
+      .map-info-panel {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-top: 1px solid #e5e7eb;
+        border-radius: 20px 20px 0 0;
+        padding: 1.25rem;
+        box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+        z-index: 20;
+        max-height: 50vh;
+        overflow-y: auto;
+      }
+      .map-info-panel.active {
+        transform: translateY(0);
+      }
+      .info-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      .info-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #1f2937;
+      }
+      .info-close {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #9ca3af;
+        transition: all 0.2s;
+        border-radius: 8px;
+      }
+      .info-close:hover {
+        background: #f3f4f6;
+        color: #ef4444;
+      }
+      .info-details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+      .detail-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0.75rem;
+        background: #f9fafb;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        color: #6b7280;
+      }
+      .detail-row i {
+        color: #ef4444;
+        font-size: 1rem;
+      }
+      .coord-inputs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+      .coord-input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+      .coord-input-group label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #6b7280;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .coord-input-group input {
+        padding: 0.5rem 0.75rem;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-family: "Inter", monospace;
+        background: white;
+      }
+      .coord-input-group input:focus {
+        outline: none;
+        border-color: #ef4444;
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+      }
+      .info-actions {
+        display: flex;
+        gap: 0.75rem;
+      }
+      .btn-save-location {
+        flex: 1;
+        background: #ef4444;
+        color: white;
+        border: none;
+        padding: 0.65rem 1rem;
+        border-radius: 7px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: background 0.2s;
+      }
+      .btn-save-location:hover {
+        background: #dc2626;
+      }
+      .btn-reset-location {
+        background: #f3f4f6;
+        color: #6b7280;
+        border: 1px solid #d1d5db;
+        padding: 0.65rem 1rem;
+        border-radius: 7px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s;
+      }
+      .btn-reset-location:hover {
+        background: #e5e7eb;
+        border-color: #9ca3af;
+        color: #374151;
+      }
+
       @media (max-width: 768px) {
         .profile-page {
           padding: 1rem;
@@ -449,7 +692,7 @@
           </a>
         </div>
       </div>
-            <div class="nav-right">
+      <div class="nav-right">
         <!-- Notifications -->
         <div class="notification-dropdown">
           <button class="nav-icon-btn" aria-label="Notifications">
@@ -463,26 +706,38 @@
             </div>
             <div class="notification-list">
               <a href="vendor-orders.html" class="notification-item unread">
-                <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
+                <div class="notif-icon green">
+                  <i class="fa-solid fa-check"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Order #1234 Ready</p>
-                  <p class="notif-desc">Your order from Canteen 1 is ready for pickup.</p>
+                  <p class="notif-desc">
+                    Your order from Canteen 1 is ready for pickup.
+                  </p>
                   <span class="notif-time">2 mins ago</span>
                 </div>
               </a>
               <a href="vendor-wallet.html" class="notification-item unread">
-                <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
+                <div class="notif-icon blue">
+                  <i class="fa-solid fa-info"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Wallet Top-up</p>
-                  <p class="notif-desc">Successfully added &#8369;500.00 to your wallet.</p>
+                  <p class="notif-desc">
+                    Successfully added &#8369;500.00 to your wallet.
+                  </p>
                   <span class="notif-time">1 hour ago</span>
                 </div>
               </a>
               <a href="vendor-orders.html" class="notification-item">
-                <div class="notif-icon orange"><i class="fa-solid fa-fire-burner"></i></div>
+                <div class="notif-icon orange">
+                  <i class="fa-solid fa-fire-burner"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Order Preparing</p>
-                  <p class="notif-desc">Vendor has started preparing your order.</p>
+                  <p class="notif-desc">
+                    Vendor has started preparing your order.
+                  </p>
                   <span class="notif-time">2 hours ago</span>
                 </div>
               </a>
@@ -738,15 +993,111 @@
             </div>
           </div>
           <!-- /two-col -->
+
+          <!-- LOCATION MAP SECTION -->
+          <div class="location-map-section">
+            <div class="location-header">
+              <h2>
+                <i class="fa-solid fa-map-location-dot"></i> Business Location
+              </h2>
+            </div>
+            <div class="location-body">
+              <!-- Map Legend -->
+              <div class="map-overlay">
+                <div class="legend-item">
+                  <div class="legend-dot" style="background: #ef4444"></div>
+                  <span>Your Location</span>
+                </div>
+              </div>
+
+              <!-- Map Controls -->
+              <div class="map-controls">
+                <button
+                  class="control-btn"
+                  title="Zoom In"
+                  onclick="vendorMap.setZoom(vendorMap.getZoom() + 1)"
+                >
+                  <i class="fa-solid fa-plus"></i>
+                </button>
+                <button
+                  class="control-btn"
+                  title="Zoom Out"
+                  onclick="vendorMap.setZoom(vendorMap.getZoom() - 1)"
+                >
+                  <i class="fa-solid fa-minus"></i>
+                </button>
+                <div class="control-divider"></div>
+                <button
+                  class="control-btn"
+                  title="Reset View"
+                  onclick="resetVendorMapView()"
+                >
+                  <i class="fa-solid fa-location-crosshairs"></i>
+                </button>
+              </div>
+
+              <!-- Google Map Container -->
+              <div id="vendorMap"></div>
+
+              <!-- Location Info Panel -->
+              <div class="map-info-panel" id="locationPanel">
+                <div class="info-header">
+                  <h2 class="info-title">Your Location</h2>
+                  <div class="info-close" onclick="closeLocationPanel()">
+                    <i class="fa-solid fa-xmark"></i>
+                  </div>
+                </div>
+                <div class="info-details">
+                  <div class="detail-row">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span id="locCoords">Click or drag marker on map</span>
+                  </div>
+                </div>
+                <div class="coord-inputs">
+                  <div class="coord-input-group">
+                    <label for="latInput">Latitude</label>
+                    <input
+                      type="text"
+                      id="latInput"
+                      placeholder="0.0000"
+                      readonly
+                    />
+                  </div>
+                  <div class="coord-input-group">
+                    <label for="lngInput">Longitude</label>
+                    <input
+                      type="text"
+                      id="lngInput"
+                      placeholder="0.0000"
+                      readonly
+                    />
+                  </div>
+                </div>
+                <div class="info-actions">
+                  <button class="btn-save-location" id="saveLocBtn">
+                    <i class="fa-solid fa-floppy-disk"></i> Save Location
+                  </button>
+                  <button class="btn-reset-location" id="resetLocBtn">
+                    <i class="fa-solid fa-undo"></i> Reset
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /location-map-section -->
         </div>
         <!-- /profile-page -->
       </div>
       <!-- /main-content -->
     </div>
     <!-- /layout -->
+    <!-- Location Map Script First -->
+    <script src="../../script/vendor-js/location-map.js"></script>
+    <!-- Google Maps API -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO6gC7V8EijyHtXjb4Iypbpvi0Z-ih1S0&callback=initVendorLocationMap"
+      async
+      defer
+    ></script>
   </body>
 </html>
-
-
-
-

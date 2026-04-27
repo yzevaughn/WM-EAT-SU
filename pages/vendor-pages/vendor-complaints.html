@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WM EAT SU - Vendor Reports & Complaints</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../css/navbar.css" />
+    <link rel="stylesheet" href="../../css/vendor-css/complaints.css" />
+  </head>
+  <body>
+    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+
+    <!-- TOP NAVBAR -->
+    <div class="top-nav">
+      <div class="nav-left">
+        <label for="menu-checkbox" class="menu-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </label>
+        <a href="#" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
+        </a>
+      </div>
+
+      <div class="nav-center">
+        <div class="role-switcher" id="roleSwitcher">
+          <a
+            href="../student/student-dashboard.html"
+            class="role-btn"
+            id="roleStudent"
+          >
+            <i class="fa-solid fa-graduation-cap"></i><span>Student</span>
+          </a>
+          <a
+            href="vendor-dashboard.html"
+            class="role-btn active"
+            id="roleVendor"
+          >
+            <i class="fa-solid fa-store"></i><span>Vendor</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="nav-right">
+        <!-- Notifications -->
+        <div class="notification-dropdown">
+          <button class="nav-icon-btn" aria-label="Notifications">
+            <i class="fa-regular fa-bell"></i>
+            <span class="notification-badge">2</span>
+          </button>
+          <div class="notification-menu">
+            <div class="notification-header">
+              <h3>Notifications</h3>
+              <button class="mark-read-btn">Mark all as read</button>
+            </div>
+            <div class="notification-list">
+              <a href="vendor-orders.html" class="notification-item unread">
+                <div class="notif-icon green">
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <div class="notif-content">
+                  <p class="notif-title">Report Resolved</p>
+                  <p class="notif-desc">
+                    Your complaint has been reviewed and resolved by admin.
+                  </p>
+                  <span class="notif-time">2 hours ago</span>
+                </div>
+              </a>
+              <a href="vendor-wallet.html" class="notification-item unread">
+                <div class="notif-icon blue">
+                  <i class="fa-solid fa-info"></i>
+                </div>
+                <div class="notif-content">
+                  <p class="notif-title">New Message</p>
+                  <p class="notif-desc">
+                    Admin replied to your payment dispute report.
+                  </p>
+                  <span class="notif-time">4 hours ago</span>
+                </div>
+              </a>
+            </div>
+            <div class="notification-footer">
+              <a href="vendor-notifications.html">View all notifications</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile">
+          <div class="profile-info">
+            <span class="profile-name">Vaughn Evangelista</span>
+            <span class="email">vaughn.vendor@wm.edu.ph</span>
+          </div>
+          <div class="profile-dropdown">
+            <button class="profile-btn">
+              <img
+                src="../../images/pfp.jpg"
+                class="profile-pic"
+                alt="Profile"
+              />
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="vendor-profile.html" class="dropdown-item">
+                <i class="fa-solid fa-gear"></i><span>Settings</span>
+              </a>
+              <a href="../../index.html" class="dropdown-item">
+                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAYOUT -->
+    <div class="layout">
+      <!-- SIDEBAR -->
+      <div class="left-nav" id="sidebar">
+        <ul class="nav-list">
+          <li>
+            <a href="vendor-dashboard.html" class="nav-link"
+              ><i class="fa-solid fa-house"></i><span>Dashboard</span></a
+            >
+          </li>
+          <li>
+            <a href="vendor-orders.html" class="nav-link"
+              ><i class="fa-solid fa-clock-rotate-left"></i
+              ><span>Orders</span></a
+            >
+          </li>
+          <li>
+            <a href="vendor-menu.html" class="nav-link"
+              ><i class="fa-solid fa-utensils"></i><span>Menu</span></a
+            >
+          </li>
+          <li>
+            <a href="vendor-reviews.html" class="nav-link"
+              ><i class="fa-solid fa-star"></i><span>Reviews</span></a
+            >
+          </li>
+          <li>
+            <a href="vendor-sales-payments.html" class="nav-link"
+              ><i class="fa-solid fa-chart-line"></i
+              ><span>Sales &amp; Payments</span></a
+            >
+          </li>
+          <li>
+            <a href="vendor-wallet.html" class="nav-link"
+              ><i class="fa-solid fa-wallet"></i><span>Wallet</span></a
+            >
+          </li>
+          <li>
+            <a href="vendor-complaints.html" class="nav-link active"
+              ><i class="fa-solid fa-triangle-exclamation"></i
+              ><span>Reports</span></a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div class="main-content">
+        <div class="complaints-container">
+          <!-- Header -->
+          <div class="complaints-header">
+            <div class="header-text">
+              <h1>Reports & Complaints</h1>
+              <p>Track reported issues or submit a new complaint.</p>
+            </div>
+            <button class="btn-primary" onclick="openModal('formModal')">
+              <i class="fa-solid fa-plus"></i> File a Report
+            </button>
+          </div>
+
+          <!-- Controls -->
+          <div class="controls-bar">
+            <div class="search-box">
+              <i class="fa-solid fa-search"></i>
+              <input
+                type="text"
+                class="search-input"
+                id="searchInput"
+                placeholder="Search reports..."
+              />
+            </div>
+            <div class="filter-tabs">
+              <button class="filter-tab active" data-filter="review">
+                Under Review
+              </button>
+              <button class="filter-tab" data-filter="resolved">
+                Resolved
+              </button>
+            </div>
+          </div>
+
+          <!-- List -->
+          <div class="complaints-list" id="reportsList">
+            <!-- Reports dynamically injected here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         MODALS
+         ════════════════════════════════════════ -->
+
+    <!-- New Report Form Modal -->
+    <div class="modal-backdrop" id="formModal">
+      <div class="modal-panel">
+        <div class="modal-header">
+          <h2>File a New Report</h2>
+          <button class="btn-close" onclick="closeModal('formModal')">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="reportForm" onsubmit="handleReportSubmit(event)">
+            <div class="form-group">
+              <label>Report Type *</label>
+              <select class="form-control" id="formType" required>
+                <option value="">Select a type</option>
+                <option value="payment">Payment Issue</option>
+                <option value="order">Order Dispute</option>
+                <option value="student">Student Complaint</option>
+                <option value="system">System/Technical Issue</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Related Order (Optional)</label>
+              <select class="form-control" id="formOrder">
+                <option value="">No specific order</option>
+                <option value="#ORD-2026-1547 - Student Order">
+                  #ORD-2026-1547 - Student Order
+                </option>
+                <option value="#ORD-2026-1548 - Food Delivery">
+                  #ORD-2026-1548 - Food Delivery
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Subject *</label>
+              <input
+                type="text"
+                class="form-control"
+                id="formSubject"
+                placeholder="Brief description of the issue"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Contact Number (Optional)</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="formPhone"
+                placeholder="Mobile number"
+              />
+            </div>
+
+            <div class="form-group">
+              <label>Description *</label>
+              <textarea
+                class="form-control"
+                id="formDesc"
+                placeholder="Provide detailed information about your concern..."
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Attach Evidence (Optional)</label>
+              <div class="upload-area" id="uploadArea">
+                <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                <p class="upload-text">Click or drag image to upload</p>
+                <p class="upload-subtext">SVG, PNG, JPG or GIF (max. 5MB)</p>
+                <input type="file" id="fileInput" accept="image/*" />
+              </div>
+              <div class="preview-container" id="previewContainer">
+                <img
+                  src=""
+                  alt="Preview"
+                  class="preview-img"
+                  id="imagePreview"
+                />
+                <button
+                  type="button"
+                  class="btn-remove-img"
+                  onclick="removeImage()"
+                >
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost" onclick="closeModal('formModal')">
+            Cancel
+          </button>
+          <button class="btn-primary" type="submit" form="reportForm">
+            Submit Report
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Report Details Modal -->
+    <div class="modal-backdrop" id="detailsModal">
+      <div class="modal-panel">
+        <div class="modal-header">
+          <h2>Report Details</h2>
+          <button class="btn-close" onclick="closeModal('detailsModal')">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="detail-grid">
+            <div class="detail-item">
+              <span class="detail-label">Status</span>
+              <span class="badge" id="detailStatus"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Date Submitted</span>
+              <span class="detail-value" id="detailDate"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Type</span>
+              <span class="detail-value" id="detailType"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Subject</span>
+              <span class="detail-value" id="detailSubject"></span>
+            </div>
+          </div>
+
+          <span class="detail-label">Description</span>
+          <div class="detail-desc-box" id="detailDesc"></div>
+
+          <div id="detailConclusionSection" style="display: none">
+            <span class="detail-label">Admin Response</span>
+            <div class="conclusion-box" id="detailConclusion"></div>
+          </div>
+
+          <span class="detail-label">Evidence</span>
+          <div id="detailAttachmentContainer" style="margin-top: 8px">
+            <!-- Attached image or placeholder will go here -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-ghost" onclick="closeModal('detailsModal')">
+            Close
+          </button>
+          <button
+            class="btn-danger"
+            id="btnRemoveReport"
+            style="display: none"
+            onclick="deleteReport()"
+          >
+            Delete Report
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+      // Mock Data
+      let reports = [
+        {
+          id: "VRP-002",
+          type: "payment",
+          subject: "Payment Not Credited to Wallet",
+          order: "#ORD-2026-1549 - Multiple Orders",
+          desc: "I submitted payment for orders totaling PHP 850 but the amount is not showing in my wallet. Been waiting for 2 hours.",
+          status: "review",
+          date: "March 5, 2026",
+          img: null,
+          phone: "09123456789",
+        },
+        {
+          id: "VRP-001",
+          type: "student",
+          subject: "Student Refused to Pay",
+          order: "#ORD-2026-1547 - Food Order",
+          desc: "Student picked up their order but refused to pay when I requested payment. They claimed they would pay through the app but never did.",
+          status: "resolved",
+          date: "March 1, 2026",
+          img: null,
+          phone: "09187654321",
+          conclusion:
+            "Our team reviewed the order history and confirmed the student's account. A payment reminder was sent to them, and the full amount (PHP 120) was received and credited to your wallet on March 2, 2026.",
+        },
+      ];
+
+      let currentFilter = "review";
+      let currentViewId = null;
+
+      // DOM Elements
+      const reportsList = document.getElementById("reportsList");
+      const searchInput = document.getElementById("searchInput");
+      const filterTabs = document.querySelectorAll(".filter-tab");
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", () => {
+        renderReports();
+
+        // Setup filter listeners
+        filterTabs.forEach((tab) => {
+          tab.addEventListener("click", (e) => {
+            filterTabs.forEach((t) => t.classList.remove("active"));
+            e.target.classList.add("active");
+            currentFilter = e.target.getAttribute("data-filter");
+            renderReports();
+          });
+        });
+
+        // Setup search listener
+        searchInput.addEventListener("input", () => {
+          renderReports();
+        });
+
+        // Drag & drop logic
+        setupDragDrop();
+      });
+
+      // Render List
+      function renderReports() {
+        const searchTerm = searchInput.value.toLowerCase();
+
+        const filtered = reports.filter((r) => {
+          const matchFilter = r.status === currentFilter;
+          const matchSearch =
+            r.subject.toLowerCase().includes(searchTerm) ||
+            r.id.toLowerCase().includes(searchTerm) ||
+            r.type.toLowerCase().includes(searchTerm) ||
+            (r.order && r.order.toLowerCase().includes(searchTerm));
+          return matchFilter && matchSearch;
+        });
+
+        reportsList.innerHTML = "";
+
+        if (filtered.length === 0) {
+          reportsList.innerHTML = `
+            <div class="empty-state">
+              <i class="fa-solid fa-face-smile-beam"></i>
+              <h3>No ${currentFilter === "review" ? "active" : ""} reports found</h3>
+              <p>Everything looks good right now.</p>
+              ${currentFilter === "review" ? `<button class="btn-primary" onclick="openModal('formModal')">File a Report</button>` : ""}
+            </div>
+          `;
+          return;
+        }
+
+        filtered.forEach((r) => {
+          const isResolved = r.status === "resolved";
+          const badgeClass = isResolved ? "resolved" : "review";
+          const badgeText = isResolved ? "Resolved" : "Under Review";
+          const typeLabel = {
+            payment: "💳 Payment",
+            order: "📦 Order",
+            student: "👤 Student",
+            system: "⚙️ System",
+            other: "ℹ️ Other",
+          }[r.type];
+          const orderHtml = r.order
+            ? `<p class="complaint-order"><i class="fa-solid fa-receipt"></i> ${r.order}</p>`
+            : "";
+
+          const item = document.createElement("div");
+          item.className = `complaint-item ${isResolved ? "resolved" : ""}`;
+          item.onclick = () => openDetails(r.id);
+
+          item.innerHTML = `
+            <div class="complaint-header">
+              <div class="complaint-title-group">
+                <span class="type-badge">${typeLabel}</span>
+                <h3>${r.subject}</h3>
+              </div>
+              <span class="badge ${badgeClass}">${badgeText}</span>
+            </div>
+            ${orderHtml}
+            <p class="complaint-desc">${r.desc}</p>
+            <div class="complaint-footer">
+              <span>Filed: ${r.date}</span>
+              <span class="view-details-text">View Details <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          `;
+          reportsList.appendChild(item);
+        });
+      }
+
+      // Modal Handlers
+      function openModal(id) {
+        document.getElementById(id).classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal(id) {
+        document.getElementById(id).classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+
+      // Details View
+      function openDetails(id) {
+        currentViewId = id;
+        const r = reports.find((x) => x.id === id);
+        if (!r) return;
+
+        document.getElementById("detailStatus").className = `badge ${r.status}`;
+        document.getElementById("detailStatus").innerText =
+          r.status === "resolved" ? "Resolved" : "Under Review";
+
+        document.getElementById("detailDate").innerText = r.date;
+        document.getElementById("detailType").innerText = {
+          payment: "Payment Issue",
+          order: "Order Dispute",
+          student: "Student Complaint",
+          system: "System Issue",
+          other: "Other",
+        }[r.type];
+        document.getElementById("detailSubject").innerText = r.subject;
+        document.getElementById("detailDesc").innerText = r.desc;
+
+        const attachmentContainer = document.getElementById(
+          "detailAttachmentContainer",
+        );
+        if (r.img) {
+          attachmentContainer.innerHTML = `<img src="${r.img}" class="detail-image" alt="Attachment" onclick="window.open('${r.img}', '_blank')"/>`;
+        } else {
+          attachmentContainer.innerHTML = `
+            <div class="detail-image-placeholder">
+              <i class="fa-regular fa-image"></i>
+              <span>No evidence attached</span>
+            </div>
+          `;
+        }
+
+        // Handle conclusion display & Buttons
+        const conclusionSec = document.getElementById(
+          "detailConclusionSection",
+        );
+        const btnRemove = document.getElementById("btnRemoveReport");
+
+        if (r.status === "resolved") {
+          btnRemove.style.display = "inline-flex";
+
+          if (r.conclusion) {
+            conclusionSec.style.display = "block";
+            document.getElementById("detailConclusion").innerText =
+              r.conclusion;
+          } else {
+            conclusionSec.style.display = "block";
+            document.getElementById("detailConclusion").innerText =
+              "This report has been reviewed and marked as resolved by the administration.";
+          }
+        } else {
+          btnRemove.style.display = "none";
+          conclusionSec.style.display = "none";
+        }
+
+        openModal("detailsModal");
+      }
+
+      function deleteReport() {
+        if (!currentViewId) return;
+        if (
+          confirm(
+            "Are you sure you want to permanently remove this report record?",
+          )
+        ) {
+          reports = reports.filter((x) => x.id !== currentViewId);
+          closeModal("detailsModal");
+          showToast("Report removed.");
+          renderReports();
+        }
+      }
+
+      // Form Submission
+      function handleReportSubmit(e) {
+        e.preventDefault();
+
+        const newReport = {
+          id:
+            "VRP-" +
+            Math.floor(Math.random() * 1000)
+              .toString()
+              .padStart(3, "0"),
+          type: document.getElementById("formType").value,
+          subject: document.getElementById("formSubject").value,
+          order: document.getElementById("formOrder").value,
+          phone: document.getElementById("formPhone").value,
+          desc: document.getElementById("formDesc").value,
+          status: "review",
+          date: new Date().toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          }),
+          img: document.getElementById("imagePreview").src || null,
+        };
+
+        // Don't save image if it's empty/placeholder
+        if (
+          !document
+            .getElementById("previewContainer")
+            .classList.contains("active")
+        ) {
+          newReport.img = null;
+        }
+
+        reports.unshift(newReport); // Add to top
+
+        closeModal("formModal");
+        e.target.reset();
+        removeImage();
+        showToast("Your report has been submitted successfully.");
+
+        // Ensure we are viewing "Under Review"
+        if (currentFilter !== "review") {
+          document.querySelector('[data-filter="review"]').click();
+        } else {
+          renderReports();
+        }
+      }
+
+      // Drag & Drop Upload
+      function setupDragDrop() {
+        const dropArea = document.getElementById("uploadArea");
+        const fileInput = document.getElementById("fileInput");
+
+        ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+          dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+
+        ["dragenter", "dragover"].forEach((eventName) => {
+          dropArea.addEventListener(
+            eventName,
+            () => dropArea.classList.add("dragover"),
+            false,
+          );
+        });
+
+        ["dragleave", "drop"].forEach((eventName) => {
+          dropArea.addEventListener(
+            eventName,
+            () => dropArea.classList.remove("dragover"),
+            false,
+          );
+        });
+
+        dropArea.addEventListener("drop", (e) => {
+          const dt = e.dataTransfer;
+          const files = dt.files;
+          handleFiles(files);
+        });
+
+        fileInput.addEventListener("change", function () {
+          handleFiles(this.files);
+        });
+      }
+
+      function handleFiles(files) {
+        if (files.length === 0) return;
+        const file = files[0];
+
+        if (!file.type.startsWith("image/")) {
+          alert("Please upload an image file.");
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          document.getElementById("imagePreview").src = e.target.result;
+          document.getElementById("uploadArea").style.display = "none";
+          document.getElementById("previewContainer").classList.add("active");
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function removeImage() {
+        document.getElementById("fileInput").value = "";
+        document.getElementById("imagePreview").src = "";
+        document.getElementById("uploadArea").style.display = "block";
+        document.getElementById("previewContainer").classList.remove("active");
+      }
+
+      // Toast System
+      function showToast(message) {
+        const container = document.getElementById("toastContainer");
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${message}`;
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.opacity = "0";
+          toast.style.transform = "translateX(100%)";
+          toast.style.transition = "all 0.3s ease";
+          setTimeout(() => toast.remove(), 300);
+        }, 3000);
+      }
+    </script>
+  </body>
+</html>
