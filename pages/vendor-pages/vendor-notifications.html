@@ -1,9 +1,9 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU ï¿½ Notifications</title>
+    <title>WM EAT SU - Notifications</title>
 
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
@@ -15,7 +15,8 @@
     />
     <link rel="stylesheet" href="../../css/navbar.css" />
     <link rel="stylesheet" href="../../css/vendor-css/dashboard.css" />
-  <link rel="stylesheet" href="../../css/notifications.css" /></head>
+    <link rel="stylesheet" href="../../css/notifications.css" />
+  </head>
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
 
@@ -57,7 +58,7 @@
       </div>
 
       <!-- RIGHT: profile -->
-            <div class="nav-right">
+      <div class="nav-right">
         <!-- Notifications -->
         <div class="notification-dropdown">
           <button class="nav-icon-btn" aria-label="Notifications">
@@ -71,26 +72,38 @@
             </div>
             <div class="notification-list">
               <a href="vendor-orders.html" class="notification-item unread">
-                <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
+                <div class="notif-icon green">
+                  <i class="fa-solid fa-check"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Order #1234 Ready</p>
-                  <p class="notif-desc">Your order from Canteen 1 is ready for pickup.</p>
+                  <p class="notif-desc">
+                    Your order from Canteen 1 is ready for pickup.
+                  </p>
                   <span class="notif-time">2 mins ago</span>
                 </div>
               </a>
               <a href="vendor-wallet.html" class="notification-item unread">
-                <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
+                <div class="notif-icon blue">
+                  <i class="fa-solid fa-info"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Wallet Top-up</p>
-                  <p class="notif-desc">Successfully added &#8369;500.00 to your wallet.</p>
+                  <p class="notif-desc">
+                    Successfully added &#8369;500.00 to your wallet.
+                  </p>
                   <span class="notif-time">1 hour ago</span>
                 </div>
               </a>
               <a href="vendor-orders.html" class="notification-item">
-                <div class="notif-icon orange"><i class="fa-solid fa-fire-burner"></i></div>
+                <div class="notif-icon orange">
+                  <i class="fa-solid fa-fire-burner"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Order Preparing</p>
-                  <p class="notif-desc">Vendor has started preparing your order.</p>
+                  <p class="notif-desc">
+                    Vendor has started preparing your order.
+                  </p>
                   <span class="notif-time">2 hours ago</span>
                 </div>
               </a>
@@ -118,6 +131,9 @@
               <a href="vendor-profile.html" class="dropdown-item">
                 <i class="fa-solid fa-gear"></i><span>Settings</span>
               </a>
+              <a href="vendor-complaints.html" class="dropdown-item">
+                <i class="fa-solid fa-flag"></i><span>Reports</span>
+              </a>
               <a href="../../index.html" class="dropdown-item">
                 <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
               </a>
@@ -138,7 +154,7 @@
 
         <ul class="nav-list">
           <li>
-            <a href="vendor-dashboard.html" class="nav-link active">
+            <a href="vendor-dashboard.html" class="nav-link">
               <i class="fa-solid fa-house"></i>
               <span>Dashboard</span>
             </a>
@@ -173,193 +189,54 @@
               <span>Wallet</span>
             </a>
           </li>
-          </ul>
+        </ul>
       </div>
 
       <div class="main-content">
-
-      <!-- Notifications Component -->
-      <div class="notifications-container" style="margin-top: 20px;">
-        <div class="notifications-header">
-          <h1>All Notifications</h1>
-          <div class="notifications-filters">
-            <button class="filter-btn active">All</button>
-            <button class="filter-btn">Unread</button>
+        <!-- Notifications Component -->
+        <div class="notifications-container" style="margin-top: 20px">
+          <div class="notifications-header">
+            <h1>All Notifications</h1>
+            <div class="notifications-filters">
+              <button class="filter-btn active">All</button>
+              <button class="filter-btn">Unread</button>
+            </div>
+          </div>
+          <div class="notifications-list">
+            <a href="vendor-orders.html" class="notification-page-item unread">
+              <div class="notif-page-icon green">
+                <i class="fa-solid fa-check"></i>
+              </div>
+              <div class="notif-page-content">
+                <div class="notif-page-header">
+                  <span class="notif-page-title">Order #1234 Ready</span>
+                  <span class="notif-page-time">2 mins ago</span>
+                </div>
+                <p class="notif-page-desc">
+                  Your order from Canteen 1 is ready for pickup.
+                </p>
+                <div class="notif-page-actions">
+                  <span class="notif-action-btn">View Order</span>
+                </div>
+              </div>
+            </a>
+            <a href="vendor-wallet.html" class="notification-page-item unread">
+              <div class="notif-page-icon blue">
+                <i class="fa-solid fa-info"></i>
+              </div>
+              <div class="notif-page-content">
+                <div class="notif-page-header">
+                  <span class="notif-page-title">Wallet Top-up</span>
+                  <span class="notif-page-time">1 hour ago</span>
+                </div>
+                <p class="notif-page-desc">
+                  Successfully added &#8369;500.00 to your wallet.
+                </p>
+              </div>
+            </a>
           </div>
         </div>
-        <div class="notifications-list">
-          <a href="vendor-orders.html" class="notification-page-item unread">
-            <div class="notif-page-icon green"><i class="fa-solid fa-check"></i></div>
-            <div class="notif-page-content">
-              <div class="notif-page-header">
-                <span class="notif-page-title">Order #1234 Ready</span>
-                <span class="notif-page-time">2 mins ago</span>
-              </div>
-              <p class="notif-page-desc">Your order from Canteen 1 is ready for pickup.</p>
-              <div class="notif-page-actions">
-                <span class="notif-action-btn">View Order</span>
-              </div>
-            </div>
-          </a>
-          <a href="vendor-wallet.html" class="notification-page-item unread">
-            <div class="notif-page-icon blue"><i class="fa-solid fa-info"></i></div>
-            <div class="notif-page-content">
-              <div class="notif-page-header">
-                <span class="notif-page-title">Wallet Top-up</span>
-                <span class="notif-page-time">1 hour ago</span>
-              </div>
-              <p class="notif-page-desc">Successfully added &#8369;500.00 to your wallet.</p>
-            </div>
-          </a>
-        </div>
       </div>
-      </div>
-      <!-- /Notifications Component -->
-
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const ctx = document.getElementById('revenueChart').getContext('2d');
-        
-        // Mock data for different views
-        const chartData = {
-          daily: {
-            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            data: [120, 190, 150, 220, 180, 250, 290],
-            total: '&#8369;1,400.00',
-            growth: '+12%',
-            growthType: 'positive'
-          },
-          weekly: {
-            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-            data: [850, 920, 1100, 1400],
-            total: '&#8369;4,270.00',
-            growth: '+8%',
-            growthType: 'positive'
-          },
-          monthly: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-            data: [3200, 3800, 3500, 4100, 4800, 5200],
-            total: '&#8369;24,600.00',
-            growth: '+15%',
-            growthType: 'positive'
-          }
-        };
-
-        // Create gradient
-        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-        gradient.addColorStop(0, 'rgba(234, 88, 12, 0.2)'); // theme orange
-        gradient.addColorStop(1, 'rgba(234, 88, 12, 0)');
-
-        let revenueChart = new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: chartData.daily.labels,
-            datasets: [{
-              label: 'Revenue (&#8369;)',
-              data: chartData.daily.data,
-              borderColor: '#ea580c',
-              backgroundColor: gradient,
-              borderWidth: 3,
-              pointBackgroundColor: '#ffffff',
-              pointBorderColor: '#ea580c',
-              pointBorderWidth: 2,
-              pointRadius: 4,
-              pointHoverRadius: 6,
-              fill: true,
-              tension: 0.4
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                display: false
-              },
-              tooltip: {
-                backgroundColor: '#1f2937',
-                padding: 12,
-                titleFont: { size: 13 },
-                bodyFont: { size: 14, weight: 'bold' },
-                displayColors: false,
-                callbacks: {
-                  label: function(context) {
-                    return '&#8369;' + context.parsed.y.toLocaleString();
-                  }
-                }
-              }
-            },
-            scales: {
-              y: {
-                beginAtZero: true,
-                grid: {
-                  color: '#f3f4f6',
-                  drawBorder: false
-                },
-                ticks: {
-                  color: '#6b7280',
-                  callback: function(value) {
-                    return '&#8369;' + value;
-                  }
-                }
-              },
-              x: {
-                grid: {
-                  display: false,
-                  drawBorder: false
-                },
-                ticks: {
-                  color: '#6b7280'
-                }
-              }
-            },
-            interaction: {
-              intersect: false,
-              mode: 'index',
-            },
-          }
-        });
-
-        // Handle tab switching
-        const tabs = document.querySelectorAll('.chart-tab');
-        const domTotal = document.getElementById('chartTotalRevenue');
-        const domGrowth = document.getElementById('chartGrowth');
-        const domGrowthBadge = domGrowth.parentElement;
-
-        tabs.forEach(tab => {
-          tab.addEventListener('click', (e) => {
-            // Update active state
-            tabs.forEach(t => t.classList.remove('active'));
-            e.target.classList.add('active');
-
-            const view = e.target.getAttribute('data-view');
-            const dataToLoad = chartData[view];
-
-            // Update chart data
-            revenueChart.data.labels = dataToLoad.labels;
-            revenueChart.data.datasets[0].data = dataToLoad.data;
-            revenueChart.update();
-
-            // Update summary
-            domTotal.textContent = dataToLoad.total;
-            domGrowth.textContent = dataToLoad.growth;
-            
-            if (dataToLoad.growthType === 'positive') {
-              domGrowthBadge.className = 'growth-badge positive';
-              domGrowthBadge.querySelector('i').className = 'fas fa-arrow-up';
-            } else {
-              domGrowthBadge.className = 'growth-badge negative';
-              domGrowthBadge.querySelector('i').className = 'fas fa-arrow-down';
-            }
-          });
-        });
-      });
-    </script>
+    </div>
   </body>
 </html>
-
-
-
-

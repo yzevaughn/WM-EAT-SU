@@ -111,6 +111,9 @@
               <a href="vendor-profile.html" class="dropdown-item">
                 <i class="fa-solid fa-gear"></i><span>Settings</span>
               </a>
+              <a href="vendor-complaints.html" class="dropdown-item">
+                <i class="fa-solid fa-flag"></i><span>Reports</span>
+              </a>
               <a href="../../index.html" class="dropdown-item">
                 <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
               </a>
@@ -471,13 +474,7 @@
           const isResolved = r.status === "resolved";
           const badgeClass = isResolved ? "resolved" : "review";
           const badgeText = isResolved ? "Resolved" : "Under Review";
-          const typeLabel = {
-            payment: "💳 Payment",
-            order: "📦 Order",
-            student: "👤 Student",
-            system: "⚙️ System",
-            other: "ℹ️ Other",
-          }[r.type];
+          const typeLabel = "";
           const orderHtml = r.order
             ? `<p class="complaint-order"><i class="fa-solid fa-receipt"></i> ${r.order}</p>`
             : "";
@@ -489,7 +486,6 @@
           item.innerHTML = `
             <div class="complaint-header">
               <div class="complaint-title-group">
-                <span class="type-badge">${typeLabel}</span>
                 <h3>${r.subject}</h3>
               </div>
               <span class="badge ${badgeClass}">${badgeText}</span>

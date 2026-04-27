@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -57,7 +57,7 @@
       </div>
 
       <!-- RIGHT: profile -->
-            <div class="nav-right">
+      <div class="nav-right">
         <!-- Notifications -->
         <div class="notification-dropdown">
           <button class="nav-icon-btn" aria-label="Notifications">
@@ -71,26 +71,38 @@
             </div>
             <div class="notification-list">
               <a href="vendor-orders.html" class="notification-item unread">
-                <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
+                <div class="notif-icon green">
+                  <i class="fa-solid fa-check"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Order #1234 Ready</p>
-                  <p class="notif-desc">Your order from Canteen 1 is ready for pickup.</p>
+                  <p class="notif-desc">
+                    Your order from Canteen 1 is ready for pickup.
+                  </p>
                   <span class="notif-time">2 mins ago</span>
                 </div>
               </a>
               <a href="vendor-wallet.html" class="notification-item unread">
-                <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
+                <div class="notif-icon blue">
+                  <i class="fa-solid fa-info"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Wallet Top-up</p>
-                  <p class="notif-desc">Successfully added &#8369;500.00 to your wallet.</p>
+                  <p class="notif-desc">
+                    Successfully added &#8369;500.00 to your wallet.
+                  </p>
                   <span class="notif-time">1 hour ago</span>
                 </div>
               </a>
               <a href="vendor-orders.html" class="notification-item">
-                <div class="notif-icon orange"><i class="fa-solid fa-fire-burner"></i></div>
+                <div class="notif-icon orange">
+                  <i class="fa-solid fa-fire-burner"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Order Preparing</p>
-                  <p class="notif-desc">Vendor has started preparing your order.</p>
+                  <p class="notif-desc">
+                    Vendor has started preparing your order.
+                  </p>
                   <span class="notif-time">2 hours ago</span>
                 </div>
               </a>
@@ -117,6 +129,9 @@
             <div class="dropdown-menu">
               <a href="vendor-profile.html" class="dropdown-item">
                 <i class="fa-solid fa-gear"></i><span>Settings</span>
+              </a>
+              <a href="vendor-complaints.html" class="dropdown-item">
+                <i class="fa-solid fa-flag"></i><span>Reports</span>
               </a>
               <a href="../../index.html" class="dropdown-item">
                 <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
@@ -173,7 +188,7 @@
               <span>Wallet</span>
             </a>
           </li>
-          </ul>
+        </ul>
       </div>
 
       <div class="main-content">
@@ -232,12 +247,19 @@
               <div class="chart-title">
                 <h2>Revenue Analytics</h2>
                 <div class="chart-summary">
-                  <span class="total-value" id="chartTotalRevenue">&#8369;1,400.00</span>
-                  <span class="growth-badge positive"><i class="fas fa-arrow-up"></i> <span id="chartGrowth">+12%</span></span>
+                  <span class="total-value" id="chartTotalRevenue"
+                    >&#8369;1,400.00</span
+                  >
+                  <span class="growth-badge positive"
+                    ><i class="fas fa-arrow-up"></i>
+                    <span id="chartGrowth">+12%</span></span
+                  >
                 </div>
               </div>
               <div class="chart-controls">
-                <button class="chart-tab active" data-view="daily">Daily</button>
+                <button class="chart-tab active" data-view="daily">
+                  Daily
+                </button>
                 <button class="chart-tab" data-view="weekly">Weekly</button>
                 <button class="chart-tab" data-view="monthly">Monthly</button>
               </div>
@@ -247,7 +269,16 @@
             </div>
           </div>
 
-          <h2 style="font-size: 20px; font-weight: 700; color: #1f2937; margin: 32px 0 16px 0;">Quick Actions</h2>
+          <h2
+            style="
+              font-size: 20px;
+              font-weight: 700;
+              color: #1f2937;
+              margin: 32px 0 16px 0;
+            "
+          >
+            Quick Actions
+          </h2>
           <div class="actions-grid">
             <a href="vendor-menu.html" class="action-card">
               <i class="fas fa-shopping-bag action-icon menu"></i>
@@ -273,122 +304,124 @@
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const ctx = document.getElementById('revenueChart').getContext('2d');
-        
+      document.addEventListener("DOMContentLoaded", function () {
+        const ctx = document.getElementById("revenueChart").getContext("2d");
+
         // Mock data for different views
         const chartData = {
           daily: {
-            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
             data: [120, 190, 150, 220, 180, 250, 290],
-            total: '&#8369;1,400.00',
-            growth: '+12%',
-            growthType: 'positive'
+            total: "&#8369;1,400.00",
+            growth: "+12%",
+            growthType: "positive",
           },
           weekly: {
-            labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+            labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
             data: [850, 920, 1100, 1400],
-            total: '&#8369;4,270.00',
-            growth: '+8%',
-            growthType: 'positive'
+            total: "&#8369;4,270.00",
+            growth: "+8%",
+            growthType: "positive",
           },
           monthly: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
             data: [3200, 3800, 3500, 4100, 4800, 5200],
-            total: '&#8369;24,600.00',
-            growth: '+15%',
-            growthType: 'positive'
-          }
+            total: "&#8369;24,600.00",
+            growth: "+15%",
+            growthType: "positive",
+          },
         };
 
         // Create gradient
         const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-        gradient.addColorStop(0, 'rgba(234, 88, 12, 0.2)'); // theme orange
-        gradient.addColorStop(1, 'rgba(234, 88, 12, 0)');
+        gradient.addColorStop(0, "rgba(234, 88, 12, 0.2)"); // theme orange
+        gradient.addColorStop(1, "rgba(234, 88, 12, 0)");
 
         let revenueChart = new Chart(ctx, {
-          type: 'line',
+          type: "line",
           data: {
             labels: chartData.daily.labels,
-            datasets: [{
-              label: 'Revenue (&#8369;)',
-              data: chartData.daily.data,
-              borderColor: '#ea580c',
-              backgroundColor: gradient,
-              borderWidth: 3,
-              pointBackgroundColor: '#ffffff',
-              pointBorderColor: '#ea580c',
-              pointBorderWidth: 2,
-              pointRadius: 4,
-              pointHoverRadius: 6,
-              fill: true,
-              tension: 0.4
-            }]
+            datasets: [
+              {
+                label: "Revenue (&#8369;)",
+                data: chartData.daily.data,
+                borderColor: "#ea580c",
+                backgroundColor: gradient,
+                borderWidth: 3,
+                pointBackgroundColor: "#ffffff",
+                pointBorderColor: "#ea580c",
+                pointBorderWidth: 2,
+                pointRadius: 4,
+                pointHoverRadius: 6,
+                fill: true,
+                tension: 0.4,
+              },
+            ],
           },
           options: {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
               legend: {
-                display: false
+                display: false,
               },
               tooltip: {
-                backgroundColor: '#1f2937',
+                backgroundColor: "#1f2937",
                 padding: 12,
                 titleFont: { size: 13 },
-                bodyFont: { size: 14, weight: 'bold' },
+                bodyFont: { size: 14, weight: "bold" },
                 displayColors: false,
                 callbacks: {
-                  label: function(context) {
-                    return '&#8369;' + context.parsed.y.toLocaleString();
-                  }
-                }
-              }
+                  label: function (context) {
+                    return "&#8369;" + context.parsed.y.toLocaleString();
+                  },
+                },
+              },
             },
             scales: {
               y: {
                 beginAtZero: true,
                 grid: {
-                  color: '#f3f4f6',
-                  drawBorder: false
+                  color: "#f3f4f6",
+                  drawBorder: false,
                 },
                 ticks: {
-                  color: '#6b7280',
-                  callback: function(value) {
-                    return '&#8369;' + value;
-                  }
-                }
+                  color: "#6b7280",
+                  callback: function (value) {
+                    return "&#8369;" + value;
+                  },
+                },
               },
               x: {
                 grid: {
                   display: false,
-                  drawBorder: false
+                  drawBorder: false,
                 },
                 ticks: {
-                  color: '#6b7280'
-                }
-              }
+                  color: "#6b7280",
+                },
+              },
             },
             interaction: {
               intersect: false,
-              mode: 'index',
+              mode: "index",
             },
-          }
+          },
         });
 
         // Handle tab switching
-        const tabs = document.querySelectorAll('.chart-tab');
-        const domTotal = document.getElementById('chartTotalRevenue');
-        const domGrowth = document.getElementById('chartGrowth');
+        const tabs = document.querySelectorAll(".chart-tab");
+        const domTotal = document.getElementById("chartTotalRevenue");
+        const domGrowth = document.getElementById("chartGrowth");
         const domGrowthBadge = domGrowth.parentElement;
 
-        tabs.forEach(tab => {
-          tab.addEventListener('click', (e) => {
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", (e) => {
             // Update active state
-            tabs.forEach(t => t.classList.remove('active'));
-            e.target.classList.add('active');
+            tabs.forEach((t) => t.classList.remove("active"));
+            e.target.classList.add("active");
 
-            const view = e.target.getAttribute('data-view');
+            const view = e.target.getAttribute("data-view");
             const dataToLoad = chartData[view];
 
             // Update chart data
@@ -399,13 +432,13 @@
             // Update summary
             domTotal.textContent = dataToLoad.total;
             domGrowth.textContent = dataToLoad.growth;
-            
-            if (dataToLoad.growthType === 'positive') {
-              domGrowthBadge.className = 'growth-badge positive';
-              domGrowthBadge.querySelector('i').className = 'fas fa-arrow-up';
+
+            if (dataToLoad.growthType === "positive") {
+              domGrowthBadge.className = "growth-badge positive";
+              domGrowthBadge.querySelector("i").className = "fas fa-arrow-up";
             } else {
-              domGrowthBadge.className = 'growth-badge negative';
-              domGrowthBadge.querySelector('i').className = 'fas fa-arrow-down';
+              domGrowthBadge.className = "growth-badge negative";
+              domGrowthBadge.querySelector("i").className = "fas fa-arrow-down";
             }
           });
         });
@@ -413,7 +446,3 @@
     </script>
   </body>
 </html>
-
-
-
-

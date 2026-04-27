@@ -73,7 +73,7 @@
       </div>
 
       <!-- RIGHT: profile -->
-            <div class="nav-right">
+      <div class="nav-right">
         <!-- Notifications -->
         <div class="notification-dropdown">
           <button class="nav-icon-btn" aria-label="Notifications">
@@ -87,26 +87,38 @@
             </div>
             <div class="notification-list">
               <a href="vendor-orders.html" class="notification-item unread">
-                <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
+                <div class="notif-icon green">
+                  <i class="fa-solid fa-check"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Order #1234 Ready</p>
-                  <p class="notif-desc">Your order from Canteen 1 is ready for pickup.</p>
+                  <p class="notif-desc">
+                    Your order from Canteen 1 is ready for pickup.
+                  </p>
                   <span class="notif-time">2 mins ago</span>
                 </div>
               </a>
               <a href="vendor-wallet.html" class="notification-item unread">
-                <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
+                <div class="notif-icon blue">
+                  <i class="fa-solid fa-info"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Wallet Top-up</p>
-                  <p class="notif-desc">Successfully added &#8369;500.00 to your wallet.</p>
+                  <p class="notif-desc">
+                    Successfully added &#8369;500.00 to your wallet.
+                  </p>
                   <span class="notif-time">1 hour ago</span>
                 </div>
               </a>
               <a href="vendor-orders.html" class="notification-item">
-                <div class="notif-icon orange"><i class="fa-solid fa-fire-burner"></i></div>
+                <div class="notif-icon orange">
+                  <i class="fa-solid fa-fire-burner"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Order Preparing</p>
-                  <p class="notif-desc">Vendor has started preparing your order.</p>
+                  <p class="notif-desc">
+                    Vendor has started preparing your order.
+                  </p>
                   <span class="notif-time">2 hours ago</span>
                 </div>
               </a>
@@ -133,6 +145,9 @@
             <div class="dropdown-menu">
               <a href="vendor-profile.html" class="dropdown-item">
                 <i class="fa-solid fa-gear"></i><span>Settings</span>
+              </a>
+              <a href="vendor-complaints.html" class="dropdown-item">
+                <i class="fa-solid fa-flag"></i><span>Reports</span>
               </a>
               <a href="../../index.html" class="dropdown-item">
                 <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
@@ -187,7 +202,7 @@
               <span>Wallet</span>
             </a>
           </li>
-          </ul>
+        </ul>
       </div>
       <!-- MAIN CONTENT -->
       <div class="main-content">
@@ -205,7 +220,11 @@
             <label for="withdrawToggle" class="topup-btn">
               <i class="fa-solid fa-minus"></i> Withdraw Funds
             </label>
-            <label for="qrReceiveToggle" class="topup-btn btn-qr-receive" style="justify-content: center;">
+            <label
+              for="qrReceiveToggle"
+              class="topup-btn btn-qr-receive"
+              style="justify-content: center"
+            >
               <i class="fa-solid fa-qrcode"></i> Receive QR Payment
             </label>
           </div>
@@ -423,25 +442,52 @@
     </div>
 
     <!-- RECEIVE QR MODAL -->
-    <input type="checkbox" id="qrReceiveToggle" style="display: none;" />
+    <input type="checkbox" id="qrReceiveToggle" style="display: none" />
     <div class="modal" id="qrReceiveModal">
       <label for="qrReceiveToggle" class="modal-overlay"></label>
-      <div class="modal-content" style="text-align: center; padding: 30px; max-width: 400px;">
-        <div class="modal-header" style="justify-content: center; position: relative;">
-          <h2 style="margin: 0;">Receive Payment</h2>
-          <label for="qrReceiveToggle" class="modal-close" style="position: absolute; right: 0; top: 0;">
+      <div
+        class="modal-content"
+        style="text-align: center; padding: 30px; max-width: 400px"
+      >
+        <div
+          class="modal-header"
+          style="justify-content: center; position: relative"
+        >
+          <h2 style="margin: 0">Receive Payment</h2>
+          <label
+            for="qrReceiveToggle"
+            class="modal-close"
+            style="position: absolute; right: 0; top: 0"
+          >
             <i class="fa-solid fa-times"></i>
           </label>
         </div>
-        <div class="modal-body" style="padding-top: 20px;">
-          <p style="color: #64748b; margin-bottom: 20px;">Show this QR code to the student for them to scan and pay.</p>
-          <div style="background: white; padding: 15px; border-radius: 12px; display: inline-block; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=vendor_payment:Canteen1" alt="Vendor QR Code" style="width: 250px; height: 250px;" />
+        <div class="modal-body" style="padding-top: 20px">
+          <p style="color: #64748b; margin-bottom: 20px">
+            Show this QR code to the student for them to scan and pay.
+          </p>
+          <div
+            style="
+              background: white;
+              padding: 15px;
+              border-radius: 12px;
+              display: inline-block;
+              box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            "
+          >
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=vendor_payment:Canteen1"
+              alt="Vendor QR Code"
+              style="width: 250px; height: 250px"
+            />
           </div>
-          <div style="margin-top: 20px; font-size: 16px; color: #1e293b;">
+          <div style="margin-top: 20px; font-size: 16px; color: #1e293b">
             Waiting for payment scan...
-            <div style="margin-top: 10px;">
-              <i class="fa-solid fa-spinner fa-spin" style="color: #3b82f6; font-size: 24px;"></i>
+            <div style="margin-top: 10px">
+              <i
+                class="fa-solid fa-spinner fa-spin"
+                style="color: #3b82f6; font-size: 24px"
+              ></i>
             </div>
           </div>
         </div>
@@ -613,7 +659,8 @@
 
           if (phoneVal.length < 11) {
             phoneField.classList.add("invalid");
-            phoneErrorText.innerText = "Number is too short (exactly 11 digits required)";
+            phoneErrorText.innerText =
+              "Number is too short (exactly 11 digits required)";
             phoneError.classList.add("show");
             showToast("Number is too short!");
             return;
@@ -621,7 +668,8 @@
 
           if (phoneVal.length > 11) {
             phoneField.classList.add("invalid");
-            phoneErrorText.innerText = "Number is too long (exactly 11 digits required)";
+            phoneErrorText.innerText =
+              "Number is too long (exactly 11 digits required)";
             phoneError.classList.add("show");
             showToast("Number exceeds 11 digits!");
             return;
@@ -653,17 +701,34 @@
         const amount = parseFloat(customInput.value);
         const balanceEl = document.getElementById("balanceValue");
         let currentBalance = parseFloat(balanceEl.innerText.replace(",", ""));
-        
+
         // Update Balance
         const newBalance = currentBalance - amount;
-        balanceEl.innerText = newBalance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        balanceEl.innerText = newBalance.toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
 
         // Add to Transaction List
         const list = document.getElementById("transactionList");
-        const methodText = selectedMethod === "gcash" ? "GCash" : selectedMethod === "maya" ? "Maya" : "Bank Transfer";
+        const methodText =
+          selectedMethod === "gcash"
+            ? "GCash"
+            : selectedMethod === "maya"
+              ? "Maya"
+              : "Bank Transfer";
         const now = new Date();
-        const dateStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) + 
-                       " - " + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        const dateStr =
+          now.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          }) +
+          " - " +
+          now.toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+          });
 
         const newItem = document.createElement("div");
         newItem.className = "transaction-item";
@@ -737,7 +802,3 @@
     </script>
   </body>
 </html>
-
-
-
-
