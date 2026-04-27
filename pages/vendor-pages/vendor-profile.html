@@ -468,7 +468,7 @@
       /* Map Controls */
       .map-controls {
         position: absolute;
-        bottom: 1.25rem;
+        top: 1.25rem;
         right: 1.25rem;
         background: white;
         border-radius: 10px;
@@ -501,90 +501,67 @@
         background: #e5e7eb;
       }
       /* Info Panel */
-      .map-info-panel {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: white;
+      /* Location Footer Panel */
+      .location-footer {
+        background: #f9fafb;
         border-top: 1px solid #e5e7eb;
-        border-radius: 20px 20px 0 0;
-        padding: 1.25rem;
-        box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
-        transform: translateY(100%);
-        transition: transform 0.3s ease;
-        z-index: 20;
-        max-height: 50vh;
-        overflow-y: auto;
+        padding: 1.5rem;
       }
-      .map-info-panel.active {
-        transform: translateY(0);
-      }
-      .info-header {
+      .footer-content {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1rem;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        gap: 1.5rem;
       }
-      .info-title {
-        font-size: 1.1rem;
+      .coord-info {
+        flex: 1;
+        min-width: 200px;
+      }
+      .footer-title {
+        font-size: 0.9rem;
         font-weight: 700;
-        color: #1f2937;
-      }
-      .info-close {
-        width: 32px;
-        height: 32px;
+        color: #111827;
+        margin-bottom: 0.5rem;
         display: flex;
         align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        color: #9ca3af;
-        transition: all 0.2s;
-        border-radius: 8px;
+        gap: 8px;
       }
-      .info-close:hover {
-        background: #f3f4f6;
+      .footer-title i {
         color: #ef4444;
       }
-      .info-details {
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        margin-bottom: 1rem;
-      }
-      .detail-row {
+      .footer-coords {
         display: flex;
         align-items: center;
         gap: 10px;
         padding: 0.75rem;
-        background: #f9fafb;
+        background: white;
+        border: 1px solid #e5e7eb;
         border-radius: 8px;
         font-size: 0.9rem;
-        color: #6b7280;
+        color: #374151;
+        font-family: "Inter", monospace;
       }
-      .detail-row i {
+      .footer-coords i {
         color: #ef4444;
-        font-size: 1rem;
       }
-      .coord-inputs {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.75rem;
-        margin-bottom: 1rem;
+      .coord-inputs-mini {
+        display: flex;
+        gap: 1rem;
       }
-      .coord-input-group {
+      .mini-input-group {
         display: flex;
         flex-direction: column;
         gap: 0.35rem;
       }
-      .coord-input-group label {
-        font-size: 0.75rem;
+      .mini-input-group label {
+        font-size: 0.7rem;
         font-weight: 600;
         color: #6b7280;
         text-transform: uppercase;
         letter-spacing: 0.05em;
       }
-      .coord-input-group input {
+      .mini-input-group input {
+        width: 120px;
         padding: 0.5rem 0.75rem;
         border: 1px solid #d1d5db;
         border-radius: 6px;
@@ -592,52 +569,69 @@
         font-family: "Inter", monospace;
         background: white;
       }
-      .coord-input-group input:focus {
-        outline: none;
-        border-color: #ef4444;
-        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-      }
-      .info-actions {
+      .footer-actions {
         display: flex;
         gap: 0.75rem;
       }
       .btn-save-location {
-        flex: 1;
         background: #ef4444;
         color: white;
         border: none;
-        padding: 0.65rem 1rem;
-        border-radius: 7px;
+        padding: 0.65rem 1.25rem;
+        border-radius: 8px;
         font-size: 0.9rem;
         font-weight: 600;
         cursor: pointer;
         display: flex;
         align-items: center;
-        justify-content: center;
-        gap: 6px;
-        transition: background 0.2s;
+        gap: 8px;
+        transition: all 0.2s;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
       }
       .btn-save-location:hover {
         background: #dc2626;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px rgba(239, 68, 68, 0.2);
       }
       .btn-reset-location {
-        background: #f3f4f6;
-        color: #6b7280;
+        background: white;
+        color: #4b5563;
         border: 1px solid #d1d5db;
-        padding: 0.65rem 1rem;
-        border-radius: 7px;
+        padding: 0.65rem 1.25rem;
+        border-radius: 8px;
         font-size: 0.9rem;
         font-weight: 600;
         cursor: pointer;
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
         transition: all 0.2s;
       }
       .btn-reset-location:hover {
-        background: #e5e7eb;
+        background: #f9fafb;
         border-color: #9ca3af;
-        color: #374151;
+        color: #111827;
+      }
+
+      @media (max-width: 992px) {
+        .footer-content {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .coord-inputs-mini {
+          justify-content: space-between;
+        }
+        .mini-input-group input {
+          width: 100%;
+        }
+        .footer-actions {
+          margin-top: 0.5rem;
+        }
+        .btn-save-location,
+        .btn-reset-location {
+          flex: 1;
+          justify-content: center;
+        }
       }
 
       @media (max-width: 768px) {
@@ -1042,47 +1036,49 @@
               <!-- Google Map Container -->
               <div id="vendorMap"></div>
 
-              <!-- Location Info Panel -->
-              <div class="map-info-panel" id="locationPanel">
-                <div class="info-header">
-                  <h2 class="info-title">Your Location</h2>
-                  <div class="info-close" onclick="closeLocationPanel()">
-                    <i class="fa-solid fa-xmark"></i>
+              <!-- Location Footer Panel -->
+              <div class="location-footer" id="locationPanel">
+                <div class="footer-content">
+                  <div class="coord-info">
+                    <div class="footer-title">
+                      <i class="fa-solid fa-location-crosshairs"></i> Selected
+                      Business Location
+                    </div>
+                    <div class="footer-coords">
+                      <i class="fa-solid fa-location-dot"></i>
+                      <span id="locCoords">Click or drag marker on map</span>
+                    </div>
                   </div>
-                </div>
-                <div class="info-details">
-                  <div class="detail-row">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span id="locCoords">Click or drag marker on map</span>
+
+                  <div class="coord-inputs-mini">
+                    <div class="mini-input-group">
+                      <label for="latInput">Latitude</label>
+                      <input
+                        type="text"
+                        id="latInput"
+                        placeholder="0.0000"
+                        readonly
+                      />
+                    </div>
+                    <div class="mini-input-group">
+                      <label for="lngInput">Longitude</label>
+                      <input
+                        type="text"
+                        id="lngInput"
+                        placeholder="0.0000"
+                        readonly
+                      />
+                    </div>
                   </div>
-                </div>
-                <div class="coord-inputs">
-                  <div class="coord-input-group">
-                    <label for="latInput">Latitude</label>
-                    <input
-                      type="text"
-                      id="latInput"
-                      placeholder="0.0000"
-                      readonly
-                    />
+
+                  <div class="footer-actions">
+                    <button class="btn-save-location" id="saveLocBtn">
+                      <i class="fa-solid fa-floppy-disk"></i> Save Location
+                    </button>
+                    <button class="btn-reset-location" id="resetLocBtn">
+                      <i class="fa-solid fa-undo"></i> Reset
+                    </button>
                   </div>
-                  <div class="coord-input-group">
-                    <label for="lngInput">Longitude</label>
-                    <input
-                      type="text"
-                      id="lngInput"
-                      placeholder="0.0000"
-                      readonly
-                    />
-                  </div>
-                </div>
-                <div class="info-actions">
-                  <button class="btn-save-location" id="saveLocBtn">
-                    <i class="fa-solid fa-floppy-disk"></i> Save Location
-                  </button>
-                  <button class="btn-reset-location" id="resetLocBtn">
-                    <i class="fa-solid fa-undo"></i> Reset
-                  </button>
                 </div>
               </div>
             </div>

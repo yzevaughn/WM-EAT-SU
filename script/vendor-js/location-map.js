@@ -166,6 +166,7 @@ function loadSavedVendorLocation() {
       vendorMarker.setPosition(pos);
       vendorMap.setCenter(pos);
       updateVendorCoordinates(location.latitude, location.longitude);
+      showLocationPanel();
     } catch (e) {
       console.error("Error loading saved location:", e);
     }
