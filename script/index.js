@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
       this.style.background = "#16a34a";
       this.style.boxShadow = "0 4px 14px rgba(22, 163, 74, 0.35)";
       setTimeout(() => {
-        window.location.href = "pages/signin.html";
+        window.location.href = "pages/auth/signin.html";
       }, 600);
     });
   });
@@ -389,7 +389,7 @@ document.addEventListener("DOMContentLoaded", () => {
         btn.style.background = "#16a34a";
         btn.style.boxShadow = "0 4px 12px rgba(22,163,74,0.35)";
         setTimeout(() => {
-          window.location.href = "pages/sign-in.html";
+          window.location.href = "pages/auth/signin.html";
         }, 600);
       });
     });

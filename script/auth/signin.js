@@ -110,7 +110,7 @@ function signIn() {
       sessionStorage.setItem("role", "admin");
 
       setTimeout(() => {
-        window.location.href = "admin-dashboard.html";
+        window.location.href = "../admin/admin-dashboard.html";
       }, 1000);
 
       return;
@@ -127,7 +127,7 @@ function signIn() {
       sessionStorage.setItem("email", em);
 
       setTimeout(() => {
-        window.location.href = "../../pages/student/student-dashboard.html";
+        window.location.href = "../student/student-dashboard.html";
       }, 1000);
 
       return;

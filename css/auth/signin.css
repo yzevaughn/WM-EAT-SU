@@ -28,7 +28,16 @@
       --ease: .22s cubic-bezier(.4,0,.2,1);
     }
 
-    html, body { min-height: 100vh; font-family: 'Inter', sans-serif; background: var(--gray-100); }
+    html, body { 
+      min-height: 100vh; 
+      font-family: 'Inter', sans-serif; 
+      background: 
+        linear-gradient(135deg, rgba(185, 28, 28, 0.7), rgba(17, 24, 39, 0.85)),
+        url('../../images/wmsu.jpg'); 
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
 
     .page-grid {
       display: grid;
@@ -63,7 +72,7 @@
       padding: 36px 26px;
       background:
         linear-gradient(155deg, rgba(220,38,38,.65), rgba(185,28,28,1)),
-        url('../images/pizza.avif');
+        url('../../images/pizza.avif');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;

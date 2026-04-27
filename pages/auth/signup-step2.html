@@ -12,7 +12,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="../css/sign-up.css" />
+    <link rel="stylesheet" href="../../css/auth/signup.css" />
   </head>
   <body>
     <div class="page-grid">
@@ -83,6 +83,7 @@
                         'coePrev',
                         'coeIco',
                         'coeTxt',
+                        'coe'
                       )
                     "
                   >
@@ -91,7 +92,7 @@
                       id="coeFile"
                       accept=".pdf,.jpg,.jpeg,.png"
                       onchange="
-                        hf(this, 'coeZone', 'coePrev', 'coeIco', 'coeTxt')
+                        hf(this, 'coeZone', 'coePrev', 'coeIco', 'coeTxt', 'coe')
                       "
                     />
                     <div class="uz-ico">
@@ -123,14 +124,14 @@
                     ondragover="dv(event, 'idZone')"
                     ondragleave="dl(event, 'idZone')"
                     ondrop="
-                      dd(event, 'idFile', 'idZone', 'idPrev', 'idIco', 'idTxt')
+                      dd(event, 'idFile', 'idZone', 'idPrev', 'idIco', 'idTxt', 'id')
                     "
                   >
                     <input
                       type="file"
                       id="idFile"
                       accept=".pdf,.jpg,.jpeg,.png"
-                      onchange="hf(this, 'idZone', 'idPrev', 'idIco', 'idTxt')"
+                      onchange="hf(this, 'idZone', 'idPrev', 'idIco', 'idTxt', 'id')"
                     />
                     <div class="uz-ico">
                       <i class="fa-solid fa-id-card" id="idIco"></i>
@@ -152,7 +153,7 @@
               </div>
 
               <div class="fg-action">
-                <a href="step1.html" class="btn btn-back"
+                <a href="signup-step1.html" class="btn btn-back"
                   ><i class="fa-solid fa-arrow-left"></i
                 ></a>
                 <button class="btn btn-primary" onclick="submitStep2()">
@@ -165,6 +166,6 @@
       </div>
     </div>
 
-    <script src="../script/create-account/step2.js"></script>
+    <script src="../../script/auth/step2.js"></script>
   </body>
 </html>

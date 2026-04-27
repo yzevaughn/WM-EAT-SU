@@ -251,7 +251,7 @@
         </div>
 
         <!-- Filter Tabs -->
-        <div class="filter-tabs-wrapper">
+        <div class="filter-tabs-wrapper" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
           <div class="filter-tabs" id="filterTabs">
             <button class="filter-btn active" data-tab="Pending" id="tab-Pending">
               <span class="filter-dot Pending"></span> Pending
@@ -274,6 +274,9 @@
               <span class="tab-count" id="count-Cancelled">1</span>
             </button>
           </div>
+          <button id="clearAllVendorBtn" class="remove-btn" style="display: none; margin: 0; white-space: nowrap;">
+            <i class="fa-solid fa-trash-can"></i> Clear All
+          </button>
         </div>
 
         <div class="orders-list" id="ordersList">
@@ -455,7 +458,7 @@
 
     /* --- Global Render engine --- */
     window.renderVendorOrders = function() {
-      const orders  = typeof getOrders === 'function' ? getOrders() : []; // from cart.js
+      const orders  = (typeof getOrders === 'function' ? getOrders() : []).filter(o => !o.removedByVendor); // from cart.js
       const list    = document.getElementById("ordersList");
       if (!list) return;
 
@@ -498,6 +501,15 @@
         if(emptyDiv) emptyDiv.style.display = hasVisible ? "none" : "flex";
       }
 
+      const clearBtn = document.getElementById("clearAllVendorBtn");
+      if (clearBtn) {
+        if ((activeTab === "Completed" || activeTab === "Cancelled") && hasVisible) {
+          clearBtn.style.display = "flex";
+        } else {
+          clearBtn.style.display = "none";
+        }
+      }
+
       wirePickupModal();
     };
 
@@ -531,6 +543,53 @@
     const cmClose = () => { document.getElementById("pickupModal").classList.remove("active"); document.body.style.overflow = ""; };
     document.getElementById("closePickupModal")?.addEventListener("click", cmClose);
     document.getElementById("pickupOverlay")?.addEventListener("click", cmClose);
+
+    document.getElementById("clearAllVendorBtn")?.addEventListener("click", () => {
+      const activeBtn = document.querySelector(".filter-btn.active");
+      const activeTab = activeBtn ? activeBtn.dataset.tab : "Pending";
+      if (activeTab !== "Completed" && activeTab !== "Cancelled") return;
+
+      const title = document.getElementById("modalHeaderTitle");
+      const sub = document.getElementById("modalSubtitle");
+      const icon = document.getElementById("modalHeaderIcon");
+      const actionBtn = document.getElementById("confirmActionBtn");
+      const btnIcon = document.getElementById("confirmBtnIcon");
+      const btnText = document.getElementById("confirmBtnText");
+
+      icon.className = "fa-solid fa-triangle-exclamation";
+      icon.style.color = "#ef4444";
+      title.textContent = "Clear All";
+      sub.innerHTML = `Are you sure you want to clear all <strong>${activeTab.toLowerCase()}</strong> orders?`;
+      document.getElementById("modalDetail").innerHTML = "";
+
+      actionBtn.className = "remove-btn";
+      btnIcon.className = "fa-solid fa-trash-can";
+      btnText.textContent = "Clear All";
+      actionBtn.style.margin = "0";
+
+      const customHandler = () => {
+        const statusMapInv = { "Completed": "completed", "Cancelled": "cancelled" };
+        const rawStatus = statusMapInv[activeTab];
+        if (rawStatus) {
+          const allOrders = getOrders();
+          allOrders.forEach(o => {
+            if (o.status === rawStatus) removeOrder(o.id, "vendor");
+          });
+          window.renderVendorOrders();
+          showVendorToast("success", "fa-check", `All ${activeTab.toLowerCase()} orders cleared.`);
+        }
+        document.getElementById("confirmModal").classList.remove("active");
+        actionBtn.removeEventListener("click", customHandler);
+      };
+
+      actionBtn.addEventListener("click", customHandler);
+      
+      document.getElementById("closeConfirmModal")?.addEventListener("click", () => actionBtn.removeEventListener("click", customHandler), {once: true});
+      document.getElementById("cancelConfirmModal")?.addEventListener("click", () => actionBtn.removeEventListener("click", customHandler), {once: true});
+      document.getElementById("confirmOverlay")?.addEventListener("click", () => actionBtn.removeEventListener("click", customHandler), {once: true});
+
+      document.getElementById("confirmModal").classList.add("active");
+    });
 
     // Initial render
     window.renderVendorOrders();

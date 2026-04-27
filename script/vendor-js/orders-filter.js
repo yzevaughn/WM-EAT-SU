@@ -327,7 +327,7 @@
     const orderId = card.dataset.orderFullId || card.dataset.orderId || card.querySelector(".order-id-val")?.innerText;
 
     if (action === "deleteHistory") {
-      if (window.removeOrder) window.removeOrder(orderId);
+      if (window.removeOrder) window.removeOrder(orderId, "vendor");
       else {
         card.remove();
         applyFilter();

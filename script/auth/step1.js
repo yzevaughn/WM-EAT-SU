@@ -118,7 +118,7 @@ function submitStep1() {
   sessionStorage.setItem("userEmail", email);
 
   // Redirect to next step
-  window.location.href = "signUp-step2.html";
+  window.location.href = "signup-step2.html";
 }
 
 // =========================
@@ -141,41 +141,47 @@ function togglePw() {
 
 const passwordInput = document.getElementById("password");
 
-passwordInput.addEventListener("input", function () {
-  const val = this.value;
+if (passwordInput) {
+  passwordInput.addEventListener("input", function () {
+    const val = this.value;
 
-  // Reset bars
-  for (let i = 1; i <= 5; i++) {
-    document.getElementById("ps" + i).className = "pw-seg";
-  }
+    // Reset bars
+    for (let i = 1; i <= 5; i++) {
+      const seg = document.getElementById("ps" + i);
+      if (seg) seg.className = "pw-seg";
+    }
 
-  const label = document.getElementById("pwLbl");
+    const label = document.getElementById("pwLbl");
 
-  let score = 0;
+    let score = 0;
 
-  if (val.length >= 6) score++;
-  if (val.length >= 8) score++;
-  if (/[A-Za-z]/.test(val)) score++;
-  if (/[0-9]/.test(val)) score++;
-  if (/[^A-Za-z0-9]/.test(val) || val.length >= 12) score++;
+    if (val.length >= 6) score++;
+    if (val.length >= 8) score++;
+    if (/[A-Za-z]/.test(val)) score++;
+    if (/[0-9]/.test(val)) score++;
+    if (/[^A-Za-z0-9]/.test(val) || val.length >= 12) score++;
 
-  if (score > 5) score = 5;
+    if (score > 5) score = 5;
 
-  const labels = ["—", "Weak", "Fair", "Good", "Very Good", "Strong"];
-  const colors = [
-    "#9ca3af",
-    "#ef4444",
-    "#f97316",
-    "#eab308",
-    "#84cc16",
-    "#22c55e",
-  ];
+    const labels = ["—", "Weak", "Fair", "Good", "Very Good", "Strong"];
+    const colors = [
+      "#9ca3af",
+      "#ef4444",
+      "#f97316",
+      "#eab308",
+      "#84cc16",
+      "#22c55e",
+    ];
 
-  // Fill bars progressively (correct behavior)
-  for (let i = 1; i <= score; i++) {
-    document.getElementById("ps" + i).style.background = colors[score];
-  }
+    // Fill bars progressively (correct behavior)
+    for (let i = 1; i <= score; i++) {
+      const seg = document.getElementById("ps" + i);
+      if (seg) seg.style.background = colors[score];
+    }
 
-  label.textContent = labels[score];
-  label.style.color = colors[score];
-});
+    if (label) {
+      label.textContent = labels[score];
+      label.style.color = colors[score];
+    }
+  });
+}

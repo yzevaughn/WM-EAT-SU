@@ -161,7 +161,7 @@
         <h2>Order History</h2>
         <p class="page-subtitle">Track and manage your campus food orders</p>
 
-        <div class="order-controls">
+        <div class="order-controls" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
           <div class="filter-bar" id="categoryTabs">
             <button class="filter-btn active" data-filter="pending">
               <span class="filter-dot pending"></span> Pending
@@ -184,6 +184,9 @@
               <span class="tab-count" id="count-cancelled">0</span>
             </button>
           </div>
+          <button id="clearAllBtn" class="remove-btn" style="display: none; margin: 0; white-space: nowrap;">
+            <i class="fa-solid fa-trash-can"></i> Clear All
+          </button>
         </div>
 
         <div class="orders-list" id="ordersList">
@@ -444,7 +447,7 @@
       // Remove previously rendered cards (keep emptyState)
       list.querySelectorAll(".order-card").forEach(c => c.remove());
 
-      const orders = getOrders();
+      const orders = getOrders().filter(o => !o.removedByStudent);
       const html = orders.map(buildCard).join("");
       document.getElementById("emptyState").insertAdjacentHTML("afterend", html);
 
@@ -465,8 +468,17 @@
       const es = document.getElementById("emptyState");
       visible === 0 ? es.classList.add("active") : es.classList.remove("active");
 
+      const clearBtn = document.getElementById("clearAllBtn");
+      if (clearBtn) {
+        if ((af === "completed" || af === "cancelled") && visible > 0) {
+          clearBtn.style.display = "flex";
+        } else {
+          clearBtn.style.display = "none";
+        }
+      }
+
       // Update counts
-      const orders = getOrders();
+      const orders = getOrders().filter(o => !o.removedByStudent);
       ["pending", "preparing", "ready", "completed", "cancelled"].forEach(s => {
         const badge = document.getElementById("count-" + s);
         if (badge) {
@@ -544,7 +556,7 @@
             () => {
               const card = document.querySelector(`.order-card[data-id="${btn.dataset.id}"]`);
               if (card) card.classList.add("removing");
-              setTimeout(() => { removeOrder(btn.dataset.id); renderOrders(); }, 300);
+              setTimeout(() => { removeOrder(btn.dataset.id, "student"); renderOrders(); }, 300);
               showToast("success", "fa-check", "Removed from history.");
             },
             order
@@ -568,6 +580,29 @@
           document.getElementById("reviewModal").classList.add("active");
         });
       });
+
+      /* Clear All */
+      const clearBtn = document.getElementById("clearAllBtn");
+      if (clearBtn) {
+        clearBtn.onclick = () => {
+          const af = document.querySelector(".filter-btn.active")?.getAttribute("data-filter") || "pending";
+          if (af !== "completed" && af !== "cancelled") return;
+          showConfirmation(
+            "Clear All",
+            `Are you sure you want to clear all ${af} orders from your history?`,
+            () => {
+              const orders = getOrders();
+              orders.forEach(o => {
+                if (o.status === af) {
+                  removeOrder(o.id, "student");
+                }
+              });
+              renderOrders();
+              showToast("success", "fa-check", `All ${af} orders cleared.`);
+            }
+          );
+        };
+      }
     }
 
     /* ── Pickup Modal ── */

@@ -7,7 +7,8 @@ const OTP = "1234";
 window.onload = function () {
   const savedEmail = sessionStorage.getItem("userEmail");
   if (savedEmail) {
-    document.getElementById("emailDisp").textContent = savedEmail;
+    const el = document.getElementById("emailDisp");
+    if (el) el.textContent = savedEmail;
   }
 
   startCD(60);
@@ -21,8 +22,11 @@ window.onload = function () {
 // ==========================
 function showGA(m, type = "err") {
   const el = document.getElementById("gAlert");
-  el.className = "alert alert-" + type + " show";
-  document.getElementById("gMsg").textContent = m;
+  if (el) {
+    el.className = "alert alert-" + type + " show";
+    const msg = document.getElementById("gMsg");
+    if (msg) msg.textContent = m;
+  }
 }
 
 // ==========================
@@ -53,7 +57,8 @@ function verifyOTP(e) {
     .join("");
 
   fClr("otp");
-  document.getElementById("otpOk").classList.remove("show");
+  const otpOk = document.getElementById("otpOk");
+  if (otpOk) otpOk.classList.remove("show");
 
   if (code.length < 4) {
     fErr("otp", "Enter the complete 4-digit code.");
@@ -68,10 +73,10 @@ function verifyOTP(e) {
   }
 
   // ✅ SUCCESS
-  document.getElementById("otpOk").classList.add("show");
+  if (otpOk) otpOk.classList.add("show");
 
   setTimeout(() => {
-    window.location.href = "signUp-step4.html";
+    window.location.href = "signup-step4.html";
   }, 800);
 }
 
@@ -80,11 +85,12 @@ function verifyOTP(e) {
 // ==========================
 function shakeOTP() {
   const grid = document.getElementById("otpGrid");
-  grid.classList.add("shake");
-
-  setTimeout(() => {
-    grid.classList.remove("shake");
-  }, 300);
+  if (grid) {
+    grid.classList.add("shake");
+    setTimeout(() => {
+      grid.classList.remove("shake");
+    }, 300);
+  }
 }
 
 // ==========================
@@ -102,7 +108,7 @@ document.querySelectorAll(".otp-in").forEach((inp, i, arr) => {
     }
 
     // 🔥 auto verify when all filled
-    if (arr.every((el) => el.value)) {
+    if (Array.from(arr).every((el) => el.value)) {
       verifyOTP();
     }
   });
@@ -141,6 +147,8 @@ function startCD(s) {
   clearInterval(cdInt);
 
   const btn = document.getElementById("resendBtn");
+  if (!btn) return;
+
   btn.disabled = true;
   btn.innerHTML = 'Resend in <span id="cd">' + s + "s</span>";
 
@@ -170,12 +178,14 @@ function resendCode() {
   });
 
   fClr("otp");
-  document.getElementById("otpOk").classList.remove("show");
+  const otpOk = document.getElementById("otpOk");
+  if (otpOk) otpOk.classList.remove("show");
 
   startCD(60);
   showGA("A new code has been sent to your email.", "ok");
 
   setTimeout(() => {
-    document.getElementById("gAlert").classList.remove("show");
+    const gAlert = document.getElementById("gAlert");
+    if (gAlert) gAlert.classList.remove("show");
   }, 3500);
 }

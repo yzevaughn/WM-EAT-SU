@@ -69,7 +69,7 @@ function submitStep2() {
     return;
   }
   // Go to next step
-  window.location.href = "signUp-step3.html";
+  window.location.href = "signup-step3.html";
 }
 
 // =========================

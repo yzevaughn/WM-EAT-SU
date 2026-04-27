@@ -101,7 +101,9 @@ function placeOrder(instructions, payment) {
       payment,
       vendor,
       pickupCode,
-      img: item.img || ""
+      img: item.img || "",
+      removedByStudent: false,
+      removedByVendor: false
     };
 
     orders.unshift(order);
@@ -129,8 +131,18 @@ function cancelOrder(orderId) {
   updateOrderStatus(orderId, "cancelled");
 }
 
-function removeOrder(orderId) {
-  saveOrders(getOrders().filter(o => o.id !== orderId));
+function removeOrder(orderId, role = "student") {
+  const orders = getOrders();
+  const idx = orders.findIndex(o => o.id === orderId);
+  if (idx === -1) return;
+
+  if (role === "student") orders[idx].removedByStudent = true;
+  else if (role === "vendor") orders[idx].removedByVendor = true;
+
+  // Truly delete only if both parties removed it
+  const finalOrders = orders.filter(o => !(o.removedByStudent && o.removedByVendor));
+  
+  saveOrders(finalOrders);
   updateAllCartBadges();
 }
 
