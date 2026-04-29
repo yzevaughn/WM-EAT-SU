@@ -179,7 +179,7 @@
           <li>
             <a href="vendor-sales-payments.html" class="nav-link">
               <i class="fa-solid fa-chart-line"></i>
-              <span>Sales & Payments</span>
+              <span>Vendor Analytics</span>
             </a>
           </li>
           <li>
@@ -202,8 +202,16 @@
           <div class="stats-grid">
             <div class="stat-card">
               <div class="stat-info">
-                <h3>Total Revenue</h3>
-                <p>&#8369;12.99</p>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                  <h3 style="margin: 0;">Total Revenue</h3>
+                  <select id="revenueFilter" style="padding: 2px 4px; font-size: 11px; border: 1px solid #e5e7eb; border-radius: 4px; background: #f9fafb; color: #4b5563; cursor: pointer; outline: none;">
+                    <option value="all_time">All time</option>
+                    <option value="ytd">This year</option>
+                    <option value="monthly" selected>This month</option>
+                    <option value="daily">Today</option>
+                  </select>
+                </div>
+                <p id="totalRevenueValue" style="margin: 0;">&#8369;12.99</p>
               </div>
               <div class="stat-icon icon-green">
                 <i class="fas fa-peso-sign"></i>
@@ -262,6 +270,8 @@
                 </button>
                 <button class="chart-tab" data-view="weekly">Weekly</button>
                 <button class="chart-tab" data-view="monthly">Monthly</button>
+                <button class="chart-tab" data-view="yearly">Yearly</button>
+                <button class="chart-tab" data-view="all_time">All-time</button>
               </div>
             </div>
             <div class="chart-body">
@@ -330,7 +340,38 @@
             growth: "+15%",
             growthType: "positive",
           },
+          yearly: {
+            labels: ["2023", "2024", "2025", "2026"],
+            data: [45000, 52000, 68000, 85000],
+            total: "₱250,000.00",
+            growth: "+25%",
+            growthType: "positive",
+          },
+          all_time: {
+            labels: ["2021", "2022", "2023", "2024", "2025", "2026"],
+            data: [15000, 25000, 45000, 52000, 68000, 85000],
+            total: "₱290,000.00",
+            growth: "+100%",
+            growthType: "positive",
+          },
         };
+
+        // Total Revenue Card Filter
+        const revenueFilter = document.getElementById("revenueFilter");
+        const totalRevenueValue = document.getElementById("totalRevenueValue");
+        
+        const cardRevenueData = {
+          all_time: "&#8369;290,000.00",
+          ytd: "&#8369;85,000.00",
+          monthly: "&#8369;12.99",
+          daily: "&#8369;1,400.00"
+        };
+
+        if (revenueFilter && totalRevenueValue) {
+          revenueFilter.addEventListener("change", function() {
+            totalRevenueValue.innerHTML = cardRevenueData[this.value];
+          });
+        }
 
         // Create gradient
         const gradient = ctx.createLinearGradient(0, 0, 0, 300);

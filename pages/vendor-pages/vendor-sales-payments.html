@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU - Sales & Payments</title>
+    <title>WM EAT SU - Vendor Analytics</title>
 
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
@@ -16,6 +16,13 @@
     <link rel="stylesheet" href="../../css/navbar.css" />
     <link rel="stylesheet" href="../../css/vendor-css/dashboard.css" />
     <link rel="stylesheet" href="../../css/vendor-css/sales.css" />
+    <style>
+      @media (max-width: 768px) {
+        .analytics-grid {
+          grid-template-columns: 1fr !important;
+        }
+      }
+    </style>
   </head>
 
   <body>
@@ -179,7 +186,7 @@
           <li>
             <a href="vendor-sales-payments.html" class="nav-link active">
               <i class="fa-solid fa-chart-line"></i>
-              <span>Sales & Payments</span>
+              <span>Vendor Analytics</span>
             </a>
           </li>
           <li>
@@ -194,15 +201,23 @@
       <div class="main-content">
         <div class="dashboard-content">
           <div class="dashboard-header">
-            <h1>Sales & Payments</h1>
+            <h1>Vendor Analytics</h1>
             <p>Track your revenue, sales trends, and payment history</p>
           </div>
 
           <div class="stats-grid">
             <div class="stat-card">
               <div class="stat-info">
-                <h3>Total Revenue</h3>
-                <p>&#8369;24,600.00</p>
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                  <h3 style="margin: 0;">Total Revenue</h3>
+                  <select id="revenueFilter" style="padding: 2px 4px; font-size: 11px; border: 1px solid #e5e7eb; border-radius: 4px; background: #f9fafb; color: #4b5563; cursor: pointer; outline: none;">
+                    <option value="all_time">All time</option>
+                    <option value="ytd">This year</option>
+                    <option value="monthly" selected>This month</option>
+                    <option value="daily">Today</option>
+                  </select>
+                </div>
+                <p id="totalRevenueValue" style="margin: 0;">&#8369;24,600.00</p>
               </div>
               <div class="stat-icon icon-green">
                 <i class="fas fa-peso-sign"></i>
@@ -251,10 +266,105 @@
                 </button>
                 <button class="chart-tab" data-view="weekly">Weekly</button>
                 <button class="chart-tab" data-view="monthly">Monthly</button>
+                <button class="chart-tab" data-view="yearly">Yearly</button>
+                <button class="chart-tab" data-view="all_time">All-time</button>
               </div>
             </div>
             <div class="chart-body">
               <canvas id="revenueChart"></canvas>
+            </div>
+          </div>
+
+          <div class="analytics-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+            <!-- Menu Order Analytics -->
+            <div class="chart-container-wrapper" style="margin-bottom: 0;">
+              <div class="chart-header">
+                <div class="chart-title">
+                  <h2>Menu Order Analytics</h2>
+                  <div class="chart-summary">
+                    <span style="font-size: 14px; color: #6b7280;">Top Seller:</span>
+                    <span class="total-value" style="font-size: 18px; margin-left: 8px;">Classic Burger Meal</span>
+                  </div>
+                </div>
+              </div>
+              <div class="chart-body" style="height: 300px;">
+                <canvas id="menuChart"></canvas>
+              </div>
+            </div>
+
+            <!-- Customer Analytics -->
+            <div class="chart-container-wrapper" style="margin-bottom: 0;">
+              <div class="chart-header">
+                <div class="chart-title">
+                  <h2>Customer Analytics</h2>
+                  <div class="chart-summary">
+                    <span style="font-size: 14px; color: #6b7280;">Total Customers:</span>
+                    <span class="total-value" style="font-size: 18px; margin-left: 8px;">342</span>
+                  </div>
+                </div>
+                <div class="chart-controls">
+                  <select id="customerTimeFilter" style="padding: 6px; border: 1px solid #e5e7eb; border-radius: 6px; background: white; cursor: pointer; outline: none; font-size: 13px;">
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                  </select>
+                </div>
+              </div>
+              <div class="chart-body" style="height: 300px;">
+                <canvas id="customerChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Customer Leaderboard -->
+          <div class="payment-history-wrapper" style="margin-bottom: 24px;">
+            <div class="history-header">
+              <h2>Customer Leaderboard</h2>
+              <p style="color: #6b7280; font-size: 14px; margin-top: 4px;">Top customers by orders and spending</p>
+            </div>
+            <div class="table-responsive">
+              <table class="history-table">
+                <thead>
+                  <tr>
+                    <th style="width: 80px;">Rank</th>
+                    <th>Customer Name</th>
+                    <th class="text-right">Total Orders</th>
+                    <th class="text-right">Total Amount Spent</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span style="font-weight: 600; color: #fbbf24;"><i class="fas fa-trophy"></i> 1</span></td>
+                    <td>Juan Dela Cruz</td>
+                    <td class="text-right">24</td>
+                    <td class="text-right amount">&#8369;3,240.50</td>
+                  </tr>
+                  <tr>
+                    <td><span style="font-weight: 600; color: #9ca3af;"><i class="fas fa-medal"></i> 2</span></td>
+                    <td>Maria Santos</td>
+                    <td class="text-right">18</td>
+                    <td class="text-right amount">&#8369;2,150.00</td>
+                  </tr>
+                  <tr>
+                    <td><span style="font-weight: 600; color: #b45309;"><i class="fas fa-medal"></i> 3</span></td>
+                    <td>Pedro Penduko</td>
+                    <td class="text-right">15</td>
+                    <td class="text-right amount">&#8369;1,850.75</td>
+                  </tr>
+                  <tr>
+                    <td><span style="padding-left: 8px; font-weight: 600;">4</span></td>
+                    <td>Anna Reyes</td>
+                    <td class="text-right">12</td>
+                    <td class="text-right amount">&#8369;1,200.00</td>
+                  </tr>
+                  <tr>
+                    <td><span style="padding-left: 8px; font-weight: 600;">5</span></td>
+                    <td>John Doe</td>
+                    <td class="text-right">9</td>
+                    <td class="text-right amount">&#8369;950.25</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
 
@@ -420,7 +530,38 @@
             growth: "+15%",
             growthType: "positive",
           },
+          yearly: {
+            labels: ["2023", "2024", "2025", "2026"],
+            data: [45000, 52000, 68000, 85000],
+            total: "₱250,000.00",
+            growth: "+25%",
+            growthType: "positive",
+          },
+          all_time: {
+            labels: ["2021", "2022", "2023", "2024", "2025", "2026"],
+            data: [15000, 25000, 45000, 52000, 68000, 85000],
+            total: "₱290,000.00",
+            growth: "+100%",
+            growthType: "positive",
+          },
         };
+
+        // Total Revenue Card Filter
+        const revenueFilter = document.getElementById("revenueFilter");
+        const totalRevenueValue = document.getElementById("totalRevenueValue");
+        
+        const cardRevenueData = {
+          all_time: "&#8369;290,000.00",
+          ytd: "&#8369;85,000.00",
+          monthly: "&#8369;24,600.00",
+          daily: "&#8369;1,400.00"
+        };
+
+        if (revenueFilter && totalRevenueValue) {
+          revenueFilter.addEventListener("change", function() {
+            totalRevenueValue.innerHTML = cardRevenueData[this.value];
+          });
+        }
 
         // Create gradient
         const gradient = ctx.createLinearGradient(0, 0, 0, 300);
@@ -498,6 +639,119 @@
             },
           },
         });
+
+        // Menu Order Analytics Chart (Bar Chart)
+        const menuCtx = document.getElementById("menuChart").getContext("2d");
+        new Chart(menuCtx, {
+          type: "bar",
+          data: {
+            labels: ["Burger Meal", "Fries", "Spicy Chicken", "Softdrink", "Nachos", "Salad Bowl"],
+            datasets: [{
+              label: "Times Ordered",
+              data: [145, 120, 95, 80, 65, 40],
+              backgroundColor: "rgba(234, 88, 12, 0.8)", // Theme orange
+              borderRadius: 6,
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: "#1f2937",
+                padding: 12,
+                titleFont: { size: 13 },
+                bodyFont: { size: 14, weight: "bold" },
+                displayColors: false,
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                grid: { color: "#f3f4f6", drawBorder: false },
+                ticks: { color: "#6b7280" },
+              },
+              x: {
+                grid: { display: false, drawBorder: false },
+                ticks: { color: "#6b7280" },
+              }
+            }
+          }
+        });
+
+        // Customer Analytics Chart (Line Chart)
+        const customerCtx = document.getElementById("customerChart").getContext("2d");
+        
+        const customerData = {
+          daily: {
+            labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            data: [25, 30, 28, 45, 52, 65, 58]
+          },
+          weekly: {
+            labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+            data: [150, 180, 165, 210]
+          },
+          monthly: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+            data: [450, 520, 480, 610, 590, 720]
+          }
+        };
+
+        let customerChart = new Chart(customerCtx, {
+          type: "line",
+          data: {
+            labels: customerData.daily.labels,
+            datasets: [{
+              label: "New & Returning Customers",
+              data: customerData.daily.data,
+              borderColor: "#3b82f6", // Blue theme
+              backgroundColor: "rgba(59, 130, 246, 0.1)",
+              borderWidth: 3,
+              pointBackgroundColor: "#ffffff",
+              pointBorderColor: "#3b82f6",
+              pointBorderWidth: 2,
+              pointRadius: 4,
+              fill: true,
+              tension: 0.4,
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: "#1f2937",
+                padding: 12,
+                titleFont: { size: 13 },
+                bodyFont: { size: 14, weight: "bold" },
+                displayColors: false,
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                grid: { color: "#f3f4f6", drawBorder: false },
+                ticks: { color: "#6b7280" },
+              },
+              x: {
+                grid: { display: false, drawBorder: false },
+                ticks: { color: "#6b7280" },
+              }
+            }
+          }
+        });
+
+        const customerTimeFilter = document.getElementById("customerTimeFilter");
+        if (customerTimeFilter) {
+          customerTimeFilter.addEventListener("change", function(e) {
+            const val = e.target.value;
+            customerChart.data.labels = customerData[val].labels;
+            customerChart.data.datasets[0].data = customerData[val].data;
+            customerChart.update();
+          });
+        }
 
         // Handle tab switching
         const tabs = document.querySelectorAll(".chart-tab");
