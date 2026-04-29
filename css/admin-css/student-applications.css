@@ -223,21 +223,26 @@ h1 {
   border-radius: var(--radius-lg);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
   border: 1px solid #f1f5f9;
-  overflow-x: auto;
   margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
   scrollbar-width: thin;
   scrollbar-color: #cbd5e1 transparent;
 }
 
-.table-container::-webkit-scrollbar {
+.table-wrapper::-webkit-scrollbar {
   height: 6px;
 }
 
-.table-container::-webkit-scrollbar-track {
+.table-wrapper::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.table-container::-webkit-scrollbar-thumb {
+.table-wrapper::-webkit-scrollbar-thumb {
   background-color: #cbd5e1;
   border-radius: 10px;
 }
