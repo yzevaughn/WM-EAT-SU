@@ -223,12 +223,28 @@ h1 {
   border-radius: var(--radius-lg);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
   border: 1px solid #f1f5f9;
-  overflow: hidden;
+  overflow-x: auto;
   margin-bottom: 30px;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.table-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 10px;
 }
 
 .data-grid {
   width: 100%;
+  min-width: 900px;
   border-collapse: collapse;
   text-align: left;
 }
@@ -521,7 +537,7 @@ h1 {
 
 .modal-panel {
   background: white;
-  border-radius: 16px;
+  border-radius: 24px;
   width: 90%;
   max-width: 550px;
   max-height: 90vh;
@@ -531,6 +547,7 @@ h1 {
   transform: scale(0.95) translateY(20px);
   opacity: 0;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
 }
 
 .modal-backdrop.active .modal-panel {
@@ -544,6 +561,11 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+}
+
+.modal-panel .modal-header::before {
+  display: none;
 }
 
 .modal-header h2 {
