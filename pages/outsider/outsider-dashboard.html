@@ -1,0 +1,340 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WM EAT SU — Outsider Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/navbar.css" />
+  <link rel="stylesheet" href="../../css/student/dashboard.css" />
+  <link rel="stylesheet" href="../../css/outsider/outsider.css" />
+</head>
+<body>
+  <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- â•â•â•â• TOP NAVBAR â•â•â•â• -->
+  <div class="top-nav">
+    <div class="nav-left">
+      <label for="menu-checkbox" class="menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </label>
+      <a href="outsider-dashboard.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
+    </div>
+
+    <div class="nav-center">
+      <!-- No role switcher for Outsider -->
+      
+    </div>
+
+    <div class="nav-right">
+      <!-- Notifications -->
+      <div class="notification-dropdown">
+        <button class="nav-icon-btn" aria-label="Notifications">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notification-badge">1</span>
+        </button>
+        <div class="notification-menu">
+          <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="mark-read-btn">Mark all as read</button>
+          </div>
+          <div class="notification-list">
+            <a href="outsider-order.html" class="notification-item unread">
+              <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
+              <div class="notif-content">
+                <p class="notif-title">Welcome to WM EAT SU!</p>
+                <p class="notif-desc">Browse and order delicious campus food.</p>
+                <span class="notif-time">Just now</span>
+              </div>
+            </a>
+          </div>
+          <div class="notification-footer">
+            <a href="#">View all notifications</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile">
+        
+        <div class="profile-dropdown">
+          <button class="profile-btn">
+            <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" onerror="this.src='https://placehold.co/40x40/e61524/ffffff?text=O'" />
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-menu">
+            <a href="outsider-profile.html" class="dropdown-item">
+              <i class="fa-solid fa-gear"></i><span>Settings</span>
+            </a>
+            <a href="outsider-feedback.html" class="dropdown-item">
+              <i class="fa-solid fa-flag"></i><span>Reports</span>
+            </a>
+            <a href="../../index.html" class="dropdown-item dropdown-item--danger">
+              <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- â•â•â•â• LAYOUT â•â•â•â• -->
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <div class="left-nav" id="sidebar">
+      <ul class="nav-list">
+        <li><a href="outsider-dashboard.html" class="nav-link active"><i class="fa-solid fa-house"></i><span>Dashboard</span></a></li>
+        <li><a href="outsider-browse-food.html" class="nav-link"><i class="fa-solid fa-utensils"></i><span>Browse Food</span></a></li>
+        <li>
+          <a href="outsider-cart.html" class="nav-link">
+            <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
+            <span class="nav-badge" style="display:none">0</span>
+          </a>
+        </li>
+        <li><a href="outsider-order.html" class="nav-link"><i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span></a></li>
+        <li><a href="outsider-wallet.html" class="nav-link"><i class="fa-solid fa-wallet"></i><span>Wallet</span></a></li>
+        <li><a href="outsider-campus-map.html" class="nav-link"><i class="fa-solid fa-map-location-dot"></i><span>Campus Map</span></a></li>
+      </ul>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <!-- Welcome Banner -->
+      <div class="promo-carousel">
+        <div class="promo-slides">
+          <div class="promo-slide active">
+            <a href="outsider-browse-food.html">
+              <img src="../../images/banner4.avif" alt="Browse Food" />
+            </a>
+          </div>
+          <div class="promo-slide">
+            <a href="outsider-browse-food.html">
+              <img src="../../images/banner5.avif" alt="New Vendors" />
+            </a>
+          </div>
+          <div class="promo-slide">
+            <a href="outsider-wallet.html">
+              <img src="../../images/banner6.avif" alt="Wallet Top Up" />
+            </a>
+          </div>
+        </div>
+        <button class="promo-prev" id="promoPrev"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="promo-next" id="promoNext"><i class="fa-solid fa-chevron-right"></i></button>
+        <div class="promo-dots" id="promoDots"></div>
+      </div>
+
+      <!-- Outsider Info Notice -->
+      <div style="background:linear-gradient(135deg,#fbe5e6,#f9d0d3);border:1px solid #f7b8be;border-radius:16px;padding:18px 20px;display:flex;gap:14px;align-items:center;margin-bottom:24px;">
+        <div style="width:42px;height:42px;border-radius:50%;background:#e61524;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;flex-shrink:0;">
+          <i class="fa-solid fa-user-astronaut"></i>
+        </div>
+        <div>
+          <div style="font-weight:700;color:#7f1d1d;font-size:15px;margin-bottom:2px;">Outsider Account</div>
+          <div style="font-size:13px;color:#991b1b;line-height:1.5;">You can browse menus, order food, and pay via <strong>online methods</strong> (GCash, Maya, Card). Cash on Pickup is not available for outsiders.</div>
+        </div>
+      </div>
+
+      <!-- Popular Food Slider -->
+      <div class="food-slider-section">
+        <div class="slider-header">
+          <div><h2 class="slider-title">Popular on Campus</h2></div>
+          <div class="slider-controls">
+            <button class="slider-btn" id="slidePrev"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="slider-btn" id="slideNext"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+        <div class="slider-track-wrapper">
+          <div class="slider-track" id="sliderTrack">
+            <div class="food-card">
+              <div class="food-card-img-wrapper">
+                <img src="../../images/spciy.jpg" alt="Chicken Rice" />
+                <span class="food-badge popular">⭐ Popular</span>
+                <div class="food-img-overlay"></div>
+              </div>
+              <div class="food-card-body">
+                <div class="food-meta"><span class="food-vendor"><i class="fa-solid fa-store"></i> Canteen A</span><span class="food-rating">★ 4.9</span></div>
+                <h4>Spicy Chicken Rice</h4>
+                <p>Tender chicken with garlic fried rice and special sauce</p>
+                <div class="food-price-row"><span class="food-price">₱55</span></div>
+                <button class="add-to-cart-btn" data-item="Spicy Chicken Rice" data-price="55">
+                  <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+
+            <div class="food-card">
+              <div class="food-card-img-wrapper">
+                <img src="../../images/pancit.avif" alt="Pancit" />
+                <span class="food-badge new">✨ New</span>
+                <div class="food-img-overlay"></div>
+              </div>
+              <div class="food-card-body">
+                <div class="food-meta"><span class="food-vendor"><i class="fa-solid fa-store"></i> Canteen B</span><span class="food-rating">★ 4.7</span></div>
+                <h4>Pancit Canton Guisado</h4>
+                <p>Stir-fried noodles with fresh veggies and pork</p>
+                <div class="food-price-row"><span class="food-price">₱45</span></div>
+                <button class="add-to-cart-btn" data-item="Pancit Canton Guisado" data-price="45">
+                  <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+
+            <div class="food-card">
+              <div class="food-card-img-wrapper">
+                <img src="../../images/shake.avif" alt="Fruit Shake" />
+                <span class="food-badge deal">💸 Deal</span>
+                <div class="food-img-overlay"></div>
+              </div>
+              <div class="food-card-body">
+                <div class="food-meta"><span class="food-vendor"><i class="fa-solid fa-store"></i> Drinks Corner</span><span class="food-rating">★ 4.8</span></div>
+                <h4>Mango Graham Shake</h4>
+                <p>Creamy blended mango with graham crumble topping</p>
+                <div class="food-price-row"><span class="food-price">₱35</span></div>
+                <button class="add-to-cart-btn" data-item="Mango Graham Shake" data-price="35">
+                  <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+
+            <div class="food-card">
+              <div class="food-card-img-wrapper">
+                <img src="../../images/pizza.avif" alt="Pizza" />
+                <span class="food-badge popular">⭐ Popular</span>
+                <div class="food-img-overlay"></div>
+              </div>
+              <div class="food-card-body">
+                <div class="food-meta"><span class="food-vendor"><i class="fa-solid fa-store"></i> Pizza Hub</span><span class="food-rating">★ 4.6</span></div>
+                <h4>Hawaiian Mini Pizza</h4>
+                <p>Ham, pineapple and mozzarella on crispy thin crust</p>
+                <div class="food-price-row"><span class="food-price">₱65</span></div>
+                <button class="add-to-cart-btn" data-item="Hawaiian Mini Pizza" data-price="65">
+                  <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+
+            <div class="food-card">
+              <div class="food-card-img-wrapper">
+                <img src="../../images/milktea.avif" alt="Milk Tea" />
+                <span class="food-badge deal">💸 Deal</span>
+                <div class="food-img-overlay"></div>
+              </div>
+              <div class="food-card-body">
+                <div class="food-meta"><span class="food-vendor"><i class="fa-solid fa-store"></i> Sip &amp; Go</span><span class="food-rating">★ 4.9</span></div>
+                <h4>Brown Sugar Milk Tea</h4>
+                <p>Classic milk tea with chewy tapioca pearls</p>
+                <div class="food-price-row"><span class="food-price">₱40</span></div>
+                <button class="add-to-cart-btn" data-item="Brown Sugar Milk Tea" data-price="40">
+                  <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-dots" id="sliderDots"></div>
+      </div>
+
+      <!-- Overview Stats -->
+      <div class="section-label" style="margin-bottom:16px;">
+        <span class="section-title">Overview</span>
+      </div>
+      <div class="stats-grid" style="margin-bottom:32px;">
+        <div class="stat-card green">
+          <div class="stat-icon"><i class="fa-solid fa-wallet"></i></div>
+          <div class="stat-info">
+            <div class="stat-value">₱0.00</div>
+            <div class="stat-label">Wallet Balance</div>
+          </div>
+        </div>
+        <div class="stat-card blue">
+          <div class="stat-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="cartCount">0</div>
+            <div class="stat-label">Cart Items</div>
+          </div>
+        </div>
+        <div class="stat-card red">
+          <div class="stat-icon"><i class="fa-solid fa-receipt"></i></div>
+          <div class="stat-info">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Total Orders</div>
+          </div>
+        </div>
+        <div class="stat-card orange">
+          <div class="stat-icon"><i class="fa-solid fa-clock"></i></div>
+          <div class="stat-info">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Pending Orders</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="quick-section">
+        <div class="section-label">
+          <span class="section-title">Quick Actions</span>
+        </div>
+        <div class="quick-grid">
+          <a href="outsider-browse-food.html" class="quick-card">
+            <div class="quick-icon red"><i class="fa-solid fa-utensils"></i></div>
+            <h3>Browse Food</h3>
+            <p>Explore menus from all campus vendors</p>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+          </a>
+          <a href="outsider-cart.html" class="quick-card">
+            <div class="quick-icon blue"><i class="fa-solid fa-cart-shopping"></i></div>
+            <h3>View Cart</h3>
+            <p>Review and place your order</p>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+          </a>
+          <a href="outsider-order.html" class="quick-card">
+            <div class="quick-icon purple"><i class="fa-solid fa-location-arrow"></i></div>
+            <h3>Track Order</h3>
+            <p>Monitor real-time status of your orders</p>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+          </a>
+          <a href="outsider-wallet.html" class="quick-card">
+            <div class="quick-icon green"><i class="fa-solid fa-plus-circle"></i></div>
+            <h3>Top Up Wallet</h3>
+            <p>Add balance via GCash, Maya, or card</p>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+          </a>
+          <a href="outsider-feedback.html" class="quick-card">
+            <div class="quick-icon teal"><i class="fa-regular fa-star"></i></div>
+            <h3>Feedback</h3>
+            <p>Rate your orders and share your experience</p>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+  <script src="../../script/student/cart.js"></script>
+  <script src="../../script/student/dashboard.js"></script>
+  <script>
+    
+    
+    
+    
+    
+
+    // Cart count
+    const cart = JSON.parse(localStorage.getItem('wm_cart') || '[]');
+    const count = cart.reduce((s, c) => s + c.qty, 0);
+    if (count > 0) {
+      document.getElementById('cartCount').textContent = count;
+      const badge = document.querySelector('.nav-badge');
+      if (badge) { badge.textContent = count; badge.style.display = 'inline-block'; }
+    }
+  </script>
+</body>
+</html>
+
+
+

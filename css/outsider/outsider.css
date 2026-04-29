@@ -1,0 +1,39 @@
+/* =====================================================
+   OUTSIDER PORTAL — Shared Overrides
+   Inherits navbar.css + student/dashboard.css
+===================================================== */
+
+/* Role switcher hidden — Outsider has no vendor role */
+#roleSwitcher { display: none !important; }
+
+/* Outsider role badge in nav */
+.outsider-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fce8e9;
+  color: #e61524;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(230,21,36,0.2);
+}
+
+/* Restriction badge in Cart page */
+.payment-restriction-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #92400e;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.payment-restriction-notice i { flex-shrink: 0; margin-top: 1px; color: #d97706; }

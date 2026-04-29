@@ -133,9 +133,11 @@ function signIn() {
       return;
     }
 
+    // OUTSIDER LOGIN — redirect to outsider sign-in page
+    // (Outsiders use phone number, so we point them to the dedicated page)
     btn.disabled = false;
     btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Sign In';
-    showGA("Invalid credentials. Use WMSU email.");
+    showGA("Invalid credentials. Use your WMSU email, or sign in as an Outsider.");
   }, 1200);
 }
 
