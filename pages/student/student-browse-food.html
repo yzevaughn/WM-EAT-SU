@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -143,7 +143,7 @@
          LAYOUT
         -->
     <div class="layout">
-      <!-- â”€â”€ SIDEBAR â”€â”€ -->
+      <!-- SIDEBAR -->
       <div class="left-nav" id="sidebar">
         <ul class="nav-list">
           <li>
@@ -201,7 +201,7 @@
                 <h2 class="shop-profile-name" id="spName">Shop Name</h2>
                 <div class="shop-profile-meta">
                   <span class="shop-profile-meta-item"><i class="fa-solid fa-tags"></i> <span id="spCat">Category</span></span>
-                  <span>·</span>
+                  <span>Â·</span>
                   <span class="shop-profile-meta-item"><i class="fa-solid fa-location-dot"></i> <span id="spLoc">Location</span></span>
                 </div>
               </div>
@@ -482,7 +482,7 @@
           <div class="food-card" data-id="${f.id}">
             <div class="food-image">
               <img src="${f.img}" alt="${f.name}" onerror="this.src='../../images/burger.avif'">
-              ${f.badge ? `<span class="food-badge ${f.badge}">${f.badge === "popular" ? "â­ Popular" : f.badge === "new" ? "âœ¨ New" : f.badge}</span>` : ""}
+              ${f.badge ? `<span class="food-badge ${f.badge}">${f.badge === "popular" ? "⭐ Popular" : f.badge === "new" ? "✨ New" : f.badge}</span>` : ""}
             </div>
             <div class="food-content">
               <div class="food-header">
@@ -672,7 +672,7 @@
         renderGrid();
       }
 
-      /* â•â•â•â•â•â•â•â•â•â•â•â• SHOPS SECTION â•â•â•â•â•â•â•â•â•â•â•â• */
+      /* SHOPS SECTION */
 
       function renderShops() {
         const grid = document.getElementById("shopGrid");

@@ -37,22 +37,44 @@ function saveNotifications(list) {
   localStorage.setItem(NOTIF_KEY, JSON.stringify(list));
 }
 
-function addNotification(notif) {
+function addNotification(notifOrRole, title, desc, link, color, icon) {
   const list = getAllNotifications();
-  const entry = {
-    id:        "NOTIF-" + Date.now() + "-" + Math.random().toString(36).slice(2, 6),
-    role:      notif.role      || "student",
-    type:      notif.type      || "general",
-    title:     notif.title     || "Notification",
-    desc:      notif.desc      || "",
-    icon:      notif.icon      || "fa-bell",
-    color:     notif.color     || "blue",
-    link:      notif.link      || "#",
-    read:      false,
-    createdAt: new Date().toISOString(),
-    orderId:   notif.orderId   || null,
-  };
-  list.unshift(entry);         // newest first
+  let entry;
+
+  if (typeof notifOrRole === "object" && notifOrRole !== null) {
+    // New Object Format
+    const n = notifOrRole;
+    entry = {
+      id: "NOTIF-" + Date.now() + "-" + Math.random().toString(36).slice(2, 6),
+      role: n.role || "student",
+      type: n.type || "general",
+      title: n.title || "Notification",
+      desc: n.desc || "",
+      icon: n.icon || "fa-bell",
+      color: n.color || "blue",
+      link: n.link || "#",
+      read: false,
+      createdAt: new Date().toISOString(),
+      orderId: n.orderId || null,
+    };
+  } else {
+    // Legacy Positional Format: (role, title, desc, link, color, icon)
+    entry = {
+      id: "NOTIF-" + Date.now() + "-" + Math.random().toString(36).slice(2, 6),
+      role: notifOrRole || "student",
+      type: "general",
+      title: title || "Notification",
+      desc: desc || "",
+      icon: icon || "fa-bell",
+      color: color || "blue",
+      link: link || "#",
+      read: false,
+      createdAt: new Date().toISOString(),
+      orderId: null,
+    };
+  }
+
+  list.unshift(entry); // newest first
   saveNotifications(list);
   return entry;
 }

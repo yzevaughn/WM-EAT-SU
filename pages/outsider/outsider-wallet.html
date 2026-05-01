@@ -681,6 +681,7 @@
 
   <script src="../../script/notifications.js"></script>
   <script src="../../script/student/cart.js"></script>
+  <script src="../../script/wallet.js"></script>
   <script>
     // Make checkboxes styled as active buttons
     const styleRadioButtons = (inputsSelector) => {
@@ -790,13 +791,10 @@
     }
 
     function getBalance() {
-      return parseFloat(
-        document.getElementById("balanceValue").innerText.replace(/,/g, ""),
-      );
+      return getWalletBalance();
     }
     function updateBalance(amount, isAdd) {
-      let current = getBalance();
-      let newBal = isAdd ? current + amount : current - amount;
+      const newBal = updateWalletBalance(amount, isAdd);
       document.getElementById("balanceValue").innerText =
         newBal.toLocaleString(undefined, {
           minimumFractionDigits: 2,
@@ -804,9 +802,66 @@
         });
     }
 
-    function addTransactionRow(typeText, amount, isAdd) {
+    function loadWalletData() {
+      const balance = getWalletBalance();
+      document.getElementById("balanceValue").innerText =
+        balance.toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
+      
+      const transactions = getWalletTransactions();
       const list = document.getElementById("transactionList");
-      const now = new Date();
+      
+      if (transactions.length > 0) {
+        list.innerHTML = "";
+        transactions.forEach(t => {
+          renderTransactionRow(t);
+        });
+      }
+    }
+
+    function renderTransactionRow(t) {
+      const list = document.getElementById("transactionList");
+      const now = new Date(t.timestamp);
+      const dateStr =
+        now.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        }) +
+        " - " +
+        now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+      const sign = t.isAdd ? "+" : "-";
+      const colorClass = t.isAdd ? "positive" : "negative";
+      const iconClass = t.type === 'cashin' ? "topup" : (t.type === 'withdraw' ? "withdraw" : "payment");
+      const faIcon = t.type === 'cashin' ? "fa-money-bill" : (t.type === 'withdraw' ? "fa-money-bill-transfer" : "fa-utensils");
+
+      const newItem = document.createElement("div");
+      newItem.className = "transaction-item";
+      newItem.setAttribute("data-type", t.type);
+
+      newItem.innerHTML = `
+          <div class="transaction-icon ${iconClass}">
+            <i class="fa-solid ${faIcon}"></i>
+          </div>
+          <div class="transaction-details">
+            <p class="transaction-type">${t.typeText}</p>
+            <p class="transaction-date">${dateStr}</p>
+          </div>
+          <div class="transaction-amount ${colorClass}">${sign}₱${t.amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+        `;
+      list.appendChild(newItem);
+    }
+
+    function addTransactionRow(typeText, amount, isAdd, type = "payment") {
+      const t = addWalletTransaction(typeText, amount, isAdd, type);
+      const list = document.getElementById("transactionList");
+      const now = new Date(t.timestamp);
       const dateStr =
         now.toLocaleDateString("en-US", {
           month: "short",
@@ -821,11 +876,12 @@
 
       const sign = isAdd ? "+" : "-";
       const colorClass = isAdd ? "positive" : "negative";
-      const iconClass = isAdd ? "topup" : "payment";
-      const faIcon = isAdd ? "fa-money-bill" : "fa-money-bill-transfer";
+      const iconClass = type === 'cashin' ? "topup" : (type === 'withdraw' ? "withdraw" : "payment");
+      const faIcon = type === 'cashin' ? "fa-money-bill" : (type === 'withdraw' ? "fa-money-bill-transfer" : "fa-utensils");
 
       const newItem = document.createElement("div");
       newItem.className = "transaction-item";
+      newItem.setAttribute("data-type", type);
       newItem.style.animation = "slideIn 0.3s ease-out";
       newItem.innerHTML = `
           <div class="transaction-icon ${iconClass}">
@@ -839,6 +895,11 @@
         `;
       list.prepend(newItem);
     }
+
+    // Initialize on load
+    document.addEventListener("DOMContentLoaded", () => {
+      loadWalletData();
+    });
 
     // ==========================================
     // CASH IN LOGIC
@@ -971,7 +1032,7 @@
         : selected.id.includes("maya")
           ? "Maya"
           : "Bank Transfer";
-      addTransactionRow(`Cash In via ${methodText}`, amount, true);
+      addTransactionRow(`Cash In via ${methodText}`, amount, true, "cashin");
       
       // Add notification
       if (typeof addNotification === 'function') {
@@ -1142,7 +1203,7 @@
         : selected.id.includes("maya")
           ? "Maya"
           : "Bank Transfer";
-      addTransactionRow(`Withdrawal via ${methodText}`, amount, false);
+      addTransactionRow(`Withdrawal via ${methodText}`, amount, false, "withdraw");
 
       // Add notification
       if (typeof addNotification === 'function') {
@@ -1226,7 +1287,7 @@
         return;
       }
       updateBalance(amount, false);
-      addTransactionRow("QR Payment - Canteen 1", amount, false);
+      addTransactionRow("QR Payment - Canteen 1", amount, false, "payment");
       
       // Add notification
       if (typeof addNotification === 'function') {
