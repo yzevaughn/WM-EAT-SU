@@ -126,7 +126,53 @@ document.addEventListener("DOMContentLoaded", () => {
     renderReviewsTable();
     // Initial metrics update
     updateSummaryMetrics(mockReviews);
+    setupModalListeners();
   }
+
+  function setupModalListeners() {
+    const closeBtn = document.getElementById("closeReviewModal");
+    const modal = document.getElementById("reviewModal");
+
+    if (closeBtn && modal) {
+      closeBtn.addEventListener("click", () => {
+        modal.classList.remove("active");
+      });
+
+      // Close on outside click
+      window.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          modal.classList.remove("active");
+        }
+      });
+    }
+  }
+
+  window.openReviewModal = function (id) {
+    const review = mockReviews.find((r) => r.id === id);
+    if (!review) return;
+
+    document.getElementById("modalCustomerName").textContent = review.customer;
+    document.getElementById("modalReviewDate").textContent = review.date;
+    document.getElementById("modalItemName").textContent = review.item;
+    document.getElementById("modalComment").textContent = review.comment;
+
+    // Render stars for modal
+    const ratingEl = document.getElementById("modalRating");
+    ratingEl.innerHTML = "";
+    for (let i = 0; i < 5; i++) {
+      const star = document.createElement("i");
+      star.className = i < review.rating ? "fas fa-star" : "far fa-star";
+      star.style.marginRight = "2px";
+      ratingEl.appendChild(star);
+    }
+    const ratingText = document.createElement("span");
+    ratingText.textContent = ` ${review.rating}.0`;
+    ratingText.style.color = "#0f172a";
+    ratingText.style.marginLeft = "8px";
+    ratingEl.appendChild(ratingText);
+
+    document.getElementById("reviewModal").classList.add("active");
+  };
 
   function populateFoodDropdown() {
     const foodFilter = document.getElementById("foodFilter");
@@ -337,11 +383,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const tableBody = document.getElementById("reviewsTableBody");
     if (!tableBody) return;
 
-    filteredReviews = mockReviews.filter(r => {
-        const matchesSearch = r.customer.toLowerCase().includes(currentSearch) || r.comment.toLowerCase().includes(currentSearch);
-        const matchesRating = currentRating === "All" || r.rating.toString() === currentRating;
-        const matchesFood = currentFood === "All" || r.item === currentFood;
-        return matchesSearch && matchesRating && matchesFood;
+    filteredReviews = mockReviews.filter((r) => {
+      const matchesSearch =
+        r.customer.toLowerCase().includes(currentSearch) ||
+        r.comment.toLowerCase().includes(currentSearch);
+      const matchesRating =
+        currentRating === "All" || r.rating.toString() === currentRating;
+      const matchesFood = currentFood === "All" || r.item === currentFood;
+      return matchesSearch && matchesRating && matchesFood;
     });
 
     // Update Summary Metrics based on filtered data
@@ -369,6 +418,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </td>
                 <td><p style="margin: 0; max-width: 400px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #64748b; font-size: 13px;" title="${r.comment}">${r.comment}</p></td>
+                <td style="text-align: center; vertical-align: middle;">
+                    <button class="view-btn" onclick="openReviewModal(${r.id})" title="View Details">
+                        <i class="fa-solid fa-eye"></i>
+                    </button>
+                </td>
             </tr>
         `,
       )
@@ -468,16 +522,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  const nextBtn = document.getElementById('nextPage');
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            const totalPages = Math.ceil(filteredReviews.length / itemsPerPage);
-            if (currentPage < totalPages) {
-                currentPage++;
-                renderReviewsTable();
-            }
-        });
-    }
+  const nextBtn = document.getElementById("nextPage");
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      const totalPages = Math.ceil(filteredReviews.length / itemsPerPage);
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderReviewsTable();
+      }
+    });
+  }
 
   // Initialize
   init();

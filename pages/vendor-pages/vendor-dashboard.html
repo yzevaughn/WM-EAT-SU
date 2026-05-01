@@ -89,7 +89,7 @@
                 <div class="notif-content">
                   <p class="notif-title">Wallet Top-up</p>
                   <p class="notif-desc">
-                    Successfully added &#8369;500.00 to your wallet.
+                    Successfully added ₱500.00 to your wallet.
                   </p>
                   <span class="notif-time">1 hour ago</span>
                 </div>
@@ -196,29 +196,38 @@
           <div class="stats-grid">
             <div class="stat-card">
               <div class="stat-info">
-                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                  <h3 style="margin: 0;">Total Revenue</h3>
-                  <select id="revenueFilter" style="padding: 2px 4px; font-size: 11px; border: 1px solid #e5e7eb; border-radius: 4px; background: #f9fafb; color: #4b5563; cursor: pointer; outline: none;">
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    margin-bottom: 4px;
+                  "
+                >
+                  <h3 style="margin: 0">Total Revenue</h3>
+                  <select
+                    id="revenueFilter"
+                    style="
+                      padding: 2px 4px;
+                      font-size: 11px;
+                      border: 1px solid #e5e7eb;
+                      border-radius: 4px;
+                      background: #f9fafb;
+                      color: #4b5563;
+                      cursor: pointer;
+                      outline: none;
+                    "
+                  >
                     <option value="all_time">All time</option>
                     <option value="ytd">This year</option>
                     <option value="monthly" selected>This month</option>
                     <option value="daily">Today</option>
                   </select>
                 </div>
-                <p id="totalRevenueValue" style="margin: 0;">&#8369;12.99</p>
+                <p id="totalRevenueValue" style="margin: 0">₱24,600.00</p>
               </div>
               <div class="stat-icon icon-green">
                 <i class="fas fa-peso-sign"></i>
-              </div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-info">
-                <h3>Active Orders</h3>
-                <p>0</p>
-              </div>
-              <div class="stat-icon icon-orange">
-                <i class="fas fa-shopping-bag"></i>
               </div>
             </div>
 
@@ -250,7 +259,7 @@
                 <h2>Revenue Analytics</h2>
                 <div class="chart-summary">
                   <span class="total-value" id="chartTotalRevenue"
-                    >&#8369;1,400.00</span
+                    >₱1,400.00</span
                   >
                   <span class="growth-badge positive"
                     ><i class="fas fa-arrow-up"></i>
@@ -295,7 +304,6 @@
               <h3>View Orders</h3>
               <p>Manage incoming orders</p>
             </a>
-
           </div>
         </div>
       </div>
@@ -311,21 +319,21 @@
           daily: {
             labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
             data: [120, 190, 150, 220, 180, 250, 290],
-            total: "&#8369;1,400.00",
+            total: "₱1,400.00",
             growth: "+12%",
             growthType: "positive",
           },
           weekly: {
             labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
             data: [850, 920, 1100, 1400],
-            total: "&#8369;4,270.00",
+            total: "₱4,270.00",
             growth: "+8%",
             growthType: "positive",
           },
           monthly: {
             labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
             data: [3200, 3800, 3500, 4100, 4800, 5200],
-            total: "&#8369;24,600.00",
+            total: "₱24,600.00",
             growth: "+15%",
             growthType: "positive",
           },
@@ -348,16 +356,16 @@
         // Total Revenue Card Filter
         const revenueFilter = document.getElementById("revenueFilter");
         const totalRevenueValue = document.getElementById("totalRevenueValue");
-        
+
         const cardRevenueData = {
-          all_time: "&#8369;290,000.00",
-          ytd: "&#8369;85,000.00",
-          monthly: "&#8369;12.99",
-          daily: "&#8369;1,400.00"
+          all_time: "₱290,000.00",
+          ytd: "₱85,000.00",
+          monthly: "₱24,600.00",
+          daily: "₱1,400.00",
         };
 
         if (revenueFilter && totalRevenueValue) {
-          revenueFilter.addEventListener("change", function() {
+          revenueFilter.addEventListener("change", function () {
             totalRevenueValue.innerHTML = cardRevenueData[this.value];
           });
         }
@@ -373,7 +381,7 @@
             labels: chartData.daily.labels,
             datasets: [
               {
-                label: "Revenue (&#8369;)",
+                label: "Revenue (₱)",
                 data: chartData.daily.data,
                 borderColor: "#ea580c",
                 backgroundColor: gradient,
@@ -403,7 +411,7 @@
                 displayColors: false,
                 callbacks: {
                   label: function (context) {
-                    return "&#8369;" + context.parsed.y.toLocaleString();
+                    return "₱" + context.parsed.y.toLocaleString();
                   },
                 },
               },
@@ -418,7 +426,7 @@
                 ticks: {
                   color: "#6b7280",
                   callback: function (value) {
-                    return "&#8369;" + value;
+                    return "₱" + value;
                   },
                 },
               },
