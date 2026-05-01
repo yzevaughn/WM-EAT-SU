@@ -16,11 +16,27 @@
     <link rel="stylesheet" href="../../css/navbar.css" />
     <link rel="stylesheet" href="../../css/vendor-css/dashboard.css" />
     <link rel="stylesheet" href="../../css/vendor-css/sales.css" />
+    <link
+      rel="stylesheet"
+      href="../../css/admin-css/student-applications.css"
+    />
+    <link rel="stylesheet" href="../../css/vendor-css/reviews.css" />
     <style>
+      @media (max-width: 1024px) {
+        .review-analytics-grid {
+          grid-template-columns: 1fr !important;
+        }
+      }
       @media (max-width: 768px) {
         .analytics-grid {
           grid-template-columns: 1fr !important;
         }
+      }
+      .review-tab.active {
+        color: #a855f7 !important;
+      }
+      .customer-tab.active {
+        color: #3b82f6 !important;
       }
     </style>
   </head>
@@ -178,12 +194,6 @@
             </a>
           </li>
           <li>
-            <a href="vendor-reviews.html" class="nav-link">
-              <i class="fa-solid fa-star"></i>
-              <span>Reviews</span>
-            </a>
-          </li>
-          <li>
             <a href="vendor-sales-payments.html" class="nav-link active">
               <i class="fa-solid fa-chart-line"></i>
               <span>Vendor Analytics</span>
@@ -208,16 +218,35 @@
           <div class="stats-grid">
             <div class="stat-card">
               <div class="stat-info">
-                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                  <h3 style="margin: 0;">Total Revenue</h3>
-                  <select id="revenueFilter" style="padding: 2px 4px; font-size: 11px; border: 1px solid #e5e7eb; border-radius: 4px; background: #f9fafb; color: #4b5563; cursor: pointer; outline: none;">
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    margin-bottom: 4px;
+                  "
+                >
+                  <h3 style="margin: 0">Total Revenue</h3>
+                  <select
+                    id="revenueFilter"
+                    style="
+                      padding: 2px 4px;
+                      font-size: 11px;
+                      border: 1px solid #e5e7eb;
+                      border-radius: 4px;
+                      background: #f9fafb;
+                      color: #4b5563;
+                      cursor: pointer;
+                      outline: none;
+                    "
+                  >
                     <option value="all_time">All time</option>
                     <option value="ytd">This year</option>
                     <option value="monthly" selected>This month</option>
                     <option value="daily">Today</option>
                   </select>
                 </div>
-                <p id="totalRevenueValue" style="margin: 0;">&#8369;24,600.00</p>
+                <p id="totalRevenueValue" style="margin: 0">&#8369;24,600.00</p>
               </div>
               <div class="stat-icon icon-green">
                 <i class="fas fa-peso-sign"></i>
@@ -246,7 +275,7 @@
           </div>
 
           <!-- Revenue Analytics Chart -->
-          <div class="chart-container-wrapper">
+          <div class="chart-container-wrapper" id="revenueChartContainer">
             <div class="chart-header">
               <div class="chart-title">
                 <h2>Revenue Analytics</h2>
@@ -275,225 +304,551 @@
             </div>
           </div>
 
-          <div class="analytics-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px;">
+          <!-- Analytics Switcher -->
+          <div
+            class="analytics-tabs"
+            style="
+              display: flex;
+              gap: 8px;
+              margin-bottom: 24px;
+              border-bottom: 1px solid #e5e7eb;
+              padding-bottom: 12px;
+            "
+          >
+            <button
+              id="btnVendorReviews"
+              class="analytics-tab-btn active"
+              style="
+                padding: 8px 16px;
+                background: #ef4444;
+                color: #fff;
+                border: none;
+                border-radius: 6px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s;
+              "
+            >
+              Customer Reviews
+            </button>
+            <button
+              id="btnMenuAnalytics"
+              class="analytics-tab-btn"
+              style="
+                padding: 8px 16px;
+                background: transparent;
+                color: #4b5563;
+                border: none;
+                border-radius: 6px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s;
+              "
+            >
+              Menu Order Analytics
+            </button>
+            <button
+              id="btnCustomerAnalytics"
+              class="analytics-tab-btn"
+              style="
+                padding: 8px 16px;
+                background: transparent;
+                color: #4b5563;
+                border: none;
+                border-radius: 6px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s;
+              "
+            >
+              Customer Analytics
+            </button>
+          </div>
+
+          <div
+            class="analytics-container"
+            style="display: block; margin-bottom: 24px"
+          >
             <!-- Menu Order Analytics -->
-            <div class="chart-container-wrapper" style="margin-bottom: 0;">
-              <div class="chart-header">
-                <div class="chart-title">
-                  <h2>Menu Order Analytics</h2>
-                  <div class="chart-summary">
-                    <span style="font-size: 14px; color: #6b7280;">Top Seller:</span>
-                    <span class="total-value" style="font-size: 18px; margin-left: 8px;">Classic Burger Meal</span>
-                  </div>
-                </div>
-              </div>
-              <div class="chart-body" style="height: 300px;">
-                <canvas id="menuChart"></canvas>
-              </div>
-            </div>
-
-            <!-- Customer Analytics -->
-            <div class="chart-container-wrapper" style="margin-bottom: 0;">
-              <div class="chart-header">
-                <div class="chart-title">
-                  <h2>Customer Analytics</h2>
-                  <div class="chart-summary">
-                    <span style="font-size: 14px; color: #6b7280;">Total Customers:</span>
-                    <span class="total-value" style="font-size: 18px; margin-left: 8px;">342</span>
-                  </div>
-                </div>
-                <div class="chart-controls">
-                  <select id="customerTimeFilter" style="padding: 6px; border: 1px solid #e5e7eb; border-radius: 6px; background: white; cursor: pointer; outline: none; font-size: 13px;">
-                    <option value="daily">Daily</option>
-                    <option value="weekly">Weekly</option>
-                    <option value="monthly">Monthly</option>
-                  </select>
-                </div>
-              </div>
-              <div class="chart-body" style="height: 300px;">
-                <canvas id="customerChart"></canvas>
-              </div>
-            </div>
-          </div>
-
-          <!-- Customer Leaderboard -->
-          <div class="payment-history-wrapper" style="margin-bottom: 24px;">
-            <div class="history-header">
-              <h2>Customer Leaderboard</h2>
-              <p style="color: #6b7280; font-size: 14px; margin-top: 4px;">Top customers by orders and spending</p>
-            </div>
-            <div class="table-responsive">
-              <table class="history-table">
-                <thead>
-                  <tr>
-                    <th style="width: 80px;">Rank</th>
-                    <th>Customer Name</th>
-                    <th class="text-right">Total Orders</th>
-                    <th class="text-right">Total Amount Spent</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span style="font-weight: 600; color: #fbbf24;"><i class="fas fa-trophy"></i> 1</span></td>
-                    <td>Juan Dela Cruz</td>
-                    <td class="text-right">24</td>
-                    <td class="text-right amount">&#8369;3,240.50</td>
-                  </tr>
-                  <tr>
-                    <td><span style="font-weight: 600; color: #9ca3af;"><i class="fas fa-medal"></i> 2</span></td>
-                    <td>Maria Santos</td>
-                    <td class="text-right">18</td>
-                    <td class="text-right amount">&#8369;2,150.00</td>
-                  </tr>
-                  <tr>
-                    <td><span style="font-weight: 600; color: #b45309;"><i class="fas fa-medal"></i> 3</span></td>
-                    <td>Pedro Penduko</td>
-                    <td class="text-right">15</td>
-                    <td class="text-right amount">&#8369;1,850.75</td>
-                  </tr>
-                  <tr>
-                    <td><span style="padding-left: 8px; font-weight: 600;">4</span></td>
-                    <td>Anna Reyes</td>
-                    <td class="text-right">12</td>
-                    <td class="text-right amount">&#8369;1,200.00</td>
-                  </tr>
-                  <tr>
-                    <td><span style="padding-left: 8px; font-weight: 600;">5</span></td>
-                    <td>John Doe</td>
-                    <td class="text-right">9</td>
-                    <td class="text-right amount">&#8369;950.25</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- Payment History -->
-          <div class="payment-history-wrapper">
-            <div class="history-header">
-              <h2>Payment History</h2>
-              <div class="export-actions">
-                <button class="export-btn">
-                  <i class="fas fa-file-csv"></i> Export CSV
-                </button>
-                <button class="export-btn">
-                  <i class="fas fa-file-pdf"></i> Export PDF
-                </button>
-              </div>
-            </div>
-
-            <div class="history-controls">
-              <div class="search-bar">
-                <i class="fas fa-search"></i>
-                <input
-                  type="text"
-                  placeholder="Search Order ID or Customer..."
-                />
-              </div>
-
-              <div class="filters">
-                <select class="filter-dropdown">
-                  <option value="">All Dates</option>
-                  <option value="today">Today</option>
-                  <option value="week">This Week</option>
-                  <option value="month">This Month</option>
-                </select>
-
-                <select class="filter-dropdown">
-                  <option value="">All Payment Methods</option>
-                  <option value="gcash">GCash</option>
-                  <option value="cash">Cash on Delivery</option>
-                  <option value="card">Credit/Debit Card</option>
-                </select>
-
-                <select class="sort-dropdown">
-                  <option value="latest">Sort by: Latest</option>
-                  <option value="oldest">Sort by: Oldest</option>
-                  <option value="highest">Sort by: Highest Amount</option>
-                  <option value="lowest">Sort by: Lowest Amount</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="table-responsive">
-              <table class="history-table">
-                <thead>
-                  <tr>
-                    <th>Order ID</th>
-                    <th>Customer Name</th>
-                    <th>Items Ordered</th>
-                    <th>Payment Method</th>
-                    <th>Date & Time</th>
-                    <th class="text-right">Total Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="order-id">#ORD-1049</span></td>
-                    <td>Juan Dela Cruz</td>
-                    <td>
-                      <span class="item-list"
-                        >2x Classic Burger Meal, 1x Fries</span
+            <div
+              class="chart-container-wrapper"
+              id="menuOrderWrapper"
+              style="
+                display: none;
+                margin-bottom: 0;
+                border: none;
+                padding: 0;
+                box-shadow: none;
+                background: transparent;
+              "
+            >
+              <div
+                style="
+                  background: white;
+                  border: 1px solid #e5e7eb;
+                  border-radius: 12px;
+                  padding: 24px;
+                  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+                "
+              >
+                <div class="chart-header">
+                  <div class="chart-title">
+                    <h2>Menu Order Analytics</h2>
+                    <div class="chart-summary">
+                      <span style="font-size: 14px; color: #6b7280"
+                        >Top Seller:</span
                       >
-                    </td>
-                    <td><span class="pay-method gcash">GCash</span></td>
-                    <td>
-                      Oct 24, 2026<br /><span class="time-sub">12:30 PM</span>
-                    </td>
-                    <td class="text-right amount">&#8369;29.97</td>
-                  </tr>
-                  <tr>
-                    <td><span class="order-id">#ORD-1048</span></td>
-                    <td>Maria Santos</td>
-                    <td>
-                      <span class="item-list">1x Spicy Chicken Sandwich</span>
-                    </td>
-                    <td><span class="pay-method cash">Cash</span></td>
-                    <td>
-                      Oct 24, 2026<br /><span class="time-sub">11:15 AM</span>
-                    </td>
-                    <td class="text-right amount">&#8369;9.99</td>
-                  </tr>
-                  <tr>
-                    <td><span class="order-id">#ORD-1047</span></td>
-                    <td>Pedro Penduko</td>
-                    <td>
-                      <span class="item-list">3x Softdrink, 1x Nachos</span>
-                    </td>
-                    <td><span class="pay-method gcash">GCash</span></td>
-                    <td>
-                      Oct 24, 2026<br /><span class="time-sub">10:45 AM</span>
-                    </td>
-                    <td class="text-right amount">&#8369;12.50</td>
-                  </tr>
-                  <tr>
-                    <td><span class="order-id">#ORD-1046</span></td>
-                    <td>Anna Reyes</td>
-                    <td><span class="item-list">1x Salad Bowl</span></td>
-                    <td><span class="pay-method card">Card</span></td>
-                    <td>
-                      Oct 23, 2026<br /><span class="time-sub">02:20 PM</span>
-                    </td>
-                    <td class="text-right amount">&#8369;15.00</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                      <span
+                        class="total-value"
+                        style="font-size: 18px; margin-left: 8px"
+                        >Classic Burger Meal</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="chart-body" style="height: 300px">
+                  <canvas id="menuChart"></canvas>
+                </div>
+              </div>
 
-            <div class="pagination">
-              <span class="page-info">Showing 1 to 4 of 124 entries</span>
-              <div class="page-controls">
-                <button class="page-btn" disabled>
-                  <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="page-btn active">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
-                <span class="page-dots">...</span>
-                <button class="page-btn">31</button>
-                <button class="page-btn">
-                  <i class="fas fa-chevron-right"></i>
-                </button>
+              <div
+                class="payment-history-wrapper food-leaderboard"
+                style="margin-bottom: 0; margin-top: 24px"
+              >
+                <div class="history-header">
+                  <h2>Food Leaderboard</h2>
+                  <p style="color: #6b7280; font-size: 14px; margin-top: 4px">
+                    Most ordered menu items
+                  </p>
+                </div>
+                <div class="table-responsive">
+                  <table class="history-table">
+                    <thead>
+                      <tr>
+                        <th style="width: 80px">Rank</th>
+                        <th>Menu Item</th>
+                        <th class="text-right">Total Orders</th>
+                        <th class="text-right">Revenue Generated</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span style="font-weight: 600; color: #fbbf24"
+                            ><i class="fas fa-trophy"></i> 1</span
+                          >
+                        </td>
+                        <td>Classic Burger Meal</td>
+                        <td class="text-right">145</td>
+                        <td class="text-right amount">&#8369;12,325.00</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span style="font-weight: 600; color: #9ca3af"
+                            ><i class="fas fa-medal"></i> 2</span
+                          >
+                        </td>
+                        <td>Spicy Chicken Wings</td>
+                        <td class="text-right">98</td>
+                        <td class="text-right amount">&#8369;8,820.00</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span style="font-weight: 600; color: #b45309"
+                            ><i class="fas fa-medal"></i> 3</span
+                          >
+                        </td>
+                        <td>Iced Caramel Macchiato</td>
+                        <td class="text-right">85</td>
+                        <td class="text-right amount">&#8369;5,100.00</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span style="padding-left: 8px; font-weight: 600"
+                            >4</span
+                          >
+                        </td>
+                        <td>Pork Sisig Rice Bowl</td>
+                        <td class="text-right">72</td>
+                        <td class="text-right amount">&#8369;6,480.00</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span style="padding-left: 8px; font-weight: 600"
+                            >5</span
+                          >
+                        </td>
+                        <td>Fries & Drink Combo</td>
+                        <td class="text-right">64</td>
+                        <td class="text-right amount">&#8369;3,200.00</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!-- Customer Analytics -->
+            <div
+              class="chart-container-wrapper"
+              id="customerAnalyticsWrapper"
+              style="
+                display: none;
+                margin-bottom: 0;
+                border: none;
+                padding: 0;
+                box-shadow: none;
+                background: transparent;
+              "
+            >
+              <div
+                style="
+                  background: white;
+                  border: 1px solid #e5e7eb;
+                  border-radius: 12px;
+                  padding: 24px;
+                  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+                "
+              >
+                <div class="chart-header">
+                  <div class="chart-title">
+                    <h2>Customer Analytics</h2>
+                    <div class="chart-summary">
+                      <span class="total-value" id="customerTotalCount"
+                        >342</span
+                      >
+                      <span class="growth-badge positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span id="customerGrowth">+18%</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="chart-controls">
+                    <button
+                      class="chart-tab customer-tab active"
+                      data-view="daily"
+                    >
+                      Daily
+                    </button>
+                    <button class="chart-tab customer-tab" data-view="weekly">
+                      Weekly
+                    </button>
+                    <button class="chart-tab customer-tab" data-view="monthly">
+                      Monthly
+                    </button>
+                    <button class="chart-tab customer-tab" data-view="yearly">
+                      Yearly
+                    </button>
+                    <button class="chart-tab customer-tab" data-view="all_time">
+                      All-time
+                    </button>
+                  </div>
+                </div>
+                <div class="chart-body" style="height: 300px">
+                  <canvas id="customerChart"></canvas>
+                </div>
+              </div>
+
+              <!-- Customer Leaderboard -->
+              <div
+                class="payment-history-wrapper"
+                style="margin-bottom: 0; margin-top: 24px"
+              >
+                <div class="history-header">
+                  <h2>Customer Leaderboard</h2>
+                  <p style="color: #6b7280; font-size: 14px; margin-top: 4px">
+                    Top customers by orders and spending
+                  </p>
+                </div>
+                <div class="table-responsive">
+                  <table class="history-table">
+                    <thead>
+                      <tr>
+                        <th style="width: 80px">Rank</th>
+                        <th>Customer Name</th>
+                        <th class="text-right">Total Orders</th>
+                        <th class="text-right">Total Amount Spent</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span style="font-weight: 600; color: #fbbf24"
+                            ><i class="fas fa-trophy"></i> 1</span
+                          >
+                        </td>
+                        <td>Juan Dela Cruz</td>
+                        <td class="text-right">24</td>
+                        <td class="text-right amount">&#8369;3,240.50</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span style="font-weight: 600; color: #9ca3af"
+                            ><i class="fas fa-medal"></i> 2</span
+                          >
+                        </td>
+                        <td>Maria Santos</td>
+                        <td class="text-right">18</td>
+                        <td class="text-right amount">&#8369;2,150.00</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span style="font-weight: 600; color: #b45309"
+                            ><i class="fas fa-medal"></i> 3</span
+                          >
+                        </td>
+                        <td>Pedro Penduko</td>
+                        <td class="text-right">15</td>
+                        <td class="text-right amount">&#8369;1,850.75</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span style="padding-left: 8px; font-weight: 600"
+                            >4</span
+                          >
+                        </td>
+                        <td>Anna Reyes</td>
+                        <td class="text-right">12</td>
+                        <td class="text-right amount">&#8369;1,200.00</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span style="padding-left: 8px; font-weight: 600"
+                            >5</span
+                          >
+                        </td>
+                        <td>John Doe</td>
+                        <td class="text-right">9</td>
+                        <td class="text-right amount">&#8369;950.25</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!-- Closes customerAnalyticsWrapper -->
+
+            <!-- Vendor Reviews Wrapper -->
+            <div
+              class="chart-container-wrapper"
+              id="vendorReviewsWrapper"
+              style="
+                display: block;
+                margin-bottom: 0;
+                border: none;
+                padding: 0;
+                box-shadow: none;
+                background: transparent;
+              "
+            >
+              <div
+                class="reviews-content"
+                style="padding-top: 0; border-top: none; margin-top: 0"
+              >
+                <div class="reviews-header">
+                  <h2
+                    style="
+                      font-size: 24px;
+                      font-weight: 700;
+                      color: #111827;
+                      margin: 0 0 4px 0;
+                    "
+                  >
+                    Vendor Reviews
+                  </h2>
+                  <p style="color: #6b7280; margin: 0 0 24px 0">
+                    See customer feedback and review analytics
+                  </p>
+                </div>
+
+                <div class="metrics-grid">
+                  <div class="metric-card">
+                    <div class="metric-info">
+                      <h3>Total Reviews</h3>
+                      <p id="totalReviewsCount">0</p>
+                    </div>
+                    <div class="metric-icon icon-blue">
+                      <i class="fas fa-star"></i>
+                    </div>
+                  </div>
+
+                  <div class="metric-card">
+                    <div class="metric-info">
+                      <h3>Average Rating</h3>
+                      <p id="avgRatingValue">0.0</p>
+                    </div>
+                    <div class="metric-icon icon-gold">
+                      <i class="fas fa-chart-line"></i>
+                    </div>
+                  </div>
+
+                  <div class="metric-card">
+                    <div class="metric-info">
+                      <h3>Positive Feedback</h3>
+                      <p id="positivePercentage">0%</p>
+                    </div>
+                    <div class="metric-icon icon-green">
+                      <i class="fas fa-thumbs-up"></i>
+                    </div>
+                  </div>
+
+                  <div class="metric-card">
+                    <div class="metric-info">
+                      <h3>Pending Responses</h3>
+                      <p id="pendingCount">0</p>
+                    </div>
+                    <div class="metric-icon icon-orange">
+                      <i class="fas fa-clock"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- REVIEW ANALYTICS CHART -->
+                <div
+                  class="revenue-section"
+                  style="
+                    margin-bottom: 32px;
+                    background: white;
+                    border: 1px solid #e5e7eb;
+                    border-radius: 12px;
+                    padding: 24px;
+                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+                  "
+                >
+                  <div class="chart-header">
+                    <div class="chart-title">
+                      <h2>Review Performance</h2>
+                      <div class="chart-summary">
+                        <span class="total-value" id="reviewTotalRating"
+                          >4.4 ★</span
+                        >
+                        <span class="growth-badge positive">
+                          <i class="fas fa-arrow-up"></i>
+                          <span id="reviewGrowth">+0.2</span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="chart-controls">
+                      <button
+                        class="chart-tab review-tab active"
+                        data-view="daily"
+                      >
+                        Daily
+                      </button>
+                      <button class="chart-tab review-tab" data-view="weekly">
+                        Weekly
+                      </button>
+                      <button class="chart-tab review-tab" data-view="monthly">
+                        Monthly
+                      </button>
+                      <button class="chart-tab review-tab" data-view="yearly">
+                        Yearly
+                      </button>
+                      <button class="chart-tab review-tab" data-view="all_time">
+                        All-time
+                      </button>
+                    </div>
+                  </div>
+                  <div
+                    class="chart-container"
+                    style="position: relative; height: 320px; width: 100%"
+                  >
+                    <canvas id="reviewChart"></canvas>
+                  </div>
+                </div>
+
+                <!-- ALL REVIEWS DATA GRID -->
+                <div class="reviews-list-section">
+                  <h2
+                    style="
+                      font-size: 20px;
+                      font-weight: 700;
+                      color: #1f2937;
+                      margin: 0 0 16px 0;
+                    "
+                  >
+                    All Reviews
+                  </h2>
+                  <div class="table-container">
+                    <div
+                      class="table-controls"
+                      style="
+                        padding: 24px;
+                        border-bottom: 1px solid #e2e8f0;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        gap: 16px;
+                      "
+                    >
+                      <div class="search-box">
+                        <i class="fa-solid fa-search"></i>
+                        <input
+                          type="text"
+                          id="reviewSearchInput"
+                          placeholder="Search customer or review keyword..."
+                        />
+                      </div>
+                      <div class="filter-group">
+                        <div class="filter-item">
+                          <label for="foodFilter"
+                            ><i class="fa-solid fa-utensils"></i> Food
+                            Item:</label
+                          >
+                          <select id="foodFilter" class="custom-select">
+                            <option value="All">All Items</option>
+                          </select>
+                        </div>
+                        <div class="filter-item">
+                          <label for="ratingFilter"
+                            ><i class="fa-solid fa-filter"></i> Rating:</label
+                          >
+                          <select id="ratingFilter" class="custom-select">
+                            <option value="All">All Ratings</option>
+                            <option value="5">5 stars</option>
+                            <option value="4">4 stars</option>
+                            <option value="3">3 stars</option>
+                            <option value="2">2 stars</option>
+                            <option value="1">1 star</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <table class="data-grid">
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>Customer</th>
+                          <th>Item</th>
+                          <th>Rating</th>
+                          <th>Review</th>
+                        </tr>
+                      </thead>
+                      <tbody id="reviewsTableBody">
+                        <!-- Rows injected by JS -->
+                      </tbody>
+                    </table>
+                    <div class="pagination-controls">
+                      <div class="pagination-info">
+                        Showing <span id="pageStart">1</span> to
+                        <span id="pageEnd">10</span> of
+                        <span id="totalEntries">0</span> entries
+                      </div>
+                      <div class="pagination-nav">
+                        <button class="page-btn disabled" id="prevPage">
+                          <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <div
+                          id="pageNumbers"
+                          style="display: flex; gap: 4px"
+                        ></div>
+                        <button class="page-btn" id="nextPage">
+                          <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -503,6 +858,7 @@
 
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../script/vendor-js/vendor-reviews.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const ctx = document.getElementById("revenueChart").getContext("2d");
@@ -549,16 +905,16 @@
         // Total Revenue Card Filter
         const revenueFilter = document.getElementById("revenueFilter");
         const totalRevenueValue = document.getElementById("totalRevenueValue");
-        
+
         const cardRevenueData = {
           all_time: "&#8369;290,000.00",
           ytd: "&#8369;85,000.00",
           monthly: "&#8369;24,600.00",
-          daily: "&#8369;1,400.00"
+          daily: "&#8369;1,400.00",
         };
 
         if (revenueFilter && totalRevenueValue) {
-          revenueFilter.addEventListener("change", function() {
+          revenueFilter.addEventListener("change", function () {
             totalRevenueValue.innerHTML = cardRevenueData[this.value];
           });
         }
@@ -640,81 +996,105 @@
           },
         });
 
-        // Menu Order Analytics Chart (Bar Chart)
+        // Menu Order Analytics Chart (Pie Chart)
         const menuCtx = document.getElementById("menuChart").getContext("2d");
         new Chart(menuCtx, {
-          type: "bar",
+          type: "pie",
           data: {
-            labels: ["Burger Meal", "Fries", "Spicy Chicken", "Softdrink", "Nachos", "Salad Bowl"],
-            datasets: [{
-              label: "Times Ordered",
-              data: [145, 120, 95, 80, 65, 40],
-              backgroundColor: "rgba(234, 88, 12, 0.8)", // Theme orange
-              borderRadius: 6,
-            }]
+            labels: [
+              "Burger Meal",
+              "Fries",
+              "Spicy Chicken",
+              "Softdrink",
+              "Nachos",
+              "Salad Bowl",
+            ],
+            datasets: [
+              {
+                label: "Times Ordered",
+                data: [145, 120, 95, 80, 65, 40],
+                backgroundColor: [
+                  "#ea580c",
+                  "#f97316",
+                  "#fb923c",
+                  "#fdba74",
+                  "#fcd34d",
+                  "#fbbf24",
+                ],
+                borderWidth: 2,
+                borderColor: "#ffffff",
+              },
+            ],
           },
           options: {
             responsive: true,
             maintainAspectRatio: false,
             plugins: {
-              legend: { display: false },
+              legend: {
+                position: "right",
+                labels: {
+                  usePointStyle: true,
+                  padding: 15,
+                  font: { family: "'Inter', sans-serif" },
+                },
+              },
               tooltip: {
                 backgroundColor: "#1f2937",
                 padding: 12,
                 titleFont: { size: 13 },
                 bodyFont: { size: 14, weight: "bold" },
-                displayColors: false,
-              }
-            },
-            scales: {
-              y: {
-                beginAtZero: true,
-                grid: { color: "#f3f4f6", drawBorder: false },
-                ticks: { color: "#6b7280" },
               },
-              x: {
-                grid: { display: false, drawBorder: false },
-                ticks: { color: "#6b7280" },
-              }
-            }
-          }
+            },
+          },
         });
 
         // Customer Analytics Chart (Line Chart)
-        const customerCtx = document.getElementById("customerChart").getContext("2d");
-        
+        const customerCtx = document
+          .getElementById("customerChart")
+          .getContext("2d");
+
         const customerData = {
           daily: {
             labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-            data: [25, 30, 28, 45, 52, 65, 58]
+            data: [25, 30, 28, 45, 52, 65, 58],
           },
           weekly: {
             labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
-            data: [150, 180, 165, 210]
+            data: [150, 180, 165, 210],
           },
           monthly: {
             labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-            data: [450, 520, 480, 610, 590, 720]
-          }
+            data: [450, 520, 480, 610, 590, 720],
+          },
+          yearly: {
+            labels: ["2023", "2024", "2025", "2026"],
+            data: [4500, 5200, 6800, 8500],
+          },
+          all_time: {
+            labels: ["2021", "2022", "2023", "2024", "2025", "2026"],
+            data: [1500, 2500, 4500, 5200, 6800, 8500],
+          },
         };
 
         let customerChart = new Chart(customerCtx, {
           type: "line",
           data: {
             labels: customerData.daily.labels,
-            datasets: [{
-              label: "New & Returning Customers",
-              data: customerData.daily.data,
-              borderColor: "#3b82f6", // Blue theme
-              backgroundColor: "rgba(59, 130, 246, 0.1)",
-              borderWidth: 3,
-              pointBackgroundColor: "#ffffff",
-              pointBorderColor: "#3b82f6",
-              pointBorderWidth: 2,
-              pointRadius: 4,
-              fill: true,
-              tension: 0.4,
-            }]
+            datasets: [
+              {
+                label: "New & Returning Customers",
+                data: customerData.daily.data,
+                borderColor: "#3b82f6", // Blue theme
+                backgroundColor: "rgba(59, 130, 246, 0.1)",
+                borderWidth: 3,
+                pointBackgroundColor: "#ffffff",
+                pointBorderColor: "#3b82f6",
+                pointBorderWidth: 2,
+                pointRadius: 4,
+                fill: true,
+                tension: 0.4,
+              },
+            ],
           },
           options: {
             responsive: true,
@@ -727,7 +1107,7 @@
                 titleFont: { size: 13 },
                 bodyFont: { size: 14, weight: "bold" },
                 displayColors: false,
-              }
+              },
             },
             scales: {
               y: {
@@ -738,23 +1118,60 @@
               x: {
                 grid: { display: false, drawBorder: false },
                 ticks: { color: "#6b7280" },
-              }
-            }
-          }
+              },
+            },
+          },
         });
 
-        const customerTimeFilter = document.getElementById("customerTimeFilter");
-        if (customerTimeFilter) {
-          customerTimeFilter.addEventListener("change", function(e) {
-            const val = e.target.value;
-            customerChart.data.labels = customerData[val].labels;
-            customerChart.data.datasets[0].data = customerData[val].data;
-            customerChart.update();
+        const customerTimeTabs =
+          customerAnalyticsWrapper.querySelectorAll(".customer-tab");
+        const domCustomerTotal = document.getElementById("customerTotalCount");
+        const domCustomerGrowth = document.getElementById("customerGrowth");
+
+        if (customerTimeTabs) {
+          customerTimeTabs.forEach((tab) => {
+            tab.addEventListener("click", function (e) {
+              customerTimeTabs.forEach((t) => t.classList.remove("active"));
+              this.classList.add("active");
+
+              const val = this.getAttribute("data-view");
+              // Update chart
+              if (customerData[val]) {
+                customerChart.data.labels = customerData[val].labels;
+                customerChart.data.datasets[0].data = customerData[val].data;
+                customerChart.update();
+
+                // Update summary (mocking growth/total for other views)
+                if (domCustomerTotal) {
+                  const totals = {
+                    daily: "342",
+                    weekly: "1,240",
+                    monthly: "4,820",
+                    yearly: "12,400",
+                    all_time: "15,800",
+                  };
+                  domCustomerTotal.textContent = totals[val] || "342";
+                }
+                if (domCustomerGrowth) {
+                  const growths = {
+                    daily: "+18%",
+                    weekly: "+12%",
+                    monthly: "+15%",
+                    yearly: "+22%",
+                    all_time: "+45%",
+                  };
+                  domCustomerGrowth.textContent = growths[val] || "+18%";
+                }
+              }
+            });
           });
         }
 
         // Handle tab switching
-        const tabs = document.querySelectorAll(".chart-tab");
+        const revenueChartContainer = document.getElementById(
+          "revenueChartContainer",
+        );
+        const tabs = revenueChartContainer.querySelectorAll(".chart-tab");
         const domTotal = document.getElementById("chartTotalRevenue");
         const domGrowth = document.getElementById("chartGrowth");
         const domGrowthBadge = domGrowth.parentElement;
@@ -786,6 +1203,87 @@
             }
           });
         });
+
+        // Analytics Tabs Switcher Logic
+        const btnMenuAnalytics = document.getElementById("btnMenuAnalytics");
+        const btnCustomerAnalytics = document.getElementById(
+          "btnCustomerAnalytics",
+        );
+        const btnVendorReviews = document.getElementById("btnVendorReviews");
+
+        const menuOrderWrapper = document.getElementById("menuOrderWrapper");
+        const customerAnalyticsWrapper = document.getElementById(
+          "customerAnalyticsWrapper",
+        );
+        const vendorReviewsWrapper = document.getElementById(
+          "vendorReviewsWrapper",
+        );
+
+        function switchAnalyticsTab(activeBtn, activeWrapper) {
+          console.log(
+            "Switching to:",
+            activeWrapper ? activeWrapper.id : "none",
+          );
+
+          // Reset all buttons
+          [btnMenuAnalytics, btnCustomerAnalytics, btnVendorReviews].forEach(
+            (btn) => {
+              if (btn) {
+                btn.classList.remove("active");
+                btn.style.background = "transparent";
+                btn.style.color = "#4b5563";
+              }
+            },
+          );
+
+          // Hide all wrappers
+          [
+            menuOrderWrapper,
+            customerAnalyticsWrapper,
+            vendorReviewsWrapper,
+          ].forEach((wrapper) => {
+            if (wrapper) wrapper.style.display = "none";
+          });
+
+          // Activate selected
+          if (activeBtn) {
+            activeBtn.classList.add("active");
+            activeBtn.style.background = "#ef4444";
+            activeBtn.style.color = "#fff";
+          }
+          if (activeWrapper) {
+            activeWrapper.style.display = "block";
+            // Trigger a resize for any charts inside the wrapper
+            window.dispatchEvent(new Event("resize"));
+          }
+        }
+
+        if (btnMenuAnalytics) {
+          btnMenuAnalytics.addEventListener("click", (e) => {
+            e.preventDefault();
+            switchAnalyticsTab(btnMenuAnalytics, menuOrderWrapper);
+          });
+        }
+        if (btnCustomerAnalytics) {
+          btnCustomerAnalytics.addEventListener("click", (e) => {
+            e.preventDefault();
+            switchAnalyticsTab(btnCustomerAnalytics, customerAnalyticsWrapper);
+          });
+        }
+        if (btnVendorReviews) {
+          btnVendorReviews.addEventListener("click", (e) => {
+            e.preventDefault();
+            switchAnalyticsTab(btnVendorReviews, vendorReviewsWrapper);
+          });
+        }
+
+        // Initialize default view
+        if (btnVendorReviews && vendorReviewsWrapper) {
+          // Ensure it's active on start if the HTML has it as active
+          if (btnVendorReviews.classList.contains("active")) {
+            vendorReviewsWrapper.style.display = "block";
+          }
+        }
       });
     </script>
   </body>

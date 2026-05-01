@@ -447,7 +447,7 @@
       // Remove previously rendered cards (keep emptyState)
       list.querySelectorAll(".order-card").forEach(c => c.remove());
 
-      const orders = getOrders().filter(o => !o.removedByStudent);
+      const orders = getOrders().filter(o => !o.removedByStudent && o.customerRole !== "outsider");
       const html = orders.map(buildCard).join("");
       document.getElementById("emptyState").insertAdjacentHTML("afterend", html);
 
@@ -478,7 +478,7 @@
       }
 
       // Update counts
-      const orders = getOrders().filter(o => !o.removedByStudent);
+      const orders = getOrders().filter(o => !o.removedByStudent && o.customerRole !== "outsider");
       ["pending", "preparing", "ready", "completed", "cancelled"].forEach(s => {
         const badge = document.getElementById("count-" + s);
         if (badge) {

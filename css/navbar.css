@@ -699,16 +699,7 @@ button {
   color: var(--red);
 }
 
-.nav-link.active::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 22%;
-  bottom: 22%;
-  width: 3px;
-  background: var(--red);
-  border-radius: 0 3px 3px 0;
-}
+
 
 /* ── sidebar bottom: logout ── */
 .sidebar-bottom {

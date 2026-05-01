@@ -4,7 +4,13 @@
  * Load this BEFORE any page-specific script.
  */
 
-const CART_KEY = "wm_eat_su_cart";
+let CART_KEY = "wm_eat_su_cart";
+if (window.location.href.includes("/outsider/")) {
+  CART_KEY = "wm_eat_su_outsider_cart";
+} else if (window.location.href.includes("/student/")) {
+  CART_KEY = "wm_eat_su_student_cart";
+}
+
 const ORDERS_KEY = "wm_eat_su_orders";
 const MENU_KEY = "wm_eat_su_menu";
 const SHOPS_KEY = "wm_eat_su_shops";
@@ -102,6 +108,7 @@ function placeOrder(instructions, payment) {
       vendor,
       pickupCode,
       img: item.img || "",
+      customerRole: window.location.href.includes("/outsider/") ? "outsider" : "student",
       removedByStudent: false,
       removedByVendor: false
     };
@@ -147,9 +154,11 @@ function removeOrder(orderId, role = "student") {
 }
 
 function getPendingCount() {
-  return getOrders().filter(
-    o => o.status === "pending" || o.status === "preparing" || o.status === "ready"
-  ).length;
+  const isOutsider = window.location.href.includes("/outsider/");
+  return getOrders().filter(o => {
+    const roleMatches = isOutsider ? o.customerRole === "outsider" : o.customerRole !== "outsider";
+    return roleMatches && (o.status === "pending" || o.status === "preparing" || o.status === "ready");
+  }).length;
 }
 
 /* ═══════════════════════════════════════

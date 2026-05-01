@@ -226,11 +226,6 @@
           </a>
         </li>
         <li>
-          <a href="vendor-reviews.html" class="nav-link">
-            <i class="fa-solid fa-star"></i><span>Reviews</span>
-          </a>
-        </li>
-        <li>
           <a href="vendor-sales-payments.html" class="nav-link">
             <i class="fa-solid fa-chart-line"></i><span>Vendor Analytics</span>
           </a>
@@ -246,11 +241,14 @@
     <!-- MAIN CONTENT -->
     <div class="main-content">
       <div class="orders-container">
-        <div class="orders-header">
+        <div class="orders-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
           <div class="header-main">
             <h1>Customer Orders</h1>
             <p class="subtitle">Manage incoming and active orders for your store.</p>
           </div>
+          <button id="openWalkInBtn" class="pickup-btn" style="background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 3px 10px rgba(59, 130, 246, 0.3); font-size: 14px; padding: 10px 20px;">
+            <i class="fa-solid fa-person-walking"></i> Walk-in Order
+          </button>
         </div>
 
         <!-- Filter Tabs -->
@@ -337,6 +335,81 @@
         <div class="form-actions">
           <button id="confirmActionBtn"><i id="confirmBtnIcon"></i><span id="confirmBtnText"></span></button>
           <button class="btn-cancel" id="cancelConfirmModal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WALK-IN ORDER MODAL -->
+  <div class="modal" id="walkinModal">
+    <div class="modal-overlay" id="walkinOverlay"></div>
+    <div class="modal-content" style="max-width: 1000px; width: 95%; height: 85vh; display: flex; flex-direction: column;">
+      <div class="modal-header">
+        <h2><i class="fa-solid fa-cash-register" style="margin-right:8px; color: #3b82f6;"></i>Walk-in Order (POS)</h2>
+        <button class="modal-close" id="closeWalkinModal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body walkin-layout" style="flex: 1; display: flex; gap: 20px; overflow: hidden; padding: 20px;">
+        <!-- Left: Menu & Filters -->
+        <div class="walkin-menu-section" style="flex: 2; display: flex; flex-direction: column; overflow: hidden;">
+          <!-- Search & Category Filter -->
+          <div class="walkin-filters" style="display: flex; gap: 12px; margin-bottom: 16px;">
+            <div style="flex: 1; position: relative;">
+              <i class="fa-solid fa-search" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #94a3b8;"></i>
+              <input type="text" id="walkinSearch" placeholder="Search menu items..." style="width: 100%; padding: 10px 10px 10px 36px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px;" />
+            </div>
+            <select id="walkinCategory" style="padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; background: #fff;">
+              <option value="All">All Categories</option>
+              <option value="Meals">Meals</option>
+              <option value="Drinks">Drinks</option>
+              <option value="Snacks">Snacks</option>
+            </select>
+          </div>
+          <!-- Menu Grid -->
+          <div id="walkinMenuGrid" style="flex: 1; display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; overflow-y: auto; padding-right: 8px; align-content: start; scrollbar-width: thin;">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Right: Order List Panel -->
+        <div class="walkin-order-section" style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; display: flex; flex-direction: column; padding: 16px; min-width: 300px;">
+          <h3 style="margin-bottom: 16px; font-size: 16px; color: #1e293b;"><i class="fa-solid fa-clipboard-list" style="margin-right:6px;"></i>Current Order</h3>
+          
+          <div id="walkinOrderList" style="flex: 1; overflow-y: auto; margin-bottom: 16px; border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; display: flex; flex-direction: column; gap: 12px; scrollbar-width: thin;">
+            <!-- Cart Items Rendered by JS -->
+            <div style="text-align:center; color:#94a3b8; font-size:14px; margin-top:20px;">No items selected</div>
+          </div>
+
+          <div class="walkin-summary">
+            <div style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:18px; font-weight:700; color:#0f172a;">
+              <span>Total</span>
+              <span id="walkinTotal">&#8369;0.00</span>
+            </div>
+
+            <!-- Payment Method Selector -->
+            <div style="margin-bottom: 12px;">
+              <label style="display:block; font-size:13px; font-weight:600; color:#64748b; margin-bottom:8px;">Payment Method</label>
+              <div style="display:flex; gap:8px;">
+                <button class="pay-method-btn active" data-method="Cash" style="flex:1; padding:10px; border:1px solid #3b82f6; background:#eff6ff; color:#1d4ed8; border-radius:8px; font-weight:600; cursor:pointer; transition:all 0.2s;"><i class="fa-solid fa-money-bill-wave"></i> Cash</button>
+                <button class="pay-method-btn" data-method="GCash" style="flex:1; padding:10px; border:1px solid #cbd5e1; background:#fff; color:#64748b; border-radius:8px; font-weight:600; cursor:pointer; transition:all 0.2s;"><i class="fa-solid fa-mobile-screen"></i> GCash</button>
+              </div>
+            </div>
+
+            <!-- Cash Tendered Input -->
+            <div id="walkinCashInputSection" style="margin-bottom: 16px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+                <label style="font-size:13px; font-weight:600; color:#64748b;">Amount Tendered</label>
+                <span id="walkinChange" style="font-size:13px; font-weight:700; color:#22c55e;">Change: &#8369;0.00</span>
+              </div>
+              <div style="position: relative;">
+                <span style="position: absolute; left:12px; top:50%; transform:translateY(-50%); color:#64748b; font-weight:600;">&#8369;</span>
+                <input type="number" id="walkinTendered" min="0" step="1" style="width:100%; padding:10px 10px 10px 28px; border:1px solid #cbd5e1; border-radius:8px; font-size:16px; font-weight:600;" placeholder="0.00" />
+              </div>
+            </div>
+
+            <button id="walkinChargeBtn" style="width:100%; padding:14px; background:#e2e8f0; color:#94a3b8; border:none; border-radius:8px; font-size:16px; font-weight:700; cursor:not-allowed; transition:all 0.3s; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+              Charge &#8369;0.00
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -602,6 +675,232 @@
       if (e.key === "wm_eat_su_orders") {
         window.renderVendorOrders();
       }
+    });
+
+    /* ----------------------------------------------------------
+       WALK-IN ORDER MODAL LOGIC
+       ---------------------------------------------------------- */
+    const walkinItems = [
+      { id: 'm1', name: 'Chicken Joy Meal', price: 85.00, category: 'Meals', img: '../../images/burger.avif' },
+      { id: 'm2', name: 'Pork BBQ with Rice', price: 95.00, category: 'Meals', img: '../../images/burger.avif' },
+      { id: 'm3', name: 'Classic Spaghetti', price: 50.00, category: 'Snacks', img: '../../images/burger.avif' },
+      { id: 'm4', name: 'House Iced Tea', price: 20.00, category: 'Drinks', img: '../../images/burger.avif' },
+      { id: 'm5', name: 'Double Cheeseburger', price: 65.00, category: 'Snacks', img: '../../images/burger.avif' },
+      { id: 'm6', name: 'Mineral Water', price: 15.00, category: 'Drinks', img: '../../images/burger.avif' },
+      { id: 'm7', name: 'French Fries', price: 40.00, category: 'Snacks', img: '../../images/burger.avif' },
+      { id: 'm8', name: 'Tapsilog', price: 110.00, category: 'Meals', img: '../../images/burger.avif' }
+    ];
+
+    let walkinCart = {};
+    let currentPaymentMethod = 'Cash';
+
+    function renderWalkinMenu() {
+      const q = document.getElementById('walkinSearch').value.toLowerCase();
+      const cat = document.getElementById('walkinCategory').value;
+      const grid = document.getElementById('walkinMenuGrid');
+      
+      const filtered = walkinItems.filter(item => {
+        const matchQ = item.name.toLowerCase().includes(q);
+        const matchC = cat === 'All' || item.category === cat;
+        return matchQ && matchC;
+      });
+
+      grid.innerHTML = filtered.map(item => {
+        const qty = walkinCart[item.id] ? walkinCart[item.id].qty : 0;
+        const isSelected = qty > 0;
+        return `
+          <div class="walkin-item-card" onclick="addToWalkin('${item.id}')" style="background:#fff; border:2px solid ${isSelected ? '#22c55e' : '#e2e8f0'}; border-radius:12px; padding:12px; cursor:pointer; position:relative; transition:all 0.2s; box-shadow: ${isSelected ? '0 4px 12px rgba(34,197,94,0.15)' : 'none'};">
+            ${isSelected ? `<div style="position:absolute; top:-8px; right:-8px; background:#22c55e; color:#fff; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; z-index:2; box-shadow:0 2px 5px rgba(0,0,0,0.2);">${qty}</div>` : ''}
+            <div style="height:100px; background:#f1f5f9; border-radius:8px; margin-bottom:10px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+              <img src="${item.img}" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'">
+            </div>
+            <div style="font-size:14px; font-weight:600; color:#1e293b; margin-bottom:4px; line-height:1.2;">${item.name}</div>
+            <div style="font-size:15px; font-weight:700; color:#3b82f6;">&#8369;${item.price.toFixed(2)}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderWalkinCart() {
+      const list = document.getElementById('walkinOrderList');
+      const items = Object.values(walkinCart);
+      let total = 0;
+
+      if(items.length === 0) {
+        list.innerHTML = `<div style="text-align:center; color:#94a3b8; font-size:14px; margin-top:40px;"><i class="fa-solid fa-basket-shopping" style="font-size:32px; color:#cbd5e1; margin-bottom:12px; display:block;"></i>No items added yet</div>`;
+      } else {
+        list.innerHTML = items.map(item => {
+          const subtotal = item.price * item.qty;
+          total += subtotal;
+          return `
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div style="flex:1;">
+                <div style="font-size:14px; font-weight:600; color:#1e293b; line-height:1.2; margin-bottom:2px;">${item.name}</div>
+                <div style="font-size:13px; color:#64748b;">&#8369;${item.price.toFixed(2)}</div>
+              </div>
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div style="display:flex; align-items:center; gap:6px; background:#f1f5f9; padding:4px; border-radius:8px;">
+                  <button onclick="updateWalkinQty('${item.id}', -1)" style="width:26px; height:26px; border-radius:6px; border:none; background:#fff; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,0.05); color:#64748b;"><i class="fa-solid fa-minus" style="font-size:10px;"></i></button>
+                  <span style="font-size:14px; font-weight:700; width:16px; text-align:center; color:#0f172a;">${item.qty}</span>
+                  <button onclick="updateWalkinQty('${item.id}', 1)" style="width:26px; height:26px; border-radius:6px; border:none; background:#fff; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,0.05); color:#64748b;"><i class="fa-solid fa-plus" style="font-size:10px;"></i></button>
+                </div>
+                <div style="font-size:15px; font-weight:700; color:#0f172a; width:65px; text-align:right;">&#8369;${subtotal.toFixed(2)}</div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      document.getElementById('walkinTotal').innerHTML = `&#8369;${total.toFixed(2)}`;
+      updateChargeBtn(total);
+      calculateChange(total);
+    }
+
+    function addToWalkin(id) {
+      if(!walkinCart[id]) {
+        const item = walkinItems.find(i => i.id === id);
+        walkinCart[id] = { ...item, qty: 1 };
+      } else {
+        walkinCart[id].qty++;
+      }
+      renderWalkinMenu();
+      renderWalkinCart();
+    }
+
+    function updateWalkinQty(id, delta) {
+      if(walkinCart[id]) {
+        walkinCart[id].qty += delta;
+        if(walkinCart[id].qty <= 0) delete walkinCart[id];
+      }
+      renderWalkinMenu();
+      renderWalkinCart();
+    }
+
+    function calculateChange(total) {
+      if(currentPaymentMethod !== 'Cash') {
+        document.getElementById('walkinChange').textContent = `Change: \u20B10.00`;
+        return;
+      }
+      const tendered = parseFloat(document.getElementById('walkinTendered').value) || 0;
+      const change = tendered - total;
+      const changeEl = document.getElementById('walkinChange');
+      if(tendered > 0 && change >= 0) {
+        changeEl.innerHTML = `Change: <span style="color:#22c55e;">&#8369;${change.toFixed(2)}</span>`;
+      } else {
+        changeEl.innerHTML = `Change: <span style="color:#ef4444;">&#8369;0.00</span>`;
+      }
+      updateChargeBtn(total, tendered);
+    }
+
+    function updateChargeBtn(total, tendered = parseFloat(document.getElementById('walkinTendered').value) || 0) {
+      const btn = document.getElementById('walkinChargeBtn');
+      btn.innerHTML = `Charge &#8369;${total.toFixed(2)}`;
+      
+      let canCharge = total > 0;
+      if (currentPaymentMethod === 'Cash' && tendered < total) {
+        canCharge = false;
+      }
+
+      if(canCharge) {
+        btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+        btn.style.color = '#fff';
+        btn.style.cursor = 'pointer';
+        btn.disabled = false;
+        btn.style.boxShadow = '0 4px 12px rgba(34,197,94,0.3)';
+      } else {
+        btn.style.background = '#e2e8f0';
+        btn.style.color = '#94a3b8';
+        btn.style.cursor = 'not-allowed';
+        btn.disabled = true;
+        btn.style.boxShadow = 'none';
+      }
+    }
+
+    document.getElementById('walkinSearch')?.addEventListener('input', renderWalkinMenu);
+    document.getElementById('walkinCategory')?.addEventListener('change', renderWalkinMenu);
+    document.getElementById('walkinTendered')?.addEventListener('input', () => {
+      const total = Object.values(walkinCart).reduce((sum, item) => sum + (item.price * item.qty), 0);
+      calculateChange(total);
+    });
+
+    document.querySelectorAll('.pay-method-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.pay-method-btn').forEach(b => {
+          b.style.background = '#fff';
+          b.style.borderColor = '#cbd5e1';
+          b.style.color = '#64748b';
+          b.classList.remove('active');
+        });
+        const target = e.currentTarget;
+        target.style.background = '#eff6ff';
+        target.style.borderColor = '#3b82f6';
+        target.style.color = '#1d4ed8';
+        target.classList.add('active');
+        
+        currentPaymentMethod = target.dataset.method;
+        const section = document.getElementById('walkinCashInputSection');
+        if(currentPaymentMethod === 'Cash') {
+          section.style.display = 'block';
+        } else {
+          section.style.display = 'none';
+          document.getElementById('walkinTendered').value = '';
+        }
+        
+        const total = Object.values(walkinCart).reduce((sum, item) => sum + (item.price * item.qty), 0);
+        calculateChange(total);
+      });
+    });
+
+    document.getElementById('walkinChargeBtn')?.addEventListener('click', () => {
+      const items = Object.values(walkinCart);
+      const total = items.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      
+      const newOrder = {
+        id: "W" + Date.now().toString().slice(-6),
+        items: items.map(i => ({ name: i.name, price: i.price, qty: i.qty })),
+        total: total,
+        status: 'completed',
+        placedAt: new Date().toISOString(),
+        payment: currentPaymentMethod,
+        vendor: "Canteen 1",
+        customerRole: "Walk-in"
+      };
+
+      const allOrders = typeof getOrders === 'function' ? getOrders() : [];
+      allOrders.push(newOrder);
+      if(typeof saveOrders === 'function') {
+        saveOrders(allOrders);
+      }
+      
+      showVendorToast("success", "fa-check", "Transaction Successful!");
+      
+      walkinCart = {};
+      document.getElementById('walkinTendered').value = '';
+      renderWalkinMenu();
+      renderWalkinCart();
+      
+      document.getElementById('walkinModal').classList.remove('active');
+      
+      if(window.renderVendorOrders) window.renderVendorOrders();
+    });
+
+    // OPEN MODAL
+    document.getElementById('openWalkInBtn')?.addEventListener('click', () => {
+      walkinCart = {};
+      document.getElementById('walkinTendered').value = '';
+      currentPaymentMethod = 'Cash';
+      document.querySelectorAll('.pay-method-btn')[0].click(); // reset to cash
+      
+      renderWalkinMenu();
+      renderWalkinCart();
+      document.getElementById('walkinModal').classList.add('active');
+    });
+
+    document.getElementById('closeWalkinModal')?.addEventListener('click', () => {
+      document.getElementById('walkinModal').classList.remove('active');
+    });
+    document.getElementById('walkinOverlay')?.addEventListener('click', () => {
+      document.getElementById('walkinModal').classList.remove('active');
     });
   </script>
 </body>

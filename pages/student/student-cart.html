@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -56,7 +56,7 @@
       </div>
 
       <!-- RIGHT: profile -->
-            <div class="nav-right">
+      <div class="nav-right">
         <!-- Notifications -->
         <div class="notification-dropdown">
           <button class="nav-icon-btn" aria-label="Notifications">
@@ -70,26 +70,38 @@
             </div>
             <div class="notification-list">
               <a href="student-order.html" class="notification-item unread">
-                <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
+                <div class="notif-icon green">
+                  <i class="fa-solid fa-check"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Order #1234 Ready</p>
-                  <p class="notif-desc">Your order from Canteen 1 is ready for pickup.</p>
+                  <p class="notif-desc">
+                    Your order from Canteen 1 is ready for pickup.
+                  </p>
                   <span class="notif-time">2 mins ago</span>
                 </div>
               </a>
               <a href="student-wallet.html" class="notification-item unread">
-                <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
+                <div class="notif-icon blue">
+                  <i class="fa-solid fa-info"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Wallet Top-up</p>
-                  <p class="notif-desc">Successfully added &#8369;500.00 to your wallet.</p>
+                  <p class="notif-desc">
+                    Successfully added &#8369;500.00 to your wallet.
+                  </p>
                   <span class="notif-time">1 hour ago</span>
                 </div>
               </a>
               <a href="student-order.html" class="notification-item">
-                <div class="notif-icon orange"><i class="fa-solid fa-fire-burner"></i></div>
+                <div class="notif-icon orange">
+                  <i class="fa-solid fa-fire-burner"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Order Preparing</p>
-                  <p class="notif-desc">Vendor has started preparing your order.</p>
+                  <p class="notif-desc">
+                    Vendor has started preparing your order.
+                  </p>
                   <span class="notif-time">2 hours ago</span>
                 </div>
               </a>
@@ -156,7 +168,7 @@
           <li>
             <a href="student-cart.html" class="nav-link active">
               <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
-              <span class="nav-badge" style="display:none">0</span>
+              <span class="nav-badge" style="display: none">0</span>
             </a>
           </li>
           <li>
@@ -171,7 +183,8 @@
           </li>
           <li>
             <a href="student-campus-map.html" class="nav-link">
-              <i class="fa-solid fa-map-location-dot"></i><span>Campus Map</span>
+              <i class="fa-solid fa-map-location-dot"></i
+              ><span>Campus Map</span>
             </a>
           </li>
         </ul>
@@ -181,9 +194,15 @@
         <div class="cart-header">
           <div class="cart-title-info">
             <p class="cart-page-title">Cart</p>
-            <p class="cart-page-sub" id="cartSubtitle">0 item(s) in your cart</p>
+            <p class="cart-page-sub" id="cartSubtitle">
+              0 item(s) in your cart
+            </p>
           </div>
-          <button class="clear-cart-btn" id="clearCartBtn" style="display:none">
+          <button
+            class="clear-cart-btn"
+            id="clearCartBtn"
+            style="display: none"
+          >
             <i class="fa-solid fa-trash-can"></i> Clear All
           </button>
         </div>
@@ -240,18 +259,29 @@
     <!-- CONFIRMATION MODAL -->
     <div class="modal" id="confirmModal">
       <div class="modal-overlay" id="confirmOverlay"></div>
-      <div class="modal-content" style="max-width:400px;text-align:center">
-        <div class="modal-body" style="padding-top:32px">
+      <div class="modal-content" style="max-width: 400px; text-align: center">
+        <div class="modal-body" style="padding-top: 32px">
           <div class="modal-icon">
             <i class="fa-solid fa-circle-exclamation"></i>
           </div>
-          <h2 style="font-size:20px;font-weight:800;color:#0f172a;margin-bottom:8px" id="confirmTitle">
+          <h2
+            style="
+              font-size: 20px;
+              font-weight: 800;
+              color: #0f172a;
+              margin-bottom: 8px;
+            "
+            id="confirmTitle"
+          >
             Confirm Action
           </h2>
-          <p style="font-size:14px;color:#64748b;margin-bottom:24px" id="confirmMessage">
+          <p
+            style="font-size: 14px; color: #64748b; margin-bottom: 24px"
+            id="confirmMessage"
+          >
             Are you sure you want to do this?
           </p>
-          <div class="form-actions" style="justify-content:center;gap:12px">
+          <div class="form-actions" style="justify-content: center; gap: 12px">
             <button class="btn-cancel" id="cancelConfirmBtn">Cancel</button>
             <button class="btn-submit" id="submitConfirmBtn">Confirm</button>
           </div>
@@ -271,7 +301,7 @@
 
       /* ── Render the cart items from localStorage ── */
       function renderCart() {
-        const cart      = getCart();
+        const cart = getCart();
         const container = document.getElementById("cartItems");
 
         // Update subtitle + badge
@@ -305,7 +335,9 @@
           return;
         }
 
-        container.innerHTML = cart.map((item) => `
+        container.innerHTML = cart
+          .map(
+            (item) => `
           <div class="cart-item" data-id="${escHtml(item.id)}" data-price="${item.price}">
             <button class="item-remove" title="Remove item" data-id="${escHtml(item.id)}">
               <i class="fa-solid fa-trash"></i>
@@ -337,7 +369,9 @@
               </div>
             </div>
           </div>
-        `).join("");
+        `,
+          )
+          .join("");
 
         recalc();
         attachEvents();
@@ -348,21 +382,25 @@
         let grandTotal = 0;
         document.querySelectorAll(".cart-item").forEach((item) => {
           const unitPrice = parseFloat(item.dataset.price) || 0;
-          const qty       = parseInt(item.querySelector(".qty-number")?.textContent || 1);
-          const totalEl   = item.querySelector(".item-total-price");
+          const qty = parseInt(
+            item.querySelector(".qty-number")?.textContent || 1,
+          );
+          const totalEl = item.querySelector(".item-total-price");
           const lineTotal = unitPrice * qty;
           if (totalEl) totalEl.textContent = "₱" + lineTotal.toFixed(2);
           grandTotal += lineTotal;
         });
-        document.getElementById("subtotalAmt").textContent = "₱" + grandTotal.toFixed(2);
-        document.getElementById("totalAmt").textContent    = "₱" + grandTotal.toFixed(2);
+        document.getElementById("subtotalAmt").textContent =
+          "₱" + grandTotal.toFixed(2);
+        document.getElementById("totalAmt").textContent =
+          "₱" + grandTotal.toFixed(2);
       }
 
       /* ── Attach qty / remove event handlers ── */
       function attachEvents() {
         document.querySelectorAll(".qty-btn.plus").forEach((btn) => {
           btn.addEventListener("click", () => {
-            const id   = btn.dataset.id;
+            const id = btn.dataset.id;
             const cart = getCart();
             const item = cart.find((c) => c.id === id);
             if (item) {
@@ -374,7 +412,7 @@
 
         document.querySelectorAll(".qty-btn.minus").forEach((btn) => {
           btn.addEventListener("click", () => {
-            const id   = btn.dataset.id;
+            const id = btn.dataset.id;
             const cart = getCart();
             const item = cart.find((c) => c.id === id);
             if (item) {
@@ -407,22 +445,22 @@
                 clearCart();
                 renderCart();
                 showToast("info", "fa-trash-can", "Cart cleared.");
-              }
+              },
             );
           };
         }
       }
 
       /* ── Confirmation Modal Logic ── */
-      const confirmModal    = document.getElementById("confirmModal");
-      const confirmOverlay  = document.getElementById("confirmOverlay");
-      const cancelBtn       = document.getElementById("cancelConfirmBtn");
-      const submitBtn       = document.getElementById("submitConfirmBtn");
-      let confirmCallback   = null;
+      const confirmModal = document.getElementById("confirmModal");
+      const confirmOverlay = document.getElementById("confirmOverlay");
+      const cancelBtn = document.getElementById("cancelConfirmBtn");
+      const submitBtn = document.getElementById("submitConfirmBtn");
+      let confirmCallback = null;
 
       function showConfirmation(title, message, callback) {
-        document.getElementById("confirmTitle").textContent   = title;
-        document.getElementById("confirmMessage").textContent = message;
+        document.getElementById("confirmTitle").textContent = title;
+        document.getElementById("confirmMessage").innerHTML = message;
         confirmCallback = callback;
         confirmModal.classList.add("active");
       }
@@ -432,7 +470,7 @@
         confirmCallback = null;
       }
 
-      cancelBtn.onclick      = closeConfirm;
+      cancelBtn.onclick = closeConfirm;
       confirmOverlay.onclick = closeConfirm;
       submitBtn.onclick = () => {
         if (confirmCallback) confirmCallback();
@@ -455,14 +493,40 @@
           showToast("error", "fa-circle-exclamation", "Your cart is empty!");
           return;
         }
-        const instructions = document.getElementById("special-instructions").value.trim();
-        const payment      = document.getElementById("payment-method").value;
-        const order        = placeOrder(instructions, payment);
-        if (order) {
-          renderCart(); // cart is now empty; re-render shows empty state
-          showToast("success", "fa-check-circle", "Order placed! Redirecting to Orders…");
-          setTimeout(() => { window.location.href = "student-order.html"; }, 1600);
-        }
+        const instructions = document
+          .getElementById("special-instructions")
+          .value.trim();
+        const payment = document.getElementById("payment-method").value;
+        let totalAmt = 0;
+        let summaryHtml = '<div style="text-align:left; max-height:200px; overflow-y:auto; margin-bottom:15px; border:1px solid #e2e8f0; padding:10px; border-radius:8px; background:#f8fafc;">';
+        cart.forEach(item => {
+          const lineTotal = item.qty * item.price;
+          totalAmt += lineTotal;
+          summaryHtml += `<div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px; color:#475569;">
+                            <span><strong style="color:#0f172a">${item.qty}x</strong> ${escHtml(item.name)}</span>
+                            <span style="font-weight:600">&#8369;${lineTotal.toFixed(2)}</span>
+                          </div>`;
+        });
+        summaryHtml += `<div style="display:flex; justify-content:space-between; margin-top:8px; padding-top:8px; border-top:1px dashed #cbd5e1; font-weight:700; color:#0f172a;">
+                          <span>Total</span>
+                          <span style="color:#e61524">&#8369;${totalAmt.toFixed(2)}</span>
+                        </div></div>`;
+        summaryHtml += `<div style="font-size:14px;color:#64748b;">Are you sure you want to place this order via <strong>${payment}</strong>?</div>`;
+
+        showConfirmation("Place Order", summaryHtml, () => {
+          const order = placeOrder(instructions, payment);
+          if (order) {
+            renderCart(); // cart is now empty; re-render shows empty state
+            showToast(
+              "success",
+              "fa-check-circle",
+              "Order placed! Redirecting to Orders..."
+            );
+            setTimeout(() => {
+              window.location.href = "student-order.html";
+            }, 1600);
+          }
+        });
       };
 
       /* ── Toast ── */
@@ -482,8 +546,3 @@
     </script>
   </body>
 </html>
-
-
-
-
-

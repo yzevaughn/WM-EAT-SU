@@ -14,6 +14,7 @@
     />
     <link rel="stylesheet" href="../../css/navbar.css" />
     <link rel="stylesheet" href="../../css/vendor-css/wallet.css" />
+    <link rel="stylesheet" href="../../css/vendor-css/sales.css" />
     <style>
       .btn-qr-receive {
         background-color: #3b82f6 !important;
@@ -185,15 +186,9 @@
             </a>
           </li>
           <li>
-            <a href="vendor-reviews.html" class="nav-link">
-              <i class="fa-solid fa-star"></i>
-              <span>Reviews</span>
-            </a>
-          </li>
-          <li>
             <a href="vendor-sales-payments.html" class="nav-link">
               <i class="fa-solid fa-chart-line"></i>
-              <span>Sales &amp; Payments</span>
+              <span>Vendor Analytics</span>
             </a>
           </li>
           <li>
@@ -228,53 +223,138 @@
               <i class="fa-solid fa-qrcode"></i> Receive QR Payment
             </label>
           </div>
-          <!-- TRANSACTIONS -->
-          <div class="transaction-section">
-            <h2>Transaction History</h2>
-            <div class="transaction-list" id="transactionList">
-              <div class="transaction-item">
-                <div class="transaction-icon topup">
-                  <i class="fa-solid fa-cart-shopping"></i>
-                </div>
-                <div class="transaction-details">
-                  <p class="transaction-type">Daily Sales Payout</p>
-                  <p class="transaction-date">Mar 6, 2026 - 06:00 PM</p>
-                </div>
-                <div class="transaction-amount positive">+&#8369;1,250.00</div>
+        </div>
+
+          <!-- Payment History -->
+          <div class="payment-history-wrapper" style="margin-top: 24px;">
+            <div class="history-header">
+              <h2>Payment History</h2>
+              <div class="export-actions">
+                <button class="export-btn">
+                  <i class="fas fa-file-csv"></i> Export CSV
+                </button>
+                <button class="export-btn">
+                  <i class="fas fa-file-pdf"></i> Export PDF
+                </button>
               </div>
-              <div class="transaction-item">
-                <div class="transaction-icon topup">
-                  <i class="fa-solid fa-shopping-cart"></i>
-                </div>
-                <div class="transaction-details">
-                  <p class="transaction-type">Order Payment - Burger Meal</p>
-                  <p class="transaction-date">Mar 5, 2026 - 12:30 PM</p>
-                </div>
-                <div class="transaction-amount positive">+&#8369;12.99</div>
+            </div>
+
+            <div class="history-controls">
+              <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input
+                  type="text"
+                  placeholder="Search Order ID or Customer..."
+                />
               </div>
-              <div class="transaction-item">
-                <div class="transaction-icon payment">
-                  <i class="fa-solid fa-money-bill-transfer"></i>
-                </div>
-                <div class="transaction-details">
-                  <p class="transaction-type">Withdrawal via GCash</p>
-                  <p class="transaction-date">Mar 3, 2026 - 3:15 PM</p>
-                </div>
-                <div class="transaction-amount negative">-&#8369;500.00</div>
+
+              <div class="filters">
+                <select class="filter-dropdown">
+                  <option value="">All Dates</option>
+                  <option value="today">Today</option>
+                  <option value="week">This Week</option>
+                  <option value="month">This Month</option>
+                </select>
+
+                <select class="filter-dropdown">
+                  <option value="">All Payment Methods</option>
+                  <option value="gcash">GCash</option>
+                  <option value="cash">Cash on Delivery</option>
+                  <option value="card">Credit/Debit Card</option>
+                </select>
+
+                <select class="sort-dropdown">
+                  <option value="latest">Sort by: Latest</option>
+                  <option value="oldest">Sort by: Oldest</option>
+                  <option value="highest">Sort by: Highest Amount</option>
+                  <option value="lowest">Sort by: Lowest Amount</option>
+                </select>
               </div>
-              <div class="transaction-item">
-                <div class="transaction-icon payment">
-                  <i class="fa-solid fa-file-invoice-dollar"></i>
-                </div>
-                <div class="transaction-details">
-                  <p class="transaction-type">Platform Service Fee</p>
-                  <p class="transaction-date">Mar 1, 2026 - 12:00 AM</p>
-                </div>
-                <div class="transaction-amount negative">-&#8369;50.00</div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="history-table">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Customer Name</th>
+                    <th>Items Ordered</th>
+                    <th>Payment Method</th>
+                    <th>Date & Time</th>
+                    <th class="text-right">Total Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="order-id">#ORD-1049</span></td>
+                    <td>Juan Dela Cruz</td>
+                    <td>
+                      <span class="item-list"
+                        >2x Classic Burger Meal, 1x Fries</span
+                      >
+                    </td>
+                    <td><span class="pay-method gcash">GCash</span></td>
+                    <td>
+                      Oct 24, 2026<br /><span class="time-sub">12:30 PM</span>
+                    </td>
+                    <td class="text-right amount">&#8369;29.97</td>
+                  </tr>
+                  <tr>
+                    <td><span class="order-id">#ORD-1048</span></td>
+                    <td>Maria Santos</td>
+                    <td>
+                      <span class="item-list">1x Spicy Chicken Sandwich</span>
+                    </td>
+                    <td><span class="pay-method cash">Cash</span></td>
+                    <td>
+                      Oct 24, 2026<br /><span class="time-sub">11:15 AM</span>
+                    </td>
+                    <td class="text-right amount">&#8369;9.99</td>
+                  </tr>
+                  <tr>
+                    <td><span class="order-id">#ORD-1047</span></td>
+                    <td>Pedro Penduko</td>
+                    <td>
+                      <span class="item-list">3x Softdrink, 1x Nachos</span>
+                    </td>
+                    <td><span class="pay-method gcash">GCash</span></td>
+                    <td>
+                      Oct 24, 2026<br /><span class="time-sub">10:45 AM</span>
+                    </td>
+                    <td class="text-right amount">&#8369;12.50</td>
+                  </tr>
+                  <tr>
+                    <td><span class="order-id">#ORD-1046</span></td>
+                    <td>Anna Reyes</td>
+                    <td><span class="item-list">1x Salad Bowl</span></td>
+                    <td><span class="pay-method card">Card</span></td>
+                    <td>
+                      Oct 23, 2026<br /><span class="time-sub">02:20 PM</span>
+                    </td>
+                    <td class="text-right amount">&#8369;15.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="pagination">
+              <span class="page-info">Showing 1 to 4 of 124 entries</span>
+              <div class="page-controls">
+                <button class="page-btn" disabled>
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <span class="page-dots">...</span>
+                <button class="page-btn">31</button>
+                <button class="page-btn">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
               </div>
             </div>
           </div>
-        </div>
+
       </div>
     </div>
     <!-- MODAL TOGGLE -->
@@ -533,11 +613,13 @@
       });
 
       // Reset modal when opened
-      document.getElementById("withdrawToggle").addEventListener("change", (e) => {
-        if (e.target.checked) {
-          goToStep1();
-        }
-      });
+      document
+        .getElementById("withdrawToggle")
+        .addEventListener("change", (e) => {
+          if (e.target.checked) {
+            goToStep1();
+          }
+        });
 
       document.getElementById("mobileNumber").addEventListener("input", () => {
         document.getElementById("mobileNumber").classList.remove("invalid");
@@ -554,9 +636,9 @@
           const val = parseInt(btn.textContent.replace(/[^0-9]/g, ""));
           if (!isNaN(val)) {
             customInput.value = val;
-            
+
             // Manage active class
-            quickAmounts.forEach(b => b.classList.remove("active"));
+            quickAmounts.forEach((b) => b.classList.remove("active"));
             btn.classList.add("active");
 
             // Clear error when quick amount is picked
@@ -569,8 +651,10 @@
       // Clear quick amount selection when typing a custom amount
       customInput.addEventListener("input", () => {
         if (customInput.value) {
-          quickAmounts.forEach(b => b.classList.remove("active"));
-          document.querySelectorAll('input[name="amount"]').forEach(i => i.checked = false);
+          quickAmounts.forEach((b) => b.classList.remove("active"));
+          document
+            .querySelectorAll('input[name="amount"]')
+            .forEach((i) => (i.checked = false));
         }
       });
 
@@ -607,7 +691,11 @@
               : "Bank Transfer";
         document.getElementById("summaryMethod").innerText = summaryMethodText;
         document.getElementById("summaryAmount").innerHTML =
-          "&#8369;" + amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+          "&#8369;" +
+          amount.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          });
 
         // Setup Step 2 Fields
         if (selectedMethod === "card") {
@@ -739,7 +827,7 @@
         });
 
         // Add to Transaction List
-        const list = document.getElementById("transactionList");
+        const list = document.querySelector(".history-table tbody");
         const methodText =
           selectedMethod === "gcash"
             ? "GCash"
@@ -753,26 +841,28 @@
             day: "numeric",
             year: "numeric",
           }) +
-          " - " +
+          "<br /><span class=\"time-sub\">" +
           now.toLocaleTimeString("en-US", {
             hour: "2-digit",
             minute: "2-digit",
-          });
+          }) + "</span>";
 
-        const newItem = document.createElement("div");
-        newItem.className = "transaction-item";
+        const newItem = document.createElement("tr");
         newItem.style.animation = "slideIn 0.3s ease-out";
+        
+        let payClass = selectedMethod === "card" ? "card" : selectedMethod;
+
         newItem.innerHTML = `
-          <div class="transaction-icon payment">
-            <i class="fa-solid fa-money-bill-transfer"></i>
-          </div>
-          <div class="transaction-details">
-            <p class="transaction-type">Withdrawal via ${methodText}</p>
-            <p class="transaction-date">${dateStr}</p>
-          </div>
-          <div class="transaction-amount negative">-&#8369;${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+          <td><span class="order-id">#TXN-${Math.floor(1000 + Math.random() * 9000)}</span></td>
+          <td>Vendor</td>
+          <td><span class="item-list">Withdrawal via ${methodText}</span></td>
+          <td><span class="pay-method ${payClass}">${methodText}</span></td>
+          <td>${dateStr}</td>
+          <td class="text-right amount" style="color: #ef4444">-&#8369;${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
         `;
-        list.prepend(newItem);
+        if (list) {
+          list.prepend(newItem);
+        }
         // ----------------------------
 
         // Close Modal via Checkbox
@@ -782,10 +872,12 @@
         setTimeout(() => {
           goToStep1();
           customInput.value = "";
-          quickAmounts.forEach(b => b.classList.remove("active"));
-          paymentInputs.forEach(i => i.checked = false);
-          document.querySelectorAll(".payment-method-btn").forEach(b => b.classList.remove("active"));
-          
+          quickAmounts.forEach((b) => b.classList.remove("active"));
+          paymentInputs.forEach((i) => (i.checked = false));
+          document
+            .querySelectorAll(".payment-method-btn")
+            .forEach((b) => b.classList.remove("active"));
+
           document.getElementById("mobileNumber").value = "";
           document.getElementById("bankAccount").value = "";
           document.querySelectorAll(".otp-digit").forEach((b) => {

@@ -74,27 +74,55 @@ document.addEventListener('DOMContentLoaded', () => {
     // CHART INITIALIZATION
     // ════════════════════════════════════════
     function initReviewsChart() {
-        const ctx = document.getElementById('reviewChart');
-        if (!ctx) return;
+        const canvas = document.getElementById('reviewChart');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
 
         const chartData = {
             daily: {
                 labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                data: [4.2, 4.5, 3.8, 4.7, 4.9, 4.1, 4.3]
+                data: [4.2, 4.5, 3.8, 4.7, 4.9, 4.1, 4.3],
+                total: '4.4 ★',
+                growth: '+0.2',
+                growthType: 'positive'
             },
             weekly: {
                 labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-                data: [4.1, 4.4, 4.3, 4.5]
+                data: [4.1, 4.4, 4.3, 4.5],
+                total: '4.3 ★',
+                growth: '+0.1',
+                growthType: 'positive'
             },
             monthly: {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                data: [3.9, 4.2, 4.1, 4.4, 4.5, 4.3, 4.6, 4.4, 4.5, 4.7, 4.6, 4.8]
+                data: [3.9, 4.2, 4.1, 4.4, 4.5, 4.3, 4.6, 4.4, 4.5, 4.7, 4.6, 4.8],
+                total: '4.4 ★',
+                growth: '+0.3',
+                growthType: 'positive'
+            },
+            yearly: {
+                labels: ['2023', '2024', '2025', '2026'],
+                data: [4.1, 4.3, 4.4, 4.6],
+                total: '4.6 ★',
+                growth: '+0.5',
+                growthType: 'positive'
+            },
+            all_time: {
+                labels: ['2021', '2022', '2023', '2024', '2025', '2026'],
+                data: [3.8, 4.0, 4.1, 4.3, 4.4, 4.6],
+                total: '4.3 ★',
+                growth: '+0.8',
+                growthType: 'positive'
             }
         };
 
         if (reviewChartInstance) reviewChartInstance.destroy();
 
-        reviewChartInstance = new Chart(ctx, {
+        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, 'rgba(168, 85, 247, 0.25)');
+        gradient.addColorStop(1, 'rgba(168, 85, 247, 0)');
+
+        reviewChartInstance = new Chart(canvas, {
             type: 'line',
             data: {
                 labels: chartData.daily.labels,
@@ -102,12 +130,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     label: 'Avg. Rating',
                     data: chartData.daily.data,
                     borderColor: '#a855f7',
-                    backgroundColor: 'rgba(168, 85, 247, 0.1)',
-                    borderWidth: 2,
-                    pointBackgroundColor: '#fff',
+                    backgroundColor: gradient,
+                    borderWidth: 3,
+                    pointBackgroundColor: '#ffffff',
                     pointBorderColor: '#a855f7',
                     pointBorderWidth: 2,
                     pointRadius: 4,
+                    pointHoverRadius: 6,
                     fill: true,
                     tension: 0.4
                 }]
@@ -120,8 +149,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     tooltip: {
                         backgroundColor: '#1e293b',
                         padding: 12,
-                        titleFont: { size: 13, family: "'Inter', sans-serif" },
+                        cornerRadius: 8,
+                        titleFont: { size: 13, family: "'Inter', sans-serif", weight: '600' },
                         bodyFont: { size: 14, family: "'Inter', sans-serif" },
+                        displayColors: false,
                         callbacks: {
                             label: (context) => `Rating: ${context.parsed.y} ★`
                         }
@@ -130,12 +161,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 scales: {
                     y: {
                         beginAtZero: false,
-                        min: 3,
+                        min: 0,
                         max: 5,
-                        grid: { color: '#f1f5f9', drawBorder: false },
+                        grid: { 
+                            color: '#f1f5f9', 
+                            drawBorder: false,
+                            borderDash: [5, 5]
+                        },
                         ticks: {
+                            stepSize: 1,
                             font: { family: "'Inter', sans-serif", size: 11 },
-                            color: '#64748b'
+                            color: '#64748b',
+                            callback: (value) => value + ' ★'
                         }
                     },
                     x: {
@@ -150,15 +187,37 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        const toggles = document.querySelectorAll('.revenue-controls .filter-tab');
+        // Find the specific tabs for review chart (the ones inside vendorReviewsWrapper)
+        const reviewWrapper = document.getElementById('vendorReviewsWrapper');
+        if (!reviewWrapper) return;
+        const toggles = reviewWrapper.querySelectorAll('.chart-tab');
+        const domTotal = document.getElementById('reviewTotalRating');
+        const domGrowth = document.getElementById('reviewGrowth');
+
         toggles.forEach(btn => {
             btn.addEventListener('click', function() {
                 toggles.forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
-                const range = this.getAttribute('data-range');
-                reviewChartInstance.data.labels = chartData[range].labels;
-                reviewChartInstance.data.datasets[0].data = chartData[range].data;
+                const range = this.getAttribute('data-view');
+                const dataToLoad = chartData[range];
+
+                reviewChartInstance.data.labels = dataToLoad.labels;
+                reviewChartInstance.data.datasets[0].data = dataToLoad.data;
                 reviewChartInstance.update();
+
+                if (domTotal) domTotal.textContent = dataToLoad.total;
+                if (domGrowth) domGrowth.textContent = dataToLoad.growth;
+
+                const growthBadge = domGrowth ? domGrowth.parentElement : null;
+                if (growthBadge) {
+                    if (dataToLoad.growthType === 'positive') {
+                        growthBadge.className = 'growth-badge positive';
+                        growthBadge.querySelector('i').className = 'fas fa-arrow-up';
+                    } else {
+                        growthBadge.className = 'growth-badge negative';
+                        growthBadge.querySelector('i').className = 'fas fa-arrow-down';
+                    }
+                }
             });
         });
     }
