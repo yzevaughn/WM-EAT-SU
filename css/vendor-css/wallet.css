@@ -182,6 +182,31 @@
   color: #991b1b;
 }
 
+.pay-method {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.pay-method.online {
+  background: #e0e7ff;
+  color: #4338ca;
+}
+
+.pay-method.cash {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.pay-method.card {
+  background: #fef3c7;
+  color: #92400e;
+}
+
 /* MODAL */
 /* modal popup for topup */
 .modal {

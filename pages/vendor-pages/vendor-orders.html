@@ -490,6 +490,14 @@
       const dateStr = dt.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})
                     + " • " + dt.toLocaleTimeString("en-US",{hour:"2-digit",minute:"2-digit"});
       const shortId = order.id.slice(-6).toUpperCase();
+      
+      // Determine payment method label and styling
+      const rawPayment = order.payment || "Wallet";
+      const isCash = rawPayment === "Cash on Pickup" || rawPayment === "Cash";
+      const payLabel = isCash ? "Cash on Pickup" : "Online Payment (Wallet)";
+      const payIcon = isCash ? "fa-money-bill-wave" : "fa-credit-card";
+      const payBadgeClass = isCash ? "badge-cash" : "badge-online";
+
       const itemsHtml = (order.items||[]).map(it =>
         `<div class="order-item-row" style="display:flex;justify-content:space-between;color:#334155;font-weight:600;font-size:14px;padding:3px 0;"><span>${it.qty} × ${it.name}</span><span>&#8369;${(it.price*it.qty).toFixed(2)}</span></div>`
       ).join("");
@@ -506,7 +514,13 @@
             <div class="order-card-header">
               <div class="order-title">
                 <div class="order-store-icon ${cfg.cls}"><i class="fa-solid ${cfg.icon}"></i></div>
-                <span class="order-card-title">${order.payment ? order.payment : 'Wallet'}</span>
+                <div style="display:flex; flex-direction:column; gap:2px;">
+                  <span class="order-card-title">Order #${shortId}</span>
+                  <div class="pay-method-badge ${payBadgeClass}">
+                    <i class="fa-solid ${payIcon}"></i>
+                    <span>${payLabel}</span>
+                  </div>
+                </div>
               </div>
               <span class="status-badge ${cfg.badge}">${cfg.label}</span>
             </div>

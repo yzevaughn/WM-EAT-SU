@@ -409,7 +409,13 @@
                   <div class="order-store-icon ${cfg.cls}">
                     <i class="fa-solid ${cfg.icon}"></i>
                   </div>
-                  <span class="order-card-title">${esc(o.vendor)}</span>
+                  <div style="display:flex; flex-direction:column; gap:2px;">
+                    <span class="order-card-title">${esc(o.vendor)}</span>
+                    <div class="pay-method-badge ${o.payment === 'Cash on Pickup' ? 'badge-cash' : 'badge-online'}">
+                      <i class="fa-solid ${o.payment === 'Cash on Pickup' ? 'fa-money-bill-wave' : 'fa-credit-card'}"></i>
+                      <span>${o.payment === 'Cash on Pickup' ? 'Cash on Pickup' : 'Online Payment (Wallet)'}</span>
+                    </div>
+                  </div>
                 </div>
                 <span class="status-badge ${cfg.badge}">${cfg.label}</span>
               </div>
@@ -500,7 +506,7 @@
             () => {
               cancelOrder(btn.dataset.id);
               renderOrders();
-              showToast("success", "fa-check", "Order cancelled.");
+              showToast("success", "fa-check", "Order cancelled. The money is returned to the wallet.");
             },
             order
           );
@@ -523,8 +529,10 @@
           if (!order) return;
 
           document.getElementById("modalCodeVal").textContent = order.pickupCode;
-          document.getElementById("modalCodeOrder").textContent =
-            `Order #${order.id.slice(-6).toUpperCase()} Â· ${order.vendor}`;
+          const isCash = order.payment === "Cash on Pickup";
+          const payLabel = isCash ? "Cash on Pickup" : "Online Payment (Wallet)";
+          document.getElementById("modalCodeOrder").innerHTML =
+            `Order #${order.id.slice(-6).toUpperCase()} &middot; ${esc(order.vendor)}<br><small style="opacity:0.8">${payLabel}</small>`;
           document.getElementById("modalTotalPrice").textContent =
             `Total: ₱${order.total.toFixed(2)}`;
 
@@ -671,8 +679,9 @@
                 <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin: 12px 0;">
                   <div class="pickup-code-value" style="font-size: 32px; margin: 0; letter-spacing: 2px; font-family: monospace;">${esc(order.id.slice(-6).toUpperCase())}</div>
                 </div>
-                <div class="pickup-code-order" style="opacity: 0.9; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 12px; margin-top: 4px;">
-                  <i class="fa-solid fa-store" style="margin-right: 6px; font-size: 12px;"></i> ${esc(order.vendor)}
+                <div class="pickup-code-order" style="opacity: 0.9; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 12px; margin-top: 4px; display: flex; justify-content: space-between;">
+                  <span><i class="fa-solid fa-store" style="margin-right: 6px; font-size: 12px;"></i> ${esc(order.vendor)}</span>
+                  <span><i class="fa-solid ${order.payment === 'Cash on Pickup' ? 'fa-money-bill-wave' : 'fa-credit-card'}" style="margin-right: 4px; font-size: 12px;"></i> ${order.payment === 'Cash on Pickup' ? 'Cash' : 'Online'}</span>
                 </div>
               </div>
               <div style="padding: 16px; background: #fff; border: 1px solid #e2e8f0; border-top: none; border-radius: 0 0 12px 12px;">

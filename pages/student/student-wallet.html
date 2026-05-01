@@ -52,6 +52,133 @@
       align-items: center;
       justify-content: center;
     }
+
+    /* Transaction Filter Styles */
+    .transaction-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .transaction-header h2 {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .filter-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .filter-select {
+      padding: 8px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #1e293b;
+      background-color: white;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-select:focus {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1);
+    }
+
+    .transaction-icon.withdraw {
+      background-color: #fff7ed;
+      color: #9a3412;
+    }
+
+    .transaction-icon.refunded {
+      background-color: #f0f9ff;
+      color: #075985;
+    }
+
+    .transaction-item.hidden {
+      display: none;
+    }
+
+    /* Pagination Styles */
+    .pagination-controls {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 1.5rem 0;
+      background: transparent;
+    }
+
+    .pagination-info {
+      font-size: 14px;
+      color: #64748b;
+    }
+
+    .pagination-info span {
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .pagination-nav {
+      display: flex;
+      gap: 4px;
+    }
+
+    .page-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 36px;
+      padding: 0 12px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      background: white;
+      color: #475569;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .page-btn:hover:not(.disabled):not(.active) {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+      color: #0f172a;
+    }
+
+    .page-btn.active {
+      background: #ef4444;
+      color: white;
+      border-color: #ef4444;
+    }
+
+    .page-btn.disabled {
+      background: #f8fafc;
+      color: #cbd5e1;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 480px) {
+      .pagination-controls {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 
@@ -228,9 +355,21 @@
         </div>
         <!-- TRANSACTIONS -->
         <div class="transaction-section">
-          <h2>Transaction History</h2>
+          <div class="transaction-header">
+            <h2>Transaction History</h2>
+            <div class="filter-group">
+              <span class="filter-label">Filter By:</span>
+              <select id="transactionFilter" class="filter-select">
+                <option value="all">All Transactions</option>
+                <option value="cashin">Cash In</option>
+                <option value="withdraw">Withdraw</option>
+                <option value="payment">Payment</option>
+                <option value="refunded">Refunded</option>
+              </select>
+            </div>
+          </div>
           <div class="transaction-list" id="transactionList">
-            <div class="transaction-item">
+            <div class="transaction-item" data-type="payment">
               <div class="transaction-icon payment">
                 <i class="fa-solid fa-utensils"></i>
               </div>
@@ -240,7 +379,7 @@
               </div>
               <div class="transaction-amount negative">-₱45.00</div>
             </div>
-            <div class="transaction-item">
+            <div class="transaction-item" data-type="cashin">
               <div class="transaction-icon topup">
                 <i class="fa-solid fa-money-bill"></i>
               </div>
@@ -250,7 +389,27 @@
               </div>
               <div class="transaction-amount positive">+₱500.00</div>
             </div>
-            <div class="transaction-item">
+            <div class="transaction-item" data-type="withdraw">
+              <div class="transaction-icon withdraw">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+              </div>
+              <div class="transaction-details">
+                <p class="transaction-type">Withdrawal - GCash</p>
+                <p class="transaction-date">Apr 20, 2026 - 02:30 PM</p>
+              </div>
+              <div class="transaction-amount negative">-₱200.00</div>
+            </div>
+            <div class="transaction-item" data-type="refunded">
+              <div class="transaction-icon refunded">
+                <i class="fa-solid fa-rotate-left"></i>
+              </div>
+              <div class="transaction-details">
+                <p class="transaction-type">Refund - Canteen 1</p>
+                <p class="transaction-date">Apr 19, 2026 - 11:15 AM</p>
+              </div>
+              <div class="transaction-amount positive">+₱150.00</div>
+            </div>
+            <div class="transaction-item" data-type="payment">
               <div class="transaction-icon payment">
                 <i class="fa-solid fa-burger"></i>
               </div>
@@ -260,7 +419,7 @@
               </div>
               <div class="transaction-amount negative">-₱120.00</div>
             </div>
-            <div class="transaction-item">
+            <div class="transaction-item" data-type="cashin">
               <div class="transaction-icon topup">
                 <i class="fa-solid fa-piggy-bank"></i>
               </div>
@@ -269,6 +428,21 @@
                 <p class="transaction-date">Apr 15, 2026 - 08:00 AM</p>
               </div>
               <div class="transaction-amount positive">+₱100.00</div>
+            </div>
+          </div>
+          <!-- Pagination UI Only -->
+          <div class="pagination-controls">
+
+            <div class="pagination-nav">
+              <button class="page-btn disabled">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <button class="page-btn">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
             </div>
           </div>
         </div>
@@ -817,7 +991,7 @@
         });
     }
 
-    function addTransactionRow(typeText, amount, isAdd) {
+    function addTransactionRow(typeText, amount, isAdd, type = "payment") {
       const list = document.getElementById("transactionList");
       const now = new Date();
       const dateStr =
@@ -834,12 +1008,32 @@
 
       const sign = isAdd ? "+" : "-";
       const colorClass = isAdd ? "positive" : "negative";
-      const iconClass = isAdd ? "topup" : "payment";
-      const faIcon = isAdd ? "fa-money-bill" : "fa-money-bill-transfer";
+      
+      let iconClass = "payment";
+      let faIcon = "fa-money-bill-transfer";
+      
+      if (type === "cashin") {
+        iconClass = "topup";
+        faIcon = "fa-money-bill";
+      } else if (type === "withdraw") {
+        iconClass = "withdraw";
+        faIcon = "fa-money-bill-transfer";
+      } else if (type === "refunded") {
+        iconClass = "refunded";
+        faIcon = "fa-rotate-left";
+      }
 
       const newItem = document.createElement("div");
       newItem.className = "transaction-item";
+      newItem.setAttribute("data-type", type);
       newItem.style.animation = "slideIn 0.3s ease-out";
+      
+      // Check current filter
+      const currentFilter = document.getElementById("transactionFilter").value;
+      if (currentFilter !== "all" && currentFilter !== type) {
+        newItem.classList.add("hidden");
+      }
+
       newItem.innerHTML = `
           <div class="transaction-icon ${iconClass}">
             <i class="fa-solid ${faIcon}"></i>
@@ -984,7 +1178,7 @@
         : selected.id.includes("maya")
           ? "Maya"
           : "Bank Transfer";
-      addTransactionRow(`Cash In via ${methodText}`, amount, true);
+      addTransactionRow(`Cash In via ${methodText}`, amount, true, "cashin");
 
       // Reset and close
       document.getElementById("cashInToggle").checked = false;
@@ -1142,7 +1336,7 @@
         : selected.id.includes("maya")
           ? "Maya"
           : "Bank Transfer";
-      addTransactionRow(`Withdrawal via ${methodText}`, amount, false);
+      addTransactionRow(`Withdrawal via ${methodText}`, amount, false, "withdraw");
 
       // Reset and close
       document.getElementById("withdrawToggle").checked = false;
@@ -1213,11 +1407,24 @@
         return;
       }
       updateBalance(amount, false);
-      addTransactionRow("QR Payment - Canteen 1", amount, false);
+      addTransactionRow("QR Payment - Canteen 1", amount, false, "payment");
       document.getElementById('qrToggle').checked = false;
       showToast("Payment successful!");
       updateAllCartBadges(); // To update navbar balance
     }
+    // Filter functionality
+    document.getElementById('transactionFilter').addEventListener('change', function () {
+      const filterValue = this.value;
+      const items = document.querySelectorAll('.transaction-item');
+
+      items.forEach(item => {
+        if (filterValue === 'all' || item.getAttribute('data-type') === filterValue) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
   </script>
 </body>
 
