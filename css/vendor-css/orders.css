@@ -1592,12 +1592,12 @@ hr {
   }
 
   #walkinMenuGrid {
-    max-height: 400px;
+    max-height: 60vh;
     overflow-y: auto;
   }
 
   #walkinOrderList {
-    max-height: 300px;
+    max-height: 50vh;
     overflow-y: auto;
   }
 }

@@ -857,6 +857,15 @@ document.getElementById("openWalkInBtn")?.addEventListener("click", () => {
 document.getElementById("closeWalkinModal")?.addEventListener("click", () => {
   document.getElementById("walkinModal").classList.remove("active");
 });
+
+document.getElementById("clearWalkinCartBtn")?.addEventListener("click", () => {
+  if (Object.keys(walkinCart).length === 0) return;
+  walkinCart = {};
+  renderWalkinMenu();
+  renderWalkinCart();
+  showVendorToast("info", "fa-trash-can", "Order cleared.");
+});
+
 document.getElementById("walkinOverlay")?.addEventListener("click", () => {
   document.getElementById("walkinModal").classList.remove("active");
 });
