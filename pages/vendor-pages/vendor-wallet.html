@@ -1294,6 +1294,19 @@
         if (list) {
           list.prepend(newItem);
         }
+
+        // Add notification
+        if (typeof addNotification === 'function') {
+          addNotification({
+            role: "vendor",
+            type: "wallet",
+            title: "Withdrawal Successful",
+            desc: `Your withdrawal of ₱${amount.toFixed(2)} via ${methodText} has been processed successfully.`,
+            link: "vendor-wallet.html",
+            color: "green",
+            icon: "fa-solid fa-money-bill-transfer"
+          });
+        }
         // ----------------------------
 
         // Close Modal via Checkbox
@@ -1401,5 +1414,6 @@
         }
       }
     </script>
+    <script src="../../script/notifications.js"></script>
   </body>
 </html>

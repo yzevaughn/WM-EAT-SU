@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
@@ -679,6 +679,7 @@
         z-index: 9999;
       "></div>
 
+  <script src="../../script/notifications.js"></script>
   <script src="../../script/student/cart.js"></script>
   <script>
     // Make checkboxes styled as active buttons
@@ -971,6 +972,19 @@
           ? "Maya"
           : "Bank Transfer";
       addTransactionRow(`Cash In via ${methodText}`, amount, true);
+      
+      // Add notification
+      if (typeof addNotification === 'function') {
+        addNotification({
+          role: "outsider",
+          type: "wallet",
+          title: "Wallet Top-up",
+          desc: `Successfully added ₱${amount.toFixed(2)} to your wallet via ${methodText}.`,
+          link: "outsider-wallet.html",
+          color: "blue",
+          icon: "fa-solid fa-wallet"
+        });
+      }
 
       // Reset and close
       document.getElementById("cashInToggle").checked = false;
@@ -1130,6 +1144,19 @@
           : "Bank Transfer";
       addTransactionRow(`Withdrawal via ${methodText}`, amount, false);
 
+      // Add notification
+      if (typeof addNotification === 'function') {
+        addNotification({
+          role: "outsider",
+          type: "wallet",
+          title: "Withdrawal Request",
+          desc: `Your withdrawal request for ₱${amount.toFixed(2)} has been submitted.`,
+          link: "outsider-wallet.html",
+          color: "orange",
+          icon: "fa-solid fa-money-bill-transfer"
+        });
+      }
+
       // Reset and close
       document.getElementById("withdrawToggle").checked = false;
       setTimeout(() => {
@@ -1200,6 +1227,19 @@
       }
       updateBalance(amount, false);
       addTransactionRow("QR Payment - Canteen 1", amount, false);
+      
+      // Add notification
+      if (typeof addNotification === 'function') {
+        addNotification({
+          role: "outsider",
+          type: "wallet",
+          title: "QR Payment",
+          desc: `You paid ₱${amount.toFixed(2)} to Canteen 1 via QR code.`,
+          link: "outsider-wallet.html",
+          color: "red",
+          icon: "fa-solid fa-qrcode"
+        });
+      }
       document.getElementById('qrToggle').checked = false;
       showToast("Payment successful!");
       updateAllCartBadges(); // To update navbar balance

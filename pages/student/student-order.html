@@ -309,6 +309,7 @@
   <div id="toast-container"></div>
 
   <!-- Shared cart/orders module -->
+  <script src="../../script/notifications.js"></script>
   <script src="../../script/student/cart.js"></script>
 
   <script>
@@ -742,8 +743,30 @@
       };
     }
 
-    /* â”€â”€ Init â”€â”€ */
+    /* ── Init ── */
     renderOrders();
+
+    /* ── Live notification navbar ── */
+    function refreshStudentNavNotifs() {
+      if (typeof renderNavbarNotifications === 'function') {
+        renderNavbarNotifications("student", {
+          listEl:     document.querySelector(".notification-list"),
+          badgeEl:    document.querySelector(".notification-badge"),
+          markReadEl: document.querySelector(".mark-read-btn"),
+        });
+      }
+    }
+    refreshStudentNavNotifs();
+
+    /* ── Respond to vendor status changes (cross-tab) ── */
+    window.addEventListener("storage", (e) => {
+      if (e.key === "wm_eat_su_orders") {
+        renderOrders();
+      }
+      if (e.key === "wm_eat_su_notifications") {
+        refreshStudentNavNotifs();
+      }
+    });
   </script>
 </body>
 

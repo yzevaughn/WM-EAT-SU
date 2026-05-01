@@ -1204,516 +1204,531 @@
 
     <script src="../../script/student/cart.js"></script>
     <script>
-      // Make checkboxes styled as active buttons
-      const styleRadioButtons = (inputsSelector) => {
-        const inputs = document.querySelectorAll(inputsSelector);
-        inputs.forEach((input) => {
-          input.addEventListener("change", (e) => {
-            // Remove active class from all siblings
-            const name = e.target.name;
-            document
-              .querySelectorAll(`input[name="${name}"]`)
-              .forEach((sibling) => {
-                const label = document.querySelector(
-                  `label[for="${sibling.id}"]`,
-                );
-                if (label) label.classList.remove("active");
-              });
-            // Add to current
-            const label = document.querySelector(`label[for="${e.target.id}"]`);
-            if (label) label.classList.add("active");
-          });
-        });
-      };
-      styleRadioButtons('input[name="cipayment"]');
-      styleRadioButtons('input[name="wdpayment"]');
-      styleRadioButtons('input[name="ciamount"]');
-      styleRadioButtons('input[name="wdamount"]');
-
-      // Helper function to clear errors
-      function clearErrors(prefix) {
-        document
-          .querySelectorAll(
-            `#${prefix}MethodError, #${prefix}AmountError, #${prefix}PhoneError, #${prefix}OtpError`,
-          )
-          .forEach((el) => {
-            if (el) el.classList.remove("show");
-            if (el) el.style.opacity = "0";
-            if (el) el.style.height = "0";
-          });
-        document
-          .querySelectorAll(".invalid")
-          .forEach((el) => el.classList.remove("invalid"));
-      }
-
-      function showError(elId, msg) {
-        const el = document.getElementById(elId);
-        if (el) {
-          el.querySelector("span").innerText = msg;
-          el.classList.add("show");
-          el.style.opacity = "1";
-          el.style.height = "auto";
-          el.style.padding = "10px";
-        }
-      }
-
-      function setupQuickAmounts(prefix) {
-        document
-          .querySelectorAll(`input[name="${prefix}amount"]`)
-          .forEach((radio) => {
-            radio.addEventListener("change", (e) => {
-              const val = e.target.id.replace(prefix + "a", "");
-              document.getElementById(`${prefix}CustomAmount`).value = val;
-              clearErrors(prefix);
+        // Make checkboxes styled as active buttons
+        const styleRadioButtons = (inputsSelector) => {
+          const inputs = document.querySelectorAll(inputsSelector);
+          inputs.forEach((input) => {
+            input.addEventListener("change", (e) => {
+              // Remove active class from all siblings
+              const name = e.target.name;
+              document
+                .querySelectorAll(`input[name="${name}"]`)
+                .forEach((sibling) => {
+                  const label = document.querySelector(
+                    `label[for="${sibling.id}"]`,
+                  );
+                  if (label) label.classList.remove("active");
+                });
+              // Add to current
+              const label = document.querySelector(`label[for="${e.target.id}"]`);
+              if (label) label.classList.add("active");
             });
           });
-      }
-      setupQuickAmounts("ci");
-      setupQuickAmounts("wd");
+        };
+        styleRadioButtons('input[name="cipayment"]');
+        styleRadioButtons('input[name="wdpayment"]');
+        styleRadioButtons('input[name="ciamount"]');
+        styleRadioButtons('input[name="wdamount"]');
 
-      // OTP Auto-advance
-      function setupOtpAutoAdvance(selector) {
-        const otpInputs = document.querySelectorAll(selector);
-        otpInputs.forEach((input, index) => {
-          input.addEventListener("input", (e) => {
-            input.classList.remove("invalid");
-            if (input.value.length === 1 && index < otpInputs.length - 1) {
-              otpInputs[index + 1].focus();
-            }
-          });
-          input.addEventListener("keydown", (e) => {
-            if (e.key === "Backspace" && input.value === "" && index > 0) {
-              otpInputs[index - 1].focus();
-            }
-          });
-        });
-      }
-      setupOtpAutoAdvance(".ci-otp");
-      setupOtpAutoAdvance(".wd-otp");
-
-      function showToast(message) {
-        const container = document.getElementById("toastContainer");
-        const toast = document.createElement("div");
-        toast.className = "toast";
-        toast.style.background = "#22c55e";
-        toast.style.color = "white";
-        toast.style.padding = "15px 20px";
-        toast.style.borderRadius = "8px";
-        toast.style.boxShadow = "0 4px 6px rgba(0,0,0,0.1)";
-        toast.style.transition = "all 0.3s ease";
-        toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> &nbsp; ${message}`;
-        container.appendChild(toast);
-
-        setTimeout(() => {
-          toast.style.opacity = "0";
-          toast.style.transform = "translateX(100px)";
-          setTimeout(() => toast.remove(), 300);
-        }, 3000);
-      }
-
-      function getBalance() {
-        return parseFloat(
-          document.getElementById("balanceValue").innerText.replace(/,/g, ""),
-        );
-      }
-      function updateBalance(amount, isAdd) {
-        let current = getBalance();
-        let newBal = isAdd ? current + amount : current - amount;
-        document.getElementById("balanceValue").innerText =
-          newBal.toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          });
-      }
-
-      function addTransactionRow(typeText, amount, isAdd, type = "payment") {
-        const list = document.getElementById("transactionList");
-        const now = new Date();
-        const dateStr =
-          now.toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          }) +
-          " - " +
-          now.toLocaleTimeString("en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-          });
-
-        const sign = isAdd ? "+" : "-";
-        const colorClass = isAdd ? "positive" : "negative";
-
-        let iconClass = "payment";
-        let faIcon = "fa-money-bill-transfer";
-
-        if (type === "cashin") {
-          iconClass = "topup";
-          faIcon = "fa-money-bill";
-        } else if (type === "withdraw") {
-          iconClass = "withdraw";
-          faIcon = "fa-money-bill-transfer";
-        } else if (type === "refunded") {
-          iconClass = "refunded";
-          faIcon = "fa-rotate-left";
+        // Helper function to clear errors
+        function clearErrors(prefix) {
+          document
+            .querySelectorAll(
+              `#${prefix}MethodError, #${prefix}AmountError, #${prefix}PhoneError, #${prefix}OtpError`,
+            )
+            .forEach((el) => {
+              if (el) el.classList.remove("show");
+              if (el) el.style.opacity = "0";
+              if (el) el.style.height = "0";
+            });
+          document
+            .querySelectorAll(".invalid")
+            .forEach((el) => el.classList.remove("invalid"));
         }
 
-        const newItem = document.createElement("div");
-        newItem.className = "transaction-item";
-        newItem.setAttribute("data-type", type);
-        newItem.style.animation = "slideIn 0.3s ease-out";
-
-        // Check current filter
-        const currentFilter =
-          document.getElementById("transactionFilter").value;
-        if (currentFilter !== "all" && currentFilter !== type) {
-          newItem.classList.add("hidden");
+        function showError(elId, msg) {
+          const el = document.getElementById(elId);
+          if (el) {
+            el.querySelector("span").innerText = msg;
+            el.classList.add("show");
+            el.style.opacity = "1";
+            el.style.height = "auto";
+            el.style.padding = "10px";
+          }
         }
 
-        newItem.innerHTML = `
-          <div class="transaction-icon ${iconClass}">
-            <i class="fa-solid ${faIcon}"></i>
-          </div>
-          <div class="transaction-details">
-            <p class="transaction-type">${typeText}</p>
-            <p class="transaction-date">${dateStr}</p>
-          </div>
-          <div class="transaction-amount ${colorClass}">${sign}₱${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
-        `;
-        list.prepend(newItem);
-      }
-
-      // ==========================================
-      // CASH IN LOGIC
-      // ==========================================
-      function ciGoToStep1() {
-        document.getElementById("ciStep3Body").classList.add("hidden-step");
-        document.getElementById("ciStep3Footer").classList.add("hidden-step");
-        document.getElementById("ciStep2Body").classList.add("hidden-step");
-        document.getElementById("ciStep2Footer").classList.add("hidden-step");
-        document.getElementById("ciStep1Body").classList.remove("hidden-step");
-        document
-          .getElementById("ciStep1Footer")
-          .classList.remove("hidden-step");
-      }
-
-      function ciGoToStep2() {
-        clearErrors("ci");
-        const selected = document.querySelector(
-          'input[name="cipayment"]:checked',
-        );
-        const amount = parseFloat(
-          document.getElementById("ciCustomAmount").value,
-        );
-
-        if (!selected) {
-          showError("ciMethodError", "Please select a cash in method");
-          return;
+        function setupQuickAmounts(prefix) {
+          document
+            .querySelectorAll(`input[name="${prefix}amount"]`)
+            .forEach((radio) => {
+              radio.addEventListener("change", (e) => {
+                const val = e.target.id.replace(prefix + "a", "");
+                document.getElementById(`${prefix}CustomAmount`).value = val;
+                clearErrors(prefix);
+              });
+            });
         }
-        if (!amount || amount < 50) {
-          showError(
-            "ciAmountError",
-            "Please enter a valid amount (Min. ₱50.00)",
+        setupQuickAmounts("ci");
+        setupQuickAmounts("wd");
+
+        // OTP Auto-advance
+        function setupOtpAutoAdvance(selector) {
+          const otpInputs = document.querySelectorAll(selector);
+          otpInputs.forEach((input, index) => {
+            input.addEventListener("input", (e) => {
+              input.classList.remove("invalid");
+              if (input.value.length === 1 && index < otpInputs.length - 1) {
+                otpInputs[index + 1].focus();
+              }
+            });
+            input.addEventListener("keydown", (e) => {
+              if (e.key === "Backspace" && input.value === "" && index > 0) {
+                otpInputs[index - 1].focus();
+              }
+            });
+          });
+        }
+        setupOtpAutoAdvance(".ci-otp");
+        setupOtpAutoAdvance(".wd-otp");
+
+        function showToast(message) {
+          const container = document.getElementById("toastContainer");
+          const toast = document.createElement("div");
+          toast.className = "toast";
+          toast.style.background = "#22c55e";
+          toast.style.color = "white";
+          toast.style.padding = "15px 20px";
+          toast.style.borderRadius = "8px";
+          toast.style.boxShadow = "0 4px 6px rgba(0,0,0,0.1)";
+          toast.style.transition = "all 0.3s ease";
+          toast.innerHTML = `<i class="fa-solid fa-circle-check"></i> &nbsp; ${message}`;
+          container.appendChild(toast);
+
+          setTimeout(() => {
+            toast.style.opacity = "0";
+            toast.style.transform = "translateX(100px)";
+            setTimeout(() => toast.remove(), 300);
+          }, 3000);
+        }
+
+        function getBalance() {
+          return parseFloat(
+            document.getElementById("balanceValue").innerText.replace(/,/g, ""),
           );
-          document.getElementById("ciCustomAmount").classList.add("invalid");
-          return;
+        }
+        function updateBalance(amount, isAdd) {
+          let current = getBalance();
+          let newBal = isAdd ? current + amount : current - amount;
+          document.getElementById("balanceValue").innerText =
+            newBal.toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            });
         }
 
-        const methodId = selected.id;
-        document.getElementById("ciSummaryMethod").innerText =
-          methodId.includes("gcash")
-            ? "GCash"
-            : methodId.includes("maya")
-              ? "Maya"
-              : "Bank Transfer";
-        document.getElementById("ciSummaryAmount").innerText =
-          "₱" + amount.toFixed(2);
+        function addTransactionRow(typeText, amount, isAdd, type = "payment") {
+          const list = document.getElementById("transactionList");
+          const now = new Date();
+          const dateStr =
+            now.toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            }) +
+            " - " +
+            now.toLocaleTimeString("en-US", {
+              hour: "2-digit",
+              minute: "2-digit",
+            });
 
-        if (methodId.includes("card")) {
-          document
-            .getElementById("ciPhoneInputGroup")
-            .classList.add("hidden-step");
-          document
-            .getElementById("ciBankInputGroup")
-            .classList.remove("hidden-step");
-        } else {
-          document
-            .getElementById("ciBankInputGroup")
-            .classList.add("hidden-step");
-          document
-            .getElementById("ciPhoneInputGroup")
-            .classList.remove("hidden-step");
+          const sign = isAdd ? "+" : "-";
+          const colorClass = isAdd ? "positive" : "negative";
+
+          let iconClass = "payment";
+          let faIcon = "fa-money-bill-transfer";
+
+          if (type === "cashin") {
+            iconClass = "topup";
+            faIcon = "fa-money-bill";
+          } else if (type === "withdraw") {
+            iconClass = "withdraw";
+            faIcon = "fa-money-bill-transfer";
+          } else if (type === "refunded") {
+            iconClass = "refunded";
+            faIcon = "fa-rotate-left";
+          }
+
+          const newItem = document.createElement("div");
+          newItem.className = "transaction-item";
+          newItem.setAttribute("data-type", type);
+          newItem.style.animation = "slideIn 0.3s ease-out";
+
+          // Check current filter
+          const currentFilter =
+            document.getElementById("transactionFilter").value;
+          if (currentFilter !== "all" && currentFilter !== type) {
+            newItem.classList.add("hidden");
+          }
+
+          newItem.innerHTML = `
+            <div class="transaction-icon ${iconClass}">
+              <i class="fa-solid ${faIcon}"></i>
+            </div>
+            <div class="transaction-details">
+              <p class="transaction-type">${typeText}</p>
+              <p class="transaction-date">${dateStr}</p>
+            </div>
+            <div class="transaction-amount ${colorClass}">${sign}₱${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
+          `;
+          list.prepend(newItem);
         }
 
-        document.getElementById("ciStep1Body").classList.add("hidden-step");
-        document.getElementById("ciStep1Footer").classList.add("hidden-step");
-        document.getElementById("ciStep2Body").classList.remove("hidden-step");
-        document
-          .getElementById("ciStep2Footer")
-          .classList.remove("hidden-step");
-      }
-
-      function ciProcessStep2() {
-        clearErrors("ci");
-        const selected = document.querySelector(
-          'input[name="cipayment"]:checked',
-        );
-
-        if (selected.id.includes("card")) {
-          const accField = document.getElementById("ciBankAccount");
-          if (!accField.value.trim()) {
-            accField.classList.add("invalid");
-            return;
-          }
-          processCashIn();
-        } else {
-          const phoneField = document.getElementById("ciMobileNumber");
-          if (phoneField.value.trim().length !== 11) {
-            phoneField.classList.add("invalid");
-            showError(
-              "ciPhoneError",
-              "Please enter a valid 11-digit mobile number",
-            );
-            return;
-          }
+        // ==========================================
+        // CASH IN LOGIC
+        // ==========================================
+        function ciGoToStep1() {
+          document.getElementById("ciStep3Body").classList.add("hidden-step");
+          document.getElementById("ciStep3Footer").classList.add("hidden-step");
           document.getElementById("ciStep2Body").classList.add("hidden-step");
           document.getElementById("ciStep2Footer").classList.add("hidden-step");
+          document.getElementById("ciStep1Body").classList.remove("hidden-step");
           document
-            .getElementById("ciStep3Body")
-            .classList.remove("hidden-step");
-          document
-            .getElementById("ciStep3Footer")
+            .getElementById("ciStep1Footer")
             .classList.remove("hidden-step");
         }
-      }
 
-      function processCashIn() {
-        clearErrors("ci");
-        const selected = document.querySelector(
-          'input[name="cipayment"]:checked',
-        );
+        function ciGoToStep2() {
+          clearErrors("ci");
+          const selected = document.querySelector(
+            'input[name="cipayment"]:checked',
+          );
+          const amount = parseFloat(
+            document.getElementById("ciCustomAmount").value,
+          );
 
-        if (!selected.id.includes("card")) {
-          const boxes = document.querySelectorAll(".ci-otp");
-          let otpVal = "";
-          boxes.forEach((b) => (otpVal += b.value));
-          if (otpVal.length < 4) {
-            boxes.forEach((b) => b.classList.add("invalid"));
-            showError("ciOtpError", "Please enter the full 4-digit OTP");
+          if (!selected) {
+            showError("ciMethodError", "Please select a cash in method");
             return;
+          }
+          if (!amount || amount < 50) {
+            showError(
+              "ciAmountError",
+              "Please enter a valid amount (Min. ₱50.00)",
+            );
+            document.getElementById("ciCustomAmount").classList.add("invalid");
+            return;
+          }
+
+          const methodId = selected.id;
+          document.getElementById("ciSummaryMethod").innerText =
+            methodId.includes("gcash")
+              ? "GCash"
+              : methodId.includes("maya")
+                ? "Maya"
+                : "Bank Transfer";
+          document.getElementById("ciSummaryAmount").innerText =
+            "₱" + amount.toFixed(2);
+
+          if (methodId.includes("card")) {
+            document
+              .getElementById("ciPhoneInputGroup")
+              .classList.add("hidden-step");
+            document
+              .getElementById("ciBankInputGroup")
+              .classList.remove("hidden-step");
+          } else {
+            document
+              .getElementById("ciBankInputGroup")
+              .classList.add("hidden-step");
+            document
+              .getElementById("ciPhoneInputGroup")
+              .classList.remove("hidden-step");
+          }
+
+          document.getElementById("ciStep1Body").classList.add("hidden-step");
+          document.getElementById("ciStep1Footer").classList.add("hidden-step");
+          document.getElementById("ciStep2Body").classList.remove("hidden-step");
+          document
+            .getElementById("ciStep2Footer")
+            .classList.remove("hidden-step");
+        }
+
+        function ciProcessStep2() {
+          clearErrors("ci");
+          const selected = document.querySelector(
+            'input[name="cipayment"]:checked',
+          );
+
+          if (selected.id.includes("card")) {
+            const accField = document.getElementById("ciBankAccount");
+            if (!accField.value.trim()) {
+              accField.classList.add("invalid");
+              return;
+            }
+            processCashIn();
+          } else {
+            const phoneField = document.getElementById("ciMobileNumber");
+            if (phoneField.value.trim().length !== 11) {
+              phoneField.classList.add("invalid");
+              showError(
+                "ciPhoneError",
+                "Please enter a valid 11-digit mobile number",
+              );
+              return;
+            }
+            document.getElementById("ciStep2Body").classList.add("hidden-step");
+            document.getElementById("ciStep2Footer").classList.add("hidden-step");
+            document
+              .getElementById("ciStep3Body")
+              .classList.remove("hidden-step");
+            document
+              .getElementById("ciStep3Footer")
+              .classList.remove("hidden-step");
           }
         }
 
-        const amount = parseFloat(
-          document.getElementById("ciCustomAmount").value,
-        );
-        updateBalance(amount, true);
-
-        const methodText = selected.id.includes("gcash")
-          ? "GCash"
-          : selected.id.includes("maya")
-            ? "Maya"
-            : "Bank Transfer";
-        addTransactionRow(`Cash In via ${methodText}`, amount, true, "cashin");
-
-        // Reset and close
-        document.getElementById("cashInToggle").checked = false;
-        setTimeout(() => {
-          ciGoToStep1();
-          document.getElementById("ciCustomAmount").value = "";
-          document.querySelectorAll(".ci-otp").forEach((b) => (b.value = ""));
-          document
-            .querySelectorAll('input[name="cipayment"]')
-            .forEach((r) => (r.checked = false));
-          document
-            .querySelectorAll(".payment-method-btn")
-            .forEach((btn) => btn.classList.remove("active"));
-        }, 300);
-        showToast("Cash In successful!");
-      }
-
-      // ==========================================
-      // WITHDRAW LOGIC
-      // ==========================================
-      function wdGoToStep1() {
-        document.getElementById("wdStep3Body").classList.add("hidden-step");
-        document.getElementById("wdStep3Footer").classList.add("hidden-step");
-        document.getElementById("wdStep2Body").classList.add("hidden-step");
-        document.getElementById("wdStep2Footer").classList.add("hidden-step");
-        document.getElementById("wdStep1Body").classList.remove("hidden-step");
-        document
-          .getElementById("wdStep1Footer")
-          .classList.remove("hidden-step");
-      }
-
-      function wdGoToStep2() {
-        clearErrors("wd");
-        const selected = document.querySelector(
-          'input[name="wdpayment"]:checked',
-        );
-        const amount = parseFloat(
-          document.getElementById("wdCustomAmount").value,
-        );
-        const maxBalance = getBalance();
-
-        if (!selected) {
-          showError("wdMethodError", "Please select a withdrawal method");
-          return;
-        }
-        if (!amount || amount <= 0) {
-          showError("wdAmountError", "Please enter a valid amount");
-          document.getElementById("wdCustomAmount").classList.add("invalid");
-          return;
-        }
-        if (amount > maxBalance) {
-          showError(
-            "wdAmountError",
-            `Insufficient balance. Max withdrawable: ₱${maxBalance.toFixed(2)}`,
+        function processCashIn() {
+          clearErrors("ci");
+          const selected = document.querySelector(
+            'input[name="cipayment"]:checked',
           );
-          document.getElementById("wdCustomAmount").classList.add("invalid");
-          return;
-        }
 
-        const methodId = selected.id;
-        document.getElementById("wdSummaryMethod").innerText =
-          methodId.includes("gcash")
+          if (!selected.id.includes("card")) {
+            const boxes = document.querySelectorAll(".ci-otp");
+            let otpVal = "";
+            boxes.forEach((b) => (otpVal += b.value));
+            if (otpVal.length < 4) {
+              boxes.forEach((b) => b.classList.add("invalid"));
+              showError("ciOtpError", "Please enter the full 4-digit OTP");
+              return;
+            }
+          }
+
+          const amount = parseFloat(
+            document.getElementById("ciCustomAmount").value,
+          );
+          updateBalance(amount, true);
+
+          const methodText = selected.id.includes("gcash")
             ? "GCash"
-            : methodId.includes("maya")
+            : selected.id.includes("maya")
               ? "Maya"
               : "Bank Transfer";
-        document.getElementById("wdSummaryAmount").innerText =
-          "₱" + amount.toFixed(2);
+          addTransactionRow(`Cash In via ${methodText}`, amount, true, "cashin");
 
-        if (methodId.includes("card")) {
-          document
-            .getElementById("wdPhoneInputGroup")
-            .classList.add("hidden-step");
-          document
-            .getElementById("wdBankInputGroup")
-            .classList.remove("hidden-step");
-        } else {
-          document
-            .getElementById("wdBankInputGroup")
-            .classList.add("hidden-step");
-          document
-            .getElementById("wdPhoneInputGroup")
-            .classList.remove("hidden-step");
+          // Add notification
+          if (typeof addNotification === 'function') {
+            addNotification("student", "Wallet Top-up", `Successfully added ₱${amount.toFixed(2)} to your wallet via ${methodText}.`, "student-wallet.html", "blue", "fa-solid fa-wallet");
+          }
+
+          // Reset and close
+          document.getElementById("cashInToggle").checked = false;
+          setTimeout(() => {
+            ciGoToStep1();
+            document.getElementById("ciCustomAmount").value = "";
+            document.querySelectorAll(".ci-otp").forEach((b) => (b.value = ""));
+            document
+              .querySelectorAll('input[name="cipayment"]')
+              .forEach((r) => (r.checked = false));
+            document
+              .querySelectorAll(".payment-method-btn")
+              .forEach((btn) => btn.classList.remove("active"));
+          }, 300);
+          showToast("Cash In successful!");
         }
 
-        document.getElementById("wdStep1Body").classList.add("hidden-step");
-        document.getElementById("wdStep1Footer").classList.add("hidden-step");
-        document.getElementById("wdStep2Body").classList.remove("hidden-step");
-        document
-          .getElementById("wdStep2Footer")
-          .classList.remove("hidden-step");
-      }
-
-      function wdProcessStep2() {
-        clearErrors("wd");
-        const selected = document.querySelector(
-          'input[name="wdpayment"]:checked',
-        );
-
-        if (selected.id.includes("card")) {
-          const accField = document.getElementById("wdBankAccount");
-          if (!accField.value.trim()) {
-            accField.classList.add("invalid");
-            return;
-          }
-          processWithdraw();
-        } else {
-          const phoneField = document.getElementById("wdMobileNumber");
-          if (phoneField.value.trim().length !== 11) {
-            phoneField.classList.add("invalid");
-            showError(
-              "wdPhoneError",
-              "Please enter a valid 11-digit mobile number",
-            );
-            return;
-          }
+        // ==========================================
+        // WITHDRAW LOGIC
+        // ==========================================
+        function wdGoToStep1() {
+          document.getElementById("wdStep3Body").classList.add("hidden-step");
+          document.getElementById("wdStep3Footer").classList.add("hidden-step");
           document.getElementById("wdStep2Body").classList.add("hidden-step");
           document.getElementById("wdStep2Footer").classList.add("hidden-step");
+          document.getElementById("wdStep1Body").classList.remove("hidden-step");
           document
-            .getElementById("wdStep3Body")
-            .classList.remove("hidden-step");
-          document
-            .getElementById("wdStep3Footer")
+            .getElementById("wdStep1Footer")
             .classList.remove("hidden-step");
         }
-      }
 
-      function processWithdraw() {
-        clearErrors("wd");
-        const selected = document.querySelector(
-          'input[name="wdpayment"]:checked',
-        );
+        function wdGoToStep2() {
+          clearErrors("wd");
+          const selected = document.querySelector(
+            'input[name="wdpayment"]:checked',
+          );
+          const amount = parseFloat(
+            document.getElementById("wdCustomAmount").value,
+          );
+          const maxBalance = getBalance();
 
-        if (!selected.id.includes("card")) {
-          const boxes = document.querySelectorAll(".wd-otp");
-          let otpVal = "";
-          boxes.forEach((b) => (otpVal += b.value));
-          if (otpVal.length < 4) {
-            boxes.forEach((b) => b.classList.add("invalid"));
-            showError("wdOtpError", "Please enter the full 4-digit OTP");
+          if (!selected) {
+            showError("wdMethodError", "Please select a withdrawal method");
             return;
+          }
+          if (!amount || amount <= 0) {
+            showError("wdAmountError", "Please enter a valid amount");
+            document.getElementById("wdCustomAmount").classList.add("invalid");
+            return;
+          }
+          if (amount > maxBalance) {
+            showError(
+              "wdAmountError",
+              `Insufficient balance. Max withdrawable: ₱${maxBalance.toFixed(2)}`,
+            );
+            document.getElementById("wdCustomAmount").classList.add("invalid");
+            return;
+          }
+
+          const methodId = selected.id;
+          document.getElementById("wdSummaryMethod").innerText =
+            methodId.includes("gcash")
+              ? "GCash"
+              : methodId.includes("maya")
+                ? "Maya"
+                : "Bank Transfer";
+          document.getElementById("wdSummaryAmount").innerText =
+            "₱" + amount.toFixed(2);
+
+          if (methodId.includes("card")) {
+            document
+              .getElementById("wdPhoneInputGroup")
+              .classList.add("hidden-step");
+            document
+              .getElementById("wdBankInputGroup")
+              .classList.remove("hidden-step");
+          } else {
+            document
+              .getElementById("wdBankInputGroup")
+              .classList.add("hidden-step");
+            document
+              .getElementById("wdPhoneInputGroup")
+              .classList.remove("hidden-step");
+          }
+
+          document.getElementById("wdStep1Body").classList.add("hidden-step");
+          document.getElementById("wdStep1Footer").classList.add("hidden-step");
+          document.getElementById("wdStep2Body").classList.remove("hidden-step");
+          document
+            .getElementById("wdStep2Footer")
+            .classList.remove("hidden-step");
+        }
+
+        function wdProcessStep2() {
+          clearErrors("wd");
+          const selected = document.querySelector(
+            'input[name="wdpayment"]:checked',
+          );
+
+          if (selected.id.includes("card")) {
+            const accField = document.getElementById("wdBankAccount");
+            if (!accField.value.trim()) {
+              accField.classList.add("invalid");
+              return;
+            }
+            processWithdraw();
+          } else {
+            const phoneField = document.getElementById("wdMobileNumber");
+            if (phoneField.value.trim().length !== 11) {
+              phoneField.classList.add("invalid");
+              showError(
+                "wdPhoneError",
+                "Please enter a valid 11-digit mobile number",
+              );
+              return;
+            }
+            document.getElementById("wdStep2Body").classList.add("hidden-step");
+            document.getElementById("wdStep2Footer").classList.add("hidden-step");
+            document
+              .getElementById("wdStep3Body")
+              .classList.remove("hidden-step");
+            document
+              .getElementById("wdStep3Footer")
+              .classList.remove("hidden-step");
           }
         }
 
-        const amount = parseFloat(
-          document.getElementById("wdCustomAmount").value,
-        );
-        updateBalance(amount, false);
+        function processWithdraw() {
+          clearErrors("wd");
+          const selected = document.querySelector(
+            'input[name="wdpayment"]:checked',
+          );
 
-        const methodText = selected.id.includes("gcash")
-          ? "GCash"
-          : selected.id.includes("maya")
-            ? "Maya"
-            : "Bank Transfer";
-        addTransactionRow(
-          `Withdrawal via ${methodText}`,
-          amount,
-          false,
-          "withdraw",
-        );
-
-        // Reset and close
-        document.getElementById("withdrawToggle").checked = false;
-        setTimeout(() => {
-          wdGoToStep1();
-          document.getElementById("wdCustomAmount").value = "";
-          document.querySelectorAll(".wd-otp").forEach((b) => (b.value = ""));
-          document
-            .querySelectorAll('input[name="wdpayment"]')
-            .forEach((r) => (r.checked = false));
-          document
-            .querySelectorAll(".payment-method-btn")
-            .forEach((btn) => btn.classList.remove("active"));
-        }, 300);
-        showToast("Withdrawal request submitted!");
-      }
-
-      // Add functionality to clear input errors when typing
-      document
-        .querySelectorAll(
-          'input[type="number"], input[type="tel"], input[type="text"]',
-        )
-        .forEach((input) => {
-          input.addEventListener("input", (e) => {
-            e.target.classList.remove("invalid");
-            const errorContainer =
-              e.target.parentElement.nextElementSibling ||
-              e.target.nextElementSibling;
-            if (
-              errorContainer &&
-              errorContainer.classList.contains("error-message")
-            ) {
-              errorContainer.classList.remove("show");
-              errorContainer.style.opacity = "0";
-              errorContainer.style.height = "0";
+          if (!selected.id.includes("card")) {
+            const boxes = document.querySelectorAll(".wd-otp");
+            let otpVal = "";
+            boxes.forEach((b) => (otpVal += b.value));
+            if (otpVal.length < 4) {
+              boxes.forEach((b) => b.classList.add("invalid"));
+              showError("wdOtpError", "Please enter the full 4-digit OTP");
+              return;
             }
-          });
-        });
+          }
 
+          const amount = parseFloat(
+            document.getElementById("wdCustomAmount").value,
+          );
+          updateBalance(amount, false);
+
+          const methodText = selected.id.includes("gcash")
+            ? "GCash"
+            : selected.id.includes("maya")
+              ? "Maya"
+              : "Bank Transfer";
+          addTransactionRow(
+            `Withdrawal via ${methodText}`,
+            amount,
+            false,
+            "withdraw",
+          );
+
+          // Add notification
+          if (typeof addNotification === 'function') {
+            addNotification("student", "Withdrawal Request", `Your withdrawal request for ₱${amount.toFixed(2)} has been submitted.`, "student-wallet.html", "orange", "fa-solid fa-money-bill-transfer");
+          }
+
+          // Reset and close
+          document.getElementById("withdrawToggle").checked = false;
+          setTimeout(() => {
+            wdGoToStep1();
+            document.getElementById("wdCustomAmount").value = "";
+            document.querySelectorAll(".wd-otp").forEach((b) => (b.value = ""));
+            document
+              .querySelectorAll('input[name="wdpayment"]')
+              .forEach((r) => (r.checked = false));
+            document
+              .querySelectorAll(".payment-method-btn")
+              .forEach((btn) => btn.classList.remove("active"));
+          }, 300);
+          showToast("Withdrawal request submitted!");
+        }
+
+        // Add functionality to clear input errors when typing
+        document
+          .querySelectorAll(
+            'input[type="number"], input[type="tel"], input[type="text"]',
+          )
+          .forEach((input) => {
+            input.addEventListener("input", (e) => {
+              e.target.classList.remove("invalid");
+              const errorContainer =
+                e.target.parentElement.nextElementSibling ||
+                e.target.nextElementSibling;
+              if (
+                errorContainer &&
+                errorContainer.classList.contains("error-message")
+              ) {
+                errorContainer.classList.remove("show");
+                errorContainer.style.opacity = "0";
+                errorContainer.style.height = "0";
+              }
+            });
+          });
+
+      <script src="../../script/notifications.js">
+    </script>
+    <script src="../../script/student/cart.js"></script>
+    <script src="../../script/student/dashboard.js"></script>
+    <script>
       // Update cart count for consistency with rest of app
       updateAllCartBadges();
 
@@ -1752,6 +1767,18 @@
         }
         updateBalance(amount, false);
         addTransactionRow("QR Payment - Canteen 1", amount, false, "payment");
+
+        // Add notification
+        if (typeof addNotification === "function") {
+          addNotification(
+            "student",
+            "QR Payment",
+            `You paid ₱${amount.toFixed(2)} to Canteen 1 via QR code.`,
+            "student-wallet.html",
+            "red",
+            "fa-solid fa-qrcode",
+          );
+        }
         document.getElementById("qrToggle").checked = false;
         showToast("Payment successful!");
         updateAllCartBadges(); // To update navbar balance

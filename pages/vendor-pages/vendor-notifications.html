@@ -188,49 +188,53 @@
 
       <div class="main-content">
         <!-- Notifications Component -->
-        <div class="notifications-container" style="margin-top: 20px">
+        <div class="notifications-container" style="margin-top: 20px" id="vendorNotifContainer">
           <div class="notifications-header">
             <h1>All Notifications</h1>
-            <div class="notifications-filters">
-              <button class="filter-btn active">All</button>
-              <button class="filter-btn">Unread</button>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div class="notifications-filters">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Unread</button>
+              </div>
+              <button class="mark-all-read-btn" style="background:none;border:1px solid #e2e8f0;color:#64748b;padding:6px 14px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;"
+                onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='none'">
+                <i class="fa-solid fa-check-double" style="margin-right:4px;"></i>Mark All Read
+              </button>
             </div>
           </div>
-          <div class="notifications-list">
-            <a href="vendor-orders.html" class="notification-page-item unread">
-              <div class="notif-page-icon green">
-                <i class="fa-solid fa-check"></i>
-              </div>
-              <div class="notif-page-content">
-                <div class="notif-page-header">
-                  <span class="notif-page-title">Order #1234 Ready</span>
-                  <span class="notif-page-time">2 mins ago</span>
-                </div>
-                <p class="notif-page-desc">
-                  Your order from Canteen 1 is ready for pickup.
-                </p>
-                <div class="notif-page-actions">
-                  <span class="notif-action-btn">View Order</span>
-                </div>
-              </div>
-            </a>
-            <a href="vendor-wallet.html" class="notification-page-item unread">
-              <div class="notif-page-icon blue">
-                <i class="fa-solid fa-info"></i>
-              </div>
-              <div class="notif-page-content">
-                <div class="notif-page-header">
-                  <span class="notif-page-title">Wallet Top-up</span>
-                  <span class="notif-page-time">1 hour ago</span>
-                </div>
-                <p class="notif-page-desc">
-                  Successfully added &#8369;500.00 to your wallet.
-                </p>
-              </div>
-            </a>
+          <div class="notifications-list" id="vendorNotifList">
+            <!-- Rendered by JS -->
           </div>
         </div>
       </div>
     </div>
+
+    <script src="../../script/notifications.js"></script>
+    <script src="../../script/student/cart.js"></script>
+    <script>
+      renderNotificationsPage("vendor", document.getElementById("vendorNotifContainer"));
+
+      if (typeof renderNavbarNotifications === 'function') {
+        renderNavbarNotifications("vendor", {
+          listEl:     document.querySelector(".notification-list"),
+          badgeEl:    document.querySelector(".notification-badge"),
+          markReadEl: document.querySelector(".mark-read-btn"),
+        });
+      }
+
+      window.addEventListener("storage", (e) => {
+        if (e.key === "wm_eat_su_notifications") {
+          renderNotificationsPage("vendor", document.getElementById("vendorNotifContainer"));
+          if (typeof renderNavbarNotifications === 'function') {
+            renderNavbarNotifications("vendor", {
+              listEl:     document.querySelector(".notification-list"),
+              badgeEl:    document.querySelector(".notification-badge"),
+              markReadEl: document.querySelector(".mark-read-btn"),
+            });
+          }
+        }
+      });
+    </script>
   </body>
 </html>
+

@@ -120,6 +120,12 @@ function placeOrder(instructions, payment) {
   saveOrders(orders);
   clearCart();
 
+  // Fire notifications for each created order
+  createdOrders.forEach(o => {
+    if (typeof notifyOrderPlaced === 'function')    notifyOrderPlaced(o);
+    if (typeof notifyVendorNewOrder === 'function') notifyVendorNewOrder(o);
+  });
+
   return createdOrders.length > 0 ? createdOrders[0] : null;
 }
 
@@ -127,9 +133,23 @@ function updateOrderStatus(orderId, status, extra) {
   const orders = getOrders();
   const order = orders.find(o => o.id === orderId);
   if (order) {
+    const prevStatus = order.status;
     order.status = status;
     if (extra) Object.assign(order, extra);
     saveOrders(orders);
+
+    // Fire customer notifications on status transitions
+    if (prevStatus !== status) {
+      if (status === 'preparing' && typeof notifyOrderPreparing === 'function') {
+        notifyOrderPreparing(order);
+      } else if (status === 'ready' && typeof notifyOrderReady === 'function') {
+        notifyOrderReady(order);
+      } else if (status === 'cancelled' && typeof notifyOrderCancelled === 'function') {
+        notifyOrderCancelled(order);
+      } else if (status === 'completed' && typeof notifyOrderCompleted === 'function') {
+        notifyOrderCompleted(order);
+      }
+    }
   }
   updateAllCartBadges();
 }

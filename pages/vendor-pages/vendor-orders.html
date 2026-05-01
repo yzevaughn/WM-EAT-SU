@@ -97,6 +97,83 @@
     .view-code-btn:hover {
       background: #f0fdf4;
     }
+
+    /* Walk-in Modal Responsiveness */
+    #walkinModal .modal-content {
+      max-width: 1000px;
+      width: 95%;
+      height: 85vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .walkin-layout {
+      flex: 1;
+      display: flex;
+      gap: 20px;
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .walkin-menu-section {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .walkin-order-section {
+      flex: 1;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+      min-width: 300px;
+    }
+
+    @media (max-width: 992px) {
+      #walkinModal .modal-content {
+        width: 98%;
+        height: 95vh;
+      }
+      
+      .walkin-layout {
+        flex-direction: column;
+        overflow-y: auto;
+        padding: 12px;
+        gap: 16px;
+      }
+
+      .walkin-menu-section, 
+      .walkin-order-section {
+        flex: none;
+        width: 100%;
+        min-width: 0;
+        overflow: visible;
+      }
+
+      #walkinMenuGrid {
+        max-height: 400px;
+        overflow-y: auto;
+      }
+
+      #walkinOrderList {
+        max-height: 300px;
+        overflow-y: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .walkin-filters {
+        flex-direction: column;
+      }
+      
+      #walkinMenuGrid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
+      }
+    }
   </style>
 </head>
 
@@ -246,7 +323,7 @@
             <h1>Customer Orders</h1>
             <p class="subtitle">Manage incoming and active orders for your store.</p>
           </div>
-          <button id="openWalkInBtn" class="pickup-btn" style="background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 3px 10px rgba(59, 130, 246, 0.3); font-size: 14px; padding: 10px 20px;">
+          <button id="openWalkInBtn" class="pickup-btn" style="background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 3px 10px rgba(239, 68, 68, 0.3); font-size: 14px; padding: 10px 20px;">
             <i class="fa-solid fa-person-walking"></i> Walk-in Order
           </button>
         </div>
@@ -343,14 +420,14 @@
   <!-- WALK-IN ORDER MODAL -->
   <div class="modal" id="walkinModal">
     <div class="modal-overlay" id="walkinOverlay"></div>
-    <div class="modal-content" style="max-width: 1000px; width: 95%; height: 85vh; display: flex; flex-direction: column;">
+    <div class="modal-content">
       <div class="modal-header">
-        <h2><i class="fa-solid fa-cash-register" style="margin-right:8px; color: #3b82f6;"></i>Walk-in Order (POS)</h2>
+        <h2><i class="fa-solid fa-cash-register" style="margin-right:8px; color: #ef4444;"></i>Walk-in Order (POS)</h2>
         <button class="modal-close" id="closeWalkinModal"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <div class="modal-body walkin-layout" style="flex: 1; display: flex; gap: 20px; overflow: hidden; padding: 20px;">
+      <div class="modal-body walkin-layout">
         <!-- Left: Menu & Filters -->
-        <div class="walkin-menu-section" style="flex: 2; display: flex; flex-direction: column; overflow: hidden;">
+        <div class="walkin-menu-section">
           <!-- Search & Category Filter -->
           <div class="walkin-filters" style="display: flex; gap: 12px; margin-bottom: 16px;">
             <div style="flex: 1; position: relative;">
@@ -371,7 +448,7 @@
         </div>
 
         <!-- Right: Order List Panel -->
-        <div class="walkin-order-section" style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; display: flex; flex-direction: column; padding: 16px; min-width: 300px;">
+        <div class="walkin-order-section">
           <h3 style="margin-bottom: 16px; font-size: 16px; color: #1e293b;"><i class="fa-solid fa-clipboard-list" style="margin-right:6px;"></i>Current Order</h3>
           
           <div id="walkinOrderList" style="flex: 1; overflow-y: auto; margin-bottom: 16px; border-bottom: 1px solid #e2e8f0; padding-bottom: 16px; display: flex; flex-direction: column; gap: 12px; scrollbar-width: thin;">
@@ -389,7 +466,7 @@
             <div style="margin-bottom: 12px;">
               <label style="display:block; font-size:13px; font-weight:600; color:#64748b; margin-bottom:8px;">Payment Method</label>
               <div style="display:flex; gap:8px;">
-                <button class="pay-method-btn active" data-method="Cash" style="flex:1; padding:10px; border:1px solid #3b82f6; background:#eff6ff; color:#1d4ed8; border-radius:8px; font-weight:600; cursor:pointer; transition:all 0.2s;"><i class="fa-solid fa-money-bill-wave"></i> Cash</button>
+                <button class="pay-method-btn active" data-method="Cash" style="flex:1; padding:10px; border:1px solid #ef4444; background:#fef2f2; color:#dc2626; border-radius:8px; font-weight:600; cursor:pointer; transition:all 0.2s;"><i class="fa-solid fa-money-bill-wave"></i> Cash</button>
                 <button class="pay-method-btn" data-method="GCash" style="flex:1; padding:10px; border:1px solid #cbd5e1; background:#fff; color:#64748b; border-radius:8px; font-weight:600; cursor:pointer; transition:all 0.2s;"><i class="fa-solid fa-mobile-screen"></i> GCash</button>
               </div>
             </div>
@@ -416,6 +493,7 @@
   </div>
 
   <!-- Shared data module -->
+  <script src="../../script/notifications.js"></script>
   <script src="../../script/student/cart.js"></script>
   <script src="../../script/vendor-js/orders-filter.js"></script>
   <script>
@@ -683,13 +761,108 @@
 
     // Initial render
     window.renderVendorOrders();
-    
+
+    // ── Vendor Navbar Notification Rendering ──────────────────────
+    function refreshVendorNavNotifs() {
+      if (typeof renderNavbarNotifications === 'function') {
+        renderNavbarNotifications("vendor", {
+          listEl:     document.querySelector(".notification-list"),
+          badgeEl:    document.querySelector(".notification-badge"),
+          markReadEl: document.querySelector(".mark-read-btn"),
+        });
+      }
+    }
+    refreshVendorNavNotifs();
+
+    // ── Track order count to detect NEW orders ─────────────────────
+    let _lastOrderCount = (typeof getOrders === 'function' ? getOrders().filter(o => !o.removedByVendor) : []).length;
+
     // Auto sync when students place orders
     window.addEventListener("storage", (e) => {
       if (e.key === "wm_eat_su_orders") {
+        const currentOrders = (typeof getOrders === 'function' ? getOrders().filter(o => !o.removedByVendor) : []);
+        const newCount = currentOrders.length;
+
+        // Detect truly new orders (count increased)
+        if (newCount > _lastOrderCount) {
+          const newest = currentOrders.slice(0, newCount - _lastOrderCount);
+          newest.forEach(o => {
+            // Show a prominent "new order" alert banner
+            showNewOrderBanner(o);
+          });
+        }
+        _lastOrderCount = newCount;
         window.renderVendorOrders();
       }
+      if (e.key === "wm_eat_su_notifications") {
+        refreshVendorNavNotifs();
+      }
     });
+
+    /* ── New Order Banner (vendor-side popup alert) ─────────────── */
+    function showNewOrderBanner(order) {
+      const existing = document.getElementById("newOrderBanner");
+      if (existing) existing.remove();
+
+      const banner = document.createElement("div");
+      banner.id = "newOrderBanner";
+      banner.style.cssText = `
+        position: fixed; top: 80px; right: 24px; z-index: 999999;
+        background: linear-gradient(135deg, #1e293b, #0f172a);
+        color: #fff; border-radius: 14px; padding: 16px 20px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(239,68,68,0.4);
+        max-width: 340px; min-width: 280px;
+        display: flex; align-items: flex-start; gap: 14px;
+        animation: slideInBanner 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+        border-left: 4px solid #ef4444;
+        pointer-events: all;
+      `;
+      banner.innerHTML = `
+        <style>
+          @keyframes slideInBanner {
+            from { transform: translateX(120%); opacity: 0; }
+            to   { transform: translateX(0);    opacity: 1; }
+          }
+          @keyframes slideOutBanner {
+            from { transform: translateX(0);    opacity: 1; }
+            to   { transform: translateX(120%); opacity: 0; }
+          }
+          #newOrderBannerPulse {
+            animation: pulse 1.5s ease-in-out infinite;
+          }
+          @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.6); }
+            50%       { box-shadow: 0 0 0 8px rgba(239,68,68,0); }
+          }
+        </style>
+        <div id="newOrderBannerPulse" style="width:44px;height:44px;background:rgba(239,68,68,0.15);border:2px solid #ef4444;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <i class="fa-solid fa-bell" style="color:#ef4444;font-size:18px;"></i>
+        </div>
+        <div style="flex:1;">
+          <div style="font-weight:700;font-size:14px;margin-bottom:4px;">New Order Received!</div>
+          <div style="font-size:12px;color:#94a3b8;line-height:1.5;">
+            Order <strong style="color:#fff;font-family:monospace;">#${order.id.slice(-6).toUpperCase()}</strong>
+            · ₱${order.total.toFixed(2)}
+            <br><span style="color:#64748b;">${order.customerRole === 'outsider' ? '🏫 Outsider' : '🎓 Student'}</span>
+          </div>
+          <button onclick="document.getElementById('tab-Pending').click();document.getElementById('newOrderBanner').remove();"
+            style="margin-top:8px;padding:5px 12px;background:#ef4444;color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;">
+            View Order
+          </button>
+        </div>
+        <button onclick="this.closest('#newOrderBanner').remove();" style="background:none;border:none;color:#64748b;cursor:pointer;padding:0;font-size:16px;flex-shrink:0;">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      `;
+      document.body.appendChild(banner);
+      setTimeout(() => {
+        if (banner.parentNode) {
+          banner.style.animation = "slideOutBanner 0.3s ease-in both";
+          setTimeout(() => banner.remove(), 300);
+        }
+      }, 6000);
+    }
+
 
     /* ----------------------------------------------------------
        WALK-IN ORDER MODAL LOGIC
@@ -723,13 +896,13 @@
         const qty = walkinCart[item.id] ? walkinCart[item.id].qty : 0;
         const isSelected = qty > 0;
         return `
-          <div class="walkin-item-card" onclick="addToWalkin('${item.id}')" style="background:#fff; border:2px solid ${isSelected ? '#22c55e' : '#e2e8f0'}; border-radius:12px; padding:12px; cursor:pointer; position:relative; transition:all 0.2s; box-shadow: ${isSelected ? '0 4px 12px rgba(34,197,94,0.15)' : 'none'};">
-            ${isSelected ? `<div style="position:absolute; top:-8px; right:-8px; background:#22c55e; color:#fff; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; z-index:2; box-shadow:0 2px 5px rgba(0,0,0,0.2);">${qty}</div>` : ''}
+          <div class="walkin-item-card" onclick="addToWalkin('${item.id}')" style="background:#fff; border:2px solid ${isSelected ? '#ef4444' : '#e2e8f0'}; border-radius:12px; padding:12px; cursor:pointer; position:relative; transition:all 0.2s; box-shadow: ${isSelected ? '0 4px 12px rgba(239,68,68,0.15)' : 'none'};">
+            ${isSelected ? `<div style="position:absolute; top:-8px; right:-8px; background:#ef4444; color:#fff; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; z-index:2; box-shadow:0 2px 5px rgba(0,0,0,0.2);">${qty}</div>` : ''}
             <div style="height:100px; background:#f1f5f9; border-radius:8px; margin-bottom:10px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
               <img src="${item.img}" style="width:100%; height:100%; object-fit:cover;" onerror="this.style.display='none'">
             </div>
             <div style="font-size:14px; font-weight:600; color:#1e293b; margin-bottom:4px; line-height:1.2;">${item.name}</div>
-            <div style="font-size:15px; font-weight:700; color:#3b82f6;">&#8369;${item.price.toFixed(2)}</div>
+            <div style="font-size:15px; font-weight:700; color:#ef4444;">&#8369;${item.price.toFixed(2)}</div>
           </div>
         `;
       }).join('');
@@ -816,11 +989,11 @@
       }
 
       if(canCharge) {
-        btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+        btn.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
         btn.style.color = '#fff';
         btn.style.cursor = 'pointer';
         btn.disabled = false;
-        btn.style.boxShadow = '0 4px 12px rgba(34,197,94,0.3)';
+        btn.style.boxShadow = '0 4px 12px rgba(239, 68, 68, 0.3)';
       } else {
         btn.style.background = '#e2e8f0';
         btn.style.color = '#94a3b8';
@@ -846,9 +1019,9 @@
           b.classList.remove('active');
         });
         const target = e.currentTarget;
-        target.style.background = '#eff6ff';
-        target.style.borderColor = '#3b82f6';
-        target.style.color = '#1d4ed8';
+        target.style.background = '#fef2f2';
+        target.style.borderColor = '#ef4444';
+        target.style.color = '#dc2626';
         target.classList.add('active');
         
         currentPaymentMethod = target.dataset.method;
