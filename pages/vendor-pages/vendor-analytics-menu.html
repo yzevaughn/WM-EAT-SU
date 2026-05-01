@@ -318,11 +318,11 @@
           >
             <a
               href="vendor-sales-payments.html#analytics-view"
-              class="analytics-tab-btn active"
+              class="analytics-tab-btn"
               style="
                 padding: 8px 16px;
-                background: #ef4444;
-                color: #fff;
+                background: transparent;
+                color: #4b5563;
                 border: none;
                 border-radius: 6px;
                 font-weight: 600;
@@ -334,11 +334,11 @@
             </a>
             <a
               href="vendor-analytics-menu.html#analytics-view"
-              class="analytics-tab-btn"
+              class="analytics-tab-btn active"
               style="
                 padding: 8px 16px;
-                background: transparent;
-                color: #4b5563;
+                background: #ef4444;
+                color: #fff;
                 border: none;
                 border-radius: 6px;
                 font-weight: 600;
@@ -370,10 +370,10 @@
             class="analytics-container"
             style="display: block; margin-bottom: 24px"
           >
-            <!-- Vendor Reviews Wrapper -->
+            <!-- Menu Order Analytics -->
             <div
               class="chart-container-wrapper"
-              id="vendorReviewsWrapper"
+              id="menuOrderWrapper"
               style="
                 display: block;
                 margin-bottom: 0;
@@ -384,179 +384,144 @@
               "
             >
               <div
-                class="reviews-content"
-                style="padding: 0; border-top: none; margin-top: 0"
+                style="
+                  background: white;
+                  border: 1px solid #e5e7eb;
+                  border-radius: 12px;
+                  padding: 24px;
+                  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+                "
               >
-                <div class="reviews-header">
-                  <h2
-                    style="
-                      font-size: 24px;
-                      font-weight: 700;
-                      color: #111827;
-                      margin: 0 0 4px 0;
-                    "
-                  >
-                    Vendor Reviews
-                  </h2>
-                  <p style="color: #6b7280; margin: 0 0 24px 0">
-                    See customer feedback and review analytics
-                  </p>
+                <div class="chart-header">
+                  <div class="chart-title">
+                    <h2>Menu Order Analytics</h2>
+                    <div class="chart-summary">
+                      <span style="font-size: 14px; color: #6b7280"
+                        >Top Seller:</span
+                      >
+                      <span
+                        class="total-value"
+                        id="topSellerName"
+                        style="font-size: 18px; margin-left: 8px"
+                        >Classic Burger Meal</span
+                      >
+                    </div>
+                  </div>
+                  <div class="chart-controls">
+                    <button class="chart-tab menu-tab active" data-view="daily">Daily</button>
+                    <button class="chart-tab menu-tab" data-view="weekly">Weekly</button>
+                    <button class="chart-tab menu-tab" data-view="monthly">Monthly</button>
+                    <button class="chart-tab menu-tab" data-view="yearly">Yearly</button>
+                    <button class="chart-tab menu-tab" data-view="all_time">All-time</button>
+                  </div>
                 </div>
-
-
+                <div class="chart-body" style="height: 300px">
+                  <canvas id="menuChart"></canvas>
                 </div>
               </div>
 
-                <!-- REVIEW ANALYTICS CHART -->
-                <div
-                  class="revenue-section"
-                  style="
-                    margin-bottom: 32px;
-                    background: white;
-                    border: 1px solid #e5e7eb;
-                    border-radius: 12px;
-                    padding: 24px;
-                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-                  "
-                >
-                  <div class="chart-header">
-                    <div class="chart-title">
-                      <h2>Review Performance</h2>
-                      <div class="chart-summary">
-                        <span class="total-value" id="reviewTotalRating"
-                          >4.4 ★</span
-                        >
-                        <span class="growth-badge positive">
-                          <i class="fas fa-arrow-up"></i>
-                          <span id="reviewGrowth">+0.2</span>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="chart-controls">
-                      <button
-                        class="chart-tab review-tab active"
-                        data-view="daily"
-                      >
-                        Daily
-                      </button>
-                      <button class="chart-tab review-tab" data-view="weekly">
-                        Weekly
-                      </button>
-                      <button class="chart-tab review-tab" data-view="monthly">
-                        Monthly
-                      </button>
-                      <button class="chart-tab review-tab" data-view="yearly">
-                        Yearly
-                      </button>
-                      <button class="chart-tab review-tab" data-view="all_time">
-                        All-time
-                      </button>
-                    </div>
+              <div
+                class="payment-history-wrapper food-leaderboard"
+                style="margin-bottom: 0; margin-top: 24px"
+              >
+                <div class="history-header">
+                  <h2>Food Leaderboard</h2>
+                  <p style="color: #6b7280; font-size: 14px; margin-top: 4px">
+                    Most ordered menu items
+                  </p>
+                </div>
+                <div class="table-responsive">
+                  <table class="history-table">
+                    <thead>
+                      <tr>
+                        <th style="width: 80px">Rank</th>
+                        <th>Menu Item</th>
+                        <th class="text-right">Total Orders</th>
+                        <th class="text-right">Revenue Generated</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span style="font-weight: 600; color: #fbbf24"
+                            ><i class="fas fa-trophy"></i> 1</span
+                          >
+                        </td>
+                        <td>Classic Burger Meal</td>
+                        <td class="text-right">145</td>
+                        <td class="text-right amount">&#8369;12,325.00</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span style="font-weight: 600; color: #9ca3af"
+                            ><i class="fas fa-medal"></i> 2</span
+                          >
+                        </td>
+                        <td>Spicy Chicken Wings</td>
+                        <td class="text-right">98</td>
+                        <td class="text-right amount">&#8369;8,820.00</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span style="font-weight: 600; color: #b45309"
+                            ><i class="fas fa-medal"></i> 3</span
+                          >
+                        </td>
+                        <td>Iced Caramel Macchiato</td>
+                        <td class="text-right">85</td>
+                        <td class="text-right amount">&#8369;5,100.00</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span style="padding-left: 8px; font-weight: 600"
+                            >4</span
+                          >
+                        </td>
+                        <td>Pork Sisig Rice Bowl</td>
+                        <td class="text-right">72</td>
+                        <td class="text-right amount">&#8369;6,480.00</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span style="padding-left: 8px; font-weight: 600"
+                            >5</span
+                          >
+                        </td>
+                        <td>Fries & Drink Combo</td>
+                        <td class="text-right">64</td>
+                        <td class="text-right amount">&#8369;3,200.00</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- Pagination Controls -->
+                <div class="pagination-controls" style="padding: 16px 24px; border-top: 1px solid #f3f4f6;">
+                  <div class="pagination-info">
+                    Showing <span style="font-weight: 600">1</span> to
+                    <span style="font-weight: 600">5</span> of
+                    <span style="font-weight: 600">15</span> entries
                   </div>
-                  <div
-                    class="chart-container"
-                    style="position: relative; height: 320px; width: 100%"
-                  >
-                    <canvas id="reviewChart"></canvas>
+                  <div class="pagination-nav">
+                    <button class="page-btn disabled">
+                      <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <div style="display: flex; gap: 4px">
+                      <button class="page-btn active" style="background: #ef4444; color: white; border: none;">1</button>
+                      <button class="page-btn">2</button>
+                      <button class="page-btn">3</button>
+                    </div>
+                    <button class="page-btn">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </button>
                   </div>
                 </div>
-
-                <!-- ALL REVIEWS DATA GRID -->
-                <div class="reviews-list-section">
-                  <h2
-                    style="
-                      font-size: 20px;
-                      font-weight: 700;
-                      color: #1f2937;
-                      margin: 0 0 16px 0;
-                    "
-                  >
-                    All Reviews
-                  </h2>
-                  <div class="table-container">
-                    <div
-                      class="table-controls"
-                      style="
-                        padding: 24px;
-                        border-bottom: 1px solid #e2e8f0;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        flex-wrap: wrap;
-                        gap: 16px;
-                      "
-                    >
-                      <div class="search-box">
-                        <i class="fa-solid fa-search"></i>
-                        <input
-                          type="text"
-                          id="reviewSearchInput"
-                          placeholder="Search customer or review keyword..."
-                        />
-                      </div>
-                      <div class="filter-group">
-                        <div class="filter-item">
-                          <label for="foodFilter"
-                            ><i class="fa-solid fa-utensils"></i> Food
-                            Item:</label
-                          >
-                          <select id="foodFilter" class="custom-select">
-                            <option value="All">All Items</option>
-                          </select>
-                        </div>
-                        <div class="filter-item">
-                          <label for="ratingFilter"
-                            ><i class="fa-solid fa-filter"></i> Rating:</label
-                          >
-                          <select id="ratingFilter" class="custom-select">
-                            <option value="All">All Ratings</option>
-                            <option value="5">5 stars</option>
-                            <option value="4">4 stars</option>
-                            <option value="3">3 stars</option>
-                            <option value="2">2 stars</option>
-                            <option value="1">1 star</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <table class="data-grid">
-                      <thead>
-                        <tr>
-                          <th>Date</th>
-                          <th>Customer</th>
-                          <th>Item</th>
-                          <th>Rating</th>
-                          <th>Review</th>
-                        </tr>
-                      </thead>
-                      <tbody id="reviewsTableBody">
-                        <!-- Rows injected by JS -->
-                      </tbody>
-                    </table>
-                    <div class="pagination-controls">
-                      <div class="pagination-info">
-                        Showing <span id="pageStart">1</span> to
-                        <span id="pageEnd">10</span> of
-                        <span id="totalEntries">0</span> entries
-                      </div>
-                      <div class="pagination-nav">
-                        <button class="page-btn disabled" id="prevPage">
-                          <i class="fa-solid fa-chevron-left"></i>
-                        </button>
-                        <div
-                          id="pageNumbers"
-                          style="display: flex; gap: 4px"
-                        ></div>
-                        <button class="page-btn" id="nextPage">
-                          <i class="fa-solid fa-chevron-right"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
         </div>
       </div>
     </div>
@@ -701,7 +666,107 @@
           },
         });
 
-        const tabs = revenueChartContainer.querySelectorAll(".chart-tab");
+        // Menu Order Analytics Chart (Pie Chart)
+        const menuCtx = document.getElementById("menuChart").getContext("2d");
+        const menuData = {
+          daily: {
+            labels: ["Burger Meal", "Fries", "Spicy Chicken", "Softdrink", "Nachos", "Salad Bowl"],
+            data: [12, 15, 8, 20, 5, 4],
+            topSeller: "Softdrink"
+          },
+          weekly: {
+            labels: ["Burger Meal", "Fries", "Spicy Chicken", "Softdrink", "Nachos", "Salad Bowl"],
+            data: [85, 70, 55, 120, 30, 25],
+            topSeller: "Softdrink"
+          },
+          monthly: {
+            labels: ["Burger Meal", "Fries", "Spicy Chicken", "Softdrink", "Nachos", "Salad Bowl"],
+            data: [145, 120, 95, 80, 65, 40],
+            topSeller: "Classic Burger Meal"
+          },
+          yearly: {
+            labels: ["Burger Meal", "Fries", "Spicy Chicken", "Softdrink", "Nachos", "Salad Bowl"],
+            data: [1200, 1000, 850, 900, 600, 450],
+            topSeller: "Classic Burger Meal"
+          },
+          all_time: {
+            labels: ["Burger Meal", "Fries", "Spicy Chicken", "Softdrink", "Nachos", "Salad Bowl"],
+            data: [3500, 2800, 2400, 2600, 1800, 1200],
+            topSeller: "Classic Burger Meal"
+          }
+        };
+
+        let menuChart = new Chart(menuCtx, {
+          type: "pie",
+          data: {
+            labels: menuData.monthly.labels,
+            datasets: [
+              {
+                label: "Times Ordered",
+                data: menuData.monthly.data,
+                backgroundColor: [
+                  "#ea580c",
+                  "#f97316",
+                  "#fb923c",
+                  "#fdba74",
+                  "#fcd34d",
+                  "#fbbf24",
+                ],
+                borderWidth: 2,
+                borderColor: "#ffffff",
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: "right",
+                labels: {
+                  usePointStyle: true,
+                  padding: 15,
+                  font: { family: "'Inter', sans-serif" },
+                },
+              },
+              tooltip: {
+                backgroundColor: "#1f2937",
+                padding: 12,
+                titleFont: { size: 13 },
+                bodyFont: { size: 14, weight: "bold" },
+              },
+            },
+          },
+        });
+
+        const menuTabs = document.querySelectorAll(".menu-tab");
+        const topSellerEl = document.getElementById("topSellerName");
+
+        function updateMenuChart(view) {
+          if(menuData[view]) {
+            menuTabs.forEach(t => {
+              if (t.getAttribute("data-view") === view) t.classList.add("active");
+              else t.classList.remove("active");
+            });
+            menuChart.data.labels = menuData[view].labels;
+            menuChart.data.datasets[0].data = menuData[view].data;
+            menuChart.update();
+            if(topSellerEl) topSellerEl.textContent = menuData[view].topSeller;
+          }
+        }
+
+        menuTabs.forEach(tab => {
+          tab.addEventListener("click", function() {
+            const view = this.getAttribute("data-view");
+            localStorage.setItem("selected_analytics_filter", view);
+            updateMenuChart(view);
+            document.querySelectorAll(`.chart-tab[data-view="${view}"]`).forEach(t => {
+              if (t !== tab) t.click();
+            });
+          });
+        });
+
+        const tabs = revenueChartContainer.querySelectorAll(".chart-tab:not(.menu-tab)");
         const domTotal = document.getElementById("chartTotalRevenue");
         const domGrowth = document.getElementById("chartGrowth");
         const domGrowthBadge = domGrowth.parentElement;
@@ -732,17 +797,15 @@
             const view = e.target.getAttribute("data-view");
             localStorage.setItem("selected_analytics_filter", view);
             updateRevenueChart(view);
-            document
-              .querySelectorAll(`.chart-tab[data-view="${view}"]`)
-              .forEach((t) => {
-                if (t !== e.target) t.click();
-              });
+            document.querySelectorAll(`.chart-tab[data-view="${view}"]`).forEach(t => {
+              if (t !== e.target) t.click();
+            });
           });
         });
 
-        const savedFilter =
-          localStorage.getItem("selected_analytics_filter") || "daily";
+        const savedFilter = localStorage.getItem("selected_analytics_filter") || "daily";
         updateRevenueChart(savedFilter);
+        updateMenuChart(savedFilter);
       });
     </script>
   </body>

@@ -318,11 +318,11 @@
           >
             <a
               href="vendor-sales-payments.html#analytics-view"
-              class="analytics-tab-btn active"
+              class="analytics-tab-btn"
               style="
                 padding: 8px 16px;
-                background: #ef4444;
-                color: #fff;
+                background: transparent;
+                color: #4b5563;
                 border: none;
                 border-radius: 6px;
                 font-weight: 600;
@@ -350,11 +350,11 @@
             </a>
             <a
               href="vendor-analytics-customers.html#analytics-view"
-              class="analytics-tab-btn"
+              class="analytics-tab-btn active"
               style="
                 padding: 8px 16px;
-                background: transparent;
-                color: #4b5563;
+                background: #ef4444;
+                color: #fff;
                 border: none;
                 border-radius: 6px;
                 font-weight: 600;
@@ -370,10 +370,10 @@
             class="analytics-container"
             style="display: block; margin-bottom: 24px"
           >
-            <!-- Vendor Reviews Wrapper -->
+            <!-- Customer Analytics -->
             <div
               class="chart-container-wrapper"
-              id="vendorReviewsWrapper"
+              id="customerAnalyticsWrapper"
               style="
                 display: block;
                 margin-bottom: 0;
@@ -384,178 +384,153 @@
               "
             >
               <div
-                class="reviews-content"
-                style="padding: 0; border-top: none; margin-top: 0"
+                style="
+                  background: white;
+                  border: 1px solid #e5e7eb;
+                  border-radius: 12px;
+                  padding: 24px;
+                  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+                "
               >
-                <div class="reviews-header">
-                  <h2
-                    style="
-                      font-size: 24px;
-                      font-weight: 700;
-                      color: #111827;
-                      margin: 0 0 4px 0;
-                    "
-                  >
-                    Vendor Reviews
-                  </h2>
-                  <p style="color: #6b7280; margin: 0 0 24px 0">
-                    See customer feedback and review analytics
+                <div class="chart-header">
+                  <div class="chart-title">
+                    <h2>Customer Analytics</h2>
+                    <div class="chart-summary">
+                      <span class="total-value" id="customerTotalCount"
+                        >342</span
+                      >
+                      <span class="growth-badge positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span id="customerGrowth">+18%</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="chart-controls">
+                    <button
+                      class="chart-tab customer-tab active"
+                      data-view="daily"
+                    >
+                      Daily
+                    </button>
+                    <button class="chart-tab customer-tab" data-view="weekly">
+                      Weekly
+                    </button>
+                    <button class="chart-tab customer-tab" data-view="monthly">
+                      Monthly
+                    </button>
+                    <button class="chart-tab customer-tab" data-view="yearly">
+                      Yearly
+                    </button>
+                    <button class="chart-tab customer-tab" data-view="all_time">
+                      All-time
+                    </button>
+                  </div>
+                </div>
+                <div class="chart-body" style="height: 300px">
+                  <canvas id="customerChart"></canvas>
+                </div>
+              </div>
+
+              <!-- Customer Leaderboard -->
+              <div
+                class="payment-history-wrapper"
+                style="margin-bottom: 0; margin-top: 24px"
+              >
+                <div class="history-header">
+                  <h2>Customer Leaderboard</h2>
+                  <p style="color: #6b7280; font-size: 14px; margin-top: 4px">
+                    Top customers by orders and spending
                   </p>
                 </div>
-
-
+                <div class="table-responsive">
+                  <table class="history-table">
+                    <thead>
+                      <tr>
+                        <th style="width: 80px">Rank</th>
+                        <th>Customer Name</th>
+                        <th class="text-right">Total Orders</th>
+                        <th class="text-right">Total Amount Spent</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span style="font-weight: 600; color: #fbbf24"
+                            ><i class="fas fa-trophy"></i> 1</span
+                          >
+                        </td>
+                        <td>Juan Dela Cruz</td>
+                        <td class="text-right">24</td>
+                        <td class="text-right amount">&#8369;3,240.50</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span style="font-weight: 600; color: #9ca3af"
+                            ><i class="fas fa-medal"></i> 2</span
+                          >
+                        </td>
+                        <td>Maria Santos</td>
+                        <td class="text-right">18</td>
+                        <td class="text-right amount">&#8369;2,150.00</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span style="font-weight: 600; color: #b45309"
+                            ><i class="fas fa-medal"></i> 3</span
+                          >
+                        </td>
+                        <td>Pedro Penduko</td>
+                        <td class="text-right">15</td>
+                        <td class="text-right amount">&#8369;1,850.75</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span style="padding-left: 8px; font-weight: 600"
+                            >4</span
+                          >
+                        </td>
+                        <td>Anna Reyes</td>
+                        <td class="text-right">12</td>
+                        <td class="text-right amount">&#8369;1,200.00</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span style="padding-left: 8px; font-weight: 600"
+                            >5</span
+                          >
+                        </td>
+                        <td>John Doe</td>
+                        <td class="text-right">9</td>
+                        <td class="text-right amount">&#8369;950.25</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- Pagination Controls -->
+                <div class="pagination-controls" style="padding: 16px 24px; border-top: 1px solid #f3f4f6;">
+                  <div class="pagination-info">
+                    Showing <span style="font-weight: 600">1</span> to
+                    <span style="font-weight: 600">5</span> of
+                    <span style="font-weight: 600">12</span> entries
+                  </div>
+                  <div class="pagination-nav">
+                    <button class="page-btn disabled">
+                      <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <div style="display: flex; gap: 4px">
+                      <button class="page-btn active" style="background: #ef4444; color: white; border: none;">1</button>
+                      <button class="page-btn">2</button>
+                      <button class="page-btn">3</button>
+                    </div>
+                    <button class="page-btn">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
-
-                <!-- REVIEW ANALYTICS CHART -->
-                <div
-                  class="revenue-section"
-                  style="
-                    margin-bottom: 32px;
-                    background: white;
-                    border: 1px solid #e5e7eb;
-                    border-radius: 12px;
-                    padding: 24px;
-                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-                  "
-                >
-                  <div class="chart-header">
-                    <div class="chart-title">
-                      <h2>Review Performance</h2>
-                      <div class="chart-summary">
-                        <span class="total-value" id="reviewTotalRating"
-                          >4.4 ★</span
-                        >
-                        <span class="growth-badge positive">
-                          <i class="fas fa-arrow-up"></i>
-                          <span id="reviewGrowth">+0.2</span>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="chart-controls">
-                      <button
-                        class="chart-tab review-tab active"
-                        data-view="daily"
-                      >
-                        Daily
-                      </button>
-                      <button class="chart-tab review-tab" data-view="weekly">
-                        Weekly
-                      </button>
-                      <button class="chart-tab review-tab" data-view="monthly">
-                        Monthly
-                      </button>
-                      <button class="chart-tab review-tab" data-view="yearly">
-                        Yearly
-                      </button>
-                      <button class="chart-tab review-tab" data-view="all_time">
-                        All-time
-                      </button>
-                    </div>
-                  </div>
-                  <div
-                    class="chart-container"
-                    style="position: relative; height: 320px; width: 100%"
-                  >
-                    <canvas id="reviewChart"></canvas>
-                  </div>
-                </div>
-
-                <!-- ALL REVIEWS DATA GRID -->
-                <div class="reviews-list-section">
-                  <h2
-                    style="
-                      font-size: 20px;
-                      font-weight: 700;
-                      color: #1f2937;
-                      margin: 0 0 16px 0;
-                    "
-                  >
-                    All Reviews
-                  </h2>
-                  <div class="table-container">
-                    <div
-                      class="table-controls"
-                      style="
-                        padding: 24px;
-                        border-bottom: 1px solid #e2e8f0;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        flex-wrap: wrap;
-                        gap: 16px;
-                      "
-                    >
-                      <div class="search-box">
-                        <i class="fa-solid fa-search"></i>
-                        <input
-                          type="text"
-                          id="reviewSearchInput"
-                          placeholder="Search customer or review keyword..."
-                        />
-                      </div>
-                      <div class="filter-group">
-                        <div class="filter-item">
-                          <label for="foodFilter"
-                            ><i class="fa-solid fa-utensils"></i> Food
-                            Item:</label
-                          >
-                          <select id="foodFilter" class="custom-select">
-                            <option value="All">All Items</option>
-                          </select>
-                        </div>
-                        <div class="filter-item">
-                          <label for="ratingFilter"
-                            ><i class="fa-solid fa-filter"></i> Rating:</label
-                          >
-                          <select id="ratingFilter" class="custom-select">
-                            <option value="All">All Ratings</option>
-                            <option value="5">5 stars</option>
-                            <option value="4">4 stars</option>
-                            <option value="3">3 stars</option>
-                            <option value="2">2 stars</option>
-                            <option value="1">1 star</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <table class="data-grid">
-                      <thead>
-                        <tr>
-                          <th>Date</th>
-                          <th>Customer</th>
-                          <th>Item</th>
-                          <th>Rating</th>
-                          <th>Review</th>
-                        </tr>
-                      </thead>
-                      <tbody id="reviewsTableBody">
-                        <!-- Rows injected by JS -->
-                      </tbody>
-                    </table>
-                    <div class="pagination-controls">
-                      <div class="pagination-info">
-                        Showing <span id="pageStart">1</span> to
-                        <span id="pageEnd">10</span> of
-                        <span id="totalEntries">0</span> entries
-                      </div>
-                      <div class="pagination-nav">
-                        <button class="page-btn disabled" id="prevPage">
-                          <i class="fa-solid fa-chevron-left"></i>
-                        </button>
-                        <div
-                          id="pageNumbers"
-                          style="display: flex; gap: 4px"
-                        ></div>
-                        <button class="page-btn" id="nextPage">
-                          <i class="fa-solid fa-chevron-right"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
+            <!-- Closes customerAnalyticsWrapper -->
           </div>
         </div>
       </div>
@@ -563,7 +538,7 @@
 
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../../script/vendor-js/vendor-reviews.js"></script>
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const ctx = document.getElementById("revenueChart").getContext("2d");
@@ -701,7 +676,141 @@
           },
         });
 
-        const tabs = revenueChartContainer.querySelectorAll(".chart-tab");
+        // Customer Analytics Chart (Line Chart)
+        const customerCtx = document
+          .getElementById("customerChart")
+          .getContext("2d");
+
+        const customerData = {
+          daily: {
+            labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            data: [25, 30, 28, 45, 52, 65, 58],
+          },
+          weekly: {
+            labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+            data: [150, 180, 165, 210],
+          },
+          monthly: {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+            data: [450, 520, 480, 610, 590, 720],
+          },
+          yearly: {
+            labels: ["2023", "2024", "2025", "2026"],
+            data: [4500, 5200, 6800, 8500],
+          },
+          all_time: {
+            labels: ["2021", "2022", "2023", "2024", "2025", "2026"],
+            data: [1500, 2500, 4500, 5200, 6800, 8500],
+          },
+        };
+
+        let customerChart = new Chart(customerCtx, {
+          type: "line",
+          data: {
+            labels: customerData.daily.labels,
+            datasets: [
+              {
+                label: "New & Returning Customers",
+                data: customerData.daily.data,
+                borderColor: "#3b82f6", // Blue theme
+                backgroundColor: "rgba(59, 130, 246, 0.1)",
+                borderWidth: 3,
+                pointBackgroundColor: "#ffffff",
+                pointBorderColor: "#3b82f6",
+                pointBorderWidth: 2,
+                pointRadius: 4,
+                fill: true,
+                tension: 0.4,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: "#1f2937",
+                padding: 12,
+                titleFont: { size: 13 },
+                bodyFont: { size: 14, weight: "bold" },
+                displayColors: false,
+              },
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                grid: { color: "#f3f4f6", drawBorder: false },
+                ticks: { color: "#6b7280" },
+              },
+              x: {
+                grid: { display: false, drawBorder: false },
+                ticks: { color: "#6b7280" },
+              },
+            },
+          },
+        });
+
+        // Customer Analytics Logic
+        const customerTimeTabs = document.querySelectorAll(".customer-tab");
+        const domCustomerTotal = document.getElementById("customerTotalCount");
+        const domCustomerGrowth = document.getElementById("customerGrowth");
+
+        function updateCustomerChart(view) {
+          if (customerData[view]) {
+            customerTimeTabs.forEach((t) => {
+              if (t.getAttribute("data-view") === view)
+                t.classList.add("active");
+              else t.classList.remove("active");
+            });
+
+            customerChart.data.labels = customerData[view].labels;
+            customerChart.data.datasets[0].data = customerData[view].data;
+            customerChart.update();
+
+            if (domCustomerTotal) {
+              const totals = {
+                daily: "342",
+                weekly: "1,240",
+                monthly: "4,820",
+                yearly: "12,400",
+                all_time: "15,800",
+              };
+              domCustomerTotal.textContent = totals[view] || "342";
+            }
+            if (domCustomerGrowth) {
+              const growths = {
+                daily: "+18%",
+                weekly: "+12%",
+                monthly: "+15%",
+                yearly: "+22%",
+                all_time: "+45%",
+              };
+              domCustomerGrowth.textContent = growths[view] || "+18%";
+            }
+          }
+        }
+
+        if (customerTimeTabs) {
+          customerTimeTabs.forEach((tab) => {
+            tab.addEventListener("click", function (e) {
+              const view = this.getAttribute("data-view");
+              localStorage.setItem("selected_analytics_filter", view);
+              updateCustomerChart(view);
+
+              document
+                .querySelectorAll(`.chart-tab[data-view="${view}"]`)
+                .forEach((t) => {
+                  if (t !== tab) t.click();
+                });
+            });
+          });
+        }
+
+        // Handle tab switching for Revenue
+        const tabs = revenueChartContainer.querySelectorAll(
+          ".chart-tab:not(.customer-tab)",
+        );
         const domTotal = document.getElementById("chartTotalRevenue");
         const domGrowth = document.getElementById("chartGrowth");
         const domGrowthBadge = domGrowth.parentElement;
@@ -709,15 +818,19 @@
         function updateRevenueChart(view) {
           const dataToLoad = chartData[view];
           if (!dataToLoad) return;
+
           tabs.forEach((t) => {
             if (t.getAttribute("data-view") === view) t.classList.add("active");
             else t.classList.remove("active");
           });
+
           revenueChart.data.labels = dataToLoad.labels;
           revenueChart.data.datasets[0].data = dataToLoad.data;
           revenueChart.update();
+
           domTotal.textContent = dataToLoad.total;
           domGrowth.textContent = dataToLoad.growth;
+
           if (dataToLoad.growthType === "positive") {
             domGrowthBadge.className = "growth-badge positive";
             domGrowthBadge.querySelector("i").className = "fas fa-arrow-up";
@@ -732,6 +845,7 @@
             const view = e.target.getAttribute("data-view");
             localStorage.setItem("selected_analytics_filter", view);
             updateRevenueChart(view);
+
             document
               .querySelectorAll(`.chart-tab[data-view="${view}"]`)
               .forEach((t) => {
@@ -740,9 +854,11 @@
           });
         });
 
+        // Initialize from localStorage
         const savedFilter =
           localStorage.getItem("selected_analytics_filter") || "daily";
         updateRevenueChart(savedFilter);
+        updateCustomerChart(savedFilter);
       });
     </script>
   </body>
