@@ -310,14 +310,14 @@
             </div>
 
             <div class="filters">
-              <select class="filter-dropdown" id="paymentDateFilter">
+              <select class="filter-dropdown">
                 <option value="">All Dates</option>
                 <option value="today">Today</option>
                 <option value="week">This Week</option>
                 <option value="month">This Month</option>
               </select>
 
-              <select class="filter-dropdown" id="paymentMethodFilter">
+              <select class="filter-dropdown">
                 <option value="">All Payment Methods</option>
                 <option value="gcash">GCash</option>
                 <option value="cash">Cash on Delivery</option>
@@ -327,207 +327,169 @@
               <select class="sort-dropdown">
                 <option value="latest">Sort by: Latest</option>
                 <option value="oldest">Sort by: Oldest</option>
-                <option value="highest">Sort by: Highest Amount                <!-- GCash Payments (5 examples) -->
-                <tr data-method="gcash">
-                  <td><span class="order-id">#ORD-2001</span></td>
-                  <td>Alice Guo</td>
-                  <td><span class="item-list">1x Pork Adobo, 1x Rice</span></td>
-                  <td><span class="pay-method online"><i class="fa-solid fa-credit-card" style="margin-right: 4px"></i>Online (GCash)</span></td>
-                  <td>Oct 25, 2026<br /><span class="time-sub">08:30 AM</span></td>
-                  <td class="amount">&#8369;85.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#ORD-2001', 'Alice Guo', '1x Pork Adobo, 1x Rice', 'GCash', 'Oct 25, 2026', '08:30 AM', '85.00', 'Payment')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-                <tr data-method="gcash">
-                  <td><span class="order-id">#ORD-2002</span></td>
-                  <td>Bob Ong</td>
-                  <td><span class="item-list">2x Beef Pares</span></td>
-                  <td><span class="pay-method online"><i class="fa-solid fa-credit-card" style="margin-right: 4px"></i>Online (GCash)</span></td>
-                  <td>Oct 25, 2026<br /><span class="time-sub">09:15 AM</span></td>
-                  <td class="amount">&#8369;150.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#ORD-2002', 'Bob Ong', '2x Beef Pares', 'GCash', 'Oct 25, 2026', '09:15 AM', '150.00', 'Payment')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-                <tr data-method="gcash">
-                  <td><span class="order-id">#ORD-2003</span></td>
-                  <td>Charlie Puth</td>
-                  <td><span class="item-list">1x Halo-Halo Special</span></td>
-                  <td><span class="pay-method online"><i class="fa-solid fa-credit-card" style="margin-right: 4px"></i>Online (GCash)</span></td>
-                  <td>Oct 25, 2026<br /><span class="time-sub">10:00 AM</span></td>
-                  <td class="amount">&#8369;75.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#ORD-2003', 'Charlie Puth', '1x Halo-Halo Special', 'GCash', 'Oct 25, 2026', '10:00 AM', '75.00', 'Payment')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-                <tr data-method="gcash">
-                  <td><span class="order-id">#ORD-2004</span></td>
-                  <td>Dina Bonnevie</td>
-                  <td><span class="item-list">3x Turon, 1x Coke</span></td>
-                  <td><span class="pay-method online"><i class="fa-solid fa-credit-card" style="margin-right: 4px"></i>Online (GCash)</span></td>
-                  <td>Oct 25, 2026<br /><span class="time-sub">11:30 AM</span></td>
-                  <td class="amount">&#8369;90.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#ORD-2004', 'Dina Bonnevie', '3x Turon, 1x Coke', 'GCash', 'Oct 25, 2026', '11:30 AM', '90.00', 'Payment')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-                <tr data-method="gcash">
-                  <td><span class="order-id">#ORD-2005</span></td>
-                  <td>Eric Tai</td>
-                  <td><span class="item-list">1x Crispy Pata (Solo)</span></td>
-                  <td><span class="pay-method online"><i class="fa-solid fa-credit-card" style="margin-right: 4px"></i>Online (GCash)</span></td>
-                  <td>Oct 25, 2026<br /><span class="time-sub">12:45 PM</span></td>
-                  <td class="amount">&#8369;180.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#ORD-2005', 'Eric Tai', '1x Crispy Pata (Solo)', 'GCash', 'Oct 25, 2026', '12:45 PM', '180.00', 'Payment')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
+                <option value="highest">Sort by: Highest Amount</option>
+                <option value="lowest">Sort by: Lowest Amount</option>
+              </select>
+            </div>
+          </div>
 
-                <!-- Cash Payments (5 examples) -->
-                <tr data-method="cash">
-                  <td><span class="order-id">#ORD-3001</span></td>
-                  <td>Fernando Poe</td>
-                  <td><span class="item-list">1x Sinigang na Baboy</span></td>
-                  <td><span class="pay-method cash"><i class="fa-solid fa-money-bill-wave" style="margin-right: 4px"></i>Cash</span></td>
-                  <td>Oct 24, 2026<br /><span class="time-sub">01:15 PM</span></td>
-                  <td class="amount">&#8369;120.00</td>
+          <div class="table-responsive">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Customer Name</th>
+                  <th>Items Ordered</th>
+                  <th>Payment Method</th>
+                  <th>Date & Time</th>
+                  <th>Total Amount</th>
+                  <th class="text-right">DETAILS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="order-id">#ORD-1049</span></td>
+                  <td>Juan Dela Cruz</td>
+                  <td>
+                    <span class="item-list"
+                      >2x Classic Burger Meal, 1x Fries</span
+                    >
+                  </td>
+                  <td>
+                    <span class="pay-method online"
+                      ><i
+                        class="fa-solid fa-credit-card"
+                        style="margin-right: 4px"
+                      ></i
+                      >Online</span
+                    >
+                  </td>
+                  <td>
+                    Oct 24, 2026<br /><span class="time-sub">12:30 PM</span>
+                  </td>
+                  <td class="amount">&#8369;29.97</td>
                   <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#ORD-3001', 'Fernando Poe', '1x Sinigang na Baboy', 'Cash', 'Oct 24, 2026', '01:15 PM', '120.00', 'Payment')">
+                    <label
+                      for="detailsToggle"
+                      class="view-btn"
+                      onclick="
+                        showTransactionDetails(
+                          '#ORD-1049',
+                          'Juan Dela Cruz',
+                          '2x Classic Burger Meal, 1x Fries',
+                          'GCash',
+                          'Oct 24, 2026',
+                          '12:30 PM',
+                          '29.97',
+                          'Payment',
+                        )
+                      "
+                    >
                       <i class="fa-solid fa-eye"></i>
                     </label>
                   </td>
                 </tr>
-                <tr data-method="cash">
-                  <td><span class="order-id">#ORD-3002</span></td>
-                  <td>Gloria Arroyo</td>
-                  <td><span class="item-list">2x Lumpia Shanghai</span></td>
-                  <td><span class="pay-method cash"><i class="fa-solid fa-money-bill-wave" style="margin-right: 4px"></i>Cash</span></td>
-                  <td>Oct 24, 2026<br /><span class="time-sub">02:30 PM</span></td>
-                  <td class="amount">&#8369;50.00</td>
+                <tr>
+                  <td><span class="order-id">#ORD-1048</span></td>
+                  <td>Maria Santos</td>
+                  <td>
+                    <span class="item-list">1x Spicy Chicken Sandwich</span>
+                  </td>
+                  <td>
+                    <span class="pay-method cash"
+                      ><i
+                        class="fa-solid fa-money-bill-wave"
+                        style="margin-right: 4px"
+                      ></i
+                      >Cash</span
+                    >
+                  </td>
+                  <td>
+                    Oct 24, 2026<br /><span class="time-sub">11:15 AM</span>
+                  </td>
+                  <td class="amount">&#8369;9.99</td>
                   <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#ORD-3002', 'Gloria Arroyo', '2x Lumpia Shanghai', 'Cash', 'Oct 24, 2026', '02:30 PM', '50.00', 'Payment')">
+                    <label
+                      for="detailsToggle"
+                      class="view-btn"
+                      onclick="
+                        showTransactionDetails(
+                          '#ORD-1048',
+                          'Maria Santos',
+                          '1x Spicy Chicken Sandwich',
+                          'Cash',
+                          'Oct 24, 2026',
+                          '11:15 AM',
+                          '9.99',
+                          'Payment',
+                        )
+                      "
+                    >
                       <i class="fa-solid fa-eye"></i>
                     </label>
                   </td>
                 </tr>
-                <tr data-method="cash">
-                  <td><span class="order-id">#ORD-3003</span></td>
-                  <td>Herbert Bautista</td>
-                  <td><span class="item-list">1x Sisig Rice Bowl</span></td>
-                  <td><span class="pay-method cash"><i class="fa-solid fa-money-bill-wave" style="margin-right: 4px"></i>Cash</span></td>
-                  <td>Oct 24, 2026<br /><span class="time-sub">03:45 PM</span></td>
-                  <td class="amount">&#8369;95.00</td>
+                <tr>
+                  <td><span class="order-id">#ORD-1047</span></td>
+                  <td>Pedro Penduko</td>
+                  <td>
+                    <span class="item-list">3x Softdrink, 1x Nachos</span>
+                  </td>
+                  <td>
+                    <span class="pay-method online"
+                      ><i
+                        class="fa-solid fa-credit-card"
+                        style="margin-right: 4px"
+                      ></i
+                      >Online</span
+                    >
+                  </td>
+                  <td>
+                    Oct 24, 2026<br /><span class="time-sub">10:45 AM</span>
+                  </td>
+                  <td class="amount">&#8369;12.50</td>
                   <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#ORD-3003', 'Herbert Bautista', '1x Sisig Rice Bowl', 'Cash', 'Oct 24, 2026', '03:45 PM', '95.00', 'Payment')">
+                    <label
+                      for="detailsToggle"
+                      class="view-btn"
+                      onclick="
+                        showTransactionDetails(
+                          '#ORD-1047',
+                          'Pedro Penduko',
+                          '3x Softdrink, 1x Nachos',
+                          'GCash',
+                          'Oct 24, 2026',
+                          '10:45 AM',
+                          '12.50',
+                          'Payment',
+                        )
+                      "
+                    >
                       <i class="fa-solid fa-eye"></i>
                     </label>
                   </td>
                 </tr>
-                <tr data-method="cash">
-                  <td><span class="order-id">#ORD-3004</span></td>
-                  <td>Isko Moreno</td>
-                  <td><span class="item-list">1x Batchoy, 1x Pandesal</span></td>
-                  <td><span class="pay-method cash"><i class="fa-solid fa-money-bill-wave" style="margin-right: 4px"></i>Cash</span></td>
-                  <td>Oct 24, 2026<br /><span class="time-sub">05:00 PM</span></td>
-                  <td class="amount">&#8369;70.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#ORD-3004', 'Isko Moreno', '1x Batchoy, 1x Pandesal', 'Cash', 'Oct 24, 2026', '05:00 PM', '70.00', 'Payment')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
+                <tr>
+                  <td><span class="order-id">#ORD-1046</span></td>
+                  <td>Anna Reyes</td>
+                  <td><span class="item-list">1x Salad Bowl</span></td>
+                  <td>
+                    <span class="pay-method online"
+                      ><i
+                        class="fa-solid fa-credit-card"
+                        style="margin-right: 4px"
+                      ></i
+                      >Online</span
+                    >
                   </td>
-                </tr>
-                <tr data-method="cash">
-                  <td><span class="order-id">#ORD-3005</span></td>
-                  <td>Jolina Magdangal</td>
-                  <td><span class="item-list">1x Kare-Kare Solo</span></td>
-                  <td><span class="pay-method cash"><i class="fa-solid fa-money-bill-wave" style="margin-right: 4px"></i>Cash</span></td>
-                  <td>Oct 24, 2026<br /><span class="time-sub">06:30 PM</span></td>
-                  <td class="amount">&#8369;140.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#ORD-3005', 'Jolina Magdangal', '1x Kare-Kare Solo', 'Cash', 'Oct 24, 2026', '06:30 PM', '140.00', 'Payment')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
+                  <td>
+                    Oct 23, 2026<br /><span class="time-sub">02:20 PM</span>
                   </td>
-                </tr>
-
-                <!-- Card Payments (5 examples) -->
-                <tr data-method="card">
-                  <td><span class="order-id">#ORD-4001</span></td>
-                  <td>Kathryn Bernardo</td>
-                  <td><span class="item-list">1x Ribeye Steak Meal</span></td>
-                  <td><span class="pay-method online"><i class="fa-solid fa-credit-card" style="margin-right: 4px"></i>Online (Card)</span></td>
-                  <td>Oct 23, 2026<br /><span class="time-sub">07:00 PM</span></td>
-                  <td class="amount">&#8369;450.00</td>
+                  <td class="amount">&#8369;15.00</td>
                   <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#ORD-4001', 'Kathryn Bernardo', '1x Ribeye Steak Meal', 'Card', 'Oct 23, 2026', '07:00 PM', '450.00', 'Payment')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-                <tr data-method="card">
-                  <td><span class="order-id">#ORD-4002</span></td>
-                  <td>Liza Soberano</td>
-                  <td><span class="item-list">1x Salmon Teriyaki</span></td>
-                  <td><span class="pay-method online"><i class="fa-solid fa-credit-card" style="margin-right: 4px"></i>Online (Card)</span></td>
-                  <td>Oct 23, 2026<br /><span class="time-sub">08:15 PM</span></td>
-                  <td class="amount">&#8369;320.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#ORD-4002', 'Liza Soberano', '1x Salmon Teriyaki', 'Card', 'Oct 23, 2026', '08:15 PM', '320.00', 'Payment')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-                <tr data-method="card">
-                  <td><span class="order-id">#ORD-4003</span></td>
-                  <td>Manny Pacquiao</td>
-                  <td><span class="item-list">1x Bulalo Special</span></td>
-                  <td><span class="pay-method online"><i class="fa-solid fa-credit-card" style="margin-right: 4px"></i>Online (Card)</span></td>
-                  <td>Oct 23, 2026<br /><span class="time-sub">09:30 PM</span></td>
-                  <td class="amount">&#8369;250.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#ORD-4003', 'Manny Pacquiao', '1x Bulalo Special', 'Card', 'Oct 23, 2026', '09:30 PM', '250.00', 'Payment')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-                <tr data-method="card">
-                  <td><span class="order-id">#ORD-4004</span></td>
-                  <td>Nadine Lustre</td>
-                  <td><span class="item-list">1x Chicken Inasal Meal</span></td>
-                  <td><span class="pay-method online"><i class="fa-solid fa-credit-card" style="margin-right: 4px"></i>Online (Card)</span></td>
-                  <td>Oct 23, 2026<br /><span class="time-sub">10:45 PM</span></td>
-                  <td class="amount">&#8369;145.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#ORD-4004', 'Nadine Lustre', '1x Chicken Inasal Meal', 'Card', 'Oct 23, 2026', '10:45 PM', '145.00', 'Payment')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-                <tr data-method="card">
-                  <td><span class="order-id">#ORD-4005</span></td>
-                  <td>Ogie Alcasid</td>
-                  <td><span class="item-list">1x Tocino Breakfast</span></td>
-                  <td><span class="pay-method online"><i class="fa-solid fa-credit-card" style="margin-right: 4px"></i>Online (Card)</span></td>
-                  <td>Oct 23, 2026<br /><span class="time-sub">11:55 PM</span></td>
-                  <td class="amount">&#8369;110.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#ORD-4005', 'Ogie Alcasid', '1x Tocino Breakfast', 'Card', 'Oct 23, 2026', '11:55 PM', '110.00', 'Payment')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-              </tbody>  class="view-btn"
+                    <label
+                      for="detailsToggle"
+                      class="view-btn"
                       onclick="
                         showTransactionDetails(
                           '#ORD-1046',
@@ -588,14 +550,14 @@
             </div>
 
             <div class="filters">
-              <select class="filter-dropdown" id="withdrawalStatusFilter">
+              <select class="filter-dropdown">
                 <option value="">All Status</option>
                 <option value="pending">Pending</option>
                 <option value="success">Success</option>
                 <option value="failed">Failed</option>
               </select>
 
-              <select class="filter-dropdown" id="withdrawalMethodFilter">
+              <select class="filter-dropdown">
                 <option value="">All Methods</option>
                 <option value="gcash">GCash</option>
                 <option value="PayMaya">PayMaya</option>
@@ -619,202 +581,79 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- GCash Withdrawals (5 examples) -->
-                <tr data-method="gcash" data-status="success">
-                  <td><span class="order-id">#WDR-1001</span></td>
+                <tr>
+                  <td><span class="order-id">#WDR-9021</span></td>
                   <td><span class="pay-method gcash">GCash</span></td>
-                  <td>0912 345 0001</td>
-                  <td><span class="status-pill status-success">Success</span></td>
-                  <td>Oct 26, 2026<br /><span class="time-sub">09:00 AM</span></td>
+                  <td>0912 345 6789</td>
+                  <td>
+                    <span class="status-pill status-success">Success</span>
+                  </td>
+                  <td>
+                    Oct 25, 2026<br /><span class="time-sub">09:15 AM</span>
+                  </td>
                   <td class="amount" style="color: #ef4444">-&#8369;500.00</td>
                   <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#WDR-1001', 'Vendor Withdrawal', 'Withdrawal via GCash', 'GCash', 'Oct 26, 2026', '09:00 AM', '-500.00', 'Withdrawal')">
+                    <label
+                      for="detailsToggle"
+                      class="view-btn"
+                      onclick="
+                        showTransactionDetails(
+                          '#WDR-9021',
+                          'Vendor Withdrawal',
+                          'Withdrawal via GCash',
+                          'GCash',
+                          'Oct 25, 2026',
+                          '09:15 AM',
+                          '-500.00',
+                          'Withdrawal',
+                        )
+                      "
+                    >
                       <i class="fa-solid fa-eye"></i>
                     </label>
                   </td>
                 </tr>
-                <tr data-method="gcash" data-status="pending">
-                  <td><span class="order-id">#WDR-1002</span></td>
-                  <td><span class="pay-method gcash">GCash</span></td>
-                  <td>0912 345 0002</td>
-                  <td><span class="status-pill status-pending">Pending</span></td>
-                  <td>Oct 26, 2026<br /><span class="time-sub">10:30 AM</span></td>
-                  <td class="amount" style="color: #ef4444">-&#8369;1,000.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#WDR-1002', 'Vendor Withdrawal', 'Withdrawal via GCash', 'GCash', 'Oct 26, 2026', '10:30 AM', '-1000.00', 'Withdrawal')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-                <tr data-method="gcash" data-status="failed">
-                  <td><span class="order-id">#WDR-1003</span></td>
-                  <td><span class="pay-method gcash">GCash</span></td>
-                  <td>0912 345 0003</td>
-                  <td><span class="status-pill status-failed">Failed</span></td>
-                  <td>Oct 26, 2026<br /><span class="time-sub">11:45 AM</span></td>
-                  <td class="amount" style="color: #ef4444">-&#8369;200.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#WDR-1003', 'Vendor Withdrawal', 'Withdrawal via GCash', 'GCash', 'Oct 26, 2026', '11:45 AM', '-200.00', 'Withdrawal')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-                <tr data-method="gcash" data-status="success">
-                  <td><span class="order-id">#WDR-1004</span></td>
-                  <td><span class="pay-method gcash">GCash</span></td>
-                  <td>0912 345 0004</td>
-                  <td><span class="status-pill status-success">Success</span></td>
-                  <td>Oct 25, 2026<br /><span class="time-sub">02:20 PM</span></td>
-                  <td class="amount" style="color: #ef4444">-&#8369;1,500.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#WDR-1004', 'Vendor Withdrawal', 'Withdrawal via GCash', 'GCash', 'Oct 25, 2026', '02:20 PM', '-1500.00', 'Withdrawal')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-                <tr data-method="gcash" data-status="success">
-                  <td><span class="order-id">#WDR-1005</span></td>
-                  <td><span class="pay-method gcash">GCash</span></td>
-                  <td>0912 345 0005</td>
-                  <td><span class="status-pill status-success">Success</span></td>
-                  <td>Oct 25, 2026<br /><span class="time-sub">04:45 PM</span></td>
-                  <td class="amount" style="color: #ef4444">-&#8369;750.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#WDR-1005', 'Vendor Withdrawal', 'Withdrawal via GCash', 'GCash', 'Oct 25, 2026', '04:45 PM', '-750.00', 'Withdrawal')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-
-                <!-- Maya Withdrawals (5 examples) -->
-                <tr data-method="maya" data-status="success">
-                  <td><span class="order-id">#WDR-2001</span></td>
-                  <td><span class="pay-method maya">Maya</span></td>
-                  <td>0998 765 0001</td>
-                  <td><span class="status-pill status-success">Success</span></td>
-                  <td>Oct 26, 2026<br /><span class="time-sub">08:15 AM</span></td>
-                  <td class="amount" style="color: #ef4444">-&#8369;300.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#WDR-2001', 'Vendor Withdrawal', 'Withdrawal via Maya', 'Maya', 'Oct 26, 2026', '08:15 AM', '-300.00', 'Withdrawal')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-                <tr data-method="maya" data-status="pending">
-                  <td><span class="order-id">#WDR-2002</span></td>
-                  <td><span class="pay-method maya">Maya</span></td>
-                  <td>0998 765 0002</td>
-                  <td><span class="status-pill status-pending">Pending</span></td>
-                  <td>Oct 26, 2026<br /><span class="time-sub">09:45 AM</span></td>
-                  <td class="amount" style="color: #ef4444">-&#8369;2,500.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#WDR-2002', 'Vendor Withdrawal', 'Withdrawal via Maya', 'Maya', 'Oct 26, 2026', '09:45 AM', '-2500.00', 'Withdrawal')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-                <tr data-method="maya" data-status="success">
-                  <td><span class="order-id">#WDR-2003</span></td>
-                  <td><span class="pay-method maya">Maya</span></td>
-                  <td>0998 765 0003</td>
-                  <td><span class="status-pill status-success">Success</span></td>
-                  <td>Oct 25, 2026<br /><span class="time-sub">11:00 AM</span></td>
-                  <td class="amount" style="color: #ef4444">-&#8369;800.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#WDR-2003', 'Vendor Withdrawal', 'Withdrawal via Maya', 'Maya', 'Oct 25, 2026', '11:00 AM', '-800.00', 'Withdrawal')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-                <tr data-method="maya" data-status="failed">
-                  <td><span class="order-id">#WDR-2004</span></td>
-                  <td><span class="pay-method maya">Maya</span></td>
-                  <td>0998 765 0004</td>
-                  <td><span class="status-pill status-failed">Failed</span></td>
-                  <td>Oct 24, 2026<br /><span class="time-sub">03:30 PM</span></td>
-                  <td class="amount" style="color: #ef4444">-&#8369;150.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#WDR-2004', 'Vendor Withdrawal', 'Withdrawal via Maya', 'Maya', 'Oct 24, 2026', '03:30 PM', '-150.00', 'Withdrawal')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-                <tr data-method="maya" data-status="success">
-                  <td><span class="order-id">#WDR-2005</span></td>
-                  <td><span class="pay-method maya">Maya</span></td>
-                  <td>0998 765 0005</td>
-                  <td><span class="status-pill status-success">Success</span></td>
-                  <td>Oct 23, 2026<br /><span class="time-sub">10:00 AM</span></td>
-                  <td class="amount" style="color: #ef4444">-&#8369;1,200.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#WDR-2005', 'Vendor Withdrawal', 'Withdrawal via Maya', 'Maya', 'Oct 23, 2026', '10:00 AM', '-1200.00', 'Withdrawal')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-
-                <!-- Bank Withdrawals (5 examples) -->
-                <tr data-method="bank" data-status="success">
-                  <td><span class="order-id">#WDR-3001</span></td>
+                <tr>
+                  <td><span class="order-id">#WDR-8954</span></td>
                   <td><span class="pay-method card">Bank</span></td>
-                  <td>BDO - **** 9876</td>
-                  <td><span class="status-pill status-success">Success</span></td>
-                  <td>Oct 26, 2026<br /><span class="time-sub">07:45 AM</span></td>
-                  <td class="amount" style="color: #ef4444">-&#8369;5,000.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#WDR-3001', 'Vendor Withdrawal', 'Withdrawal via Bank Transfer', 'Bank', 'Oct 26, 2026', '07:45 AM', '-5000.00', 'Withdrawal')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
+                  <td>BDO - **** 1234</td>
+                  <td>
+                    <span
+                      class="status-pill status-active"
+                      style="
+                        background: #dcfce7;
+                        color: #166534;
+                        padding: 4px 10px;
+                        border-radius: 20px;
+                        font-size: 12px;
+                        font-weight: 500;
+                      "
+                      >Success</span
+                    >
                   </td>
-                </tr>
-                <tr data-method="bank" data-status="pending">
-                  <td><span class="order-id">#WDR-3002</span></td>
-                  <td><span class="pay-method card">Bank</span></td>
-                  <td>BPI - **** 5544</td>
-                  <td><span class="status-pill status-pending">Pending</span></td>
-                  <td>Oct 26, 2026<br /><span class="time-sub">12:00 PM</span></td>
-                  <td class="amount" style="color: #ef4444">-&#8369;2,000.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#WDR-3002', 'Vendor Withdrawal', 'Withdrawal via Bank Transfer', 'Bank', 'Oct 26, 2026', '12:00 PM', '-2000.00', 'Withdrawal')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
+                  <td>
+                    Oct 20, 2026<br /><span class="time-sub">02:30 PM</span>
                   </td>
-                </tr>
-                <tr data-method="bank" data-status="success">
-                  <td><span class="order-id">#WDR-3003</span></td>
-                  <td><span class="pay-method card">Bank</span></td>
-                  <td>Metrobank - **** 3322</td>
-                  <td><span class="status-pill status-success">Success</span></td>
-                  <td>Oct 25, 2026<br /><span class="time-sub">03:15 PM</span></td>
-                  <td class="amount" style="color: #ef4444">-&#8369;3,500.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#WDR-3003', 'Vendor Withdrawal', 'Withdrawal via Bank Transfer', 'Bank', 'Oct 25, 2026', '03:15 PM', '-3500.00', 'Withdrawal')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
+                  <td class="amount" style="color: #ef4444">
+                    -&#8369;1,200.00
                   </td>
-                </tr>
-                <tr data-method="bank" data-status="failed">
-                  <td><span class="order-id">#WDR-3004</span></td>
-                  <td><span class="pay-method card">Bank</span></td>
-                  <td>UnionBank - **** 1100</td>
-                  <td><span class="status-pill status-failed">Failed</span></td>
-                  <td>Oct 24, 2026<br /><span class="time-sub">09:30 AM</span></td>
-                  <td class="amount" style="color: #ef4444">-&#8369;1,000.00</td>
                   <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#WDR-3004', 'Vendor Withdrawal', 'Withdrawal via Bank Transfer', 'Bank', 'Oct 24, 2026', '09:30 AM', '-1000.00', 'Withdrawal')">
-                      <i class="fa-solid fa-eye"></i>
-                    </label>
-                  </td>
-                </tr>
-                <tr data-method="bank" data-status="success">
-                  <td><span class="order-id">#WDR-3005</span></td>
-                  <td><span class="pay-method card">Bank</span></td>
-                  <td>Security Bank - **** 8877</td>
-                  <td><span class="status-pill status-success">Success</span></td>
-                  <td>Oct 23, 2026<br /><span class="time-sub">11:00 AM</span></td>
-                  <td class="amount" style="color: #ef4444">-&#8369;4,200.00</td>
-                  <td class="text-right">
-                    <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('#WDR-3005', 'Vendor Withdrawal', 'Withdrawal via Bank Transfer', 'Bank', 'Oct 23, 2026', '11:00 AM', '-4200.00', 'Withdrawal')">
+                    <label
+                      for="detailsToggle"
+                      class="view-btn"
+                      onclick="
+                        showTransactionDetails(
+                          '#WDR-8954',
+                          'Vendor Withdrawal',
+                          'Withdrawal via Bank Transfer',
+                          'Bank',
+                          'Oct 20, 2026',
+                          '02:30 PM',
+                          '-1200.00',
+                          'Withdrawal',
+                        )
+                      "
+                    >
                       <i class="fa-solid fa-eye"></i>
                     </label>
                   </td>
@@ -1561,54 +1400,6 @@
           amountEl.style.color = "#10b981";
         }
       }
-
-      // --- FILTERING LOGIC ---
-      function setupTableFilter(filterId, tableId, dataAttr) {
-        const filter = document.getElementById(filterId);
-        const table = document.getElementById(tableId);
-        if (!filter || !table) return;
-
-        filter.addEventListener("change", () => {
-          const val = filter.value;
-          const rows = table.querySelectorAll("tbody tr");
-          rows.forEach((row) => {
-            const rowVal = row.getAttribute(dataAttr);
-            if (!val || rowVal === val) {
-              row.style.display = "";
-            } else {
-              row.style.display = "none";
-            }
-          });
-        });
-      }
-
-      // Combined Filter for Withdrawal (Status + Method)
-      function setupWithdrawalFilter() {
-        const statusFilter = document.getElementById("withdrawalStatusFilter");
-        const methodFilter = document.getElementById("withdrawalMethodFilter");
-        const table = document.getElementById("withdrawalHistoryTable");
-
-        const filterAction = () => {
-          const sVal = statusFilter.value;
-          const mVal = methodFilter.value;
-          const rows = table.querySelectorAll("tbody tr");
-          rows.forEach((row) => {
-            const rStatus = row.getAttribute("data-status");
-            const rMethod = row.getAttribute("data-method");
-            const matchS = !sVal || rStatus === sVal;
-            const matchM = !mVal || rMethod === mVal;
-            row.style.display = matchS && matchM ? "" : "none";
-          });
-        };
-
-        statusFilter.addEventListener("change", filterAction);
-        methodFilter.addEventListener("change", filterAction);
-      }
-
-      // Initialize Filters
-      setupTableFilter("paymentMethodFilter", document.querySelector(".history-table").parentNode.parentNode.querySelector("table").id || "paymentTable", "data-method");
-      // Wait, the payment table doesn't have an ID. I'll add one.
-      setupWithdrawalFilter();
     </script>
   </body>
 </html>
