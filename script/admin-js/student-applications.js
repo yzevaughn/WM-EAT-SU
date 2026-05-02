@@ -1,66 +1,86 @@
-// Expose mock applications array to global scope so inline onclick functions can access it
-let mockApplications = [
-  {
-    id: "APP-1042",
-    studentName: "Alice Johnson",
-    studentEmail: "alice.j@wm.edu.ph",
-    businessName: "Alice Bakes",
-    category: "Food & Beverage",
-    status: "Pending",
-    dateSubmitted: "Oct 24, 2023",
-    rejectionReason: ""
-  },
-  {
-    id: "APP-1043",
-    studentName: "Bob Smith",
-    studentEmail: "bob.s@wm.edu.ph",
-    businessName: "Bob Tech Repairs",
-    category: "Services",
-    status: "Under Review",
-    dateSubmitted: "Oct 23, 2023",
-    rejectionReason: ""
-  },
-  {
-    id: "APP-1039",
-    studentName: "Charlie Brown",
-    studentEmail: "charlie.b@wm.edu.ph",
-    businessName: "Charlie Merch",
-    category: "Retail",
-    status: "Active Vendor",
-    dateSubmitted: "Oct 18, 2023",
-    rejectionReason: ""
-  },
-  {
-    id: "APP-1035",
-    studentName: "Diana Prince",
-    studentEmail: "diana.p@wm.edu.ph",
-    businessName: "Wonder Crafts",
-    category: "Arts & Crafts",
-    status: "Rejected",
-    dateSubmitted: "Oct 15, 2023",
-    rejectionReason: "Duplicate application for the same category."
-  },
-  {
-    id: "APP-1044",
-    studentName: "Evan Wright",
-    studentEmail: "evan.w@wm.edu.ph",
-    businessName: "Fresh Squeeze",
-    category: "Food & Beverage",
-    status: "Pending",
-    dateSubmitted: "Oct 25, 2023",
-    rejectionReason: ""
-  },
-  {
-    id: "APP-1040",
-    studentName: "Fiona Gallagher",
-    studentEmail: "fiona.g@wm.edu.ph",
-    businessName: "Campus Thrifts",
-    category: "Retail",
-    status: "Active Vendor",
-    dateSubmitted: "Oct 19, 2023",
-    rejectionReason: ""
-  },
-];
+// Load applications from localStorage or use mock data
+let mockApplications = [];
+
+function loadStudentApplications() {
+  const stored = localStorage.getItem('student_vendor_applications');
+  if (stored) {
+    mockApplications = JSON.parse(stored);
+  } else {
+    mockApplications = [
+      {
+        id: "APP-1042",
+        studentName: "Alice Johnson",
+        studentEmail: "alice.j@wm.edu.ph",
+        businessName: "Alice Bakes",
+        category: "Food & Beverage",
+        status: "Pending",
+        dateSubmitted: "Oct 24, 2023",
+        rejectionReason: "",
+        products: []
+      },
+      {
+        id: "APP-1043",
+        studentName: "Bob Smith",
+        studentEmail: "bob.s@wm.edu.ph",
+        businessName: "Bob Tech Repairs",
+        category: "Services",
+        status: "Under Review",
+        dateSubmitted: "Oct 23, 2023",
+        rejectionReason: "",
+        products: []
+      },
+      {
+        id: "APP-1039",
+        studentName: "Charlie Brown",
+        studentEmail: "charlie.b@wm.edu.ph",
+        businessName: "Charlie Merch",
+        category: "Retail",
+        status: "Active Vendor",
+        dateSubmitted: "Oct 18, 2023",
+        rejectionReason: "",
+        products: []
+      },
+      {
+        id: "APP-1035",
+        studentName: "Diana Prince",
+        studentEmail: "diana.p@wm.edu.ph",
+        businessName: "Wonder Crafts",
+        category: "Arts & Crafts",
+        status: "Rejected",
+        dateSubmitted: "Oct 15, 2023",
+        rejectionReason: "Duplicate application for the same category.",
+        products: []
+      },
+      {
+        id: "APP-1044",
+        studentName: "Evan Wright",
+        studentEmail: "evan.w@wm.edu.ph",
+        businessName: "Fresh Squeeze",
+        category: "Food & Beverage",
+        status: "Pending",
+        dateSubmitted: "Oct 25, 2023",
+        rejectionReason: "",
+        products: []
+      },
+      {
+        id: "APP-1040",
+        studentName: "Fiona Gallagher",
+        studentEmail: "fiona.g@wm.edu.ph",
+        businessName: "Campus Thrifts",
+        category: "Retail",
+        status: "Active Vendor",
+        dateSubmitted: "Oct 19, 2023",
+        rejectionReason: "",
+        products: []
+      },
+    ];
+    saveStudentApplications();
+  }
+}
+
+function saveStudentApplications() {
+  localStorage.setItem('student_vendor_applications', JSON.stringify(mockApplications));
+}
 
 // State variables for Table
 let currentPage = 1;
@@ -107,6 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Initial render
+  loadStudentApplications();
   renderTable();
   initApplicationChart();
 });
@@ -312,6 +333,7 @@ function renderTable() {
     else if (app.status === "Under Review") statusClass = "status-review";
     else if (app.status === "Active Vendor") statusClass = "status-active";
     else if (app.status === "Rejected") statusClass = "status-rejected";
+    else if (app.status === "Deactivated") statusClass = "status-deactivated";
 
     let actionButtons = "";
     if (app.status === "Pending") {
@@ -325,10 +347,15 @@ function renderTable() {
     } else if (app.status === "Active Vendor") {
       actionButtons = `
         <button class="btn-action btn-details" onclick="openDetails('${app.id}')">View Details</button>
-        <button class="btn-action btn-reason" onclick="removeVendor('${app.id}')">Remove Access</button>
+        <button class="btn-action btn-reason" onclick="removeVendor('${app.id}')">Deactivate</button>
       `;
     } else if (app.status === "Rejected") {
       actionButtons = `<button class="btn-action btn-details" onclick="openDetails('${app.id}')">View Details</button>`;
+    } else if (app.status === "Deactivated") {
+      actionButtons = `
+        <button class="btn-action btn-details" onclick="openDetails('${app.id}')">View Details</button>
+        <button class="btn-action btn-approve" onclick="reactivateVendor('${app.id}')">Reactivate</button>
+      `;
     }
 
     tr.innerHTML = `
@@ -343,7 +370,7 @@ function renderTable() {
       <td>${app.category}</td>
       <td>
         <span class="status-pill ${statusClass}">
-          ${app.status === "Pending" ? "🟡" : app.status === "Under Review" ? "🔵" : app.status === "Active Vendor" ? "🟢" : "🔴"} 
+          ${app.status === "Pending" ? "🟡" : app.status === "Under Review" ? "🔵" : app.status === "Active Vendor" ? "🟢" : app.status === "Rejected" ? "🔴" : "⚫"} 
           ${app.status}
         </span>
       </td>
@@ -467,6 +494,7 @@ function reviewApp(id) {
   const app = mockApplications.find((x) => x.id === id);
   if (app) {
     app.status = "Under Review";
+    saveStudentApplications();
     renderTable(); // This will re-render the table and update the counters immediately
   }
 }
@@ -481,6 +509,7 @@ function approveApp(id) {
       const app = mockApplications.find((x) => x.id === id);
       if (app) {
         app.status = "Active Vendor";
+        saveStudentApplications();
         renderTable();
       }
     }
@@ -499,6 +528,7 @@ function rejectApp(id) {
       if (app) {
         app.status = "Rejected";
         app.rejectionReason = reason;
+        saveStudentApplications();
         renderTable();
       }
     }
@@ -507,16 +537,35 @@ function rejectApp(id) {
 
 function removeVendor(id) {
   showConfirmModal({
-    title: "Remove Vendor Access",
-    message: "Are you sure you want to remove this vendor's access? Please provide a reason.",
+    title: "Deactivate Vendor",
+    message: "Are you sure you want to deactivate this vendor? Please provide a reason.",
     type: "reject",
     requireInput: true,
-    inputLabel: "Removal Reason",
+    inputLabel: "Deactivation Reason",
     onConfirm: (reason) => {
       const app = mockApplications.find((x) => x.id === id);
       if (app) {
-        app.status = "Rejected";
-        app.rejectionReason = reason;
+        app.status = "Deactivated";
+        app.deactivationReason = reason;
+        saveStudentApplications();
+        renderTable();
+      }
+    }
+  });
+}
+
+function reactivateVendor(id) {
+  showConfirmModal({
+    title: "Reactivate Vendor",
+    message: "Are you sure you want to reactivate this vendor?",
+    type: "approve",
+    requireInput: false,
+    onConfirm: () => {
+      const app = mockApplications.find((x) => x.id === id);
+      if (app) {
+        app.status = "Active Vendor";
+        delete app.deactivationReason;
+        saveStudentApplications();
         renderTable();
       }
     }
@@ -543,6 +592,7 @@ function openDetails(id) {
   else if (app.status === "Under Review") statusClass = "status-review";
   else if (app.status === "Active Vendor") statusClass = "status-active";
   else if (app.status === "Rejected") statusClass = "status-rejected";
+  else if (app.status === "Deactivated") statusClass = "status-deactivated";
 
   document.getElementById("detStatusHtml").className = `status-pill ${statusClass}`;
   document.getElementById("detStatusHtml").innerText = app.status;
@@ -550,38 +600,45 @@ function openDetails(id) {
   document.getElementById("detBusiness").innerText = app.businessName;
   document.getElementById("detOwner").innerText = app.studentName;
 
-  // Mock Products rendering
   const detProductsContainer = document.getElementById("detProductsContainer");
-  detProductsContainer.innerHTML = "";
+  if (detProductsContainer) {
+    detProductsContainer.innerHTML = "";
+    
+    const productsToRender = app.products && app.products.length > 0 ? app.products : [
+      { name: "Sample Meal", price: "45", category: "Meals", ingredients: "Rice, Chicken, Soy Sauce, Garlic, Onion" },
+      { name: "Sample Snack", price: "20", category: "Snacks", ingredients: "Flour, Sugar, Butter, Eggs" }
+    ];
 
-  const mockProducts = [
-    { name: "Sample Product 1", ingredients: "Ingredient A, Ingredient B, Ingredient C" },
-    { name: "Sample Product 2", ingredients: "Ingredient X, Ingredient Y, Ingredient Z" },
-  ];
-
-  mockProducts.forEach((prod) => {
-    const wrap = document.createElement("div");
-    wrap.className = "det-product-block";
-    wrap.innerHTML = `
-      <div class="det-product-title"><i class="fa-solid fa-box"></i> ${prod.name}</div>
-      <details class="product-details-dropdown" open>
-        <summary>Ingredients Provided</summary>
-        <div class="dropdown-content">
-          <p style="margin: 0; line-height: 1.5; color: #4b5563;">${prod.ingredients}</p>
+    productsToRender.forEach((prod) => {
+      const wrap = document.createElement("div");
+      wrap.className = "det-product-block";
+      wrap.innerHTML = `
+        <div class="det-product-title" style="display: flex; justify-content: space-between;">
+          <span><i class="fa-solid fa-box"></i> ${prod.name}</span>
+          <span style="font-size: 14px; color: #475569;">₱${prod.price || "0.00"}</span>
         </div>
-      </details>
-      <details class="product-details-dropdown">
-        <summary>Step-by-Step Preparation Photos</summary>
-        <div class="dropdown-content">
-          <div style="background: #f3f4f6; border-radius: 8px; padding: 24px; text-align: center; color: #9ca3af;">
-            <i class="fa-regular fa-images" style="font-size: 24px;"></i>
-            <p style="margin: 8px 0 0 0; font-size: 13px;">Photos securely attached to submission.</p>
+        <div style="font-size: 13px; color: #64748b; margin-bottom: 12px; font-weight: 500;">
+          <i class="fa-solid fa-tag"></i> Category: <span style="color: #1e293b;">${prod.category || "N/A"}</span>
+        </div>
+        <details class="product-details-dropdown" open>
+          <summary>Ingredients Provided</summary>
+          <div class="dropdown-content">
+            <p style="margin: 0; line-height: 1.5; color: #4b5563;">${prod.ingredients || "No ingredients listed."}</p>
           </div>
-        </div>
-      </details>
-    `;
-    detProductsContainer.appendChild(wrap);
-  });
+        </details>
+        <details class="product-details-dropdown">
+          <summary>Step-by-Step Preparation Photos</summary>
+          <div class="dropdown-content">
+            <div style="background: #f3f4f6; border-radius: 8px; padding: 24px; text-align: center; color: #9ca3af;">
+              <i class="fa-regular fa-images" style="font-size: 24px;"></i>
+              <p style="margin: 8px 0 0 0; font-size: 13px;">Photos securely attached to submission.</p>
+            </div>
+          </div>
+        </details>
+      `;
+      detProductsContainer.appendChild(wrap);
+    });
+  }
 
   // Admin Feedback Section
   const fbSection = document.getElementById("adminFeedbackSection");
@@ -592,6 +649,11 @@ function openDetails(id) {
     fbSection.style.display = "block";
     fbLabel.innerText = "Rejection Reason";
     fbBox.innerText = app.rejectionReason;
+    fbBox.className = "feedback-box rejected";
+  } else if (app.status === "Deactivated" && app.deactivationReason) {
+    fbSection.style.display = "block";
+    fbLabel.innerText = "Deactivation Reason";
+    fbBox.innerText = app.deactivationReason;
     fbBox.className = "feedback-box rejected";
   } else {
     fbSection.style.display = "none";

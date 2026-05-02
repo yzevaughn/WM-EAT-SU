@@ -272,6 +272,7 @@ h1 {
   color: #1e293b;
   border-bottom: 1px solid #e2e8f0;
   vertical-align: middle;
+  white-space: nowrap;
 }
 
 .data-grid tbody tr {
@@ -335,6 +336,11 @@ h1 {
 .status-rejected {
   background: #fee2e2;
   color: #991b1b;
+}
+
+.status-deactivated {
+  background: #f1f5f9;
+  color: #475569;
 }
 
 /* --- Action Buttons --- */
