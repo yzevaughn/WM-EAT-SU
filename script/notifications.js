@@ -247,6 +247,49 @@ function renderNavbarNotifications(role, opts) {
 
   if (!listEl) return;
 
+  // Ensure header has a close button for mobile
+  const dropdownMenu = listEl.closest(".notification-menu");
+  const dropdownParent = listEl.closest(".notification-dropdown");
+  if (dropdownMenu) {
+    const headerEl = dropdownMenu.querySelector(".notification-header");
+    if (headerEl) {
+      // Create actions wrapper if missing
+      let actionsEl = headerEl.querySelector(".notif-header-actions");
+      if (!actionsEl) {
+        actionsEl = document.createElement("div");
+        actionsEl.className = "notif-header-actions";
+        actionsEl.style.display = "flex";
+        actionsEl.style.alignItems = "center";
+        actionsEl.style.gap = "8px";
+        
+        // Move mark-read-btn into actions if it exists
+        const oldMarkBtn = headerEl.querySelector(".mark-read-btn");
+        if (oldMarkBtn) actionsEl.appendChild(oldMarkBtn);
+        
+        headerEl.appendChild(actionsEl);
+      }
+
+      // Add close button if missing
+      if (!actionsEl.querySelector(".close-notif-btn")) {
+        actionsEl.insertAdjacentHTML("beforeend", `
+          <button class="close-notif-btn" title="Close Notifications">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        `);
+      }
+
+      // Wire up the close button
+      const closeBtn = actionsEl.querySelector(".close-notif-btn");
+      if (closeBtn && dropdownParent) {
+        closeBtn.onclick = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropdownParent.classList.remove("is-open");
+        };
+      }
+    }
+  }
+
   const notifs  = getNotificationsForRole(role).slice(0, maxItems);
   const unread  = getUnreadCount(role);
 
@@ -498,4 +541,33 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+
+  // ── Mobile: tap-to-toggle notification dropdown ──────────
+  // On touch devices (≤768px), hover doesn't work reliably.
+  // We toggle .is-open on the parent .notification-dropdown.
+  const notifDropdown = document.querySelector(".notification-dropdown");
+  const notifBtn      = notifDropdown ? notifDropdown.querySelector(".nav-icon-btn") : null;
+
+  if (notifDropdown && notifBtn) {
+    notifBtn.addEventListener("click", (e) => {
+      if (window.innerWidth > 768) return; // desktop uses CSS :hover
+      e.stopPropagation();
+      notifDropdown.classList.toggle("is-open");
+    });
+
+    // Close when tapping outside
+    document.addEventListener("click", (e) => {
+      if (window.innerWidth > 768) return;
+      if (!notifDropdown.contains(e.target)) {
+        notifDropdown.classList.remove("is-open");
+      }
+    });
+
+    // Close on notification item click
+    notifDropdown.addEventListener("click", (e) => {
+      if (e.target.closest(".notification-item, .notification-footer a")) {
+        notifDropdown.classList.remove("is-open");
+      }
+    });
+  }
 });

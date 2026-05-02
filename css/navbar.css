@@ -178,18 +178,49 @@ button {
   color: #0f172a;
 }
 
-.mark-read-btn {
-  background: none;
+.close-notif-btn {
+  display: none; /* hidden on desktop */
+  background: #f1f5f9;
   border: none;
-  color: var(--red);
-  font-size: 12px;
-  font-weight: 600;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
   cursor: pointer;
-  transition: var(--transition);
+  font-size: 14px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.close-notif-btn:hover {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+@media (max-width: 768px) {
+  .close-notif-btn {
+    display: flex;
+  }
+}
+
+.mark-read-btn {
+  background: #f1f5f9;
+  border: none;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
 }
 
 .mark-read-btn:hover {
-  text-decoration: underline;
+  background: #e2e8f0;
+  color: #0f172a;
 }
 
 .notification-list {
@@ -870,3 +901,169 @@ button {
     padding: 16px 12px;
   }
 }
+
+/* ============================================================
+   RESPONSIVE — NOTIFICATION DROPDOWN
+   ============================================================ */
+
+/* Tablet: shrink dropdown width and re-anchor to avoid overflow */
+@media (max-width: 900px) {
+  .notification-menu {
+    width: 300px;
+    right: 0;
+  }
+}
+
+/* Mobile: convert to a full-width panel anchored at the top */
+@media (max-width: 768px) {
+  /* Overlay behind the open dropdown */
+  .notification-dropdown.is-open::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: rgba(15, 23, 42, 0.35);
+    backdrop-filter: blur(2px);
+    animation: fadeIn .2s ease;
+  }
+
+  .notification-menu {
+    position: fixed;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 0 0 20px 20px;
+    max-height: 70vh;
+    overflow-y: auto;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .18);
+    transform: translateY(-10px);
+    z-index: 9999;
+  }
+
+  /* Open state is toggled by JS class instead of :hover */
+  .notification-dropdown.is-open .notification-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Disable the CSS hover trigger on mobile (JS handles it) */
+  .notification-dropdown:hover .notification-menu {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+  }
+
+  .notification-dropdown.is-open:hover .notification-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .notification-list {
+    max-height: unset;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — FULL NOTIFICATIONS PAGE
+   ============================================================ */
+@media (max-width: 768px) {
+  .notifications-container {
+    border-radius: 16px;
+    margin: 0;
+  }
+
+  .notifications-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .notifications-header h1 {
+    font-size: 18px;
+  }
+
+  .notifications-header > div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .notifications-filters {
+    gap: 8px;
+  }
+
+  .filter-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  /* Icon-only buttons on mobile for better fit */
+  .mark-all-read-btn span,
+  .clear-all-notif-btn span {
+    display: none;
+  }
+
+  .mark-all-read-btn,
+  .clear-all-notif-btn {
+    padding: 0 !important;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50% !important;
+    flex-shrink: 0;
+  }
+
+  .mark-all-read-btn i,
+  .clear-all-notif-btn i {
+    margin: 0 !important;
+    font-size: 14px;
+  }
+
+  .notification-page-item {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+
+  .notif-page-title {
+    font-size: 14px;
+  }
+
+  .notif-page-desc {
+    font-size: 13px;
+  }
+
+  .notif-page-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .modal-content {
+    border-radius: 16px;
+    margin: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .notifications-header > div {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .notif-page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .notif-page-time {
+    font-size: 11px;
+  }
+}
