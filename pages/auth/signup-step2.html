@@ -15,6 +15,63 @@
     <link rel="stylesheet" href="../../css/auth/signup.css" />
   </head>
   <body>
+    <!-- ═══════════════════════════════════════
+         CAMERA MODAL (shared for COE & ID)
+    ═══════════════════════════════════════ -->
+    <div class="cam-modal-overlay" id="camOverlay">
+      <div class="cam-modal">
+        <div class="cam-modal-header">
+          <span id="camModalTitle"><i class="fa-solid fa-camera"></i> Take Photo</span>
+          <button type="button" class="cam-modal-close" onclick="closeCamera()">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Live viewfinder -->
+        <div class="cam-viewfinder" id="camViewfinder">
+          <video id="camVideo" autoplay playsinline muted></video>
+          <div class="cam-corner cam-corner-tl"></div>
+          <div class="cam-corner cam-corner-tr"></div>
+          <div class="cam-corner cam-corner-bl"></div>
+          <div class="cam-corner cam-corner-br"></div>
+        </div>
+
+        <!-- After capture: show still -->
+        <div class="cam-snapshot-wrap" id="camSnapshotWrap" style="display:none">
+          <img id="camSnapshot" src="" alt="Captured photo" />
+        </div>
+
+        <!-- Error state -->
+        <div class="cam-error" id="camError" style="display:none">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <p id="camErrorMsg">Camera access denied or not available.</p>
+          <label class="cam-btn cam-btn-outline" style="cursor:pointer;margin-top:8px;">
+            <i class="fa-solid fa-folder-open"></i> Upload from Device
+            <input type="file" id="camFallbackInput" accept="image/*" style="display:none" onchange="fallbackFileSelected()" />
+          </label>
+        </div>
+
+        <!-- Controls -->
+        <div class="cam-modal-controls" id="camControls">
+          <button type="button" class="cam-btn cam-btn-outline" onclick="closeCamera()">
+            <i class="fa-solid fa-xmark"></i> Cancel
+          </button>
+          <button type="button" class="cam-btn cam-btn-capture" id="captureBtn" onclick="capturePhoto()">
+            <i class="fa-solid fa-camera"></i> Capture
+          </button>
+          <button type="button" class="cam-btn cam-btn-outline" id="retakeCamBtn" style="display:none" onclick="retakeCam()">
+            <i class="fa-solid fa-rotate-left"></i> Retake
+          </button>
+          <button type="button" class="cam-btn cam-btn-confirm" id="confirmCamBtn" style="display:none" onclick="confirmPhoto()">
+            <i class="fa-solid fa-check"></i> Use Photo
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hidden canvas for snapshot extraction -->
+    <canvas id="camCanvas" style="display:none"></canvas>
+
     <div class="page-grid">
       <div class="card">
         <aside class="sidebar">
@@ -61,95 +118,65 @@
             <div class="step-panel active">
               <div class="step-head">
                 <h2>Verification Documents</h2>
-                <p>Upload your school credentials for account review.</p>
+                <p>Take a photo of each required document using your camera.</p>
               </div>
 
               <div class="fg-upload">
+
+                <!-- COE Camera Capture -->
                 <div class="fg">
                   <div class="uz-lbl">
-                    <i class="fa-solid fa-file-circle-check"></i> Certificate of
-                    Enrollment <span class="req">*</span>
+                    <i class="fa-solid fa-file-circle-check"></i>
+                    Certificate of Enrollment <span class="req">*</span>
                   </div>
-                  <div
-                    class="upload-zone"
-                    id="coeZone"
-                    ondragover="dv(event, 'coeZone')"
-                    ondragleave="dl(event, 'coeZone')"
-                    ondrop="
-                      dd(
-                        event,
-                        'coeFile',
-                        'coeZone',
-                        'coePrev',
-                        'coeIco',
-                        'coeTxt',
-                        'coe'
-                      )
-                    "
-                  >
-                    <input
-                      type="file"
-                      id="coeFile"
-                      accept=".pdf,.jpg,.jpeg,.png"
-                      onchange="
-                        hf(this, 'coeZone', 'coePrev', 'coeIco', 'coeTxt', 'coe')
-                      "
-                    />
-                    <div class="uz-ico">
-                      <i class="fa-solid fa-cloud-arrow-up" id="coeIco"></i>
+                  <div class="cam-zone" id="coeZone" onclick="openCamera('coe')">
+                    <div class="cam-idle" id="coeIdle">
+                      <div class="cam-ico"><i class="fa-solid fa-camera"></i></div>
+                      <div class="cam-label">Certificate of Enrollment</div>
+                      <div class="cam-hint">Click here to open camera</div>
+                      <span class="cam-btn-inline">
+                        <i class="fa-solid fa-camera"></i> Take Photo
+                      </span>
                     </div>
-                    <div class="uz-t" id="coeTxt">Click or drag & drop</div>
-                    <div class="uz-s">Certificate of Enrollment</div>
-                    <div class="uz-pills">
-                      <span class="uz-pill">PDF</span
-                      ><span class="uz-pill">JPG</span
-                      ><span class="uz-pill">PNG</span
-                      ><span class="uz-pill">≤5MB</span>
+                    <div class="cam-preview" id="coePrevImg" style="display:none">
+                      <img id="coeImgTag" src="" alt="COE preview" />
+                      <button type="button" class="cam-retake-btn" onclick="event.stopPropagation(); openCamera('coe')">
+                        <i class="fa-solid fa-camera"></i> Retake Photo
+                      </button>
                     </div>
                   </div>
-                  <div class="uz-prev" id="coePrev"></div>
                   <div class="ferr" id="ferr-coe">
                     <i class="fa-solid fa-circle-exclamation"></i><span></span>
                   </div>
                 </div>
 
+                <!-- School ID Camera Capture -->
                 <div class="fg">
                   <div class="uz-lbl">
-                    <i class="fa-solid fa-id-card"></i> School ID
-                    <span class="req">*</span>
+                    <i class="fa-solid fa-id-card"></i>
+                    School ID <span class="req">*</span>
                   </div>
-                  <div
-                    class="upload-zone"
-                    id="idZone"
-                    ondragover="dv(event, 'idZone')"
-                    ondragleave="dl(event, 'idZone')"
-                    ondrop="
-                      dd(event, 'idFile', 'idZone', 'idPrev', 'idIco', 'idTxt', 'id')
-                    "
-                  >
-                    <input
-                      type="file"
-                      id="idFile"
-                      accept=".pdf,.jpg,.jpeg,.png"
-                      onchange="hf(this, 'idZone', 'idPrev', 'idIco', 'idTxt', 'id')"
-                    />
-                    <div class="uz-ico">
-                      <i class="fa-solid fa-id-card" id="idIco"></i>
+                  <div class="cam-zone" id="idZone" onclick="openCamera('id')">
+                    <div class="cam-idle" id="idIdle">
+                      <div class="cam-ico"><i class="fa-solid fa-id-card"></i></div>
+                      <div class="cam-label">School ID</div>
+                      <div class="cam-hint">Front of your School ID</div>
+                      <span class="cam-btn-inline">
+                        <i class="fa-solid fa-camera"></i> Take Photo
+                      </span>
                     </div>
-                    <div class="uz-t" id="idTxt">Click or drag & drop</div>
-                    <div class="uz-s">Front of your School ID</div>
-                    <div class="uz-pills">
-                      <span class="uz-pill">PDF</span
-                      ><span class="uz-pill">JPG</span
-                      ><span class="uz-pill">PNG</span
-                      ><span class="uz-pill">≤5MB</span>
+                    <div class="cam-preview" id="idPrevImg" style="display:none">
+                      <img id="idImgTag" src="" alt="School ID preview" />
+                      <button type="button" class="cam-retake-btn" onclick="event.stopPropagation(); openCamera('id')">
+                        <i class="fa-solid fa-camera"></i> Retake Photo
+                      </button>
                     </div>
                   </div>
-                  <div class="uz-prev" id="idPrev"></div>
                   <div class="ferr" id="ferr-id">
                     <i class="fa-solid fa-circle-exclamation"></i><span></span>
                   </div>
                 </div>
+
               </div>
 
               <div class="fg-action">
