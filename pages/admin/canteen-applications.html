@@ -46,6 +46,10 @@
             <div class="step-pill-text">Applicant</div>
           </div>
           <div id="wi-step-ind2" class="step-pill">
+            <div class="step-pill-icon"><i class="fa-solid fa-users-gear"></i></div>
+            <div class="step-pill-text">Employee</div>
+          </div>
+          <div id="wi-step-ind3" class="step-pill">
             <div class="step-pill-icon"><i class="fa-solid fa-check-double"></i></div>
             <div class="step-pill-text">Finalize</div>
           </div>
@@ -56,9 +60,22 @@
           <div id="wi-step1">
             <div class="form-section-title">Personal Details</div>
             <div class="form-grid-2">
-              <div class="form-group">
-                <label>Operator Full Name <span style="color: #ef4444;">*</span></label>
-                <input type="text" id="wi-operatorName" class="form-control" placeholder="e.g. Juan Dela Cruz" required />
+              <div class="form-group" style="grid-column: span 2;">
+                <div style="font-size: 11px; font-weight: 700; color: #ef4444; text-transform: uppercase; margin-bottom: 8px;">(Owner)</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 80px; gap: 12px;">
+                  <div>
+                    <label>Last Name <span style="color: #ef4444;">*</span></label>
+                    <input type="text" id="wi-operatorLastName" class="form-control" placeholder="Dela Cruz" required />
+                  </div>
+                  <div>
+                    <label>First Name <span style="color: #ef4444;">*</span></label>
+                    <input type="text" id="wi-operatorFirstName" class="form-control" placeholder="Juan" required />
+                  </div>
+                  <div>
+                    <label>M.I.</label>
+                    <input type="text" id="wi-operatorMidInit" class="form-control" placeholder="M." maxlength="3" />
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 <label>Business Name <span style="color: #ef4444;">*</span></label>
@@ -81,8 +98,8 @@
                 <label>Valid ID Copy <span style="color: #ef4444;">*</span></label>
                 <input type="file" class="form-control" accept="image/*,.pdf" required />
               </div>
-              <div class="form-group">
-                <label>Permit / Clearance <span style="color: #ef4444;">*</span></label>
+               <div class="form-group">
+                <label>Business Permit <span style="color: #ef4444;">*</span></label>
                 <input type="file" class="form-control" accept="image/*,.pdf" required />
               </div>
             </div>
@@ -94,8 +111,54 @@
           </div>
 
 
-          <!-- STEP 2: FINALIZE -->
+          <!-- STEP 2: EMPLOYEES -->
           <div id="wi-step2" style="display: none;">
+            <div class="form-section-title">Employee Details</div>
+            <p style="font-size: 13px; color: #64748b; margin-bottom: 16px;">Add the staff members who will be working in this canteen.</p>
+            
+            <div id="wi-employeesContainer">
+              <!-- Initial Employee Row -->
+              <div class="wi-employee-box" style="padding: 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 16px;">
+                <div class="form-grid-2">
+                  <div class="form-group" style="grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr 80px; gap: 12px;">
+                    <div>
+                      <label>Last Name <span style="color: #ef4444;">*</span></label>
+                      <input type="text" class="form-control wi-emp-ln" placeholder="e.g. Santos" />
+                    </div>
+                    <div>
+                      <label>First Name <span style="color: #ef4444;">*</span></label>
+                      <input type="text" class="form-control wi-emp-fn" placeholder="e.g. Maria" />
+                    </div>
+                    <div>
+                      <label>M.I.</label>
+                      <input type="text" class="form-control wi-emp-mi" placeholder="M." maxlength="3" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Role/Position <span style="color: #ef4444;">*</span></label>
+                    <input type="text" class="form-control wi-emp-role" placeholder="e.g. Cashier, Cook" />
+                  </div>
+                  <div class="form-group">
+                    <label>Health Certificate <span style="color: #ef4444;">*</span></label>
+                    <input type="file" class="form-control wi-emp-cert" accept="image/*,.pdf" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="btn-add-product-wi" onclick="wiAddEmployee()" style="background: #f1f5f9; color: #475569; border: 1px dashed #cbd5e1; width: 100%; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 24px;">
+              <i class="fa-solid fa-plus"></i> Add Another Employee
+            </button>
+
+            <div class="modal-footer-actions">
+              <button type="button" class="btn-cancel" onclick="wiGoToStep(1)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+              <button type="button" class="btn-submit" onclick="wiGoToStep(3)">Next Step <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+
+
+          <!-- STEP 3: FINALIZE -->
+          <div id="wi-step3" style="display: none;">
             <div class="form-section-title">Account Creation</div>
             <p style="font-size: 14px; color: #475569; margin-bottom: 24px; line-height: 1.6;">
               Almost done. Please review the applicant details below before finalizing and granting access.
@@ -115,10 +178,14 @@
                 <span class="summary-label">Operator Name</span>
                 <span id="sum-name" class="summary-value">-</span>
               </div>
+              <div class="summary-row">
+                <span class="summary-label">Employees</span>
+                <span id="sum-employees" class="summary-value">-</span>
+              </div>
             </div>
 
             <div class="modal-footer-actions">
-              <button type="button" class="btn-cancel" onclick="wiGoToStep(1)"><i class="fa-solid fa-arrow-left"></i> Back</button>
+              <button type="button" class="btn-cancel" onclick="wiGoToStep(2)"><i class="fa-solid fa-arrow-left"></i> Back</button>
               <button type="button" class="btn-submit"
                 style="background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 10px 20px -10px rgba(239, 68, 68, 0.5);"
                 onclick="wiSubmitFinal()">
@@ -172,7 +239,7 @@
       </div>
       <div class="profile">
         <div class="profile-info">
-          <span class="profile-name">Vaughn Evangelista</span>
+          <span class="profile-name">Evangelista, Vaughn</span>
           <span class="email">vaughn.student@wm.edu.ph</span>
         </div>
         <div class="profile-dropdown">
@@ -413,35 +480,102 @@
 
     function wiGoToStep(step) {
       if (step === 2) {
-        const name = document.getElementById("wi-operatorName").value.trim();
+        const ln = document.getElementById("wi-operatorLastName").value.trim();
+        const fn = document.getElementById("wi-operatorFirstName").value.trim();
+        const mi = document.getElementById("wi-operatorMidInit").value.trim();
         const email = document.getElementById("wi-operatorEmail").value.trim();
         const contact = document.getElementById("wi-contact").value.trim();
         const business = document.getElementById("wi-businessName").value.trim();
-        if (!name || !email || !contact || !business || !email.includes("@")) {
+        if (!ln || !fn || !email || !contact || !business || !email.includes("@")) {
           showToast("Missing Info", "Please fill in all applicant details with a valid email.", "warning");
           return;
         }
-        // Fill summary
-        document.getElementById("sum-name").innerText = name;
-        document.getElementById("sum-email").innerText = email || "-";
-        document.getElementById("sum-biz").innerText = business;
       }
 
-      [1, 2].forEach(s => {
-        document.getElementById(`wi-step${s}`).style.display = s === step ? "block" : "none";
+      if (step === 3) {
+        const lnInputs = document.querySelectorAll(".wi-emp-ln");
+        const fnInputs = document.querySelectorAll(".wi-emp-fn");
+        let filled = true;
+        lnInputs.forEach(e => { if(!e.value.trim()) filled = false; });
+        fnInputs.forEach(e => { if(!e.value.trim()) filled = false; });
+        
+        if (!filled) {
+          showToast("Missing Info", "Please provide all employee names.", "warning");
+          return;
+        }
+
+        // Fill summary
+        const ln = document.getElementById("wi-operatorLastName").value.trim();
+        const fn = document.getElementById("wi-operatorFirstName").value.trim();
+        const mi = document.getElementById("wi-operatorMidInit").value.trim();
+        const fullName = `${ln}, ${fn}${mi ? ' ' + mi : ''}`;
+        document.getElementById("sum-name").innerText = fullName;
+        document.getElementById("sum-email").innerText = document.getElementById("wi-operatorEmail").value || "-";
+        document.getElementById("sum-biz").innerText = document.getElementById("wi-businessName").value;
+        
+        const empCount = document.querySelectorAll(".wi-employee-box").length;
+        document.getElementById("sum-employees").innerText = `${empCount} Staff Member(s)`;
+      }
+
+      [1, 2, 3].forEach(s => {
+        const stepEl = document.getElementById(`wi-step${s}`);
+        if (stepEl) stepEl.style.display = s === step ? "block" : "none";
+        
         const ind = document.getElementById(`wi-step-ind${s}`);
-        ind.classList.remove("active", "completed");
-        if (s < step) ind.classList.add("completed");
-        else if (s === step) ind.classList.add("active");
+        if (ind) {
+          ind.classList.remove("active", "completed");
+          if (s < step) ind.classList.add("completed");
+          else if (s === step) ind.classList.add("active");
+        }
       });
+    }
+
+    function wiAddEmployee() {
+      const container = document.getElementById("wi-employeesContainer");
+      const box = document.createElement("div");
+      box.className = "wi-employee-box";
+      box.style = "padding: 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 16px; position: relative;";
+      box.innerHTML = `
+        <button type="button" onclick="this.parentElement.remove()" style="position: absolute; top: 12px; right: 12px; background: #fee2e2; color: #ef4444; border: none; width: 24px; height: 24px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-times"></i></button>
+        <div class="form-grid-2">
+          <div class="form-group" style="grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr 80px; gap: 12px;">
+            <div>
+              <label>Last Name <span style="color: #ef4444;">*</span></label>
+              <input type="text" class="form-control wi-emp-ln" placeholder="e.g. Santos" />
+            </div>
+            <div>
+              <label>First Name <span style="color: #ef4444;">*</span></label>
+              <input type="text" class="form-control wi-emp-fn" placeholder="e.g. Maria" />
+            </div>
+            <div>
+              <label>M.I.</label>
+              <input type="text" class="form-control wi-emp-mi" placeholder="M." maxlength="3" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Role/Position <span style="color: #ef4444;">*</span></label>
+            <input type="text" class="form-control wi-emp-role" placeholder="e.g. Cashier, Cook" />
+          </div>
+          <div class="form-group">
+            <label>Health Certificate <span style="color: #ef4444;">*</span></label>
+            <input type="file" class="form-control wi-emp-cert" accept="image/*,.pdf" />
+          </div>
+        </div>
+      `;
+      container.appendChild(box);
     }
 
     function wiSubmitFinal() {
       const email = document.getElementById("wi-operatorEmail").value.trim();
       if (!email || !email.includes("@")) { showToast("Invalid Email", "Please go back to Step 1 and provide a valid email.", "error"); return; }
       
+      const ln = document.getElementById("wi-operatorLastName").value.trim();
+      const fn = document.getElementById("wi-operatorFirstName").value.trim();
+      const mi = document.getElementById("wi-operatorMidInit").value.trim();
+      const fullName = `${ln}, ${fn}${mi ? ' ' + mi : ''}`;
+      
       const appData = {
-        operatorName: document.getElementById("wi-operatorName").value.trim(),
+        operatorName: fullName,
         operatorEmail: email,
         businessName: document.getElementById("wi-businessName").value.trim(),
       };

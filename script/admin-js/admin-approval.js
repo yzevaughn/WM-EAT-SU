@@ -9,10 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
       desc: "A fresh strawberry cake slice served with cream. Light, sweet, and perfect for any occasion.",
       img: "../../images/strawberry.avif",
       price: "₱120.00",
-      tags: [
-        { text: "Dessert", class: "tag-green" },
-        { text: "Bestseller", class: "tag-pink" },
-      ],
       submitter: "Maria Santos",
       time: "Apr 27, 2026 • 9:14 AM",
       status: "pending",
@@ -27,10 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
       desc: "Double patty burger with extra cheddar cheese.",
       img: "../../images/burger.avif",
       price: "₱150.00",
-      tags: [
-        { text: "Main", class: "tag-green" },
-        { text: "Beef", class: "tag-pink" },
-      ],
       submitter: "Juan Dela Cruz",
       time: "Apr 26, 2026 • 2:30 PM",
       status: "pending",
@@ -45,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
       desc: "10% off all grilled items starting next week.",
       img: "../../images/banner4.avif",
       price: "N/A",
-      tags: [{ text: "Promo", class: "tag-green" }],
       submitter: "Campus Grill Admin",
       time: "Apr 26, 2026 • 10:00 AM",
       status: "pending",
@@ -59,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
       desc: "Fresh romaine lettuce, croutons, parmesan cheese, and Caesar dressing.",
       img: "../../images/pancit.avif",
       price: "₱85.00",
-      tags: [{ text: "Healthy", class: "tag-green" }],
       submitter: "Ana Smith",
       time: "Apr 25, 2026 • 4:15 PM",
       status: "pending",
@@ -74,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
       desc: "Check out our premium pepperoni and supreme flavors.",
       img: "../../images/pizza.avif",
       price: "N/A",
-      tags: [{ text: "New", class: "tag-pink" }],
       submitter: "Pizza Corner Mgr",
       time: "Apr 24, 2026 • 8:45 AM",
       status: "pending",
@@ -89,7 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
       desc: "Rich chocolate muffin with chocolate chips.",
       img: "../../images/strawberry.avif",
       price: "₱45.00",
-      tags: [{ text: "Dessert", class: "tag-green" }],
       submitter: "Maria Santos",
       time: "Apr 20, 2026 • 1:00 PM",
       status: "approved",
@@ -103,7 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
       desc: "Our signature beef patty with cheddar.",
       img: "../../images/burger.avif",
       price: "₱95.00",
-      tags: [{ text: "Main", class: "tag-green" }],
       submitter: "Juan Dela Cruz",
       time: "Apr 20, 2026 • 2:00 PM",
       status: "approved",
@@ -117,7 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
       desc: "Served with java rice and gravy.",
       img: "../../images/pizza.avif",
       price: "₱110.00",
-      tags: [{ text: "Meal", class: "tag-green" }],
       submitter: "Campus Grill Admin",
       time: "Apr 19, 2026 • 11:30 AM",
       status: "approved",
@@ -131,7 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
       desc: "Assorted seasonal fresh fruits.",
       img: "../../images/pancit.avif",
       price: "₱60.00",
-      tags: [{ text: "Healthy", class: "tag-green" }],
       submitter: "Ana Smith",
       time: "Apr 18, 2026 • 9:00 AM",
       status: "approved",
@@ -202,11 +187,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const typeLabel = item.type === "menu" ? "Menu item" : "Promo poster";
       const statusLabel =
         item.status === "pending" ? "Pending review" : "Active";
-      const tagsHtml = item.tags
-        ? item.tags
-            .map((t) => `<span class="ac-tag ${t.class}">${t.text}</span>`)
-            .join("")
-        : "";
 
       let footerHtml = "";
       if (item.status === "pending") {
@@ -248,9 +228,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         <span class="ac-price">${item.price}</span>
                     </div>
                     <p class="ac-desc">${item.desc}</p>
-                    <div class="ac-tags">
-                        ${tagsHtml}
-                    </div>
                     <hr class="ac-divider" />
                     <div class="ac-meta">
                         <div class="ac-meta-row">
@@ -328,12 +305,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("detDesc").textContent = item.desc;
     document.getElementById("detIngredients").textContent = item.ingredients ? item.ingredients.join(", ") : "No ingredients listed.";
 
-    const tagsContainer = document.getElementById("detTags");
-    tagsContainer.innerHTML = item.tags
-      ? item.tags
-          .map((t) => `<span class="ac-tag ${t.class}">${t.text}</span>`)
-          .join("")
-      : "";
+    document.getElementById("detDesc").textContent = item.desc;
+    document.getElementById("detIngredients").textContent = item.ingredients ? item.ingredients.join(", ") : "No ingredients listed.";
 
     // Step images are static placeholders as requested
 

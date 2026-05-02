@@ -9,7 +9,7 @@ function loadStudentApplications() {
     mockApplications = [
       {
         id: "APP-1042",
-        studentName: "Alice Johnson",
+        studentName: "Johnson, Alice",
         studentEmail: "alice.j@wm.edu.ph",
         businessName: "Alice Bakes",
         category: "Food & Beverage",
@@ -20,7 +20,7 @@ function loadStudentApplications() {
       },
       {
         id: "APP-1043",
-        studentName: "Bob Smith",
+        studentName: "Smith, Bob",
         studentEmail: "bob.s@wm.edu.ph",
         businessName: "Bob Tech Repairs",
         category: "Services",
@@ -31,7 +31,7 @@ function loadStudentApplications() {
       },
       {
         id: "APP-1039",
-        studentName: "Charlie Brown",
+        studentName: "Brown, Charlie",
         studentEmail: "charlie.b@wm.edu.ph",
         businessName: "Charlie Merch",
         category: "Retail",
@@ -42,7 +42,7 @@ function loadStudentApplications() {
       },
       {
         id: "APP-1035",
-        studentName: "Diana Prince",
+        studentName: "Prince, Diana",
         studentEmail: "diana.p@wm.edu.ph",
         businessName: "Wonder Crafts",
         category: "Arts & Crafts",
@@ -53,7 +53,7 @@ function loadStudentApplications() {
       },
       {
         id: "APP-1044",
-        studentName: "Evan Wright",
+        studentName: "Wright, Evan",
         studentEmail: "evan.w@wm.edu.ph",
         businessName: "Fresh Squeeze",
         category: "Food & Beverage",
@@ -64,7 +64,7 @@ function loadStudentApplications() {
       },
       {
         id: "APP-1040",
-        studentName: "Fiona Gallagher",
+        studentName: "Gallagher, Fiona",
         studentEmail: "fiona.g@wm.edu.ph",
         businessName: "Campus Thrifts",
         category: "Retail",

@@ -62,10 +62,19 @@
           <div id="wi-step1">
             <div class="form-section-title">Personal Details</div>
             <div class="form-grid-2">
-              <div class="form-group">
-                <label>Student Full Name <span style="color: #ef4444;">*</span></label>
-                <input type="text" id="wi-studentName" class="form-control" placeholder="e.g. Juan Dela Cruz"
-                  required />
+              <div class="form-group" style="grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr 80px; gap: 12px;">
+                <div>
+                  <label>Last Name <span style="color: #ef4444;">*</span></label>
+                  <input type="text" id="wi-lastName" class="form-control" placeholder="Dela Cruz" required />
+                </div>
+                <div>
+                  <label>First Name <span style="color: #ef4444;">*</span></label>
+                  <input type="text" id="wi-firstName" class="form-control" placeholder="Juan" required />
+                </div>
+                <div>
+                  <label>M.I.</label>
+                  <input type="text" id="wi-midInit" class="form-control" placeholder="M." maxlength="3" />
+                </div>
               </div>
               <div class="form-group">
                 <label>Student Email Address <span style="color: #ef4444;">*</span></label>
@@ -75,10 +84,6 @@
               <div class="form-group">
                 <label>Contact Number <span style="color: #ef4444;">*</span></label>
                 <input type="tel" id="wi-contact" class="form-control" placeholder="0912 345 6789" required />
-              </div>
-              <div class="form-group">
-                <label>Course/Year <span style="color: #ef4444;">*</span></label>
-                <input type="text" id="wi-course" class="form-control" placeholder="BSCS - 4" required />
               </div>
             </div>
 
@@ -96,11 +101,8 @@
               </div>
             </div>
 
-            <div class="modal-footer-actions" style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="display: flex; align-items: center; gap: 16px;">
-                <label for="walkInModalToggle" class="btn-cancel" style="cursor: pointer; margin: 0;">Cancel</label>
-                <button type="button" onclick="wiGoToStep(2, true)" style="background: transparent; border: none; color: #64748b; font-weight: 500; cursor: pointer; text-decoration: underline; padding: 0;">Skip this step</button>
-              </div>
+            <div class="modal-footer-actions">
+              <label for="walkInModalToggle" class="btn-cancel" style="cursor: pointer;">Cancel</label>
               <button type="button" class="btn-submit" onclick="wiGoToStep(2)">Next Step <i class="fa-solid fa-arrow-right"></i></button>
             </div>
           </div>
@@ -243,16 +245,17 @@
       container.appendChild(box);
     }
 
-    function wiGoToStep(step, skipValidation = false) {
+    function wiGoToStep(step) {
       // Validation logic
-      if (step === 2 && !skipValidation) {
-        const name = document.getElementById("wi-studentName").value.trim();
+      if (step === 2) {
+        const ln = document.getElementById("wi-lastName").value.trim();
+        const fn = document.getElementById("wi-firstName").value.trim();
+        const mi = document.getElementById("wi-midInit").value.trim();
         const email = document.getElementById("wi-studentEmail").value.trim();
         const contact = document.getElementById("wi-contact").value.trim();
-        const course = document.getElementById("wi-course").value.trim();
 
-        if (!name || !email || !contact || !course || !email.includes("@")) {
-          showToast("Missing Info", "Please fill in all applicant details with a valid email.", "warning");
+        if (!ln || !fn || !email || !contact || !email.includes("@")) {
+          showToast("Missing Info", "Please fill in all required applicant details.", "warning");
           return;
         }
       }
@@ -279,7 +282,11 @@
         }
 
         // Fill summary
-        document.getElementById("sum-name").innerText = document.getElementById("wi-studentName").value;
+        const ln = document.getElementById("wi-lastName").value.trim();
+        const fn = document.getElementById("wi-firstName").value.trim();
+        const mi = document.getElementById("wi-midInit").value.trim();
+        const fullName = `${ln}, ${fn}${mi ? ' ' + mi : ''}`;
+        document.getElementById("sum-name").innerText = fullName;
 
         const email = document.getElementById("wi-studentEmail").value;
         document.getElementById("sum-email").innerText = email || "-";
@@ -391,7 +398,7 @@
       </div>
       <div class="profile">
         <div class="profile-info">
-          <span class="profile-name">Vaughn Evangelista</span>
+          <span class="profile-name">Evangelista, Vaughn</span>
           <span class="email">vaughn.student@wm.edu.ph</span>
         </div>
         <div class="profile-dropdown">

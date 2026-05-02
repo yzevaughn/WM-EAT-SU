@@ -9,7 +9,7 @@ function loadCanteenApplications() {
     mockApplications = [
       {
         id: "CAN-1001",
-        studentName: "Maria Santos",
+        studentName: "Santos, Maria",
         studentEmail: "maria.s@wmsu.edu.ph",
         businessName: "Maria's Canteen",
         category: "Food & Beverage",
@@ -19,7 +19,7 @@ function loadCanteenApplications() {
       },
       {
         id: "CAN-1002",
-        studentName: "Jose Reyes",
+        studentName: "Reyes, Jose",
         studentEmail: "jose.r@wmsu.edu.ph",
         businessName: "Reyes Lutong Bahay",
         category: "Food & Beverage",
@@ -29,7 +29,7 @@ function loadCanteenApplications() {
       },
       {
         id: "CAN-1003",
-        studentName: "Ana Cruz",
+        studentName: "Cruz, Ana",
         studentEmail: "ana.c@wmsu.edu.ph",
         businessName: "Ana's Snack Bar",
         category: "Snacks & Drinks",
@@ -39,7 +39,7 @@ function loadCanteenApplications() {
       },
       {
         id: "CAN-1004",
-        studentName: "Pedro Garcia",
+        studentName: "Garcia, Pedro",
         studentEmail: "pedro.g@wmsu.edu.ph",
         businessName: "Garcia Meals",
         category: "Food & Beverage",
@@ -49,7 +49,7 @@ function loadCanteenApplications() {
       },
       {
         id: "CAN-1005",
-        studentName: "Rosa Lim",
+        studentName: "Lim, Rosa",
         studentEmail: "rosa.l@wmsu.edu.ph",
         businessName: "Lim's Corner Eats",
         category: "Snacks & Drinks",

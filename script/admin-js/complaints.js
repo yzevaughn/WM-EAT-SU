@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const complaints = [
         {
             id: "CMP-2026-001",
-            user: "Maria Santos",
+            user: "Santos, Maria",
             subject: "Wrong side dish received",
             orderId: "#ORD-2026-1547",
             message: "I ordered mashed potato but I received rice instead. This is the second time this happened with this vendor.",
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         {
             id: "CMP-2026-002",
-            user: "Juan Dela Cruz",
+            user: "Dela Cruz, Juan",
             subject: "Food was cold and stale",
             orderId: "#ORD-2026-1549",
             message: "The burger arrived cold and the bun was very hard. It felt like it was sitting there for hours.",
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         {
             id: "CMP-2026-003",
-            user: "Elena Gomez",
+            user: "Gomez, Elena",
             subject: "Overcharged for drinks",
             orderId: "#ORD-2026-1552",
             message: "The price in the app said ₱50 but I was charged ₱65 upon checkout. Please refund the difference.",
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         {
             id: "CMP-2026-004",
-            user: "Ricardo Lim",
+            user: "Lim, Ricardo",
             subject: "Rude delivery staff",
             orderId: "#ORD-2026-1560",
             message: "The delivery person was very impatient and used inappropriate language when I asked for my change.",
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         {
             id: "CMP-2026-005",
-            user: "Sofia Reyes",
+            user: "Reyes, Sofia",
             subject: "Hair found in food",
             orderId: "#ORD-2026-1565",
             message: "I found a long strand of hair in my pasta. This is very unhygienic and disappointing.",
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         {
             id: "CMP-2026-006",
-            user: "Gabriel Tech",
+            user: "Tech, Gabriel",
             subject: "Order never arrived",
             orderId: "#ORD-2026-1570",
             message: "My order was marked as delivered but I never received it. I've been waiting for over an hour.",
