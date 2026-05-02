@@ -60,16 +60,23 @@
         <form id="walkInModalForm">
           <!-- STEP 1: APPLICANT INFO -->
           <div id="wi-step1">
+            <div class="form-section-title">Existing Account (Optional)</div>
+            <div class="form-group" style="margin-bottom: 24px;">
+              <label>Link to Existing Email Address</label>
+              <input type="email" id="wi-existingEmail" class="form-control" placeholder="Enter email if student already has an account" />
+              <p style="font-size: 11px; color: #64748b; margin-top: 4px;">If provided, other personal details can be left blank.</p>
+            </div>
+
             <div class="form-section-title">Personal Details</div>
             <div class="form-grid-2">
               <div class="form-group" style="grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr 80px; gap: 12px;">
                 <div>
-                  <label>Last Name <span style="color: #ef4444;">*</span></label>
-                  <input type="text" id="wi-lastName" class="form-control" placeholder="Dela Cruz" required />
+                  <label>Last Name</label>
+                  <input type="text" id="wi-lastName" class="form-control" placeholder="Dela Cruz" />
                 </div>
                 <div>
-                  <label>First Name <span style="color: #ef4444;">*</span></label>
-                  <input type="text" id="wi-firstName" class="form-control" placeholder="Juan" required />
+                  <label>First Name</label>
+                  <input type="text" id="wi-firstName" class="form-control" placeholder="Juan" />
                 </div>
                 <div>
                   <label>M.I.</label>
@@ -77,27 +84,25 @@
                 </div>
               </div>
               <div class="form-group">
-                <label>Student Email Address <span style="color: #ef4444;">*</span></label>
-                <input type="email" id="wi-studentEmail" class="form-control" placeholder="student@wmsu.edu.ph"
-                  required />
+                <label>Student Email Address</label>
+                <input type="email" id="wi-studentEmail" class="form-control" placeholder="student@wmsu.edu.ph" />
               </div>
               <div class="form-group">
-                <label>Contact Number <span style="color: #ef4444;">*</span></label>
-                <input type="tel" id="wi-contact" class="form-control" placeholder="0912 345 6789" required />
+                <label>Contact Number</label>
+                <input type="tel" id="wi-contact" class="form-control" placeholder="0912 345 6789" />
               </div>
             </div>
 
             <div class="form-section-title" style="margin-top: 32px;">Required Documents</div>
-            <p style="font-size: 13px; color: #64748b; margin-bottom: 16px;">Upload scanned copies of the physical
-              documents provided by the student.</p>
+            <p style="font-size: 13px; color: #64748b; margin-bottom: 16px;">Upload scanned copies of the physical documents (optional for walk-ins).</p>
             <div class="form-grid-2">
               <div class="form-group">
-                <label>Valid ID Copy <span style="color: #ef4444;">*</span></label>
-                <input type="file" class="form-control" accept="image/*,.pdf" required />
+                <label>Valid ID Copy</label>
+                <input type="file" class="form-control" accept="image/*,.pdf" />
               </div>
               <div class="form-group">
-                <label>Certifcate Of Enrollment<span style="color: #ef4444;">*</span></label>
-                <input type="file" class="form-control" accept="image/*,.pdf" required />
+                <label>Certifcate Of Enrollment</label>
+                <input type="file" class="form-control" accept="image/*,.pdf" />
               </div>
             </div>
 
@@ -211,16 +216,16 @@
           <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 12px; margin-bottom: 12px;">
             <div class="form-group">
               <label>Item Name</label>
-              <input type="text" class="form-control wi-p-name" placeholder="e.g. Siomai" required />
+              <input type="text" class="form-control wi-p-name" placeholder="e.g. Siomai" />
             </div>
             <div class="form-group">
               <label>Price (&#8369;)</label>
-              <input type="number" class="form-control wi-p-qty" placeholder="e.g. 25" min="0" step="0.01" required />
+              <input type="number" class="form-control wi-p-qty" placeholder="e.g. 25" min="0" step="0.01" />
             </div>
           </div>
           <div class="form-group">
             <label>Product Image</label>
-            <input type="file" class="form-control wi-p-image" accept="image/*" required />
+            <input type="file" class="form-control wi-p-image" accept="image/*" />
           </div>
           <div class="form-group" style="margin-top: 10px;">
             <label>Category of Food</label>
@@ -246,50 +251,21 @@
     }
 
     function wiGoToStep(step) {
-      // Validation logic
-      if (step === 2) {
+      // Validation logic (REMOVED as per request to ignore requirements in first pages)
+      if (step === 3) {
+        const prodNames = document.querySelectorAll(".wi-p-name");
+        // We still need a name for the summary, even if optional
+        const existingEmail = document.getElementById("wi-existingEmail").value.trim();
         const ln = document.getElementById("wi-lastName").value.trim();
         const fn = document.getElementById("wi-firstName").value.trim();
         const mi = document.getElementById("wi-midInit").value.trim();
         const email = document.getElementById("wi-studentEmail").value.trim();
-        const contact = document.getElementById("wi-contact").value.trim();
 
-        if (!ln || !fn || !email || !contact || !email.includes("@")) {
-          showToast("Missing Info", "Please fill in all required applicant details.", "warning");
-          return;
-        }
-      }
-
-      if (step === 3) {
-
-        const prodNames = document.querySelectorAll(".wi-p-name");
-        const prodQtys = document.querySelectorAll(".wi-p-qty");
-        const prodImages = document.querySelectorAll(".wi-p-image");
-        let valid = true;
-
-        if (prodNames.length === 0) {
-          showToast("Missing Info", "Please add at least one product to the catalog.", "warning");
-          return;
-        }
-
-        prodNames.forEach((p, i) => {
-          if (!p.value.trim() || !prodQtys[i].value || !prodImages[i].value) valid = false;
-        });
-
-        if (!valid) {
-          showToast("Missing Info", "Please fill in all product names, quantities, and upload images.", "warning");
-          return;
-        }
-
-        // Fill summary
-        const ln = document.getElementById("wi-lastName").value.trim();
-        const fn = document.getElementById("wi-firstName").value.trim();
-        const mi = document.getElementById("wi-midInit").value.trim();
-        const fullName = `${ln}, ${fn}${mi ? ' ' + mi : ''}`;
+        const displayEmail = existingEmail || email || "Not provided";
+        const fullName = (ln || fn) ? `${ln}, ${fn}${mi ? ' ' + mi : ''}` : (existingEmail ? "Existing Account" : "Walk-in Applicant");
+        
         document.getElementById("sum-name").innerText = fullName;
-
-        const email = document.getElementById("wi-studentEmail").value;
-        document.getElementById("sum-email").innerText = email || "-";
+        document.getElementById("sum-email").innerText = displayEmail;
       }
 
       // Toggle visibility & indicators

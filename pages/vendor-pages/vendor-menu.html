@@ -280,17 +280,22 @@
                 <i class="fas fa-times"></i>
               </button>
             </div>
+
+            <!-- STEP INDICATOR -->
+            <div class="step-indicator" id="menuStepIndicator">
+              <div class="step-dot active" data-step="1">1<span>Details</span></div>
+              <div class="step-dot" data-step="2">2<span>Price</span></div>
+              <div class="step-dot" data-step="3">3<span>Media</span></div>
+              <div class="step-dot" data-step="4">4<span>Review</span></div>
+            </div>
+
             <div class="modal-body">
               <form id="itemForm" novalidate>
-                <!-- Group for fields that are only shown in Applications (Pending/Accepted/Rejected) or Creation -->
-                <div id="creationFields">
+                <!-- STEP 1: BASIC DETAILS -->
+                <div class="menu-step-content active" data-step="1">
                   <div class="form-group">
                     <label for="itemName">Item Name</label>
-                    <input type="text" id="itemName" required />
-                  </div>
-                  <div class="form-group">
-                    <label for="itemDescription">Description</label>
-                    <textarea id="itemDescription" required></textarea>
+                    <input type="text" id="itemName" placeholder="e.g. Adobo Meal" required />
                   </div>
                   <div class="form-group">
                     <label for="itemCategory">Category</label>
@@ -303,36 +308,82 @@
                     </select>
                   </div>
                   <div class="form-group">
-                    <label for="itemImage"
-                      >Image (upload or leave blank to keep existing)</label
-                    >
-                    <input type="file" id="itemImage" accept="image/*" />
+                    <label for="itemDescription">Description</label>
+                    <textarea id="itemDescription" placeholder="Tell students about this dish..." required></textarea>
                   </div>
                 </div>
 
-                <!-- Price and Stock are always editable except in read-only Details mode -->
-                <div class="form-group">
-                  <label for="itemPrice">Price (&#8369;)</label>
-                  <input
-                    type="number"
-                    id="itemPrice"
-                    step="0.01"
-                    min="0"
-                    required
-                  />
+                <!-- STEP 2: PRICING -->
+                <div class="menu-step-content" data-step="2">
+                  <div class="form-group">
+                    <label for="itemPrice">Price (&#8369;)</label>
+                    <input
+                      type="number"
+                      id="itemPrice"
+                      step="0.01"
+                      min="0"
+                      placeholder="0.00"
+                      required
+                    />
+                  </div>
+                  <input type="hidden" id="itemQuantity" value="0" />
                 </div>
-                <div class="form-group" id="stockField">
-                  <label for="itemQuantity">Available Quantity</label>
-                  <input type="number" id="itemQuantity" min="0" required />
+
+                <!-- STEP 3: MEDIA (Upload Only, No Preview) -->
+                <div class="menu-step-content" data-step="3">
+                  <div class="form-group">
+                    <label for="itemImage">Upload Product Image</label>
+                    <div style="border: 2px dashed #e5e7eb; border-radius: 12px; padding: 40px; text-align: center; cursor: pointer; transition: all 0.2s;" 
+                         onmouseover="this.style.borderColor='#dc2626'; this.style.background='#fff5f5'" 
+                         onmouseout="this.style.borderColor='#e5e7eb'; this.style.background='transparent'" 
+                         onclick="document.getElementById('itemImage').click()">
+                      <i class="fas fa-camera" style="font-size: 40px; color: #dc2626; margin-bottom: 15px;"></i>
+                      <p style="font-size: 16px; font-weight: 600; color: #1f2937; margin: 0;">Click to select a photo</p>
+                      <p style="font-size: 13px; color: #6b7280; margin-top: 5px;">PNG, JPG or JPEG up to 5MB</p>
+                      <input type="file" id="itemImage" accept="image/*" style="display: none;" onchange="handleImageUpload(this)" />
+                    </div>
+                    <div id="uploadSuccessMsg" style="display: none; margin-top: 15px; color: #059669; font-weight: 600; text-align: center;">
+                       <i class="fas fa-check-circle"></i> Image selected successfully!
+                    </div>
+                  </div>
+                </div>
+
+                <!-- STEP 4: REVIEW -->
+                <div class="menu-step-content" data-step="4">
+                  <div style="background: #f8fafc; border-radius: 12px; padding: 16px;">
+                    <div class="review-item">
+                      <span class="review-label">Name</span>
+                      <span class="review-value" id="revName">-</span>
+                    </div>
+                    <div class="review-item">
+                      <span class="review-label">Category</span>
+                      <span class="review-value" id="revCategory">-</span>
+                    </div>
+                    <div class="review-item">
+                      <span class="review-label">Price</span>
+                      <span class="review-value" id="revPrice">-</span>
+                    </div>
+                    <div style="margin-top: 12px;">
+                      <span class="review-label">Description</span>
+                      <p id="revDesc" style="font-size: 13px; color: #475569; margin: 4px 0 0 0; line-height: 1.4;">-</p>
+                    </div>
+                    <div style="margin-top: 15px;">
+                      <span class="review-label">Product Image Preview</span>
+                      <img id="revImage" src="" alt="Preview" class="review-image-preview">
+                    </div>
+                  </div>
                 </div>
 
                 <input type="hidden" id="itemEditId" />
                 <input type="hidden" id="itemExistingImg" />
+                <img id="imagePreview" src="" alt="Preview" style="display: none;">
               </form>
             </div>
             <div class="modal-footer">
-              <button class="btn-save" id="saveBtn">Save Item</button>
-              <button class="btn-cancel" id="cancelBtn">Cancel</button>
+              <button class="btn-back" id="prevBtn">Back</button>
+              <button class="btn-next" id="nextBtn">Next</button>
+              <button class="btn-save" id="saveBtn" style="display: none;">Save & Submit</button>
+              <button class="btn-cancel" id="cancelBtn" style="display: none;">Cancel</button>
             </div>
           </div>
         </div>
@@ -657,6 +708,91 @@
         );
       }
 
+      /* --- Multi-Step Wizard --- */
+      let currentMenuStep = 1;
+
+      function updateMenuWizard() {
+        // Show/Hide steps
+        document.querySelectorAll(".menu-step-content").forEach((s) => {
+          s.classList.toggle("active", parseInt(s.dataset.step) === currentMenuStep);
+        });
+
+        // Update dots
+        document.querySelectorAll(".step-dot").forEach((dot) => {
+          const s = parseInt(dot.dataset.step);
+          dot.classList.toggle("active", s === currentMenuStep);
+          dot.classList.toggle("completed", s < currentMenuStep);
+        });
+
+        // Update buttons
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const saveBtn = document.getElementById("saveBtn");
+        const cancelBtn = document.getElementById("cancelBtn");
+
+        prevBtn.style.display = currentMenuStep === 1 ? "none" : "block";
+        nextBtn.style.display = currentMenuStep === 4 ? "none" : "block";
+        saveBtn.style.display = currentMenuStep === 4 ? "block" : "none";
+        cancelBtn.style.display = currentMenuStep === 1 ? "block" : "none";
+
+        if (currentMenuStep === 4) renderReviewStep();
+      }
+
+      function handleImageUpload(input) {
+        const msg = document.getElementById("uploadSuccessMsg");
+        const preview = document.getElementById("imagePreview");
+        if (input.files && input.files[0]) {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            preview.src = e.target.result;
+            msg.style.display = "block";
+          };
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+
+      function renderReviewStep() {
+        document.getElementById("revName").textContent = document.getElementById("itemName").value || "-";
+        document.getElementById("revCategory").textContent = document.getElementById("itemCategory").value || "-";
+        document.getElementById("revPrice").textContent = "₱" + (parseFloat(document.getElementById("itemPrice").value) || 0).toFixed(2);
+        document.getElementById("revDesc").textContent = document.getElementById("itemDescription").value || "No description provided.";
+        
+        const preview = document.getElementById("imagePreview").src;
+        const existImg = document.getElementById("itemExistingImg").value;
+        document.getElementById("revImage").src = preview || existImg || "../../images/burger.avif";
+      }
+
+      function validateMenuStep(step) {
+        if (step === 1) {
+          const name = document.getElementById("itemName").value.trim();
+          const desc = document.getElementById("itemDescription").value.trim();
+          if (!name || !desc) {
+            showToast("error", "fa-circle-exclamation", "Please fill in Name and Description");
+            return false;
+          }
+        }
+        if (step === 2) {
+          const price = document.getElementById("itemPrice").value;
+          if (!price || parseFloat(price) < 0) {
+            showToast("error", "fa-circle-exclamation", "Please enter a valid price");
+            return false;
+          }
+        }
+        return true;
+      }
+
+      document.getElementById("nextBtn").addEventListener("click", () => {
+        if (validateMenuStep(currentMenuStep)) {
+          currentMenuStep++;
+          updateMenuWizard();
+        }
+      });
+
+      document.getElementById("prevBtn").addEventListener("click", () => {
+        currentMenuStep--;
+        updateMenuWizard();
+      });
+
       /* --- Add/Edit Modal --- */
       const itemModal = document.getElementById("itemModal");
 
@@ -665,17 +801,15 @@
         document.getElementById("itemForm").reset();
         document.getElementById("itemEditId").value = "";
         document.getElementById("itemExistingImg").value = "";
-
-        // Show creation fields for new items, but hide stock
-        document.getElementById("creationFields").style.display = "block";
-        document.getElementById("stockField").style.display = "none";
+        document.getElementById("uploadSuccessMsg").style.display = "none";
+        document.getElementById("imagePreview").src = "";
+        
+        currentMenuStep = 1;
+        updateMenuWizard();
 
         // Enable fields
-        const fields = document
-          .getElementById("itemForm")
-          .querySelectorAll("input, select, textarea");
+        const fields = document.getElementById("itemForm").querySelectorAll("input, select, textarea");
         fields.forEach((f) => (f.disabled = false));
-        document.getElementById("saveBtn").style.display = "";
 
         itemModal.classList.add("active");
       }
@@ -683,42 +817,38 @@
       function openEditModal(id, readOnly = false) {
         const item = getMenu().find((m) => m.id === id);
         if (!item) return;
-        document.getElementById("modalTitle").textContent = readOnly
-          ? "Item Details"
-          : "Edit Item";
+        document.getElementById("modalTitle").textContent = readOnly ? "Item Details" : "Edit Item";
 
         // Populate fields
         document.getElementById("itemName").value = item.name;
         document.getElementById("itemDescription").value = item.desc || "";
         document.getElementById("itemPrice").value = item.price;
-        document.getElementById("itemCategory").value =
-          item.category || "meals";
+        document.getElementById("itemCategory").value = item.category || "meals";
         document.getElementById("itemQuantity").value = item.stock || 0;
         document.getElementById("itemEditId").value = item.id;
         document.getElementById("itemExistingImg").value = item.img || "";
         document.getElementById("itemImage").value = "";
+        
+        document.getElementById("imagePreview").src = item.img || "";
+        document.getElementById("uploadSuccessMsg").style.display = item.img ? "block" : "none";
 
-        // Logic:
-        // 1. Hide core details ONLY for Main Menu & Accepted items.
-        // 2. Hide stock field ONLY for Applications (Pending/Accepted/Rejected).
-        const status = item.status || "active";
-        const isLiveMenu = status === "active";
-        const isAccepted = status === "accepted";
+        currentMenuStep = 1;
+        updateMenuWizard();
 
-        document.getElementById("creationFields").style.display =
-          isLiveMenu || isAccepted ? "none" : "block";
-        document.getElementById("stockField").style.display = isLiveMenu
-          ? "block"
-          : "none";
-
-        // Read only mode (e.g. for rejected items "Details")
-        const fields = document
-          .getElementById("itemForm")
-          .querySelectorAll("input, select, textarea");
+        // Read only mode
+        const fields = document.getElementById("itemForm").querySelectorAll("input, select, textarea");
         fields.forEach((f) => (f.disabled = readOnly));
-        document.getElementById("saveBtn").style.display = readOnly
-          ? "none"
-          : "";
+        
+        // If read-only, we might want to jump straight to review or just disable buttons
+        if (readOnly) {
+           currentMenuStep = 4;
+           updateMenuWizard();
+           document.getElementById("prevBtn").style.display = "none";
+           document.getElementById("nextBtn").style.display = "none";
+           document.getElementById("saveBtn").style.display = "none";
+           document.getElementById("cancelBtn").style.display = "block";
+           document.getElementById("cancelBtn").textContent = "Close";
+        }
 
         itemModal.classList.add("active");
       }
@@ -727,60 +857,16 @@
         itemModal.classList.remove("active");
       }
 
-      document
-        .getElementById("openModalBtn")
-        .addEventListener("click", openAddModal);
-      document
-        .getElementById("modalClose")
-        .addEventListener("click", closeItemModal);
-      document
-        .getElementById("cancelBtn")
-        .addEventListener("click", closeItemModal);
-      document
-        .getElementById("modalOverlay")
-        .addEventListener("click", closeItemModal);
+      document.getElementById("openModalBtn").addEventListener("click", openAddModal);
+      document.getElementById("modalClose").addEventListener("click", closeItemModal);
+      document.getElementById("cancelBtn").addEventListener("click", closeItemModal);
+      document.getElementById("modalOverlay").addEventListener("click", closeItemModal);
 
       /* --- Save item --- */
       document.getElementById("saveBtn").addEventListener("click", (e) => {
         e.preventDefault();
-        const price = document.getElementById("itemPrice").value;
-        const qty = document.getElementById("itemQuantity").value;
-
-        // Validation based on visible fields
-        const isCreationVisible =
-          document.getElementById("creationFields").style.display !== "none";
-        const isStockVisible =
-          document.getElementById("stockField").style.display !== "none";
-
-        if (isCreationVisible) {
-          const name = document.getElementById("itemName").value.trim();
-          const desc = document.getElementById("itemDescription").value.trim();
-          if (!name || !price || !desc) {
-            showToast(
-              "error",
-              "fa-circle-exclamation",
-              "Please fill in all required fields.",
-            );
-            return;
-          }
-        }
-
-        if (isStockVisible && qty === "") {
-          showToast(
-            "error",
-            "fa-circle-exclamation",
-            "Please specify the available quantity.",
-          );
-          return;
-        }
-
-        if (!price) {
-          showToast("error", "fa-circle-exclamation", "Please enter a price.");
-          return;
-        }
-
         pendingAction = "save";
-        document.getElementById("confirmSaveMsg").textContent = "Save changes?";
+        document.getElementById("confirmSaveMsg").textContent = "Submit this item for review?";
         document.getElementById("confirmSaveModal").classList.add("active");
       });
 
@@ -788,15 +874,9 @@
       function closeConfirm() {
         document.getElementById("confirmSaveModal").classList.remove("active");
       }
-      document
-        .getElementById("cancelConfirmBtn")
-        .addEventListener("click", closeConfirm);
-      document
-        .getElementById("confirmSaveOverlay")
-        .addEventListener("click", closeConfirm);
-      document
-        .getElementById("confirmSaveClose")
-        .addEventListener("click", closeConfirm);
+      document.getElementById("cancelConfirmBtn").addEventListener("click", closeConfirm);
+      document.getElementById("confirmSaveOverlay").addEventListener("click", closeConfirm);
+      document.getElementById("confirmSaveClose").addEventListener("click", closeConfirm);
 
       document
         .getElementById("confirmSaveBtn")
