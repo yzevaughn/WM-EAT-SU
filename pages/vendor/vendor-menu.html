@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU - Canteen Menu</title>
+    <title>WM EAT SU - Vendor Menu</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -13,7 +13,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="stylesheet" href="../../css/navbar.css" />
-    <link rel="stylesheet" href="../../css/canteen-css/canteen-menu.css" />
+    <link rel="stylesheet" href="../../css/vendor-css/menu.css" />
   </head>
 
   <body>
@@ -40,11 +40,11 @@
             <i class="fa-solid fa-graduation-cap"></i><span>Student</span>
           </a>
           <a
-            href="canteen-dashboard.html"
+            href="vendor-dashboard.html"
             class="role-btn active"
-            id="roleCanteen"
+            id="roleVendor"
           >
-            <i class="fa-solid fa-store"></i><span>Canteen</span>
+            <i class="fa-solid fa-store"></i><span>Vendor</span>
           </a>
         </div>
       </div>
@@ -61,7 +61,7 @@
               <button class="mark-read-btn">Mark all as read</button>
             </div>
             <div class="notification-list">
-              <a href="canteen-orders.html" class="notification-item unread">
+              <a href="vendor-orders.html" class="notification-item unread">
                 <div class="notif-icon green">
                   <i class="fa-solid fa-check"></i>
                 </div>
@@ -73,7 +73,7 @@
                   <span class="notif-time">2 mins ago</span>
                 </div>
               </a>
-              <a href="canteen-wallet.html" class="notification-item unread">
+              <a href="vendor-wallet.html" class="notification-item unread">
                 <div class="notif-icon blue">
                   <i class="fa-solid fa-info"></i>
                 </div>
@@ -85,21 +85,21 @@
                   <span class="notif-time">1 hour ago</span>
                 </div>
               </a>
-              <a href="canteen-orders.html" class="notification-item">
+              <a href="vendor-orders.html" class="notification-item">
                 <div class="notif-icon orange">
                   <i class="fa-solid fa-fire-burner"></i>
                 </div>
                 <div class="notif-content">
                   <p class="notif-title">Order Preparing</p>
                   <p class="notif-desc">
-                    Canteen has started preparing your order.
+                    Vendor has started preparing your order.
                   </p>
                   <span class="notif-time">2 hours ago</span>
                 </div>
               </a>
             </div>
             <div class="notification-footer">
-              <a href="canteen-notifications.html">View all notifications</a>
+              <a href="vendor-notifications.html">View all notifications</a>
             </div>
           </div>
         </div>
@@ -118,10 +118,10 @@
               <i class="fa-solid fa-chevron-down"></i>
             </button>
             <div class="dropdown-menu">
-              <a href="canteen-profile.html" class="dropdown-item">
+              <a href="vendor-profile.html" class="dropdown-item">
                 <i class="fa-solid fa-gear"></i><span>Settings</span>
               </a>
-              <a href="canteen-complaints.html" class="dropdown-item">
+              <a href="vendor-complaints.html" class="dropdown-item">
                 <i class="fa-solid fa-flag"></i><span>Reports</span>
               </a>
               <a href="../../index.html" class="dropdown-item">
@@ -139,29 +139,29 @@
       <div class="left-nav" id="sidebar">
         <ul class="nav-list">
           <li>
-            <a href="canteen-dashboard.html" class="nav-link"
+            <a href="vendor-dashboard.html" class="nav-link"
               ><i class="fa-solid fa-house"></i><span>Dashboard</span></a
             >
           </li>
           <li>
-            <a href="canteen-orders.html" class="nav-link"
+            <a href="vendor-orders.html" class="nav-link"
               ><i class="fa-solid fa-clock-rotate-left"></i
               ><span>Orders</span></a
             >
           </li>
           <li>
-            <a href="canteen-menu.html" class="nav-link active"
+            <a href="vendor-menu.html" class="nav-link active"
               ><i class="fa-solid fa-utensils"></i><span>Menu</span></a
             >
           </li>
           <li>
-            <a href="canteen-sales-payments.html" class="nav-link"
+            <a href="vendor-sales-payments.html" class="nav-link"
               ><i class="fa-solid fa-chart-line"></i
-              ><span>Canteen Analytics</span></a
+              ><span>Vendor Analytics</span></a
             >
           </li>
           <li>
-            <a href="canteen-wallet.html" class="nav-link"
+            <a href="vendor-wallet.html" class="nav-link"
               ><i class="fa-solid fa-wallet"></i><span>Wallet</span></a
             >
           </li>
@@ -205,7 +205,7 @@
               <i class="fas fa-image"></i> Add Poster
             </button>
             <button class="add-item-btn" id="openModalBtn">
-              <i class="fas fa-plus"></i> Create
+              <i class="fas fa-plus"></i> Add Menu
             </button>
             <div class="profile-dropdown">
               <button
@@ -313,7 +313,7 @@
                   </div>
                 </div>
 
-                <!-- STEP 2: PRICING & INVENTORY -->
+                <!-- STEP 2: PRICING -->
                 <div class="menu-step-content" data-step="2">
                   <div class="form-group">
                     <label for="itemPrice">Price (&#8369;)</label>
@@ -326,23 +326,24 @@
                       required
                     />
                   </div>
-                  <div class="form-group" id="stockField">
-                    <label for="itemQuantity">Available Quantity (Stock)</label>
-                    <input type="number" id="itemQuantity" min="0" placeholder="e.g. 50" required />
-                  </div>
+                  <input type="hidden" id="itemQuantity" value="0" />
                 </div>
 
-                <!-- STEP 3: MEDIA -->
+                <!-- STEP 3: MEDIA (Upload Only, No Preview) -->
                 <div class="menu-step-content" data-step="3">
                   <div class="form-group">
                     <label for="itemImage">Upload Product Image</label>
-                    <div style="border: 2px dashed #e5e7eb; border-radius: 12px; padding: 30px; text-align: center; cursor: pointer; transition: border-color 0.2s;" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='#e5e7eb'" onclick="document.getElementById('itemImage').click()">
-                      <i class="fas fa-cloud-upload-alt" style="font-size: 32px; color: #94a3b8; margin-bottom: 12px;"></i>
-                      <p style="font-size: 14px; color: #64748b; margin: 0;">Click to upload image</p>
-                      <input type="file" id="itemImage" accept="image/*" style="display: none;" onchange="handleImagePreview(this)" />
+                    <div style="border: 2px dashed #e5e7eb; border-radius: 12px; padding: 40px; text-align: center; cursor: pointer; transition: all 0.2s;" 
+                         onmouseover="this.style.borderColor='#dc2626'; this.style.background='#fff5f5'" 
+                         onmouseout="this.style.borderColor='#e5e7eb'; this.style.background='transparent'" 
+                         onclick="document.getElementById('itemImage').click()">
+                      <i class="fas fa-camera" style="font-size: 40px; color: #dc2626; margin-bottom: 15px;"></i>
+                      <p style="font-size: 16px; font-weight: 600; color: #1f2937; margin: 0;">Click to select a photo</p>
+                      <p style="font-size: 13px; color: #6b7280; margin-top: 5px;">PNG, JPG or JPEG up to 5MB</p>
+                      <input type="file" id="itemImage" accept="image/*" style="display: none;" onchange="handleImageUpload(this)" />
                     </div>
-                    <div id="imagePreviewContainer" style="margin-top: 15px; display: none; text-align: center;">
-                       <img id="imagePreview" src="" alt="Preview" style="max-width: 100%; max-height: 150px; border-radius: 8px; border: 1px solid #e5e7eb;">
+                    <div id="uploadSuccessMsg" style="display: none; margin-top: 15px; color: #059669; font-weight: 600; text-align: center;">
+                       <i class="fas fa-check-circle"></i> Image selected successfully!
                     </div>
                   </div>
                 </div>
@@ -362,20 +363,20 @@
                       <span class="review-label">Price</span>
                       <span class="review-value" id="revPrice">-</span>
                     </div>
-                    <div class="review-item">
-                      <span class="review-label">Stock</span>
-                      <span class="review-value" id="revStock">-</span>
-                    </div>
                     <div style="margin-top: 12px;">
                       <span class="review-label">Description</span>
                       <p id="revDesc" style="font-size: 13px; color: #475569; margin: 4px 0 0 0; line-height: 1.4;">-</p>
                     </div>
-                    <img id="revImage" src="" alt="Preview" class="review-image-preview">
+                    <div style="margin-top: 15px;">
+                      <span class="review-label">Product Image Preview</span>
+                      <img id="revImage" src="" alt="Preview" class="review-image-preview">
+                    </div>
                   </div>
                 </div>
 
                 <input type="hidden" id="itemEditId" />
                 <input type="hidden" id="itemExistingImg" />
+                <img id="imagePreview" src="" alt="Preview" style="display: none;">
               </form>
             </div>
             <div class="modal-footer">
@@ -480,7 +481,7 @@
     <script src="../../script/student/cart.js"></script>
     <script>
       /* ------------------------------------------------------
-       Canteen MENU fully localStorage-driven
+       VENDOR MENU fully localStorage-driven
        ------------------------------------------------------ */
 
       /* --- Toast --- */
@@ -737,14 +738,14 @@
         if (currentMenuStep === 4) renderReviewStep();
       }
 
-      function handleImagePreview(input) {
+      function handleImageUpload(input) {
+        const msg = document.getElementById("uploadSuccessMsg");
         const preview = document.getElementById("imagePreview");
-        const container = document.getElementById("imagePreviewContainer");
         if (input.files && input.files[0]) {
           const reader = new FileReader();
           reader.onload = (e) => {
             preview.src = e.target.result;
-            container.style.display = "block";
+            msg.style.display = "block";
           };
           reader.readAsDataURL(input.files[0]);
         }
@@ -754,7 +755,6 @@
         document.getElementById("revName").textContent = document.getElementById("itemName").value || "-";
         document.getElementById("revCategory").textContent = document.getElementById("itemCategory").value || "-";
         document.getElementById("revPrice").textContent = "₱" + (parseFloat(document.getElementById("itemPrice").value) || 0).toFixed(2);
-        document.getElementById("revStock").textContent = document.getElementById("itemQuantity").value || "0";
         document.getElementById("revDesc").textContent = document.getElementById("itemDescription").value || "No description provided.";
         
         const preview = document.getElementById("imagePreview").src;
@@ -801,7 +801,7 @@
         document.getElementById("itemForm").reset();
         document.getElementById("itemEditId").value = "";
         document.getElementById("itemExistingImg").value = "";
-        document.getElementById("imagePreviewContainer").style.display = "none";
+        document.getElementById("uploadSuccessMsg").style.display = "none";
         document.getElementById("imagePreview").src = "";
         
         currentMenuStep = 1;
@@ -830,7 +830,7 @@
         document.getElementById("itemImage").value = "";
         
         document.getElementById("imagePreview").src = item.img || "";
-        document.getElementById("imagePreviewContainer").style.display = item.img ? "block" : "none";
+        document.getElementById("uploadSuccessMsg").style.display = item.img ? "block" : "none";
 
         currentMenuStep = 1;
         updateMenuWizard();
@@ -924,7 +924,7 @@
                 stock,
                 status,
                 img: imgSrc || "../../images/burger.avif",
-                Canteen: "Mang Tino's Canteen",
+                vendor: "Mang Tino's Canteen",
                 shopId: 1,
                 available: old.available !== false,
                 rating: old.rating || 4.5,
@@ -1000,6 +1000,3 @@
     </script>
   </body>
 </html>
-
-
-
