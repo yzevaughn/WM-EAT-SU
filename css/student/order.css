@@ -147,8 +147,14 @@
 /* ── grid of order cards ── */
 .orders-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+}
+
+@media (max-width: 1200px) {
+  .orders-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* ── single order card ── */

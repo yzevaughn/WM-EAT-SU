@@ -296,6 +296,16 @@ function renderNavbarNotifications(role, opts) {
    (for *-notifications.html pages)
    ═══════════════════════════════════════ */
 
+function clearAllNotifications(role) {
+  const list = getAllNotifications().filter(n => n.role !== role);
+  saveNotifications(list);
+}
+
+/* ═══════════════════════════════════════
+   FULL NOTIFICATIONS PAGE RENDERER
+   (for *-notifications.html pages)
+   ═══════════════════════════════════════ */
+
 function renderNotificationsPage(role, containerEl) {
   if (!containerEl) return;
 
@@ -311,6 +321,9 @@ function renderNotificationsPage(role, containerEl) {
         <p style="font-size:16px;font-weight:600;color:#64748b;margin:0 0 8px;">No notifications yet</p>
         <p style="font-size:13px;margin:0;">Activity related to your orders will appear here.</p>
       </div>`;
+    // Hide clear btn when empty
+    const clearBtn = containerEl.querySelector(".clear-all-notif-btn");
+    if (clearBtn) clearBtn.style.display = "none";
     return;
   }
 
@@ -329,6 +342,10 @@ function renderNotificationsPage(role, containerEl) {
         </div>` : ""}
       </div>
     </a>`).join("");
+
+  // Show clear btn when there are notifications
+  const clearBtn = containerEl.querySelector(".clear-all-notif-btn");
+  if (clearBtn) clearBtn.style.display = "";
 
   // Mark each as read on click
   listEl.querySelectorAll("[data-notif-id]").forEach(el => {
@@ -363,6 +380,73 @@ function renderNotificationsPage(role, containerEl) {
       renderNotificationsPage(role, containerEl);
     };
   }
+
+  // Clear all button
+  if (clearBtn) {
+    clearBtn.onclick = () => {
+      showNotificationConfirm(
+        "Clear All Notifications",
+        "Are you sure you want to permanently delete all your notifications? This action cannot be undone.",
+        () => {
+          clearAllNotifications(role);
+          renderNotificationsPage(role, containerEl);
+        }
+      );
+    };
+  }
+}
+
+/* ═══════════════════════════════════════
+   CONFIRMATION MODAL HELPERS
+   ═══════════════════════════════════════ */
+
+function ensureModalExists() {
+  if (document.getElementById("notifConfirmModal")) return;
+
+  const modalHtml = `
+    <div class="modal" id="notifConfirmModal">
+      <div class="modal-overlay" id="notifConfirmOverlay"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="notifConfirmTitle">Confirm</h2>
+          <button class="modal-close" id="notifConfirmClose"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <p id="notifConfirmMessage">Are you sure?</p>
+          <div class="modal-footer">
+            <button class="btn-modal btn-modal-cancel" id="notifConfirmCancel">Cancel</button>
+            <button class="btn-modal btn-modal-danger" id="notifConfirmBtn">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.insertAdjacentHTML("beforeend", modalHtml);
+
+  // Wire close events
+  const modal = document.getElementById("notifConfirmModal");
+  const close = () => modal.classList.remove("active");
+  
+  document.getElementById("notifConfirmClose").onclick = close;
+  document.getElementById("notifConfirmOverlay").onclick = close;
+  document.getElementById("notifConfirmCancel").onclick = close;
+}
+
+function showNotificationConfirm(title, message, onConfirm) {
+  ensureModalExists();
+  
+  document.getElementById("notifConfirmTitle").textContent = title;
+  document.getElementById("notifConfirmMessage").textContent = message;
+  
+  const confirmBtn = document.getElementById("notifConfirmBtn");
+  const modal = document.getElementById("notifConfirmModal");
+  
+  confirmBtn.onclick = () => {
+    onConfirm();
+    modal.classList.remove("active");
+  };
+  
+  modal.classList.add("active");
 }
 
 /* ═══════════════════════════════════════
