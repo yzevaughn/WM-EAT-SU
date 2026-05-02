@@ -506,11 +506,11 @@
         if (!o.studentPickedUp) {
           if (o.vendorPickedUp) {
             if (o.reportedIssue) {
-              actHtml += `<div style="background:#fff7ed; border:1px solid #fed7aa; color:#c2410c; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px;">
+              actHtml += `<div style="background:#fff7ed; border:1px solid #fed7aa; color:#c2410c; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px; width: 100%;">
                   <i class="fa-solid fa-circle-exclamation"></i> Issue reported. Auto-completion is paused pending vendor review.
                </div>`;
             } else {
-              actHtml += `<div style="background:#eff6ff; border:1px solid #bfdbfe; color:#1d4ed8; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px; width: 100%">
+              actHtml += `<div style="background:#eff6ff; border:1px solid #bfdbfe; color:#1d4ed8; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px; width: 100%;">
                   <i class="fa-solid fa-stopwatch"></i> The vendor has marked this order as picked up. This order will be automatically completed in <span class="auto-complete-timer" data-id="${esc(o.id)}" style="font-weight:bold;">--:--</span>.
                </div>`;
             }
@@ -865,15 +865,9 @@
       if (!order) return;
 
       scanConfirmModal.classList.remove("active");
-      // Mark as completed and set flags for both parties
-      updateOrderStatus(order.id, "completed", { 
-        payment: "Online Payment (Wallet)", 
-        isPaid: true,
-        studentPickedUp: true,
-        vendorPickedUp: true 
-      });
+      updateOrderStatus(order.id, order.status, { payment: "Online Payment (Wallet)", isPaid: true });
       renderOrders();
-      showToast("success", "fa-check-double", "Payment successful! Order completed.");
+      showToast("success", "fa-check-circle", "Payment successful via WMSU Pay!");
     };
 
     /* ── Pickup Modal ── */
