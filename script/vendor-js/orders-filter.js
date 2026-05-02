@@ -238,7 +238,17 @@
     modalHeaderTitle.textContent = cfg.title;
 
     // ── Populate subtitle ──────────────────────────────────
-    modalSubtitle.innerHTML = cfg.subtitle;
+    if (action === "complete") {
+      const orderId = card.dataset.orderFullId || card.dataset.orderId || card.querySelector(".order-id-val")?.innerText;
+      const order = window.getOrders ? window.getOrders().find(o => o.id === orderId) : null;
+      if (order && order.studentPickedUp) {
+        modalSubtitle.innerHTML = `<div style="margin-bottom:12px;color:#22c55e;background:#f0fdf4;padding:10px;border-radius:8px;border:1px solid #bbf7d0;"><i class="fa-solid fa-circle-check"></i> <b>Confirmed:</b> The student has already confirmed this order as picked up.</div>` + cfg.subtitle;
+      } else {
+        modalSubtitle.innerHTML = `<div style="margin-bottom:12px;color:#ef4444;background:#fef2f2;padding:10px;border-radius:8px;border:1px solid #fecaca;"><i class="fa-solid fa-triangle-exclamation"></i> <b>Warning:</b> The student has not yet confirmed this order as picked up.</div>` + cfg.subtitle;
+      }
+    } else {
+      modalSubtitle.innerHTML = cfg.subtitle;
+    }
 
     // ── Populate order detail card ─────────────────────────
     modalDetail.innerHTML = `
@@ -336,13 +346,23 @@
     } else {
       let nextStatus = "";
       let isCancel = false;
+      let extraAttrs = {};
+      let order = window.getOrders ? window.getOrders().find(o => o.id === orderId) : null;
+
       if (action === "accept") nextStatus = "preparing";
-      else if (action === "decline") { nextStatus = "cancelled"; isCancel = true; }
+      else if (action === "decline") { nextStatus = "cancelled"; isCancel = true; extraAttrs = { cancelledByVendor: true }; }
       else if (action === "markReady") nextStatus = "ready";
-      else if (action === "complete") nextStatus = "completed";
+      else if (action === "complete") {
+        extraAttrs = { vendorPickedUp: true, vendorPickedUpAt: Date.now() };
+        if (order && order.studentPickedUp) {
+          nextStatus = "completed";
+        } else {
+          nextStatus = "ready"; 
+        }
+      }
 
       if (window.updateOrderStatus && nextStatus) {
-        window.updateOrderStatus(orderId, nextStatus, isCancel ? { cancelledByVendor: true } : {});
+        window.updateOrderStatus(orderId, nextStatus, extraAttrs);
       } else {
         // Fallback static mutation
         const t = STATUS_TRANSITIONS[action];

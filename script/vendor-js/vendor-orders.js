@@ -78,11 +78,21 @@ function buildActions(order, tab) {
     return `
     <button class="pickup-btn" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);box-shadow:0 3px 10px rgba(37,99,235,.3);"
             data-action="markReady" data-id="${order.id}"><i class="fa-solid fa-bell"></i> Mark Ready</button>`;
-  if (tab === "Ready")
-    return `
-    <button class="pickup-btn" data-action="complete" data-id="${order.id}"><i class="fas fa-bag-shopping"></i> Mark as Picked Up</button>
-    <button class="view-code-btn open-code-btn" data-id="${order.id}" data-code="${order.pickupCode || "----"}">
-      <i class="fa-solid fa-qrcode"></i> View Pickup Code</button>`;
+  if (tab === "Ready") {
+    let actHtml = "";
+    if (!order.vendorPickedUp) {
+      actHtml += `<button class="pickup-btn" data-action="complete" data-id="${order.id}"><i class="fas fa-bag-shopping"></i> Mark as Picked Up</button>`;
+    } else {
+      actHtml += `<div style="font-size:13px; color:#f59e0b; font-weight:600; padding:8px 0; display:flex; align-items:center; gap:6px;">
+                <i class="fa-solid fa-clock"></i> Waiting for Student Confirmation
+              </div>`;
+    }
+    if (order.payment === "Cash on Pickup") {
+       actHtml += `<button class="view-code-btn open-code-btn" data-id="${order.id}" data-code="${order.pickupCode || "----"}" style="margin-top: 8px;">
+      <i class="fa-solid fa-qrcode"></i> Show QR to Scan</button>`;
+    }
+    return actHtml;
+  }
   if (tab === "Completed" || tab === "Cancelled")
     return `
     <button class="remove-btn" data-action="deleteHistory" data-id="${order.id}">
@@ -126,10 +136,24 @@ function buildVendorCard(order) {
     </div>`
     : "";
 
+  let timerHtml = "";
+  if (order.status === "ready" && order.vendorPickedUp && !order.studentPickedUp) {
+    if (order.reportedIssue) {
+       timerHtml = `<div style="background:#fff7ed; border:1px solid #fed7aa; color:#c2410c; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px; width:100%;">
+          <i class="fa-solid fa-circle-exclamation"></i> Issue reported by student. Auto-completion paused.
+       </div>`;
+    } else {
+       timerHtml = `<div style="background:#eff6ff; border:1px solid #bfdbfe; color:#1d4ed8; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px; width:100%;">
+          <i class="fa-solid fa-stopwatch"></i> Waiting for student pickup. Auto-completes in <span class="vendor-auto-complete-timer" data-id="${order.id}" style="font-weight:bold;">--:--</span>.
+       </div>`;
+    }
+  }
+
   return `
     <div class="order-card" data-status="${tab}" data-vendor="${order.vendor}" data-order-id="${shortId}"
          data-order-full-id="${order.id}" data-price="${order.total.toFixed(2)}" data-image="${order.img || ""}">
       <div class="order-card-inner">
+        ${timerHtml}
         <div class="order-card-header">
           <div class="order-title">
             <div class="order-store-icon ${cfg.cls}"><i class="fa-solid ${cfg.icon}"></i></div>
@@ -143,6 +167,7 @@ function buildVendorCard(order) {
           </div>
           <span class="status-badge ${cfg.badge}">${cfg.label}</span>
         </div>
+
         <div class="order-body-wrapper">
           <img src="${order.img || "../../images/burger.avif"}" alt="Food image" class="order-image" onerror="this.style.display='none'" />
           <div class="order-body-info">
@@ -157,7 +182,7 @@ function buildVendorCard(order) {
             ${noteHtml}
           </div>
         </div>
-        <div class="order-total-row"><span>Total: &#8369;${order.total.toFixed(2)}</span></div>
+        <div class="order-total-row"><span>Total: ₱${order.total.toFixed(2)}</span></div>
         <div class="order-actions" style="margin-top:14px;display:flex;gap:8px;">
           ${buildActions(order, tab)}
         </div>
@@ -238,25 +263,34 @@ function wirePickupModal() {
     btn.addEventListener("click", () => {
       const card = btn.closest(".order-card");
       const code = btn.dataset.code;
-      document.getElementById("modalCodeVal").textContent = code;
       document.getElementById("modalCodeOrder").textContent =
         "Order #" + card.dataset.orderId;
       document.getElementById("modalTotalPrice").textContent =
-        "Total: &#8369;" + card.dataset.price;
+        "Total: ₱" + card.dataset.price;
 
-      let img = document.getElementById("modalFoodImage");
-      if (card.dataset.image) {
-        img.src = card.dataset.image;
-        img.style.display = "block";
-      } else {
-        img.style.display = "none";
-      }
+
 
       let itemsList = document.getElementById("modalOrderItems");
       itemsList.innerHTML = "";
       card
         .querySelectorAll(".order-item-row")
         .forEach((r) => itemsList.appendChild(r.cloneNode(true)));
+
+      const qrSection = document.getElementById("vendorQrSection");
+      const qrImage = document.getElementById("vendorQrImage");
+      
+      if (qrSection && qrImage) {
+         const items = Array.from(card.querySelectorAll(".order-item-row")).map(r => r.textContent.trim()).join(", ");
+         const qrData = JSON.stringify({
+            orderId: card.dataset.orderFullId || card.dataset.orderId || btn.dataset.id,
+            customer: card.querySelector(".order-card-title")?.textContent || "Customer",
+            items: items,
+            total: card.dataset.price
+         });
+         
+         qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(qrData);
+         qrSection.style.display = "block";
+      }
 
       document.getElementById("pickupModal").classList.add("active");
       document.body.style.overflow = "hidden";
@@ -869,3 +903,45 @@ document.getElementById("clearWalkinCartBtn")?.addEventListener("click", () => {
 document.getElementById("walkinOverlay")?.addEventListener("click", () => {
   document.getElementById("walkinModal").classList.remove("active");
 });
+
+/* ── Vendor Auto-Complete Timer Logic ── */
+setInterval(() => {
+  const spans = document.querySelectorAll(".vendor-auto-complete-timer");
+  if (spans.length === 0) return;
+  
+  const orders = JSON.parse(localStorage.getItem("wm_eat_su_orders") || "[]");
+  let changed = false;
+
+  spans.forEach(span => {
+    const orderId = span.dataset.id;
+    const order = orders.find(o => o.id === orderId);
+    
+    if (!order || !order.vendorPickedUpAt || order.reportedIssue || order.studentPickedUp || order.status !== "ready") {
+       return;
+    }
+
+    const timeLimit = 5 * 60 * 1000;
+    const timePassed = Date.now() - order.vendorPickedUpAt;
+    const timeLeft = timeLimit - timePassed;
+
+    if (timeLeft <= 0) {
+      span.textContent = "0:00";
+      if (order.status !== "completed") {
+         order.status = "completed";
+         order.studentPickedUp = true;
+         order.autoCompleted = true;
+         changed = true;
+      }
+    } else {
+      const m = Math.floor(timeLeft / 60000);
+      const s = Math.floor((timeLeft % 60000) / 1000);
+      span.textContent = `${m}:${s.toString().padStart(2, '0')}`;
+    }
+  });
+
+  if (changed) {
+    localStorage.setItem("wm_eat_su_orders", JSON.stringify(orders));
+    if (typeof renderVendorOrders === "function") renderVendorOrders();
+    window.dispatchEvent(new Event('storage'));
+  }
+}, 1000);

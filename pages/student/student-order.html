@@ -161,7 +161,8 @@
         <h2>Order History</h2>
         <p class="page-subtitle">Track and manage your campus food orders</p>
 
-        <div class="order-controls" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <div class="order-controls"
+          style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
           <div class="filter-bar" id="categoryTabs">
             <button class="filter-btn active" data-filter="pending">
               <span class="filter-dot pending"></span> Pending
@@ -198,6 +199,144 @@
             <p>We couldn't find any orders matching your filters.</p>
           </div>
           <!-- Dynamic order cards injected here by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCAN MODAL -->
+  <div class="modal" id="scanModal">
+    <div class="modal-overlay" id="scanOverlay"></div>
+    <div class="modal-content" style="max-width:400px;">
+      <div class="modal-header">
+        <h2 style="font-size:18px;font-weight:800;color:#0f172a;margin:0;display:flex;align-items:center;">
+          <i class="fa-solid fa-qrcode" style="margin-right:8px;color:#2563eb;"></i>
+          Scan Vendor QR
+        </h2>
+        <button class="modal-close" id="closeScanModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align:center;">
+        <p style="font-size:14px;color:#64748b;margin-bottom:20px;">
+          Position the vendor's QR code within the frame to switch your payment to Wallet.
+        </p>
+        <div
+          style="background:#000; width:100%; height:250px; border-radius:12px; margin-bottom:20px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;">
+          <!-- Camera frame simulation -->
+          <div
+            style="position:absolute; width:180px; height:180px; border:2px solid rgba(255,255,255,0.5); border-radius:12px;">
+            <div
+              style="position:absolute; top:-2px; left:-2px; width:20px; height:20px; border-top:3px solid #3b82f6; border-left:3px solid #3b82f6; border-top-left-radius:12px;">
+            </div>
+            <div
+              style="position:absolute; top:-2px; right:-2px; width:20px; height:20px; border-top:3px solid #3b82f6; border-right:3px solid #3b82f6; border-top-right-radius:12px;">
+            </div>
+            <div
+              style="position:absolute; bottom:-2px; left:-2px; width:20px; height:20px; border-bottom:3px solid #3b82f6; border-left:3px solid #3b82f6; border-bottom-left-radius:12px;">
+            </div>
+            <div
+              style="position:absolute; bottom:-2px; right:-2px; width:20px; height:20px; border-bottom:3px solid #3b82f6; border-right:3px solid #3b82f6; border-bottom-right-radius:12px;">
+            </div>
+          </div>
+          <!-- Scanning line animation -->
+          <div
+            style="position:absolute; top:10%; left:10%; width:80%; height:2px; background:rgba(59,130,246,0.8); box-shadow:0 0 8px #3b82f6; animation: scanAnim 2s infinite ease-in-out;">
+          </div>
+          <style>
+            @keyframes scanAnim {
+              0% {
+                top: 10%;
+              }
+
+              50% {
+                top: 90%;
+              }
+
+              100% {
+                top: 10%;
+              }
+            }
+          </style>
+
+          <i class="fa-solid fa-camera" style="color:rgba(255,255,255,0.2); font-size:48px;"></i>
+        </div>
+        <button id="simulateScanBtn"
+          style="background:#2563eb; color:#fff; border:none; padding:12px 20px; border-radius:8px; font-weight:600; width:100%; cursor:pointer; transition:all 0.2s;">
+          <i class="fa-solid fa-camera-rotate"></i> Simulate Scan Success
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAYMENT CONFIRMATION MODAL -->
+  <div class="modal" id="scanConfirmModal">
+    <div class="modal-overlay" id="scanConfirmOverlay"></div>
+    <div class="modal-content" style="max-width:400px; padding:0; overflow:hidden;">
+      <div style="background:linear-gradient(135deg, #1e293b, #0f172a); padding:24px; position:relative; color:white;">
+        <button class="modal-close" id="closeScanConfirmModal"
+          style="position:absolute; top:16px; right:16px; color:rgba(255,255,255,0.7); background:rgba(255,255,255,0.1);">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div
+          style="width:56px; height:56px; background:#3b82f6; border-radius:16px; display:flex; align-items:center; justify-content:center; margin-bottom:16px; box-shadow:0 4px 12px rgba(59,130,246,0.3);">
+          <i class="fa-solid fa-store" style="font-size:24px; color:white;"></i>
+        </div>
+        <h2 style="font-size:20px; font-weight:700; margin:0 0 4px 0; color:white;" id="scanConfirmVendor">Vendor Name
+        </h2>
+        <p style="font-size:14px; color:#94a3b8; margin:0; opacity:0.9;">Order #<span id="scanConfirmOrderId"></span>
+        </p>
+      </div>
+
+      <div style="padding:24px;">
+        <div style="text-align:center; margin-bottom:24px;">
+          <div
+            style="font-size:13px; font-weight:600; color:#64748b; margin-bottom:4px; text-transform:uppercase; letter-spacing:1px;">
+            Amount to Pay</div>
+          <div style="font-size:36px; font-weight:800; color:#0f172a; letter-spacing:-1px;" id="scanConfirmTotal">₱0.00
+          </div>
+        </div>
+
+        <div
+          style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:16px; margin-bottom:24px;">
+          <div style="font-size:13px; font-weight:600; color:#475569; margin-bottom:8px;">Order Details</div>
+          <div id="scanConfirmItems" style="font-size:14px; color:#1e293b; line-height:1.6;"></div>
+        </div>
+
+        <button id="scanConfirmPayBtn"
+          style="background:#2563eb; color:white; border:none; padding:14px; border-radius:10px; font-weight:700; font-size:15px; width:100%; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:8px; box-shadow:0 4px 12px rgba(37,99,235,0.2);">
+          <i class="fa-solid fa-wallet"></i> Confirm Payment
+        </button>
+        <button id="scanConfirmCancelBtn"
+          style="background:transparent; color:#64748b; border:none; padding:12px; border-radius:10px; font-weight:600; font-size:14px; width:100%; cursor:pointer; margin-top:8px;">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- REPORT ISSUE MODAL -->
+  <div class="modal" id="reportModal">
+    <div class="modal-overlay" id="reportOverlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i class="fa-solid fa-triangle-exclamation" style="color:#ef4444; margin-right:8px;"></i> Report Issue</h2>
+        <button class="modal-close" id="closeReportModal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:14px; color:#64748b; margin-bottom:16px;">
+          If the vendor marked the order as picked up but you have not received it, please let us know below.
+        </p>
+        <div class="form-group">
+          <label>Reason for report</label>
+          <textarea class="form-control" id="reportReason" rows="4"
+            placeholder="E.g., I arrived at the counter but my food is not here."></textarea>
+        </div>
+        <div class="form-actions">
+          <button class="btn-cancel" id="cancelReportBtn">Cancel</button>
+          <button class="btn-submit" id="submitReportBtn" style="background:#ef4444;">Submit Report</button>
         </div>
       </div>
     </div>
@@ -360,26 +499,58 @@
       let actHtml = "";
       if (o.status === "pending") {
         actHtml = `
-            <button class="cancel-btn js-cancel" data-id="${esc(o.id)}">
+            <button class="cancel-btn js-cancel" data-id="${esc(o.id)}" style="width:100%; justify-content:center;">
               <i class="fa-solid fa-times"></i> Cancel Order
             </button>`;
       } else if (o.status === "ready") {
-        actHtml = `
-            <button class="pickup-btn js-mark-picked" data-id="${esc(o.id)}">
-              <i class="fa-solid fa-bag-shopping"></i> Mark as Picked Up
-            </button>
-            <button class="view-code-btn js-view-code" data-id="${esc(o.id)}">
-              <i class="fa-solid fa-qrcode"></i> View Pickup Code
-            </button>`;
+        if (!o.studentPickedUp) {
+          if (o.vendorPickedUp) {
+            if (o.reportedIssue) {
+              actHtml += `<div style="background:#fff7ed; border:1px solid #fed7aa; color:#c2410c; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px;">
+                  <i class="fa-solid fa-circle-exclamation"></i> Issue reported. Auto-completion is paused pending vendor review.
+               </div>`;
+            } else {
+              actHtml += `<div style="background:#eff6ff; border:1px solid #bfdbfe; color:#1d4ed8; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px; width: 100%">
+                  <i class="fa-solid fa-stopwatch"></i> The vendor has marked this order as picked up. This order will be automatically completed in <span class="auto-complete-timer" data-id="${esc(o.id)}" style="font-weight:bold;">--:--</span>.
+               </div>`;
+            }
+          }
+
+          let buttonsRow = `
+              <button class="pickup-btn js-mark-picked" data-id="${esc(o.id)}" style="justify-content:center; ${o.vendorPickedUp ? 'background: #22c55e;' : ''}">
+                <i class="fa-solid fa-bag-shopping"></i> Mark as Picked Up
+              </button>`;
+
+          if (o.payment === "Cash on Pickup") {
+            buttonsRow += `
+              <button class="view-code-btn js-pay-wallet" data-id="${esc(o.id)}" style="justify-content:center; margin:0;">
+                <i class="fa-solid fa-qrcode"></i> Pay with Wallet (Scan)
+              </button>`;
+          }
+
+          actHtml += `<div style="display:flex; justify-content:space-between; width:100%; gap:10px;">${buttonsRow}</div>`;
+
+          if (o.vendorPickedUp && !o.reportedIssue) {
+            actHtml += `
+              <button class="remove-btn js-report-issue" data-id="${esc(o.id)}" style="width:100%; justify-content:center; margin:0; margin-top:10px;">
+                <i class="fa-solid fa-triangle-exclamation"></i> Report Issue
+              </button>`;
+          }
+        } else {
+          actHtml = `
+              <div style="font-size:13px; color:#f59e0b; font-weight:600; padding:8px 0; display:flex; align-items:center; gap:6px;">
+                <i class="fa-solid fa-clock"></i> Waiting for Vendor Confirmation
+              </div>`;
+        }
       } else if (o.status === "completed") {
         actHtml = `
-            <button class="order-again-btn js-order-again" data-id="${esc(o.id)}">
+            <button class="order-again-btn js-order-again" data-id="${esc(o.id)}" style="flex:1; justify-content:center;">
               <i class="fa-solid fa-cart-plus"></i> Order Again
             </button>
-            <button class="leave-review-btn js-review" data-id="${esc(o.id)}">
+            <button class="leave-review-btn js-review" data-id="${esc(o.id)}" style="flex:1; justify-content:center;">
               <i class="fa-regular fa-star"></i> Leave a Review
             </button>
-            <button class="remove-btn js-remove" data-id="${esc(o.id)}">
+            <button class="remove-btn js-remove" data-id="${esc(o.id)}" style="width:100%; justify-content:center; margin:0;">
               <i class="fa-solid fa-trash-can"></i> Remove
             </button>`;
       } else if (o.status === "cancelled") {
@@ -390,7 +561,7 @@
                </p>`
           : "";
         actHtml = vendorMsg + `
-            <button class="remove-btn js-remove" data-id="${esc(o.id)}">
+            <button class="remove-btn js-remove" data-id="${esc(o.id)}" style="width:100%; justify-content:center; margin:0;">
               <i class="fa-solid fa-trash-can"></i> Remove
             </button>`;
       }
@@ -514,12 +685,60 @@
         });
       });
 
+      /* Report Issue */
+      document.querySelectorAll(".js-report-issue").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const order = getOrders().find(o => o.id === btn.dataset.id);
+          if (!order) return;
+
+          window.currentReportOrder = order;
+          document.getElementById("reportReason").value = "";
+          document.getElementById("reportModal").classList.add("active");
+        });
+      });
+
       /* Mark as Picked Up (card button) */
       document.querySelectorAll(".js-mark-picked").forEach(btn => {
         btn.addEventListener("click", () => {
-          updateOrderStatus(btn.dataset.id, "completed");
-          renderOrders();
-          showToast("success", "fa-bag-shopping", "Order marked as picked up!");
+          const order = getOrders().find(o => o.id === btn.dataset.id);
+          if (!order) return;
+
+          let msg = "Are you sure you want to mark this order as picked up?";
+          if (!order.vendorPickedUp) {
+            msg = `<div style="margin-bottom:12px;color:#ef4444;background:#fef2f2;padding:10px;border-radius:8px;border:1px solid #fecaca;"><i class="fa-solid fa-triangle-exclamation"></i> <b>Warning:</b> The vendor has not yet confirmed this order as picked up.</div>` + msg;
+          } else {
+            msg = `<div style="margin-bottom:12px;color:#22c55e;background:#f0fdf4;padding:10px;border-radius:8px;border:1px solid #bbf7d0;"><i class="fa-solid fa-circle-check"></i> <b>Confirmed:</b> The vendor has already confirmed this order as picked up.</div>` + msg;
+          }
+
+          showConfirmation(
+            "Mark as Picked Up",
+            msg,
+            () => {
+              const isWallet = order.payment && order.payment.includes("Wallet");
+              if (isWallet || order.vendorPickedUp) {
+                updateOrderStatus(order.id, "completed", { studentPickedUp: true, vendorPickedUp: true });
+                renderOrders();
+                showToast("success", "fa-check-double", "Order completed!");
+              } else {
+                updateOrderStatus(order.id, order.status, { studentPickedUp: true });
+                renderOrders();
+                showToast("success", "fa-check", "Marked as picked up. Waiting for vendor confirmation.");
+              }
+            },
+            order,
+            { btnColor: "green", btnIcon: "fa-solid fa-check", btnText: "Confirm Pickup" }
+          );
+        });
+      });
+
+      /* Pay with Wallet (Scan) */
+      document.querySelectorAll(".js-pay-wallet").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const order = getOrders().find(o => o.id === btn.dataset.id);
+          if (!order) return;
+
+          window.currentScanOrder = order; // store for the simulate button
+          document.getElementById("scanModal").classList.add("active");
         });
       });
 
@@ -614,6 +833,49 @@
       }
     }
 
+    /* ── Scan Modals ── */
+    const scanModal = document.getElementById("scanModal");
+    const scanConfirmModal = document.getElementById("scanConfirmModal");
+
+    document.getElementById("closeScanModal").onclick = () => scanModal.classList.remove("active");
+    document.getElementById("scanOverlay").onclick = () => scanModal.classList.remove("active");
+
+    document.getElementById("closeScanConfirmModal").onclick = () => scanConfirmModal.classList.remove("active");
+    document.getElementById("scanConfirmOverlay").onclick = () => scanConfirmModal.classList.remove("active");
+    document.getElementById("scanConfirmCancelBtn").onclick = () => scanConfirmModal.classList.remove("active");
+
+    document.getElementById("simulateScanBtn").onclick = () => {
+      scanModal.classList.remove("active");
+      const order = window.currentScanOrder;
+      if (!order) return;
+
+      document.getElementById("scanConfirmVendor").textContent = order.vendor;
+      document.getElementById("scanConfirmOrderId").textContent = order.id.slice(-6).toUpperCase();
+      document.getElementById("scanConfirmTotal").textContent = "₱" + order.total.toFixed(2);
+
+      document.getElementById("scanConfirmItems").innerHTML = order.items.map(it =>
+        `<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:14px;color:#334155;font-weight:500;"><span>${it.qty} × ${esc(it.name)}</span><span>₱${(it.price * it.qty).toFixed(2)}</span></div>`
+      ).join("");
+
+      scanConfirmModal.classList.add("active");
+    };
+
+    document.getElementById("scanConfirmPayBtn").onclick = () => {
+      const order = window.currentScanOrder;
+      if (!order) return;
+
+      scanConfirmModal.classList.remove("active");
+      // Mark as completed and set flags for both parties
+      updateOrderStatus(order.id, "completed", { 
+        payment: "Online Payment (Wallet)", 
+        isPaid: true,
+        studentPickedUp: true,
+        vendorPickedUp: true 
+      });
+      renderOrders();
+      showToast("success", "fa-check-double", "Payment successful! Order completed.");
+    };
+
     /* ── Pickup Modal ── */
     const pickupModal = document.getElementById("pickupModal");
     document.getElementById("closePickupModal").onclick = () =>
@@ -664,9 +926,26 @@
     const confirmModal = document.getElementById("confirmModal");
     let confirmCallback = null;
 
-    function showConfirmation(title, message, callback, order = null) {
+    function showConfirmation(title, message, callback, order = null, options = {}) {
       document.getElementById("confirmTitle").textContent = title;
-      document.getElementById("confirmMessage").textContent = message;
+      document.getElementById("confirmMessage").innerHTML = message;
+
+      const btn = document.getElementById("submitConfirmBtn");
+      const icon = document.getElementById("confirmBtnIcon");
+      const text = document.getElementById("confirmBtnText");
+
+      if (options.btnColor === "green") {
+        btn.style.border = "1px solid #22c55e";
+        btn.style.color = "#fff";
+        btn.style.background = "#22c55e";
+      } else {
+        btn.style.border = "1px solid #fecaca";
+        btn.style.color = "#ef4444";
+        btn.style.background = "#fff";
+      }
+
+      icon.className = options.btnIcon || "fas fa-trash";
+      text.textContent = options.btnText || "Confirm";
 
       let detailHtml = "";
       if (order) {
@@ -703,6 +982,9 @@
       confirmCallback = callback;
       confirmModal.classList.add("active");
     }
+    document.getElementById("closeConfirmModal").onclick = () => {
+      confirmModal.classList.remove("active"); confirmCallback = null;
+    };
     document.getElementById("cancelConfirmBtn").onclick = () => {
       confirmModal.classList.remove("active"); confirmCallback = null;
     };
@@ -746,12 +1028,57 @@
     /* ── Init ── */
     renderOrders();
 
+    /* ── Report Modal ── */
+    const reportModal = document.getElementById("reportModal");
+    document.getElementById("closeReportModal").onclick = () => reportModal.classList.remove("active");
+    document.getElementById("reportOverlay").onclick = () => reportModal.classList.remove("active");
+    document.getElementById("cancelReportBtn").onclick = () => reportModal.classList.remove("active");
+
+    document.getElementById("submitReportBtn").onclick = () => {
+      const order = window.currentReportOrder;
+      if (!order) return;
+      const reason = document.getElementById("reportReason").value.trim();
+      if (!reason) {
+        showToast("error", "fa-triangle-exclamation", "Please provide a reason.");
+        return;
+      }
+
+      reportModal.classList.remove("active");
+      updateOrderStatus(order.id, order.status, { reportedIssue: true, reportReason: reason });
+      renderOrders();
+      showToast("success", "fa-check", "Issue reported. Auto-completion paused.");
+    };
+
+    /* ── Auto-Complete Timer ── */
+    setInterval(() => {
+      document.querySelectorAll(".auto-complete-timer").forEach(span => {
+        const orderId = span.dataset.id;
+        const order = getOrders().find(o => o.id === orderId);
+        if (!order || !order.vendorPickedUpAt || order.reportedIssue) return;
+
+        const timeLimit = 5 * 60 * 1000;
+        const timePassed = Date.now() - order.vendorPickedUpAt;
+        const timeLeft = timeLimit - timePassed;
+
+        if (timeLeft <= 0) {
+          span.textContent = "0:00";
+          updateOrderStatus(order.id, "completed", { studentPickedUp: true, autoCompleted: true });
+          renderOrders();
+          showToast("success", "fa-check-double", "Order auto-completed!");
+        } else {
+          const m = Math.floor(timeLeft / 60000);
+          const s = Math.floor((timeLeft % 60000) / 1000);
+          span.textContent = `${m}:${s.toString().padStart(2, '0')}`;
+        }
+      });
+    }, 1000);
+
     /* ── Live notification navbar ── */
     function refreshStudentNavNotifs() {
       if (typeof renderNavbarNotifications === 'function') {
         renderNavbarNotifications("student", {
-          listEl:     document.querySelector(".notification-list"),
-          badgeEl:    document.querySelector(".notification-badge"),
+          listEl: document.querySelector(".notification-list"),
+          badgeEl: document.querySelector(".notification-badge"),
           markReadEl: document.querySelector(".mark-read-btn"),
         });
       }

@@ -344,49 +344,14 @@
                 </button>
               </div>
               <div class="modal-body">
-                <div class="pickup-code-card">
-                  <div class="pickup-code-label">Customer pickup code</div>
-                  <div
-                    style="
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      gap: 12px;
-                      margin: 10px 0;
-                    "
-                  >
-                    <div
-                      class="pickup-code-value"
-                      id="modalCodeVal"
-                      style="margin: 0"
-                    >
-                      ----
-                    </div>
-                    <button
-                      id="copyCodeBtn"
-                      style="
-                        background: rgba(255, 255, 255, 0.2);
-                        border: 1px solid rgba(255, 255, 255, 0.4);
-                        color: #fff;
-                        padding: 8px;
-                        border-radius: 6px;
-                        cursor: pointer;
-                      "
-                    >
-                      <i class="fa-regular fa-copy"></i>
-                    </button>
-                  </div>
-                  <div class="pickup-code-order" id="modalCodeOrder">
-                    Order #--
-                  </div>
+                <div style="text-align: center; margin-bottom: 20px;">
+                  <div id="modalCodeOrder" style="font-size: 18px; font-weight: 700; color: #0f172a;">Order #--</div>
                 </div>
-                <img
-                  src=""
-                  id="modalFoodImage"
-                  class="modal-order-image"
-                  alt="Order items"
-                  style="display: none"
-                />
+                <div id="vendorQrSection" style="margin: 20px 0; display: none; text-align: center;">
+                  <div style="font-size: 13px; font-weight: 600; color: #64748b; margin-bottom: 8px;">SCAN TO PAY VIA WALLET</div>
+                  <img id="vendorQrImage" src="" alt="Scan to Pay QR" style="width: 150px; height: 150px; border-radius: 8px; border: 1px solid #e2e8f0; padding: 4px; background: #fff;" />
+                </div>
+
                 <div class="modal-info-row">
                   <span class="modal-info-label">Status</span>
                   <span class="modal-info-value" style="color: #22c55e"
