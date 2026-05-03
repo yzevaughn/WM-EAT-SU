@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WM EAT SU - Admin Analytics</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
+    <link rel="stylesheet" href="../../css/navbar.css" />
+    <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css" />
+    <link rel="stylesheet" href="../../css/admin-css/analytics.css" />
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+
+    <!-- TOP NAVBAR (Consistent) -->
+    <div class="top-nav">
+        <!-- LEFT: hamburger + logo -->
+        <div class="nav-left">
+            <label for="menu-checkbox" class="menu-toggle">
+                <i class="fa-solid fa-bars"></i>
+            </label>
+            <a href="admin-dashboard.html" class="logo">
+                <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+                <span class="logo-text">WM EAT SU</span>
+            </a>
+        </div>
+
+        <div class="nav-center"></div>
+
+        <!-- RIGHT: profile -->
+        <div class="nav-right">
+            <!-- Notifications -->
+            <div class="notification-dropdown">
+                <button class="nav-icon-btn" aria-label="Notifications">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="notification-menu">
+                    <div class="notification-header">
+                        <h3>Notifications</h3>
+                        <button class="mark-read-btn">Mark all as read</button>
+                    </div>
+                    <div class="notification-list">
+                        <a href="admin-dashboard.html" class="notification-item unread">
+                            <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
+                            <div class="notif-content">
+                                <p class="notif-title">New Report Filed</p>
+                                <p class="notif-desc">A student has submitted a new complaint.</p>
+                                <span class="notif-time">2 mins ago</span>
+                            </div>
+                        </a>
+                        <a href="admin-dashboard.html" class="notification-item unread">
+                            <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
+                            <div class="notif-content">
+                                <p class="notif-title">Application Pending</p>
+                                <p class="notif-desc">Canteen application #543 is awaiting review.</p>
+                                <span class="notif-time">1 hour ago</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="notification-footer">
+                        <a href="admin-notifications.html">View all notifications</a>
+                    </div>
+                </div>
+            </div>
+            <div class="profile">
+                <div class="profile-info">
+                    <span class="profile-name">Evangelista, Vaughn</span>
+                    <span class="email">vaughn.student@wm.edu.ph</span>
+                </div>
+                <div class="profile-dropdown">
+                    <button class="profile-btn">
+                        <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" />
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="../../index.html" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layout">
+        <!-- SIDEBAR (Consistent) -->
+        <div class="left-nav" id="sidebar">
+            <div class="sidebar-logo">
+                <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+                <span class="logo-text">WM EAT SU</span>
+            </div>
+            <ul class="nav-list">
+                <li>
+                    <a href="admin-dashboard.html" class="nav-link">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="student-applications.html" class="nav-link">
+                        <i class="fa-solid fa-user-check"></i>
+                        <span>Student Applications</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="canteen-applications.html" class="nav-link">
+                        <i class="fa-solid fa-store"></i>
+                        <span>Canteen Applications</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="complaints.html" class="nav-link">
+                        <i class="fa-solid fa-comment-dots"></i>
+                        <span>Complaints</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="admin-approval.html" class="nav-link">
+                        <i class="fa-solid fa-utensils"></i>
+                        <span>Menu</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="admin-analytics.html" class="nav-link active">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <header class="page-header">
+                <div class="header-left">
+                    <h1>Platform Analytics</h1>
+                    <p class="subtitle">Insights and performance tracking for the entire ecosystem</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-report"><i class="fa-solid fa-download"></i> Export Data</button>
+                    <button class="btn-report primary"><i class="fa-solid fa-print"></i> Generate Report</button>
+                </div>
+            </header>
+
+            <!-- TABS -->
+            <div class="analytics-tabs">
+                <button class="tab-btn active" id="vendorTab">
+                    <i class="fa-solid fa-shop"></i> Vendor Analytics
+                </button>
+                <button class="tab-btn" id="studentTab">
+                    <i class="fa-solid fa-graduation-cap"></i> Student Analytics
+                </button>
+            </div>
+
+            <!-- VENDOR VIEW -->
+            <div id="vendorView">
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-label">Total Revenue</span>
+                            <div class="kpi-icon-wrapper kpi-green"><i class="fa-solid fa-peso-sign"></i></div>
+                        </div>
+                        <div class="kpi-value">₱1,245,000</div>
+                        <div class="kpi-footer trend-up">
+                            <i class="fa-solid fa-arrow-trend-up"></i> 12% vs last month
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-label">Total Orders</span>
+                            <div class="kpi-icon-wrapper kpi-blue"><i class="fa-solid fa-bag-shopping"></i></div>
+                        </div>
+                        <div class="kpi-value">8,432</div>
+                        <div class="kpi-footer trend-up">
+                            <i class="fa-solid fa-arrow-trend-up"></i> 5.4% vs last month
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-label">Active Vendors</span>
+                            <div class="kpi-icon-wrapper kpi-purple"><i class="fa-solid fa-store"></i></div>
+                        </div>
+                        <div class="kpi-value">42</div>
+                        <div class="kpi-footer">
+                            <span style="color: var(--text-muted)">Stable performance</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-label">Avg. Rating</span>
+                            <div class="kpi-icon-wrapper kpi-amber"><i class="fa-solid fa-star"></i></div>
+                        </div>
+                        <div class="kpi-value">4.8</div>
+                        <div class="kpi-footer trend-up">
+                            <i class="fa-solid fa-arrow-trend-up"></i> 0.2 points
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fa-solid fa-trophy"></i> Top Performing Vendors</h2>
+                        <button class="btn-report">View All Vendors</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-grid">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Vendor / Canteen</th>
+                                    <th>Total Orders</th>
+                                    <th>Revenue</th>
+                                    <th>Status</th>
+                                    <th>Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>#1</strong></td>
+                                    <td>
+                                        <div class="entity-cell">
+                                            <img src="../../images/burger.avif" class="entity-img" alt="Canteen">
+                                            <div class="entity-info">
+                                                <span class="entity-name">Canteen 1 (Main)</span>
+                                                <span class="entity-sub">Main Hub</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>2,140</td>
+                                    <td><strong>₱342,100</strong></td>
+                                    <td><span class="badge badge-success">Top Seller</span></td>
+                                    <td><i class="fa-solid fa-star" style="color: #f59e0b"></i> 4.9</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#2</strong></td>
+                                    <td>
+                                        <div class="entity-cell">
+                                            <img src="../../images/pancit.avif" class="entity-img" alt="Canteen">
+                                            <div class="entity-info">
+                                                <span class="entity-name">Sisig Express</span>
+                                                <span class="entity-sub">Food Court</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>1,850</td>
+                                    <td><strong>₱210,450</strong></td>
+                                    <td><span class="badge badge-success">High Traffic</span></td>
+                                    <td><i class="fa-solid fa-star" style="color: #f59e0b"></i> 4.8</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#3</strong></td>
+                                    <td>
+                                        <div class="entity-cell">
+                                            <img src="../../images/shake.avif" class="entity-img" alt="Canteen">
+                                            <div class="entity-info">
+                                                <span class="entity-name">Brew Haven</span>
+                                                <span class="entity-sub">South Gate</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>1,240</td>
+                                    <td><strong>₱185,200</strong></td>
+                                    <td><span class="badge badge-blue">Growing</span></td>
+                                    <td><i class="fa-solid fa-star" style="color: #f59e0b"></i> 4.7</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STUDENT VIEW -->
+            <div id="studentView" style="display: none;">
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-label">Active Students</span>
+                            <div class="kpi-icon-wrapper kpi-blue"><i class="fa-solid fa-graduation-cap"></i></div>
+                        </div>
+                        <div class="kpi-value">2,840</div>
+                        <div class="kpi-footer trend-up">
+                            <i class="fa-solid fa-arrow-trend-up"></i> 8% growth
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-label">Avg. Daily Spend</span>
+                            <div class="kpi-icon-wrapper kpi-green"><i class="fa-solid fa-wallet"></i></div>
+                        </div>
+                        <div class="kpi-value">₱142.00</div>
+                        <div class="kpi-footer trend-up">
+                            <i class="fa-solid fa-arrow-trend-up"></i> ₱12 increase
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-label">Peak Traffic Day</span>
+                            <div class="kpi-icon-wrapper kpi-amber"><i class="fa-solid fa-calendar-day"></i></div>
+                        </div>
+                        <div class="kpi-value">Wednesday</div>
+                        <div class="kpi-footer">
+                            <span style="color: var(--text-muted)">High purchasing power</span>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-label">System Health</span>
+                            <div class="kpi-icon-wrapper kpi-purple"><i class="fa-solid fa-bolt"></i></div>
+                        </div>
+                        <div class="kpi-value">99.9%</div>
+                        <div class="kpi-footer">
+                            <span style="color: var(--text-muted)">Excellent stability</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fa-solid fa-users"></i> Most Active Students (Top Spenders)</h2>
+                        <button class="btn-report">Full Student List</button>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-grid">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Student Account</th>
+                                    <th>Email Address</th>
+                                    <th>Total Orders</th>
+                                    <th>Total Spent</th>
+                                    <th>Last Activity</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>#1</strong></td>
+                                    <td>
+                                        <div class="entity-cell">
+                                            <img src="../../images/pfp.jpg" class="entity-img" alt="Student">
+                                            <div class="entity-info">
+                                                <span class="entity-name">Vaughn Evangelista</span>
+                                                <span class="entity-sub">Senior Student</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>vaughn.student@wm.edu.ph</td>
+                                    <td>156</td>
+                                    <td><strong>₱15,240.00</strong></td>
+                                    <td>2 hours ago</td>
+                                    <td><span class="badge badge-success">Power User</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#2</strong></td>
+                                    <td>
+                                        <div class="entity-cell">
+                                            <img src="../../images/pfp.jpg" class="entity-img" alt="Student">
+                                            <div class="entity-info">
+                                                <span class="entity-name">Maria Clara</span>
+                                                <span class="entity-sub">Junior Student</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>m.clara@wm.edu.ph</td>
+                                    <td>142</td>
+                                    <td><strong>₱12,850.00</strong></td>
+                                    <td>1 day ago</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#3</strong></td>
+                                    <td>
+                                        <div class="entity-cell">
+                                            <img src="../../images/pfp.jpg" class="entity-img" alt="Student">
+                                            <div class="entity-info">
+                                                <span class="entity-name">Jose Rizal</span>
+                                                <span class="entity-sub">Freshman</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>j.rizal@wm.edu.ph</td>
+                                    <td>98</td>
+                                    <td><strong>₱9,200.00</strong></td>
+                                    <td>3 days ago</td>
+                                    <td><span class="badge badge-blue">Consistent</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fa-solid fa-chart-bar"></i> Weekly Traffic Distribution</h2>
+                    </div>
+                    <div class="chart-box">
+                        <canvas id="studentActivityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching logic
+        const vendorTab = document.getElementById('vendorTab');
+        const studentTab = document.getElementById('studentTab');
+        const vendorView = document.getElementById('vendorView');
+        const studentView = document.getElementById('studentView');
+
+        vendorTab.addEventListener('click', () => {
+            vendorTab.classList.add('active');
+            studentTab.classList.remove('active');
+            vendorView.style.display = 'block';
+            studentView.style.display = 'none';
+        });
+
+        studentTab.addEventListener('click', () => {
+            studentTab.classList.add('active');
+            vendorTab.classList.remove('active');
+            studentView.style.display = 'block';
+            vendorView.style.display = 'none';
+            // Trigger chart update if hidden previously
+            if(window.activityChart) window.activityChart.update();
+        });
+
+        // Initialize Student Traffic Chart
+        const ctx = document.getElementById('studentActivityChart').getContext('2d');
+        window.activityChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Campus Traffic (Orders)',
+                    data: [1200, 1400, 2100, 1600, 1800, 900, 600],
+                    backgroundColor: (context) => {
+                        const chart = context.chart;
+                        const {ctx, chartArea} = chart;
+                        if (!chartArea) return null;
+                        return context.index === 2 ? '#ef4444' : '#64748b'; // Highlight peak (Wed)
+                    },
+                    borderRadius: 8,
+                    barThickness: 40
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#0f172a',
+                        padding: 12,
+                        titleFont: { size: 14, weight: 'bold' },
+                        bodyFont: { size: 13 }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#f1f5f9', drawBorder: false },
+                        ticks: { font: { family: 'Inter', size: 12 }, color: '#94a3b8' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { font: { family: 'Inter', size: 12 }, color: '#94a3b8' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -588,7 +588,9 @@
                 <img src="${item.img || "../../images/burger.avif"}" alt="${item.name}"
                      onerror="this.src='../../images/burger.avif'" />
                 <span class="category-badge">${catDisp}</span>
-                ${!avail && status === "active" ? '<span style="position:absolute;top:8px;right:8px;background:#ef4444;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;">OFF</span>' : ""}
+                ${avail 
+                  ? '<span style="position:absolute;top:12px;left:12px;background:#10b981;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;box-shadow:0 2px 4px rgba(0,0,0,0.1);z-index:1;">Available</span>' 
+                  : '<span style="position:absolute;top:12px;left:12px;background:#ef4444;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;box-shadow:0 2px 4px rgba(0,0,0,0.1);z-index:1;">Unavailable</span>'}
               </div>
               <div class="item-info" style="flex:1">
                 <div style="display:flex;justify-content:space-between;align-items:flex-start;">
@@ -632,6 +634,7 @@
                   <label class="stock-toggle" style="margin-right:auto;" title="${avail ? "Disable (hide from students)" : "Enable (show to students)"}">
                     <input type="checkbox" class="avail-check" data-id="${item.id}" ${avail ? "checked" : ""}>
                     <div class="toggle-slider"></div>
+                    <span style="font-size:12px; font-weight:700; color:#475569; text-transform:uppercase; letter-spacing:0.5px;">Listed</span>
                   </label>
                 `
                 }
@@ -639,7 +642,7 @@
                 ${
                   !isRejected
                     ? `
-                  <button class="edit-btn" data-id="${item.id}"><i class="fas fa-pencil"></i></button>
+                  <button class="edit-btn" data-id="${item.id}"><i class="fas fa-pencil"></i> Edit <i class="fas fa-chevron-right" style="font-size:10px; margin-left:4px; opacity:.7;"></i></button>
                   <button class="delete-btn" data-id="${item.id}"><i class="fas fa-trash"></i></button>
                 `
                     : `
