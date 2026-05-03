@@ -376,8 +376,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h2>
-                  <i id="modalHeaderIcon" style="margin-right: 8px"></i
-                  ><span id="modalHeaderTitle"></span>
+                  <i id="modalHeaderIcon" style="margin-right: 8px"></i><span id="modalHeaderTitle"></span>
                 </h2>
                 <button class="modal-close" id="closeConfirmModal">
                   <i class="fa-solid fa-xmark"></i>
@@ -395,6 +394,31 @@
                   </button>
                   <button class="btn-cancel" id="cancelConfirmModal">
                     Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ORDER DETAILS MODAL -->
+          <div class="modal" id="orderDetailsModal">
+            <div class="modal-overlay" id="orderDetailOverlay"></div>
+            <div class="modal-content" style="max-width: 500px">
+              <div class="modal-header">
+                <h2>
+                  <i class="fa-solid fa-receipt" style="color: #ef4444; margin-right: 8px"></i>
+                  Order Details
+                </h2>
+                <button class="modal-close" id="closeOrderDetailModal">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div id="orderDetailContent"></div>
+                <div class="form-actions" style="margin-top: 24px;">
+                  <button class="btn-submit" id="closeDetailBtn" style="width: 100%;">
+                    <i class="fa-solid fa-circle-check"></i>
+                    Close Details
                   </button>
                 </div>
               </div>

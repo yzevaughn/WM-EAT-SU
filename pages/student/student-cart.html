@@ -291,6 +291,7 @@
 
     <!-- Shared cart module must load first -->
     <script src="../../script/notifications.js"></script>
+    <script src="../../script/wallet.js"></script>
     <script src="../../script/student/cart.js"></script>
 
     <script>
@@ -318,23 +319,34 @@
 
         updateAllCartBadges();
 
+        const cartContainer = document.querySelector(".cart-container");
+        const orderSummary = document.querySelector(".order-summary");
+
         if (cart.length === 0) {
+          if (cartContainer) cartContainer.style.display = "block";
+          if (orderSummary) orderSummary.style.display = "none";
           container.innerHTML = `
             <div style="
               display:flex;flex-direction:column;align-items:center;
-              justify-content:center;gap:16px;padding:60px 20px;
-              color:#94a3b8;text-align:center;">
-              <i class="fa-solid fa-cart-shopping" style="font-size:3rem;opacity:.35;"></i>
-              <p style="font-size:15px;margin:0;">Your cart is empty.</p>
+              justify-content:center;gap:24px;padding:100px 20px;
+              color:#94a3b8;text-align:center; min-height: 60vh;">
+              <i class="fa-solid fa-cart-shopping" style="font-size:5rem;opacity:.2;margin-bottom:10px;"></i>
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                <p style="font-size:22px; font-weight:800; color:#1e293b; margin:0;">Your cart is empty</p>
+                <p style="font-size:15px; color:#64748b; margin:0;">Looks like you haven't added anything to your cart yet.</p>
+              </div>
               <a href="student-browse-food.html"
-                 style="padding:10px 22px;border-radius:10px;background:#e61524;
-                        color:#fff;font-weight:600;font-size:14px;text-decoration:none;">
-                Browse Food
+                 style="padding:14px 32px; border-radius:14px; background:linear-gradient(135deg, #e61524, #c41318);
+                        color:#fff; font-weight:700; font-size:15px; text-decoration:none; box-shadow: 0 4px 15px rgba(230, 21, 36, 0.25); transition: all 0.2s;">
+                Browse Food Now
               </a>
             </div>`;
           recalc();
           return;
         }
+
+        if (cartContainer) cartContainer.style.display = "grid";
+        if (orderSummary) orderSummary.style.display = "block";
 
         container.innerHTML = cart
           .map(
@@ -391,11 +403,28 @@
           if (totalEl) totalEl.textContent = "₱" + lineTotal.toFixed(2);
           grandTotal += lineTotal;
         });
+
+        // Update Wallet Balance
+        const balance = typeof getWalletBalance === 'function' ? getWalletBalance() : 245.50;
+        const balanceEls = document.querySelectorAll(".summary-row span:last-child");
+        // Find the one that corresponds to Wallet Balance
+        document.querySelectorAll(".summary-row").forEach(row => {
+          if (row.innerText.includes("Wallet Balance")) {
+            row.querySelector("span:last-child").textContent = "₱" + balance.toFixed(2);
+          }
+        });
+
         document.getElementById("subtotalAmt").textContent =
           "₱" + grandTotal.toFixed(2);
         document.getElementById("totalAmt").textContent =
           "₱" + grandTotal.toFixed(2);
       }
+
+      window.addEventListener("storage", (e) => {
+        if (e.key === "student_wm_eat_su_balance") {
+          recalc();
+        }
+      });
 
       /* ── Attach qty / remove event handlers ── */
       function attachEvents() {

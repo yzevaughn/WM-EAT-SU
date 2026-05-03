@@ -277,7 +277,7 @@
 /* ── pagination ── */
 .pagination {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   gap: 6px;
   margin-top: 32px;
@@ -295,6 +295,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
+  line-height: 1;
   transition: all 0.2s;
   font-family: inherit;
 }

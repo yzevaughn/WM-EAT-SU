@@ -59,7 +59,7 @@
       </div>
 
       <!-- RIGHT: profile -->
-            <div class="nav-right">
+      <div class="nav-right">
         <!-- Notifications -->
         <div class="notification-dropdown">
           <button class="nav-icon-btn" aria-label="Notifications">
@@ -73,26 +73,38 @@
             </div>
             <div class="notification-list">
               <a href="student-order.html" class="notification-item unread">
-                <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
+                <div class="notif-icon green">
+                  <i class="fa-solid fa-check"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Order #1234 Ready</p>
-                  <p class="notif-desc">Your order from Canteen 1 is ready for pickup.</p>
+                  <p class="notif-desc">
+                    Your order from Canteen 1 is ready for pickup.
+                  </p>
                   <span class="notif-time">2 mins ago</span>
                 </div>
               </a>
               <a href="student-wallet.html" class="notification-item unread">
-                <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
+                <div class="notif-icon blue">
+                  <i class="fa-solid fa-info"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Wallet Top-up</p>
-                  <p class="notif-desc">Successfully added &#8369;500.00 to your wallet.</p>
+                  <p class="notif-desc">
+                    Successfully added &#8369;500.00 to your wallet.
+                  </p>
                   <span class="notif-time">1 hour ago</span>
                 </div>
               </a>
               <a href="student-order.html" class="notification-item">
-                <div class="notif-icon orange"><i class="fa-solid fa-fire-burner"></i></div>
+                <div class="notif-icon orange">
+                  <i class="fa-solid fa-fire-burner"></i>
+                </div>
                 <div class="notif-content">
                   <p class="notif-title">Order Preparing</p>
-                  <p class="notif-desc">Vendor has started preparing your order.</p>
+                  <p class="notif-desc">
+                    Vendor has started preparing your order.
+                  </p>
                   <span class="notif-time">2 hours ago</span>
                 </div>
               </a>
@@ -185,11 +197,23 @@
       <div class="main-content">
         <div class="browse-food-section">
           <!-- SHOP PROFILE HEADER (Initially hidden) -->
-          <div class="shop-profile-header" id="shopProfileHeader" style="display: none;">
+          <div
+            class="shop-profile-header"
+            id="shopProfileHeader"
+            style="display: none"
+          >
             <div class="shop-profile-cover">
-              <img id="spCover" src="" alt="Shop Cover" onerror="this.src='../../images/silog.avif'"/>
+              <img
+                id="spCover"
+                src=""
+                alt="Shop Cover"
+                onerror="this.src = '../../images/silog.avif'"
+              />
               <div class="shop-profile-overlay"></div>
-              <a href="student-browse-food.html?tab=shops" class="shop-profile-back">
+              <a
+                href="student-browse-food.html?tab=shops"
+                class="shop-profile-back"
+              >
                 <i class="fa-solid fa-arrow-left"></i> Back to Shops
               </a>
               <a href="#" class="shop-profile-map-btn" id="spMapBtn">
@@ -200,13 +224,21 @@
               <div class="shop-profile-details">
                 <h2 class="shop-profile-name" id="spName">Shop Name</h2>
                 <div class="shop-profile-meta">
-                  <span class="shop-profile-meta-item"><i class="fa-solid fa-tags"></i> <span id="spCat">Category</span></span>
+                  <span class="shop-profile-meta-item"
+                    ><i class="fa-solid fa-tags"></i>
+                    <span id="spCat">Category</span></span
+                  >
                   <span>Â·</span>
-                  <span class="shop-profile-meta-item"><i class="fa-solid fa-location-dot"></i> <span id="spLoc">Location</span></span>
+                  <span class="shop-profile-meta-item"
+                    ><i class="fa-solid fa-location-dot"></i>
+                    <span id="spLoc">Location</span></span
+                  >
                 </div>
               </div>
               <div class="shop-profile-rating-box">
-                <div class="shop-profile-rating-val"><i class="fa-solid fa-star"></i> <span id="spRate">0.0</span></div>
+                <div class="shop-profile-rating-val">
+                  <i class="fa-solid fa-star"></i> <span id="spRate">0.0</span>
+                </div>
                 <div class="shop-profile-rating-label">Rating</div>
               </div>
             </div>
@@ -443,23 +475,27 @@
           switchView("shops");
         } else if (params.get("shop")) {
           const shopId = parseInt(params.get("shop"));
-          const shop   = shops.find(s => s.id === shopId);
+          const shop = shops.find((s) => s.id === shopId);
           if (shop) {
-            foods    = foods.filter(f => f.shopId === shopId);
+            foods = foods.filter((f) => f.shopId === shopId);
             filtered = [...foods];
-            
+
             // Hide standard headers
             document.getElementById("browseHeader").style.display = "none";
-            if(document.getElementById("viewToggleWrapper")) document.getElementById("viewToggleWrapper").style.display = "none";
-            
+            if (document.getElementById("viewToggleWrapper"))
+              document.getElementById("viewToggleWrapper").style.display =
+                "none";
+
             // Show new profile header
             document.getElementById("shopProfileHeader").style.display = "flex";
             document.getElementById("spName").textContent = shop.name;
-            document.getElementById("spCat").textContent  = shop.category;
-            document.getElementById("spLoc").textContent  = shop.loc || "Campus";
-            document.getElementById("spRate").textContent = shop.rating.toFixed(1);
-            document.getElementById("spCover").src        = shop.img;
-            document.getElementById("spMapBtn").href      = "student-campus-map.html?focus=" + shop.id;
+            document.getElementById("spCat").textContent = shop.category;
+            document.getElementById("spLoc").textContent = shop.loc || "Campus";
+            document.getElementById("spRate").textContent =
+              shop.rating.toFixed(1);
+            document.getElementById("spCover").src = shop.img;
+            document.getElementById("spMapBtn").href =
+              "student-campus-map.html?focus=" + shop.id;
           }
         }
       })();
@@ -790,8 +826,3 @@
     </script>
   </body>
 </html>
-
-
-
-
-

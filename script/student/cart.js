@@ -87,19 +87,27 @@ function placeOrder(instructions, payment) {
   const cart = getCart();
   if (cart.length === 0) return null;
 
+  // Group items by vendor
+  const groups = {};
+  cart.forEach(item => {
+    const v = item.vendor || "Campus Vendor";
+    if (!groups[v]) groups[v] = [];
+    groups[v].push(item);
+  });
+
   const orders = getOrders();
   const timestamp = Date.now();
   const createdOrders = [];
 
-  cart.forEach((item, index) => {
-    const total = item.price * item.qty;
-    const vendor = item.vendor || "Campus Vendor";
+  Object.keys(groups).forEach((vendor, index) => {
+    const items = groups[vendor];
+    const total = items.reduce((sum, it) => sum + it.price * it.qty, 0);
     const orderId = "ORD-" + timestamp + "-" + index;
     const pickupCode = Math.random().toString(36).substring(2, 6).toUpperCase();
 
     const order = {
       id: orderId,
-      items: [JSON.parse(JSON.stringify(item))],
+      items: JSON.parse(JSON.stringify(items)),
       total,
       status: "pending",
       placedAt: new Date().toISOString(),
@@ -107,11 +115,21 @@ function placeOrder(instructions, payment) {
       payment,
       vendor,
       pickupCode,
-      img: item.img || "",
+      img: items[0].img || "", // Use first item image as preview
       customerRole: window.location.href.includes("/outsider/") ? "outsider" : "student",
       removedByStudent: false,
-      removedByVendor: false
+      removedByVendor: false,
+      isPaid: (payment === "Wallet")
     };
+
+    if (order.isPaid) {
+      if (typeof updateWalletBalance === 'function') {
+        updateWalletBalance(order.total, false);
+        if (typeof addWalletTransaction === 'function') {
+          addWalletTransaction(`Payment - Order #${orderId.slice(-6).toUpperCase()}`, order.total, false, 'payment');
+        }
+      }
+    }
 
     orders.unshift(order);
     createdOrders.push(order);
@@ -134,8 +152,35 @@ function updateOrderStatus(orderId, status, extra) {
   const order = orders.find(o => o.id === orderId);
   if (order) {
     const prevStatus = order.status;
+    const prevIsPaid = order.isPaid;
+
     order.status = status;
     if (extra) Object.assign(order, extra);
+
+    // Wallet Integration: Refund if cancelled
+    if (order.status === 'cancelled' && prevStatus !== 'cancelled') {
+      const isWalletPayment = order.isPaid || (order.payment && order.payment.includes("Wallet"));
+      if (isWalletPayment) {
+        if (typeof updateWalletBalance === 'function') {
+          updateWalletBalance(order.total, true);
+          if (typeof addWalletTransaction === 'function') {
+            addWalletTransaction(`Refund - Order #${order.id.slice(-6).toUpperCase()}`, order.total, true, 'refunded');
+          }
+          order.isPaid = false; // Prevent double refund
+        }
+      }
+    }
+
+    // Wallet Integration: Payment if marked as paid (e.g. via QR)
+    if (order.isPaid && !prevIsPaid) {
+      if (typeof updateWalletBalance === 'function') {
+        updateWalletBalance(order.total, false);
+        if (typeof addWalletTransaction === 'function') {
+          addWalletTransaction(`Payment - Order #${order.id.slice(-6).toUpperCase()}`, order.total, false, 'payment');
+        }
+      }
+    }
+
     saveOrders(orders);
 
     // Fire customer notifications on status transitions

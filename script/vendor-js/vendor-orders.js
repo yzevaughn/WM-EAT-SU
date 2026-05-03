@@ -3,6 +3,15 @@
    Reads student orders from the shared LS key and renders them
    ---------------------------------------------------------- */
 
+/* --- Shared Helpers --- */
+function esc(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 /* --- Toast --- */
 function showVendorToast(type, icon, msg) {
   const colours = { success: "#10b981", error: "#ef4444", info: "#3b82f6" };
@@ -101,7 +110,7 @@ function buildActions(order, tab) {
 }
 
 /* --- Build one order card HTML --- */
-function buildVendorCard(order) {
+function buildVendorCard(order, sequence) {
   const tab = window.STATUS_MAP[order.status] || "Pending";
   const cfg = STATUS_CFG[tab] || STATUS_CFG.Pending;
   const dt = new Date(order.placedAt);
@@ -114,6 +123,7 @@ function buildVendorCard(order) {
     " • " +
     dt.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" });
   const shortId = order.id.slice(-6).toUpperCase();
+  const FALLBACK = "https://placehold.co/80x80/f8fafc/94a3b8?text=Food";
 
   // Determine payment method label and styling
   const rawPayment = order.payment || "Wallet";
@@ -122,17 +132,11 @@ function buildVendorCard(order) {
   const payIcon = isCash ? "fa-money-bill-wave" : "fa-credit-card";
   const payBadgeClass = isCash ? "badge-cash" : "badge-online";
 
-  const itemsHtml = (order.items || [])
-    .map(
-      (it) =>
-        `<div class="order-item-row" style="display:flex;justify-content:space-between;color:#334155;font-weight:600;font-size:14px;padding:3px 0;"><span>${it.qty} × ${it.name}</span><span>&#8369;${(it.price * it.qty).toFixed(2)}</span></div>`,
-    )
-    .join("");
   const noteHtml = order.instructions
     ? `
     <div class="order-instruction" style="font-size:12px;color:#64748b;margin-top:8px;padding:6px 8px;background:#f8fafc;border-radius:4px;border-left:2px solid #cbd5e1;">
       <i class="fa-regular fa-comment-dots" style="margin-right:4px;color:#94a3b8"></i>
-      <strong>Note:</strong> ${order.instructions}
+      <strong>Note:</strong> ${esc(order.instructions)}
     </div>`
     : "";
 
@@ -149,6 +153,14 @@ function buildVendorCard(order) {
     }
   }
 
+  const headerIcon = (tab === "Pending" || tab === "Preparing")
+    ? `<span style="font-weight:800; font-size:16px; font-family: 'Inter', sans-serif;">${sequence}</span>`
+    : `<i class="fa-solid ${cfg.icon}"></i>`;
+  const isFirstActive = sequence === 1 && (order.status === "pending" || order.status === "preparing");
+  const priorityBadge = isFirstActive
+    ? `<span class="priority-badge" style="background:#ef4444; color:#fff; font-size:10px; font-weight:800; padding:2px 6px; border-radius:4px; text-transform:uppercase; margin-left:8px; animation: pulse 2s infinite; display: flex; align-items: center; gap: 4px;"><i class="fa-solid fa-fire-burner"></i> First Order</span>`
+    : "";
+
   return `
     <div class="order-card" data-status="${tab}" data-vendor="${order.vendor}" data-order-id="${shortId}"
          data-order-full-id="${order.id}" data-price="${order.total.toFixed(2)}" data-image="${order.img || ""}">
@@ -156,9 +168,12 @@ function buildVendorCard(order) {
         ${timerHtml}
         <div class="order-card-header">
           <div class="order-title">
-            <div class="order-store-icon ${cfg.cls}"><i class="fa-solid ${cfg.icon}"></i></div>
+            <div class="order-store-icon ${cfg.cls}">${headerIcon}</div>
             <div style="display:flex; flex-direction:column; gap:2px;">
-              <span class="order-card-title">Order #${shortId}</span>
+              <div style="display:flex; align-items:center;">
+                <span class="order-card-title">Order #${shortId}</span>
+                ${priorityBadge}
+              </div>
               <div class="pay-method-badge ${payBadgeClass}">
                 <i class="fa-solid ${payIcon}"></i>
                 <span>${payLabel}</span>
@@ -168,19 +183,48 @@ function buildVendorCard(order) {
           <span class="status-badge ${cfg.badge}">${cfg.label}</span>
         </div>
 
-        <div class="order-body-wrapper">
-          <img src="${order.img || "../../images/burger.avif"}" alt="Food image" class="order-image" onerror="this.style.display='none'" />
-          <div class="order-body-info">
-            <div class="order-meta">
-              <span style="display:flex;align-items:center;gap:4px;margin-bottom:4px;">
-                <i class="fa-solid fa-hashtag"></i>
-                <span class="order-id-val" style="font-weight:700;color:#1e293b;background:#f1f5f9;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:13px;">${shortId}</span>
-              </span>
-              <span><i class="fa-regular fa-calendar"></i> ${dateStr}</span>
-            </div>
-            <div class="order-items">${itemsHtml}</div>
-            ${noteHtml}
+        <div class="order-body-wrapper" style="flex-direction: column; align-items: stretch; gap: 12px;">
+          <div class="order-meta" style="margin-bottom: 0;">
+            <span style="display:flex;align-items:center;gap:4px;">
+              <i class="fa-solid fa-hashtag"></i>
+              <span class="order-id-val" style="font-weight:700;color:#1e293b;background:#f1f5f9;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:13px;">${shortId}</span>
+            </span>
+            <span><i class="fa-regular fa-calendar"></i> ${dateStr}</span>
           </div>
+
+          <div class="horizontal-images" style="display:flex; gap:10px; overflow-x:auto; padding-bottom:4px; scrollbar-width: none;">
+            ${(order.items || [])
+              .map(
+                (it) => `
+              <img
+                src="${esc(it.img || FALLBACK)}"
+                alt="${esc(it.name)}"
+                style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; flex-shrink: 0; border: 1px solid #f1f5f9; box-shadow: 0 2px 8px rgba(0,0,0,0.05);"
+                onerror="this.src='${FALLBACK}'"
+              />
+            `,
+              )
+              .join("")}
+          </div>
+
+          <div class="order-items-display" style="background: #f8fafc; padding: 10px; border-radius: 10px; border: 1px solid #f1f5f9;">
+            ${
+              order.items && order.items.length > 1
+                ? `<div style="display:flex; justify-content:space-between; align-items:center; font-size:14px; font-weight:600; color:#475569;">
+                  <span>${order.items.length} items purchased</span>
+                  <button class="js-view-details" data-id="${esc(order.id)}" style="background:#fff; border:1.5px solid #e2e8f0; color:#ef4444; cursor:pointer; width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; transition:all 0.2s;" title="View Details">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                 </div>`
+                : `<div class="order-item-row" style="padding:0; display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size:14px; color:#475569; font-weight:600;">${order.items && order.items[0] ? order.items[0].qty + " × " + esc(order.items[0].name) : "No items"}</span>
+                  <button class="js-view-details" data-id="${esc(order.id)}" style="background:#fff; border:1.5px solid #e2e8f0; color:#ef4444; cursor:pointer; width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; transition:all 0.2s;" title="View Details">
+                    <i class="fa-solid fa-eye"></i>
+                  </button>
+                 </div>`
+            }
+          </div>
+          ${noteHtml}
         </div>
         <div class="order-total-row"><span>Total: ₱${order.total.toFixed(2)}</span></div>
         <div class="order-actions" style="margin-top:14px;display:flex;gap:8px;">
@@ -192,9 +236,9 @@ function buildVendorCard(order) {
 
 /* --- Global Render engine --- */
 window.renderVendorOrders = function () {
-  const orders = (typeof getOrders === "function" ? getOrders() : []).filter(
-    (o) => !o.removedByVendor,
-  ); // from cart.js
+  const orders = (typeof getOrders === "function" ? getOrders() : [])
+    .filter((o) => !o.removedByVendor)
+    .sort((a, b) => new Date(a.placedAt) - new Date(b.placedAt)); // Sort by time oldest first
   const list = document.getElementById("ordersList");
   if (!list) return;
 
@@ -204,7 +248,7 @@ window.renderVendorOrders = function () {
   if (orders.length === 0) {
     if (emptyDiv) emptyDiv.style.display = "flex";
   } else {
-    const htmlCards = orders.map(buildVendorCard).join("");
+    const htmlCards = orders.map((o, i) => buildVendorCard(o, i + 1)).join("");
     if (emptyDiv) emptyDiv.style.display = "none";
     list.insertAdjacentHTML("beforeend", htmlCards);
   }
@@ -255,6 +299,77 @@ window.renderVendorOrders = function () {
     }
   }
 
+  // Wire View Details
+  document.querySelectorAll(".js-view-details").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const orderId = btn.dataset.id;
+      const order = (typeof getOrders === "function" ? getOrders() : []).find(o => o.id === orderId);
+      if (!order) return;
+
+      const itemsHtml = order.items
+        .map(
+          (it) => `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; background:#f8fafc; border-radius:12px; margin-bottom:8px; border:1px solid #f1f5f9;">
+            <div style="display:flex; gap:12px; align-items:center;">
+              <img src="${esc(it.img || "")}" style="width:50px; height:50px; border-radius:8px; object-fit:cover;" onerror="this.src='https://placehold.co/50x50?text=Food'" />
+              <div>
+                <div style="font-weight:700; color:#1e293b; font-size:14px;">${esc(it.name)}</div>
+                <div style="font-size:12px; color:#64748b;">${it.qty} × ₱${it.price.toFixed(2)}</div>
+              </div>
+            </div>
+            <div style="font-weight:700; color:#0f172a;">₱${(it.price * it.qty).toFixed(2)}</div>
+          </div>`,
+        )
+        .join("");
+
+      const content = `
+        <div style="margin-bottom:20px; padding-bottom:15px; border-bottom:1px dashed #e2e8f0;">
+          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+            <span style="color:#64748b; font-size:13px;">Order ID</span>
+            <span style="font-family:monospace; font-weight:700; color:#1e293b;">#${esc(order.id.slice(-6).toUpperCase())}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+            <span style="color:#64748b; font-size:13px;">Date</span>
+            <span style="font-weight:600; color:#1e293b;">${new Date(order.placedAt).toLocaleString()}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+            <span style="color:#64748b; font-size:13px;">Status</span>
+            <span class="status-badge ${order.status}">${order.status.toUpperCase()}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span style="color:#64748b; font-size:13px;">Payment</span>
+            <span style="font-weight:600; color:#1e293b;">${order.payment}</span>
+          </div>
+        </div>
+
+        <div style="margin-bottom:15px; font-weight:700; color:#0f172a; font-size:14px;">Items Summary</div>
+        <div style="max-height:300px; overflow-y:auto; padding-right:5px;">
+          ${itemsHtml}
+        </div>
+
+        <div style="margin-top:20px; padding:15px; background:#f1f5f9; border-radius:12px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-weight:700; color:#475569;">Total Amount</span>
+            <span style="font-size:20px; font-weight:800; color:#ef4444;">₱${order.total.toFixed(2)}</span>
+          </div>
+        </div>
+        
+        ${
+          order.instructions
+            ? `
+        <div style="margin-top:15px; padding:12px; background:#fffbeb; border-radius:10px; border:1px solid #fef3c7;">
+          <div style="font-size:12px; font-weight:700; color:#b45309; margin-bottom:4px;">Special Instructions:</div>
+          <div style="font-size:13px; color:#92400e;">${esc(order.instructions)}</div>
+        </div>`
+            : ""
+        }
+      `;
+
+      document.getElementById("orderDetailContent").innerHTML = content;
+      document.getElementById("orderDetailsModal").classList.add("active");
+    });
+  });
+
   wirePickupModal();
 };
 
@@ -304,6 +419,14 @@ const cmClose = () => {
 };
 document.getElementById("closePickupModal")?.addEventListener("click", cmClose);
 document.getElementById("pickupOverlay")?.addEventListener("click", cmClose);
+
+const closeDetails = () => {
+  document.getElementById("orderDetailsModal").classList.remove("active");
+  document.body.style.overflow = "";
+};
+document.getElementById("closeOrderDetailModal")?.addEventListener("click", closeDetails);
+document.getElementById("orderDetailOverlay")?.addEventListener("click", closeDetails);
+document.getElementById("closeDetailBtn")?.addEventListener("click", closeDetails);
 
 document.getElementById("clearAllVendorBtn")?.addEventListener("click", () => {
   const activeBtn = document.querySelector(".filter-btn.active");
