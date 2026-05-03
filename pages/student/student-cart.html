@@ -177,6 +177,11 @@
             </a>
           </li>
           <li>
+            <a href="student-vouchers.html" class="nav-link">
+              <i class="fa-solid fa-ticket"></i><span>Vouchers</span>
+            </a>
+          </li>
+          <li>
             <a href="student-wallet.html" class="nav-link">
               <i class="fa-solid fa-wallet"></i><span>Wallet</span>
             </a>
@@ -234,13 +239,84 @@
               </div>
             </div>
 
+            <!-- PROMO CODE SECTION -->
+            <div
+              class="promo-section"
+              style="
+                margin-top: 20px;
+                padding: 15px;
+                background: #f8fafc;
+                border: 1px dashed #cbd5e1;
+                border-radius: 12px;
+              "
+            >
+              <label
+                style="
+                  font-size: 13px;
+                  font-weight: 700;
+                  color: #475569;
+                  margin-bottom: 8px;
+                  display: block;
+                "
+                >Promo Code</label
+              >
+              <div style="display: flex; gap: 8px">
+                <input
+                  type="text"
+                  id="promo-code"
+                  placeholder="Enter code (e.g. SAVE10)"
+                  style="
+                    flex: 1;
+                    padding: 10px;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 8px;
+                    font-size: 14px;
+                    outline: none;
+                  "
+                />
+                <button
+                  id="apply-promo-btn"
+                  style="
+                    padding: 0 16px;
+                    background: #0f172a;
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    font-weight: 600;
+                    font-size: 13px;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                  "
+                >
+                  Apply
+                </button>
+              </div>
+              <div
+                id="promo-msg"
+                style="
+                  font-size: 12px;
+                  margin-top: 8px;
+                  display: none;
+                  font-weight: 500;
+                "
+              ></div>
+            </div>
+
             <div class="summary-details">
               <div class="summary-row">
                 <span>Subtotal</span><span id="subtotalAmt">₱0.00</span>
               </div>
+              <div
+                class="summary-row"
+                id="discountRow"
+                style="display: none; color: #22c55e; font-weight: 600"
+              >
+                <span>Discount</span><span id="discountAmt">-₱0.00</span>
+              </div>
               <div class="summary-row">
                 <span>Wallet Balance</span><span>₱245.50</span>
               </div>
+
               <div class="summary-row total">
                 <span>Total</span><span id="totalAmt">₱0.00</span>
               </div>
@@ -406,8 +482,7 @@
 
         // Update Wallet Balance
         const balance = typeof getWalletBalance === 'function' ? getWalletBalance() : 245.50;
-        const balanceEls = document.querySelectorAll(".summary-row span:last-child");
-        // Find the one that corresponds to Wallet Balance
+        // Update summary rows
         document.querySelectorAll(".summary-row").forEach(row => {
           if (row.innerText.includes("Wallet Balance")) {
             row.querySelector("span:last-child").textContent = "₱" + balance.toFixed(2);
@@ -416,8 +491,23 @@
 
         document.getElementById("subtotalAmt").textContent =
           "₱" + grandTotal.toFixed(2);
+
+        // Apply existing promo if any
+        const discountRow = document.getElementById("discountRow");
+        const discountAmt = document.getElementById("discountAmt");
+        let finalTotal = grandTotal;
+
+        if (window.appliedPromo) {
+          const discount = calculateDiscount(grandTotal, window.appliedPromo, getCart());
+          finalTotal = grandTotal - discount;
+          discountRow.style.display = "flex";
+          discountAmt.textContent = "-₱" + discount.toFixed(2);
+        } else {
+          discountRow.style.display = "none";
+        }
+
         document.getElementById("totalAmt").textContent =
-          "₱" + grandTotal.toFixed(2);
+          "₱" + finalTotal.toFixed(2);
       }
 
       window.addEventListener("storage", (e) => {
@@ -477,6 +567,33 @@
                 showToast("info", "fa-trash-can", "Cart cleared.");
               },
             );
+          };
+        }
+
+        // Apply Promo
+        const applyPromoBtn = document.getElementById("apply-promo-btn");
+        if (applyPromoBtn) {
+          applyPromoBtn.onclick = () => {
+            const code = document.getElementById("promo-code").value.trim();
+            const msgEl = document.getElementById("promo-msg");
+
+            const promo = validatePromoCode(code);
+            if (!promo) {
+              window.appliedPromo = null;
+              msgEl.textContent = "Invalid promo code.";
+              msgEl.style.color = "#ef4444";
+              msgEl.style.display = "block";
+              recalc();
+              return;
+            }
+
+            window.appliedPromo = promo;
+            window.appliedPromoCode = code.toUpperCase();
+            msgEl.textContent = `Applied! ${promo.label} saved.`;
+            msgEl.style.color = "#22c55e";
+            msgEl.style.display = "block";
+            recalc();
+            showToast("success", "fa-tag", "Promo code applied!");
           };
         }
       }
@@ -543,8 +660,11 @@
                         </div></div>`;
         summaryHtml += `<div style="font-size:14px;color:#64748b;">Are you sure you want to place this order via <strong>${payment}</strong>?</div>`;
 
+        const promoCode = window.appliedPromoCode || null;
+
         showConfirmation("Place Order", summaryHtml, () => {
-          const order = placeOrder(instructions, payment);
+          const order = placeOrder(instructions, payment, promoCode);
+
           if (order) {
             renderCart(); // cart is now empty; re-render shows empty state
             showToast(
