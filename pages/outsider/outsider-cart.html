@@ -33,7 +33,8 @@
         </a>
       </div>
 
-      <div class="nav-center"></div><!-- RIGHT: profile -->
+      <div class="nav-center"></div>
+      <!-- RIGHT: profile -->
       <div class="nav-right">
         <!-- Notifications -->
         <div class="notification-dropdown">
@@ -454,11 +455,13 @@
         });
 
         // Update Wallet Balance
-        const balance = typeof getWalletBalance === 'function' ? getWalletBalance() : 245.50;
+        const balance =
+          typeof getWalletBalance === "function" ? getWalletBalance() : 245.5;
         // Update summary rows
-        document.querySelectorAll(".summary-row").forEach(row => {
+        document.querySelectorAll(".summary-row").forEach((row) => {
           if (row.innerText.includes("Wallet Balance")) {
-            row.querySelector("span:last-child").textContent = "₱" + balance.toFixed(2);
+            row.querySelector("span:last-child").textContent =
+              "₱" + balance.toFixed(2);
           }
         });
 
@@ -472,8 +475,12 @@
         let finalTotal = grandTotal;
 
         if (window.appliedPromoCode) {
-          const promo = validatePromoCode(window.appliedPromoCode, grandTotal, totalQty);
-          
+          const promo = validatePromoCode(
+            window.appliedPromoCode,
+            grandTotal,
+            totalQty,
+          );
+
           if (!promo || promo.error) {
             // Requirements no longer met (e.g. item removed)
             if (window.appliedPromo) {
@@ -481,7 +488,11 @@
               msgEl.style.color = "#ef4444";
               msgEl.style.display = "block";
               window.appliedPromo = null;
-              showToast("error", "fa-tag", "Voucher removed: requirements not met.");
+              showToast(
+                "error",
+                "fa-tag",
+                "Voucher removed: requirements not met.",
+              );
             }
           } else {
             window.appliedPromo = promo;
@@ -492,7 +503,11 @@
         }
 
         if (window.appliedPromo) {
-          const discount = calculateDiscount(grandTotal, window.appliedPromo, getCart());
+          const discount = calculateDiscount(
+            grandTotal,
+            window.appliedPromo,
+            getCart(),
+          );
           finalTotal = grandTotal - discount;
           discountRow.style.display = "flex";
           discountAmt.textContent = "-₱" + discount.toFixed(2);
@@ -571,7 +586,10 @@
             const code = document.getElementById("promo-code").value.trim();
             const msgEl = document.getElementById("promo-msg");
             const cart = getCart();
-            const currentTotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const currentTotal = cart.reduce(
+              (sum, item) => sum + item.price * item.qty,
+              0,
+            );
             const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
             const promo = validatePromoCode(code, currentTotal, totalQty);
             if (!promo || promo.error) {
@@ -642,8 +660,9 @@
           .value.trim();
         const payment = document.getElementById("payment-method").value;
         let totalAmt = 0;
-        let summaryHtml = '<div style="text-align:left; max-height:200px; overflow-y:auto; margin-bottom:15px; border:1px solid #e2e8f0; padding:10px; border-radius:8px; background:#f8fafc;">';
-        cart.forEach(item => {
+        let summaryHtml =
+          '<div style="text-align:left; max-height:200px; overflow-y:auto; margin-bottom:15px; border:1px solid #e2e8f0; padding:10px; border-radius:8px; background:#f8fafc;">';
+        cart.forEach((item) => {
           const lineTotal = item.qty * item.price;
           totalAmt += lineTotal;
           summaryHtml += `<div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:13px; color:#475569;">
@@ -667,7 +686,7 @@
             showToast(
               "success",
               "fa-check-circle",
-              "Order placed! Redirecting to Orders..."
+              "Order placed! Redirecting to Orders...",
             );
             setTimeout(() => {
               window.location.href = "outsider-order.html";
@@ -693,4 +712,3 @@
     </script>
   </body>
 </html>
-

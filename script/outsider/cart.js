@@ -22,7 +22,12 @@ const PROMO_CODES = {
   WMSU50: { type: "fixed", value: 50, label: "₱50 Off", minPurchase: 150 },
   SAVE10: { type: "percent", value: 0.1, label: "10% Off", minPurchase: 0 },
   WELCOME: { type: "fixed", value: 20, label: "₱20 Off", minPurchase: 50 },
-  FREE: { type: "percent", value: 1.0, label: "100% Off (Testing)", minPurchase: 0 },
+  FREE: {
+    type: "percent",
+    value: 1.0,
+    label: "100% Off (Testing)",
+    minPurchase: 0,
+  },
 };
 
 function validatePromoCode(code, total = 0, itemCount = 0) {
@@ -39,7 +44,9 @@ function validatePromoCode(code, total = 0, itemCount = 0) {
   const staticPromo = PROMO_CODES[upperCode];
   if (staticPromo) {
     if (total < (staticPromo.minPurchase || 0)) {
-      return { error: `Minimum purchase of ₱${staticPromo.minPurchase} required.` };
+      return {
+        error: `Minimum purchase of ₱${staticPromo.minPurchase} required.`,
+      };
     }
     return staticPromo;
   }
@@ -51,7 +58,9 @@ function validatePromoCode(code, total = 0, itemCount = 0) {
   if (vendorPromo) {
     // Check minimum purchase if vendor promo has it
     if (total < (vendorPromo.minPurchase || 0)) {
-      return { error: `Minimum purchase of ₱${vendorPromo.minPurchase} required.` };
+      return {
+        error: `Minimum purchase of ₱${vendorPromo.minPurchase} required.`,
+      };
     }
     // 1. Check assignment restriction
     if (vendorPromo.assignmentType === "specific" && vendorPromo.assignedTo) {
@@ -153,7 +162,7 @@ function markPromoCodeAsUsed(code) {
   let claimed = [];
   try {
     claimed = JSON.parse(localStorage.getItem(claimedKey)) || [];
-  } catch (e) { }
+  } catch (e) {}
 
   if (claimed.includes(upperCode)) {
     claimed = claimed.filter((c) => c !== upperCode);
@@ -168,7 +177,7 @@ function returnPromoCode(code) {
   let claimed = [];
   try {
     claimed = JSON.parse(localStorage.getItem(claimedKey)) || [];
-  } catch (e) { }
+  } catch (e) {}
 
   if (!claimed.includes(upperCode)) {
     claimed.push(upperCode);
@@ -258,8 +267,8 @@ function placeOrder(instructions, payment, promoCode = null) {
   const grandTotal = cart.reduce((sum, it) => sum + it.price * it.qty, 0);
   const itemCount = cart.reduce((sum, it) => sum + it.qty, 0);
   const globalPromo = validatePromoCode(promoCode, grandTotal, itemCount);
-  const promoObj = (globalPromo && !globalPromo.error) ? globalPromo : null;
-  
+  const promoObj = globalPromo && !globalPromo.error ? globalPromo : null;
+
   // Calculate total discount available for the whole cart if it's a fixed amount
   let remainingDiscount = 0;
   if (promoObj && promoObj.type === "fixed") {
@@ -281,7 +290,7 @@ function placeOrder(instructions, payment, promoCode = null) {
   Object.keys(groups).forEach((vendor, index) => {
     const items = groups[vendor];
     const total = items.reduce((sum, it) => sum + it.price * it.qty, 0);
-    
+
     let discount = 0;
     if (promoObj) {
       if (promoObj.type === "percent") {
@@ -1322,6 +1331,13 @@ function updateAllCartBadges() {
     badge.style.display = cartCount > 0 ? "" : "none";
   });
 
+  /* ── Dashboard: Wallet Balance stat card ── */
+  const walletStat = document.querySelector(".stat-card.green .stat-value");
+  if (walletStat) {
+    const balance = typeof getWalletBalance === "function" ? getWalletBalance() : 245.5;
+    walletStat.textContent = "₱" + balance.toFixed(2);
+  }
+
   /* ── Dashboard: Cart Items stat card ── */
   const cartStat = document.querySelector(".stat-card.blue .stat-value");
   if (cartStat) cartStat.textContent = cartCount;
@@ -1330,8 +1346,20 @@ function updateAllCartBadges() {
   const pendingStat = document.querySelector(".stat-card.orange .stat-value");
   if (pendingStat) pendingStat.textContent = pendingCount;
 
+  /* ── Dashboard: Total Orders stat card ── */
+  const totalStat = document.querySelector(".stat-card.red .stat-value");
+  if (totalStat) {
+    const isOutsider = window.location.href.includes("/outsider/");
+    const totalOrders = getOrders().filter((o) => {
+      return isOutsider
+        ? o.customerRole === "outsider"
+        : o.customerRole !== "outsider";
+    }).length;
+    totalStat.textContent = totalOrders;
+  }
+
   /* ── Dashboard: "View Cart" quick-action text ── */
-  document.querySelectorAll('a[href="student-cart.html"]').forEach((link) => {
+  document.querySelectorAll('a[href="outsider-cart.html"]').forEach((link) => {
     const p = link.querySelector("p");
     if (p) {
       p.textContent =

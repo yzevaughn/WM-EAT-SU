@@ -30,7 +30,8 @@
         </a>
       </div>
 
-      <div class="nav-center"></div><div class="nav-right">
+      <div class="nav-center"></div>
+      <div class="nav-right">
         <!-- Notifications -->
         <div class="notification-dropdown">
           <button class="nav-icon-btn" aria-label="Notifications">
@@ -156,7 +157,8 @@
           </li>
           <li>
             <a href="outsider-campus-map.html" class="nav-link active">
-              <i class="fa-solid fa-map-location-dot"></i><span>Campus Map</span>
+              <i class="fa-solid fa-map-location-dot"></i
+              ><span>Campus Map</span>
             </a>
           </li>
         </ul>
@@ -237,7 +239,7 @@
               </div>
               <div class="detail-row">
                 <i class="fa-solid fa-star"></i>
-                <span id="vRate">4.5 Â· Highly Rated</span>
+                <span id="vRate">4.5 · Highly Rated</span>
               </div>
               <div class="detail-row">
                 <i class="fa-solid fa-tags"></i>
@@ -357,7 +359,7 @@
         document.getElementById("vName").textContent = v.name;
         document.getElementById("vLoc").textContent = v.loc || "Campus";
         document.getElementById("vRate").textContent =
-          v.rating + " Â· Highly Rated";
+          v.rating + " · Highly Rated";
         document.getElementById("vCat").textContent = v.category;
         // Link to browse-food filtered by this shop's id
         document.getElementById("vLink").href =
@@ -371,4 +373,3 @@
     </script>
   </body>
 </html>
-

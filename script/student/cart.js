@@ -1321,6 +1321,13 @@ function updateAllCartBadges() {
     badge.textContent = cartCount;
     badge.style.display = cartCount > 0 ? "" : "none";
   });
+  
+  /* ── Dashboard: Wallet Balance stat card ── */
+  const walletStat = document.querySelector(".stat-card.green .stat-value");
+  if (walletStat) {
+    const balance = typeof getWalletBalance === "function" ? getWalletBalance() : 245.5;
+    walletStat.textContent = "₱" + balance.toFixed(2);
+  }
 
   /* ── Dashboard: Cart Items stat card ── */
   const cartStat = document.querySelector(".stat-card.blue .stat-value");
@@ -1329,6 +1336,18 @@ function updateAllCartBadges() {
   /* ── Dashboard: Pending Orders stat card ── */
   const pendingStat = document.querySelector(".stat-card.orange .stat-value");
   if (pendingStat) pendingStat.textContent = pendingCount;
+
+  /* ── Dashboard: Total Orders stat card ── */
+  const totalStat = document.querySelector(".stat-card.red .stat-value");
+  if (totalStat) {
+    const isOutsider = window.location.href.includes("/outsider/");
+    const totalOrders = getOrders().filter((o) => {
+      return isOutsider
+        ? o.customerRole === "outsider"
+        : o.customerRole !== "outsider";
+    }).length;
+    totalStat.textContent = totalOrders;
+  }
 
   /* ── Dashboard: "View Cart" quick-action text ── */
   document.querySelectorAll('a[href="student-cart.html"]').forEach((link) => {

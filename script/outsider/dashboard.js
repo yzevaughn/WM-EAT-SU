@@ -354,13 +354,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const itemName = this.getAttribute("data-item");
       const itemPrice = parseFloat(this.getAttribute("data-price")) || 0;
-      const itemQty   = parseInt(this.getAttribute("data-quantity")) || 1;
+      const itemQty = parseInt(this.getAttribute("data-quantity")) || 1;
       const isRecentOrder = this.closest(".recent-orders-section") !== null;
 
       // Derive vendor from sibling element if present
       const card = this.closest(".food-card");
       const vendorEl = card ? card.querySelector(".food-vendor") : null;
-      const vendor = vendorEl ? vendorEl.textContent.trim().replace(/^[^\w]+/, "") : "";
+      const vendor = vendorEl
+        ? vendorEl.textContent.trim().replace(/^[^\w]+/, "")
+        : "";
 
       // Derive image
       const imgEl = card ? card.querySelector("img") : null;
@@ -370,7 +372,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const itemId = makeItemId(itemName, vendor);
 
       // Persist to localStorage
-      addToCart({ id: itemId, name: itemName, price: itemPrice, vendor, img, qty: itemQty });
+      addToCart({
+        id: itemId,
+        name: itemName,
+        price: itemPrice,
+        vendor,
+        img,
+        qty: itemQty,
+      });
 
       // Visual button feedback
       const originalIcon = '<i class="fa-solid fa-cart-shopping"></i>';
@@ -403,8 +412,7 @@ document.addEventListener("DOMContentLoaded", () => {
       e.stopPropagation();
 
       const orderId = this.getAttribute("data-order");
-      // Redirect to order details page
-      window.location.href = `student-order.html?order=${orderId}`;
+      window.location.href = `outsider-order.html?order=${orderId}`;
     });
   });
 
@@ -416,8 +424,7 @@ document.addEventListener("DOMContentLoaded", () => {
       e.stopPropagation();
 
       const itemName = this.getAttribute("data-item");
-      // Redirect to feedback page with item
-      window.location.href = `student-feedback.html?item=${encodeURIComponent(itemName)}`;
+      window.location.href = `outsider-feedback.html?item=${encodeURIComponent(itemName)}`;
     });
   });
 
@@ -519,10 +526,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Modal add to cart
   modalAddBtn.addEventListener("click", () => {
-    const name   = modalName.textContent;
-    const price  = parseFloat(modalPrice.textContent.replace(/[^\d.]/g, "")) || 0;
+    const name = modalName.textContent;
+    const price =
+      parseFloat(modalPrice.textContent.replace(/[^\d.]/g, "")) || 0;
     const vendor = modalVendor.textContent.trim().replace(/^[^\w]+/, "");
-    const img    = modalImg.src;
+    const img = modalImg.src;
     const itemId = makeItemId(name, vendor);
 
     addToCart({ id: itemId, name, price, vendor, img, qty: 1 });
