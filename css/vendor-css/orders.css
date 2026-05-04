@@ -1351,6 +1351,26 @@ hr {
   background: #e5e7eb;
 }
 
+.btn-submit {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.btn-submit:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+}
+
 /* ── Shared confirm button base ─────────────────────────── */
 .btn-confirm-accept,
 .btn-confirm-decline,
@@ -1526,6 +1546,29 @@ hr {
 .remove-btn:hover {
   background: #fee2e2;
   border-color: #fca5a5;
+}
+
+.order-again-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: #0f172a;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.2);
+}
+
+.order-again-btn:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 16px rgba(15, 23, 42, 0.3);
 }
 
 .pickup-btn {
@@ -1845,28 +1888,42 @@ hr {
   margin-bottom: 24px;
 }
 
-.pickup-btn {
-  background: linear-gradient(135deg, #ef4444, #dc2626);
-  box-shadow: 0 3px 10px rgba(239, 68, 68, 0.3);
-  font-size: 14px;
-  padding: 10px 20px;
-  color: #fff;
-  border: none;
+.pay-method-btn {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: #64748b;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  text-decoration: none;
+  transition: all 0.2s;
 }
 
-.pickup-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+.pay-method-btn.active {
+  background: #fef2f2;
+  border-color: #e61524;
+  color: #e61524;
 }
+
+.wallet-option-btn {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  padding: 6px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.wallet-option-btn.active {
+  background: #e61524;
+  color: #fff;
+  border-color: #e61524;
+}
+
 
 @media (max-width: 768px) {
   .orders-header {
@@ -1880,7 +1937,7 @@ hr {
     margin-bottom: 12px;
   }
   
-  .pickup-btn {
+  .order-again-btn {
     width: 100%;
     justify-content: center;
     padding: 12px;

@@ -1073,28 +1073,28 @@
 
         if (o.status === "pending") {
           actHtml = `
-            <button class="cancel-btn js-cancel" data-id="${esc(o.id)}" style="width:100%; justify-content:center;">
+            <button class="cancel-btn js-cancel" data-id="${esc(o.id)}">
               <i class="fa-solid fa-times"></i> Cancel Order
             </button>`;
         } else if (o.status === "ready") {
           if (!o.studentPickedUp) {
             let buttonsRow = `
-              <button class="pickup-btn js-mark-picked" data-id="${esc(o.id)}" style="justify-content:center; flex:1; ${o.vendorPickedUp ? "background: #22c55e;" : ""}">
+              <button class="pickup-btn js-mark-picked" data-id="${esc(o.id)}" style="${o.vendorPickedUp ? "background: #22c55e;" : ""}">
                 <i class="fa-solid fa-bag-shopping"></i> Mark as Picked Up
               </button>`;
 
             if (o.payment === "Cash on Pickup") {
               buttonsRow += `
-              <button class="view-code-btn js-pay-wallet" data-id="${esc(o.id)}" style="justify-content:center; flex:1; margin:0;">
+              <button class="view-code-btn js-pay-wallet" data-id="${esc(o.id)}" style="margin:0;">
                 <i class="fa-solid fa-qrcode"></i> Pay (Scan)
               </button>`;
             }
 
-            actHtml += `<div style="display:flex; justify-content:space-between; width:100%; gap:10px;">${buttonsRow}</div>`;
+            actHtml += `<div style="display:flex; width:100%; gap:8px;">${buttonsRow}</div>`;
 
             if (o.vendorPickedUp && !o.reportedIssue) {
               actHtml += `
-              <button class="remove-btn js-report-issue" data-id="${esc(o.id)}" style="width:100%; justify-content:center; margin:0; margin-top:10px;">
+              <button class="remove-btn js-report-issue" data-id="${esc(o.id)}" style="margin:0; margin-top:10px;">
                 <i class="fa-solid fa-triangle-exclamation"></i> Report Issue
               </button>`;
             }
@@ -1106,14 +1106,14 @@
           }
         } else if (o.status === "completed") {
           actHtml = `
-            <div style="display:flex; gap:10px; width:100%; flex-wrap:wrap;">
-              <button class="order-again-btn js-order-again" data-id="${esc(o.id)}" style="flex:1; justify-content:center;">
+            <div style="display:flex; gap:8px; width:100%; flex-wrap:wrap;">
+              <button class="order-again-btn js-order-again" data-id="${esc(o.id)}">
                 <i class="fa-solid fa-cart-plus"></i> Order Again
               </button>
-              <button class="leave-review-btn js-review" data-id="${esc(o.id)}" style="flex:1; justify-content:center;">
+              <button class="leave-review-btn js-review" data-id="${esc(o.id)}">
                 <i class="fa-regular fa-star"></i> Review
               </button>
-              <button class="remove-btn js-remove" data-id="${esc(o.id)}" style="width:100%; justify-content:center; margin:0;">
+              <button class="remove-btn js-remove" data-id="${esc(o.id)}" style="margin:0;">
                 <i class="fa-solid fa-trash-can"></i> Remove
               </button>
             </div>`;
@@ -1127,7 +1127,7 @@
           actHtml =
             vendorMsg +
             `
-            <button class="remove-btn js-remove" data-id="${esc(o.id)}" style="width:100%; justify-content:center; margin:0;">
+            <button class="remove-btn js-remove" data-id="${esc(o.id)}" style="margin:0;">
               <i class="fa-solid fa-trash-can"></i> Remove
             </button>`;
         }
@@ -1205,7 +1205,7 @@
 
               <hr class="order-divider" />
               <div class="order-total-row"><span>Total Amount: ₱${o.total.toFixed(2)}</span></div>
-              ${actHtml ? `<div class="order-actions" style="margin-top:14px">${actHtml}</div>` : ""}
+              ${actHtml ? `<div class="order-actions" style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;">${actHtml}</div>` : ""}
             </div>
           </div>`;
       }
@@ -1435,10 +1435,10 @@
                     <img src="${esc(it.img || "")}" style="width:50px; height:50px; border-radius:8px; object-fit:cover;" onerror="this.src='https://placehold.co/50x50?text=Food'" />
                     <div>
                       <div style="font-weight:700; color:#1e293b; font-size:14px;">${esc(it.name)}</div>
-                      <div style="font-size:12px; color:#64748b;">${it.qty} Ã— â‚±${it.price.toFixed(2)}</div>
+                      <div style="font-size:12px; color:#64748b;">${it.qty} × ₱${it.price.toFixed(2)}</div>
                     </div>
                   </div>
-                  <div style="font-weight:700; color:#0f172a;">â‚±${(it.price * it.qty).toFixed(2)}</div>
+                  <div style="font-weight:700; color:#0f172a;">₱${(it.price * it.qty).toFixed(2)}</div>
                 </div>`,
               )
               .join("");
@@ -1475,7 +1475,7 @@
               <div style="margin-top:20px; padding:15px; background:#f1f5f9; border-radius:12px;">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                   <span style="font-weight:700; color:#475569;">Total Amount</span>
-                  <span style="font-size:20px; font-weight:800; color:#ef4444;">â‚±${order.total.toFixed(2)}</span>
+                  <span style="font-size:20px; font-weight:800; color:#ef4444;">₱${order.total.toFixed(2)}</span>
                 </div>
               </div>
               
@@ -1512,7 +1512,7 @@
             document.getElementById("modalCodeOrder").innerHTML =
               `Order #${order.id.slice(-6).toUpperCase()} &middot; ${esc(order.vendor)}<br><small style="opacity:0.8">${payLabel}</small>`;
             document.getElementById("modalTotalPrice").textContent =
-              `Total: â‚±${order.total.toFixed(2)}`;
+              `Total: ₱${order.total.toFixed(2)}`;
 
             const mImg = document.getElementById("modalFoodImage");
             if (order.img) {
@@ -1527,8 +1527,8 @@
                 (it) =>
                   `<div class="order-item-row"
                 style="display:flex;justify-content:space-between;font-size:14px;padding:4px 0;color:#374151;">
-                <span>${it.qty} Ã— ${esc(it.name)}</span>
-                <span>â‚±${(it.price * it.qty).toFixed(2)}</span>
+                <span>${it.qty} × ${esc(it.name)}</span>
+                <span>₱${(it.price * it.qty).toFixed(2)}</span>
               </div>`,
               )
               .join("");
@@ -1606,7 +1606,7 @@
         }
       }
 
-      /* â”€â”€ Scan Modals â”€â”€ */
+      /* -- Scan Modals -- */
       const scanModal = document.getElementById("scanModal");
       const scanConfirmModal = document.getElementById("scanConfirmModal");
 
@@ -1632,12 +1632,12 @@
           .slice(-6)
           .toUpperCase();
         document.getElementById("scanConfirmTotal").textContent =
-          "â‚±" + order.total.toFixed(2);
+          "₱" + order.total.toFixed(2);
 
         document.getElementById("scanConfirmItems").innerHTML = order.items
           .map(
             (it) =>
-              `<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:14px;color:#334155;font-weight:500;"><span>${it.qty} Ã— ${esc(it.name)}</span><span>â‚±${(it.price * it.qty).toFixed(2)}</span></div>`,
+              `<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:14px;color:#334155;font-weight:500;"><span>${it.qty} × ${esc(it.name)}</span><span>₱${(it.price * it.qty).toFixed(2)}</span></div>`,
           )
           .join("");
 
@@ -1650,7 +1650,7 @@
         window.currentAppliedPromo = null;
       };
 
-      /* â”€â”€ Apply Promo Code (Scan Modal) â”€â”€ */
+      /* -- Apply Promo Code (Scan Modal) -- */
       document.getElementById("applyScanPromoBtn").onclick = () => {
         const code = document.getElementById("scanPromoCode").value.trim();
         const msgEl = document.getElementById("scanPromoMsg");
@@ -1677,9 +1677,9 @@
 
         // Update UI
         document.getElementById("scanConfirmTotal").textContent =
-          "â‚±" + newTotal.toFixed(2);
+          "₱" + newTotal.toFixed(2);
         const origRow = document.getElementById("scanOriginalTotalRow");
-        origRow.textContent = "â‚±" + order.total.toFixed(2);
+        origRow.textContent = "₱" + order.total.toFixed(2);
         origRow.style.display = "block";
 
         msgEl.textContent = `Applied! ${promo.label} saved.`;
@@ -1720,7 +1720,7 @@
         );
       };
 
-      /* â”€â”€ Pickup Modal â”€â”€ */
+      /* -- Pickup Modal -- */
       const pickupModal = document.getElementById("pickupModal");
       document.getElementById("closePickupModal").onclick = () =>
         pickupModal.classList.remove("active");
@@ -1736,7 +1736,7 @@
         };
       }
 
-      /* â”€â”€ Review Modal â”€â”€ */
+      /* -- Review Modal -- */
       document.getElementById("closeReviewModal").onclick = () =>
         document.getElementById("reviewModal").classList.remove("active");
       document.getElementById("reviewOverlay").onclick = () =>
@@ -1744,7 +1744,7 @@
       document.getElementById("cancelReview").onclick = () =>
         document.getElementById("reviewModal").classList.remove("active");
 
-      /* â”€â”€ Star Rating â”€â”€ */
+      /* -- Star Rating -- */
       const stars = document.querySelectorAll(".star-btn");
       const ratingText = document.querySelector(".rating-text");
       const starLabels = ["", "Poor", "Fair", "Good", "Very Good", "Excellent"];
@@ -1762,7 +1762,7 @@
         stars.forEach((b, i) => b.classList.toggle("active", i < n));
       }
 
-      /* â”€â”€ Review Submit â”€â”€ */
+      /* -- Review Submit -- */
       document
         .getElementById("submitReviewBtn")
         .addEventListener("click", () => {
@@ -1770,7 +1770,7 @@
           showToast("success", "fa-star", "Review submitted! Thank you.");
         });
 
-      /* â”€â”€ Confirmation Modal â”€â”€ */
+      /* -- Confirmation Modal -- */
       const confirmModal = document.getElementById("confirmModal");
       let confirmCallback = null;
 
@@ -1806,7 +1806,7 @@
           const itemsHtml = order.items
             .map(
               (it) =>
-                `<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:14px;color:#334155;font-weight:500;"><span>${it.qty} Ã— ${esc(it.name)}</span><span>â‚±${(it.price * it.qty).toFixed(2)}</span></div>`,
+                `<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:14px;color:#334155;font-weight:500;"><span>${it.qty} × ${esc(it.name)}</span><span>₱${(it.price * it.qty).toFixed(2)}</span></div>`,
             )
             .join("");
 
@@ -1829,7 +1829,7 @@
                 </div>
                 <div style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
                   <span style="font-weight: 600; color: #64748b; font-size: 13px;">Total Amount:</span>
-                  <span style="font-weight: 800; color: #1e293b; font-size: 18px;">â‚±${order.total.toFixed(2)}</span>
+                  <span style="font-weight: 800; color: #1e293b; font-size: 18px;">₱${order.total.toFixed(2)}</span>
                 </div>
               </div>
             `;
@@ -1857,7 +1857,7 @@
         confirmCallback = null;
       };
 
-      /* â”€â”€ Filter Tabs â”€â”€ */
+      /* -- Filter Tabs -- */
       document.querySelectorAll(".filter-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
           document
@@ -1884,7 +1884,7 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
       };
 
-      /* Ã¢â€â‚¬Ã¢â€â‚¬ Toast Ã¢â€â‚¬Ã¢â€â‚¬ */
+      /* -- Toast -- */
       function showToast(type, icon, msg) {
         const el = document.createElement("div");
         el.className = `toast ${type}`;
@@ -1896,7 +1896,7 @@
         }, 3200);
       }
 
-      /* Ã¢â€â‚¬Ã¢â€â‚¬ Sidebar overlay (mobile) Ã¢â€â‚¬Ã¢â€â‚¬ */
+      /* -- Sidebar overlay (mobile) -- */
       const sidebarOverlay = document.getElementById("sidebarOverlay");
       if (sidebarOverlay) {
         sidebarOverlay.onclick = () => {
@@ -1904,10 +1904,10 @@
         };
       }
 
-      /* â”€â”€ Init â”€â”€ */
+      /* -- Init -- */
       renderOrders();
 
-      /* â”€â”€ Report Modal â”€â”€ */
+      /* -- Report Modal -- */
       const reportModal = document.getElementById("reportModal");
       document.getElementById("closeReportModal").onclick = () =>
         reportModal.classList.remove("active");
@@ -1942,7 +1942,7 @@
         );
       };
 
-      /* â”€â”€ Auto-Complete Timer â”€â”€ */
+      /* -- Auto-Complete Timer -- */
       setInterval(() => {
         document.querySelectorAll(".auto-complete-timer").forEach((span) => {
           const orderId = span.dataset.id;
@@ -1969,7 +1969,7 @@
         });
       }, 1000);
 
-      /* â”€â”€ Order Detail Modal â”€â”€ */
+      /* -- Order Detail Modal -- */
       const orderDetailsModal = document.getElementById("orderDetailsModal");
       document.getElementById("closeOrderDetailModal").onclick = () =>
         orderDetailsModal.classList.remove("active");
@@ -1978,7 +1978,7 @@
       document.getElementById("closeDetailBtn").onclick = () =>
         orderDetailsModal.classList.remove("active");
 
-      /* â”€â”€ Live notification navbar â”€â”€ */
+      /* -- Live notification navbar -- */
       function refreshStudentNavNotifs() {
         if (typeof renderNavbarNotifications === "function") {
           renderNavbarNotifications("student", {
@@ -1990,7 +1990,7 @@
       }
       refreshStudentNavNotifs();
 
-      /* â”€â”€ Respond to vendor status changes (cross-tab) â”€â”€ */
+      /* -- Respond to vendor status changes (cross-tab) -- */
       window.addEventListener("storage", (e) => {
         if (e.key === "wm_eat_su_orders") {
           renderOrders();

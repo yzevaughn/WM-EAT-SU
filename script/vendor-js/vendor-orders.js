@@ -81,12 +81,11 @@ const STATUS_CFG = {
 function buildActions(order, tab) {
   if (tab === "Pending")
     return `
-    <button class="pickup-btn"  data-action="accept"  data-id="${order.id}"><i class="fas fa-check"></i> Accept</button>
+    <button class="order-again-btn"  data-action="accept"  data-id="${order.id}"><i class="fas fa-check"></i> Accept</button>
     <button class="cancel-btn"  data-action="decline" data-id="${order.id}"><i class="fas fa-times"></i> Decline</button>`;
   if (tab === "Preparing")
     return `
-    <button class="pickup-btn" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);box-shadow:0 3px 10px rgba(37,99,235,.3);"
-            data-action="markReady" data-id="${order.id}"><i class="fa-solid fa-bell"></i> Mark Ready</button>`;
+    <button class="order-again-btn" data-action="markReady" data-id="${order.id}"><i class="fa-solid fa-bell"></i> Mark Ready</button>`;
   if (tab === "Ready") {
     let actHtml = "";
     if (!order.vendorPickedUp) {
@@ -815,11 +814,11 @@ function updateChargeBtn(
   }
 
   if (canCharge) {
-    btn.style.background = "linear-gradient(135deg, #ef4444, #dc2626)";
+    btn.style.background = "#2563eb";
     btn.style.color = "#fff";
     btn.style.cursor = "pointer";
     btn.disabled = false;
-    btn.style.boxShadow = "0 4px 12px rgba(239, 68, 68, 0.3)";
+    btn.style.boxShadow = "0 4px 12px rgba(37, 99, 235, 0.3)";
   } else {
     btn.style.background = "#e2e8f0";
     btn.style.color = "#94a3b8";
@@ -845,16 +844,8 @@ document.getElementById("walkinTendered")?.addEventListener("input", () => {
 
 document.querySelectorAll(".pay-method-btn").forEach((btn) => {
   btn.addEventListener("click", (e) => {
-    document.querySelectorAll(".pay-method-btn").forEach((b) => {
-      b.style.background = "#fff";
-      b.style.borderColor = "#cbd5e1";
-      b.style.color = "#64748b";
-      b.classList.remove("active");
-    });
+    document.querySelectorAll(".pay-method-btn").forEach((b) => b.classList.remove("active"));
     const target = e.currentTarget;
-    target.style.background = "#fef2f2";
-    target.style.borderColor = "#ef4444";
-    target.style.color = "#dc2626";
     target.classList.add("active");
 
     currentPaymentMethod = target.dataset.method;
