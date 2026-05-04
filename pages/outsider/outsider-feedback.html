@@ -12,17 +12,16 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="../../css/student/dashboard.css" />
+    <link rel="stylesheet" href="../../css/outsider/dashboard.css" />
     <link rel="stylesheet" href="../../css/navbar.css" />
-    <link rel="stylesheet" href="../../css/student/feedback.css" />
-    <link rel="stylesheet" href="../../css/outsider/outsider.css" />
-</head>
+    <link rel="stylesheet" href="../../css/outsider/feedback.css" />
+  </head>
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
 
-    <!-- ════════════════════════════════════════
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
          TOP NAVBAR
-         ════════════════════════════════════════ -->
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
     <div class="top-nav">
       <!-- LEFT: hamburger + logo -->
       <div class="nav-left">
@@ -35,11 +34,7 @@
         </a>
       </div>
 
-      <div class="nav-center">
-      
-    </div>
-
-      <!-- RIGHT: profile -->
+      <div class="nav-center"></div><!-- RIGHT: profile -->
       <div class="nav-right">
         <!-- Notifications -->
         <div class="notification-dropdown">
@@ -96,7 +91,10 @@
           </div>
         </div>
         <div class="profile">
-          
+          <div class="profile-info">
+            <span class="profile-name">Vaughn Evangelista</span>
+            <span class="email">vaughn.student@wm.edu.ph</span>
+          </div>
           <div class="profile-dropdown">
             <button class="profile-btn">
               <img
@@ -116,7 +114,9 @@
               >
                 <i class="fa-solid fa-flag"></i><span>Reports</span>
               </a>
-              
+              <a href="outsider-vendor-applications.html" class="dropdown-item">
+                <i class="fa-solid fa-rss"></i><span>Vendor Applications</span>
+              </a>
               <a
                 href="../../index.html"
                 class="dropdown-item dropdown-item--danger"
@@ -130,11 +130,11 @@
     </div>
     <!-- /top-nav -->
 
-    <!-- ════════════════════════════════════════
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
          LAYOUT
-         ════════════════════════════════════════ -->
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
     <div class="layout">
-      <!-- ── SIDEBAR ── -->
+      <!-- â”€â”€ SIDEBAR â”€â”€ -->
       <div class="left-nav" id="sidebar">
         <!-- logo shown on mobile inside sidebar -->
 
@@ -158,6 +158,11 @@
           <li>
             <a href="outsider-order.html" class="nav-link">
               <i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span>
+            </a>
+          </li>
+          <li>
+            <a href="outsider-vouchers.html" class="nav-link">
+              <i class="fa-solid fa-ticket"></i><span>Vouchers</span>
             </a>
           </li>
           <li>
@@ -217,15 +222,15 @@
       </div>
     </div>
 
-    <!-- ════════════════════════════════════════
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
          MODALS
-         ════════════════════════════════════════ -->
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
 
     <!-- New Report Form Modal -->
     <div class="modal-backdrop" id="formModal">
       <div class="modal-panel">
         <div class="modal-header">
-          <h2>File a New Report</h2>
+          <h2>File a Report</h2>
           <button class="btn-close" onclick="closeModal('formModal')">
             <i class="fa-solid fa-xmark"></i>
           </button>
@@ -371,11 +376,11 @@
     <!-- Toast Notifications -->
     <div class="toast-container" id="toastContainer"></div>
 
-    <!-- ════════════════════════════════════════
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
          JAVASCRIPT
-         ════════════════════════════════════════ -->
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
     <!-- Shared cart module -->
-    <script src="../../script/student/cart.js"></script>
+    <script src="../../script/outsider/cart.js"></script>
     <script>
       // Mock Data
       let reports = [
@@ -703,6 +708,4 @@
     </script>
   </body>
 </html>
-
-
 

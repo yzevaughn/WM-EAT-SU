@@ -13,9 +13,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="stylesheet" href="../../css/navbar.css" />
-    <link rel="stylesheet" href="../../css/student/campus-map.css" />
-    <link rel="stylesheet" href="../../css/outsider/outsider.css" />
-</head>
+    <link rel="stylesheet" href="../../css/outsider/campus-map.css" />
+  </head>
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
 
@@ -31,11 +30,7 @@
         </a>
       </div>
 
-      <div class="nav-center">
-      
-    </div>
-
-      <div class="nav-right">
+      <div class="nav-center"></div><div class="nav-right">
         <!-- Notifications -->
         <div class="notification-dropdown">
           <button class="nav-icon-btn" aria-label="Notifications">
@@ -91,7 +86,10 @@
           </div>
         </div>
         <div class="profile">
-          
+          <div class="profile-info">
+            <span class="profile-name">Vaughn Evangelista</span>
+            <span class="email">vaughn.student@wm.edu.ph</span>
+          </div>
           <div class="profile-dropdown">
             <button class="profile-btn">
               <img
@@ -108,7 +106,9 @@
               <a href="outsider-feedback.html" class="dropdown-item">
                 <i class="fa-solid fa-flag"></i><span>Reports</span>
               </a>
-              
+              <a href="outsider-vendor-applications.html" class="dropdown-item">
+                <i class="fa-solid fa-rss"></i><span>Vendor Applications</span>
+              </a>
               <div class="dropdown-divider"></div>
               <a
                 href="../../index.html"
@@ -128,14 +128,14 @@
       <div class="left-nav">
         <ul class="nav-list">
           <li>
-            <a href="outsider-dashboard.html" class="nav-link"
-              ><i class="fa-solid fa-house"></i><span>Dashboard</span></a
-            >
+            <a href="outsider-dashboard.html" class="nav-link">
+              <i class="fa-solid fa-house"></i><span>Dashboard</span>
+            </a>
           </li>
           <li>
-            <a href="outsider-browse-food.html" class="nav-link"
-              ><i class="fa-solid fa-utensils"></i><span>Browse Food</span></a
-            >
+            <a href="outsider-browse-food.html" class="nav-link">
+              <i class="fa-solid fa-utensils"></i><span>Browse Food</span>
+            </a>
           </li>
           <li>
             <a href="outsider-cart.html" class="nav-link">
@@ -144,21 +144,24 @@
             </a>
           </li>
           <li>
-            <a href="outsider-order.html" class="nav-link"
-              ><i class="fa-solid fa-clock-rotate-left"></i
-              ><span>Orders</span></a
-            >
+            <a href="outsider-order.html" class="nav-link">
+              <i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span>
+            </a>
           </li>
           <li>
-            <a href="outsider-wallet.html" class="nav-link"
-              ><i class="fa-solid fa-wallet"></i><span>Wallet</span></a
-            >
+            <a href="outsider-vouchers.html" class="nav-link">
+              <i class="fa-solid fa-ticket"></i><span>Vouchers</span>
+            </a>
           </li>
           <li>
-            <a href="outsider-campus-map.html" class="nav-link active"
-              ><i class="fa-solid fa-map-location-dot"></i
-              ><span>Campus Map</span></a
-            >
+            <a href="outsider-wallet.html" class="nav-link">
+              <i class="fa-solid fa-wallet"></i><span>Wallet</span>
+            </a>
+          </li>
+          <li>
+            <a href="outsider-campus-map.html" class="nav-link active">
+              <i class="fa-solid fa-map-location-dot"></i><span>Campus Map</span>
+            </a>
           </li>
         </ul>
       </div>
@@ -238,7 +241,7 @@
               </div>
               <div class="detail-row">
                 <i class="fa-solid fa-star"></i>
-                <span id="vRate">4.5 · Highly Rated</span>
+                <span id="vRate">4.5 Â· Highly Rated</span>
               </div>
               <div class="detail-row">
                 <i class="fa-solid fa-tags"></i>
@@ -256,7 +259,7 @@
     </div>
 
     <!-- Load shared data (seeds shops + menu on first visit) -->
-    <script src="../../script/student/cart.js"></script>
+    <script src="../../script/outsider/cart.js"></script>
     <!-- Google Maps API -->
     <script
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO6gC7V8EijyHtXjb4Iypbpvi0Z-ih1S0&callback=initMap"
@@ -358,7 +361,7 @@
         document.getElementById("vName").textContent = v.name;
         document.getElementById("vLoc").textContent = v.loc || "Campus";
         document.getElementById("vRate").textContent =
-          v.rating + " · Highly Rated";
+          v.rating + " Â· Highly Rated";
         document.getElementById("vCat").textContent = v.category;
         // Link to browse-food filtered by this shop's id
         document.getElementById("vLink").href =
@@ -372,5 +375,4 @@
     </script>
   </body>
 </html>
-
 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU — Outsider Profile</title>
+    <title>WM EAT SU — Student Profile</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -13,9 +13,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="stylesheet" href="../../css/navbar.css" />
-    <link rel="stylesheet" href="../../css/student/profile.css" />
-    <link rel="stylesheet" href="../../css/outsider/outsider.css" />
-</head>
+    <link rel="stylesheet" href="../../css/outsider/profile.css" />
+  </head>
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
@@ -31,10 +30,7 @@
           <span class="logo-text">WM EAT SU</span>
         </a>
       </div>
-      <div class="nav-center">
-      
-    </div>
-      <div class="nav-right">
+      <div class="nav-center"></div><div class="nav-right">
         <div class="notification-dropdown">
           <button class="nav-icon-btn" aria-label="Notifications">
             <i class="fa-regular fa-bell"></i>
@@ -69,7 +65,10 @@
           </div>
         </div>
         <div class="profile">
-          
+          <div class="profile-info">
+            <span class="profile-name">Vaughn Evangelista</span>
+            <span class="email">vaughn.student@wm.edu.ph</span>
+          </div>
           <div class="profile-dropdown">
             <button class="profile-btn">
               <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" id="navProfilePic" />
@@ -118,6 +117,11 @@
             </a>
           </li>
           <li>
+            <a href="outsider-vouchers.html" class="nav-link">
+              <i class="fa-solid fa-ticket"></i><span>Vouchers</span>
+            </a>
+          </li>
+          <li>
             <a href="outsider-wallet.html" class="nav-link">
               <i class="fa-solid fa-wallet"></i><span>Wallet</span>
             </a>
@@ -142,7 +146,7 @@
             <div class="hero-info">
               <h1>Vaughn Evangelista</h1>
               <p class="store-tag">
-                <i class="fa-solid fa-graduation-cap"></i> Student Account &nbsp;·&nbsp; College of Computing Studies
+                <i class="fa-solid fa-graduation-cap"></i> Student Account &nbsp;Â·&nbsp; College of Computing Studies
               </p>
               <div class="hero-badges">
                 <span class="hero-badge"><i class="fa-solid fa-circle-check"></i> Verified Student</span>
@@ -154,6 +158,8 @@
             </button>
             <input type="file" id="photoUpload" accept="image/*" style="display:none;" />
           </div>
+
+
 
           <!-- PERSONAL INFO -->
           <div class="section-card">
@@ -198,7 +204,7 @@
     <!-- TOAST CONTAINER -->
     <div id="toast-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>
 
-    <script src="../../script/student/cart.js"></script>
+    <script src="../../script/outsider/cart.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const savedPic = localStorage.getItem("userProfilePic");
@@ -255,5 +261,4 @@
     </script>
   </body>
 </html>
-
 
