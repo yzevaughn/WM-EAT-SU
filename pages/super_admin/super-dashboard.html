@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WM EAT SU - Admin Portal</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="../../css/navbar.css" />
+  <link rel="stylesheet" href="../../css/super_admin_css/super-dashboard.css" />
+</head>
+
+<body>
+  <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+
+  <div class="top-nav">
+    <div class="nav-left">
+      <label for="menu-checkbox" class="menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </label>
+      <a href="super-dashboard.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
+    </div>
+    <div class="nav-center"></div>
+    <div class="nav-right">
+      <div class="profile">
+        <div class="profile-info">
+          <span class="profile-name">Super Admin</span>
+          <span class="email">admin@wm.edu.ph</span>
+        </div>
+        <div class="profile-dropdown">
+          <button class="profile-btn">
+            <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" />
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="left-nav" id="sidebar">
+      <ul class="nav-list">
+        <li>
+          <a href="super-dashboard.html" class="nav-link active">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="top-earners.html" class="nav-link">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Top Earners</span>
+          </a>
+        </li>
+        <li>
+          <a href="payment-tracking.html" class="nav-link">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+            <span>Payment Tracking</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-applications.html" class="nav-link">
+            <i class="fa-solid fa-user-check"></i>
+            <span>Student Apps</span>
+          </a>
+        </li>
+        <li>
+          <a href="canteen-applications.html" class="nav-link">
+            <i class="fa-solid fa-store"></i>
+            <span>Canteen Apps</span>
+          </a>
+        </li>
+        <li>
+          <a href="complaints.html" class="nav-link">
+            <i class="fa-solid fa-comment-dots"></i>
+            <span>Complaints</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <header>
+        <h1>Super Admin Dashboard</h1>
+        <p class="subtitle">Real-time platform overview and vendor management</p>
+      </header>
+
+      <div class="dashboard-container">
+        <!-- Metrics Grid -->
+        <div class="metrics-grid">
+          <div class="metric-card" id="metric-canteens">
+            <h4>Total Canteens</h4>
+            <h2 class="value">12</h2>
+            <div class="trend up">
+              <i class="fa-solid fa-arrow-up"></i>
+              <span>2 new this month</span>
+            </div>
+          </div>
+          <div class="metric-card" id="metric-vendors">
+            <h4>Student Vendors</h4>
+            <h2 class="value">48</h2>
+            <div class="trend up">
+              <i class="fa-solid fa-arrow-up"></i>
+              <span>5 new this week</span>
+            </div>
+          </div>
+          <div class="metric-card" id="metric-payments">
+            <h4>Pending Payments</h4>
+            <h2 class="value">₱24.5K</h2>
+            <div class="trend down">
+              <i class="fa-solid fa-flag"></i>
+              <span>4 overdue</span>
+            </div>
+          </div>
+          <div class="metric-card" id="metric-complaints">
+            <h4>Open Complaints</h4>
+            <h2 class="value">5</h2>
+            <div class="trend down">
+              <i class="fa-solid fa-circle-exclamation"></i>
+              <span>2 high priority</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Dashboard Content -->
+        <div class="dashboard-content">
+          <!-- Top Earning Canteens Panel -->
+          <div class="content-panel">
+            <div class="panel-header">
+              <div class="panel-title">
+                <i class="fa-solid fa-caret-up"></i>
+                <span>Top Earning Canteens</span>
+              </div>
+              <a href="top-earners.html" class="view-all">View all &rarr;</a>
+            </div>
+            <div class="earning-list" id="earning-list">
+              <!-- JS will populate this -->
+            </div>
+          </div>
+
+          <!-- Payment Due Tracking Panel -->
+          <div class="content-panel">
+            <div class="panel-header">
+              <div class="panel-title">
+                <i class="fa-solid fa-diamond"></i>
+                <span>Payment Due Tracking</span>
+              </div>
+              <a href="payment-tracking.html" class="view-all">View all &rarr;</a>
+            </div>
+            <div class="payment-list" id="payment-list">
+              <!-- JS will populate this -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../script/super_admin_js/super-dashboard.js"></script>
+</body>
+
+</html>

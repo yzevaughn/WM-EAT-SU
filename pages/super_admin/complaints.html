@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WM EAT SU - Complaints Management</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="../../css/navbar.css" />
+  <link rel="stylesheet" href="../../css/super_admin_css/super-dashboard.css" />
+  <link rel="stylesheet" href="../../css/super_admin_css/complaints.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+
+  <!-- ════════════════════════════════════════
+         TOP NAVBAR
+         ════════════════════════════════════════ -->
+  <div class="top-nav">
+    <div class="nav-left">
+      <label for="menu-checkbox" class="menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </label>
+      <a href="super-dashboard.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
+    </div>
+
+    <div class="nav-center"></div>
+          <div class="nav-right">
+        <!-- Notifications -->
+        <div class="notification-dropdown">
+          <button class="nav-icon-btn" aria-label="Notifications">
+            <i class="fa-regular fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="notification-menu">
+            <div class="notification-header">
+              <h3>Notifications</h3>
+              <button class="mark-read-btn">Mark all as read</button>
+            </div>
+            <div class="notification-list">
+              <a href="super-dashboard.html" class="notification-item unread">
+                <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
+                <div class="notif-content">
+                  <p class="notif-title">Order #1234 Ready</p>
+                  <p class="notif-desc">Your order from Canteen 1 is ready for pickup.</p>
+                  <span class="notif-time">2 mins ago</span>
+                </div>
+              </a>
+              <a href="super-dashboard.html" class="notification-item unread">
+                <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
+                <div class="notif-content">
+                  <p class="notif-title">Wallet Top-up</p>
+                  <p class="notif-desc">Successfully added &#8369;500.00 to your wallet.</p>
+                  <span class="notif-time">1 hour ago</span>
+                </div>
+              </a>
+              <a href="super-dashboard.html" class="notification-item">
+                <div class="notif-icon orange"><i class="fa-solid fa-fire-burner"></i></div>
+                <div class="notif-content">
+                  <p class="notif-title">Order Preparing</p>
+                  <p class="notif-desc">Vendor has started preparing your order.</p>
+                  <span class="notif-time">2 hours ago</span>
+                </div>
+              </a>
+            </div>
+            <div class="notification-footer">
+              <a href="admin-notifications.html">View all notifications</a>
+            </div>
+          </div>
+        </div>
+      <div class="profile">
+        <div class="profile-info">
+          <span class="profile-name">Evangelista, Vaughn</span>
+          <span class="email">vaughn.student@wm.edu.ph</span>
+        </div>
+        <div class="profile-dropdown">
+          <button class="profile-btn">
+            <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" />
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-menu">
+            <a href="../../index.html" class="dropdown-item">
+              <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+         LAYOUT
+         ════════════════════════════════════════ -->
+  <div class="layout">
+    <!-- ── SIDEBAR ── -->
+    <div class="left-nav" id="sidebar">
+      <ul class="nav-list">
+        <li>
+          <a href="super-dashboard.html" class="nav-link">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="top-earners.html" class="nav-link">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Top Earners</span>
+          </a>
+        </li>
+        <li>
+          <a href="payment-tracking.html" class="nav-link">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+            <span>Payment Tracking</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-applications.html" class="nav-link">
+            <i class="fa-solid fa-user-check"></i>
+            <span>Student Apps</span>
+          </a>
+        </li>
+        <li>
+          <a href="canteen-applications.html" class="nav-link">
+            <i class="fa-solid fa-store"></i>
+            <span>Canteen Apps</span>
+          </a>
+        </li>
+        <li>
+          <a href="complaints.html" class="nav-link active">
+            <i class="fa-solid fa-comment-dots"></i>
+            <span>Complaints</span>
+          </a>
+        </li>
+      </ul>
+
+
+    </div>
+
+    <div class="main-content">
+      <header class="page-header">
+        <div>
+          <h1>User Complaints</h1>
+          <p class="subtitle">Manage and resolve reported issues from students and vendors.</p>
+        </div>
+      </header>
+
+      <div class="dashboard-container" style="padding-top: 0;">
+        <!-- Metrics Cards -->
+        <div class="metrics-cards">
+          <div class="metrics-card progress card-progress">
+            <div class="icon-box"><i class="fa-solid fa-clock-rotate-left"></i></div>
+            <div class="card-info">
+              <p>In Progress</p>
+              <h3 class="card-value">0</h3>
+            </div>
+          </div>
+          <div class="metrics-card resolved card-resolved">
+            <div class="icon-box"><i class="fa-solid fa-check-circle"></i></div>
+            <div class="card-info">
+              <p>Resolved</p>
+              <h3 class="card-value">0</h3>
+            </div>
+          </div>
+          <div class="metrics-card closed card-closed">
+            <div class="icon-box"><i class="fa-solid fa-folder-closed"></i></div>
+            <div class="card-info">
+              <p>Closed</p>
+              <h3 class="card-value">0</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- COMPLAINTS ANALYTICS CHART -->
+        <div class="revenue-section" style="margin-bottom: 24px;">
+          <div class="revenue-header">
+            <div class="revenue-title">
+              <h2><i class="fa-solid fa-chart-line color-purple"></i> Complaints Overview</h2>
+              <p>Analysis of reported, resolved, and pending issues over time</p>
+            </div>
+            <div class="revenue-controls filter-tabs">
+              <button class="filter-tab active" data-range="daily">Daily</button>
+              <button class="filter-tab" data-range="weekly">Weekly</button>
+              <button class="filter-tab" data-range="monthly">Monthly</button>
+            </div>
+          </div>
+          <div class="chart-container" style="position: relative; height:300px; width:100%; margin-top:1.5rem;">
+            <canvas id="complaintsChart"></canvas>
+          </div>
+        </div>
+
+        <!-- data table -->
+        <div class="table-container">
+          <!-- table controls section -->
+          <div class="table-controls">
+            <div class="search-box">
+              <i class="fa-solid fa-search"></i>
+              <input type="text" id="searchInput" placeholder="Search Complaint ID or Title..." />
+            </div>
+            <div class="filter-group">
+              <div class="filter-item">
+                <label for="statusFilter"><i class="fa-solid fa-filter"></i> Status:</label>
+                <select id="statusFilter" class="custom-select">
+                  <option value="All">All</option>
+                  <option value="In Progress" selected>In Progress</option>
+                  <option value="Resolved">Resolved</option>
+                  <option value="Closed">Closed</option>
+                </select>
+              </div>
+              <div class="filter-item">
+                <label for="sortFilter"><i class="fa-solid fa-sort"></i> Sort:</label>
+                <select id="sortFilter" class="custom-select">
+                  <option value="Latest">Latest</option>
+                  <option value="Oldest">Oldest</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="data-grid">
+              <thead>
+                <tr>
+                  <th>Complaint ID</th>
+                  <th>Student</th>
+                  <th>Subject</th>
+                  <th>Vendor & Order</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th class="actions-col">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="complaintsList">
+                <!-- Data populated by JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- pagination -->
+          <div class="pagination-controls">
+            <div class="pagination-info">
+              Showing <span id="pageStart">1</span> to <span id="pageEnd">10</span> of <span id="totalEntries">120</span> entries
+            </div>
+            <div class="pagination-nav" id="paginationControls">
+              <button class="page-btn disabled" id="prevPage"><i class="fa-solid fa-chevron-left"></i></button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <span class="page-dots">...</span>
+              <button class="page-btn">12</button>
+              <button class="page-btn" id="nextPage"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+          <i class="fa-solid fa-clipboard-check"></i>
+          <div class="empty-text">No complaints found</div>
+        </div>
+
+    <!-- View Details Modal -->
+    <div class="modal-backdrop" id="detailsModal">
+      <div class="modal-panel">
+        <div class="modal-header">
+          <h2 id="dpTitle">Complaint Details</h2>
+          <button class="btn-close" onclick="closeModal('detailsModal')">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="detail-grid">
+            <div class="detail-item">
+              <span class="detail-label">Complaint ID</span>
+              <span class="detail-value" id="dpIdLocation"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Status</span>
+              <span class="status-pill" id="detStatusHtml"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Date Submitted</span>
+              <span class="detail-value" id="dpDate"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Student Name</span>
+              <span class="detail-value" id="dpStudentName"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Email</span>
+              <span class="detail-value" id="dpEmail"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Contact Number</span>
+              <span class="detail-value" id="dpContact"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Order Reference</span>
+              <span class="detail-value" id="dpOrderRef"></span>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 24px">
+            <span class="detail-label" style="font-size: 14px; border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; margin-bottom: 16px; display: block;">Description</span>
+            <div class="dp-description">
+              <p id="dpDescriptionText"></p>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 24px">
+            <span class="detail-label" style="font-size: 14px; border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; margin-bottom: 16px; display: block;">Evidence</span>
+            <div class="dp-evidence" id="dpEvidenceContainer">
+              <a href="#" class="evidence-card">
+                <div class="evidence-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                <div class="evidence-details">
+                  <span class="evidence-name" id="dpEvidenceName">photo_evidence.jpg</span>
+                  <span class="evidence-size" id="dpEvidenceSize">1.2 MB</span>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 24px">
+            <span class="detail-label" style="font-size: 14px; border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; margin-bottom: 16px; display: block;">Activity</span>
+            <div class="dp-timeline" id="dpTimelineContainer">
+              <!-- Chronological Logs -->
+            </div>
+          </div>
+
+          <div style="margin-bottom: 24px">
+            <span class="detail-label" style="font-size: 14px; border-bottom: 1px solid #e5e7eb; padding-bottom: 8px; margin-bottom: 16px; display: block;">Add Reply / Note</span>
+            <div class="dp-reply">
+              <textarea rows="3" placeholder="Write a note or reply to student..." id="dpReplyInput"></textarea>
+              <div class="dp-actions">
+                <button class="dp-btn btn-note" id="dpAddNote"><i class="fa-regular fa-clipboard"></i> Add Internal Note</button>
+                <button class="dp-btn btn-send" id="dpSendReply"><i class="fa-regular fa-paper-plane"></i> Send Reply</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="modal-footer" id="detailsFooter" style="display: flex; justify-content: flex-end;">
+           <button class="dp-btn btn-mark-resolved" id="dpMarkResolved"><i class="fa-solid fa-check"></i> Mark Resolved</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal-backdrop" id="confirmModal">
+      <div class="modal-panel" style="max-width: 400px; text-align: center">
+        <div class="modal-body" style="padding-top: 32px">
+          <div class="modal-icon" style="font-size: 48px; color: #ef4444; margin-bottom: 16px" id="confirmIcon">
+            <i class="fa-solid fa-circle-exclamation"></i>
+          </div>
+          <h2 style="font-size: 20px; font-weight: 800; color: #0f172a; margin-bottom: 8px;" id="confirmTitle">Confirm Action</h2>
+          <p style="font-size: 14px; color: #64748b; margin-bottom: 24px" id="confirmMessage">Are you sure you want to do this?</p>
+          
+          <div id="confirmInputContainer" style="display: none; margin-bottom: 24px; text-align: left;">
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 8px;" id="confirmInputLabel">Reason</label>
+            <textarea id="confirmInput" class="form-control" rows="3" placeholder="Enter reason here..." style="width: 100%; border: 1px solid #cbd5e1; border-radius: 8px; padding: 12px; font-family: inherit; font-size: 14px; resize: vertical; box-sizing: border-box; outline: none; transition: border-color 0.2s;"></textarea>
+          </div>
+
+          <div class="form-actions" style="display: flex; justify-content: center; gap: 12px">
+             <button class="btn-submit" id="submitConfirmBtn" style="padding: 10px 24px; border: none; color: white; border-radius: 8px; font-weight: 600; cursor: pointer; background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);">Confirm</button>
+            <button class="btn-ghost" id="cancelConfirmBtn" style="padding: 10px 24px; border: 1px solid #cbd5e1; background: transparent; color: #475569; border-radius: 8px; font-weight: 600; cursor: pointer;">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../script/super_admin_js/complaints.js"></script>
+</body>
+</html>
+
+
+
+

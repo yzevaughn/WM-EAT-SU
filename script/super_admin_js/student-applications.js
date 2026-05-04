@@ -1,0 +1,666 @@
+// Load applications from localStorage or use mock data
+let mockApplications = [];
+
+function loadStudentApplications() {
+  const stored = localStorage.getItem('student_vendor_applications');
+  if (stored) {
+    mockApplications = JSON.parse(stored);
+  } else {
+    mockApplications = [
+      {
+        id: "APP-1042",
+        studentName: "Johnson, Alice",
+        studentEmail: "alice.j@wm.edu.ph",
+        businessName: "Alice Bakes",
+        category: "Food & Beverage",
+        status: "Pending",
+        dateSubmitted: "Oct 24, 2023",
+        rejectionReason: "",
+        products: []
+      },
+      {
+        id: "APP-1043",
+        studentName: "Smith, Bob",
+        studentEmail: "bob.s@wm.edu.ph",
+        businessName: "Bob Tech Repairs",
+        category: "Services",
+        status: "Under Review",
+        dateSubmitted: "Oct 23, 2023",
+        rejectionReason: "",
+        products: []
+      },
+      {
+        id: "APP-1039",
+        studentName: "Brown, Charlie",
+        studentEmail: "charlie.b@wm.edu.ph",
+        businessName: "Charlie Merch",
+        category: "Retail",
+        status: "Active Vendor",
+        dateSubmitted: "Oct 18, 2023",
+        rejectionReason: "",
+        products: []
+      },
+      {
+        id: "APP-1035",
+        studentName: "Prince, Diana",
+        studentEmail: "diana.p@wm.edu.ph",
+        businessName: "Wonder Crafts",
+        category: "Arts & Crafts",
+        status: "Rejected",
+        dateSubmitted: "Oct 15, 2023",
+        rejectionReason: "Duplicate application for the same category.",
+        products: []
+      },
+      {
+        id: "APP-1044",
+        studentName: "Wright, Evan",
+        studentEmail: "evan.w@wm.edu.ph",
+        businessName: "Fresh Squeeze",
+        category: "Food & Beverage",
+        status: "Pending",
+        dateSubmitted: "Oct 25, 2023",
+        rejectionReason: "",
+        products: []
+      },
+      {
+        id: "APP-1040",
+        studentName: "Gallagher, Fiona",
+        studentEmail: "fiona.g@wm.edu.ph",
+        businessName: "Campus Thrifts",
+        category: "Retail",
+        status: "Active Vendor",
+        dateSubmitted: "Oct 19, 2023",
+        rejectionReason: "",
+        products: []
+      },
+    ];
+    saveStudentApplications();
+  }
+}
+
+function saveStudentApplications() {
+  localStorage.setItem('student_vendor_applications', JSON.stringify(mockApplications));
+}
+
+// State variables for Table
+let currentPage = 1;
+let itemsPerPage = 10;
+let currentSort = "Latest";
+let currentStatus = "All";
+let currentSearch = "";
+
+// Wait for DOM to be ready
+document.addEventListener("DOMContentLoaded", () => {
+  // Event Listeners for Filters & Search
+  document.getElementById("statusFilter").addEventListener("change", (e) => {
+    currentStatus = e.target.value;
+    currentPage = 1;
+    renderTable();
+  });
+
+  document.getElementById("sortFilter").addEventListener("change", (e) => {
+    currentSort = e.target.value;
+    currentPage = 1;
+    renderTable();
+  });
+
+  document.getElementById("searchInput").addEventListener("input", (e) => {
+    currentSearch = e.target.value.toLowerCase();
+    currentPage = 1;
+    renderTable();
+  });
+
+  // Event Listeners for Pagination
+  document.getElementById("prevPage").addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderTable();
+    }
+  });
+
+  document.getElementById("nextPage").addEventListener("click", () => {
+    const maxPage = Math.ceil(getFilteredAndSortedData().length / itemsPerPage);
+    if (currentPage < maxPage) {
+      currentPage++;
+      renderTable();
+    }
+  });
+
+  // Initial render
+  loadStudentApplications();
+  renderTable();
+  initApplicationChart();
+});
+
+/* ========================================================
+ * APPLICATION CHART LOGIC
+ * ======================================================== */
+function initApplicationChart() {
+  const ctx = document.getElementById("applicationChart");
+  if (!ctx) return;
+
+  const chartData = {
+    daily: {
+      labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      submitted: [5, 8, 4, 10, 12, 3, 2],
+      approved: [3, 5, 2, 7, 8, 2, 1],
+      rejected: [1, 2, 1, 2, 3, 1, 0],
+    },
+    weekly: {
+      labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
+      submitted: [45, 52, 48, 60],
+      approved: [30, 38, 35, 42],
+      rejected: [10, 12, 9, 15],
+    },
+    monthly: {
+      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      submitted: [150, 180, 165, 200, 220, 210, 190, 205, 230, 250, 240, 260],
+      approved: [110, 130, 120, 150, 165, 155, 140, 150, 170, 190, 180, 195],
+      rejected: [30, 40, 35, 45, 40, 42, 38, 45, 50, 55, 48, 55],
+    },
+  };
+
+  const appChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: chartData.daily.labels,
+      datasets: [
+        {
+          label: "Submitted",
+          data: chartData.daily.submitted,
+          borderColor: "#a855f7",
+          backgroundColor: "rgba(168, 85, 247, 0.1)",
+          borderWidth: 2,
+          pointBackgroundColor: "#fff",
+          pointBorderColor: "#a855f7",
+          pointBorderWidth: 2,
+          pointRadius: 4,
+          fill: true,
+          tension: 0.4,
+        },
+        {
+          label: "Approved",
+          data: chartData.daily.approved,
+          borderColor: "#22c55e",
+          backgroundColor: "rgba(34, 197, 94, 0.1)",
+          borderWidth: 2,
+          pointBackgroundColor: "#fff",
+          pointBorderColor: "#22c55e",
+          pointBorderWidth: 2,
+          pointRadius: 4,
+          fill: true,
+          tension: 0.4,
+        },
+        {
+          label: "Rejected",
+          data: chartData.daily.rejected,
+          borderColor: "#ef4444",
+          backgroundColor: "rgba(239, 68, 68, 0.1)",
+          borderWidth: 2,
+          pointBackgroundColor: "#fff",
+          pointBorderColor: "#ef4444",
+          pointBorderWidth: 2,
+          pointRadius: 4,
+          fill: true,
+          tension: 0.4,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          position: "top",
+          align: "end",
+          labels: {
+            boxWidth: 10,
+            usePointStyle: true,
+            pointStyle: "circle",
+            font: { family: "'Inter', sans-serif", size: 12 },
+          },
+        },
+        tooltip: {
+          backgroundColor: "#1e293b",
+          padding: 12,
+          titleFont: { size: 13, family: "'Inter', sans-serif" },
+          bodyFont: { size: 14, family: "'Inter', sans-serif" },
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: { color: "#f1f5f9", drawBorder: false },
+          ticks: { font: { family: "'Inter', sans-serif", size: 11 }, color: "#64748b" },
+        },
+        x: {
+          grid: { display: false, drawBorder: false },
+          ticks: { font: { family: "'Inter', sans-serif", size: 11 }, color: "#64748b" },
+        },
+      },
+      interaction: { intersect: false, mode: "index" },
+    },
+  });
+
+  // Handle Range Toggles
+  const toggles = document.querySelectorAll(".revenue-controls .filter-tab");
+  toggles.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      toggles.forEach((t) => t.classList.remove("active"));
+      this.classList.add("active");
+
+      const range = this.getAttribute("data-range");
+      const targetData = chartData[range];
+
+      appChart.data.labels = targetData.labels;
+      appChart.data.datasets[0].data = targetData.submitted;
+      appChart.data.datasets[1].data = targetData.approved;
+      appChart.data.datasets[2].data = targetData.rejected;
+      appChart.update();
+    });
+  });
+}
+
+// Helper functions for filtering and sorting
+function getFilteredAndSortedData() {
+  let filtered = mockApplications.filter((app) => {
+    // Search Filter
+    const searchMatch = app.studentName.toLowerCase().includes(currentSearch) ||
+                        app.id.toLowerCase().includes(currentSearch) ||
+                        app.businessName.toLowerCase().includes(currentSearch);
+    
+    // Status Filter
+    let statusMatch = true;
+    if (currentStatus !== "All") {
+      if (currentStatus === "Active Vendor") {
+        statusMatch = (app.status === "Active Vendor");
+      } else {
+        statusMatch = (app.status === currentStatus);
+      }
+    }
+
+    return searchMatch && statusMatch;
+  });
+
+  // Sort Filter
+  filtered.sort((a, b) => {
+    const dateA = new Date(a.dateSubmitted).getTime();
+    const dateB = new Date(b.dateSubmitted).getTime();
+    if (currentSort === "Latest") {
+      return dateB - dateA;
+    } else {
+      return dateA - dateB;
+    }
+  });
+
+  return filtered;
+}
+
+function renderTable() {
+  const tableBody = document.getElementById("applicationsTableBody");
+  const filteredData = getFilteredAndSortedData();
+  const totalEntries = filteredData.length;
+  
+  tableBody.innerHTML = "";
+
+  if (totalEntries === 0) {
+    tableBody.innerHTML = `
+      <tr>
+        <td colspan="7" style="text-align: center; color: #64748b; padding: 32px;">
+          No applications found matching the current filters.
+        </td>
+      </tr>
+    `;
+    updatePaginationUI(0, 0, 0);
+    return;
+  }
+
+  // Calculate pagination
+  const totalPages = Math.ceil(totalEntries / itemsPerPage);
+  if (currentPage > totalPages) currentPage = totalPages;
+  
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = Math.min(startIndex + itemsPerPage, totalEntries);
+  
+  const paginatedData = filteredData.slice(startIndex, endIndex);
+
+  paginatedData.forEach((app) => {
+    const tr = document.createElement("tr");
+
+    let statusClass = "";
+    if (app.status === "Pending") statusClass = "status-pending";
+    else if (app.status === "Under Review") statusClass = "status-review";
+    else if (app.status === "Active Vendor") statusClass = "status-active";
+    else if (app.status === "Rejected") statusClass = "status-rejected";
+    else if (app.status === "Deactivated") statusClass = "status-deactivated";
+
+    let actionButtons = "";
+    if (app.status === "Pending") {
+      actionButtons = `<button class="btn-action btn-review" onclick="reviewApp('${app.id}')">Review</button>`;
+    } else if (app.status === "Under Review") {
+      actionButtons = `
+        <button class="btn-action btn-approve" onclick="approveApp('${app.id}')">Approve</button>
+        <button class="btn-action btn-reject" onclick="rejectApp('${app.id}')">Reject</button>
+        <button class="btn-action btn-details" onclick="openDetails('${app.id}')">View Details</button>
+      `;
+    } else if (app.status === "Active Vendor") {
+      actionButtons = `
+        <button class="btn-action btn-details" onclick="openDetails('${app.id}')">View Details</button>
+        <button class="btn-action btn-reason" onclick="removeVendor('${app.id}')">Deactivate</button>
+      `;
+    } else if (app.status === "Rejected") {
+      actionButtons = `<button class="btn-action btn-details" onclick="openDetails('${app.id}')">View Details</button>`;
+    } else if (app.status === "Deactivated") {
+      actionButtons = `
+        <button class="btn-action btn-details" onclick="openDetails('${app.id}')">View Details</button>
+        <button class="btn-action btn-approve" onclick="reactivateVendor('${app.id}')">Reactivate</button>
+      `;
+    }
+
+    tr.innerHTML = `
+      <td class="app-id">${app.id}</td>
+      <td>
+        <div class="student-info">
+          <span class="student-name">${app.studentName}</span>
+          <span class="student-email">${app.studentEmail}</span>
+        </div>
+      </td>
+      <td>${app.businessName}</td>
+      <td>${app.category}</td>
+      <td>
+        <span class="status-pill ${statusClass}">
+          ${app.status === "Pending" ? "🟡" : app.status === "Under Review" ? "🔵" : app.status === "Active Vendor" ? "🟢" : app.status === "Rejected" ? "🔴" : "⚫"} 
+          ${app.status}
+        </span>
+      </td>
+      <td>${app.dateSubmitted}</td>
+      <td class="actions-col">
+        <div class="action-buttons">
+          ${actionButtons}
+        </div>
+      </td>
+    `;
+
+    tableBody.appendChild(tr);
+  });
+
+  updatePaginationUI(startIndex + 1, endIndex, totalEntries);
+  updateCounters();
+}
+
+function updateCounters() {
+  const pendingCount = mockApplications.filter(app => app.status === "Pending").length;
+  const activeCount = mockApplications.filter(app => app.status === "Active Vendor").length;
+  
+  const pendingEl = document.getElementById("countPending");
+  const activeEl = document.getElementById("countActive");
+  
+  if (pendingEl) pendingEl.innerText = pendingCount;
+  if (activeEl) activeEl.innerText = activeCount;
+}
+
+function updatePaginationUI(start, end, total) {
+  document.getElementById("pageStart").innerText = start;
+  document.getElementById("pageEnd").innerText = end;
+  document.getElementById("totalEntries").innerText = total;
+
+  const totalPages = Math.ceil(total / itemsPerPage);
+  const prevBtn = document.getElementById("prevPage");
+  const nextBtn = document.getElementById("nextPage");
+
+  if (currentPage <= 1) prevBtn.classList.add("disabled");
+  else prevBtn.classList.remove("disabled");
+
+  if (currentPage >= totalPages || total === 0) nextBtn.classList.add("disabled");
+  else nextBtn.classList.remove("disabled");
+}
+
+// Custom Confirmation Modal Logic
+let confirmCallback = null;
+
+function showConfirmModal(options) {
+  const modal = document.getElementById("confirmModal");
+  const icon = document.getElementById("confirmIcon");
+  const title = document.getElementById("confirmTitle");
+  const msg = document.getElementById("confirmMessage");
+  const inputContainer = document.getElementById("confirmInputContainer");
+  const inputLabel = document.getElementById("confirmInputLabel");
+  const inputEl = document.getElementById("confirmInput");
+  const submitBtn = document.getElementById("submitConfirmBtn");
+
+  title.innerText = options.title || "Confirm Action";
+  msg.innerText = options.message || "Are you sure?";
+
+  // Style the icon and button based on action type (approve vs reject)
+  if (options.type === 'approve') {
+    icon.style.color = "#10b981";
+    icon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+    submitBtn.style.background = "linear-gradient(135deg, #10b981, #059669)";
+    submitBtn.style.boxShadow = "0 2px 8px rgba(16, 185, 129, 0.2)";
+  } else {
+    icon.style.color = "#ef4444";
+    icon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
+    submitBtn.style.background = "linear-gradient(135deg, #ef4444, #dc2626)";
+    submitBtn.style.boxShadow = "0 2px 8px rgba(239, 68, 68, 0.2)";
+  }
+
+  if (options.requireInput) {
+    inputContainer.style.display = "block";
+    inputLabel.innerText = options.inputLabel || "Reason";
+    inputEl.value = "";
+    inputEl.placeholder = options.inputPlaceholder || "Enter reason...";
+  } else {
+    inputContainer.style.display = "none";
+  }
+
+  confirmCallback = options.onConfirm;
+  openModal("confirmModal");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const cancelBtn = document.getElementById("cancelConfirmBtn");
+  const submitBtn = document.getElementById("submitConfirmBtn");
+  const inputEl = document.getElementById("confirmInput");
+
+  if(cancelBtn) {
+    cancelBtn.addEventListener("click", () => {
+      closeModal("confirmModal");
+      confirmCallback = null;
+    });
+  }
+
+  if(submitBtn) {
+    submitBtn.addEventListener("click", () => {
+      const inputContainer = document.getElementById("confirmInputContainer");
+      let inputValue = null;
+      if (inputContainer.style.display === "block") {
+        inputValue = inputEl.value.trim();
+        if (!inputValue) {
+          alert("Please enter a reason.");
+          return;
+        }
+      }
+      
+      if (confirmCallback) confirmCallback(inputValue);
+      closeModal("confirmModal");
+      confirmCallback = null;
+    });
+  }
+});
+
+// Global Actions
+function reviewApp(id) {
+  const app = mockApplications.find((x) => x.id === id);
+  if (app) {
+    app.status = "Under Review";
+    saveStudentApplications();
+    renderTable(); // This will re-render the table and update the counters immediately
+  }
+}
+
+function approveApp(id) {
+  showConfirmModal({
+    title: "Approve Application",
+    message: "Are you sure you want to approve this vendor application?",
+    type: "approve",
+    requireInput: false,
+    onConfirm: () => {
+      const app = mockApplications.find((x) => x.id === id);
+      if (app) {
+        app.status = "Active Vendor";
+        saveStudentApplications();
+        renderTable();
+      }
+    }
+  });
+}
+
+function rejectApp(id) {
+  showConfirmModal({
+    title: "Reject Application",
+    message: "Are you sure you want to reject this application? Please provide a reason.",
+    type: "reject",
+    requireInput: true,
+    inputLabel: "Rejection Reason",
+    onConfirm: (reason) => {
+      const app = mockApplications.find((x) => x.id === id);
+      if (app) {
+        app.status = "Rejected";
+        app.rejectionReason = reason;
+        saveStudentApplications();
+        renderTable();
+      }
+    }
+  });
+}
+
+function removeVendor(id) {
+  showConfirmModal({
+    title: "Deactivate Vendor",
+    message: "Are you sure you want to deactivate this vendor? Please provide a reason.",
+    type: "reject",
+    requireInput: true,
+    inputLabel: "Deactivation Reason",
+    onConfirm: (reason) => {
+      const app = mockApplications.find((x) => x.id === id);
+      if (app) {
+        app.status = "Deactivated";
+        app.deactivationReason = reason;
+        saveStudentApplications();
+        renderTable();
+      }
+    }
+  });
+}
+
+function reactivateVendor(id) {
+  showConfirmModal({
+    title: "Reactivate Vendor",
+    message: "Are you sure you want to reactivate this vendor?",
+    type: "approve",
+    requireInput: false,
+    onConfirm: () => {
+      const app = mockApplications.find((x) => x.id === id);
+      if (app) {
+        app.status = "Active Vendor";
+        delete app.deactivationReason;
+        saveStudentApplications();
+        renderTable();
+      }
+    }
+  });
+}
+
+// Modal Logic
+function openModal(id) {
+  document.getElementById(id).classList.add("active");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove("active");
+  document.body.style.overflow = "auto";
+}
+
+function openDetails(id) {
+  const app = mockApplications.find((x) => x.id === id);
+  if (!app) return;
+
+  let statusClass = "";
+  if (app.status === "Pending") statusClass = "status-pending";
+  else if (app.status === "Under Review") statusClass = "status-review";
+  else if (app.status === "Active Vendor") statusClass = "status-active";
+  else if (app.status === "Rejected") statusClass = "status-rejected";
+  else if (app.status === "Deactivated") statusClass = "status-deactivated";
+
+  document.getElementById("detStatusHtml").className = `status-pill ${statusClass}`;
+  document.getElementById("detStatusHtml").innerText = app.status;
+  document.getElementById("detDate").innerText = app.dateSubmitted;
+  document.getElementById("detBusiness").innerText = app.businessName;
+  document.getElementById("detOwner").innerText = app.studentName;
+
+  const detProductsContainer = document.getElementById("detProductsContainer");
+  if (detProductsContainer) {
+    detProductsContainer.innerHTML = "";
+    
+    const productsToRender = app.products && app.products.length > 0 ? app.products : [
+      { name: "Sample Meal", price: "45", category: "Meals", ingredients: "Rice, Chicken, Soy Sauce, Garlic, Onion" },
+      { name: "Sample Snack", price: "20", category: "Snacks", ingredients: "Flour, Sugar, Butter, Eggs" }
+    ];
+
+    productsToRender.forEach((prod) => {
+      const wrap = document.createElement("div");
+      wrap.className = "det-product-block";
+      wrap.innerHTML = `
+        <div class="det-product-title" style="display: flex; justify-content: space-between;">
+          <span><i class="fa-solid fa-box"></i> ${prod.name}</span>
+          <span style="font-size: 14px; color: #475569;">₱${prod.price || "0.00"}</span>
+        </div>
+        <div style="font-size: 13px; color: #64748b; margin-bottom: 12px; font-weight: 500;">
+          <i class="fa-solid fa-tag"></i> Category: <span style="color: #1e293b;">${prod.category || "N/A"}</span>
+        </div>
+        <details class="product-details-dropdown" open>
+          <summary>Ingredients Provided</summary>
+          <div class="dropdown-content">
+            <p style="margin: 0; line-height: 1.5; color: #4b5563;">${prod.ingredients || "No ingredients listed."}</p>
+          </div>
+        </details>
+        <details class="product-details-dropdown">
+          <summary>Step-by-Step Preparation Photos</summary>
+          <div class="dropdown-content">
+            <div style="background: #f3f4f6; border-radius: 8px; padding: 24px; text-align: center; color: #9ca3af;">
+              <i class="fa-regular fa-images" style="font-size: 24px;"></i>
+              <p style="margin: 8px 0 0 0; font-size: 13px;">Photos securely attached to submission.</p>
+            </div>
+          </div>
+        </details>
+      `;
+      detProductsContainer.appendChild(wrap);
+    });
+  }
+
+  // Admin Feedback Section
+  const fbSection = document.getElementById("adminFeedbackSection");
+  const fbLabel = document.getElementById("adminFeedbackLabel");
+  const fbBox = document.getElementById("detFeedbackBox");
+  
+  if (app.status === "Rejected" && app.rejectionReason) {
+    fbSection.style.display = "block";
+    fbLabel.innerText = "Rejection Reason";
+    fbBox.innerText = app.rejectionReason;
+    fbBox.className = "feedback-box rejected";
+  } else if (app.status === "Deactivated" && app.deactivationReason) {
+    fbSection.style.display = "block";
+    fbLabel.innerText = "Deactivation Reason";
+    fbBox.innerText = app.deactivationReason;
+    fbBox.className = "feedback-box rejected";
+  } else {
+    fbSection.style.display = "none";
+  }
+
+  const footer = document.getElementById("detailsFooter");
+  footer.innerHTML = `<button class="btn-ghost" onclick="closeModal('detailsModal')">Close</button>`;
+
+  openModal("detailsModal");
+}

@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top Earners - WM EAT SU</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="../../css/navbar.css" />
+  <link rel="stylesheet" href="../../css/super_admin_css/super-dashboard.css" />
+  <link rel="stylesheet" href="../../css/super_admin_css/top-earners.css" />
+</head>
+
+<body>
+  <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+
+  <div class="top-nav">
+    <div class="nav-left">
+      <label for="menu-checkbox" class="menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </label>
+      <a href="super-dashboard.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
+    </div>
+    <div class="nav-center"></div>
+    <div class="nav-right">
+      <div class="profile">
+        <div class="profile-info">
+          <span class="profile-name">Super Admin</span>
+          <span class="email">admin@wm.edu.ph</span>
+        </div>
+        <div class="profile-dropdown">
+          <button class="profile-btn">
+            <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="left-nav" id="sidebar">
+      <ul class="nav-list">
+        <li>
+          <a href="super-dashboard.html" class="nav-link">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="top-earners.html" class="nav-link active">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Top Earners</span>
+          </a>
+        </li>
+        <li>
+          <a href="payment-tracking.html" class="nav-link">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+            <span>Payment Tracking</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-applications.html" class="nav-link">
+            <i class="fa-solid fa-user-check"></i>
+            <span>Student Apps</span>
+          </a>
+        </li>
+        <li>
+          <a href="canteen-applications.html" class="nav-link">
+            <i class="fa-solid fa-store"></i>
+            <span>Canteen Apps</span>
+          </a>
+        </li>
+        <li>
+          <a href="complaints.html" class="nav-link">
+            <i class="fa-solid fa-comment-dots"></i>
+            <span>Complaints</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <header class="page-header">
+        <div class="header-left">
+          <h1>Top Earners</h1>
+          <p>Most earning canteens and student vendors — May 2026</p>
+        </div>
+        <button class="export-btn">
+          <i class="fa-solid fa-download"></i>
+          Export Report
+        </button>
+      </header>
+
+      <div class="top-lists-grid">
+        <!-- Top Canteens Panel -->
+        <div class="list-panel">
+          <div class="panel-header">
+            <i class="fa-solid fa-store"></i>
+            <span>Top Canteens</span>
+          </div>
+          <div class="earning-list" id="canteens-list">
+            <!-- JS will populate -->
+          </div>
+        </div>
+
+        <!-- Top Student Vendors Panel -->
+        <div class="list-panel">
+          <div class="panel-header">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Top Student Vendors</span>
+          </div>
+          <div class="earning-list" id="students-list">
+            <!-- JS will populate -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Combined Leaderboard Panel -->
+      <div class="leaderboard-panel">
+        <h2>Combined Leaderboard — All Vendors</h2>
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Revenue (May)</th>
+                <th>All-Time</th>
+                <th>Growth</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-body">
+              <!-- JS will populate -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../script/super_admin_js/top-earners.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Tracking - WM EAT SU</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="../../css/navbar.css" />
+  <link rel="stylesheet" href="../../css/super_admin_css/super-dashboard.css" />
+  <link rel="stylesheet" href="../../css/super_admin_css/payment-tracking.css" />
+</head>
+
+<body>
+  <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+
+  <div class="top-nav">
+    <div class="nav-left">
+      <label for="menu-checkbox" class="menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </label>
+      <a href="super-dashboard.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
+    </div>
+    <div class="nav-center"></div>
+    <div class="nav-right">
+      <div class="profile">
+        <div class="profile-info">
+          <span class="profile-name">Super Admin</span>
+          <span class="email">admin@wm.edu.ph</span>
+        </div>
+        <div class="profile-dropdown">
+          <button class="profile-btn">
+            <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="left-nav" id="sidebar">
+      <ul class="nav-list">
+        <li>
+          <a href="super-dashboard.html" class="nav-link">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="top-earners.html" class="nav-link">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Top Earners</span>
+          </a>
+        </li>
+        <li>
+          <a href="payment-tracking.html" class="nav-link active">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+            <span>Payment Tracking</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-applications.html" class="nav-link">
+            <i class="fa-solid fa-user-check"></i>
+            <span>Student Apps</span>
+          </a>
+        </li>
+        <li>
+          <a href="canteen-applications.html" class="nav-link">
+            <i class="fa-solid fa-store"></i>
+            <span>Canteen Apps</span>
+          </a>
+        </li>
+        <li>
+          <a href="complaints.html" class="nav-link">
+            <i class="fa-solid fa-comment-dots"></i>
+            <span>Complaints</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <header class="page-header">
+        <div class="header-left">
+          <h1>Monthly Payment Tracking</h1>
+          <p>Track canteen monthly fee payments and due dates</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-secondary">
+            <i class="fa-solid fa-download"></i>
+            Export
+          </button>
+          <button class="btn btn-primary">
+            <i class="fa-solid fa-plus"></i>
+            Record Payment
+          </button>
+        </div>
+      </header>
+
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <h4>Total Monthly Due</h4>
+          <h2>₱38.3K</h2>
+          <div class="trend">From 12 canteens</div>
+        </div>
+        <div class="metric-card">
+          <h4>Collected (May)</h4>
+          <h2 style="color: var(--color-green)">₱13.8K</h2>
+          <div class="trend up">
+            <i class="fa-solid fa-arrow-up"></i>
+            <span>36% collected</span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <h4>Pending</h4>
+          <h2 style="color: var(--color-orange)">₱19.5K</h2>
+          <div class="trend">4 canteens pending</div>
+        </div>
+        <div class="metric-card">
+          <h4>Overdue</h4>
+          <h2 style="color: var(--color-red)">₱5,000</h2>
+          <div class="trend down">
+            <i class="fa-solid fa-flag"></i>
+            <span>1 canteen overdue</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-panel">
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Canteen</th>
+                <th>Monthly Fee</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Progress</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="payment-table-body">
+              <!-- JS will populate -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../script/super_admin_js/payment-tracking.js"></script>
+</body>
+
+</html>
