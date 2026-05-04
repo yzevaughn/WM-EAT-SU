@@ -62,9 +62,9 @@
                 <i class="fa-solid fa-check"></i>
               </div>
 
-              <h2>Welcome to WM EAT SU! 🎉</h2>
+              <h2 id="successTitle">Welcome to WM EAT SU! 🎉</h2>
 
-              <p>
+              <p id="successMsg">
                 Your account is created and pending document review. We'll email
                 you once you're approved to order.
               </p>
@@ -78,5 +78,39 @@
         </section>
       </div>
     </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const role = sessionStorage.getItem('signup_role');
+        const successTitle = document.getElementById('successTitle');
+        const successMsg = document.getElementById('successMsg');
+
+        if (role === 'staff') {
+          // Update sidebar
+          const stepNames = document.querySelectorAll('.sb-step-name');
+          if (stepNames[0]) stepNames[0].textContent = 'Staff Info';
+          
+          const stepSubs = document.querySelectorAll('.sb-step-sub');
+          if (stepSubs[1]) {
+            stepSubs[1].textContent = 'Teacher/Staff ID';
+          }
+        } else if (role === 'outsider') {
+          // Update sidebar
+          const stepNames = document.querySelectorAll('.sb-step-name');
+          if (stepNames[0]) stepNames[0].textContent = 'Personal Info';
+          if (stepNames[2]) stepNames[2].textContent = 'Verify Mobile';
+          
+          const stepSubs = document.querySelectorAll('.sb-step-sub');
+          if (stepSubs[1]) {
+            stepSubs[1].style.display = 'none'; // Hide documents step for outsider
+          }
+          const steps = document.querySelectorAll('.sb-step');
+          if (steps[1]) steps[1].style.display = 'none'; // Completely hide the 2nd step in sidebar
+
+          // Update messages
+          if (successTitle) successTitle.textContent = "You're all set! 🎊";
+          if (successMsg) successMsg.textContent = "Your visitor account has been successfully created. You can now start exploring and ordering your favorite campus meals.";
+        }
+      });
+    </script>
   </body>
 </html>

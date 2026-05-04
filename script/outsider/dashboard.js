@@ -3,6 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ============================================================
      1. FOOD SLIDER
      ============================================================ */
+  const navProfileName = document.getElementById('navProfileName');
+  if (navProfileName) {
+    const savedName = sessionStorage.getItem('outsiderName');
+    if (savedName) navProfileName.textContent = savedName;
+  }
+
   const track = document.getElementById("sliderTrack");
   const prevBtn = document.getElementById("slidePrev");
   const nextBtn = document.getElementById("slideNext");

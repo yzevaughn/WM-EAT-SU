@@ -517,6 +517,16 @@ function detectRole() {
 // ── Auto-Initialization ─────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   const role = detectRole();
+
+  // Load Outsider Profile Name
+  if (role === "outsider") {
+    const navProfileName = document.getElementById('navProfileName') || document.querySelector('.profile-name');
+    if (navProfileName) {
+      const savedName = sessionStorage.getItem('outsiderName');
+      if (savedName) navProfileName.textContent = savedName;
+    }
+  }
+
   const opts = {
     listEl:     document.querySelector(".notification-list"),
     badgeEl:    document.querySelector(".notification-badge"),

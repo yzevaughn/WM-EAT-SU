@@ -33,7 +33,7 @@ const PROMO_CODES = {
 function validatePromoCode(code, total = 0, itemCount = 0) {
   if (!code) return null;
   const upperCode = code.toUpperCase();
-  const currentStudentEmail = "vaughn.student@wm.edu.ph"; // Mock current identity
+  const currentEmail = sessionStorage.getItem('outsiderEmail') || (sessionStorage.getItem('studentEmail') || "vaughn.student@wm.edu.ph");
 
   // New Rule: Vouchers only apply to single-item orders
   if (itemCount > 1) {
@@ -68,7 +68,7 @@ function validatePromoCode(code, total = 0, itemCount = 0) {
         ? vendorPromo.assignedTo
         : vendorPromo.assignedTo.split(",").map((e) => e.trim());
 
-      if (!allowed.includes(currentStudentEmail)) {
+      if (!allowed.includes(currentEmail)) {
         return null;
       }
     } else if (vendorPromo.assignmentType === "first-time") {
@@ -324,6 +324,7 @@ function placeOrder(instructions, payment, promoCode = null) {
       customerRole: window.location.href.includes("/outsider/")
         ? "outsider"
         : "student",
+      customerEmail: sessionStorage.getItem('outsiderEmail') || (sessionStorage.getItem('studentEmail') || null),
       removedByStudent: false,
       removedByVendor: false,
       isPaid: payment === "Wallet",

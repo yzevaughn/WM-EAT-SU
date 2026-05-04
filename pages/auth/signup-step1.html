@@ -146,7 +146,7 @@
                       id="password"
                       placeholder="Create a strong password"
                     />
-                    <button class="eye-btn" type="button" onclick="togglePw()">
+                    <button class="eye-btn" type="button" onclick="togglePw('password', 'eyeIco')">
                       <i class="fa-solid fa-eye" id="eyeIco"></i>
                     </button>
                   </div>
@@ -159,6 +159,26 @@
                     <div class="pw-lbl" id="pwLbl">—</div>
                   </div>
                   <div class="ferr" id="ferr-password">
+                    <i class="fa-solid fa-circle-exclamation"></i><span></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="fg-1">
+                <div class="fg">
+                  <label>Confirm Password <span class="req">*</span></label>
+                  <div class="iw">
+                    <i class="ico fa-solid fa-shield-check"></i>
+                    <input
+                      type="password"
+                      id="confirmPassword"
+                      placeholder="Re-enter your password"
+                    />
+                    <button class="eye-btn" type="button" onclick="togglePw('confirmPassword', 'eyeIcoConfirm')">
+                      <i class="fa-solid fa-eye" id="eyeIcoConfirm"></i>
+                    </button>
+                  </div>
+                  <div class="ferr" id="ferr-confirmPassword">
                     <i class="fa-solid fa-circle-exclamation"></i><span></span>
                   </div>
                 </div>
@@ -179,5 +199,36 @@
     </div>
 
     <script src="../../script/auth/step1.js"></script>
+    <script>
+      // Detect role and update UI
+      document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const role = urlParams.get('role');
+        
+        if (role === 'staff') {
+          // Update sidebar
+          const stepName = document.querySelector('.sb-step-name');
+          if (stepName) stepName.textContent = 'Staff Info';
+          
+          // Update main heading
+          const mainHeading = document.querySelector('.step-head h2');
+          if (mainHeading) mainHeading.textContent = 'Teacher / Staff Information';
+          
+          // Update labels
+          document.querySelectorAll('label').forEach(lbl => {
+            if (lbl.textContent.includes('Student')) {
+              lbl.innerHTML = lbl.innerHTML.replace('Student', 'Staff');
+            }
+            if (lbl.textContent.includes('School Email')) {
+              lbl.innerHTML = lbl.innerHTML.replace('School', 'Staff');
+            }
+          });
+          
+          sessionStorage.setItem('signup_role', 'staff');
+        } else if (role === 'student') {
+          sessionStorage.setItem('signup_role', 'student');
+        }
+      });
+    </script>
   </body>
 </html>

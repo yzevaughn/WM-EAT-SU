@@ -1,506 +1,201 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU — Outsider Sign Up</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="../../css/auth/signup.css" />
-    <style>
-      /* Outsider accent — standard student red */
-      :root {
-        --brand: #e61524;
-        --brand-hover: #cc101d;
-        --brand-light: #fbe5e6;
-      }
-
-      .sb-icon { background: var(--brand) !important; }
-      .btn.btn-primary,
-      .btn-primary {
-        background: linear-gradient(135deg, var(--brand), var(--brand-hover)) !important;
-        box-shadow: 0 4px 14px rgba(99,102,241,0.35) !important;
-      }
-      .btn.btn-primary:hover { filter: brightness(1.08); }
-      .sb-step.active .sb-dot { background: var(--brand) !important; }
-      .sb-step.completed .sb-dot { background: var(--brand-hover) !important; }
-      .prog-fill { background: linear-gradient(90deg, var(--brand), var(--brand-hover)) !important; }
-      input.ok { border-color: var(--brand) !important; box-shadow: 0 0 0 3px rgba(99,102,241,.15) !important; }
-      .otp-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background: var(--brand-light);
-        color: var(--brand);
-        font-size: 12px;
-        font-weight: 700;
-        padding: 4px 10px;
-        border-radius: 20px;
-        margin-bottom: 12px;
-      }
-      .outsider-note {
-        background: #f0fdf4;
-        border: 1px solid #bbf7d0;
-        border-radius: 10px;
-        padding: 12px 16px;
-        font-size: 13px;
-        color: #166534;
-        display: flex;
-        gap: 10px;
-        align-items: flex-start;
-        margin-bottom: 20px;
-      }
-      .outsider-note i { margin-top: 1px; flex-shrink: 0; }
-
-      /* OTP Step */
-      #otpStep { display: none; }
-      .otp-inputs {
-        display: flex;
-        gap: 10px;
-        justify-content: center;
-        margin: 20px 0;
-      }
-      .otp-inputs input {
-        width: 52px;
-        height: 56px;
-        text-align: center;
-        font-size: 22px;
-        font-weight: 700;
-        border: 2px solid #e2e8f0;
-        border-radius: 12px;
-        outline: none;
-        transition: all 0.2s;
-        background: #f8fafc;
-        color: #0f172a;
-      }
-      .otp-inputs input:focus {
-        border-color: var(--brand);
-        box-shadow: 0 0 0 4px rgba(99,102,241,.15);
-        background: #fff;
-      }
-      .resend-row {
-        text-align: center;
-        font-size: 13px;
-        color: #64748b;
-        margin-bottom: 20px;
-      }
-      .resend-row a { color: var(--brand); font-weight: 600; cursor: pointer; text-decoration: none; }
-      .phone-display {
-        text-align: center;
-        font-size: 14px;
-        color: #475569;
-        margin-bottom: 4px;
-      }
-      .phone-display strong { color: #0f172a; }
-    </style>
-  </head>
-  <body>
-    <div class="page-grid">
-      <div class="card">
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-          <div class="sb-brand">
-            <div class="sb-icon"><i class="fa-solid fa-utensils"></i></div>
-            <div class="sb-name">WM EAT SU</div>
-            <div class="sb-tag">Campus Food Platform<br />for Everyone</div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WM EAT SU — Step 1: Outsider Sign Up</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <link rel="stylesheet" href="../../css/auth/signup.css" />
+</head>
+<body>
+  <div class="page-grid">
+    <div class="card">
+      <aside class="sidebar">
+        <div class="sb-brand">
+          <div class="sb-icon"><i class="fa-solid fa-utensils"></i></div>
+          <div class="sb-name">WM EAT SU</div>
+          <div class="sb-tag">Your Campus Food,<br />serve delicious food</div>
+        </div>
+        <nav class="sb-steps">
+          <div class="sb-step active">
+            <div class="sb-dot"><i class="fa-solid fa-user"></i></div>
+            <div class="sb-step-name">Personal Info</div>
+            <div class="sb-step-sub">Name, email & password</div>
           </div>
-          <nav class="sb-steps">
-            <div class="sb-step active" id="ind1">
-              <div class="sb-dot"><i class="fa-solid fa-user"></i></div>
-              <div class="sb-step-name">Your Info</div>
-              <div class="sb-step-sub">Name, phone & password</div>
+          <div class="sb-step">
+            <div class="sb-dot">
+              <i class="fa-solid fa-mobile-screen"></i>
             </div>
-            <div class="sb-step" id="ind2">
-              <div class="sb-dot"><i class="fa-solid fa-mobile-screen"></i></div>
-              <div class="sb-step-name">Verify Phone</div>
-              <div class="sb-step-sub">6-digit OTP code</div>
-            </div>
-          </nav>
-
-          <div style="margin-top:auto;padding:24px 0 0;">
-            <div style="background:rgba(255,255,255,0.12);border-radius:12px;padding:14px 16px;font-size:12px;color:rgba(255,255,255,0.8);line-height:1.6;">
-              <i class="fa-solid fa-shield-halved" style="margin-right:6px;"></i>
-              <strong>Outsider Account</strong><br/>
-              Access the platform without a WMSU school email.
-            </div>
+            <div class="sb-step-name">Verify Mobile</div>
+            <div class="sb-step-sub">4-digit OTP code</div>
           </div>
-        </aside>
+        </nav>
+      </aside>
 
-        <!-- FORM PANEL -->
-        <section class="form-panel">
+      <section class="form-panel">
+        <div class="fp-top">
+          <div class="prog-track">
+            <div class="prog-fill" style="width: 50%"></div>
+          </div>
+          <div class="step-badge">Step <em>1</em> of 2</div>
+        </div>
 
-          <!-- STEP 1: Personal Info -->
-          <div id="step1Panel">
-            <div class="fp-top">
-              <div class="prog-track">
-                <div class="prog-fill" id="progBar" style="width:50%"></div>
-              </div>
-              <div class="step-badge">Step <em>1</em> of 2</div>
+        <div class="fp-body">
+          <div class="alert alert-err" id="gAlert">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span id="gMsg">Please fix the errors below.</span>
+          </div>
+
+          <div class="step-panel active">
+            <div class="step-head">
+              <h2>Outsider Information</h2>
+              <p>Fill in your details to create your visitor account.</p>
             </div>
 
-            <div class="fp-body">
-              <div class="alert alert-err" id="gAlert">
-                <i class="fa-solid fa-circle-exclamation"></i>
-                <span id="gMsg">Please fix the errors below.</span>
+            <div class="sec-divider">Personal Details</div>
+            <div class="fg-name">
+              <div class="fg">
+                <label>First Name <span class="req">*</span></label>
+                <div class="iw">
+                  <i class="ico fa-solid fa-user"></i>
+                  <input type="text" id="firstName" placeholder="Juan" />
+                </div>
+                <div class="ferr" id="ferr-firstName">
+                  <i class="fa-solid fa-circle-exclamation"></i><span></span>
+                </div>
               </div>
-
-              <div class="step-panel active">
-                <div class="step-head">
-                  <h2>Create Outsider Account</h2>
-                  <p>Access the WM EAT SU platform with just your name, phone, and password.</p>
+              <div class="fg">
+                <label>Last Name <span class="req">*</span></label>
+                <div class="iw">
+                  <i class="ico fa-solid fa-user"></i>
+                  <input type="text" id="lastName" placeholder="Dela Cruz" />
                 </div>
-
-                <div class="outsider-note">
-                  <i class="fa-solid fa-circle-info"></i>
-                  <span>Outsider accounts can browse and order food, but <strong>cannot apply as vendors</strong> or pay with Cash on Pickup.</span>
+                <div class="ferr" id="ferr-lastName">
+                  <i class="fa-solid fa-circle-exclamation"></i><span></span>
                 </div>
-
-                <!-- Name Details -->
-                <div class="sec-divider">Personal Details</div>
-                <div class="fg-name">
-                  <div class="fg">
-                    <label>First Name <span class="req">*</span></label>
-                    <div class="iw">
-                      <i class="ico fa-solid fa-user"></i>
-                      <input type="text" id="firstName" placeholder="Maria" />
-                    </div>
-                    <div class="ferr" id="ferr-firstName">
-                      <i class="fa-solid fa-circle-exclamation"></i><span></span>
-                    </div>
-                  </div>
-                  <div class="fg">
-                    <label>Last Name <span class="req">*</span></label>
-                    <div class="iw">
-                      <i class="ico fa-solid fa-user"></i>
-                      <input type="text" id="lastName" placeholder="Santos" />
-                    </div>
-                    <div class="ferr" id="ferr-lastName">
-                      <i class="fa-solid fa-circle-exclamation"></i><span></span>
-                    </div>
-                  </div>
-                  <div class="fg mi">
-                    <label>M.I. <span class="opt">(opt)</span></label>
-                    <div class="iw">
-                      <input type="text" id="mi" placeholder="A." maxlength="2" />
-                    </div>
-                  </div>
+              </div>
+              <div class="fg mi">
+                <label>M.I. <span class="opt">(opt)</span></label>
+                <div class="iw">
+                  <i class="ico fa-solid fa-pen"></i>
+                  <input
+                    type="text"
+                    id="midInit"
+                    placeholder="A."
+                    maxlength="3"
+                    style="padding-left: 30px"
+                  />
                 </div>
+              </div>
+            </div>
 
-                <!-- Phone Number -->
-                <div class="sec-divider">Account Details</div>
-                <div class="fg-1">
-                  <div class="fg">
-                    <label>Phone Number <span class="req">*</span></label>
-                    <div class="iw">
-                      <i class="ico fa-solid fa-phone"></i>
-                      <input type="tel" id="phone" placeholder="0912 345 6789" maxlength="11" />
-                    </div>
-                    <div class="ferr" id="ferr-phone">
-                      <i class="fa-solid fa-circle-exclamation"></i><span></span>
-                    </div>
-                  </div>
+            <div class="sec-divider">Account Details</div>
+            <div class="fg-1">
+              <div class="fg">
+                <label>Email Address <span class="req">*</span></label>
+                <div class="iw">
+                  <i class="ico fa-solid fa-envelope"></i>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="your@email.com"
+                  />
                 </div>
-
-                <!-- Password -->
-                <div class="fg-1">
-                  <div class="fg">
-                    <label>Password <span class="req">*</span></label>
-                    <div class="iw">
-                      <i class="ico fa-solid fa-lock"></i>
-                      <input type="password" id="password" placeholder="Create a strong password" />
-                      <button class="eye-btn" type="button" onclick="togglePw('password','eyeIco')">
-                        <i class="fa-solid fa-eye" id="eyeIco"></i>
-                      </button>
-                    </div>
-                    <div class="pw-strength">
-                      <div class="pw-seg" id="ps1"></div>
-                      <div class="pw-seg" id="ps2"></div>
-                      <div class="pw-seg" id="ps3"></div>
-                      <div class="pw-seg" id="ps4"></div>
-                      <div class="pw-seg" id="ps5"></div>
-                      <div class="pw-lbl" id="pwLbl">—</div>
-                    </div>
-                    <div class="ferr" id="ferr-password">
-                      <i class="fa-solid fa-circle-exclamation"></i><span></span>
-                    </div>
-                  </div>
+                <div class="ferr" id="ferr-email">
+                  <i class="fa-solid fa-circle-exclamation"></i><span></span>
                 </div>
+              </div>
+            </div>
 
-                <!-- Confirm Password -->
-                <div class="fg-1">
-                  <div class="fg">
-                    <label>Confirm Password <span class="req">*</span></label>
-                    <div class="iw">
-                      <i class="ico fa-solid fa-lock"></i>
-                      <input type="password" id="confirmPassword" placeholder="Re-enter your password" />
-                      <button class="eye-btn" type="button" onclick="togglePw('confirmPassword','eyeIco2')">
-                        <i class="fa-solid fa-eye" id="eyeIco2"></i>
-                      </button>
-                    </div>
-                    <div class="ferr" id="ferr-confirmPassword">
-                      <i class="fa-solid fa-circle-exclamation"></i><span></span>
-                    </div>
-                  </div>
+            <div class="fg-1">
+              <div class="fg">
+                <label>Mobile Number <span class="req">*</span></label>
+                <div class="iw">
+                  <i class="ico fa-solid fa-phone"></i>
+                  <input
+                    type="tel"
+                    id="mobile"
+                    placeholder="0912 345 6789"
+                  />
                 </div>
+                <div class="ferr" id="ferr-mobile">
+                  <i class="fa-solid fa-circle-exclamation"></i><span></span>
+                </div>
+              </div>
+            </div>
 
-                <div class="fg-action no-back">
-                  <button class="btn btn-primary" onclick="goToOtp()">
-                    Continue <i class="fa-solid fa-arrow-right"></i>
+            <div class="fg-1">
+              <div class="fg">
+                <label>Password <span class="req">*</span></label>
+                <div class="iw">
+                  <i class="ico fa-solid fa-lock"></i>
+                  <input
+                    type="password"
+                    id="password"
+                    placeholder="Create a strong password"
+                  />
+                  <button class="eye-btn" type="button" onclick="togglePw('password', 'eyeIco')">
+                    <i class="fa-solid fa-eye" id="eyeIco"></i>
                   </button>
                 </div>
-                <div class="login-link">
-                  Already have an account? <a href="outsider-signin.html">Sign In</a>
+                <div class="pw-strength">
+                  <div class="pw-seg" id="ps1"></div>
+                  <div class="pw-seg" id="ps2"></div>
+                  <div class="pw-seg" id="ps3"></div>
+                  <div class="pw-seg" id="ps4"></div>
+                  <div class="pw-seg" id="ps5"></div>
+                  <div class="pw-lbl" id="pwLbl">—</div>
+                </div>
+                <div class="ferr" id="ferr-password">
+                  <i class="fa-solid fa-circle-exclamation"></i><span></span>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- STEP 2: OTP Verification -->
-          <div id="step2Panel" style="display:none;">
-            <div class="fp-top">
-              <div class="prog-track">
-                <div class="prog-fill" style="width:100%"></div>
-              </div>
-              <div class="step-badge">Step <em>2</em> of 2</div>
-            </div>
-
-            <div class="fp-body">
-              <div class="alert alert-err" id="gAlert2">
-                <i class="fa-solid fa-circle-exclamation"></i>
-                <span id="gMsg2">Invalid OTP. Please try again.</span>
-              </div>
-              <div class="alert alert-ok" id="gOk2">
-                <i class="fa-solid fa-circle-check"></i>
-                <span>Account verified! Redirecting…</span>
-              </div>
-
-              <div class="step-panel active">
-                <div class="step-head">
-                  <div class="otp-badge">
-                    <i class="fa-solid fa-mobile-screen"></i> Phone Verification
-                  </div>
-                  <h2>Enter OTP Code</h2>
-                  <p>We sent a 6-digit code to your phone number.</p>
-                </div>
-
-                <div class="phone-display">
-                  Sent to: <strong id="phoneDisplay"></strong>
-                </div>
-
-                <div class="otp-inputs">
-                  <input type="text" id="otp1" maxlength="1" inputmode="numeric" />
-                  <input type="text" id="otp2" maxlength="1" inputmode="numeric" />
-                  <input type="text" id="otp3" maxlength="1" inputmode="numeric" />
-                  <input type="text" id="otp4" maxlength="1" inputmode="numeric" />
-                  <input type="text" id="otp5" maxlength="1" inputmode="numeric" />
-                  <input type="text" id="otp6" maxlength="1" inputmode="numeric" />
-                </div>
-
-                <div class="resend-row">
-                  Didn't receive a code? <a onclick="resendOtp()">Resend OTP</a>
-                  <span id="resendTimer"></span>
-                </div>
-
-                <div class="fg-action">
-                  <button class="btn btn-primary" id="verifyBtn" onclick="verifyOtp()">
-                    <i class="fa-solid fa-check"></i> Verify & Create Account
-                  </button>
-                  <button class="btn btn-outline" onclick="backToStep1()" style="margin-left:8px;">
-                    <i class="fa-solid fa-arrow-left"></i> Back
+            <div class="fg-1">
+              <div class="fg">
+                <label>Confirm Password <span class="req">*</span></label>
+                <div class="iw">
+                  <i class="ico fa-solid fa-shield-check"></i>
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Re-enter your password"
+                  />
+                  <button class="eye-btn" type="button" onclick="togglePw('confirmPassword', 'eyeIcoConfirm')">
+                    <i class="fa-solid fa-eye" id="eyeIcoConfirm"></i>
                   </button>
                 </div>
+                <div class="ferr" id="ferr-confirmPassword">
+                  <i class="fa-solid fa-circle-exclamation"></i><span></span>
+                </div>
               </div>
             </div>
-          </div>
 
-        </section>
-      </div>
+            <div class="fg-action">
+              <a href="signup-role.html" class="btn btn-back">
+                <i class="fa-solid fa-arrow-left"></i>
+              </a>
+              <button class="btn btn-primary" onclick="submitOutsiderInfo()">
+                Continue <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+            <div class="login-link">
+              Already have an account? <a href="signin.html">Sign In</a>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
+  </div>
 
-    <script>
-      /* ── Helpers ── */
-      function fErr(id, msg) {
-        const el = document.getElementById('ferr-' + id);
-        if (!el) return;
-        el.classList.add('show');
-        el.querySelector('span').textContent = msg;
-        const inp = document.getElementById(id);
-        if (inp) inp.classList.add('err');
-      }
-      function fClr(id) {
-        const el = document.getElementById('ferr-' + id);
-        if (el) el.classList.remove('show');
-        const inp = document.getElementById(id);
-        if (inp) { inp.classList.remove('err'); inp.classList.remove('ok'); }
-      }
-      function fOk(id) {
-        const inp = document.getElementById(id);
-        if (inp) { inp.classList.remove('err'); inp.classList.add('ok'); }
-      }
-      function v(id) { return document.getElementById(id).value.trim(); }
-      function showAlert(id, msgId, msg) {
-        document.getElementById(id).classList.add('show');
-        document.getElementById(msgId).textContent = msg;
-      }
-      function hideAlerts() {
-        ['gAlert','gAlert2','gOk2'].forEach(id => {
-          const el = document.getElementById(id);
-          if (el) el.classList.remove('show');
-        });
-      }
-
-      /* ── Password toggle ── */
-      function togglePw(inputId, icoId) {
-        const inp = document.getElementById(inputId);
-        const ico = document.getElementById(icoId);
-        const show = inp.type === 'password';
-        inp.type = show ? 'text' : 'password';
-        ico.className = 'fa-solid ' + (show ? 'fa-eye-slash' : 'fa-eye');
-      }
-
-      /* ── Password strength ── */
-      document.getElementById('password').addEventListener('input', function() {
-        const pw = this.value;
-        const segs = [1,2,3,4,5].map(i => document.getElementById('ps' + i));
-        const lbl = document.getElementById('pwLbl');
-        let s = 0;
-        if (pw.length >= 6) s++;
-        if (pw.length >= 10) s++;
-        if (/[A-Z]/.test(pw)) s++;
-        if (/[0-9]/.test(pw)) s++;
-        if (/[^A-Za-z0-9]/.test(pw)) s++;
-        segs.forEach((seg, i) => {
-          seg.className = 'pw-seg';
-          if (i < s) seg.classList.add(s <= 2 ? 'weak' : s <= 3 ? 'fair' : 'strong');
-        });
-        lbl.textContent = s === 0 ? '—' : s <= 2 ? 'Weak' : s <= 3 ? 'Fair' : s <= 4 ? 'Good' : 'Strong';
-      });
-
-      /* ── Clear on input ── */
-      ['firstName','lastName','phone','password','confirmPassword'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.addEventListener('input', () => fClr(id));
-      });
-
-      /* ── Step 1: Go to OTP ── */
-      function goToOtp() {
-        hideAlerts();
-        ['firstName', 'lastName', 'phone', 'password', 'confirmPassword'].forEach(fClr);
-        let ok = true;
-
-        const fname = v('firstName');
-        if (!fname || fname.length < 2) { fErr('firstName', 'Required.'); ok = false; } else fOk('firstName');
-
-        const lname = v('lastName');
-        if (!lname || lname.length < 2) { fErr('lastName', 'Required.'); ok = false; } else fOk('lastName');
-
-        const mi = v('mi');
-
-        const phone = v('phone');
-        if (!phone || !/^(09|\+639)\d{9}$/.test(phone.replace(/\s/g,''))) {
-          fErr('phone', 'Enter a valid PH mobile number (e.g. 09123456789).');
-          ok = false;
-        } else fOk('phone');
-
-        const pw = document.getElementById('password').value;
-        if (!pw || pw.length < 6) { fErr('password', 'Password must be at least 6 characters.'); ok = false; } else fOk('password');
-
-        const cpw = document.getElementById('confirmPassword').value;
-        if (cpw !== pw) { fErr('confirmPassword', 'Passwords do not match.'); ok = false; } else fOk('confirmPassword');
-
-        if (!ok) { showAlert('gAlert','gMsg','Please fix the errors below.'); return; }
-
-        // Transition to OTP step
-        document.getElementById('step1Panel').style.display = 'none';
-        document.getElementById('step2Panel').style.display = 'block';
-        document.getElementById('ind1').classList.remove('active');
-        document.getElementById('ind1').classList.add('completed');
-        document.getElementById('ind2').classList.add('active');
-
-        const ph = v('phone');
-        const masked = ph.slice(0,4) + '***' + ph.slice(-3);
-        document.getElementById('phoneDisplay').textContent = masked;
-
-        startResendTimer();
-        document.getElementById('otp1').focus();
-      }
-
-      function backToStep1() {
-        document.getElementById('step2Panel').style.display = 'none';
-        document.getElementById('step1Panel').style.display = 'block';
-        document.getElementById('ind2').classList.remove('active');
-        document.getElementById('ind1').classList.remove('completed');
-        document.getElementById('ind1').classList.add('active');
-      }
-
-      /* ── OTP inputs — auto-advance ── */
-      const otpIds = ['otp1','otp2','otp3','otp4','otp5','otp6'];
-      otpIds.forEach((id, i) => {
-        const el = document.getElementById(id);
-        el.addEventListener('input', function() {
-          this.value = this.value.replace(/\D/,'');
-          if (this.value && i < 5) document.getElementById(otpIds[i+1]).focus();
-        });
-        el.addEventListener('keydown', function(e) {
-          if (e.key === 'Backspace' && !this.value && i > 0) {
-            document.getElementById(otpIds[i-1]).focus();
-          }
-        });
-      });
-
-      /* ── Resend timer ── */
-      let resendInterval;
-      function startResendTimer() {
-        let secs = 60;
-        const el = document.getElementById('resendTimer');
-        el.textContent = ' (' + secs + 's)';
-        clearInterval(resendInterval);
-        resendInterval = setInterval(() => {
-          secs--;
-          el.textContent = secs > 0 ? ' (' + secs + 's)' : '';
-          if (secs <= 0) clearInterval(resendInterval);
-        }, 1000);
-      }
-      function resendOtp() {
-        otpIds.forEach(id => document.getElementById(id).value = '');
-        document.getElementById('otp1').focus();
-        startResendTimer();
-      }
-
-      /* ── Verify OTP ── */
-      function verifyOtp() {
-        const otp = otpIds.map(id => document.getElementById(id).value).join('');
-        if (otp.length < 6) {
-          showAlert('gAlert2','gMsg2','Please enter all 6 digits of the OTP.');
-          return;
-        }
-
-        const btn = document.getElementById('verifyBtn');
-        btn.disabled = true;
-        btn.innerHTML = '<div class="spinner"></div> Verifying…';
-
-        setTimeout(() => {
-          // Demo: any 6-digit OTP passes
-          sessionStorage.setItem('role', 'outsider');
-          const fullName = v('mi') ? `${v('firstName')} ${v('mi')} ${v('lastName')}` : `${v('firstName')} ${v('lastName')}`;
-          sessionStorage.setItem('outsiderName', fullName);
-          sessionStorage.setItem('outsiderPhone', v('phone'));
-
-          document.getElementById('gAlert2').classList.remove('show');
-          document.getElementById('gOk2').classList.add('show');
-          btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Account Created!';
-
-          setTimeout(() => {
-            window.location.href = '../outsider/outsider-dashboard.html';
-          }, 1200);
-        }, 1500);
-      }
-    </script>
-  </body>
+  <script src="../../script/auth/outsider-signup.js"></script>
+</body>
 </html>

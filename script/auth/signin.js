@@ -101,43 +101,85 @@ function signIn() {
   btn.innerHTML = '<div class="spinner"></div> Signing in…';
 
   setTimeout(() => {
-    // 🔐 ADMIN LOGIN
+    // 🔐 ADMIN DEMO
     if (em === "admin123" && pw === "admin123") {
       showGA("Admin signed in successfully! Redirecting…", "ok");
       btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Welcome Admin!';
-
-      // optional: store session
       sessionStorage.setItem("role", "admin");
-
       setTimeout(() => {
         window.location.href = "../admin/admin-dashboard.html";
       }, 1000);
-
       return;
     }
 
-    //  STUDENT LOGIN (any WMSU email)
-    if (/@wmsu\.edu\.ph$/.test(em)) {
+    // 🎓 STUDENT DEMO
+    if (em === "student@wmsu.edu.ph" && pw === "student123") {
       showGA("Student signed in successfully! Redirecting…", "ok");
-      btn.innerHTML =
-        '<i class="fa-solid fa-circle-check"></i> Welcome Student!';
-
-      // optional: store session
+      btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Welcome Student!';
       sessionStorage.setItem("role", "student");
       sessionStorage.setItem("email", em);
-
       setTimeout(() => {
         window.location.href = "../student/student-dashboard.html";
       }, 1000);
-
       return;
     }
 
-    // OUTSIDER LOGIN — redirect to outsider sign-in page
-    // (Outsiders use phone number, so we point them to the dedicated page)
+    // 🏪 CANTEEN / VENDOR DEMO
+    if (em === "canteen@wmsu.edu.ph" && pw === "canteen123") {
+      showGA("Vendor signed in successfully! Redirecting…", "ok");
+      btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Welcome Vendor!';
+      sessionStorage.setItem("role", "vendor");
+      setTimeout(() => {
+        window.location.href = "../vendor/vendor-dashboard.html";
+      }, 1000);
+      return;
+    }
+
+    // 👤 OUTSIDER DEMO
+    if (em === "outsider@gmail.com" && pw === "outsider123") {
+      showGA("Outsider signed in successfully! Redirecting…", "ok");
+      btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Welcome Outsider!';
+      sessionStorage.setItem("role", "outsider");
+      sessionStorage.setItem("outsiderEmail", em);
+      if (!sessionStorage.getItem('outsiderName')) {
+        sessionStorage.setItem('outsiderName', "Demo Outsider");
+      }
+      setTimeout(() => {
+        window.location.href = "../outsider/outsider-dashboard.html";
+      }, 1000);
+      return;
+    }
+
+    // 🎓 GENERIC STUDENT LOGIN (WMSU email)
+    if (/@wmsu\.edu\.ph$/.test(em)) {
+      showGA("Student signed in successfully! Redirecting…", "ok");
+      btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Welcome Student!';
+      sessionStorage.setItem("role", "student");
+      sessionStorage.setItem("email", em);
+      setTimeout(() => {
+        window.location.href = "../student/student-dashboard.html";
+      }, 1000);
+      return;
+    }
+
+    // 👤 GENERIC OUTSIDER LOGIN (Any other email)
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) {
+      showGA("Outsider signed in successfully! Redirecting…", "ok");
+      btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Welcome!';
+      sessionStorage.setItem("role", "outsider");
+      sessionStorage.setItem("outsiderEmail", em);
+      if (!sessionStorage.getItem('outsiderName')) {
+        sessionStorage.setItem('outsiderName', em.split('@')[0]);
+      }
+      setTimeout(() => {
+        window.location.href = "../outsider/outsider-dashboard.html";
+      }, 1000);
+      return;
+    }
+
     btn.disabled = false;
     btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Sign In';
-    showGA("Invalid credentials. Use your WMSU email, or sign in as an Outsider.");
+    showGA("Invalid credentials. Please try again.");
   }, 1200);
 }
 

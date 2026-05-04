@@ -295,6 +295,7 @@ html, body {
   /* ✨ CHANGED: Pushes the button container strictly to the bottom */
   margin-top: auto; 
   padding-top: 20px;
+  
 }
 .fg-action.no-back { grid-template-columns: 1fr; }
 .fg.mi input {

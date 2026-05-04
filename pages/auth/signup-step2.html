@@ -15,61 +15,7 @@
     <link rel="stylesheet" href="../../css/auth/signup.css" />
   </head>
   <body>
-    <!-- ═══════════════════════════════════════
-         CAMERA MODAL (shared for COE & ID)
-    ═══════════════════════════════════════ -->
-    <div class="cam-modal-overlay" id="camOverlay">
-      <div class="cam-modal">
-        <div class="cam-modal-header">
-          <span id="camModalTitle"><i class="fa-solid fa-camera"></i> Take Photo</span>
-          <button type="button" class="cam-modal-close" onclick="closeCamera()">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-
-        <!-- Live viewfinder -->
-        <div class="cam-viewfinder" id="camViewfinder">
-          <video id="camVideo" autoplay playsinline muted></video>
-          <div class="cam-corner cam-corner-tl"></div>
-          <div class="cam-corner cam-corner-tr"></div>
-          <div class="cam-corner cam-corner-bl"></div>
-          <div class="cam-corner cam-corner-br"></div>
-        </div>
-
-        <!-- After capture: show still -->
-        <div class="cam-snapshot-wrap" id="camSnapshotWrap" style="display:none">
-          <img id="camSnapshot" src="" alt="Captured photo" />
-        </div>
-
-        <!-- Error state -->
-        <div class="cam-error" id="camError" style="display:none">
-          <i class="fa-solid fa-triangle-exclamation"></i>
-          <p id="camErrorMsg">Camera access denied or not available.</p>
-          <label class="cam-btn cam-btn-outline" style="cursor:pointer;margin-top:8px;">
-            <i class="fa-solid fa-folder-open"></i> Upload from Device
-            <input type="file" id="camFallbackInput" accept="image/*" style="display:none" onchange="fallbackFileSelected()" />
-          </label>
-        </div>
-
-        <!-- Controls -->
-        <div class="cam-modal-controls" id="camControls">
-          <button type="button" class="cam-btn cam-btn-outline" onclick="closeCamera()">
-            <i class="fa-solid fa-xmark"></i> Cancel
-          </button>
-          <button type="button" class="cam-btn cam-btn-capture" id="captureBtn" onclick="capturePhoto()">
-            <i class="fa-solid fa-camera"></i> Capture
-          </button>
-          <button type="button" class="cam-btn cam-btn-outline" id="retakeCamBtn" style="display:none" onclick="retakeCam()">
-            <i class="fa-solid fa-rotate-left"></i> Retake
-          </button>
-          <button type="button" class="cam-btn cam-btn-confirm" id="confirmCamBtn" style="display:none" onclick="confirmPhoto()">
-            <i class="fa-solid fa-check"></i> Use Photo
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Hidden canvas for snapshot extraction -->
+    <!-- Camera functionality removed -->
     <canvas id="camCanvas" style="display:none"></canvas>
 
     <div class="page-grid">
@@ -89,7 +35,7 @@
             <div class="sb-step active">
               <div class="sb-dot"><i class="fa-solid fa-file-lines"></i></div>
               <div class="sb-step-name">Documents</div>
-              <div class="sb-step-sub">COE &amp; School ID</div>
+              <div class="sb-step-sub" id="sbStepSub">COE &amp; School ID</div>
             </div>
             <div class="sb-step">
               <div class="sb-dot">
@@ -124,25 +70,16 @@
               <div class="fg-upload">
 
                 <!-- COE Camera Capture -->
-                <div class="fg">
+                <div class="fg" id="coeSection">
                   <div class="uz-lbl">
                     <i class="fa-solid fa-file-circle-check"></i>
                     Certificate of Enrollment <span class="req">*</span>
                   </div>
-                  <div class="cam-zone" id="coeZone" onclick="openCamera('coe')">
+                  <div class="cam-zone" id="coeZone">
                     <div class="cam-idle" id="coeIdle">
-                      <div class="cam-ico"><i class="fa-solid fa-camera"></i></div>
+                      <div class="cam-ico"><i class="fa-solid fa-file-invoice"></i></div>
                       <div class="cam-label">Certificate of Enrollment</div>
-                      <div class="cam-hint">Click here to open camera</div>
-                      <span class="cam-btn-inline">
-                        <i class="fa-solid fa-camera"></i> Take Photo
-                      </span>
-                    </div>
-                    <div class="cam-preview" id="coePrevImg" style="display:none">
-                      <img id="coeImgTag" src="" alt="COE preview" />
-                      <button type="button" class="cam-retake-btn" onclick="event.stopPropagation(); openCamera('coe')">
-                        <i class="fa-solid fa-camera"></i> Retake Photo
-                      </button>
+                      <div class="cam-hint">WMSU COE Document</div>
                     </div>
                   </div>
                   <div class="ferr" id="ferr-coe">
@@ -156,20 +93,11 @@
                     <i class="fa-solid fa-id-card"></i>
                     School ID <span class="req">*</span>
                   </div>
-                  <div class="cam-zone" id="idZone" onclick="openCamera('id')">
+                  <div class="cam-zone" id="idZone">
                     <div class="cam-idle" id="idIdle">
                       <div class="cam-ico"><i class="fa-solid fa-id-card"></i></div>
                       <div class="cam-label">School ID</div>
-                      <div class="cam-hint">Front of your School ID</div>
-                      <span class="cam-btn-inline">
-                        <i class="fa-solid fa-camera"></i> Take Photo
-                      </span>
-                    </div>
-                    <div class="cam-preview" id="idPrevImg" style="display:none">
-                      <img id="idImgTag" src="" alt="School ID preview" />
-                      <button type="button" class="cam-retake-btn" onclick="event.stopPropagation(); openCamera('id')">
-                        <i class="fa-solid fa-camera"></i> Retake Photo
-                      </button>
+                      <div class="cam-hint">Front of your WMSU ID</div>
                     </div>
                   </div>
                   <div class="ferr" id="ferr-id">
@@ -193,6 +121,51 @@
       </div>
     </div>
 
-    <script src="../../script/auth/step2.js"></script>
+    <script>
+      function submitStep2() {
+        window.location.href = 'signup-step3.html';
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const role = sessionStorage.getItem('signup_role');
+        if (role === 'staff') {
+          // Update sidebar
+          const stepNames = document.querySelectorAll('.sb-step-name');
+          if (stepNames[0]) stepNames[0].textContent = 'Staff Info';
+          
+          const sbStepSub = document.getElementById('sbStepSub');
+          if (sbStepSub) sbStepSub.textContent = 'Teacher/Staff ID';
+
+          // Hide COE section for staff
+          const coeSection = document.getElementById('coeSection');
+          if (coeSection) coeSection.style.display = 'none';
+          
+          // Update labels
+          document.querySelectorAll('.uz-lbl').forEach(lbl => {
+            if (lbl.textContent.includes('School ID')) {
+              lbl.innerHTML = lbl.innerHTML.replace('School ID', 'Teacher/Staff ID');
+            }
+          });
+          
+          // Update card labels
+          document.querySelectorAll('.cam-label').forEach(lbl => {
+            if (lbl.textContent.includes('School ID')) {
+              lbl.textContent = 'Teacher/Staff ID';
+            }
+          });
+          
+          // Update hints
+          document.querySelectorAll('.cam-hint').forEach(hint => {
+             if (hint.textContent.includes('School ID')) {
+                hint.textContent = 'Front of your Teacher/Staff ID';
+             }
+          });
+
+          // Update back button
+          const backBtn = document.querySelector('.btn-back');
+          if (backBtn) backBtn.href = 'signup-step1.html?role=staff';
+        }
+      });
+    </script>
   </body>
 </html>

@@ -75,7 +75,7 @@
         </div>
         <div class="profile">
           <div class="profile-info">
-            <span class="profile-name">Vaughn Evangelista</span>
+            <span class="profile-name" id="navProfileName">Vaughn Evangelista</span>
           </div>
           <div class="profile-dropdown">
             <button class="profile-btn">
@@ -170,19 +170,16 @@
               ></span>
             </div>
             <div class="hero-info">
-              <h1>Vaughn Evangelista</h1>
+              <h1 id="mainProfileName">Vaughn Evangelista</h1>
               <p class="store-tag">
                 <i class="fa-solid fa-user"></i> Outsider Account
-                &nbsp;·&nbsp; College of Computing Studies
               </p>
               <div class="hero-badges">
                 <span class="hero-badge"
                   ><i class="fa-solid fa-circle-check"></i> Verified
                   Outsider</span
                 >
-                <span class="hero-badge"
-                  ><i class="fa-solid fa-id-card"></i> ID: 2021-01234</span
-                >
+              </div>
               </div>
             </div>
             <button class="edit-hero-btn" id="changePhotoBtn">
@@ -208,23 +205,21 @@
                 </div>
                 <div class="info-content">
                   <div class="info-label">Full Name</div>
-                  <div class="info-value">Vaughn M. Evangelista</div>
+                  <div class="info-value" id="profileFullName">Vaughn M. Evangelista</div>
+                </div>
+              </div>
+              <div class="info-row">
+                <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div class="info-content">
+                  <div class="info-label">Email Address</div>
+                  <div class="info-value" id="profileEmail">vaughn@email.com</div>
                 </div>
               </div>
               <div class="info-row">
                 <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
                 <div class="info-content">
                   <div class="info-label">Contact Number</div>
-                  <div class="info-value">+63 912 345 6789</div>
-                </div>
-              </div>
-              <div class="info-row">
-                <div class="info-icon">
-                  <i class="fa-solid fa-building"></i>
-                </div>
-                <div class="info-content">
-                  <div class="info-label">College / Department</div>
-                  <div class="info-value">College of Computing Studies</div>
+                  <div class="info-value" id="profilePhone">+63 912 345 6789</div>
                 </div>
               </div>
             </div>
@@ -243,6 +238,23 @@
     <script src="../../script/outsider/cart.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
+        // Load Profile Info from Storage
+        const name = sessionStorage.getItem('outsiderName');
+        const email = sessionStorage.getItem('outsiderEmail');
+        const phone = sessionStorage.getItem('outsiderPhone');
+
+        if (name) {
+          document.getElementById('navProfileName').textContent = name;
+          document.getElementById('mainProfileName').textContent = name;
+          document.getElementById('profileFullName').textContent = name;
+        }
+        if (email) {
+          document.getElementById('profileEmail').textContent = email;
+        }
+        if (phone) {
+          document.getElementById('profilePhone').textContent = phone;
+        }
+
         const savedPic = localStorage.getItem("userProfilePic");
         if (savedPic) {
           document.getElementById("mainProfilePic").src = savedPic;

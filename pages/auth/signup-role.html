@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WM EAT SU — Choose Account Type</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../css/auth/signup.css" />
+    <style>
+      .role-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-top: 10px;
+      }
+      .role-card {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 20px;
+        border: 2px solid var(--gray-100);
+        border-radius: var(--r-md);
+        cursor: pointer;
+        transition: all var(--ease);
+        text-decoration: none;
+        color: inherit;
+      }
+      .role-card:hover {
+        border-color: var(--red-500);
+        background: var(--red-50);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(220, 38, 38, 0.05);
+      }
+      .role-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 14px;
+        background: var(--gray-50);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        color: var(--gray-600);
+        transition: all var(--ease);
+        flex-shrink: 0;
+      }
+      .role-card:hover .role-icon {
+        background: var(--red-500);
+        color: white;
+        transform: rotate(-5deg);
+      }
+      .role-info {
+        flex: 1;
+      }
+      .role-info h3 {
+        font-family: "Inter", sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        margin-bottom: 3px;
+        color: var(--gray-900);
+      }
+      .role-info p {
+        font-family: "Inter", sans-serif;
+        font-size: 12.5px;
+        color: var(--gray-500);
+        margin: 0;
+        line-height: 1.4;
+      }
+      .role-arrow {
+        color: var(--gray-300);
+        font-size: 14px;
+        transition: all var(--ease);
+      }
+      .role-card:hover .role-arrow {
+        color: var(--red-500);
+        transform: translateX(4px);
+      }
+
+      .sidebar {
+        background:
+          linear-gradient(
+            155deg,
+            rgba(220, 38, 38, 0.75),
+            rgba(185, 28, 28, 0.95)
+          ),
+          url("../../images/pizza.avif");
+        padding: 36px 26px;
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-grid">
+      <div class="card">
+        <aside class="sidebar">
+          <div class="sb-brand">
+            <div class="sb-icon"><i class="fa-solid fa-utensils"></i></div>
+            <div class="sb-name">WM EAT SU</div>
+            <div class="sb-tag">
+              Campus Food Platform<br />for the WMSU Community
+            </div>
+          </div>
+          <div style="margin-top: auto">
+            <h2
+              style="
+                color: white;
+                font-size: 22px;
+                font-weight: 800;
+                margin-bottom: 12px;
+                line-height: 1.2;
+              "
+            >
+              Join us today
+            </h2>
+            <p
+              style="
+                color: rgba(255, 255, 255, 0.6);
+                font-size: 13px;
+                line-height: 1.6;
+              "
+            >
+              Create an account to start ordering your favorite campus meals
+              with ease.
+            </p>
+          </div>
+        </aside>
+
+        <section class="form-panel">
+          <div class="fp-body">
+            <div class="step-head">
+              <h2>Select account type</h2>
+              <p>Choose the option that best describes you.</p>
+            </div>
+
+            <div class="role-grid">
+              <!-- Student -->
+              <a href="signup-step1.html?role=student" class="role-card">
+                <div class="role-icon">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div class="role-info">
+                  <h3>Student</h3>
+                  <p>Currently enrolled WMSU student</p>
+                </div>
+                <div class="role-arrow">
+                  <i class="fa-solid fa-chevron-right"></i>
+                </div>
+              </a>
+
+              <!-- Teacher/Staff -->
+              <a href="signup-step1.html?role=staff" class="role-card">
+                <div class="role-icon">
+                  <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <div class="role-info">
+                  <h3>Teacher / Staff</h3>
+                  <p>Faculty or school personnel at WMSU</p>
+                </div>
+                <div class="role-arrow">
+                  <i class="fa-solid fa-chevron-right"></i>
+                </div>
+              </a>
+
+              <!-- Outsider -->
+              <a href="outsider-signup.html" class="role-card">
+                <div class="role-icon">
+                  <i class="fa-solid fa-user-astronaut"></i>
+                </div>
+                <div class="role-info">
+                  <h3>Outsider</h3>
+                  <p>Visitors, alumni, or non-WMSU members</p>
+                </div>
+                <div class="role-arrow">
+                  <i class="fa-solid fa-chevron-right"></i>
+                </div>
+              </a>
+            </div>
+
+            <div
+              class="login-link"
+              style="margin-top: 100px; padding-top: 20px"
+            >
+              Already have an account? <a href="signin.html">Sign In</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

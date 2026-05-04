@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WM EAT SU — Step 2: Verify Outsider</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <link rel="stylesheet" href="../../css/auth/signup.css" />
+</head>
+<body>
+  <div class="page-grid">
+    <div class="card">
+      <aside class="sidebar">
+        <div class="sb-brand">
+          <div class="sb-icon"><i class="fa-solid fa-utensils"></i></div>
+          <div class="sb-name">WM EAT SU</div>
+          <div class="sb-tag">Your Campus Food,<br />serve delicious food</div>
+        </div>
+        <nav class="sb-steps">
+          <div class="sb-step completed">
+            <div class="sb-dot"><i class="fa-solid fa-user"></i></div>
+            <div class="sb-step-name">Personal Info</div>
+            <div class="sb-step-sub">Name, email & password</div>
+          </div>
+          <div class="sb-step active">
+            <div class="sb-dot">
+              <i class="fa-solid fa-mobile-screen"></i>
+            </div>
+            <div class="sb-step-name">Verify Mobile</div>
+            <div class="sb-step-sub">4-digit OTP code</div>
+          </div>
+        </nav>
+      </aside>
+
+      <section class="form-panel">
+        <div class="fp-top">
+          <div class="prog-track">
+            <div class="prog-fill" style="width: 100%"></div>
+          </div>
+          <div class="step-badge">Step <em>2</em> of 2</div>
+        </div>
+
+        <div class="fp-body">
+          <div class="alert alert-err" id="gAlert">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span id="gMsg">Please enter your details to continue.</span>
+          </div>
+
+          <div class="step-panel active">
+            <div class="step-head">
+              <h2>Verify Your Number</h2>
+              <p>Enter the 4-digit OTP sent to your mobile number.</p>
+            </div>
+
+            <div class="email-chip">
+              <i class="fa-solid fa-phone"></i>
+              <span>Code sent to <strong id="mobileDisp">—</strong></span>
+            </div>
+
+            <div style="font-size: 11px; color: var(--gray-400); font-family: 'Inter', sans-serif; margin-bottom: 2px;">
+              <i class="fa-solid fa-triangle-exclamation" style="color: var(--red-300)"></i>
+              Demo OTP: <strong>1234</strong>
+            </div>
+
+            <div class="fg-otp" id="otpGrid">
+              <input class="otp-in" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
+              <input class="otp-in" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
+              <input class="otp-in" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
+              <input class="otp-in" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" />
+            </div>
+
+            <div class="ferr" id="ferr-otp" style="justify-content: center">
+              <i class="fa-solid fa-circle-exclamation"></i>
+              <span></span>
+            </div>
+
+            <div class="alert alert-ok" id="otpOk">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Code verified! Setting up your account…</span>
+            </div>
+
+            <div class="resend-row">
+              Didn't get it?
+              <button class="resend-btn" id="resendBtn" onclick="resendCode()" disabled>
+                Resend in <span id="cd">60s</span>
+              </button>
+            </div>
+
+            <div class="fg-action">
+              <a href="outsider-signup.html" class="btn btn-back">
+                <i class="fa-solid fa-arrow-left"></i>
+              </a>
+              <button type="button" class="btn btn-primary" onclick="verifyOTP(event)">
+                <i class="fa-solid fa-shield-check"></i>
+                Verify & Create Account
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="../../script/auth/outsider-verify.js"></script>
+</body>
+</html>
