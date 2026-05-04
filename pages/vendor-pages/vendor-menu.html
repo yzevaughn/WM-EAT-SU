@@ -175,6 +175,7 @@
       </div>
 
       <div class="main-content">
+        <!-- Redesigned Header -->
         <div class="menu-header">
           <div class="header-left">
             <h1>Menu Management</h1>
@@ -183,95 +184,38 @@
               from students.
             </p>
           </div>
-          <div
-            class="header-right"
-            style="display: flex; gap: 12px; align-items: center"
-          >
-            <button
-              id="openPosterModalBtn"
-              style="
-                background: #ef4444;
-                color: #fff;
-                border: none;
-                padding: 10px 18px;
-                border-radius: 8px;
-                font-weight: 600;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                font-family: inherit;
-                font-size: 15px;
-                transition: opacity 0.2s;
-                box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.2);
-              "
-              onmouseover="this.style.opacity = '.9'"
-              onmouseout="this.style.opacity = '1'"
-            >
+          <div class="header-right">
+            <button id="openPosterModalBtn" class="btn-outline-poster">
               <i class="fas fa-image"></i> Add Poster
             </button>
-            <button class="add-item-btn" id="openModalBtn">
+            <button class="btn-primary-menu" id="openModalBtn">
               <i class="fas fa-plus"></i> Add Menu
             </button>
-            <div class="profile-dropdown">
-              <button
-                class="add-item-btn"
-                style="
-                  background: #f1f5f9;
-                  color: #64748b;
-                  border: 1px solid #e2e8f0;
-                  width: 44px;
-                  height: 44px;
-                  padding: 0;
-                  justify-content: center;
-                  border-radius: 12px;
-                  box-shadow: none;
-                "
-              >
-                <i class="fas fa-ellipsis-v"></i>
-              </button>
-              <div class="dropdown-menu" style="top: calc(100% + 5px)">
-                <a
-                  href="javascript:void(0)"
-                  onclick="setStatusFilter('active')"
-                  class="dropdown-item"
-                  ><i class="fas fa-utensils"></i><span>Main Menu</span></a
-                >
-                <div
-                  style="
-                    padding: 10px 16px 5px;
-                    font-size: 10px;
-                    font-weight: 800;
-                    color: #94a3b8;
-                    text-transform: uppercase;
-                    letter-spacing: 1px;
-                    border-top: 1px solid #f8fafc;
-                  "
-                >
-                  Menu Applications
-                </div>
-                <a
-                  href="javascript:void(0)"
-                  onclick="setStatusFilter('pending')"
-                  class="dropdown-item"
-                  ><i class="fas fa-clock"></i><span>Pending</span></a
-                >
-                <a
-                  href="javascript:void(0)"
-                  onclick="setStatusFilter('accepted')"
-                  class="dropdown-item"
-                  ><i class="fas fa-check-circle"></i><span>Accepted</span></a
-                >
-                <a
-                  href="javascript:void(0)"
-                  onclick="setStatusFilter('rejected')"
-                  class="dropdown-item"
-                  ><i class="fas fa-times-circle"></i><span>Rejected</span></a
-                >
-              </div>
-            </div>
+          </div>
+
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="menu-tabs-wrapper">
+          <div class="menu-tabs" id="menuTabs">
+            <button class="tab-btn active" onclick="setStatusFilter('active')">
+              <i class="fa-solid fa-utensils"></i> Main Menu
+            </button>
+            <button class="tab-btn" onclick="setStatusFilter('pending')">
+              <i class="fa-solid fa-hourglass-half"></i> Pending
+              <span class="tab-badge" id="count-pending">0</span>
+            </button>
+            <button class="tab-btn" onclick="setStatusFilter('accepted')">
+              <i class="fa-solid fa-check"></i> Accepted
+              <span class="tab-badge badge-success" id="count-accepted">0</span>
+            </button>
+            <button class="tab-btn" onclick="setStatusFilter('rejected')">
+              <i class="fa-solid fa-xmark"></i> Rejected
+              <span class="tab-badge badge-danger" id="count-rejected">0</span>
+            </button>
           </div>
         </div>
+
 
         <!-- Menu grid (dynamically rendered from localStorage) -->
         <div class="menu-grid" id="menuGrid"></div>
@@ -321,19 +265,40 @@
 
                 <!-- STEP 2: PRICING -->
                 <div class="menu-step-content" data-step="2">
-                  <div class="form-group">
-                    <label for="itemPrice">Price (&#8369;)</label>
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <div class="form-group">
+                      <label for="itemPrice">Price (&#8369;)</label>
+                      <input
+                        type="number"
+                        id="itemPrice"
+                        step="0.01"
+                        min="0"
+                        placeholder="0.00"
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="itemDiscount">Discount (%)</label>
+                      <input
+                        type="number"
+                        id="itemDiscount"
+                        min="0"
+                        max="100"
+                        placeholder="0"
+                      />
+                    </div>
+                  <div class="form-group" style="margin-top: 12px;">
+                    <label for="itemQuantity">Stock Remaining</label>
+
                     <input
                       type="number"
-                      id="itemPrice"
-                      step="0.01"
+                      id="itemQuantity"
                       min="0"
-                      placeholder="0.00"
-                      required
+                      placeholder="Enter current stock..."
                     />
                   </div>
-                  <input type="hidden" id="itemQuantity" value="0" />
                 </div>
+
 
                 <!-- STEP 3: MEDIA (Upload Only, No Preview) -->
                 <div class="menu-step-content" data-step="3">
@@ -348,9 +313,9 @@
                       <p style="font-size: 13px; color: #6b7280; margin-top: 5px;">PNG, JPG or JPEG up to 5MB</p>
                       <input type="file" id="itemImage" accept="image/*" style="display: none;" onchange="handleImageUpload(this)" />
                     </div>
-                    <div id="uploadSuccessMsg" style="display: none; margin-top: 15px; color: #059669; font-weight: 600; text-align: center;">
-                       <i class="fas fa-check-circle"></i> Image selected successfully!
-                    </div>
+                    <div id="uploadSuccessMsg" style="display: none; margin-top: 15px; text-align: center;"></div>
+
+
                   </div>
                 </div>
 
@@ -382,13 +347,14 @@
 
                 <input type="hidden" id="itemEditId" />
                 <input type="hidden" id="itemExistingImg" />
-                <img id="imagePreview" src="" alt="Preview" style="display: none;">
+
               </form>
             </div>
             <div class="modal-footer">
               <button class="btn-back" id="prevBtn">Back</button>
               <button class="btn-next" id="nextBtn">Next</button>
-              <button class="btn-save" id="saveBtn" style="display: none;">Save & Submit</button>
+              <button class="btn-save" id="saveBtn" style="display: none;">Save</button>
+
               <button class="btn-cancel" id="cancelBtn" style="display: none;">Cancel</button>
             </div>
           </div>
@@ -515,22 +481,39 @@
       let pendingItemId = null;
       let currentStatusFilter = "active";
 
+      function updateTabCounts() {
+        const menu = getMenu();
+        const pending = menu.filter(m => m.status === 'pending').length;
+        const accepted = menu.filter(m => m.status === 'accepted').length;
+        const rejected = menu.filter(m => m.status === 'rejected').length;
+
+        document.getElementById('count-pending').textContent = pending;
+        document.getElementById('count-accepted').textContent = accepted;
+        document.getElementById('count-rejected').textContent = rejected;
+
+        // Hide badges if zero
+        document.getElementById('count-pending').style.display = pending > 0 ? 'inline-flex' : 'none';
+        document.getElementById('count-accepted').style.display = accepted > 0 ? 'inline-flex' : 'none';
+        document.getElementById('count-rejected').style.display = rejected > 0 ? 'inline-flex' : 'none';
+      }
+
       function setStatusFilter(status) {
         currentStatusFilter = status;
         renderMenu();
+        updateTabCounts();
 
-        const links = document.querySelectorAll(".dropdown-item");
-        links.forEach((l) => {
-          const text = l.textContent.trim().toLowerCase();
-          const isActive =
-            (status === "active" && text === "main menu") ||
-            (status === "pending" && text === "pending") ||
-            (status === "accepted" && text === "accepted") ||
-            (status === "rejected" && text === "rejected");
-          if (isActive) l.classList.add("dropdown-item--active");
-          else l.classList.remove("dropdown-item--active");
+        // Update active tab UI
+        const tabs = document.querySelectorAll(".tab-btn");
+        tabs.forEach((t) => {
+          const fnCall = t.getAttribute('onclick');
+          if (fnCall && fnCall.includes(`'${status}'`)) {
+            t.classList.add("active");
+          } else {
+            t.classList.remove("active");
+          }
         });
       }
+
 
       /* --- Render the menu grid --- */
       function renderMenu() {
@@ -601,7 +584,14 @@
                 ${rejectionNote}
               </div>
               <div class="item-footer">
-                <div class="price">&#8369;${Number(item.price).toFixed(2)}</div>
+                <div class="price-container">
+                  ${item.discount > 0 
+                    ? `<div class="price discount-active">&#8369;${(item.price * (1 - item.discount / 100)).toFixed(2)}</div>
+                       <div class="original-price">&#8369;${Number(item.price).toFixed(2)}</div>`
+                    : `<div class="price">&#8369;${Number(item.price).toFixed(2)}</div>`
+                  }
+                </div>
+
                 ${
                   status === "active"
                     ? `
@@ -721,10 +711,29 @@
       let currentMenuStep = 1;
 
       function updateMenuWizard() {
+        const isQuickEdit = itemModal.dataset.quickEdit === "true";
+
+        if (isQuickEdit) {
+          document.getElementById("menuStepIndicator").style.display = "none";
+          document.querySelectorAll(".menu-step-content").forEach((s) => {
+            const step = parseInt(s.dataset.step);
+            s.classList.toggle("active", step === 2 || step === 3);
+          });
+          document.getElementById("prevBtn").style.display = "none";
+          document.getElementById("nextBtn").style.display = "none";
+          document.getElementById("saveBtn").style.display = "block";
+          document.getElementById("cancelBtn").style.display = "block";
+          document.getElementById("cancelBtn").textContent = "Cancel";
+          return;
+        }
+
+
+        document.getElementById("menuStepIndicator").style.display = "flex";
         // Show/Hide steps
         document.querySelectorAll(".menu-step-content").forEach((s) => {
           s.classList.toggle("active", parseInt(s.dataset.step) === currentMenuStep);
         });
+
 
         // Update dots
         document.querySelectorAll(".step-dot").forEach((dot) => {
@@ -749,16 +758,12 @@
 
       function handleImageUpload(input) {
         const msg = document.getElementById("uploadSuccessMsg");
-        const preview = document.getElementById("imagePreview");
         if (input.files && input.files[0]) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            preview.src = e.target.result;
-            msg.style.display = "block";
-          };
-          reader.readAsDataURL(input.files[0]);
+          msg.style.display = "block";
+          msg.innerHTML = `<p style="color: #059669; font-size: 13px; font-weight: 600;"><i class="fas fa-check-circle"></i> Image selected</p>`;
         }
       }
+
 
       function renderReviewStep() {
         document.getElementById("revName").textContent = document.getElementById("itemName").value || "-";
@@ -766,10 +771,10 @@
         document.getElementById("revPrice").textContent = "₱" + (parseFloat(document.getElementById("itemPrice").value) || 0).toFixed(2);
         document.getElementById("revDesc").textContent = document.getElementById("itemDescription").value || "No description provided.";
         
-        const preview = document.getElementById("imagePreview").src;
         const existImg = document.getElementById("itemExistingImg").value;
-        document.getElementById("revImage").src = preview || existImg || "../../images/burger.avif";
+        document.getElementById("revImage").src = existImg || "../../images/burger.avif";
       }
+
 
       function validateMenuStep(step) {
         if (step === 1) {
@@ -805,59 +810,88 @@
       /* --- Add/Edit Modal --- */
       const itemModal = document.getElementById("itemModal");
 
-      function openAddModal() {
-        document.getElementById("modalTitle").textContent = "Add New Item";
-        document.getElementById("itemForm").reset();
-        document.getElementById("itemEditId").value = "";
-        document.getElementById("itemExistingImg").value = "";
-        document.getElementById("uploadSuccessMsg").style.display = "none";
-        document.getElementById("imagePreview").src = "";
-        
-        currentMenuStep = 1;
-        updateMenuWizard();
-
-        // Enable fields
-        const fields = document.getElementById("itemForm").querySelectorAll("input, select, textarea");
-        fields.forEach((f) => (f.disabled = false));
-
-        itemModal.classList.add("active");
-      }
-
       function openEditModal(id, readOnly = false) {
         const item = getMenu().find((m) => m.id === id);
         if (!item) return;
-        document.getElementById("modalTitle").textContent = readOnly ? "Item Details" : "Edit Item";
+
+        const isActiveMenu = (item.status || "active") === "active";
+        const isQuickEdit = isActiveMenu && !readOnly;
+
+        itemModal.dataset.quickEdit = isQuickEdit;
+        document.getElementById("modalTitle").textContent = readOnly
+          ? "Item Details"
+          : isQuickEdit
+            ? "Update Item"
+            : "Edit Item";
+
 
         // Populate fields
         document.getElementById("itemName").value = item.name;
         document.getElementById("itemDescription").value = item.desc || "";
         document.getElementById("itemPrice").value = item.price;
+        document.getElementById("itemDiscount").value = item.discount || 0;
         document.getElementById("itemCategory").value = item.category || "meals";
+
         document.getElementById("itemQuantity").value = item.stock || 0;
         document.getElementById("itemEditId").value = item.id;
         document.getElementById("itemExistingImg").value = item.img || "";
         document.getElementById("itemImage").value = "";
-        
-        document.getElementById("imagePreview").src = item.img || "";
-        document.getElementById("uploadSuccessMsg").style.display = item.img ? "block" : "none";
+
+        document.getElementById("uploadSuccessMsg").style.display = "none";
+        document.getElementById("uploadSuccessMsg").innerHTML = "";
+
+
+        if (isQuickEdit) {
+          currentMenuStep = 2; // Jump to Price
+        } else {
+          currentMenuStep = 1;
+        }
+
+        updateMenuWizard();
+
+        // Update button text
+        document.getElementById("saveBtn").textContent = "Update";
+
+        // Read only mode
+
+        const fields = document
+          .getElementById("itemForm")
+          .querySelectorAll("input, select, textarea");
+        fields.forEach((f) => (f.disabled = readOnly));
+
+        // If read-only, we might want to jump straight to review or just disable buttons
+        if (readOnly) {
+          currentMenuStep = 4;
+          updateMenuWizard();
+          document.getElementById("prevBtn").style.display = "none";
+          document.getElementById("nextBtn").style.display = "none";
+          document.getElementById("saveBtn").style.display = "none";
+          document.getElementById("cancelBtn").style.display = "block";
+          document.getElementById("cancelBtn").textContent = "Close";
+        }
+
+        itemModal.classList.add("active");
+      }
+
+      function openAddModal() {
+        itemModal.dataset.quickEdit = "false";
+        document.getElementById("modalTitle").textContent = "Add New Item";
+        document.getElementById("saveBtn").textContent = "Save";
+        document.getElementById("itemForm").reset();
+
+        document.getElementById("itemEditId").value = "";
+        document.getElementById("itemExistingImg").value = "";
+        document.getElementById("uploadSuccessMsg").style.display = "none";
+        document.getElementById("imagePreview").src = "";
 
         currentMenuStep = 1;
         updateMenuWizard();
 
-        // Read only mode
-        const fields = document.getElementById("itemForm").querySelectorAll("input, select, textarea");
-        fields.forEach((f) => (f.disabled = readOnly));
-        
-        // If read-only, we might want to jump straight to review or just disable buttons
-        if (readOnly) {
-           currentMenuStep = 4;
-           updateMenuWizard();
-           document.getElementById("prevBtn").style.display = "none";
-           document.getElementById("nextBtn").style.display = "none";
-           document.getElementById("saveBtn").style.display = "none";
-           document.getElementById("cancelBtn").style.display = "block";
-           document.getElementById("cancelBtn").textContent = "Close";
-        }
+        // Enable fields
+        const fields = document
+          .getElementById("itemForm")
+          .querySelectorAll("input, select, textarea");
+        fields.forEach((f) => (f.disabled = false));
 
         itemModal.classList.add("active");
       }
@@ -874,10 +908,14 @@
       /* --- Save item --- */
       document.getElementById("saveBtn").addEventListener("click", (e) => {
         e.preventDefault();
+        const existId = document.getElementById("itemEditId").value;
         pendingAction = "save";
-        document.getElementById("confirmSaveMsg").textContent = "Submit this item for review?";
+        document.getElementById("confirmSaveMsg").textContent = existId 
+          ? "Update this item?" 
+          : "Save this new item for review?";
         document.getElementById("confirmSaveModal").classList.add("active");
       });
+
 
       /* --- Confirm modal --- */
       function closeConfirm() {
@@ -907,8 +945,11 @@
               .value.trim();
             const price =
               parseFloat(document.getElementById("itemPrice").value) || 0;
+            const discount =
+              parseFloat(document.getElementById("itemDiscount").value) || 0;
             const category =
               document.getElementById("itemCategory").value || "meals";
+
             const stock =
               parseInt(document.getElementById("itemQuantity").value) || 0;
             const fileEl = document.getElementById("itemImage");
@@ -929,7 +970,9 @@
                 name,
                 desc,
                 price,
+                discount,
                 category,
+
                 stock,
                 status,
                 img: imgSrc || "../../images/burger.avif",
@@ -1006,6 +1049,8 @@
 
       /* --- Init --- */
       renderMenu();
+      updateTabCounts();
+
     </script>
   </body>
 </html>
