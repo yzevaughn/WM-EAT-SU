@@ -495,7 +495,28 @@
         // Apply existing promo if any
         const discountRow = document.getElementById("discountRow");
         const discountAmt = document.getElementById("discountAmt");
+        const msgEl = document.getElementById("promo-msg");
         let finalTotal = grandTotal;
+
+        if (window.appliedPromoCode) {
+          const promo = validatePromoCode(window.appliedPromoCode, grandTotal, totalQty);
+          
+          if (!promo || promo.error) {
+            // Requirements no longer met (e.g. item removed)
+            if (window.appliedPromo) {
+              msgEl.textContent = promo ? promo.error : "Invalid promo code.";
+              msgEl.style.color = "#ef4444";
+              msgEl.style.display = "block";
+              window.appliedPromo = null;
+              showToast("error", "fa-tag", "Voucher removed: requirements not met.");
+            }
+          } else {
+            window.appliedPromo = promo;
+            msgEl.textContent = `Applied! ${promo.label} saved.`;
+            msgEl.style.color = "#22c55e";
+            msgEl.style.display = "block";
+          }
+        }
 
         if (window.appliedPromo) {
           const discount = calculateDiscount(grandTotal, window.appliedPromo, getCart());
@@ -576,11 +597,14 @@
           applyPromoBtn.onclick = () => {
             const code = document.getElementById("promo-code").value.trim();
             const msgEl = document.getElementById("promo-msg");
-
-            const promo = validatePromoCode(code);
-            if (!promo) {
+            const cart = getCart();
+            const currentTotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            const promo = validatePromoCode(code, currentTotal, totalQty);
+            if (!promo || promo.error) {
               window.appliedPromo = null;
-              msgEl.textContent = "Invalid promo code.";
+              window.appliedPromoCode = null;
+              msgEl.textContent = promo ? promo.error : "Invalid promo code.";
               msgEl.style.color = "#ef4444";
               msgEl.style.display = "block";
               recalc();

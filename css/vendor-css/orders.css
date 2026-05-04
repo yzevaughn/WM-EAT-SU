@@ -40,6 +40,21 @@
   }
 }
 
+.filter-tabs-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
 .filter-bar {
   display: flex;
   gap: 8px;
@@ -764,9 +779,28 @@ hr {
     font-size: 28px;
   }
 
+  .filter-tabs-wrapper {
+    flex-wrap: nowrap;
+    overflow: hidden;
+  }
+
   .filter-tabs {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Firefox */
+    width: 100%;
     align-items: center;
+    justify-content: flex-start;
+  }
+
+  .filter-tabs::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari/Opera */
   }
 
   .tab-btn {
@@ -1575,7 +1609,7 @@ hr {
     width: 98%;
     height: 95vh;
   }
-  
+
   .walkin-layout {
     flex-direction: column;
     overflow-y: auto;
@@ -1583,7 +1617,7 @@ hr {
     gap: 16px;
   }
 
-  .walkin-menu-section, 
+  .walkin-menu-section,
   .walkin-order-section {
     flex: none;
     width: 100%;
@@ -1645,18 +1679,23 @@ hr {
   .walkin-layout.cart-open .walkin-menu-section {
     display: none;
   }
+
   .walkin-layout:not(.cart-open) .walkin-order-section {
     display: none;
   }
+
   .mobile-view-order-btn.has-items {
     display: flex;
   }
+
   .mobile-back-to-menu-btn {
     display: flex;
   }
+
   #walkinModal .modal-content {
     padding-bottom: 0;
   }
+
   .walkin-order-section {
     border: none !important;
     background: transparent !important;
@@ -1688,15 +1727,20 @@ hr {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 480px) {
   .walkin-filters {
     flex-direction: column;
   }
-  
+
   #walkinMenuGrid {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)) !important;
   }
@@ -1778,8 +1822,68 @@ hr {
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
+/* Custom Header & Walk-in Button Styles */
+.orders-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.pickup-btn {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  box-shadow: 0 3px 10px rgba(239, 68, 68, 0.3);
+  font-size: 14px;
+  padding: 10px 20px;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.pickup-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+}
+
+@media (max-width: 768px) {
+  .orders-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: 24px;
+  }
+
+  .orders-header .subtitle {
+    margin-bottom: 12px;
+  }
+  
+  .pickup-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
+    margin-top: 0;
+  }
+}

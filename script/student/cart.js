@@ -19,26 +19,40 @@ const SHOPS_KEY = "wm_eat_su_shops";
    PROMO CODES
    ═══════════════════════════════════════ */
 const PROMO_CODES = {
-  WMSU50: { type: "fixed", value: 50, label: "₱50 Off" },
-  SAVE10: { type: "percent", value: 0.1, label: "10% Off" },
-  WELCOME: { type: "fixed", value: 20, label: "₱20 Off" },
-  FREE: { type: "percent", value: 1.0, label: "100% Off (Testing)" },
+  WMSU50: { type: "fixed", value: 50, label: "₱50 Off", minPurchase: 150 },
+  SAVE10: { type: "percent", value: 0.1, label: "10% Off", minPurchase: 0 },
+  WELCOME: { type: "fixed", value: 20, label: "₱20 Off", minPurchase: 50 },
+  FREE: { type: "percent", value: 1.0, label: "100% Off (Testing)", minPurchase: 0 },
 };
 
-function validatePromoCode(code) {
+function validatePromoCode(code, total = 0, itemCount = 0) {
   if (!code) return null;
   const upperCode = code.toUpperCase();
   const currentStudentEmail = "vaughn.student@wm.edu.ph"; // Mock current identity
 
+  // New Rule: Vouchers only apply to single-item orders
+  if (itemCount > 1) {
+    return { error: "Vouchers can only be applied to single-item orders." };
+  }
+
   // 1. Check static codes
   const staticPromo = PROMO_CODES[upperCode];
-  if (staticPromo) return staticPromo;
+  if (staticPromo) {
+    if (total < (staticPromo.minPurchase || 0)) {
+      return { error: `Minimum purchase of ₱${staticPromo.minPurchase} required.` };
+    }
+    return staticPromo;
+  }
 
   // 2. Check vendor-generated vouchers in localStorage
   const vendorVouchers =
     JSON.parse(localStorage.getItem("wm_eat_su_vendor_vouchers")) || [];
   const vendorPromo = vendorVouchers.find((v) => v.code === upperCode);
   if (vendorPromo) {
+    // Check minimum purchase if vendor promo has it
+    if (total < (vendorPromo.minPurchase || 0)) {
+      return { error: `Minimum purchase of ₱${vendorPromo.minPurchase} required.` };
+    }
     // 1. Check assignment restriction
     if (vendorPromo.assignedTo) {
       const allowed = Array.isArray(vendorPromo.assignedTo)
@@ -89,18 +103,18 @@ function validatePromoCode(code) {
 function calculateDiscount(total, promo, items = []) {
   if (!promo) return 0;
 
-    // 1. Check for item-specific restriction
-    if (promo.appliesTo && promo.appliesTo !== "all") {
-      const targetIds = promo.appliesTo.itemIds || [promo.appliesTo.itemId];
-      const targetItems = items.filter((it) => targetIds.includes(it.id));
+  // 1. Check for item-specific restriction
+  if (promo.appliesTo && promo.appliesTo !== "all") {
+    const targetIds = promo.appliesTo.itemIds || [promo.appliesTo.itemId];
+    const targetItems = items.filter((it) => targetIds.includes(it.id));
 
-      if (targetItems.length === 0) return 0; // Promo doesn't apply to any item in cart
+    if (targetItems.length === 0) return 0; // Promo doesn't apply to any item in cart
 
-      // Calculate discount ONLY on those items
-      const applicableTotal = targetItems.reduce(
-        (sum, it) => sum + it.price * it.qty,
-        0,
-      );
+    // Calculate discount ONLY on those items
+    const applicableTotal = targetItems.reduce(
+      (sum, it) => sum + it.price * it.qty,
+      0,
+    );
 
     if (promo.type === "fixed") {
       return Math.min(applicableTotal, promo.value);
@@ -117,6 +131,36 @@ function calculateDiscount(total, promo, items = []) {
     return total * promo.value;
   }
   return 0;
+}
+
+function markPromoCodeAsUsed(code) {
+  if (!code) return;
+  const upperCode = code.toUpperCase();
+  const claimedKey = "wm_eat_su_claimed_vouchers";
+  let claimed = [];
+  try {
+    claimed = JSON.parse(localStorage.getItem(claimedKey)) || [];
+  } catch (e) { }
+
+  if (claimed.includes(upperCode)) {
+    claimed = claimed.filter((c) => c !== upperCode);
+    localStorage.setItem(claimedKey, JSON.stringify(claimed));
+  }
+}
+
+function returnPromoCode(code) {
+  if (!code) return;
+  const upperCode = code.toUpperCase();
+  const claimedKey = "wm_eat_su_claimed_vouchers";
+  let claimed = [];
+  try {
+    claimed = JSON.parse(localStorage.getItem(claimedKey)) || [];
+  } catch (e) { }
+
+  if (!claimed.includes(upperCode)) {
+    claimed.push(upperCode);
+    localStorage.setItem(claimedKey, JSON.stringify(claimed));
+  }
 }
 
 /* ═══════════════════════════════════════
@@ -197,6 +241,18 @@ function placeOrder(instructions, payment, promoCode = null) {
   const cart = getCart();
   if (cart.length === 0) return null;
 
+  // 1. Validate promo against the entire cart first to satisfy requirements
+  const grandTotal = cart.reduce((sum, it) => sum + it.price * it.qty, 0);
+  const itemCount = cart.reduce((sum, it) => sum + it.qty, 0);
+  const globalPromo = validatePromoCode(promoCode, grandTotal, itemCount);
+  const promoObj = (globalPromo && !globalPromo.error) ? globalPromo : null;
+  
+  // Calculate total discount available for the whole cart if it's a fixed amount
+  let remainingDiscount = 0;
+  if (promoObj && promoObj.type === "fixed") {
+    remainingDiscount = calculateDiscount(grandTotal, promoObj, cart);
+  }
+
   // Group items by vendor
   const groups = {};
   cart.forEach((item) => {
@@ -212,8 +268,16 @@ function placeOrder(instructions, payment, promoCode = null) {
   Object.keys(groups).forEach((vendor, index) => {
     const items = groups[vendor];
     const total = items.reduce((sum, it) => sum + it.price * it.qty, 0);
-    const promo = validatePromoCode(promoCode);
-    const discount = calculateDiscount(total, promo, items);
+    
+    let discount = 0;
+    if (promoObj) {
+      if (promoObj.type === "percent") {
+        discount = calculateDiscount(total, promoObj, items);
+      } else {
+        discount = Math.min(total, remainingDiscount);
+        remainingDiscount -= discount;
+      }
+    }
     const finalTotal = total - discount;
 
     const orderId = "ORD-" + timestamp + "-" + index;
@@ -264,6 +328,14 @@ function placeOrder(instructions, payment, promoCode = null) {
   saveOrders(orders);
   clearCart();
 
+  // Mark promo code as used so it disappears from the vouchers page
+  if (promoCode && createdOrders.length > 0) {
+    const validPromo = validatePromoCode(promoCode);
+    if (validPromo) {
+      markPromoCodeAsUsed(promoCode);
+    }
+  }
+
   // Fire notifications for each created order
   createdOrders.forEach((o) => {
     if (typeof notifyOrderPlaced === "function") notifyOrderPlaced(o);
@@ -285,6 +357,11 @@ function updateOrderStatus(orderId, status, extra) {
 
     // Wallet Integration: Refund if cancelled
     if (order.status === "cancelled" && prevStatus !== "cancelled") {
+      // Return promo code if applied
+      if (order.promoCode) {
+        returnPromoCode(order.promoCode);
+      }
+
       const isWalletPayment =
         order.isPaid || (order.payment && order.payment.includes("Wallet"));
       if (isWalletPayment) {

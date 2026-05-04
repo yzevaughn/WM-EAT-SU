@@ -272,16 +272,7 @@
           <h2>Order</h2>
           <p class="page-subtitle">Track and manage your campus food orders</p>
 
-          <div
-            class="order-controls"
-            style="
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-              flex-wrap: wrap;
-              gap: 12px;
-            "
-          >
+          <div class="order-controls">
             <div class="filter-bar" id="categoryTabs">
               <button class="filter-btn active" data-filter="pending">
                 <span class="filter-dot pending"></span> Pending
@@ -307,7 +298,7 @@
             <button
               id="clearAllBtn"
               class="remove-btn"
-              style="display: none; margin: 0; white-space: nowrap"
+              style="display: none; white-space: nowrap"
             >
               <i class="fa-solid fa-trash-can"></i> Clear All
             </button>
@@ -1691,9 +1682,10 @@
         const order = window.currentScanOrder;
         if (!order) return;
 
-        const promo = validatePromoCode(code);
-        if (!promo) {
-          msgEl.textContent = "Invalid promo code.";
+        const totalQty = order.items.reduce((sum, it) => sum + it.qty, 0);
+        const promo = validatePromoCode(code, order.total, totalQty);
+        if (!promo || promo.error) {
+          msgEl.textContent = promo ? promo.error : "Invalid promo code.";
           msgEl.style.color = "#ef4444";
           msgEl.style.display = "block";
           return;
@@ -1737,6 +1729,10 @@
           finalExtra.total = promoData.total;
           finalExtra.discount = (order.discount || 0) + promoData.discount;
           finalExtra.promoCode = promoData.code;
+          
+          if (typeof markPromoCodeAsUsed === "function") {
+            markPromoCodeAsUsed(promoData.code);
+          }
         }
 
         scanConfirmModal.classList.remove("active");
