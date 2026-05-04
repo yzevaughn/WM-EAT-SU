@@ -29,6 +29,40 @@
     </div>
     <div class="nav-center"></div>
     <div class="nav-right">
+      <!-- Notifications -->
+      <div class="notification-dropdown">
+        <button class="nav-icon-btn" aria-label="Notifications">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notification-badge">3</span>
+        </button>
+        <div class="notification-menu">
+          <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="mark-read-btn">Mark all as read</button>
+          </div>
+          <div class="notification-list">
+            <a href="super-dashboard.html" class="notification-item unread">
+              <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
+              <div class="notif-content">
+                <p class="notif-title">New Canteen Application</p>
+                <p class="notif-desc">A new canteen application has been submitted.</p>
+                <span class="notif-time">2 mins ago</span>
+              </div>
+            </a>
+            <a href="super-dashboard.html" class="notification-item unread">
+              <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
+              <div class="notif-content">
+                <p class="notif-title">System Update</p>
+                <p class="notif-desc">Maintenance scheduled for tonight at 12:00 AM.</p>
+                <span class="notif-time">1 hour ago</span>
+              </div>
+            </a>
+          </div>
+          <div class="notification-footer">
+            <a href="#">View all notifications</a>
+          </div>
+        </div>
+      </div>
       <div class="profile">
         <div class="profile-info">
           <span class="profile-name">Super Admin</span>
@@ -37,7 +71,13 @@
         <div class="profile-dropdown">
           <button class="profile-btn">
             <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" />
+            <i class="fa-solid fa-chevron-down"></i>
           </button>
+          <div class="dropdown-menu">
+            <a href="../../index.html" class="dropdown-item">
+              <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -80,6 +120,24 @@
           <a href="complaints.html" class="nav-link">
             <i class="fa-solid fa-comment-dots"></i>
             <span>Complaints</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin-approval.html" class="nav-link">
+            <i class="fa-solid fa-utensils"></i>
+            <span>Menu</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin-voucher.html" class="nav-link">
+            <i class="fa-solid fa-ticket"></i>
+            <span>Vouchers</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin-control.html" class="nav-link">
+            <i class="fa-solid fa-gear"></i>
+            <span>Admin Control</span>
           </a>
         </li>
       </ul>

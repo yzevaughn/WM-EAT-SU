@@ -235,9 +235,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 showConfirmModal({
                     title: "Resolve Complaint",
                     message: `Are you sure you want to mark complaint ${id} as Resolved?`,
-                    icon: "fa-solid fa-check-circle",
-                    iconColor: "#10b981",
-                    confirmText: "Resolve",
+                    type: "approve",
                     requireInput: false,
                     onConfirm: () => {
                         const comp = complaints.find(c => c.id === id);
@@ -245,6 +243,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             comp.status = "Resolved";
                             updateStats();
                             renderComplaints();
+                            showToast("Success", `Complaint ${id} resolved successfully.`);
                         }
                     }
                 });
@@ -332,60 +331,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // MODAL LOGIC
     // ════════════════════════════════════════
 
-    window.closeModal = function(modalId) {
-        document.getElementById(modalId).classList.remove('active');
-    };
-
-    let confirmCallback = null;
-
-    function showConfirmModal(options) {
-        const modal = document.getElementById("confirmModal");
-        const title = document.getElementById("confirmTitle");
-        const message = document.getElementById("confirmMessage");
-        const icon = document.getElementById("confirmIcon");
-        const submitBtn = document.getElementById("submitConfirmBtn");
-        const inputContainer = document.getElementById("confirmInputContainer");
-        const confirmInput = document.getElementById("confirmInput");
-        
-        title.textContent = options.title || "Confirm Action";
-        message.textContent = options.message || "Are you sure you want to do this?";
-        submitBtn.textContent = options.confirmText || "Confirm";
-        
-        if (options.icon) {
-            icon.innerHTML = `<i class="${options.icon}"></i>`;
-            icon.style.color = options.iconColor || "#ef4444";
-        }
-        
-        if (options.requireInput) {
-            inputContainer.style.display = "block";
-            confirmInput.value = "";
-        } else {
-            inputContainer.style.display = "none";
-        }
-        
-        confirmCallback = options.onConfirm;
-        modal.classList.add("active");
-    }
-
-    document.getElementById("cancelConfirmBtn").addEventListener("click", () => {
-        closeModal("confirmModal");
-        confirmCallback = null;
-    });
-
-    document.getElementById("submitConfirmBtn").addEventListener("click", () => {
-        const inputContainer = document.getElementById("confirmInputContainer");
-        const confirmInput = document.getElementById("confirmInput");
-        
-        if (inputContainer.style.display === "block" && !confirmInput.value.trim()) {
-            alert("Please provide a reason.");
-            return;
-        }
-        
-        if (confirmCallback) {
-            confirmCallback(confirmInput.value.trim());
-        }
-        closeModal("confirmModal");
-    });
 
     // ════════════════════════════════════════
     // DETAIL PANEL LOGIC
@@ -459,9 +404,7 @@ document.addEventListener("DOMContentLoaded", function() {
         showConfirmModal({
             title: "Resolve Complaint",
             message: `Are you sure you want to mark complaint ${currentDetailId} as Resolved?`,
-            icon: "fa-solid fa-check-circle",
-            iconColor: "#10b981",
-            confirmText: "Resolve",
+            type: "approve",
             requireInput: false,
             onConfirm: () => {
                 const comp = complaints.find(c => c.id === currentDetailId);
@@ -470,6 +413,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     updateStats();
                     renderComplaints();
                     closeModal("detailsModal");
+                    showToast("Success", `Complaint ${currentDetailId} resolved successfully.`);
                 }
             }
         });

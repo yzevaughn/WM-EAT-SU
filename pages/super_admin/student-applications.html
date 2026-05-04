@@ -15,10 +15,11 @@
     />
 
     <link rel="stylesheet" href="../../css/navbar.css" />
-    <link rel="stylesheet" href="../../css/super_admin_css/super-dashboard.css" />
+    <link rel="stylesheet" href="../../css/super_admin_css/admin-dashboard.css" />
     <link rel="stylesheet" href="../../css/super_admin_css/student-applications.css" />
     <link rel="stylesheet" href="../../css/super_admin_css/admin-walk-in.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../script/super_admin_js/common.js"></script>
   </head>
 
   <body>
@@ -279,38 +280,7 @@
       </div>
     </div>
 
-    <!-- Toast Container -->
-    <div class="toast-container" id="toastContainer"></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-      function showToast(title, message, type = "success") {
-        const container = document.getElementById("toastContainer");
-        const toast = document.createElement("div");
-        toast.className = `toast ${type}`;
-
-        let icon = "fa-check";
-        if (type === "warning") icon = "fa-triangle-exclamation";
-        if (type === "error") icon = "fa-circle-xmark";
-
-        toast.innerHTML = `
-        <div class="toast-icon">
-          <i class="fa-solid ${icon}"></i>
-        </div>
-        <div class="toast-content">
-          <span class="toast-title">${title}</span>
-          <span class="toast-message">${message}</span>
-        </div>
-      `;
-        container.appendChild(toast);
-
-        setTimeout(() => {
-          toast.style.opacity = "0";
-          toast.style.transform = "translateX(100%)";
-          setTimeout(() => toast.remove(), 400);
-        }, 4000);
-      }
-
       // WALK-IN MODAL LOGIC
       function wiAddProduct() {
         const container = document.getElementById("wi-productsContainer");
@@ -361,66 +331,38 @@
       }
 
       function wiGoToStep(step) {
-        // Validation logic (REMOVED as per request to ignore requirements in first pages)
         if (step === 3) {
-          const prodNames = document.querySelectorAll(".wi-p-name");
-          // We still need a name for the summary, even if optional
-          const existingEmail = document
-            .getElementById("wi-existingEmail")
-            .value.trim();
+          const existingEmail = document.getElementById("wi-existingEmail").value.trim();
           const ln = document.getElementById("wi-lastName").value.trim();
           const fn = document.getElementById("wi-firstName").value.trim();
           const mi = document.getElementById("wi-midInit").value.trim();
           const email = document.getElementById("wi-studentEmail").value.trim();
 
           const displayEmail = existingEmail || email || "Not provided";
-          const fullName =
-            ln || fn
-              ? `${ln}, ${fn}${mi ? " " + mi : ""}`
-              : existingEmail
-                ? "Existing Account"
-                : "Walk-in Applicant";
+          const fullName = ln || fn ? `${ln}, ${fn}${mi ? " " + mi : ""}` : existingEmail ? "Existing Account" : "Walk-in Applicant";
 
           document.getElementById("sum-name").innerText = fullName;
           document.getElementById("sum-email").innerText = displayEmail;
         }
 
-        // Toggle visibility & indicators
         [1, 2, 3].forEach((s) => {
-          document.getElementById(`wi-step${s}`).style.display =
-            s === step ? "block" : "none";
+          document.getElementById(`wi-step${s}`).style.display = s === step ? "block" : "none";
           const ind = document.getElementById(`wi-step-ind${s}`);
-
           ind.classList.remove("active", "completed");
-          if (s < step) {
-            ind.classList.add("completed");
-          } else if (s === step) {
-            ind.classList.add("active");
-          }
+          if (s < step) ind.classList.add("completed");
+          else if (s === step) ind.classList.add("active");
         });
       }
 
       function wiSubmitFinal() {
         const email = document.getElementById("wi-studentEmail").value.trim();
         if (!email || !email.includes("@")) {
-          showToast(
-            "Invalid Email",
-            "Please go back to Step 1 and provide a valid email.",
-            "error",
-          );
+          showToast("Invalid Email", "Please go back to Step 1 and provide a valid email.", "error");
           return;
         }
-
-        // Show Success
         showToast("Success!", `Access granted to ${email}`, "success");
-
-        // Close modal immediately
         document.getElementById("walkInModalToggle").checked = false;
-
-        // Reset form after closing transition
-        setTimeout(() => {
-          resetWalkInForm();
-        }, 500);
+        setTimeout(() => resetWalkInForm(), 500);
       }
 
       function resetWalkInForm() {
@@ -438,97 +380,71 @@
     <!-- ════════════════════════════════════════
          TOP NAVBAR
          ════════════════════════════════════════ -->
-    <div class="top-nav">
-      <!-- LEFT: hamburger + logo -->
-      <div class="nav-left">
-        <label for="menu-checkbox" class="menu-toggle">
-          <i class="fa-solid fa-bars"></i>
-        </label>
-        <a href="super-dashboard.html" class="logo">
-          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-          <span class="logo-text">WM EAT SU</span>
-        </a>
-      </div>
-      <div class="nav-center"></div>
-      <!-- RIGHT: profile -->
-      <div class="nav-right">
-        <!-- Notifications -->
-        <div class="notification-dropdown">
-          <button class="nav-icon-btn" aria-label="Notifications">
-            <i class="fa-regular fa-bell"></i>
-            <span class="notification-badge">3</span>
-          </button>
-          <div class="notification-menu">
-            <div class="notification-header">
-              <h3>Notifications</h3>
-              <button class="mark-read-btn">Mark all as read</button>
-            </div>
-            <div class="notification-list">
-              <a href="super-dashboard.html" class="notification-item unread">
-                <div class="notif-icon green">
-                  <i class="fa-solid fa-check"></i>
-                </div>
-                <div class="notif-content">
-                  <p class="notif-title">Order #1234 Ready</p>
-                  <p class="notif-desc">
-                    Your order from Canteen 1 is ready for pickup.
-                  </p>
-                  <span class="notif-time">2 mins ago</span>
-                </div>
-              </a>
-              <a href="super-dashboard.html" class="notification-item unread">
-                <div class="notif-icon blue">
-                  <i class="fa-solid fa-info"></i>
-                </div>
-                <div class="notif-content">
-                  <p class="notif-title">Wallet Top-up</p>
-                  <p class="notif-desc">
-                    Successfully added &#8369;500.00 to your wallet.
-                  </p>
-                  <span class="notif-time">1 hour ago</span>
-                </div>
-              </a>
-              <a href="super-dashboard.html" class="notification-item">
-                <div class="notif-icon orange">
-                  <i class="fa-solid fa-fire-burner"></i>
-                </div>
-                <div class="notif-content">
-                  <p class="notif-title">Order Preparing</p>
-                  <p class="notif-desc">
-                    Vendor has started preparing your order.
-                  </p>
-                  <span class="notif-time">2 hours ago</span>
-                </div>
-              </a>
-            </div>
-            <div class="notification-footer">
-              <a href="admin-notifications.html">View all notifications</a>
-            </div>
+  <div class="top-nav">
+    <div class="nav-left">
+      <label for="menu-checkbox" class="menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </label>
+      <a href="super-dashboard.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
+    </div>
+    <div class="nav-center"></div>
+    <div class="nav-right">
+      <!-- Notifications -->
+      <div class="notification-dropdown">
+        <button class="nav-icon-btn" aria-label="Notifications">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notification-badge">3</span>
+        </button>
+        <div class="notification-menu">
+          <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="mark-read-btn">Mark all as read</button>
+          </div>
+          <div class="notification-list">
+            <a href="super-dashboard.html" class="notification-item unread">
+              <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
+              <div class="notif-content">
+                <p class="notif-title">New Canteen Application</p>
+                <p class="notif-desc">A new canteen application has been submitted.</p>
+                <span class="notif-time">2 mins ago</span>
+              </div>
+            </a>
+            <a href="super-dashboard.html" class="notification-item unread">
+              <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
+              <div class="notif-content">
+                <p class="notif-title">System Update</p>
+                <p class="notif-desc">Maintenance scheduled for tonight at 12:00 AM.</p>
+                <span class="notif-time">1 hour ago</span>
+              </div>
+            </a>
+          </div>
+          <div class="notification-footer">
+            <a href="#">View all notifications</a>
           </div>
         </div>
-        <div class="profile">
-          <div class="profile-info">
-            <span class="profile-name">Evangelista, Vaughn</span>
-            <span class="email">vaughn.student@wm.edu.ph</span>
-          </div>
-          <div class="profile-dropdown">
-            <button class="profile-btn">
-              <img
-                src="../../images/pfp.jpg"
-                class="profile-pic"
-                alt="Profile"
-              />
-              <i class="fa-solid fa-chevron-down"></i>
-            </button>
-            <div class="dropdown-menu">
-              <a href="../../index.html" class="dropdown-item">
-                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
-              </a>
-            </div>
+      </div>
+      <div class="profile">
+        <div class="profile-info">
+          <span class="profile-name">Super Admin</span>
+          <span class="email">admin@wm.edu.ph</span>
+        </div>
+        <div class="profile-dropdown">
+          <button class="profile-btn">
+            <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" />
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-menu">
+            <a href="../../index.html" class="dropdown-item">
+              <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+            </a>
           </div>
         </div>
       </div>
     </div>
+  </div>
     <!-- /top-nav -->
 
     <!-- ════════════════════════════════════════
@@ -537,8 +453,6 @@
     <div class="layout">
       <!-- ── SIDEBAR ── -->
       <div class="left-nav" id="sidebar">
-        <!-- logo shown on mobile inside sidebar -->
-
         <ul class="nav-list">
           <li>
             <a href="super-dashboard.html" class="nav-link">
@@ -576,9 +490,25 @@
               <span>Complaints</span>
             </a>
           </li>
+          <li>
+            <a href="admin-approval.html" class="nav-link">
+              <i class="fa-solid fa-utensils"></i>
+              <span>Menu</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-voucher.html" class="nav-link">
+              <i class="fa-solid fa-ticket"></i>
+              <span>Vouchers</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-control.html" class="nav-link">
+              <i class="fa-solid fa-gear"></i>
+              <span>Admin Control</span>
+            </a>
+          </li>
         </ul>
-
-
       </div>
 
       <div class="main-content">
@@ -608,6 +538,11 @@
                   gap: 8px;
                   background: #ef4444;
                   box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+                  padding: 10px 16px;
+                  border-radius: 8px;
+                  color: white;
+                  font-weight: 600;
+                  transition: all 0.2s ease;
                 "
               >
                 <i class="fa-solid fa-plus"></i> Walk-In Application
@@ -824,110 +759,6 @@
         </div>
         <div class="modal-footer" id="detailsFooter">
           <!-- Dynamic buttons based on status -->
-        </div>
-      </div>
-    </div>
-
-    <!-- Confirmation Modal -->
-    <div class="modal-backdrop" id="confirmModal">
-      <div class="modal-panel" style="max-width: 400px; text-align: center">
-        <div class="modal-body" style="padding-top: 32px">
-          <div
-            class="modal-icon"
-            style="font-size: 48px; color: #ef4444; margin-bottom: 16px"
-            id="confirmIcon"
-          >
-            <i class="fa-solid fa-circle-exclamation"></i>
-          </div>
-          <h2
-            style="
-              font-size: 20px;
-              font-weight: 800;
-              color: #0f172a;
-              margin-bottom: 8px;
-            "
-            id="confirmTitle"
-          >
-            Confirm Action
-          </h2>
-          <p
-            style="font-size: 14px; color: #64748b; margin-bottom: 24px"
-            id="confirmMessage"
-          >
-            Are you sure you want to do this?
-          </p>
-
-          <div
-            id="confirmInputContainer"
-            style="display: none; margin-bottom: 24px; text-align: left"
-          >
-            <label
-              style="
-                display: block;
-                font-size: 13px;
-                font-weight: 600;
-                color: #475569;
-                margin-bottom: 8px;
-              "
-              id="confirmInputLabel"
-              >Reason</label
-            >
-            <textarea
-              id="confirmInput"
-              class="form-control"
-              rows="3"
-              placeholder="Enter reason here..."
-              style="
-                width: 100%;
-                border: 1px solid #cbd5e1;
-                border-radius: 8px;
-                padding: 12px;
-                font-family: inherit;
-                font-size: 14px;
-                resize: vertical;
-                box-sizing: border-box;
-                outline: none;
-                transition: border-color 0.2s;
-              "
-            ></textarea>
-          </div>
-
-          <div
-            class="form-actions"
-            style="display: flex; justify-content: center; gap: 12px"
-          >
-            <button
-              class="btn-submit"
-              id="submitConfirmBtn"
-              style="
-                padding: 10px 24px;
-                border: none;
-                color: white;
-                border-radius: 8px;
-                font-weight: 600;
-                cursor: pointer;
-                background: linear-gradient(135deg, #10b981, #059669);
-                box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
-              "
-            >
-              Confirm
-            </button>
-            <button
-              class="btn-ghost"
-              id="cancelConfirmBtn"
-              style="
-                padding: 10px 24px;
-                border: 1px solid #cbd5e1;
-                background: transparent;
-                color: #475569;
-                border-radius: 8px;
-                font-weight: 600;
-                cursor: pointer;
-              "
-            >
-              Cancel
-            </button>
-          </div>
         </div>
       </div>
     </div>

@@ -358,65 +358,7 @@ function updatePaginationUI(start, end, total) {
   if (currentPage >= totalPages || total === 0) nextBtn.classList.add("disabled"); else nextBtn.classList.remove("disabled");
 }
 
-// Confirmation Modal
-let confirmCallback = null;
 
-function showConfirmModal(options) {
-  const modal      = document.getElementById("confirmModal");
-  const icon       = document.getElementById("confirmIcon");
-  const title      = document.getElementById("confirmTitle");
-  const msg        = document.getElementById("confirmMessage");
-  const inputCont  = document.getElementById("confirmInputContainer");
-  const inputLabel = document.getElementById("confirmInputLabel");
-  const inputEl    = document.getElementById("confirmInput");
-  const submitBtn  = document.getElementById("submitConfirmBtn");
-
-  title.innerText = options.title   || "Confirm Action";
-  msg.innerText   = options.message || "Are you sure?";
-
-  if (options.type === "approve") {
-    icon.style.color  = "#10b981";
-    icon.innerHTML    = '<i class="fa-solid fa-circle-check"></i>';
-    submitBtn.style.background  = "linear-gradient(135deg,#10b981,#059669)";
-    submitBtn.style.boxShadow   = "0 2px 8px rgba(16,185,129,0.2)";
-  } else {
-    icon.style.color  = "#ef4444";
-    icon.innerHTML    = '<i class="fa-solid fa-circle-exclamation"></i>';
-    submitBtn.style.background  = "linear-gradient(135deg,#ef4444,#dc2626)";
-    submitBtn.style.boxShadow   = "0 2px 8px rgba(239,68,68,0.2)";
-  }
-
-  if (options.requireInput) {
-    inputCont.style.display = "block";
-    inputLabel.innerText    = options.inputLabel || "Reason";
-    inputEl.value           = "";
-    inputEl.placeholder     = options.inputPlaceholder || "Enter reason...";
-  } else {
-    inputCont.style.display = "none";
-  }
-
-  confirmCallback = options.onConfirm;
-  openModal("confirmModal");
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const cancelBtn = document.getElementById("cancelConfirmBtn");
-  const submitBtn = document.getElementById("submitConfirmBtn");
-  const inputEl   = document.getElementById("confirmInput");
-
-  if (cancelBtn) cancelBtn.addEventListener("click", () => { closeModal("confirmModal"); confirmCallback = null; });
-  if (submitBtn) submitBtn.addEventListener("click", () => {
-    const inputCont = document.getElementById("confirmInputContainer");
-    let inputValue  = null;
-    if (inputCont.style.display === "block") {
-      inputValue = inputEl.value.trim();
-      if (!inputValue) { alert("Please enter a reason."); return; }
-    }
-    if (confirmCallback) confirmCallback(inputValue);
-    closeModal("confirmModal");
-    confirmCallback = null;
-  });
-});
 
 function reviewApp(id) {
   const app = mockApplications.find(x => x.id === id);
@@ -494,15 +436,7 @@ function reactivateApp(id) {
   });
 }
 
-function openModal(id) {
-  document.getElementById(id).classList.add("active");
-  document.body.style.overflow = "hidden";
-}
 
-function closeModal(id) {
-  document.getElementById(id).classList.remove("active");
-  document.body.style.overflow = "auto";
-}
 
 function openDetails(id) {
   const app = mockApplications.find(x => x.id === id);

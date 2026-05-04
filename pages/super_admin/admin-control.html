@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WM EAT SU - Admin Control</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="../../css/navbar.css" />
+  <link rel="stylesheet" href="../../css/super_admin_css/admin-dashboard.css" />
+  <link rel="stylesheet" href="../../css/super_admin_css/admin-control.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="../../script/super_admin_js/common.js"></script>
+</head>
+
+<body>
+  <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+
+  <!-- ════════════════════════════════════════
+         TOP NAVBAR
+         ════════════════════════════════════════ -->
+  <div class="top-nav">
+    <!-- LEFT: hamburger + logo -->
+    <div class="nav-left">
+      <label for="menu-checkbox" class="menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </label>
+      <a href="super-dashboard.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
+    </div>
+
+    <div class="nav-center"></div>
+    <!-- RIGHT: profile -->
+          <div class="nav-right">
+        <!-- Notifications -->
+        <div class="notification-dropdown">
+          <button class="nav-icon-btn" aria-label="Notifications">
+            <i class="fa-regular fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="notification-menu">
+            <div class="notification-header">
+              <h3>Notifications</h3>
+              <button class="mark-read-btn">Mark all as read</button>
+            </div>
+            <div class="notification-list">
+              <a href="admin-dashboard.html" class="notification-item unread">
+                <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
+                <div class="notif-content">
+                  <p class="notif-title">Order #1234 Ready</p>
+                  <p class="notif-desc">Your order from Canteen 1 is ready for pickup.</p>
+                  <span class="notif-time">2 mins ago</span>
+                </div>
+              </a>
+              <a href="admin-dashboard.html" class="notification-item unread">
+                <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
+                <div class="notif-content">
+                  <p class="notif-title">Wallet Top-up</p>
+                  <p class="notif-desc">Successfully added &#8369;500.00 to your wallet.</p>
+                  <span class="notif-time">1 hour ago</span>
+                </div>
+              </a>
+              <a href="admin-dashboard.html" class="notification-item">
+                <div class="notif-icon orange"><i class="fa-solid fa-fire-burner"></i></div>
+                <div class="notif-content">
+                  <p class="notif-title">Order Preparing</p>
+                  <p class="notif-desc">Vendor has started preparing your order.</p>
+                  <span class="notif-time">2 hours ago</span>
+                </div>
+              </a>
+            </div>
+            <div class="notification-footer">
+              <a href="admin-notifications.html">View all notifications</a>
+            </div>
+          </div>
+        </div>
+      <div class="profile">
+        <div class="profile-info">
+          <span class="profile-name">Super Admin</span>
+          <span class="email">admin@wm.edu.ph</span>
+        </div>
+        <div class="profile-dropdown">
+          <button class="profile-btn">
+            <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" />
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-menu">
+            <a href="../../index.html" class="dropdown-item">
+              <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /top-nav -->
+
+  <!-- ════════════════════════════════════════
+         LAYOUT
+         ════════════════════════════════════════ -->
+  <div class="layout">
+    <!-- ── SIDEBAR ── -->
+    <div class="left-nav" id="sidebar">
+      <!-- logo shown on mobile inside sidebar -->
+
+      <ul class="nav-list">
+        <li>
+          <a href="super-dashboard.html" class="nav-link">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="top-earners.html" class="nav-link">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Top Earners</span>
+          </a>
+        </li>
+        <li>
+          <a href="payment-tracking.html" class="nav-link">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+            <span>Payment Tracking</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-applications.html" class="nav-link">
+            <i class="fa-solid fa-user-check"></i>
+            <span>Student Apps</span>
+          </a>
+        </li>
+        <li>
+          <a href="canteen-applications.html" class="nav-link">
+            <i class="fa-solid fa-store"></i>
+            <span>Canteen Apps</span>
+          </a>
+        </li>
+        <li>
+          <a href="complaints.html" class="nav-link">
+            <i class="fa-solid fa-comment-dots"></i>
+            <span>Complaints</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin-approval.html" class="nav-link">
+            <i class="fa-solid fa-utensils"></i>
+            <span>Menu</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin-voucher.html" class="nav-link">
+            <i class="fa-solid fa-ticket"></i>
+            <span>Vouchers</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin-control.html" class="nav-link active">
+            <i class="fa-solid fa-gear"></i>
+            <span>Admin Control</span>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+
+    <div class="main-content">
+      <div class="admin-control-section">
+        <div class="section-header">
+          <div class="header-text">
+            <h1>Admin Accounts</h1>
+            <p>Manage all admin users created by Super Admin</p>
+          </div>
+          <button class="btn-create-admin" onclick="openCreateAdminModal()">
+            <i class="fa-solid fa-plus"></i> Create Admin
+          </button>
+        </div>
+
+        <div class="admin-grid-container">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name / Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Last Login</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminTableBody">
+              <!-- Dynamically populated by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="permission-section">
+          <div class="section-header">
+            <div class="header-text">
+              <h1>Permission Control</h1>
+              <p>Control feature access for each admin account</p>
+            </div>
+            <button class="btn-save" onclick="handleSavePermissions()">Save Changes</button>
+          </div>
+
+          <div class="permission-grid">
+            <div class="admin-selector-card">
+              <div class="selector-header">
+                <h3>Select Admin</h3>
+              </div>
+              <div class="admin-list">
+                <div class="admin-item selected">
+                  <div class="admin-item-info">
+                    <span class="status-dot active"></span>
+                    <div class="admin-item-text">
+                      <h4>Maria Santos</h4>
+                      <p>Canteen Admin</p>
+                    </div>
+                  </div>
+                  <span class="selected-badge">Selected</span>
+                </div>
+                <div class="admin-item">
+                  <div class="admin-item-info">
+                    <span class="status-dot active"></span>
+                    <div class="admin-item-text">
+                      <h4>Juan Reyes</h4>
+                      <p>Finance Admin</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="admin-item">
+                  <div class="admin-item-info">
+                    <span class="status-dot suspended"></span>
+                    <div class="admin-item-text">
+                      <h4>Ana Dela Cruz</h4>
+                      <p>App Reviewer</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="admin-item">
+                  <div class="admin-item-info">
+                    <span class="status-dot inactive"></span>
+                    <div class="admin-item-text">
+                      <h4>Lea Gomez</h4>
+                      <p>Support Admin</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="banned-section">
+          <div class="section-header">
+            <div class="header-text">
+              <h1>Banned & Deactivated Accounts</h1>
+              <p>Accounts suspended, banned, or deactivated by Super Admin</p>
+            </div>
+          </div>
+
+          <div class="banned-grid-container">
+            <table class="banned-table">
+              <thead>
+                <tr>
+                  <th>Account Status</th>
+                  <th>Reason</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="bannedTableBody">
+                <tr>
+                  <td>
+                    <div class="account-status-cell">
+                      <div class="avatar-circle av-bt">BT</div>
+                      <div class="account-info-text">
+                        <h4>Be...</h4>
+                        <div class="role-status-row">
+                          <span class="account-role">Menu Admin</span>
+                          <span class="status-pill banned">Banned</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="reason-text">Policy violation</span></td>
+                  <td><span class="date-text">May 4, 2026</span></td>
+                  <td><button class="btn-action success">Restore</button></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="account-status-cell">
+                      <div class="avatar-circle av-ad">SK</div>
+                      <div class="account-info-text">
+                        <h4>Sa...</h4>
+                        <div class="role-status-row">
+                          <span class="account-role">Student Vendor</span>
+                          <span class="status-pill banned">Banned</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="reason-text">Fraud reported</span></td>
+                  <td><span class="date-text">Apr 22, 2026</span></td>
+                  <td><button class="btn-action">Review</button></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="account-status-cell">
+                      <div class="avatar-circle av-lg">RP</div>
+                      <div class="account-info-text">
+                        <h4>Ro...</h4>
+                        <div class="role-status-row">
+                          <span class="account-role">Canteen C Operator</span>
+                          <span class="status-pill suspended">Deactivated</span>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="reason-text">Non-payment x3</span></td>
+                  <td><span class="date-text">Apr 10, 2026</span></td>
+                  <td><button class="btn-action success">Restore</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../script/super_admin_js/admin-control.js"></script>
+</body>
+
+</html>
+
+
+
