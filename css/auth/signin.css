@@ -276,22 +276,39 @@
       animation: spin .6s linear infinite;
     }
 
-    @media (max-width: 620px) {
-      .card {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr;
-        max-width: 440px;
-        border-radius: var(--r-lg);
-      }
-      .sidebar {
-        flex-direction: row;
-        align-items: center;
-        gap: 16px;
-        padding: 20px 22px;
-      }
-      .sb-welcome { display: none; }
-      .form-panel { padding: 28px 22px 32px; }
-    }
-    @media (max-width: 380px) {
-      .form-panel { padding: 22px 16px 28px; }
-    }
+@media (max-width: 768px) {
+  .card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    max-width: 480px;
+    min-height: auto;
+    border-radius: var(--r-lg);
+  }
+  .sidebar {
+    padding: 24px 20px;
+  }
+  .sb-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sb-icon {
+    width: 40px; height: 40px; margin-bottom: 0;
+    font-size: 18px; border-radius: 12px;
+  }
+  .sb-name { font-size: 18px; margin-bottom: 0; }
+  .sb-tag { display: none; }
+  .sb-welcome { display: none; }
+
+  .form-panel {
+    padding: 30px 24px 36px;
+  }
+  .fp-head h2 { font-size: 20px; }
+}
+
+@media (max-width: 480px) {
+  .page-grid { padding: 12px; }
+  .card { border-radius: 16px; }
+  .form-panel { padding: 24px 18px 30px; }
+  .btn { font-size: 13px; height: 40px; }
+}

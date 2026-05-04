@@ -92,8 +92,33 @@
           ),
           url("../../images/pizza.avif");
         padding: 36px 26px;
-        display: flex;
-        flex-direction: column;
+      }
+
+      @media (min-width: 769px) {
+        .sidebar {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .sb-welcome-msg {
+          display: none;
+        }
+        .role-grid {
+          margin-top: 20px;
+        }
+        .role-card {
+          padding: 16px;
+        }
+        .role-icon {
+          width: 44px;
+          height: 44px;
+          font-size: 18px;
+        }
+        .role-info h3 {
+          font-size: 15px;
+        }
       }
     </style>
   </head>
@@ -108,7 +133,7 @@
               Campus Food Platform<br />for the WMSU Community
             </div>
           </div>
-          <div style="margin-top: auto">
+          <div class="sb-welcome-msg" style="margin-top: auto">
             <h2
               style="
                 color: white;
