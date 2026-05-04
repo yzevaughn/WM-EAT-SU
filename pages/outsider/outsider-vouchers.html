@@ -243,14 +243,6 @@
         initClaimedVouchers();
         renderVouchers();
         updateAllCartBadges();
-
-        if (typeof renderNavbarNotifications === "function") {
-          renderNavbarNotifications("student", {
-            listEl: document.querySelector(".notification-list"),
-            badgeEl: document.querySelector(".notification-badge"),
-            markReadEl: document.querySelector(".mark-read-btn"),
-          });
-        }
       });
 
       const CLAIMED_KEY = "wm_eat_su_claimed_vouchers";

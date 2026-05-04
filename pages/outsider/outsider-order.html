@@ -1978,17 +1978,7 @@
       document.getElementById("closeDetailBtn").onclick = () =>
         orderDetailsModal.classList.remove("active");
 
-      /* -- Live notification navbar -- */
-      function refreshStudentNavNotifs() {
-        if (typeof renderNavbarNotifications === "function") {
-          renderNavbarNotifications("student", {
-            listEl: document.querySelector(".notification-list"),
-            badgeEl: document.querySelector(".notification-badge"),
-            markReadEl: document.querySelector(".mark-read-btn"),
-          });
-        }
-      }
-      refreshStudentNavNotifs();
+
 
       /* -- Respond to vendor status changes (cross-tab) -- */
       window.addEventListener("storage", (e) => {
@@ -1996,7 +1986,7 @@
           renderOrders();
         }
         if (e.key === "wm_eat_su_notifications") {
-          refreshStudentNavNotifs();
+          // notifications.js auto-handles this via its own storage listener
         }
       });
     </script>

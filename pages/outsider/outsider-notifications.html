@@ -307,35 +307,13 @@
     <script src="../../script/outsider/cart.js"></script>
     <script src="../../script/outsider/dashboard.js"></script>
     <script>
-      // Render the notifications page
-      renderNotificationsPage(
-        "student",
-        document.getElementById("notificationsContainer"),
-      );
-
-      // Also update the navbar dropdown
-      if (typeof renderNavbarNotifications === "function") {
-        renderNavbarNotifications("student", {
-          listEl: document.querySelector(".notification-list"),
-          badgeEl: document.querySelector(".notification-badge"),
-          markReadEl: document.querySelector(".mark-read-btn"),
-        });
-      }
-
-      // Live update on storage changes
-      window.addEventListener("storage", (e) => {
-        if (e.key === "wm_eat_su_notifications") {
-          renderNotificationsPage(
-            "student",
-            document.getElementById("notificationsContainer"),
-          );
-          if (typeof renderNavbarNotifications === "function") {
-            renderNavbarNotifications("student", {
-              listEl: document.querySelector(".notification-list"),
-              badgeEl: document.querySelector(".notification-badge"),
-              markReadEl: document.querySelector(".mark-read-btn"),
-            });
-          }
+      // The script/notifications.js auto-initializes the navbar dropdown.
+      // We only need to manually render the full notifications page content.
+      document.addEventListener("DOMContentLoaded", () => {
+        const role = detectRole();
+        const container = document.getElementById("notificationsContainer");
+        if (container) {
+          renderNotificationsPage(role, container);
         }
       });
     </script>
