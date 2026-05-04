@@ -1,181 +1,158 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WM EAT SU — My Vouchers</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="../../css/navbar.css" />
-    <link rel="stylesheet" href="../../css/student/dashboard.css" />
-    <link rel="stylesheet" href="../../css/student/vouchers.css" />
-  </head>
-  <body>
-    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <!-- ════════════════════════════════════════
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WM EAT SU — My Vouchers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/navbar.css" />
+  <link rel="stylesheet" href="../../css/student/dashboard.css" />
+  <link rel="stylesheet" href="../../css/student/vouchers.css" />
+</head>
+
+<body>
+  <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ════════════════════════════════════════
          TOP NAVBAR
          ════════════════════════════════════════ -->
-    <div class="top-nav">
-      <div class="nav-left">
-        <label for="menu-checkbox" class="menu-toggle">
-          <i class="fa-solid fa-bars"></i>
-        </label>
-        <a href="student-dashboard.html" class="logo">
-          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-          <span class="logo-text">WM EAT SU</span>
+  <div class="top-nav">
+    <div class="nav-left">
+      <label for="menu-checkbox" class="menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </label>
+      <a href="student-dashboard.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
+    </div>
+
+    <div class="nav-center">
+      <div class="role-switcher" id="roleSwitcher">
+        <a href="student-dashboard.html" class="role-btn active" id="roleStudent">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span>Student</span>
+        </a>
+        <a href="../vendor-pages/vendor-dashboard.html" class="role-btn" id="roleVendor">
+          <i class="fa-solid fa-store"></i>
+          <span>Vendor</span>
         </a>
       </div>
+    </div>
 
-      <div class="nav-center">
-        <div class="role-switcher" id="roleSwitcher">
-          <a
-            href="student-dashboard.html"
-            class="role-btn active"
-            id="roleStudent"
-          >
-            <i class="fa-solid fa-graduation-cap"></i>
-            <span>Student</span>
-          </a>
-          <a
-            href="../vendor-pages/vendor-dashboard.html"
-            class="role-btn"
-            id="roleVendor"
-          >
-            <i class="fa-solid fa-store"></i>
-            <span>Vendor</span>
-          </a>
+    <div class="nav-right">
+      <!-- Notifications -->
+      <div class="notification-dropdown">
+        <button class="nav-icon-btn" aria-label="Notifications">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notification-badge"></span>
+        </button>
+        <div class="notification-menu">
+          <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="mark-read-btn">Mark all as read</button>
+          </div>
+          <div class="notification-list">
+            <!-- Rendered by notifications.js -->
+          </div>
+          <div class="notification-footer">
+            <a href="student-notifications.html">View all notifications</a>
+          </div>
         </div>
       </div>
-
-      <div class="nav-right">
-        <!-- Notifications -->
-        <div class="notification-dropdown">
-          <button class="nav-icon-btn" aria-label="Notifications">
-            <i class="fa-regular fa-bell"></i>
-            <span class="notification-badge"></span>
-          </button>
-          <div class="notification-menu">
-            <div class="notification-header">
-              <h3>Notifications</h3>
-              <button class="mark-read-btn">Mark all as read</button>
-            </div>
-            <div class="notification-list">
-              <!-- Rendered by notifications.js -->
-            </div>
-            <div class="notification-footer">
-              <a href="student-notifications.html">View all notifications</a>
-            </div>
-          </div>
+      <div class="profile">
+        <div class="profile-info">
+          <span class="profile-name">Vaughn Evangelista</span>
+          <span class="email">vaughn.student@wm.edu.ph</span>
         </div>
-        <div class="profile">
-          <div class="profile-info">
-            <span class="profile-name">Vaughn Evangelista</span>
-            <span class="email">vaughn.student@wm.edu.ph</span>
-          </div>
-          <div class="profile-dropdown">
-            <button class="profile-btn">
-              <img
-                src="../../images/pfp.jpg"
-                class="profile-pic"
-                alt="Profile"
-              />
-              <i class="fa-solid fa-chevron-down"></i>
-            </button>
-            <div class="dropdown-menu">
-              <a href="student-profile.html" class="dropdown-item">
-                <i class="fa-solid fa-gear"></i><span>Settings</span>
-              </a>
-              <a href="student-feedback.html" class="dropdown-item">
-                <i class="fa-solid fa-flag"></i><span>Reports</span>
-              </a>
-              <a href="student-vendor-applications.html" class="dropdown-item">
-                <i class="fa-solid fa-rss"></i><span>Vendor Applications</span>
-              </a>
-              <a
-                href="../../index.html"
-                class="dropdown-item dropdown-item--danger"
-              >
-                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
-              </a>
-            </div>
+        <div class="profile-dropdown">
+          <button class="profile-btn">
+            <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" />
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-menu">
+            <a href="student-profile.html" class="dropdown-item">
+              <i class="fa-solid fa-gear"></i><span>Settings</span>
+            </a>
+            <a href="student-feedback.html" class="dropdown-item">
+              <i class="fa-solid fa-flag"></i><span>Reports</span>
+            </a>
+            <a href="student-vendor-applications.html" class="dropdown-item">
+              <i class="fa-solid fa-rss"></i><span>Vendor Applications</span>
+            </a>
+            <a href="../../index.html" class="dropdown-item dropdown-item--danger">
+              <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+            </a>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="layout">
-      <!-- ── SIDEBAR ── -->
-      <div class="left-nav" id="sidebar">
-        <ul class="nav-list">
-          <li>
-            <a href="student-dashboard.html" class="nav-link">
-              <i class="fa-solid fa-house"></i><span>Dashboard</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-browse-food.html" class="nav-link">
-              <i class="fa-solid fa-utensils"></i><span>Browse Food</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-cart.html" class="nav-link">
-              <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
-              <span class="nav-badge" style="display: none">0</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-order.html" class="nav-link">
-              <i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-vouchers.html" class="nav-link active">
-              <i class="fa-solid fa-ticket"></i><span>Vouchers</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-wallet.html" class="nav-link">
-              <i class="fa-solid fa-wallet"></i><span>Wallet</span>
-            </a>
-          </li>
-          <li>
-            <a href="student-campus-map.html" class="nav-link">
-              <i class="fa-solid fa-map-location-dot"></i
-              ><span>Campus Map</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+  <div class="layout">
+    <!-- ── SIDEBAR ── -->
+    <div class="left-nav" id="sidebar">
+      <ul class="nav-list">
+        <li>
+          <a href="student-dashboard.html" class="nav-link">
+            <i class="fa-solid fa-house"></i><span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-browse-food.html" class="nav-link">
+            <i class="fa-solid fa-utensils"></i><span>Browse Food</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-cart.html" class="nav-link">
+            <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
+            <span class="nav-badge" style="display: none">0</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-order.html" class="nav-link">
+            <i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-vouchers.html" class="nav-link active">
+            <i class="fa-solid fa-ticket"></i><span>Vouchers</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-wallet.html" class="nav-link">
+            <i class="fa-solid fa-wallet"></i><span>Wallet</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-campus-map.html" class="nav-link">
+            <i class="fa-solid fa-map-location-dot"></i><span>Campus Map</span>
+          </a>
+        </li>
+      </ul>
+    </div>
 
-      <!-- MAIN CONTENT -->
-      <div class="main-content">
-        <div class="vouchers-header">
-          <h1
-            style="
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <div class="vouchers-header">
+        <h1 style="
               font-size: 28px;
               font-weight: 800;
               margin: 0 0 8px 0;
               color: #0f172a;
-            "
-          >
-            My Vouchers
-          </h1>
-          <p style="color: #64748b; margin: 0; font-size: 15px">
-            Redeem these codes at checkout to save on your orders.
-          </p>
-        </div>
+            ">
+          My Vouchers
+        </h1>
+        <p style="color: #64748b; margin: 0; font-size: 15px">
+          Redeem these codes at checkout to save on your orders.
+        </p>
+      </div>
 
-        <!-- REDEEM SECTION -->
-        <div
-          style="
+      <!-- REDEEM SECTION -->
+      <div style="
             background: white;
             padding: 24px;
             border-radius: 20px;
@@ -184,10 +161,8 @@
             display: flex;
             align-items: center;
             gap: 16px;
-          "
-        >
-          <div
-            style="
+          ">
+        <div style="
               background: #fff0f1;
               width: 48px;
               height: 48px;
@@ -197,31 +172,24 @@
               justify-content: center;
               color: #e61524;
               flex-shrink: 0;
-            "
-          >
-            <i class="fa-solid fa-gift" style="font-size: 20px"></i>
-          </div>
-          <div style="flex: 1">
-            <h3
-              style="
+            ">
+          <i class="fa-solid fa-gift" style="font-size: 20px"></i>
+        </div>
+        <div style="flex: 1">
+          <h3 style="
                 font-size: 16px;
                 font-weight: 700;
                 margin: 0 0 4px 0;
                 color: #1e293b;
-              "
-            >
-              Received a special code?
-            </h3>
-            <p style="font-size: 13px; color: #64748b; margin: 0">
-              Enter your loyalty or promo code to add it to your collection.
-            </p>
-          </div>
-          <div style="display: flex; gap: 8px">
-            <input
-              type="text"
-              id="redeemInput"
-              placeholder="Enter code here..."
-              style="
+              ">
+            Received a special code?
+          </h3>
+          <p style="font-size: 13px; color: #64748b; margin: 0">
+            Enter your loyalty or promo code to add it to your collection.
+          </p>
+        </div>
+        <div style="display: flex; gap: 8px">
+          <input type="text" id="redeemInput" placeholder="Enter code here..." style="
                 padding: 10px 16px;
                 border: 1.5px solid #e2e8f0;
                 border-radius: 10px;
@@ -229,11 +197,8 @@
                 width: 180px;
                 outline: none;
                 transition: border-color 0.2s;
-              "
-            />
-            <button
-              onclick="redeemVoucher()"
-              style="
+              " />
+          <button onclick="redeemVoucher()" style="
                 padding: 10px 20px;
                 background: #0f172a;
                 color: white;
@@ -242,116 +207,125 @@
                 font-weight: 600;
                 cursor: pointer;
                 transition: all 0.2s;
-              "
-            >
-              Redeem
-            </button>
-          </div>
-        </div>
-
-        <div class="vouchers-grid" id="vouchersGrid">
-          <!-- Voucher cards will be injected here -->
+              ">
+            Redeem
+          </button>
         </div>
       </div>
+
+      <div class="vouchers-grid" id="vouchersGrid">
+        <!-- Voucher cards will be injected here -->
+      </div>
     </div>
+  </div>
 
-    <div id="toast-container"></div>
+  <div id="toast-container"></div>
 
-    <!-- Shared Scripts -->
-    <script src="../../script/notifications.js"></script>
-    <script src="../../script/student/cart.js"></script>
+  <!-- Shared Scripts -->
+  <script src="../../script/notifications.js"></script>
+  <script src="../../script/student/cart.js"></script>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        initClaimedVouchers();
-        renderVouchers();
-        updateAllCartBadges();
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      initClaimedVouchers();
+      renderVouchers();
+      updateAllCartBadges();
 
-        if (typeof renderNavbarNotifications === "function") {
-          renderNavbarNotifications("student", {
-            listEl: document.querySelector(".notification-list"),
-            badgeEl: document.querySelector(".notification-badge"),
-            markReadEl: document.querySelector(".mark-read-btn"),
-          });
-        }
-      });
+      if (typeof renderNavbarNotifications === "function") {
+        renderNavbarNotifications("student", {
+          listEl: document.querySelector(".notification-list"),
+          badgeEl: document.querySelector(".notification-badge"),
+          markReadEl: document.querySelector(".mark-read-btn"),
+        });
+      }
+    });
 
-      const CLAIMED_KEY = "wm_eat_su_claimed_vouchers";
+    const CLAIMED_KEY = "wm_eat_su_claimed_vouchers";
 
-      function initClaimedVouchers() {
-        if (!localStorage.getItem(CLAIMED_KEY)) {
-          // Initial set of claimed vouchers (platform defaults)
-          localStorage.setItem(
-            CLAIMED_KEY,
-            JSON.stringify(["WMSU50", "SAVE10", "WELCOME"]),
-          );
-        }
+    function initClaimedVouchers() {
+      if (!localStorage.getItem(CLAIMED_KEY)) {
+        // Initial set of claimed vouchers (platform defaults)
+        localStorage.setItem(
+          CLAIMED_KEY,
+          JSON.stringify(["WMSU50", "SAVE10", "WELCOME"]),
+        );
+      }
+    }
+
+    function getClaimedCodes() {
+      return JSON.parse(localStorage.getItem(CLAIMED_KEY)) || [];
+    }
+
+    function renderVouchers() {
+      const grid = document.getElementById("vouchersGrid");
+      const claimedCodes = getClaimedCodes();
+
+      // 1. Static platform-wide vouchers
+      const staticVouchers = [
+        {
+          code: "WMSU50",
+          type: "fixed",
+          value: "₱50 OFF",
+          desc: "Valid on all orders above ₱150. Limited time offer.",
+          vendor: "WM EAT SU",
+        },
+        {
+          code: "SAVE10",
+          type: "percent",
+          value: "10% OFF",
+          desc: "Get 10% discount on your entire cart. No minimum spend.",
+          vendor: "WM EAT SU",
+        },
+        {
+          code: "WELCOME",
+          type: "fixed",
+          value: "₱20 OFF",
+          desc: "A special gift for our new student foodies! Min. spend ₱50.",
+          vendor: "WM EAT SU",
+        },
+      ];
+
+      // 2. Vendor-generated vouchers from localStorage (filtered by claimed or assigned rules)
+      const currentStudentEmail = "vaughn.student@wm.edu.ph";
+      const vendorVouchersRaw =
+        JSON.parse(localStorage.getItem("wm_eat_su_vendor_vouchers")) || [];
+      const vendorVouchers = vendorVouchersRaw
+        .filter((v) => {
+          if (claimedCodes.includes(v.code)) return true;
+          if (v.assignmentType === 'all') return true;
+          if (v.assignmentType === 'first-time') return true;
+          if (v.assignmentType === 'specific' && v.assignedTo) {
+             const allowed = Array.isArray(v.assignedTo) ? v.assignedTo : [v.assignedTo];
+             if (allowed.includes(currentStudentEmail)) return true;
+          }
+          return false;
+        })
+        .map((v) => ({
+          code: v.code,
+          type: v.type,
+          value:
+            v.type === "percent" ? v.value + "% OFF" : "₱" + v.value + " OFF",
+          desc: v.desc,
+          vendor: v.vendor,
+          expiry: v.expiry,
+        }));
+
+      // Merge both lists (only show static if they are in claimedCodes, or just show them always)
+      // For this prototype, static ones are always claimed by default.
+      const allVouchers = [
+        ...staticVouchers.filter((v) => claimedCodes.includes(v.code)),
+        ...vendorVouchers,
+      ];
+
+      if (allVouchers.length === 0) {
+        grid.innerHTML =
+          '<div style="grid-column: 1/-1; text-align:center; padding:60px; color:#64748b; background:white; border-radius:20px; border:1px dashed #cbd5e1;">No vouchers claimed yet. Try redeeming a code!</div>';
+        return;
       }
 
-      function getClaimedCodes() {
-        return JSON.parse(localStorage.getItem(CLAIMED_KEY)) || [];
-      }
-
-      function renderVouchers() {
-        const grid = document.getElementById("vouchersGrid");
-        const claimedCodes = getClaimedCodes();
-
-        // 1. Static platform-wide vouchers
-        const staticVouchers = [
-          {
-            code: "WMSU50",
-            type: "fixed",
-            value: "₱50 OFF",
-            desc: "Valid on all orders above ₱150. Limited time offer.",
-            vendor: "WM EAT SU",
-          },
-          {
-            code: "SAVE10",
-            type: "percent",
-            value: "10% OFF",
-            desc: "Get 10% discount on your entire cart. No minimum spend.",
-            vendor: "WM EAT SU",
-          },
-          {
-            code: "WELCOME",
-            type: "fixed",
-            value: "₱20 OFF",
-            desc: "A special gift for our new student foodies! Min. spend ₱50.",
-            vendor: "WM EAT SU",
-          },
-        ];
-
-        // 2. Vendor-generated vouchers from localStorage (filtered by claimed)
-        const vendorVouchersRaw =
-          JSON.parse(localStorage.getItem("wm_eat_su_vendor_vouchers")) || [];
-        const vendorVouchers = vendorVouchersRaw
-          .filter((v) => claimedCodes.includes(v.code))
-          .map((v) => ({
-            code: v.code,
-            type: v.type,
-            value:
-              v.type === "percent" ? v.value + "% OFF" : "₱" + v.value + " OFF",
-            desc: v.desc,
-            vendor: v.vendor,
-            expiry: v.expiry,
-          }));
-
-        // Merge both lists (only show static if they are in claimedCodes, or just show them always)
-        // For this prototype, static ones are always claimed by default.
-        const allVouchers = [
-          ...staticVouchers.filter((v) => claimedCodes.includes(v.code)),
-          ...vendorVouchers,
-        ];
-
-        if (allVouchers.length === 0) {
-          grid.innerHTML =
-            '<div style="grid-column: 1/-1; text-align:center; padding:60px; color:#64748b; background:white; border-radius:20px; border:1px dashed #cbd5e1;">No vouchers claimed yet. Try redeeming a code!</div>';
-          return;
-        }
-
-        grid.innerHTML = allVouchers
-          .map(
-            (v) => `
+      grid.innerHTML = allVouchers
+        .map(
+          (v) => `
         <div class="voucher-card ${v.type}">
           <div class="voucher-icon">
             <i class="fa-solid ${v.type === "percent" ? "fa-percent" : "fa-ticket"}"></i>
@@ -372,57 +346,59 @@
           </div>
         </div>
       `,
-          )
-          .join("");
+        )
+        .join("");
+    }
+
+    function redeemVoucher() {
+      const input = document.getElementById("redeemInput");
+      const code = input.value.trim().toUpperCase();
+      const currentStudentEmail = "vaughn.student@wm.edu.ph"; // Mock current user identity
+
+      if (!code) return;
+
+      const vendorVouchers =
+        JSON.parse(localStorage.getItem("wm_eat_su_vendor_vouchers")) || [];
+      const platformCodes = ["WMSU50", "SAVE10", "WELCOME"];
+      const claimed = getClaimedCodes();
+
+      if (claimed.includes(code)) {
+        showToast("info", "fa-circle-info", "You already have this voucher!");
+        return;
       }
 
-      function redeemVoucher() {
-        const input = document.getElementById("redeemInput");
-        const code = input.value.trim().toUpperCase();
-        const currentStudentEmail = "vaughn.student@wm.edu.ph"; // Mock current user identity
+      // Check if it's a platform code or a vendor code
+      const vendorPromo = vendorVouchers.find((v) => v.code === code);
+      const isPlatform = platformCodes.includes(code);
 
-        if (!code) return;
-
-        const vendorVouchers =
-          JSON.parse(localStorage.getItem("wm_eat_su_vendor_vouchers")) || [];
-        const platformCodes = ["WMSU50", "SAVE10", "WELCOME"];
-        const claimed = getClaimedCodes();
-
-        if (claimed.includes(code)) {
-          showToast("info", "fa-circle-info", "You already have this voucher!");
-          return;
+      if (isPlatform) {
+        claimed.push(code);
+        localStorage.setItem(CLAIMED_KEY, JSON.stringify(claimed));
+        renderVouchers();
+        showToast("success", "fa-gift", `Successfully redeemed ${code}!`);
+        input.value = "";
+      } else if (vendorPromo) {
+        // CHECK EXPIRY
+        if (vendorPromo.expiry) {
+          const exp = new Date(vendorPromo.expiry);
+          exp.setHours(23, 59, 59, 999);
+          if (new Date() > exp) {
+            showToast(
+              "error",
+              "fa-calendar-xmark",
+              "This voucher has already expired.",
+            );
+            return;
+          }
         }
 
-        // Check if it's a platform code or a vendor code
-        const vendorPromo = vendorVouchers.find((v) => v.code === code);
-        const isPlatform = platformCodes.includes(code);
+        // CHECK ASSIGNMENT
+        if (vendorPromo.assignmentType === "specific" && vendorPromo.assignedTo) {
+          const allowed = Array.isArray(vendorPromo.assignedTo)
+            ? vendorPromo.assignedTo
+            : [vendorPromo.assignedTo];
 
-        if (isPlatform) {
-          claimed.push(code);
-          localStorage.setItem(CLAIMED_KEY, JSON.stringify(claimed));
-          renderVouchers();
-          showToast("success", "fa-gift", `Successfully redeemed ${code}!`);
-          input.value = "";
-        } else if (vendorPromo) {
-          // CHECK EXPIRY
-          if (vendorPromo.expiry) {
-            const exp = new Date(vendorPromo.expiry);
-            exp.setHours(23, 59, 59, 999);
-            if (new Date() > exp) {
-              showToast(
-                "error",
-                "fa-calendar-xmark",
-                "This voucher has already expired.",
-              );
-              return;
-            }
-          }
-
-          // CHECK ASSIGNMENT
-          if (
-            vendorPromo.assignedTo &&
-            vendorPromo.assignedTo !== currentStudentEmail
-          ) {
+          if (!allowed.includes(currentStudentEmail)) {
             showToast(
               "error",
               "fa-user-lock",
@@ -430,46 +406,63 @@
             );
             return;
           }
-
-          claimed.push(code);
-          localStorage.setItem(CLAIMED_KEY, JSON.stringify(claimed));
-          renderVouchers();
-          showToast("success", "fa-gift", `Successfully redeemed ${code}!`);
-          input.value = "";
-
-          // Pulse animation
-          setTimeout(() => {
-            const cards = document.querySelectorAll(".voucher-card");
-            const newCard = Array.from(cards).find(
-              (c) => c.querySelector(".voucher-code").textContent === code,
+        } else if (vendorPromo.assignmentType === "first-time") {
+          const orders = typeof getOrders === "function" ? getOrders() : [];
+          const hasOrderedBefore = orders.some(
+            (o) =>
+              o.vendor === vendorPromo.vendor &&
+              o.status !== "cancelled" &&
+              o.status !== "failed",
+          );
+          if (hasOrderedBefore) {
+            showToast(
+              "error",
+              "fa-user-clock",
+              `This voucher is for first-time customers only.`,
             );
-            if (newCard) newCard.style.animation = "redeemPulse 1s ease";
-          }, 100);
-        } else {
-          showToast("error", "fa-circle-xmark", "Invalid voucher code.");
+            return;
+          }
         }
+
+        claimed.push(code);
+        localStorage.setItem(CLAIMED_KEY, JSON.stringify(claimed));
+        renderVouchers();
+        showToast("success", "fa-gift", `Successfully redeemed ${code}!`);
+        input.value = "";
+
+        // Pulse animation
+        setTimeout(() => {
+          const cards = document.querySelectorAll(".voucher-card");
+          const newCard = Array.from(cards).find(
+            (c) => c.querySelector(".voucher-code").textContent === code,
+          );
+          if (newCard) newCard.style.animation = "redeemPulse 1s ease";
+        }, 100);
+      } else {
+        showToast("error", "fa-circle-xmark", "Invalid voucher code.");
       }
+    }
 
-      function copyCode(code, btn) {
-        navigator.clipboard.writeText(code).then(() => {
-          const icon = btn.querySelector("i");
-          icon.className = "fa-solid fa-check";
-          btn.classList.add("copied");
+    function copyCode(code, btn) {
+      navigator.clipboard.writeText(code).then(() => {
+        const icon = btn.querySelector("i");
+        icon.className = "fa-solid fa-check";
+        btn.classList.add("copied");
 
-          showToast("success", "fa-check", `Code ${code} copied to clipboard!`);
+        showToast("success", "fa-check", `Code ${code} copied to clipboard!`);
 
-          setTimeout(() => {
-            icon.className = "fa-regular fa-copy";
-            btn.classList.remove("copied");
-          }, 2000);
-        });
-      }
+        setTimeout(() => {
+          icon.className = "fa-regular fa-copy";
+          btn.classList.remove("copied");
+        }, 2000);
+      });
+    }
 
-      function showToast(type, icon, msg) {
-        const container = document.getElementById("toast-container");
-        const toast = document.createElement("div");
-        toast.className = `toast ${type}`;
-        toast.style.cssText = `
+    function showToast(type, icon, msg) {
+      const container = document.getElementById("toast-container");
+      const toast = document.createElement("div");
+      toast.className = `toast ${type}`;
+      toast.style.cssText = `
         position: fixed;
         bottom: 24px;
         right: 24px;
@@ -485,22 +478,22 @@
         animation: slideIn 0.3s ease forwards;
       `;
 
-        toast.innerHTML = `
+      toast.innerHTML = `
         <i class="fa-solid ${icon}" style="color: ${type === "success" ? "#10b981" : "#ef4444"}"></i>
         <span style="font-weight: 600; font-size: 14px; color: #1e293b;">${msg}</span>
       `;
 
-        container.appendChild(toast);
+      container.appendChild(toast);
 
-        setTimeout(() => {
-          toast.style.animation = "slideOut 0.3s ease forwards";
-          setTimeout(() => toast.remove(), 300);
-        }, 3000);
-      }
+      setTimeout(() => {
+        toast.style.animation = "slideOut 0.3s ease forwards";
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
 
-      // Add animations to style tag
-      const animStyle = document.createElement("style");
-      animStyle.textContent = `
+    // Add animations to style tag
+    const animStyle = document.createElement("style");
+    animStyle.textContent = `
       @keyframes slideIn {
         from { transform: translateX(100%); opacity: 0; }
         to { transform: translateX(0); opacity: 1; }
@@ -515,7 +508,8 @@
         100% { transform: scale(1); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); }
       }
     `;
-      document.head.appendChild(animStyle);
-    </script>
-  </body>
+    document.head.appendChild(animStyle);
+  </script>
+</body>
+
 </html>

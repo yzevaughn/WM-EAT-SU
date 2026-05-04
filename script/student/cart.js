@@ -54,13 +54,26 @@ function validatePromoCode(code, total = 0, itemCount = 0) {
       return { error: `Minimum purchase of ₱${vendorPromo.minPurchase} required.` };
     }
     // 1. Check assignment restriction
-    if (vendorPromo.assignedTo) {
+    if (vendorPromo.assignmentType === "specific" && vendorPromo.assignedTo) {
       const allowed = Array.isArray(vendorPromo.assignedTo)
         ? vendorPromo.assignedTo
         : vendorPromo.assignedTo.split(",").map((e) => e.trim());
 
       if (!allowed.includes(currentStudentEmail)) {
         return null;
+      }
+    } else if (vendorPromo.assignmentType === "first-time") {
+      const orders = getOrders();
+      const hasOrderedBefore = orders.some(
+        (o) =>
+          o.vendor === vendorPromo.vendor &&
+          o.status !== "cancelled" &&
+          o.status !== "failed",
+      );
+      if (hasOrderedBefore) {
+        return {
+          error: "This voucher is only for first-time customers of this shop.",
+        };
       }
     }
 
