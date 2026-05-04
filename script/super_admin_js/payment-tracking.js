@@ -85,17 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td class="fee-val">${item.fee}</td>
                 <td class="due-date ${item.dueDateStatus}">${item.due}</td>
                 <td><span class="status-badge ${item.statusClass}">${item.status}</span></td>
-                <td>
-                    <div class="progress-cell">
-                        <span class="progress-text">${item.progressText}</span>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" style="width: ${item.progress}%; background: ${item.progressColor}"></div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <button class="action-btn ${item.actionClass}">${item.action}</button>
-                </td>
             </tr>
         `).join('');
     }

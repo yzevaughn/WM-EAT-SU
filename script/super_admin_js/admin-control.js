@@ -5,57 +5,59 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     renderAdminAccounts();
+    renderBannedAccounts();
+    renderPermissionAdminList();
 });
 
 const adminData = [
     {
         id: 1,
-        name: "Maria ...",
-        email: "maria@campusbite.edu",
-        role: "Canteen Admin",
+        name: "admin1",
+        email: "admin1@campusbite.edu",
+        role: "Admin",
         status: "Active",
         lastLogin: "Today 08:30",
-        initials: "MS",
+        initials: "A1",
         avatarClass: "av-ms"
     },
     {
         id: 2,
-        name: "Juan R...",
-        email: "juan@campusbite.edu",
-        role: "Finance Admin",
+        name: "admin2",
+        email: "admin2@campusbite.edu",
+        role: "Admin",
         status: "Active",
         lastLogin: "Today 07:55",
-        initials: "JR",
+        initials: "A2",
         avatarClass: "av-jr"
     },
     {
         id: 3,
-        name: "Ana D...",
-        email: "ana@campusbite.edu",
-        role: "App Reviewer",
+        name: "admin3",
+        email: "admin3@campusbite.edu",
+        role: "Admin",
         status: "Suspended",
         lastLogin: "Apr 28 14:20",
-        initials: "AD",
+        initials: "A3",
         avatarClass: "av-ad"
     },
     {
         id: 4,
-        name: "Ben T...",
-        email: "ben@campusbite.edu",
-        role: "Menu Admin",
+        name: "admin4",
+        email: "admin4@campusbite.edu",
+        role: "Admin",
         status: "Banned",
         lastLogin: "Apr 15 09:10",
-        initials: "BT",
+        initials: "A4",
         avatarClass: "av-bt"
     },
     {
         id: 5,
-        name: "Lea G...",
-        email: "lea@campusbite.edu",
-        role: "Support Admin",
+        name: "admin5",
+        email: "admin5@campusbite.edu",
+        role: "Admin",
         status: "Inactive",
         lastLogin: "Never",
-        initials: "LG",
+        initials: "A5",
         avatarClass: "av-lg"
     }
 ];
@@ -64,7 +66,9 @@ function renderAdminAccounts() {
     const tableBody = document.getElementById('adminTableBody');
     if (!tableBody) return;
 
-    tableBody.innerHTML = adminData.map(admin => `
+    const activeAdmins = adminData.filter(a => a.status === 'Active');
+
+    tableBody.innerHTML = activeAdmins.map(admin => `
         <tr>
             <td>
                 <div class="user-cell">
@@ -80,46 +84,145 @@ function renderAdminAccounts() {
             <td><span class="login-time">${admin.lastLogin}</span></td>
             <td>
                 <div class="action-group">
-                    ${getActionButtons(admin.status)}
+                    ${getActionButtons(admin.status, admin.id)}
                 </div>
             </td>
         </tr>
     `).join('');
 }
 
-function getActionButtons(status) {
-    switch (status) {
-        case 'Active':
-            return `
-                <button class="btn-action" onclick="handleEdit()">Edit</button>
-                <button class="btn-action warning" onclick="handleSuspend()">Suspend</button>
-            `;
-        case 'Suspended':
-            return `
-                <button class="btn-action success" onclick="handleRestore()">Restore</button>
-                <button class="btn-action danger" onclick="handleBan()">Ban</button>
-            `;
-        case 'Banned':
-            return `
-                <button class="btn-action success" onclick="handleRestore()">Restore</button>
-                <button class="btn-action" onclick="handleView()">View</button>
-            `;
-        case 'Inactive':
-            return `
-                <button class="btn-action" onclick="handleEdit()">Edit</button>
-                <button class="btn-action danger" onclick="handleDelete()">Delete</button>
-            `;
-        default:
-            return `<button class="btn-action">Action</button>`;
+function renderBannedAccounts() {
+    const bannedBody = document.getElementById('bannedTableBody');
+    if (!bannedBody) return;
+
+    const inactiveAdmins = adminData.filter(a => a.status !== 'Active');
+
+    bannedBody.innerHTML = inactiveAdmins.map(admin => `
+        <tr>
+            <td>
+            <div class="account-status-cell">
+                <div class="avatar-circle ${admin.avatarClass}">${admin.initials}</div>
+                <div class="account-info-text">
+                <h4>${admin.name}</h4>
+                <div class="role-status-row">
+                    <span class="account-role">${admin.role}</span>
+                    <span class="status-pill inactive">${admin.status}</span>
+                </div>
+                </div>
+            </div>
+            </td>
+            <td><span class="reason-text">${admin.reason || 'Manual Deactivation'}</span></td>
+            <td><span class="date-text">${admin.deactivatedDate || 'Recently'}</span></td>
+            <td>
+                <div class="action-group">
+                    ${getActionButtons(admin.status, admin.id)}
+                </div>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function getActionButtons(status, adminId) {
+    if (status === 'Active') {
+        return `<button class="btn-action danger" onclick="promptDeactivate(${adminId})">Inactive</button>`;
+    } else {
+        return `<button class="btn-action success" onclick="reactivateAdmin(${adminId})">Active</button>`;
     }
 }
 
-// Placeholder functions for actions
-function handleEdit() { alert('Edit admin flow...'); }
-function handleSuspend() { alert('Suspend account flow...'); }
-function handleRestore() { alert('Restore account flow...'); }
-function handleBan() { alert('Ban account flow...'); }
-function handleView() { alert('View details flow...'); }
-function handleDelete() { alert('Delete account flow...'); }
+// Workflow functions
+function promptDeactivate(adminId) {
+    const modal = document.getElementById('deactivateModal');
+    if (modal) {
+        document.getElementById('deactivateAdminId').value = adminId;
+        document.getElementById('deactivateReason').value = '';
+        modal.style.display = 'flex';
+    }
+}
+
+function confirmDeactivate() {
+    const adminId = parseInt(document.getElementById('deactivateAdminId').value);
+    const reason = document.getElementById('deactivateReason').value;
+    
+    if (!reason.trim()) {
+        alert('Please provide a reason for deactivation.');
+        return;
+    }
+
+    const admin = adminData.find(a => a.id === adminId);
+    if (admin) {
+        admin.status = 'Inactive';
+        admin.reason = reason;
+        
+        const today = new Date();
+        const options = { month: 'short', day: 'numeric', year: 'numeric' };
+        admin.deactivatedDate = today.toLocaleDateString('en-US', options);
+
+        renderAdminAccounts();
+        renderBannedAccounts();
+        closeDeactivateModal();
+    }
+}
+
+function closeDeactivateModal() {
+    const modal = document.getElementById('deactivateModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+function reactivateAdmin(adminId) {
+    const admin = adminData.find(a => a.id === adminId);
+    if (admin) {
+        admin.status = 'Active';
+        admin.reason = '';
+        admin.deactivatedDate = '';
+        renderAdminAccounts();
+        renderBannedAccounts();
+    }
+}
+
 function openCreateAdminModal() { alert('Opening Create Admin Modal...'); }
-function handleSavePermissions() { alert('Permissions saved successfully!'); }
+
+function renderPermissionAdminList() {
+    const adminList = document.querySelector('.admin-list');
+    if (!adminList) return;
+
+    adminList.innerHTML = adminData.slice(0, 4).map((admin, index) => `
+        <div class="admin-item" data-id="${admin.id}" onclick="openPermissionModal('${admin.name}', '${admin.email}')">
+            <div class="admin-item-info">
+                <span class="status-dot ${admin.status.toLowerCase()}"></span>
+                <div class="admin-item-text">
+                    <h4>${admin.name}</h4>
+                    <p>${admin.email}</p>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function openPermissionModal(adminName, adminEmail) {
+    const modal = document.getElementById('permissionModal');
+    const nameDisplay = document.getElementById('modalAdminName');
+    const emailDisplay = document.getElementById('modalAdminEmail');
+    if (modal && nameDisplay) {
+        nameDisplay.textContent = `${adminName} — Permissions`;
+        if (emailDisplay) emailDisplay.textContent = adminEmail;
+        modal.style.display = 'flex';
+    }
+}
+
+function closePermissionModal() {
+    const modal = document.getElementById('permissionModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Close modal when clicking outside
+window.addEventListener('click', (e) => {
+    const modal = document.getElementById('permissionModal');
+    if (e.target === modal) {
+        closePermissionModal();
+    }
+});

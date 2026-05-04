@@ -202,7 +202,6 @@
               <h1>Permission Control</h1>
               <p>Control feature access for each admin account</p>
             </div>
-            <button class="btn-save" onclick="handleSavePermissions()">Save Changes</button>
           </div>
 
           <div class="permission-grid">
@@ -215,7 +214,7 @@
                   <div class="admin-item-info">
                     <span class="status-dot active"></span>
                     <div class="admin-item-text">
-                      <h4>Maria Santos</h4>
+                      <h4>admin1</h4>
                       <p>Canteen Admin</p>
                     </div>
                   </div>
@@ -225,7 +224,7 @@
                   <div class="admin-item-info">
                     <span class="status-dot active"></span>
                     <div class="admin-item-text">
-                      <h4>Juan Reyes</h4>
+                      <h4>admin2</h4>
                       <p>Finance Admin</p>
                     </div>
                   </div>
@@ -234,7 +233,7 @@
                   <div class="admin-item-info">
                     <span class="status-dot suspended"></span>
                     <div class="admin-item-text">
-                      <h4>Ana Dela Cruz</h4>
+                      <h4>admin3</h4>
                       <p>App Reviewer</p>
                     </div>
                   </div>
@@ -243,7 +242,7 @@
                   <div class="admin-item-info">
                     <span class="status-dot inactive"></span>
                     <div class="admin-item-text">
-                      <h4>Lea Gomez</h4>
+                      <h4>admin4</h4>
                       <p>Support Admin</p>
                     </div>
                   </div>
@@ -272,62 +271,137 @@
                 </tr>
               </thead>
               <tbody id="bannedTableBody">
-                <tr>
-                  <td>
-                    <div class="account-status-cell">
-                      <div class="avatar-circle av-bt">BT</div>
-                      <div class="account-info-text">
-                        <h4>Be...</h4>
-                        <div class="role-status-row">
-                          <span class="account-role">Menu Admin</span>
-                          <span class="status-pill banned">Banned</span>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td><span class="reason-text">Policy violation</span></td>
-                  <td><span class="date-text">May 4, 2026</span></td>
-                  <td><button class="btn-action success">Restore</button></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="account-status-cell">
-                      <div class="avatar-circle av-ad">SK</div>
-                      <div class="account-info-text">
-                        <h4>Sa...</h4>
-                        <div class="role-status-row">
-                          <span class="account-role">Student Vendor</span>
-                          <span class="status-pill banned">Banned</span>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td><span class="reason-text">Fraud reported</span></td>
-                  <td><span class="date-text">Apr 22, 2026</span></td>
-                  <td><button class="btn-action">Review</button></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="account-status-cell">
-                      <div class="avatar-circle av-lg">RP</div>
-                      <div class="account-info-text">
-                        <h4>Ro...</h4>
-                        <div class="role-status-row">
-                          <span class="account-role">Canteen C Operator</span>
-                          <span class="status-pill suspended">Deactivated</span>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td><span class="reason-text">Non-payment x3</span></td>
-                  <td><span class="date-text">Apr 10, 2026</span></td>
-                  <td><button class="btn-action success">Restore</button></td>
-                </tr>
+                <!-- Dynamically populated by JS -->
               </tbody>
             </table>
           </div>
         </div>
       </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+         MODALS
+         ════════════════════════════════════════ -->
+  <div id="permissionModal" class="modal-overlay">
+    <div class="permission-modal">
+      <div class="modal-header">
+        <div class="modal-header-titles">
+          <h2 id="modalAdminName">Admin — Permissions</h2>
+          <p id="modalAdminEmail" class="modal-email">admin@example.com</p>
+        </div>
+        <button class="close-modal" onclick="closePermissionModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="permissions-grid-modal">
+          <!-- Left Column -->
+          <div class="perm-item">
+            <label class="switch">
+              <input type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
+            <span>View Dashboard</span>
+          </div>
+          <div class="perm-item">
+            <label class="switch">
+              <input type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
+            <span>Menu Management</span>
+          </div>
+          <div class="perm-item">
+            <label class="switch">
+              <input type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
+            <span>Canteen Apps</span>
+          </div>
+          <div class="perm-item">
+            <label class="switch">
+              <input type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
+            <span>Complaints</span>
+          </div>
+          <div class="perm-item">
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+            <span>Admin Accounts</span>
+          </div>
+          <div class="perm-item">
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+            <span>Audit Logs</span>
+          </div>
+          <div class="perm-item">
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+            <span>Payment Tracking</span>
+          </div>
+          <div class="perm-item">
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+            <span>Ban / Suspend</span>
+          </div>
+          <div class="perm-item">
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+            <span>Permissions Ctrl</span>
+          </div>
+          <div class="perm-item">
+            <label class="switch">
+              <input type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
+            <span>Student Apps</span>
+          </div>
+          <div class="perm-item">
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+            <span>Top Earners</span>
+          </div>
+          <div class="perm-item">
+            <label class="switch">
+              <input type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
+            <span>View Reports</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="deactivateModal" class="modal-overlay">
+    <div class="deactivate-modal">
+      <div class="modal-header">
+        <h2>Deactivate Admin</h2>
+        <button class="close-modal" onclick="closeDeactivateModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="warning-text">Are you sure you want to deactivate this admin account? They will lose all access immediately.</p>
+        <input type="hidden" id="deactivateAdminId">
+        <div class="input-group">
+          <label for="deactivateReason">Reason for Deactivation</label>
+          <textarea id="deactivateReason" rows="3" placeholder="Please provide a specific reason..." required></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" onclick="closeDeactivateModal()">Cancel</button>
+        <button class="btn-confirm-danger" onclick="confirmDeactivate()">Deactivate</button>
       </div>
     </div>
   </div>
