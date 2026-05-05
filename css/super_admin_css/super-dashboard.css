@@ -287,10 +287,42 @@ p.subtitle {
   text-align: center;
 }
 
-.status-overdue { color: var(--color-red); background: rgba(220, 38, 38, 0.1); }
-.status-warning { color: var(--color-orange); background: rgba(234, 88, 12, 0.1); }
-.status-ok      { color: var(--color-green); background: rgba(22, 163, 74, 0.1); }
-.status-paid    { color: var(--text-muted); background: #f7fafc; }
+.status-clear { color: var(--color-green); background: rgba(22, 163, 74, 0.1); }
+.status-unclear { color: var(--color-red); background: rgba(220, 38, 38, 0.1); }
+
+.payment-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-status-toggle {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  padding: 6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-status-toggle:hover {
+  background: var(--color-blue);
+  color: white;
+  border-color: var(--color-blue);
+}
+
+.payment-details {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 100px 80px 40px;
+  align-items: center;
+  gap: 16px;
+}
 
 /* Quick Action Cards */
 .action-grid {

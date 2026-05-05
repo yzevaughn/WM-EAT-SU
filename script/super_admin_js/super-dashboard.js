@@ -9,85 +9,92 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     // Payment Due Tracking Data
-    const payments = [
+    let payments = [
         { 
+            id: 1,
             name: "Canteen D - Engineering", 
             due: "Due Apr 30 · OVERDUE", 
             amount: "₱5,000", 
             progress: 100, 
-            status: "overdue",
+            status: "unclear",
             color: "var(--color-red)" 
         },
         { 
+            id: 2,
             name: "Canteen A - Main", 
             due: "Due May 05 · 1 day left", 
             amount: "₱7,500", 
             progress: 80, 
-            status: "warning",
+            status: "unclear",
             color: "var(--color-orange)" 
         },
         { 
+            id: 3,
             name: "Canteen B - Annex", 
             due: "Due May 07 · 3 days left", 
             amount: "₱6,000", 
             progress: 80, 
-            status: "warning",
+            status: "unclear",
             color: "var(--color-orange)" 
         },
         { 
+            id: 4,
             name: "Canteen C - Science", 
             due: "Due May 15 · 11 days left", 
             amount: "₱4,500", 
             progress: 30, 
-            status: "ok",
+            status: "unclear",
             color: "var(--color-green)" 
         },
         { 
+            id: 5,
             name: "Canteen E - Arts", 
             due: "Paid May 01 ✓", 
-            amount: "Paid", 
+            amount: "₱3,200", 
             progress: 0, 
-            status: "paid",
+            status: "clear",
             color: "var(--text-muted)" 
         }
     ];
 
-    // Render Earning List
-    const earningList = document.getElementById('earning-list');
-    if (earningList) {
-        earningList.innerHTML = earnings.map(item => `
-            <div class="earning-item">
-                <span class="rank">${item.rank}</span>
-                <div class="earning-info">
-                    <span class="earning-name">${item.name}</span>
-                    <div class="progress-container">
-                        <div class="progress-bar" style="width: ${item.progress}%; background: ${item.color}"></div>
-                    </div>
-                </div>
-                <span class="amount">${item.amount}</span>
-            </div>
-        `).join('');
-    }
-
     // Render Payment List
-    const paymentList = document.getElementById('payment-list');
-    if (paymentList) {
+    function renderPaymentList() {
+        const paymentList = document.getElementById('payment-list');
+        if (!paymentList) return;
+
         paymentList.innerHTML = payments.map(item => `
             <div class="payment-item">
-                <div class="status-dot" style="background: ${item.color}"></div>
+                <div class="status-dot" style="background: ${item.status === 'clear' ? 'var(--color-green)' : 'var(--color-red)'}"></div>
                 <div class="payment-details">
                     <div class="payment-info">
                         <span class="payment-name">${item.name}</span>
                         <span class="payment-due">${item.due}</span>
                     </div>
                     <div class="due-bar-container">
-                        <div class="due-bar" style="width: ${item.progress}%; background: ${item.color}"></div>
+                        <div class="due-bar" style="width: ${item.progress}%; background: ${item.status === 'clear' ? 'var(--color-green)' : 'var(--color-red)'}"></div>
                     </div>
                     <span class="payment-badge status-${item.status}">
-                        ${item.amount}
+                        ${item.status.toUpperCase()}
                     </span>
+                    <div class="payment-actions">
+                        <button class="btn-status-toggle" onclick="togglePaymentStatus(${item.id})">
+                            <i class="fa-solid fa-rotate"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         `).join('');
     }
+
+    // Toggle Payment Status
+    window.togglePaymentStatus = (id) => {
+        const payment = payments.find(p => p.id === id);
+        if (payment) {
+            payment.status = payment.status === 'clear' ? 'unclear' : 'clear';
+            renderPaymentList();
+        }
+    };
+
+    // Initial Renders
+    renderPaymentList();
 });

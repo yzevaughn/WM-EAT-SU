@@ -5,7 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     renderAdminAccounts();
-    renderBannedAccounts();
+    renderDeactivatedAccounts();
     renderPermissionAdminList();
 });
 
@@ -35,30 +35,10 @@ const adminData = [
         name: "admin3",
         email: "admin3@campusbite.edu",
         role: "Admin",
-        status: "Suspended",
+        status: "Deactivated",
         lastLogin: "Apr 28 14:20",
         initials: "A3",
         avatarClass: "av-ad"
-    },
-    {
-        id: 4,
-        name: "admin4",
-        email: "admin4@campusbite.edu",
-        role: "Admin",
-        status: "Banned",
-        lastLogin: "Apr 15 09:10",
-        initials: "A4",
-        avatarClass: "av-bt"
-    },
-    {
-        id: 5,
-        name: "admin5",
-        email: "admin5@campusbite.edu",
-        role: "Admin",
-        status: "Inactive",
-        lastLogin: "Never",
-        initials: "A5",
-        avatarClass: "av-lg"
     }
 ];
 
@@ -72,14 +52,12 @@ function renderAdminAccounts() {
         <tr>
             <td>
                 <div class="user-cell">
-                    <div class="avatar-circle ${admin.avatarClass}">${admin.initials}</div>
+                    <img src="../../images/pfp.jpg" class="admin-avatar-img" alt="Admin">
                     <div class="user-details">
                         <h4>${admin.name}</h4>
-                        <p>${admin.email}</p>
                     </div>
                 </div>
             </td>
-            <td><span class="role-badge">${admin.role}</span></td>
             <td><span class="status-pill ${admin.status.toLowerCase()}">${admin.status}</span></td>
             <td><span class="login-time">${admin.lastLogin}</span></td>
             <td>
@@ -101,17 +79,44 @@ function renderBannedAccounts() {
         <tr>
             <td>
             <div class="account-status-cell">
-                <div class="avatar-circle ${admin.avatarClass}">${admin.initials}</div>
+                <img src="../../images/pfp.jpg" class="admin-avatar-img" alt="Admin">
                 <div class="account-info-text">
                 <h4>${admin.name}</h4>
                 <div class="role-status-row">
-                    <span class="account-role">${admin.role}</span>
                     <span class="status-pill inactive">${admin.status}</span>
                 </div>
                 </div>
             </div>
             </td>
-            <td><span class="reason-text">${admin.reason || 'Manual Deactivation'}</span></td>
+            <td><span class="date-text">${admin.deactivatedDate || 'Recently'}</span></td>
+            <td>
+                <div class="action-group">
+                    ${getActionButtons(admin.status, admin.id)}
+                </div>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function renderDeactivatedAccounts() {
+    const deactivatedBody = document.getElementById('deactivatedTableBody');
+    if (!deactivatedBody) return;
+
+    const inactiveAdmins = adminData.filter(a => a.status === 'Deactivated');
+
+    deactivatedBody.innerHTML = inactiveAdmins.map(admin => `
+        <tr>
+            <td>
+            <div class="account-status-cell">
+                <img src="../../images/pfp.jpg" class="admin-avatar-img sm" alt="Admin">
+                <div class="account-info-text">
+                <h4>${admin.name}</h4>
+                <div class="role-status-row">
+                    <span class="status-pill deactivated">${admin.status}</span>
+                </div>
+                </div>
+            </div>
+            </td>
             <td><span class="date-text">${admin.deactivatedDate || 'Recently'}</span></td>
             <td>
                 <div class="action-group">
@@ -124,9 +129,9 @@ function renderBannedAccounts() {
 
 function getActionButtons(status, adminId) {
     if (status === 'Active') {
-        return `<button class="btn-action danger" onclick="promptDeactivate(${adminId})">Inactive</button>`;
+        return `<button class="btn-action danger" onclick="promptDeactivate(${adminId})">Deactivate</button>`;
     } else {
-        return `<button class="btn-action success" onclick="reactivateAdmin(${adminId})">Active</button>`;
+        return `<button class="btn-action success" onclick="reactivateAdmin(${adminId})">Reactivate</button>`;
     }
 }
 
@@ -135,31 +140,23 @@ function promptDeactivate(adminId) {
     const modal = document.getElementById('deactivateModal');
     if (modal) {
         document.getElementById('deactivateAdminId').value = adminId;
-        document.getElementById('deactivateReason').value = '';
         modal.style.display = 'flex';
     }
 }
 
 function confirmDeactivate() {
     const adminId = parseInt(document.getElementById('deactivateAdminId').value);
-    const reason = document.getElementById('deactivateReason').value;
     
-    if (!reason.trim()) {
-        alert('Please provide a reason for deactivation.');
-        return;
-    }
-
     const admin = adminData.find(a => a.id === adminId);
     if (admin) {
-        admin.status = 'Inactive';
-        admin.reason = reason;
+        admin.status = 'Deactivated';
         
         const today = new Date();
         const options = { month: 'short', day: 'numeric', year: 'numeric' };
         admin.deactivatedDate = today.toLocaleDateString('en-US', options);
 
         renderAdminAccounts();
-        renderBannedAccounts();
+        renderDeactivatedAccounts();
         closeDeactivateModal();
     }
 }
@@ -178,23 +175,59 @@ function reactivateAdmin(adminId) {
         admin.reason = '';
         admin.deactivatedDate = '';
         renderAdminAccounts();
-        renderBannedAccounts();
+        renderDeactivatedAccounts();
     }
 }
 
-function openCreateAdminModal() { alert('Opening Create Admin Modal...'); }
+function openCreateAdminModal() {
+    const modal = document.getElementById('createAdminModal');
+    if (modal) modal.style.display = 'flex';
+}
+
+function closeCreateAdminModal() {
+    const modal = document.getElementById('createAdminModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.getElementById('createAdminForm').reset();
+    }
+}
+
+// Create Admin Form Submission
+document.getElementById('createAdminForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const username = document.getElementById('adminUsername').value;
+    
+    const newAdmin = {
+        id: adminData.length + 1,
+        name: username,
+        status: 'Active',
+        lastLogin: 'Never',
+        initials: username.slice(0, 2).toUpperCase(),
+        avatarClass: 'av-ms'
+    };
+    
+    adminData.push(newAdmin);
+    renderAdminAccounts();
+    renderPermissionAdminList();
+    closeCreateAdminModal();
+    alert(`New admin account created for ${username}`);
+});
 
 function renderPermissionAdminList() {
     const adminList = document.querySelector('.admin-list');
     if (!adminList) return;
 
-    adminList.innerHTML = adminData.slice(0, 4).map((admin, index) => `
+    const activeAdmins = adminData.filter(admin => admin.status === 'Active');
+
+    adminList.innerHTML = activeAdmins.map((admin, index) => `
         <div class="admin-item" data-id="${admin.id}" onclick="openPermissionModal('${admin.name}', '${admin.email}')">
             <div class="admin-item-info">
-                <span class="status-dot ${admin.status.toLowerCase()}"></span>
+                <img src="../../images/pfp.jpg" class="admin-avatar-img sm" alt="Admin">
                 <div class="admin-item-text">
-                    <h4>${admin.name}</h4>
-                    <p>${admin.email}</p>
+                    <div class="name-status-row">
+                        <h4>${admin.name}</h4>
+                        <span class="status-dot ${admin.status.toLowerCase()}"></span>
+                    </div>
                 </div>
             </div>
         </div>

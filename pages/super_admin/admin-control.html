@@ -130,13 +130,13 @@
         <li>
           <a href="student-applications.html" class="nav-link">
             <i class="fa-solid fa-user-check"></i>
-            <span>Student Apps</span>
+            <span>Student Application</span>
           </a>
         </li>
         <li>
           <a href="canteen-applications.html" class="nav-link">
             <i class="fa-solid fa-store"></i>
-            <span>Canteen Apps</span>
+            <span>Canteen Application</span>
           </a>
         </li>
         <li>
@@ -182,13 +182,12 @@
         <div class="admin-grid-container">
           <table class="admin-table">
             <thead>
-              <tr>
-                <th>Name / Email</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Last Login</th>
-                <th>Actions</th>
-              </tr>
+                <tr>
+                  <th>Administrator</th>
+                  <th>Account Status</th>
+                  <th>Last Login</th>
+                  <th>Actions</th>
+                </tr>
             </thead>
             <tbody id="adminTableBody">
               <!-- Dynamically populated by JS -->
@@ -215,7 +214,6 @@
                     <span class="status-dot active"></span>
                     <div class="admin-item-text">
                       <h4>admin1</h4>
-                      <p>Canteen Admin</p>
                     </div>
                   </div>
                   <span class="selected-badge">Selected</span>
@@ -225,7 +223,6 @@
                     <span class="status-dot active"></span>
                     <div class="admin-item-text">
                       <h4>admin2</h4>
-                      <p>Finance Admin</p>
                     </div>
                   </div>
                 </div>
@@ -252,30 +249,30 @@
           </div>
         </div>
 
-        <div class="banned-section">
+        <div class="deactivated-section">
           <div class="section-header">
             <div class="header-text">
-              <h1>Banned & Deactivated Accounts</h1>
-              <p>Accounts suspended, banned, or deactivated by Super Admin</p>
+              <h1>Deactivated Accounts</h1>
+              <p>Accounts that have been deactivated by Super Admin</p>
             </div>
           </div>
 
-          <div class="banned-grid-container">
-            <table class="banned-table">
+          <div class="deactivated-grid-container">
+            <table class="deactivated-table">
               <thead>
                 <tr>
                   <th>Account Status</th>
-                  <th>Reason</th>
                   <th>Date</th>
                   <th>Actions</th>
                 </tr>
               </thead>
-              <tbody id="bannedTableBody">
+              <tbody id="deactivatedTableBody">
                 <!-- Dynamically populated by JS -->
               </tbody>
             </table>
           </div>
         </div>
+
       </div>
       </div>
     </div>
@@ -295,14 +292,6 @@
       </div>
       <div class="modal-body">
         <div class="permissions-grid-modal">
-          <!-- Left Column -->
-          <div class="perm-item">
-            <label class="switch">
-              <input type="checkbox" checked>
-              <span class="slider round"></span>
-            </label>
-            <span>View Dashboard</span>
-          </div>
           <div class="perm-item">
             <label class="switch">
               <input type="checkbox" checked>
@@ -315,72 +304,65 @@
               <input type="checkbox" checked>
               <span class="slider round"></span>
             </label>
-            <span>Canteen Apps</span>
-          </div>
-          <div class="perm-item">
-            <label class="switch">
-              <input type="checkbox" checked>
-              <span class="slider round"></span>
-            </label>
             <span>Complaints</span>
           </div>
           <div class="perm-item">
             <label class="switch">
-              <input type="checkbox">
+              <input type="checkbox" checked>
               <span class="slider round"></span>
             </label>
-            <span>Admin Accounts</span>
-          </div>
-          <div class="perm-item">
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-            <span>Audit Logs</span>
-          </div>
-          <div class="perm-item">
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-            <span>Payment Tracking</span>
-          </div>
-          <div class="perm-item">
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-            <span>Ban / Suspend</span>
-          </div>
-          <div class="perm-item">
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-            <span>Permissions Ctrl</span>
+            <span>Student Application</span>
           </div>
           <div class="perm-item">
             <label class="switch">
               <input type="checkbox" checked>
               <span class="slider round"></span>
             </label>
-            <span>Student Apps</span>
-          </div>
-          <div class="perm-item">
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-            <span>Top Earners</span>
+            <span>Canteen Application</span>
           </div>
           <div class="perm-item">
             <label class="switch">
               <input type="checkbox" checked>
               <span class="slider round"></span>
             </label>
-            <span>View Reports</span>
+            <span>Analytics</span>
+          </div>
+          <div class="perm-item">
+            <label class="switch">
+              <input type="checkbox" checked>
+              <span class="slider round"></span>
+            </label>
+            <span>Voucher</span>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREATE ADMIN MODAL -->
+  <div id="createAdminModal" class="modal-overlay">
+    <div class="deactivate-modal"> <!-- Reusing modal style -->
+      <div class="modal-header">
+        <h2>Create New Admin</h2>
+        <button class="close-modal" onclick="closeCreateAdminModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="createAdminForm">
+          <div class="input-group">
+            <label for="adminUsername">Username</label>
+            <input type="text" id="adminUsername" placeholder="e.g. admin_jane" required>
+          </div>
+          <div class="input-group">
+            <label for="adminPassword">Password</label>
+            <div class="password-wrapper">
+              <input type="password" id="adminPassword" placeholder="••••••••" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn-cancel" onclick="closeCreateAdminModal()">Cancel</button>
+            <button type="submit" class="btn-confirm-success">Create Account</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -394,10 +376,6 @@
       <div class="modal-body">
         <p class="warning-text">Are you sure you want to deactivate this admin account? They will lose all access immediately.</p>
         <input type="hidden" id="deactivateAdminId">
-        <div class="input-group">
-          <label for="deactivateReason">Reason for Deactivation</label>
-          <textarea id="deactivateReason" rows="3" placeholder="Please provide a specific reason..." required></textarea>
-        </div>
       </div>
       <div class="modal-footer">
         <button class="btn-cancel" onclick="closeDeactivateModal()">Cancel</button>

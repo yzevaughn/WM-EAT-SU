@@ -694,6 +694,10 @@
             <label>Minimum Purchase (₱)</label>
             <input type="number" id="vMinPurchase" class="form-control" placeholder="e.g. 100 (Leave 0 for none)" />
           </div>
+          <div class="form-group">
+            <label>Usage Limit (Total Redeems)</label>
+            <input type="number" id="vUsageLimit" class="form-control" placeholder="e.g. 100 (Leave 0 for unlimited)" />
+          </div>
 
 
           <!-- VENDOR SCOPE -->
@@ -1021,6 +1025,10 @@
             <p>${v.desc}</p>
             <div style="display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap;">
                <span style="font-size: 10px; background: #f1f5f9; color: #475569; padding: 2px 6px; border-radius: 4px; font-weight: 600;"><i class="fa-solid fa-store"></i> ${v.targetVendor || 'All Canteens'}</span>
+              ${v.usageLimit && v.usageLimit > 0 
+                ? `<span style="font-size: 10px; background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 4px; font-weight: 600;"><i class="fa-solid fa-users"></i> Limit: ${v.redeemedCount || 0}/${v.usageLimit}</span>` 
+                : `<span style="font-size: 10px; background: #f1f5f9; color: #475569; padding: 2px 6px; border-radius: 4px; font-weight: 600;"><i class="fa-solid fa-infinity"></i> Unlimited</span>`
+              }
               ${!v.appliesTo || v.appliesTo === "all"
               ? `<span style="font-size: 10px; background: #f1f5f9; color: #475569; padding: 2px 6px; border-radius: 4px; font-weight: 600;"><i class="fa-solid fa-layer-group"></i> All Items</span>`
               : `<span style="font-size: 10px; background: #fef3c7; color: #92400e; padding: 2px 6px; border-radius: 4px; font-weight: 600;"><i class="fa-solid fa-utensils"></i> ${v.appliesTo.itemIds ? v.appliesTo.itemIds.length + " Items" : "1 Item"}</span>`
@@ -1205,6 +1213,7 @@
       const validFrom = document.getElementById("vValidFrom").value;
       const expiry = document.getElementById("vExpiry").value;
       const minPurchase = parseFloat(document.getElementById("vMinPurchase").value) || 0;
+      const usageLimit = parseInt(document.getElementById("vUsageLimit").value) || 0;
 
       customConfirm({
         title: "Generate Voucher",
@@ -1225,6 +1234,7 @@
           validFrom,
           expiry,
           minPurchase,
+          usageLimit,
         );
       });
     }
@@ -1239,6 +1249,7 @@
       validFrom,
       expiry,
       minPurchase,
+      usageLimit,
     ) {
       // Handle multiple emails
       let assignedTo = null;
@@ -1286,6 +1297,8 @@
         validFrom: validFrom || null,
         expiry: expiry || null,
         minPurchase: minPurchase || 0,
+        usageLimit: usageLimit || 0,
+        redeemedCount: 0,
         appliesTo,
         vendorScope: document.getElementById("vVendorScope").value,
         targetVendor: document.getElementById("vVendorScope").value === "specific" ? document.getElementById("vVendorId").value : "All Canteens",

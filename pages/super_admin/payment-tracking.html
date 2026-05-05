@@ -107,13 +107,13 @@
         <li>
           <a href="student-applications.html" class="nav-link">
             <i class="fa-solid fa-user-check"></i>
-            <span>Student Apps</span>
+            <span>Student Application</span>
           </a>
         </li>
         <li>
           <a href="canteen-applications.html" class="nav-link">
             <i class="fa-solid fa-store"></i>
-            <span>Canteen Apps</span>
+            <span>Canteen Application</span>
           </a>
         </li>
         <li>
@@ -146,65 +146,123 @@
     <div class="main-content">
       <header class="page-header">
         <div class="header-left">
-          <h1>Monthly Payment Tracking</h1>
+          <div class="header-title-row">
+            <h1>Monthly Payment Tracking</h1>
+          </div>
           <p>Track canteen monthly fee payments and due dates</p>
         </div>
         <div class="header-actions">
-          <button class="btn btn-secondary">
-            <i class="fa-solid fa-download"></i>
-            Export
-          </button>
-          <button class="btn btn-primary">
-            <i class="fa-solid fa-plus"></i>
-            Record Payment
+          <button class="btn-report"><i class="fa-solid fa-file-pdf"></i> Export PDF</button>
+          <button class="btn-report"><i class="fa-solid fa-file-csv"></i> Export CSV</button>
+          <button class="btn btn-primary" onclick="openPaymentModal()">
+            <i class="fa-solid fa-plus"></i> Record Payment
           </button>
         </div>
       </header>
 
-      <div class="metrics-grid">
-        <div class="metric-card">
-          <h4>Total Monthly Due</h4>
-          <h2>₱38.3K</h2>
-          <div class="trend">From 12 canteens</div>
-        </div>
-        <div class="metric-card">
-          <h4>Collected (May)</h4>
-          <h2 style="color: var(--color-green)">₱13.8K</h2>
-          <div class="trend up">
-            <i class="fa-solid fa-arrow-up"></i>
-            <span>36% collected</span>
-          </div>
-        </div>
-        <div class="metric-card">
-          <h4>Pending</h4>
-          <h2 style="color: var(--color-orange)">₱19.5K</h2>
-          <div class="trend">4 canteens pending</div>
-        </div>
-        <div class="metric-card">
-          <h4>Overdue</h4>
-          <h2 style="color: var(--color-red)">₱5,000</h2>
-          <div class="trend down">
-            <i class="fa-solid fa-flag"></i>
-            <span>1 canteen overdue</span>
-          </div>
-        </div>
-      </div>
 
       <div class="table-panel">
         <div class="table-responsive">
           <table>
             <thead>
               <tr>
-                <th>Canteen</th>
+                <th>Canteen / Vendor</th>
+                <th>Operator</th>
                 <th>Monthly Fee</th>
-                <th>Due Date</th>
-                <th>Status</th>
+                <th style="text-align: center;">Status</th>
+                <th style="text-align: center;">Actions</th>
               </tr>
             </thead>
             <tbody id="payment-table-body">
               <!-- JS will populate -->
             </tbody>
           </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECORD PAYMENT MODAL -->
+  <div class="payment-modal" id="paymentModal">
+    <div class="modal-overlay" onclick="closePaymentModal()"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Record Payment</h2>
+        <button class="close-btn" onclick="closePaymentModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="recordPaymentForm">
+          <div class="form-group">
+            <label>Canteen Name</label>
+            <select class="form-control" id="modalCanteenSelect">
+              <option value="">Select Canteen</option>
+              <option value="A">Canteen A - Main</option>
+              <option value="B">Canteen B - Annex</option>
+              <option value="C">Canteen C - Science</option>
+              <option value="D">Canteen D - Engineering</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Amount Paid (₱)</label>
+              <input type="number" class="form-control" placeholder="0.00" id="modalAmount">
+            </div>
+            <div class="form-group">
+              <label>Payment Method</label>
+              <select class="form-control" id="modalMethod">
+                <option value="GCash">GCash</option>
+                <option value="Cash">Cash</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Reference Number / Receipt ID</label>
+            <input type="text" class="form-control" placeholder="e.g. 1029384756">
+          </div>
+          <div class="form-group">
+            <label>Notes</label>
+            <textarea class="form-control" placeholder="Any additional notes..."></textarea>
+          </div>
+          <div class="form-group" style="margin-top: 16px;">
+            <label>Upload Receipt / Proof of Payment</label>
+            <div class="receipt-upload-area" id="receiptUploadArea" style="
+              border: 2px dashed var(--card-border);
+              border-radius: var(--radius-md);
+              padding: 24px;
+              text-align: center;
+              cursor: pointer;
+              transition: var(--transition);
+              background: #f8fafc;
+            " onclick="document.getElementById('receiptInput').click()">
+              <i class="fa-solid fa-cloud-upload-alt" style="font-size: 24px; color: var(--text-muted); margin-bottom: 8px;"></i>
+              <p style="font-size: 13px; color: var(--text-muted); margin: 0;">Click to upload or drag and drop receipt image</p>
+              <input type="file" id="receiptInput" style="display: none;" accept="image/*" onchange="previewReceipt(event)">
+              <div id="receiptPreview" style="margin-top: 12px; display: none;">
+                <img id="previewImg" src="" style="max-width: 100%; max-height: 150px; border-radius: 8px; box-shadow: var(--shadow-sm);">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer" style="margin-top: 24px; display: flex; gap: 12px;">
+            <button type="button" class="btn-secondary" style="flex: 1;" onclick="closePaymentModal()">Cancel</button>
+            <button type="submit" class="btn-primary" style="flex: 2;">Save Payment Record</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAYMENT HISTORY MODAL -->
+  <div class="payment-modal" id="historyModal">
+    <div class="modal-overlay" onclick="closeHistoryModal()"></div>
+    <div class="modal-content" style="max-width: 600px;">
+      <div class="modal-header">
+        <h2 id="historyTitle">Payment History</h2>
+        <button class="close-btn" onclick="closeHistoryModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="history-list" id="historyList">
+          <!-- Dynamic history items -->
         </div>
       </div>
     </div>
