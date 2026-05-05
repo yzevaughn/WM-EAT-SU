@@ -1,0 +1,2015 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WM EAT SU - Order History</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../../css/teacher-and-staff/dashboard.css" />
+    <link rel="stylesheet" href="../../css/navbar.css" />
+    <link rel="stylesheet" href="../../css/teacher-and-staff/order.css" />
+    <style>
+      /* Pagination Styles */
+      .pagination-controls {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        padding: 1.5rem 0;
+        background: transparent;
+        border-top: 1px solid #f1f5f9;
+        margin-top: 1rem;
+        grid-column: 1 / -1; /* Span full width in grid */
+      }
+
+      .pagination-info {
+        font-size: 14px;
+        color: #64748b;
+      }
+
+      .pagination-info span {
+        font-weight: 600;
+        color: #1e293b;
+      }
+
+      .pagination-nav {
+        display: flex;
+        gap: 4px;
+      }
+
+      .page-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 36px;
+        height: 36px;
+        padding: 0 12px;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        background: white;
+        color: #475569;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .page-btn:hover:not(.disabled):not(.active) {
+        background: #fef2f2;
+        border-color: #fca5a5;
+        color: #ef4444;
+      }
+
+      .page-btn.active {
+        background: #ef4444;
+        color: white;
+        border-color: #ef4444;
+      }
+
+      .page-btn.disabled {
+        background: #f8fafc;
+        color: #cbd5e1;
+        cursor: not-allowed;
+      }
+
+      @media (max-width: 480px) {
+        .pagination-controls {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+         TOP NAVBAR
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="top-nav">
+      <div class="nav-left">
+        <label for="menu-checkbox" class="menu-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </label>
+        <a href="#" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
+        </a>
+      </div>
+
+      
+
+      <div class="nav-right">
+        <!-- Notifications -->
+        <div class="notification-dropdown">
+          <button class="nav-icon-btn" aria-label="Notifications">
+            <i class="fa-regular fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="notification-menu">
+            <div class="notification-header">
+              <h3>Notifications</h3>
+              <button class="mark-read-btn">Mark all as read</button>
+            </div>
+            <div class="notification-list">
+              <a href="teacher-and-staff-order.html" class="notification-item unread">
+                <div class="notif-icon green">
+                  <i class="fa-solid fa-check"></i>
+                </div>
+                <div class="notif-content">
+                  <p class="notif-title">Order #1234 Ready</p>
+                  <p class="notif-desc">
+                    Your order from Canteen 1 is ready for pickup.
+                  </p>
+                  <span class="notif-time">2 mins ago</span>
+                </div>
+              </a>
+              <a href="teacher-and-staff-wallet.html" class="notification-item unread">
+                <div class="notif-icon blue">
+                  <i class="fa-solid fa-info"></i>
+                </div>
+                <div class="notif-content">
+                  <p class="notif-title">Wallet Top-up</p>
+                  <p class="notif-desc">
+                    Successfully added &#8369;500.00 to your wallet.
+                  </p>
+                  <span class="notif-time">1 hour ago</span>
+                </div>
+              </a>
+              <a href="teacher-and-staff-order.html" class="notification-item">
+                <div class="notif-icon orange">
+                  <i class="fa-solid fa-fire-burner"></i>
+                </div>
+                <div class="notif-content">
+                  <p class="notif-title">Order Preparing</p>
+                  <p class="notif-desc">
+                    Vendor has started preparing your order.
+                  </p>
+                  <span class="notif-time">2 hours ago</span>
+                </div>
+              </a>
+            </div>
+            <div class="notification-footer">
+              <a href="teacher-and-staff-notifications.html">View all notifications</a>
+            </div>
+          </div>
+        </div>
+        <div class="profile">
+          <div class="profile-info">
+            <span class="profile-name">Vaughn Evangelista</span>
+            <span class="email">vaughn.staff@wm.edu.ph</span>
+          </div>
+          <div class="profile-dropdown">
+            <button class="profile-btn">
+              <img
+                src="../../images/pfp.jpg"
+                class="profile-pic"
+                alt="Profile"
+              />
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="teacher-and-staff-profile.html" class="dropdown-item">
+                <i class="fa-solid fa-gear"></i><span>Settings</span>
+              </a>
+              <a href="teacher-and-staff-feedback.html" class="dropdown-item">
+                <i class="fa-solid fa-flag"></i><span>Reports</span>
+              </a>
+              <a href="teacher-and-staff-vendor-applications.html" class="dropdown-item">
+                <i class="fa-solid fa-rss"></i><span>Vendor Applications</span>
+              </a>
+              <a
+                href="../../index.html"
+                class="dropdown-item dropdown-item--danger"
+              >
+                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+         LAYOUT
+         â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <div class="layout">
+      <!-- SIDEBAR -->
+      <div class="left-nav" id="sidebar">
+        <ul class="nav-list">
+          <li>
+            <a href="teacher-and-staff-dashboard.html" class="nav-link">
+              <i class="fa-solid fa-house"></i><span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="teacher-and-staff-browse-food.html" class="nav-link">
+              <i class="fa-solid fa-utensils"></i><span>Browse Food</span>
+            </a>
+          </li>
+          <li>
+            <a href="teacher-and-staff-cart.html" class="nav-link">
+              <i class="fa-solid fa-cart-shopping"></i><span>Cart</span>
+              <span class="nav-badge" style="display: none">0</span>
+            </a>
+          </li>
+          <li>
+            <a href="teacher-and-staff-order.html" class="nav-link active">
+              <i class="fa-solid fa-clock-rotate-left"></i><span>Orders</span>
+            </a>
+          </li>
+          <li>
+            <a href="teacher-and-staff-vouchers.html" class="nav-link">
+              <i class="fa-solid fa-ticket"></i><span>Vouchers</span>
+            </a>
+          </li>
+          <li>
+            <a href="teacher-and-staff-wallet.html" class="nav-link">
+              <i class="fa-solid fa-wallet"></i><span>Wallet</span>
+            </a>
+          </li>
+          <li>
+            <a href="teacher-and-staff-campus-map.html" class="nav-link">
+              <i class="fa-solid fa-map-location-dot"></i
+              ><span>Campus Map</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="main-content">
+        <div class="orders-page">
+          <h2>Order</h2>
+          <p class="page-subtitle">Track and manage your campus food orders</p>
+
+          <div class="order-controls">
+            <div class="filter-bar" id="categoryTabs">
+              <button class="filter-btn active" data-filter="pending">
+                <span class="filter-dot pending"></span> Pending
+                <span class="tab-count" id="count-pending">0</span>
+              </button>
+              <button class="filter-btn" data-filter="preparing">
+                <span class="filter-dot preparing"></span> Preparing
+                <span class="tab-count" id="count-preparing">0</span>
+              </button>
+              <button class="filter-btn" data-filter="ready">
+                <span class="filter-dot ready"></span> Ready for Pickup
+                <span class="tab-count" id="count-ready">0</span>
+              </button>
+              <button class="filter-btn" data-filter="completed">
+                <span class="filter-dot completed"></span> Completed
+                <span class="tab-count" id="count-completed">0</span>
+              </button>
+              <button class="filter-btn" data-filter="cancelled">
+                <span class="filter-dot cancelled"></span> Cancelled
+                <span class="tab-count" id="count-cancelled">0</span>
+              </button>
+            </div>
+            <button
+              id="clearAllBtn"
+              class="remove-btn"
+              style="display: none; white-space: nowrap"
+            >
+              <i class="fa-solid fa-trash-can"></i> Clear All
+            </button>
+          </div>
+
+          <div class="orders-list" id="ordersList">
+            <div class="empty-state" id="emptyState">
+              <div class="empty-state-icon">
+                <i class="fa-solid fa-receipt"></i>
+              </div>
+              <h3>No orders found</h3>
+              <p>We couldn't find any orders matching your filters.</p>
+            </div>
+            <!-- Dynamic order cards injected here by JS -->
+          </div>
+
+          <!-- Pagination Controls -->
+          <div
+            class="pagination-controls"
+            id="orderPagination"
+            style="display: none; justify-content: flex-end"
+          >
+            <div class="pagination-nav">
+              <button class="page-btn" id="prevPage">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <div id="pageNumbers" style="display: flex; gap: 4px"></div>
+              <button class="page-btn" id="nextPage">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCAN MODAL -->
+    <div class="modal" id="scanModal">
+      <div class="modal-overlay" id="scanOverlay"></div>
+      <div class="modal-content" style="max-width: 400px">
+        <div class="modal-header">
+          <h2
+            style="
+              font-size: 18px;
+              font-weight: 800;
+              color: #0f172a;
+              margin: 0;
+              display: flex;
+              align-items: center;
+            "
+          >
+            <i
+              class="fa-solid fa-qrcode"
+              style="margin-right: 8px; color: #2563eb"
+            ></i>
+            Scan Vendor QR
+          </h2>
+          <button class="modal-close" id="closeScanModal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body" style="text-align: center">
+          <p style="font-size: 14px; color: #64748b; margin-bottom: 20px">
+            Position the vendor's QR code within the frame to switch your
+            payment to Wallet.
+          </p>
+          <div
+            style="
+              background: #000;
+              width: 100%;
+              height: 250px;
+              border-radius: 12px;
+              margin-bottom: 20px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              position: relative;
+              overflow: hidden;
+            "
+          >
+            <!-- Camera frame simulation -->
+            <div
+              style="
+                position: absolute;
+                width: 180px;
+                height: 180px;
+                border: 2px solid rgba(255, 255, 255, 0.5);
+                border-radius: 12px;
+              "
+            >
+              <div
+                style="
+                  position: absolute;
+                  top: -2px;
+                  left: -2px;
+                  width: 20px;
+                  height: 20px;
+                  border-top: 3px solid #3b82f6;
+                  border-left: 3px solid #3b82f6;
+                  border-top-left-radius: 12px;
+                "
+              ></div>
+              <div
+                style="
+                  position: absolute;
+                  top: -2px;
+                  right: -2px;
+                  width: 20px;
+                  height: 20px;
+                  border-top: 3px solid #3b82f6;
+                  border-right: 3px solid #3b82f6;
+                  border-top-right-radius: 12px;
+                "
+              ></div>
+              <div
+                style="
+                  position: absolute;
+                  bottom: -2px;
+                  left: -2px;
+                  width: 20px;
+                  height: 20px;
+                  border-bottom: 3px solid #3b82f6;
+                  border-left: 3px solid #3b82f6;
+                  border-bottom-left-radius: 12px;
+                "
+              ></div>
+              <div
+                style="
+                  position: absolute;
+                  bottom: -2px;
+                  right: -2px;
+                  width: 20px;
+                  height: 20px;
+                  border-bottom: 3px solid #3b82f6;
+                  border-right: 3px solid #3b82f6;
+                  border-bottom-right-radius: 12px;
+                "
+              ></div>
+            </div>
+            <!-- Scanning line animation -->
+            <div
+              style="
+                position: absolute;
+                top: 10%;
+                left: 10%;
+                width: 80%;
+                height: 2px;
+                background: rgba(59, 130, 246, 0.8);
+                box-shadow: 0 0 8px #3b82f6;
+                animation: scanAnim 2s infinite ease-in-out;
+              "
+            ></div>
+            <style>
+              @keyframes scanAnim {
+                0% {
+                  top: 10%;
+                }
+
+                50% {
+                  top: 90%;
+                }
+
+                100% {
+                  top: 10%;
+                }
+              }
+            </style>
+
+            <i
+              class="fa-solid fa-camera"
+              style="color: rgba(255, 255, 255, 0.2); font-size: 48px"
+            ></i>
+          </div>
+          <button
+            id="simulateScanBtn"
+            style="
+              background: #2563eb;
+              color: #fff;
+              border: none;
+              padding: 12px 20px;
+              border-radius: 8px;
+              font-weight: 600;
+              width: 100%;
+              cursor: pointer;
+              transition: all 0.2s;
+            "
+          >
+            <i class="fa-solid fa-camera-rotate"></i> Simulate Scan Success
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAYMENT CONFIRMATION MODAL -->
+    <div class="modal" id="scanConfirmModal">
+      <div class="modal-overlay" id="scanConfirmOverlay"></div>
+      <div
+        class="modal-content"
+        style="max-width: 400px; padding: 0; overflow: hidden"
+      >
+        <div
+          style="
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            padding: 24px;
+            position: relative;
+            color: white;
+          "
+        >
+          <button
+            class="modal-close"
+            id="closeScanConfirmModal"
+            style="
+              position: absolute;
+              top: 16px;
+              right: 16px;
+              color: rgba(255, 255, 255, 0.7);
+              background: rgba(255, 255, 255, 0.1);
+            "
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <div
+            style="
+              width: 56px;
+              height: 56px;
+              background: #3b82f6;
+              border-radius: 16px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-bottom: 16px;
+              box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            "
+          >
+            <i
+              class="fa-solid fa-store"
+              style="font-size: 24px; color: white"
+            ></i>
+          </div>
+          <h2
+            style="
+              font-size: 20px;
+              font-weight: 700;
+              margin: 0 0 4px 0;
+              color: white;
+            "
+            id="scanConfirmVendor"
+          >
+            Vendor Name
+          </h2>
+          <p style="font-size: 14px; color: #94a3b8; margin: 0; opacity: 0.9">
+            Order #<span id="scanConfirmOrderId"></span>
+          </p>
+        </div>
+
+        <div style="padding: 24px">
+          <div style="text-align: center; margin-bottom: 24px">
+            <div
+              id="scanOriginalTotalRow"
+              style="
+                font-size: 16px;
+                color: #94a3b8;
+                text-decoration: line-through;
+                margin-bottom: 2px;
+                display: none;
+              "
+            >
+              ₱0.00
+            </div>
+            <div
+              style="
+                font-size: 13px;
+                font-weight: 600;
+                color: #64748b;
+                margin-bottom: 4px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+              "
+            >
+              Amount to Pay
+            </div>
+            <div
+              style="
+                font-size: 36px;
+                font-weight: 800;
+                color: #0f172a;
+                letter-spacing: -1px;
+              "
+              id="scanConfirmTotal"
+            >
+              ₱0.00
+            </div>
+          </div>
+
+          <!-- PROMO CODE SECTION -->
+          <div
+            class="promo-section"
+            style="
+              margin-bottom: 24px;
+              padding: 16px;
+              background: #f8fafc;
+              border: 1px dashed #cbd5e1;
+              border-radius: 12px;
+            "
+          >
+            <div
+              style="
+                font-size: 13px;
+                font-weight: 700;
+                color: #475569;
+                margin-bottom: 10px;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+              "
+            >
+              <i class="fa-solid fa-tag" style="color: #ef4444"></i>
+              Promo Code
+            </div>
+            <div style="display: flex; gap: 8px">
+              <input
+                type="text"
+                id="scanPromoCode"
+                placeholder="Enter code (e.g. WMSU50)"
+                style="
+                  flex: 1;
+                  padding: 10px 12px;
+                  border: 1px solid #e2e8f0;
+                  border-radius: 8px;
+                  font-size: 14px;
+                  outline: none;
+                "
+              />
+              <button
+                id="applyScanPromoBtn"
+                style="
+                  padding: 0 16px;
+                  background: #0f172a;
+                  color: white;
+                  border: none;
+                  border-radius: 8px;
+                  font-weight: 600;
+                  font-size: 13px;
+                  cursor: pointer;
+                  transition: all 0.2s;
+                "
+              >
+                Apply
+              </button>
+            </div>
+            <div
+              id="scanPromoMsg"
+              style="
+                font-size: 12px;
+                margin-top: 8px;
+                display: none;
+                font-weight: 500;
+              "
+            ></div>
+          </div>
+
+
+          <div
+            style="
+              background: #f8fafc;
+              border: 1px solid #e2e8f0;
+              border-radius: 12px;
+              padding: 16px;
+              margin-bottom: 24px;
+            "
+          >
+            <div
+              style="
+                font-size: 13px;
+                font-weight: 600;
+                color: #475569;
+                margin-bottom: 8px;
+              "
+            >
+              Order Details
+            </div>
+            <div
+              id="scanConfirmItems"
+              style="font-size: 14px; color: #1e293b; line-height: 1.6"
+            ></div>
+          </div>
+
+          <button
+            id="scanConfirmPayBtn"
+            style="
+              background: #2563eb;
+              color: white;
+              border: none;
+              padding: 14px;
+              border-radius: 10px;
+              font-weight: 700;
+              font-size: 15px;
+              width: 100%;
+              cursor: pointer;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              gap: 8px;
+              box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            "
+          >
+            <i class="fa-solid fa-wallet"></i> Confirm Payment
+          </button>
+          <button
+            id="scanConfirmCancelBtn"
+            style="
+              background: transparent;
+              color: #64748b;
+              border: none;
+              padding: 12px;
+              border-radius: 10px;
+              font-weight: 600;
+              font-size: 14px;
+              width: 100%;
+              cursor: pointer;
+              margin-top: 8px;
+            "
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- REPORT ISSUE MODAL -->
+    <div class="modal" id="reportModal">
+      <div class="modal-overlay" id="reportOverlay"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>
+            <i
+              class="fa-solid fa-triangle-exclamation"
+              style="color: #ef4444; margin-right: 8px"
+            ></i>
+            Report Issue
+          </h2>
+          <button class="modal-close" id="closeReportModal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p style="font-size: 14px; color: #64748b; margin-bottom: 16px">
+            If the vendor marked the order as picked up but you have not
+            received it, please let us know below.
+          </p>
+          <div class="form-group">
+            <label>Reason for report</label>
+            <textarea
+              class="form-control"
+              id="reportReason"
+              rows="4"
+              placeholder="E.g., I arrived at the counter but my food is not here."
+            ></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="btn-cancel" id="cancelReportBtn">Cancel</button>
+            <button
+              class="btn-submit"
+              id="submitReportBtn"
+              style="background: #ef4444"
+            >
+              Submit Report
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PICKUP CODE MODAL -->
+    <div class="modal" id="pickupModal">
+      <div class="modal-overlay" id="pickupOverlay"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Pickup Code</h2>
+          <button class="modal-close" id="closePickupModal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="pickup-code-card">
+            <div class="pickup-code-label">Your pickup code</div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                margin: 10px 0;
+              "
+            >
+              <div
+                class="pickup-code-value"
+                id="modalCodeVal"
+                style="margin: 0"
+              >
+                ----
+              </div>
+              <button
+                id="copyCodeBtn"
+                style="
+                  background: rgba(255, 255, 255, 0.2);
+                  border: 1px solid rgba(255, 255, 255, 0.4);
+                  color: #fff;
+                  padding: 8px;
+                  border-radius: 6px;
+                  cursor: pointer;
+                "
+              >
+                <i class="fa-regular fa-copy"></i>
+              </button>
+            </div>
+            <div class="pickup-code-order" id="modalCodeOrder"></div>
+          </div>
+          <img
+            src=""
+            id="modalFoodImage"
+            class="modal-order-image"
+            alt="Order items"
+            style="display: none"
+          />
+          <div class="modal-info-row">
+            <span class="modal-info-label">Status</span>
+            <span class="modal-info-value" style="color: #22c55e"
+              >âœ” Ready for Pickup</span
+            >
+          </div>
+          <div class="modal-order-items" id="modalOrderItems"></div>
+          <div class="modal-total-price" id="modalTotalPrice">Total: ₱0.00</div>
+          <p
+            style="
+              font-size: 12px;
+              color: #94a3b8;
+              margin-top: 16px;
+              text-align: center;
+            "
+          >
+            Show this code to the vendor when picking up your order.
+          </p>
+          <div style="margin-top: 16px; text-align: center">
+            <!-- "Mark as Picked Up" button removed per request -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REVIEW MODAL -->
+    <div class="modal" id="reviewModal">
+      <div class="modal-overlay" id="reviewOverlay"></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Leave a Review</h2>
+          <button class="modal-close" id="closeReviewModal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Rate your experience</label>
+            <div class="star-rating" id="starRating">
+              <button type="button" class="star-btn">
+                <i class="fa-solid fa-star"></i>
+              </button>
+              <button type="button" class="star-btn">
+                <i class="fa-solid fa-star"></i>
+              </button>
+              <button type="button" class="star-btn">
+                <i class="fa-solid fa-star"></i>
+              </button>
+              <button type="button" class="star-btn">
+                <i class="fa-solid fa-star"></i>
+              </button>
+              <button type="button" class="star-btn">
+                <i class="fa-solid fa-star"></i>
+              </button>
+              <span class="rating-text">Click to rate</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Comment</label>
+            <textarea
+              class="form-control"
+              rows="4"
+              placeholder="Share your thoughtsâ€¦"
+            ></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="btn-cancel" id="cancelReview">Cancel</button>
+            <button class="btn-submit" id="submitReviewBtn">
+              Submit Review
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONFIRMATION MODAL -->
+    <div class="modal" id="confirmModal">
+      <div class="modal-overlay" id="confirmOverlay"></div>
+      <div class="modal-content" style="max-width: 460px">
+        <div class="modal-header">
+          <h2
+            style="
+              font-size: 18px;
+              font-weight: 800;
+              color: #0f172a;
+              margin: 0;
+              display: flex;
+              align-items: center;
+            "
+          >
+            <i
+              class="fa-solid fa-circle-exclamation"
+              style="margin-right: 8px"
+              id="modalHeaderIcon"
+            ></i>
+            <span id="confirmTitle">Confirm Action</span>
+          </h2>
+          <button class="modal-close" id="closeConfirmModal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body" style="text-align: left">
+          <p
+            style="font-size: 14px; color: #64748b; margin-bottom: 24px"
+            id="confirmMessage"
+          >
+            Are you sure you want to do this?
+          </p>
+          <div
+            id="modalDetail"
+            style="margin-bottom: 20px; text-align: left"
+          ></div>
+          <div
+            class="form-actions"
+            style="
+              justify-content: flex-end;
+              gap: 12px;
+              border-top: 1px solid #f1f5f9;
+              padding-top: 20px;
+            "
+          >
+            <button class="btn-cancel" id="cancelConfirmBtn">Cancel</button>
+            <button
+              class="btn-confirm-delete"
+              id="submitConfirmBtn"
+              style="
+                background: #fff;
+                border: 1px solid #fecaca;
+                color: #ef4444;
+              "
+            >
+              <i id="confirmBtnIcon" class="fas fa-trash"></i>
+              <span id="confirmBtnText">Confirm</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORDER DETAILS MODAL -->
+    <div class="modal" id="orderDetailsModal">
+      <div class="modal-overlay" id="orderDetailOverlay"></div>
+      <div class="modal-content" style="max-width: 500px">
+        <div class="modal-header">
+          <h2>
+            <i
+              class="fa-solid fa-receipt"
+              style="color: #ef4444; margin-right: 8px"
+            ></i>
+            Order Details
+          </h2>
+          <button class="modal-close" id="closeOrderDetailModal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="orderDetailContent"></div>
+          <div class="form-actions" style="margin-top: 24px">
+            <button class="btn-submit" id="closeDetailBtn" style="width: 100%">
+              <i class="fa-solid fa-circle-check"></i>
+              Close Details
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <!-- Shared cart/orders module -->
+    <script src="../../script/teacher-and-staff/notifications.js"></script>
+    <script src="../../script/teacher-and-staff/wallet.js"></script>
+    <script src="../../script/teacher-and-staff/cart.js"></script>
+
+    <script>
+      /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       STUDENT ORDERS PAGE â€” fully localStorage-driven
+       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+      /* â”€â”€ Seed demo orders on first visit (only once) â”€â”€ */
+      /* Orders are loaded from localStorage via cart.js / getOrders() */
+
+      /* â”€â”€ Status display config â”€â”€ */
+      const STATUS_CFG = {
+        pending: {
+          icon: "fa-clock",
+          cls: "ic-pending",
+          accent: "accent-pending",
+          label: "Pending",
+          badge: "pending",
+        },
+        preparing: {
+          icon: "fa-fire-burner",
+          cls: "ic-preparing",
+          accent: "accent-preparing",
+          label: "Preparing",
+          badge: "preparing",
+        },
+        ready: {
+          icon: "fa-check-circle",
+          cls: "ic-ready",
+          accent: "accent-ready",
+          label: "Ready for Pickup",
+          badge: "ready",
+        },
+        completed: {
+          icon: "fa-check-double",
+          cls: "ic-completed",
+          accent: "accent-completed",
+          label: "Completed",
+          badge: "completed",
+        },
+        cancelled: {
+          icon: "fa-ban",
+          cls: "ic-cancelled",
+          accent: "accent-cancelled",
+          label: "Cancelled",
+          badge: "cancelled",
+        },
+      };
+
+      /* ── HTML escape ── */
+      function esc(s) {
+        return String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      /* ── Build one order card HTML string ── */
+      function buildCard(o) {
+        const cfg = STATUS_CFG[o.status] || STATUS_CFG.pending;
+        const FALLBACK = "https://placehold.co/80x80/f8fafc/94a3b8?text=Food";
+
+        const itemsHtml = o.items
+          .map(
+            (it) =>
+              `<div class="order-item-row">
+            <span>${it.qty} × ${esc(it.name)}</span>
+            <span>₱${(it.price * it.qty).toFixed(2)}</span>
+          </div>`,
+          )
+          .join("");
+
+        const noteHtml = o.instructions
+          ? `
+          <div class="order-instruction"
+            style="font-size:12px;color:#64748b;margin-top:8px;padding:6px 8px;
+                   background:#f8fafc;border-radius:4px;border-left:2px solid #cbd5e1;">
+            <i class="fa-regular fa-comment-dots" style="margin-right:4px;color:#94a3b8"></i>
+            <strong>Note:</strong> ${esc(o.instructions)}
+          </div>`
+          : "";
+
+        /* Top message banner for dual confirmation */
+        let topMsgHtml = "";
+        if (o.status === "ready" && !o.studentPickedUp && o.vendorPickedUp) {
+          if (o.reportedIssue) {
+            topMsgHtml = `<div style="background:#fff7ed; border:1px solid #fed7aa; color:#c2410c; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px; width: 100%;">
+              <i class="fa-solid fa-circle-exclamation"></i> Issue reported. Auto-completion is paused pending vendor review.
+           </div>`;
+          } else {
+            topMsgHtml = `<div style="background:#eff6ff; border:1px solid #bfdbfe; color:#1d4ed8; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px; width: 100%;">
+              <i class="fa-solid fa-stopwatch"></i> The vendor has marked this order as picked up. This order will be automatically completed in <span class="auto-complete-timer" data-id="${esc(o.id)}" style="font-weight:bold;">--:--</span>.
+           </div>`;
+          }
+        }
+
+        /* Action buttons per status */
+        let actHtml = "";
+
+        if (o.status === "pending") {
+          actHtml = `
+            <button class="cancel-btn js-cancel" data-id="${esc(o.id)}">
+              <i class="fa-solid fa-times"></i> Cancel Order
+            </button>`;
+        } else if (o.status === "ready") {
+          if (!o.studentPickedUp) {
+            let buttonsRow = `
+              <button class="pickup-btn js-mark-picked" data-id="${esc(o.id)}" style="${o.vendorPickedUp ? "background: #22c55e;" : ""}">
+                <i class="fa-solid fa-bag-shopping"></i> Mark as Picked Up
+              </button>`;
+
+            if (o.payment === "Cash on Pickup") {
+              buttonsRow += `
+              <button class="view-code-btn js-pay-wallet" data-id="${esc(o.id)}" style="margin:0;">
+                <i class="fa-solid fa-qrcode"></i> Pay (Scan)
+              </button>`;
+            }
+
+            actHtml += `<div style="display:flex; width:100%; gap:8px;">${buttonsRow}</div>`;
+
+            if (o.vendorPickedUp && !o.reportedIssue) {
+              actHtml += `
+              <button class="remove-btn js-report-issue" data-id="${esc(o.id)}" style="margin:0; margin-top:10px;">
+                <i class="fa-solid fa-triangle-exclamation"></i> Report Issue
+              </button>`;
+            }
+          } else {
+            actHtml = `
+              <div style="font-size:13px; color:#f59e0b; font-weight:600; padding:8px 0; display:flex; align-items:center; gap:6px;">
+                <i class="fa-solid fa-clock"></i> Waiting for Vendor Confirmation
+              </div>`;
+          }
+        } else if (o.status === "completed") {
+          actHtml = `
+            <div style="display:flex; gap:8px; width:100%; flex-wrap:wrap;">
+              <button class="order-again-btn js-order-again" data-id="${esc(o.id)}">
+                <i class="fa-solid fa-cart-plus"></i> Order Again
+              </button>
+              <button class="leave-review-btn js-review" data-id="${esc(o.id)}">
+                <i class="fa-regular fa-star"></i> Review
+              </button>
+              <button class="remove-btn js-remove" data-id="${esc(o.id)}" style="margin:0;">
+                <i class="fa-solid fa-trash-can"></i> Remove
+              </button>
+            </div>`;
+        } else if (o.status === "cancelled") {
+          const vendorMsg = o.cancelledByVendor
+            ? `<p style="font-size:12px;color:#ef4444;margin-bottom:8px;">
+                 <i class="fa-solid fa-circle-info"></i>
+                 The vendor has cancelled this order. A refund will be processed.
+               </p>`
+            : "";
+          actHtml =
+            vendorMsg +
+            `
+            <button class="remove-btn js-remove" data-id="${esc(o.id)}" style="margin:0;">
+              <i class="fa-solid fa-trash-can"></i> Remove
+            </button>`;
+        }
+
+        return `
+          <div class="order-card"
+            data-id="${esc(o.id)}"
+            data-status="${esc(o.status)}"
+            data-vendor="${esc(o.vendor)}"
+            data-price="${o.total.toFixed(2)}"
+            data-image="${esc(o.img || "")}"
+            style="display:none">
+            <div class="order-card-accent ${cfg.accent}"></div>
+            <div class="order-card-inner">
+              ${topMsgHtml}
+              <div class="order-card-header">
+                <div class="order-title">
+                  <div class="order-store-icon ${cfg.cls}">
+                    <i class="fa-solid ${cfg.icon}"></i>
+                  </div>
+                  <div style="display:flex; flex-direction:column; gap:2px;">
+                    <span class="order-card-title">${esc(o.vendor)}</span>
+                    <div class="pay-method-badge ${o.payment === "Cash on Pickup" ? "badge-cash" : "badge-online"}">
+                      <i class="fa-solid ${o.payment === "Cash on Pickup" ? "fa-money-bill-wave" : "fa-credit-card"}"></i>
+                      <span>${o.payment === "Cash on Pickup" ? "Cash on Pickup" : "Online Payment (Wallet)"}</span>
+                    </div>
+                  </div>
+                </div>
+                <span class="status-badge ${cfg.badge}">${cfg.label}</span>
+              </div>
+
+              <div class="order-body-wrapper" style="flex-direction: column; align-items: stretch; gap: 12px;">
+                <div class="order-meta" style="margin-bottom: 0;">
+                  <span style="display:flex;align-items:center;gap:4px;">
+                    <i class="fa-solid fa-hashtag"></i>
+                    <span class="order-id-val" style="font-weight:700;color:#1e293b;background:#f1f5f9;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:13px;">${esc(o.id.slice(-6).toUpperCase())}</span>
+                  </span>
+                  <span><i class="fa-regular fa-calendar"></i> ${formatDate(o.placedAt)}</span>
+                </div>
+
+                <div class="horizontal-images" style="display:flex; gap:10px; overflow-x:auto; padding-bottom:4px; scrollbar-width: none;">
+                  ${o.items
+                    .map(
+                      (it) => `
+                    <img
+                      src="${esc(it.img || FALLBACK)}"
+                      alt="${esc(it.name)}"
+                      style="width: 80px; height: 80px; border-radius: 12px; object-fit: cover; flex-shrink: 0; border: 1px solid #f1f5f9; box-shadow: 0 2px 8px rgba(0,0,0,0.05);"
+                      onerror="this.src='${FALLBACK}'"
+                    />
+                  `,
+                    )
+                    .join("")}
+                </div>
+
+                <div class="order-items-display" style="background: #f8fafc; padding: 10px; border-radius: 10px; border: 1px solid #f1f5f9;">
+                  ${
+                    o.items.length > 1
+                      ? `<div style="display:flex; justify-content:space-between; align-items:center; font-size:14px; font-weight:600; color:#475569;">
+                        <span>${o.items.length} items purchased</span>
+                        <button class="js-view-details" data-id="${esc(o.id)}" style="background:#fff; border:1.5px solid #e2e8f0; color:#ef4444; cursor:pointer; width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; transition:all 0.2s;" title="View Details">
+                          <i class="fa-solid fa-eye"></i>
+                        </button>
+                       </div>`
+                      : `<div class="order-item-row" style="padding:0; display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-size:14px; color:#475569; font-weight:600;">${o.items[0].qty} × ${esc(o.items[0].name)}</span>
+                        <button class="js-view-details" data-id="${esc(o.id)}" style="background:#fff; border:1.5px solid #e2e8f0; color:#ef4444; cursor:pointer; width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; transition:all 0.2s;" title="View Details">
+                          <i class="fa-solid fa-eye"></i>
+                        </button>
+                       </div>`
+                  }
+                </div>
+                ${noteHtml}
+              </div>
+
+              <hr class="order-divider" />
+              <div class="order-total-row"><span>Total Amount: ₱${o.total.toFixed(2)}</span></div>
+              ${actHtml ? `<div class="order-actions" style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;">${actHtml}</div>` : ""}
+            </div>
+          </div>`;
+      }
+
+      /* ── Render all orders from localStorage ── */
+      function renderOrders() {
+        const list = document.getElementById("ordersList");
+        // Remove previously rendered cards (keep emptyState)
+        list.querySelectorAll(".order-card").forEach((c) => c.remove());
+
+        const orders = getOrders().filter(
+          (o) => !o.removedByStudent && o.customerRole !== "outsider",
+        );
+        const html = orders.map(buildCard).join("");
+        document
+          .getElementById("emptyState")
+          .insertAdjacentHTML("afterend", html);
+
+        applyFilters();
+        wireEvents();
+        updateAllCartBadges();
+      }
+
+      /* ── Show / hide cards based on active filter tab and pagination ── */
+      let currentPage = 1;
+      const itemsPerPage = 4; // 2 cols * 2 rows = 4 items
+
+      function applyFilters() {
+        const af =
+          document
+            .querySelector(".filter-btn.active")
+            ?.getAttribute("data-filter") || "pending";
+
+        const allCards = Array.from(document.querySelectorAll(".order-card"));
+        const filteredCards = allCards.filter(
+          (card) => card.dataset.status === af,
+        );
+
+        const totalItems = filteredCards.length;
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+        // Ensure currentPage is valid
+        if (currentPage > totalPages) currentPage = totalPages || 1;
+        if (currentPage < 1) currentPage = 1;
+
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+
+        // Hide all cards first
+        allCards.forEach((card) => (card.style.display = "none"));
+
+        // Show cards for current page
+        filteredCards.slice(startIndex, endIndex).forEach((card) => {
+          card.style.display = "block";
+        });
+
+        const es = document.getElementById("emptyState");
+        totalItems === 0
+          ? es.classList.add("active")
+          : es.classList.remove("active");
+
+        const clearBtn = document.getElementById("clearAllBtn");
+        if (clearBtn) {
+          if ((af === "completed" || af === "cancelled") && totalItems > 0) {
+            clearBtn.style.display = "flex";
+          } else {
+            clearBtn.style.display = "none";
+          }
+        }
+
+        // Update Pagination UI
+        const pagination = document.getElementById("orderPagination");
+        if (totalItems >= 4) {
+          // Show if already 4 rows (2x2 grid)
+          pagination.style.display = "flex";
+
+          const prevBtn = document.getElementById("prevPage");
+          const nextBtn = document.getElementById("nextPage");
+
+          prevBtn.disabled = currentPage === 1;
+          prevBtn.classList.toggle("disabled", currentPage === 1);
+
+          nextBtn.disabled = currentPage === totalPages;
+          nextBtn.classList.toggle("disabled", currentPage === totalPages);
+
+          // Page Numbers
+          const pageNumbers = document.getElementById("pageNumbers");
+          pageNumbers.innerHTML = "";
+          for (let i = 1; i <= totalPages; i++) {
+            const btn = document.createElement("button");
+            btn.className = `page-btn ${i === currentPage ? "active" : ""}`;
+            btn.textContent = i;
+            btn.onclick = () => {
+              currentPage = i;
+              applyFilters();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            };
+            pageNumbers.appendChild(btn);
+          }
+        } else {
+          pagination.style.display = "none";
+        }
+
+        // Update counts
+        const orders = getOrders().filter(
+          (o) => !o.removedByStudent && o.customerRole !== "outsider",
+        );
+        ["pending", "preparing", "ready", "completed", "cancelled"].forEach(
+          (s) => {
+            const badge = document.getElementById("count-" + s);
+            if (badge) {
+              badge.textContent = orders.filter((o) => o.status === s).length;
+            }
+          },
+        );
+      }
+
+      /* ── Wire interactive buttons on dynamically-rendered cards ── */
+      function wireEvents() {
+        /* Cancel Order */
+        document.querySelectorAll(".js-cancel").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const order = getOrders().find((o) => o.id === btn.dataset.id);
+            showConfirmation(
+              "Cancel Order",
+              "Are you sure you want to cancel this order?",
+              () => {
+                cancelOrder(btn.dataset.id);
+                renderOrders();
+                showToast(
+                  "success",
+                  "fa-check",
+                  "Order cancelled. The money is returned to the wallet.",
+                );
+              },
+              order,
+            );
+          });
+        });
+
+        /* Report Issue */
+        document.querySelectorAll(".js-report-issue").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const order = getOrders().find((o) => o.id === btn.dataset.id);
+            if (!order) return;
+
+            window.currentReportOrder = order;
+            document.getElementById("reportReason").value = "";
+            document.getElementById("reportModal").classList.add("active");
+          });
+        });
+
+        /* Mark as Picked Up (card button) */
+        document.querySelectorAll(".js-mark-picked").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const order = getOrders().find((o) => o.id === btn.dataset.id);
+            if (!order) return;
+
+            let msg = "Are you sure you want to mark this order as picked up?";
+            if (!order.vendorPickedUp) {
+              msg =
+                `<div style="margin-bottom:12px;color:#ef4444;background:#fef2f2;padding:10px;border-radius:8px;border:1px solid #fecaca;"><i class="fa-solid fa-triangle-exclamation"></i> <b>Warning:</b> The vendor has not yet confirmed this order as picked up.</div>` +
+                msg;
+            } else {
+              msg =
+                `<div style="margin-bottom:12px;color:#22c55e;background:#f0fdf4;padding:10px;border-radius:8px;border:1px solid #bbf7d0;"><i class="fa-solid fa-circle-check"></i> <b>Confirmed:</b> The vendor has already confirmed this order as picked up.</div>` +
+                msg;
+            }
+
+            showConfirmation(
+              "Mark as Picked Up",
+              msg,
+              () => {
+                const isWallet =
+                  order.payment && order.payment.includes("Wallet");
+                if (isWallet || order.vendorPickedUp) {
+                  updateOrderStatus(order.id, "completed", {
+                    studentPickedUp: true,
+                    vendorPickedUp: true,
+                  });
+                  renderOrders();
+                  showToast("success", "fa-check-double", "Order completed!");
+                } else {
+                  updateOrderStatus(order.id, order.status, {
+                    studentPickedUp: true,
+                  });
+                  renderOrders();
+                  showToast(
+                    "success",
+                    "fa-check",
+                    "Marked as picked up. Waiting for vendor confirmation.",
+                  );
+                }
+              },
+              order,
+              {
+                btnColor: "green",
+                btnIcon: "fa-solid fa-check",
+                btnText: "Confirm Pickup",
+              },
+            );
+          });
+        });
+
+        /* Pay with Wallet (Scan) */
+        document.querySelectorAll(".js-pay-wallet").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const order = getOrders().find((o) => o.id === btn.dataset.id);
+            if (!order) return;
+
+            window.currentScanOrder = order; // store for the simulate button
+            document.getElementById("scanModal").classList.add("active");
+          });
+        });
+
+        /* View Order Details (Eye Icon / Button) */
+        document.querySelectorAll(".js-view-details").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const order = getOrders().find((o) => o.id === btn.dataset.id);
+            if (!order) return;
+
+            const itemsHtml = order.items
+              .map(
+                (it) => `
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; background:#f8fafc; border-radius:12px; margin-bottom:8px; border:1px solid #f1f5f9;">
+                  <div style="display:flex; gap:12px; align-items:center;">
+                    <img src="${esc(it.img || "")}" style="width:50px; height:50px; border-radius:8px; object-fit:cover;" onerror="this.src='https://placehold.co/50x50?text=Food'" />
+                    <div>
+                      <div style="font-weight:700; color:#1e293b; font-size:14px;">${esc(it.name)}</div>
+                      <div style="font-size:12px; color:#64748b;">${it.qty} × ₱${it.price.toFixed(2)}</div>
+                    </div>
+                  </div>
+                  <div style="font-weight:700; color:#0f172a;">₱${(it.price * it.qty).toFixed(2)}</div>
+                </div>`,
+              )
+              .join("");
+
+            const content = `
+              <div style="margin-bottom:20px; padding-bottom:15px; border-bottom:1px dashed #e2e8f0;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                  <span style="color:#64748b; font-size:13px;">Order ID</span>
+                  <span style="font-family:monospace; font-weight:700; color:#1e293b;">#${esc(order.id.slice(-6).toUpperCase())}</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                  <span style="color:#64748b; font-size:13px;">Vendor</span>
+                  <span style="font-weight:700; color:#1e293b;">${esc(order.vendor)}</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                  <span style="color:#64748b; font-size:13px;">Date</span>
+                  <span style="font-weight:600; color:#1e293b;">${formatDate(order.placedAt)}</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                  <span style="color:#64748b; font-size:13px;">Status</span>
+                  <span class="status-badge ${order.status}">${order.status.toUpperCase()}</span>
+                </div>
+                <div style="display:flex; justify-content:space-between;">
+                  <span style="color:#64748b; font-size:13px;">Payment</span>
+                  <span style="font-weight:600; color:#1e293b;">${order.payment}</span>
+                </div>
+              </div>
+
+              <div style="margin-bottom:15px; font-weight:700; color:#0f172a; font-size:14px;">Items Summary</div>
+              <div style="max-height:300px; overflow-y:auto; padding-right:5px;">
+                ${itemsHtml}
+              </div>
+
+              <div style="margin-top:20px; padding:15px; background:#f1f5f9; border-radius:12px;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-weight:700; color:#475569;">Total Amount</span>
+                  <span style="font-size:20px; font-weight:800; color:#ef4444;">₱${order.total.toFixed(2)}</span>
+                </div>
+              </div>
+              
+              ${
+                order.instructions
+                  ? `
+              <div style="margin-top:15px; padding:12px; background:#fffbeb; border-radius:10px; border:1px solid #fef3c7;">
+                <div style="font-size:12px; font-weight:700; color:#b45309; margin-bottom:4px;">Special Instructions:</div>
+                <div style="font-size:13px; color:#92400e;">${esc(order.instructions)}</div>
+              </div>`
+                  : ""
+              }
+            `;
+
+            document.getElementById("orderDetailContent").innerHTML = content;
+            document
+              .getElementById("orderDetailsModal")
+              .classList.add("active");
+          });
+        });
+
+        /* View Pickup Code */
+        document.querySelectorAll(".js-view-code").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const order = getOrders().find((o) => o.id === btn.dataset.id);
+            if (!order) return;
+
+            document.getElementById("modalCodeVal").textContent =
+              order.pickupCode;
+            const isCash = order.payment === "Cash on Pickup";
+            const payLabel = isCash
+              ? "Cash on Pickup"
+              : "Online Payment (Wallet)";
+            document.getElementById("modalCodeOrder").innerHTML =
+              `Order #${order.id.slice(-6).toUpperCase()} &middot; ${esc(order.vendor)}<br><small style="opacity:0.8">${payLabel}</small>`;
+            document.getElementById("modalTotalPrice").textContent =
+              `Total: ₱${order.total.toFixed(2)}`;
+
+            const mImg = document.getElementById("modalFoodImage");
+            if (order.img) {
+              mImg.src = order.img;
+              mImg.style.display = "block";
+            } else {
+              mImg.style.display = "none";
+            }
+
+            document.getElementById("modalOrderItems").innerHTML = order.items
+              .map(
+                (it) =>
+                  `<div class="order-item-row"
+                style="display:flex;justify-content:space-between;font-size:14px;padding:4px 0;color:#374151;">
+                <span>${it.qty} × ${esc(it.name)}</span>
+                <span>₱${(it.price * it.qty).toFixed(2)}</span>
+              </div>`,
+              )
+              .join("");
+
+            /* Modal "Mark as Picked Up" logic removed */
+
+            pickupModal.classList.add("active");
+          });
+        });
+
+        /* Remove from history */
+        document.querySelectorAll(".js-remove").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const order = getOrders().find((o) => o.id === btn.dataset.id);
+            showConfirmation(
+              "Remove Transaction",
+              "Remove this order from your history?",
+              () => {
+                const card = document.querySelector(
+                  `.order-card[data-id="${btn.dataset.id}"]`,
+                );
+                if (card) card.classList.add("removing");
+                setTimeout(() => {
+                  removeOrder(btn.dataset.id, "student");
+                  renderOrders();
+                }, 300);
+                showToast("success", "fa-check", "Removed from history.");
+              },
+              order,
+            );
+          });
+        });
+
+        /* Order Again — re-add items to cart */
+        document.querySelectorAll(".js-order-again").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const order = getOrders().find((o) => o.id === btn.dataset.id);
+            if (!order) return;
+            order.items.forEach((it) => addToCart({ ...it }));
+            showToast("success", "fa-cart-plus", "Items added back to cart!");
+          });
+        });
+
+        /* Leave Review */
+        document.querySelectorAll(".js-review").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            document.getElementById("reviewModal").classList.add("active");
+          });
+        });
+
+        /* Clear All */
+        const clearBtn = document.getElementById("clearAllBtn");
+        if (clearBtn) {
+          clearBtn.onclick = () => {
+            const af =
+              document
+                .querySelector(".filter-btn.active")
+                ?.getAttribute("data-filter") || "pending";
+            if (af !== "completed" && af !== "cancelled") return;
+            showConfirmation(
+              "Clear All",
+              `Are you sure you want to clear all ${af} orders from your history?`,
+              () => {
+                const orders = getOrders();
+                orders.forEach((o) => {
+                  if (o.status === af) {
+                    removeOrder(o.id, "student");
+                  }
+                });
+                renderOrders();
+                showToast("success", "fa-check", `All ${af} orders cleared.`);
+              },
+            );
+          };
+        }
+      }
+
+      /* ── Scan Modals ── */
+      const scanModal = document.getElementById("scanModal");
+      const scanConfirmModal = document.getElementById("scanConfirmModal");
+
+      document.getElementById("closeScanModal").onclick = () =>
+        scanModal.classList.remove("active");
+      document.getElementById("scanOverlay").onclick = () =>
+        scanModal.classList.remove("active");
+
+      document.getElementById("closeScanConfirmModal").onclick = () =>
+        scanConfirmModal.classList.remove("active");
+      document.getElementById("scanConfirmOverlay").onclick = () =>
+        scanConfirmModal.classList.remove("active");
+      document.getElementById("scanConfirmCancelBtn").onclick = () =>
+        scanConfirmModal.classList.remove("active");
+
+      document.getElementById("simulateScanBtn").onclick = () => {
+        scanModal.classList.remove("active");
+        const order = window.currentScanOrder;
+        if (!order) return;
+
+        document.getElementById("scanConfirmVendor").textContent = order.vendor;
+        document.getElementById("scanConfirmOrderId").textContent = order.id
+          .slice(-6)
+          .toUpperCase();
+        document.getElementById("scanConfirmTotal").textContent =
+          "₱" + order.total.toFixed(2);
+
+        document.getElementById("scanConfirmItems").innerHTML = order.items
+          .map(
+            (it) =>
+              `<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:14px;color:#334155;font-weight:500;"><span>${it.qty} × ${esc(it.name)}</span><span>₱${(it.price * it.qty).toFixed(2)}</span></div>`,
+          )
+          .join("");
+
+        scanConfirmModal.classList.add("active");
+
+        // Reset promo state
+        document.getElementById("scanPromoCode").value = "";
+        document.getElementById("scanPromoMsg").style.display = "none";
+        document.getElementById("scanOriginalTotalRow").style.display = "none";
+        window.currentAppliedPromo = null;
+      };
+
+      /* ── Apply Promo Code (Scan Modal) ── */
+      document.getElementById("applyScanPromoBtn").onclick = () => {
+        const code = document.getElementById("scanPromoCode").value.trim();
+        const msgEl = document.getElementById("scanPromoMsg");
+        const order = window.currentScanOrder;
+        if (!order) return;
+
+        const totalQty = order.items.reduce((sum, it) => sum + it.qty, 0);
+        const promo = validatePromoCode(code, order.total, totalQty);
+        if (!promo || promo.error) {
+          msgEl.textContent = promo ? promo.error : "Invalid promo code.";
+          msgEl.style.color = "#ef4444";
+          msgEl.style.display = "block";
+          return;
+        }
+
+        const discount = calculateDiscount(order.total, promo);
+        const newTotal = order.total - discount;
+
+        window.currentAppliedPromo = {
+          code: code.toUpperCase(),
+          discount: discount,
+          total: newTotal,
+        };
+
+        // Update UI
+        document.getElementById("scanConfirmTotal").textContent =
+          "₱" + newTotal.toFixed(2);
+        const origRow = document.getElementById("scanOriginalTotalRow");
+        origRow.textContent = "₱" + order.total.toFixed(2);
+        origRow.style.display = "block";
+
+        msgEl.textContent = `Applied! ${promo.label} saved.`;
+        msgEl.style.color = "#22c55e";
+        msgEl.style.display = "block";
+
+        showToast("success", "fa-tag", "Promo code applied!");
+      };
+
+
+      document.getElementById("scanConfirmPayBtn").onclick = () => {
+        const order = window.currentScanOrder;
+        if (!order) return;
+
+        const promoData = window.currentAppliedPromo;
+        const finalExtra = {
+          payment: "Online Payment (Wallet)",
+          isPaid: true,
+        };
+
+        if (promoData) {
+          finalExtra.total = promoData.total;
+          finalExtra.discount = (order.discount || 0) + promoData.discount;
+          finalExtra.promoCode = promoData.code;
+          
+          if (typeof markPromoCodeAsUsed === "function") {
+            markPromoCodeAsUsed(promoData.code);
+          }
+        }
+
+        scanConfirmModal.classList.remove("active");
+        updateOrderStatus(order.id, order.status, finalExtra);
+
+        renderOrders();
+        showToast(
+          "success",
+          "fa-check-circle",
+          "Payment successful via WMSU Pay!",
+        );
+      };
+
+      /* ── Pickup Modal ── */
+      const pickupModal = document.getElementById("pickupModal");
+      document.getElementById("closePickupModal").onclick = () =>
+        pickupModal.classList.remove("active");
+      document.getElementById("pickupOverlay").onclick = () =>
+        pickupModal.classList.remove("active");
+
+      const copyCodeBtn = document.getElementById("copyCodeBtn");
+      if (copyCodeBtn) {
+        copyCodeBtn.onclick = () => {
+          const code = document.getElementById("modalCodeVal").innerText;
+          navigator.clipboard.writeText(code);
+          showToast("success", "fa-copy", "Pickup code copied to clipboard!");
+        };
+      }
+
+      /* ── Review Modal ── */
+      document.getElementById("closeReviewModal").onclick = () =>
+        document.getElementById("reviewModal").classList.remove("active");
+      document.getElementById("reviewOverlay").onclick = () =>
+        document.getElementById("reviewModal").classList.remove("active");
+      document.getElementById("cancelReview").onclick = () =>
+        document.getElementById("reviewModal").classList.remove("active");
+
+      /* ── Star Rating ── */
+      const stars = document.querySelectorAll(".star-btn");
+      const ratingText = document.querySelector(".rating-text");
+      const starLabels = ["", "Poor", "Fair", "Good", "Very Good", "Excellent"];
+      let selectedStar = 0;
+      stars.forEach((btn, i) => {
+        btn.addEventListener("mouseenter", () => highlightStars(i + 1));
+        btn.addEventListener("mouseleave", () => highlightStars(selectedStar));
+        btn.addEventListener("click", () => {
+          selectedStar = i + 1;
+          highlightStars(selectedStar);
+          ratingText.textContent = starLabels[selectedStar];
+        });
+      });
+      function highlightStars(n) {
+        stars.forEach((b, i) => b.classList.toggle("active", i < n));
+      }
+
+      /* ── Review Submit ── */
+      document
+        .getElementById("submitReviewBtn")
+        .addEventListener("click", () => {
+          document.getElementById("reviewModal").classList.remove("active");
+          showToast("success", "fa-star", "Review submitted! Thank you.");
+        });
+
+      /* ── Confirmation Modal ── */
+      const confirmModal = document.getElementById("confirmModal");
+      let confirmCallback = null;
+
+      function showConfirmation(
+        title,
+        message,
+        callback,
+        order = null,
+        options = {},
+      ) {
+        document.getElementById("confirmTitle").textContent = title;
+        document.getElementById("confirmMessage").innerHTML = message;
+
+        const btn = document.getElementById("submitConfirmBtn");
+        const icon = document.getElementById("confirmBtnIcon");
+        const text = document.getElementById("confirmBtnText");
+
+        if (options.btnColor === "green") {
+          btn.style.border = "1px solid #22c55e";
+          btn.style.color = "#fff";
+          btn.style.background = "#22c55e";
+        } else {
+          btn.style.border = "1px solid #fecaca";
+          btn.style.color = "#ef4444";
+          btn.style.background = "#fff";
+        }
+
+        icon.className = options.btnIcon || "fas fa-trash";
+        text.textContent = options.btnText || "Confirm";
+
+        let detailHtml = "";
+        if (order) {
+          const itemsHtml = order.items
+            .map(
+              (it) =>
+                `<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:14px;color:#334155;font-weight:500;"><span>${it.qty} × ${esc(it.name)}</span><span>₱${(it.price * it.qty).toFixed(2)}</span></div>`,
+            )
+            .join("");
+
+          detailHtml = `
+              <div class="pickup-code-card" style="background: #ef4444; padding: 20px; border-radius: 12px 12px 0 0; margin-bottom: 0;">
+                <div class="pickup-code-label" style="opacity: 0.9; font-size: 13px;">ORDER ID</div>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin: 12px 0;">
+                  <div class="pickup-code-value" style="font-size: 32px; margin: 0; letter-spacing: 2px; font-family: monospace;">${esc(order.id.slice(-6).toUpperCase())}</div>
+                </div>
+                <div class="pickup-code-order" style="opacity: 0.9; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 12px; margin-top: 4px; display: flex; justify-content: space-between;">
+                  <span><i class="fa-solid fa-store" style="margin-right: 6px; font-size: 12px;"></i> ${esc(order.vendor)}</span>
+                  <span><i class="fa-solid ${order.payment === "Cash on Pickup" ? "fa-money-bill-wave" : "fa-credit-card"}" style="margin-right: 4px; font-size: 12px;"></i> ${order.payment === "Cash on Pickup" ? "Cash" : "Online"}</span>
+                </div>
+              </div>
+              <div style="padding: 16px; background: #fff; border: 1px solid #e2e8f0; border-top: none; border-radius: 0 0 12px 12px;">
+                ${order.img ? '<img src="' + esc(order.img) + '" style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 12px;" alt="" />' : ""}
+                <div style="font-size: 14px; color: #475569; margin-bottom: 8px; font-weight: 500;">Order Items:</div>
+                <div style="font-size: 14px; color: #1e293b; background: #f8fafc; padding: 10px; border-radius: 6px; border: 1px solid #f1f5f9; line-height: 1.5;">
+                  ${itemsHtml}
+                </div>
+                <div style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-weight: 600; color: #64748b; font-size: 13px;">Total Amount:</span>
+                  <span style="font-weight: 800; color: #1e293b; font-size: 18px;">₱${order.total.toFixed(2)}</span>
+                </div>
+              </div>
+            `;
+        }
+        document.getElementById("modalDetail").innerHTML = detailHtml;
+
+        confirmCallback = callback;
+        confirmModal.classList.add("active");
+      }
+      document.getElementById("closeConfirmModal").onclick = () => {
+        confirmModal.classList.remove("active");
+        confirmCallback = null;
+      };
+      document.getElementById("cancelConfirmBtn").onclick = () => {
+        confirmModal.classList.remove("active");
+        confirmCallback = null;
+      };
+      document.getElementById("confirmOverlay").onclick = () => {
+        confirmModal.classList.remove("active");
+        confirmCallback = null;
+      };
+      document.getElementById("submitConfirmBtn").onclick = () => {
+        if (confirmCallback) confirmCallback();
+        confirmModal.classList.remove("active");
+        confirmCallback = null;
+      };
+
+      /* ── Filter Tabs ── */
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentPage = 1; // Reset to page 1 on filter change
+          applyFilters();
+        });
+      });
+
+      // Pagination Listeners
+      document.getElementById("prevPage").onclick = () => {
+        if (currentPage > 1) {
+          currentPage--;
+          applyFilters();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      };
+      document.getElementById("nextPage").onclick = () => {
+        // Total pages calculation is in applyFilters, but we can just check if next button is enabled
+        currentPage++;
+        applyFilters();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+
+      /* â”€â”€ Toast â”€â”€ */
+      function showToast(type, icon, msg) {
+        const el = document.createElement("div");
+        el.className = `toast ${type}`;
+        el.innerHTML = `<i class="fa-solid ${icon}"></i><span>${msg}</span>`;
+        document.getElementById("toast-container").appendChild(el);
+        setTimeout(() => {
+          el.classList.add("fade-out");
+          setTimeout(() => el.remove(), 300);
+        }, 3200);
+      }
+
+      /* â”€â”€ Sidebar overlay (mobile) â”€â”€ */
+      const sidebarOverlay = document.getElementById("sidebarOverlay");
+      if (sidebarOverlay) {
+        sidebarOverlay.onclick = () => {
+          document.getElementById("menu-checkbox").checked = false;
+        };
+      }
+
+      /* ── Init ── */
+      renderOrders();
+
+      /* ── Report Modal ── */
+      const reportModal = document.getElementById("reportModal");
+      document.getElementById("closeReportModal").onclick = () =>
+        reportModal.classList.remove("active");
+      document.getElementById("reportOverlay").onclick = () =>
+        reportModal.classList.remove("active");
+      document.getElementById("cancelReportBtn").onclick = () =>
+        reportModal.classList.remove("active");
+
+      document.getElementById("submitReportBtn").onclick = () => {
+        const order = window.currentReportOrder;
+        if (!order) return;
+        const reason = document.getElementById("reportReason").value.trim();
+        if (!reason) {
+          showToast(
+            "error",
+            "fa-triangle-exclamation",
+            "Please provide a reason.",
+          );
+          return;
+        }
+
+        reportModal.classList.remove("active");
+        updateOrderStatus(order.id, order.status, {
+          reportedIssue: true,
+          reportReason: reason,
+        });
+        renderOrders();
+        showToast(
+          "success",
+          "fa-check",
+          "Issue reported. Auto-completion paused.",
+        );
+      };
+
+      /* ── Auto-Complete Timer ── */
+      setInterval(() => {
+        document.querySelectorAll(".auto-complete-timer").forEach((span) => {
+          const orderId = span.dataset.id;
+          const order = getOrders().find((o) => o.id === orderId);
+          if (!order || !order.vendorPickedUpAt || order.reportedIssue) return;
+
+          const timeLimit = 5 * 60 * 1000;
+          const timePassed = Date.now() - order.vendorPickedUpAt;
+          const timeLeft = timeLimit - timePassed;
+
+          if (timeLeft <= 0) {
+            span.textContent = "0:00";
+            updateOrderStatus(order.id, "completed", {
+              studentPickedUp: true,
+              autoCompleted: true,
+            });
+            renderOrders();
+            showToast("success", "fa-check-double", "Order auto-completed!");
+          } else {
+            const m = Math.floor(timeLeft / 60000);
+            const s = Math.floor((timeLeft % 60000) / 1000);
+            span.textContent = `${m}:${s.toString().padStart(2, "0")}`;
+          }
+        });
+      }, 1000);
+
+      /* ── Order Detail Modal ── */
+      const orderDetailsModal = document.getElementById("orderDetailsModal");
+      document.getElementById("closeOrderDetailModal").onclick = () =>
+        orderDetailsModal.classList.remove("active");
+      document.getElementById("orderDetailOverlay").onclick = () =>
+        orderDetailsModal.classList.remove("active");
+      document.getElementById("closeDetailBtn").onclick = () =>
+        orderDetailsModal.classList.remove("active");
+
+      /* ── Live notification navbar ── */
+      function refreshStudentNavNotifs() {
+        if (typeof renderNavbarNotifications === "function") {
+          renderNavbarNotifications("student", {
+            listEl: document.querySelector(".notification-list"),
+            badgeEl: document.querySelector(".notification-badge"),
+            markReadEl: document.querySelector(".mark-read-btn"),
+          });
+        }
+      }
+      refreshStudentNavNotifs();
+
+      /* ── Respond to vendor status changes (cross-tab) ── */
+      window.addEventListener("storage", (e) => {
+        if (e.key === "wm_eat_su_orders") {
+          renderOrders();
+        }
+        if (e.key === "wm_eat_su_notifications") {
+          refreshStudentNavNotifs();
+        }
+      });
+    </script>
+  </body>
+</html>
+
+
+
+
