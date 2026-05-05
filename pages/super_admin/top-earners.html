@@ -200,9 +200,78 @@
           </table>
         </div>
       </div>
+
+      <!-- Analytics Section -->
+      <div class="analytics-container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-info">
+              <div class="stat-header-inline">
+                <h3>Total Revenue</h3>
+                <select id="revenueFilter" class="mini-select">
+                  <option value="all_time">All time</option>
+                  <option value="ytd">This year</option>
+                  <option value="monthly" selected>This month</option>
+                  <option value="daily">Today</option>
+                </select>
+              </div>
+              <p id="totalRevenueValue" class="stat-value">₱24,600.00</p>
+            </div>
+            <div class="stat-icon icon-green">
+              <i class="fas fa-peso-sign"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <h3>Total Orders</h3>
+              <p class="stat-value">1,248</p>
+            </div>
+            <div class="stat-icon icon-blue">
+              <i class="fas fa-shopping-bag"></i>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-info">
+              <h3>Today's Sales</h3>
+              <p class="stat-value">₱1,400.00</p>
+            </div>
+            <div class="stat-icon icon-orange">
+              <i class="fas fa-chart-pie"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-container-wrapper">
+          <div class="chart-header">
+            <div class="chart-title">
+              <h2>Revenue Analytics</h2>
+              <div class="chart-summary">
+                <span class="total-value" id="chartTotalRevenue">₱1,400.00</span>
+                <span class="growth-badge positive">
+                  <i class="fas fa-arrow-up"></i>
+                  <span id="chartGrowth">+12%</span>
+                </span>
+              </div>
+            </div>
+            <div class="chart-controls">
+              <button class="chart-tab active" data-view="daily">Daily</button>
+              <button class="chart-tab" data-view="weekly">Weekly</button>
+              <button class="chart-tab" data-view="monthly">Monthly</button>
+              <button class="chart-tab" data-view="yearly">Yearly</button>
+              <button class="chart-tab" data-view="all_time">All-time</button>
+            </div>
+          </div>
+          <div class="chart-body">
+            <canvas id="revenueChart"></canvas>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="../../script/super_admin_js/top-earners.js"></script>
 </body>
 
