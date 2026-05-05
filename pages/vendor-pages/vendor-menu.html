@@ -277,16 +277,6 @@
                         required
                       />
                     </div>
-                    <div class="form-group">
-                      <label for="itemDiscount">Discount (%)</label>
-                      <input
-                        type="number"
-                        id="itemDiscount"
-                        min="0"
-                        max="100"
-                        placeholder="0"
-                      />
-                    </div>
                   <div class="form-group" style="margin-top: 12px;">
                     <label for="itemQuantity">Stock Remaining</label>
 
@@ -759,8 +749,17 @@
       function handleImageUpload(input) {
         const msg = document.getElementById("uploadSuccessMsg");
         if (input.files && input.files[0]) {
-          msg.style.display = "block";
-          msg.innerHTML = `<p style="color: #059669; font-size: 13px; font-weight: 600;"><i class="fas fa-check-circle"></i> Image selected</p>`;
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            msg.style.display = "block";
+            msg.innerHTML = `
+              <p style="color: #059669; font-size: 13px; font-weight: 600; margin-bottom: 10px;">
+                <i class="fas fa-check-circle"></i> Image selected
+              </p>
+              <img src="${e.target.result}" style="max-height: 120px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" />
+            `;
+          };
+          reader.readAsDataURL(input.files[0]);
         }
       }
 
@@ -771,8 +770,19 @@
         document.getElementById("revPrice").textContent = "₱" + (parseFloat(document.getElementById("itemPrice").value) || 0).toFixed(2);
         document.getElementById("revDesc").textContent = document.getElementById("itemDescription").value || "No description provided.";
         
+        const fileEl = document.getElementById("itemImage");
         const existImg = document.getElementById("itemExistingImg").value;
-        document.getElementById("revImage").src = existImg || "../../images/burger.avif";
+        const revImg = document.getElementById("revImage");
+        
+        if (fileEl && fileEl.files && fileEl.files[0]) {
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            revImg.src = ev.target.result;
+          };
+          reader.readAsDataURL(fileEl.files[0]);
+        } else {
+          revImg.src = existImg || "../../images/burger.avif";
+        }
       }
 
 
@@ -829,7 +839,6 @@
         document.getElementById("itemName").value = item.name;
         document.getElementById("itemDescription").value = item.desc || "";
         document.getElementById("itemPrice").value = item.price;
-        document.getElementById("itemDiscount").value = item.discount || 0;
         document.getElementById("itemCategory").value = item.category || "meals";
 
         document.getElementById("itemQuantity").value = item.stock || 0;
@@ -882,7 +891,6 @@
         document.getElementById("itemEditId").value = "";
         document.getElementById("itemExistingImg").value = "";
         document.getElementById("uploadSuccessMsg").style.display = "none";
-        document.getElementById("imagePreview").src = "";
 
         currentMenuStep = 1;
         updateMenuWizard();
@@ -945,8 +953,7 @@
               .value.trim();
             const price =
               parseFloat(document.getElementById("itemPrice").value) || 0;
-            const discount =
-              parseFloat(document.getElementById("itemDiscount").value) || 0;
+            const discount = 0;
             const category =
               document.getElementById("itemCategory").value || "meals";
 
