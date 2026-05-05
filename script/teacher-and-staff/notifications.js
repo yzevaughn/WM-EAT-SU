@@ -193,21 +193,48 @@ function notifyVendorNewOrder(order) {
 }
 
 /** Student/outsider: vendor declined order */
-function notifyOrderCancelled(order) {
+function notifyOrderDeclined(order) {
   const role = order.customerRole || "student";
   const orderLink = role === "outsider"
     ? "../outsider/outsider-order.html"
     : "student-order.html";
   addNotification({
     role,
-    type:    "order_cancelled",
-    title:   "Order Declined/Cancelled ❌",
-    desc:    `Your order #${order.id.slice(-6).toUpperCase()} from ${order.vendor} has been cancelled. If you paid online, funds will be returned to your wallet.`,
+    type:    "order_declined",
+    title:   "Order Declined by Vendor ❌",
+    desc:    `Your order #${order.id.slice(-6).toUpperCase()} from ${order.vendor} has been declined. If you paid online, funds will be returned to your wallet.`,
     icon:    "fa-circle-xmark",
     color:   "red",
     link:    orderLink,
     orderId: order.id.slice(-6).toUpperCase(),
   });
+}
+
+/** Student/outsider: user cancelled order */
+function notifyOrderCancelledByUser(order) {
+  const role = order.customerRole || "student";
+  const orderLink = role === "outsider"
+    ? "../outsider/outsider-order.html"
+    : "student-order.html";
+  addNotification({
+    role,
+    type:    "order_cancelled_user",
+    title:   "Order Cancelled ❌",
+    desc:    `You have successfully cancelled your order #${order.id.slice(-6).toUpperCase()} from ${order.vendor}. Funds have been returned to your wallet.`,
+    icon:    "fa-circle-xmark",
+    color:   "red",
+    link:    orderLink,
+    orderId: order.id.slice(-6).toUpperCase(),
+  });
+}
+
+/** Legacy/Generic: order cancelled */
+function notifyOrderCancelled(order) {
+  if (order.cancelledByVendor) {
+    notifyOrderDeclined(order);
+  } else {
+    notifyOrderCancelledByUser(order);
+  }
 }
 
 /** Student/outsider: order picked up */
@@ -223,6 +250,22 @@ function notifyOrderCompleted(order) {
     desc:    `Order #${order.id.slice(-6).toUpperCase()} from ${order.vendor} is completed. Thank you for using WM EAT SU!`,
     icon:    "fa-bag-shopping",
     color:   "green",
+    link:    orderLink,
+    orderId: order.id.slice(-6).toUpperCase(),
+  });
+}
+
+/** Student/outsider: vendor marked as picked up, waiting for student */
+function notifyOrderVendorConfirmedPickup(order) {
+  const role = order.customerRole || "student";
+  const orderLink = "teacher-and-staff-order.html";
+  addNotification({
+    role: "student", // Using student role as placeholder or appropriate role
+    type:    "vendor_picked_up",
+    title:   "Vendor Confirmed Pickup 🛍️",
+    desc:    `The vendor has marked order #${order.id.slice(-6).toUpperCase()} as collected. Please confirm if you have received it.`,
+    icon:    "fa-hand-holding-heart",
+    color:   "blue",
     link:    orderLink,
     orderId: order.id.slice(-6).toUpperCase(),
   });

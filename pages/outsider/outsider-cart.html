@@ -14,6 +14,20 @@
     />
     <link rel="stylesheet" href="../../css/navbar.css" />
     <link rel="stylesheet" href="../../css/outsider/cart.css" />
+    <style>
+      #promo-select:focus {
+        border-color: #e61524 !important;
+        box-shadow: 0 0 0 3px rgba(230, 21, 36, 0.1);
+      }
+      #apply-promo-btn:hover {
+        background: #1e293b !important;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+      }
+      #apply-promo-btn:active {
+        transform: translateY(0);
+      }
+    </style>
   </head>
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
@@ -217,49 +231,74 @@
             <div
               class="promo-section"
               style="
-                margin-top: 20px;
-                padding: 15px;
-                background: #f8fafc;
-                border: 1px dashed #cbd5e1;
-                border-radius: 12px;
+                margin-top: 24px;
+                padding: 20px;
+                background: white;
+                border: 1.5px solid #f0f0f5;
+                border-radius: 16px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
               "
             >
-              <label
-                style="
-                  font-size: 13px;
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+                <div style="
+                  width: 32px; 
+                  height: 32px; 
+                  background: #fff0f1; 
+                  border-radius: 8px; 
+                  display: flex; 
+                  align-items: center; 
+                  justify-content: center; 
+                  color: #e61524;
+                ">
+                  <i class="fa-solid fa-ticket-alt" style="font-size: 14px;"></i>
+                </div>
+                <label style="
+                  font-size: 15px;
                   font-weight: 700;
-                  color: #475569;
-                  margin-bottom: 8px;
-                  display: block;
-                "
-                >Promo Code</label
-              >
-              <div style="display: flex; gap: 8px">
-                <input
-                  type="text"
-                  id="promo-code"
-                  placeholder="Enter code (e.g. SAVE10)"
+                  color: #1e293b;
+                  margin: 0;
+                ">Have a voucher?</label>
+              </div>
+              <div style="display: flex; gap: 8px; width: 100%;">
+                <select
+                  id="promo-select"
                   style="
                     flex: 1;
+                    min-width: 0;
                     padding: 10px;
-                    border: 1px solid #e2e8f0;
-                    border-radius: 8px;
+                    border: 1.5px solid #e2e8f0;
+                    border-radius: 10px;
                     font-size: 14px;
                     outline: none;
+                    background: white;
+                    cursor: pointer;
+                    appearance: none;
+                    background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22currentColor%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3e%3cpolyline points=%226 9 12 15 18 9%22%3e%3c/polyline%3e%3c/svg%3e');
+                    background-repeat: no-repeat;
+                    background-position: right 12px center;
+                    background-size: 16px;
+                    padding-right: 40px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                   "
-                />
+                >
+                  <option value="">Select a voucher...</option>
+                </select>
                 <button
                   id="apply-promo-btn"
                   style="
-                    padding: 0 16px;
+                    flex-shrink: 0;
+                    padding: 0 20px;
                     background: #0f172a;
                     color: white;
                     border: none;
-                    border-radius: 8px;
+                    border-radius: 10px;
                     font-weight: 600;
                     font-size: 13px;
                     cursor: pointer;
                     transition: all 0.2s;
+                    white-space: nowrap;
                   "
                 >
                   Apply
@@ -438,6 +477,37 @@
 
         recalc();
         attachEvents();
+        updateVoucherDropdown();
+      }
+
+      function updateVoucherDropdown() {
+        const select = document.getElementById("promo-select");
+        if (!select) return;
+
+        const cart = getCart();
+        const vouchers = getAvailableVouchersForCart(cart);
+        const currentValue = select.value;
+
+        select.innerHTML = '<option value="">Select a voucher...</option>';
+        vouchers.forEach((v) => {
+          const option = document.createElement("option");
+          option.value = v.code;
+          option.textContent = `${v.code} - ${v.label} (${v.vendor})`;
+          if (v.error) {
+            option.disabled = true;
+            option.textContent += ` [${v.error}]`;
+          }
+          select.appendChild(option);
+        });
+
+        if (window.appliedPromoCode) {
+          select.value = window.appliedPromoCode;
+        } else if (
+          currentValue &&
+          !select.querySelector(`option[value="${currentValue}"]:disabled`)
+        ) {
+          select.value = currentValue;
+        }
       }
 
       /* â”€â”€ Recalculate totals from DOM â”€â”€ */
@@ -474,12 +544,10 @@
         const msgEl = document.getElementById("promo-msg");
         let finalTotal = grandTotal;
 
+        const totalQty = getCart().reduce((s, c) => s + c.qty, 0);
+
         if (window.appliedPromoCode) {
-          const promo = validatePromoCode(
-            window.appliedPromoCode,
-            grandTotal,
-            totalQty,
-          );
+          const promo = validatePromoCode(window.appliedPromoCode, getCart());
 
           if (!promo || promo.error) {
             // Requirements no longer met (e.g. item removed)
@@ -517,6 +585,9 @@
 
         document.getElementById("totalAmt").textContent =
           "₱" + finalTotal.toFixed(2);
+
+        // Update dropdown state as minPurchase requirements might have changed
+        updateVoucherDropdown();
       }
 
       window.addEventListener("storage", (e) => {
@@ -581,17 +652,21 @@
 
         // Apply Promo
         const applyPromoBtn = document.getElementById("apply-promo-btn");
-        if (applyPromoBtn) {
+        const promoSelect = document.getElementById("promo-select");
+        if (applyPromoBtn && promoSelect) {
           applyPromoBtn.onclick = () => {
-            const code = document.getElementById("promo-code").value.trim();
+            const code = promoSelect.value;
             const msgEl = document.getElementById("promo-msg");
+            if (!code) {
+              window.appliedPromo = null;
+              window.appliedPromoCode = null;
+              msgEl.style.display = "none";
+              recalc();
+              return;
+            }
+
             const cart = getCart();
-            const currentTotal = cart.reduce(
-              (sum, item) => sum + item.price * item.qty,
-              0,
-            );
-            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-            const promo = validatePromoCode(code, currentTotal, totalQty);
+            const promo = validatePromoCode(code, cart);
             if (!promo || promo.error) {
               window.appliedPromo = null;
               window.appliedPromoCode = null;
@@ -609,6 +684,11 @@
             msgEl.style.display = "block";
             recalc();
             showToast("success", "fa-tag", "Promo code applied!");
+          };
+
+          // Also apply on change for better UX
+          promoSelect.onchange = () => {
+            applyPromoBtn.click();
           };
         }
       }

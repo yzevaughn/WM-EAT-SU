@@ -25,21 +25,23 @@ const PROMO_CODES = {
   FREE: { type: "percent", value: 1.0, label: "100% Off (Testing)", minPurchase: 0 },
 };
 
-function validatePromoCode(code, total = 0, itemCount = 0) {
+function validatePromoCode(code, items = []) {
   if (!code) return null;
   const upperCode = code.toUpperCase();
-  const currentStudentEmail = "vaughn.student@wm.edu.ph"; // Mock current identity
+  const currentEmail =
+    sessionStorage.getItem("teacherEmail") ||
+    sessionStorage.getItem("studentEmail") ||
+    "vaughn.student@wm.edu.ph";
 
-  // New Rule: Vouchers only apply to single-item orders
-  if (itemCount > 1) {
-    return { error: "Vouchers can only be applied to single-item orders." };
-  }
+  const total = items.reduce((s, i) => s + i.price * i.qty, 0);
 
   // 1. Check static codes
   const staticPromo = PROMO_CODES[upperCode];
   if (staticPromo) {
     if (total < (staticPromo.minPurchase || 0)) {
-      return { error: `Minimum purchase of ₱${staticPromo.minPurchase} required.` };
+      return {
+        error: `Minimum purchase of ₱${staticPromo.minPurchase} required.`,
+      };
     }
     return staticPromo;
   }
@@ -49,17 +51,23 @@ function validatePromoCode(code, total = 0, itemCount = 0) {
     JSON.parse(localStorage.getItem("wm_eat_su_vendor_vouchers")) || [];
   const vendorPromo = vendorVouchers.find((v) => v.code === upperCode);
   if (vendorPromo) {
-    // Check minimum purchase if vendor promo has it
-    if (total < (vendorPromo.minPurchase || 0)) {
-      return { error: `Minimum purchase of ₱${vendorPromo.minPurchase} required.` };
+    // Check minimum purchase against items from THIS vendor
+    const vendorItems = items.filter((it) => it.vendor === vendorPromo.vendor);
+    const vendorTotal = vendorItems.reduce((s, i) => s + i.price * i.qty, 0);
+
+    if (vendorTotal < (vendorPromo.minPurchase || 0)) {
+      return {
+        error: `Minimum purchase of ₱${vendorPromo.minPurchase} from ${vendorPromo.vendor} required.`,
+      };
     }
+
     // 1. Check assignment restriction
     if (vendorPromo.assignmentType === "specific" && vendorPromo.assignedTo) {
       const allowed = Array.isArray(vendorPromo.assignedTo)
         ? vendorPromo.assignedTo
         : vendorPromo.assignedTo.split(",").map((e) => e.trim());
 
-      if (!allowed.includes(currentStudentEmail)) {
+      if (!allowed.includes(currentEmail)) {
         return null;
       }
     } else if (vendorPromo.assignmentType === "first-time") {
@@ -113,35 +121,102 @@ function validatePromoCode(code, total = 0, itemCount = 0) {
   return null;
 }
 
+/**
+ * Returns all vouchers available for the current user and cart.
+ */
+function getAvailableVouchersForCart(items = []) {
+  const claimedKey = "wm_eat_su_claimed_vouchers";
+  let claimedCodes = [];
+  try {
+    claimedCodes = JSON.parse(localStorage.getItem(claimedKey)) || [
+      "WMSU50",
+      "SAVE10",
+      "WELCOME",
+    ];
+  } catch (e) {
+    claimedCodes = ["WMSU50", "SAVE10", "WELCOME"];
+  }
+
+  const results = [];
+
+  // 1. Static Vouchers
+  Object.keys(PROMO_CODES).forEach((code) => {
+    if (claimedCodes.includes(code)) {
+      const promo = validatePromoCode(code, items);
+      results.push({
+        code,
+        label: PROMO_CODES[code].label,
+        error: promo && promo.error ? promo.error : null,
+        vendor: "WM EAT SU",
+      });
+    }
+  });
+
+  // 2. Vendor Vouchers
+  const vendorVouchers =
+    JSON.parse(localStorage.getItem("wm_eat_su_vendor_vouchers")) || [];
+  const currentEmail =
+    sessionStorage.getItem("teacherEmail") ||
+    sessionStorage.getItem("studentEmail") ||
+    "vaughn.student@wm.edu.ph";
+
+  vendorVouchers.forEach((v) => {
+    // Check if user has it (claimed or assigned)
+    let hasIt = claimedCodes.includes(v.code);
+    if (!hasIt) {
+      if (v.assignmentType === "all") hasIt = true;
+      else if (v.assignmentType === "first-time") hasIt = true;
+      else if (v.assignmentType === "specific" && v.assignedTo) {
+        const allowed = Array.isArray(v.assignedTo)
+          ? v.assignedTo
+          : v.assignedTo.split(",").map((e) => e.trim());
+        if (allowed.includes(currentEmail)) hasIt = true;
+      }
+    }
+
+    if (hasIt) {
+      const promo = validatePromoCode(v.code, items);
+      results.push({
+        code: v.code,
+        label:
+          v.type === "percent" ? `${v.value}% Off` : `₱${v.value} Off`,
+        error: promo && promo.error ? promo.error : null,
+        vendor: v.vendor,
+      });
+    }
+  });
+
+  return results;
+}
+
 function calculateDiscount(total, promo, items = []) {
   if (!promo) return 0;
 
-  // 1. Check for item-specific restriction
-  if (promo.appliesTo && promo.appliesTo !== "all") {
-    const targetIds = promo.appliesTo.itemIds || [promo.appliesTo.itemId];
-    const targetItems = items.filter((it) => targetIds.includes(it.id));
+  let applicableItems = items;
 
-    if (targetItems.length === 0) return 0; // Promo doesn't apply to any item in cart
-
-    // Calculate discount ONLY on those items
-    const applicableTotal = targetItems.reduce(
-      (sum, it) => sum + it.price * it.qty,
-      0,
-    );
-
-    if (promo.type === "fixed") {
-      return Math.min(applicableTotal, promo.value);
-    } else if (promo.type === "percent") {
-      return applicableTotal * promo.value;
-    }
-    return 0;
+  // 1. Filter by vendor if specified
+  if (promo.vendor) {
+    applicableItems = applicableItems.filter((it) => it.vendor === promo.vendor);
   }
 
-  // 2. Global discount
+  // 2. Filter by item-specific restriction
+  if (promo.appliesTo && promo.appliesTo !== "all") {
+    const targetIds = promo.appliesTo.itemIds || [promo.appliesTo.itemId];
+    applicableItems = applicableItems.filter((it) => targetIds.includes(it.id));
+  }
+
+  if (applicableItems.length === 0) return 0;
+
+  // Calculate discount ONLY on those items
+  const applicableTotal = applicableItems.reduce(
+    (sum, it) => sum + it.price * it.qty,
+    0,
+  );
+
   if (promo.type === "fixed") {
-    return Math.min(total, promo.value);
+    return Math.min(applicableTotal, promo.value);
   } else if (promo.type === "percent") {
-    return total * promo.value;
+    return applicableTotal * promo.value;
   }
   return 0;
 }
@@ -257,9 +332,9 @@ function placeOrder(instructions, payment, promoCode = null) {
   // 1. Validate promo against the entire cart first to satisfy requirements
   const grandTotal = cart.reduce((sum, it) => sum + it.price * it.qty, 0);
   const itemCount = cart.reduce((sum, it) => sum + it.qty, 0);
-  const globalPromo = validatePromoCode(promoCode, grandTotal, itemCount);
-  const promoObj = (globalPromo && !globalPromo.error) ? globalPromo : null;
-  
+  const globalPromo = validatePromoCode(promoCode, cart);
+  const promoObj = globalPromo && !globalPromo.error ? globalPromo : null;
+
   // Calculate total discount available for the whole cart if it's a fixed amount
   let remainingDiscount = 0;
   if (promoObj && promoObj.type === "fixed") {
@@ -284,11 +359,20 @@ function placeOrder(instructions, payment, promoCode = null) {
     
     let discount = 0;
     if (promoObj) {
-      if (promoObj.type === "percent") {
-        discount = calculateDiscount(total, promoObj, items);
-      } else {
-        discount = Math.min(total, remainingDiscount);
-        remainingDiscount -= discount;
+      // Only apply if it's a global promo or belongs to this vendor
+      if (!promoObj.vendor || promoObj.vendor === vendor) {
+        if (promoObj.type === "percent") {
+          discount = calculateDiscount(total, promoObj, items);
+        } else {
+          if (promoObj.vendor) {
+            // Vendor-specific fixed discount
+            discount = calculateDiscount(total, promoObj, items);
+          } else {
+            // Global fixed discount (e.g. WMSU50)
+            discount = Math.min(total, remainingDiscount);
+            remainingDiscount -= discount;
+          }
+        }
       }
     }
     const finalTotal = total - discount;
@@ -364,6 +448,7 @@ function updateOrderStatus(orderId, status, extra) {
   if (order) {
     const prevStatus = order.status;
     const prevIsPaid = order.isPaid;
+    const prevVendorPickedUp = !!order.vendorPickedUp;
 
     order.status = status;
     if (extra) Object.assign(order, extra);
@@ -429,6 +514,13 @@ function updateOrderStatus(orderId, status, extra) {
         typeof notifyOrderCompleted === "function"
       ) {
         notifyOrderCompleted(order);
+      }
+    }
+
+    // Notify if vendor marked as picked up but student hasn't yet
+    if (order.vendorPickedUp && !prevVendorPickedUp && !order.studentPickedUp) {
+      if (typeof notifyOrderVendorConfirmedPickup === "function") {
+        notifyOrderVendorConfirmedPickup(order);
       }
     }
   }

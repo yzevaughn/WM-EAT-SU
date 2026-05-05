@@ -152,9 +152,7 @@ function buildVendorCard(order, sequence) {
     }
   }
 
-  const headerIcon = (tab === "Pending" || tab === "Preparing")
-    ? `<span style="font-weight:800; font-size:16px; font-family: 'Inter', sans-serif;">${sequence}</span>`
-    : `<i class="fa-solid ${cfg.icon}"></i>`;
+  const headerIcon = `<i class="fa-solid ${cfg.icon}"></i>`;
 
   return `
     <div class="order-card" data-status="${tab}" data-vendor="${order.vendor}" data-order-id="${shortId}"

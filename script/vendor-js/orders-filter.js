@@ -445,27 +445,6 @@
       const action = btn.dataset.action;
       if (!card || !action || !MODAL_CONFIG[action]) return;
 
-      if (action === "accept" || action === "markReady" || action === "complete") {
-        const currentStatus = card.dataset.status;
-        const allOfStatus = [...ordersList.querySelectorAll(".order-card")].filter(c => c.dataset.status === currentStatus);
-        
-        if (allOfStatus[0] !== card) {
-          modalHeaderIcon.className = "fa-solid fa-triangle-exclamation";
-          modalHeaderIcon.style.color = "#dc2626";
-          modalHeaderTitle.textContent = "Action Not Allowed";
-          
-          modalSubtitle.innerHTML = "<strong>The first order should be processed first.</strong> Please process orders in sequence.";
-          modalDetail.innerHTML = ""; 
-          
-          confirmActionBtn.style.display = "none";
-          cancelConfirmModal.textContent = "OK";
-          
-          confirmModal.classList.add("active");
-          document.body.style.overflow = "hidden";
-          return;
-        }
-      }
-
       // All actions → show confirmation modal first
       openConfirmModal(card, action);
     });
