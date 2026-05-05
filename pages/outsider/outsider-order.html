@@ -1044,15 +1044,13 @@
           )
           .join("");
 
-        const noteHtml = o.instructions
-          ? `
+        const noteHtml = `
           <div class="order-instruction"
             style="font-size:12px;color:#64748b;margin-top:8px;padding:6px 8px;
                    background:#f8fafc;border-radius:4px;border-left:2px solid #cbd5e1;">
             <i class="fa-regular fa-comment-dots" style="margin-right:4px;color:#94a3b8"></i>
-            <strong>Note:</strong> ${esc(o.instructions)}
-          </div>`
-          : "";
+            <strong>Note:</strong> ${o.instructions ? esc(o.instructions) : "None"}
+          </div>`;
 
         /* Top message banner for dual confirmation */
         let topMsgHtml = "";
@@ -1207,8 +1205,10 @@
               </div>
 
               <hr class="order-divider" />
-              <div class="order-total-row"><span>Total Amount: ₱${o.total.toFixed(2)}</span></div>
-              ${actHtml ? `<div class="order-actions" style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;">${actHtml}</div>` : ""}
+              <div class="order-total-row">
+                <span>Total Amount: ₱${o.total.toFixed(2)}</span>
+                ${actHtml ? `<div class="order-actions">${actHtml}</div>` : ""}
+              </div>
             </div>
           </div>`;
       }
@@ -1345,6 +1345,7 @@
                 );
               },
               order,
+              { btnIcon: "none" },
             );
           });
         });
@@ -1482,15 +1483,10 @@
                 </div>
               </div>
               
-              ${
-                order.instructions
-                  ? `
               <div style="margin-top:15px; padding:12px; background:#fffbeb; border-radius:10px; border:1px solid #fef3c7;">
                 <div style="font-size:12px; font-weight:700; color:#b45309; margin-bottom:4px;">Special Instructions:</div>
-                <div style="font-size:13px; color:#92400e;">${esc(order.instructions)}</div>
-              </div>`
-                  : ""
-              }
+                <div style="font-size:13px; color:#92400e;">${order.instructions ? esc(order.instructions) : "None"}</div>
+              </div>
             `;
 
             document.getElementById("orderDetailContent").innerHTML = content;
@@ -1801,7 +1797,12 @@
           btn.style.background = "#fff";
         }
 
-        icon.className = options.btnIcon || "fas fa-trash";
+        if (options.btnIcon === "none") {
+          icon.style.display = "none";
+        } else {
+          icon.style.display = "inline-block";
+          icon.className = options.btnIcon || "fas fa-trash";
+        }
         text.textContent = options.btnText || "Confirm";
 
         let detailHtml = "";
@@ -1980,8 +1981,6 @@
         orderDetailsModal.classList.remove("active");
       document.getElementById("closeDetailBtn").onclick = () =>
         orderDetailsModal.classList.remove("active");
-
-
 
       /* -- Respond to vendor status changes (cross-tab) -- */
       window.addEventListener("storage", (e) => {

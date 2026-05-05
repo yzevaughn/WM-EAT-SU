@@ -213,6 +213,71 @@
         </div>
       </div>
 
+      <!-- CATEGORY TABS & FILTERS -->
+      <div style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            gap: 16px;
+            flex-wrap: wrap;
+          ">
+        <div class="category-tabs" style="
+              display: flex;
+              background: #f1f5f9;
+              padding: 4px;
+              border-radius: 12px;
+              gap: 4px;
+            ">
+          <button class="category-tab active" data-tab="active" onclick="setTab('active')" style="
+                padding: 8px 20px;
+                border: none;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s;
+                background: white;
+                color: #0f172a;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+              ">
+            Active
+          </button>
+          <button class="category-tab" data-tab="expired" onclick="setTab('expired')" style="
+                padding: 8px 20px;
+                border: none;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.2s;
+                background: transparent;
+                color: #64748b;
+              ">
+            Expired
+          </button>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-size: 14px; font-weight: 600; color: #64748b;">Filter by:</span>
+          <select id="discountFilter" onchange="setFilter(this.value)" style="
+                padding: 8px 16px;
+                border: 1.5px solid #e2e8f0;
+                border-radius: 10px;
+                font-size: 14px;
+                font-weight: 600;
+                color: #1e293b;
+                outline: none;
+                cursor: pointer;
+                background: white;
+              ">
+            <option value="all">All Discounts</option>
+            <option value="percentage">Percentage (%)</option>
+            <option value="fixed">Fixed Amount (₱)</option>
+          </select>
+        </div>
+      </div>
+
       <div class="vouchers-grid" id="vouchersGrid">
         <!-- Voucher cards will be injected here -->
       </div>
@@ -226,6 +291,9 @@
   <script src="../../script/student/cart.js"></script>
 
   <script>
+    let currentTab = "active";
+    let currentFilter = "all";
+
     document.addEventListener("DOMContentLoaded", () => {
       initClaimedVouchers();
       renderVouchers();
@@ -239,6 +307,30 @@
         });
       }
     });
+
+    function setTab(tab) {
+      currentTab = tab;
+      // Update UI
+      document.querySelectorAll(".category-tab").forEach((btn) => {
+        if (btn.dataset.tab === tab) {
+          btn.classList.add("active");
+          btn.style.background = "white";
+          btn.style.color = "#0f172a";
+          btn.style.boxShadow = "0 2px 4px rgba(0,0,0,0.05)";
+        } else {
+          btn.classList.remove("active");
+          btn.style.background = "transparent";
+          btn.style.color = "#64748b";
+          btn.style.boxShadow = "none";
+        }
+      });
+      renderVouchers();
+    }
+
+    function setFilter(filter) {
+      currentFilter = filter;
+      renderVouchers();
+    }
 
     const CLAIMED_KEY = "wm_eat_su_claimed_vouchers";
 
@@ -259,6 +351,8 @@
     function renderVouchers() {
       const grid = document.getElementById("vouchersGrid");
       const claimedCodes = getClaimedCodes();
+      const now = new Date();
+      now.setHours(0, 0, 0, 0);
 
       // 1. Static platform-wide vouchers
       const staticVouchers = [
@@ -285,7 +379,7 @@
         },
       ];
 
-      // 2. Vendor-generated vouchers from localStorage (filtered by claimed or assigned rules)
+      // 2. Vendor-generated vouchers from localStorage
       const currentStudentEmail = "vaughn.student@wm.edu.ph";
       const vendorVouchersRaw =
         JSON.parse(localStorage.getItem("wm_eat_su_vendor_vouchers")) || [];
@@ -302,7 +396,7 @@
         })
         .map((v) => ({
           code: v.code,
-          type: v.type,
+          type: v.type, // 'percent' or 'fixed'
           value:
             v.type === "percent" ? v.value + "% OFF" : "₱" + v.value + " OFF",
           desc: v.desc,
@@ -310,42 +404,72 @@
           expiry: v.expiry,
         }));
 
-      // Merge both lists (only show static if they are in claimedCodes, or just show them always)
-      // For this prototype, static ones are always claimed by default.
-      const allVouchers = [
+      // Merge both lists
+      let allVouchers = [
         ...staticVouchers.filter((v) => claimedCodes.includes(v.code)),
         ...vendorVouchers,
       ];
 
+      // 3. APPLY CATEGORY FILTER (Active vs Expired)
+      allVouchers = allVouchers.filter(v => {
+        const isExpired = v.expiry && new Date(v.expiry) < now;
+        return currentTab === "active" ? !isExpired : isExpired;
+      });
+
+      // 4. APPLY TYPE FILTER (Percentage vs Amount)
+      if (currentFilter !== "all") {
+        allVouchers = allVouchers.filter(v => {
+          if (currentFilter === "percentage") return v.type === "percent";
+          if (currentFilter === "fixed") return v.type === "fixed";
+          return true;
+        });
+      }
+
       if (allVouchers.length === 0) {
         grid.innerHTML =
-          '<div style="grid-column: 1/-1; text-align:center; padding:60px; color:#64748b; background:white; border-radius:20px; border:1px dashed #cbd5e1;">No vouchers claimed yet. Try redeeming a code!</div>';
+          `<div style="grid-column: 1/-1; text-align:center; padding:60px; color:#64748b; background:white; border-radius:20px; border:1px dashed #cbd5e1;">
+            <i class="fa-solid fa-ticket-simple" style="font-size: 32px; color: #cbd5e1; margin-bottom: 12px; display: block;"></i>
+            No ${currentTab} ${currentFilter === 'all' ? '' : currentFilter} vouchers found.
+          </div>`;
         return;
       }
 
       grid.innerHTML = allVouchers
         .map(
-          (v) => `
-        <div class="voucher-card ${v.type}">
-          <div class="voucher-icon">
-            <i class="fa-solid ${v.type === "percent" ? "fa-percent" : "fa-ticket"}"></i>
-          </div>
-          <div class="voucher-info">
-            <div class="voucher-value">${v.value}</div>
-            <div class="voucher-code">${v.code}</div>
-            <div class="voucher-desc">${v.desc}</div>
-            <div style="font-size: 11px; color: #94a3b8; margin-top: 4px; font-weight: 600; text-transform: uppercase; display: flex; justify-content: space-between;">
-              <span>By ${v.vendor}</span>
-              ${v.expiry ? `<span style="color: #ef4444;"><i class="fa-solid fa-clock"></i> Exp: ${new Date(v.expiry).toLocaleDateString()}</span>` : ""}
-            </div>
-          </div>
-          <div class="voucher-action">
-            <button class="copy-btn" onclick="copyCode('${v.code}', this)" title="Copy Code">
-              <i class="fa-regular fa-copy"></i>
-            </button>
-          </div>
-        </div>
-      `,
+          (v) => {
+            const isExpired = v.expiry && new Date(v.expiry) < now;
+            return `
+              <div class="voucher-card ${v.type} ${isExpired ? 'expired' : ''}" style="${isExpired ? 'opacity: 0.7; filter: grayscale(0.5);' : ''}">
+                <div class="voucher-icon">
+                  <i class="fa-solid ${v.type === "percent" ? "fa-percent" : "fa-ticket"}"></i>
+                </div>
+                <div class="voucher-info">
+                  <div class="voucher-value">${v.value}</div>
+                  <div class="voucher-code">${v.code}</div>
+                  <div class="voucher-desc">${v.desc}</div>
+                  <div style="font-size: 11px; color: #94a3b8; margin-top: 4px; font-weight: 600; text-transform: uppercase; display: flex; justify-content: space-between;">
+                    <span>By ${v.vendor}</span>
+                    ${v.expiry ? `
+                      <span style="color: ${isExpired ? '#64748b' : '#ef4444'};">
+                        <i class="fa-solid ${isExpired ? 'fa-calendar-xmark' : 'fa-clock'}"></i> 
+                        ${isExpired ? 'Expired' : 'Exp'}: ${new Date(v.expiry).toLocaleDateString()}
+                      </span>` : ""}
+                  </div>
+                </div>
+                <div class="voucher-action">
+                  ${!isExpired ? `
+                    <button class="copy-btn" onclick="copyCode('${v.code}', this)" title="Copy Code">
+                      <i class="fa-regular fa-copy"></i>
+                    </button>
+                  ` : `
+                    <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; color: #cbd5e1;">
+                      <i class="fa-solid fa-lock"></i>
+                    </div>
+                  `}
+                </div>
+              </div>
+            `;
+          }
         )
         .join("");
     }

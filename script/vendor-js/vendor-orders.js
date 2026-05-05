@@ -131,13 +131,11 @@ function buildVendorCard(order, sequence) {
   const payIcon = isCash ? "fa-money-bill-wave" : "fa-credit-card";
   const payBadgeClass = isCash ? "badge-cash" : "badge-online";
 
-  const noteHtml = order.instructions
-    ? `
+  const noteHtml = `
     <div class="order-instruction" style="font-size:12px;color:#64748b;margin-top:8px;padding:6px 8px;background:#f8fafc;border-radius:4px;border-left:2px solid #cbd5e1;">
       <i class="fa-regular fa-comment-dots" style="margin-right:4px;color:#94a3b8"></i>
-      <strong>Note:</strong> ${esc(order.instructions)}
-    </div>`
-    : "";
+      <strong>Note:</strong> ${order.instructions ? esc(order.instructions) : "None"}
+    </div>`;
 
   let timerHtml = "";
   if (order.status === "ready" && order.vendorPickedUp && !order.studentPickedUp) {
@@ -353,15 +351,10 @@ window.renderVendorOrders = function () {
           </div>
         </div>
         
-        ${
-          order.instructions
-            ? `
         <div style="margin-top:15px; padding:12px; background:#fffbeb; border-radius:10px; border:1px solid #fef3c7;">
           <div style="font-size:12px; font-weight:700; color:#b45309; margin-bottom:4px;">Special Instructions:</div>
-          <div style="font-size:13px; color:#92400e;">${esc(order.instructions)}</div>
-        </div>`
-            : ""
-        }
+          <div style="font-size:13px; color:#92400e;">${order.instructions ? esc(order.instructions) : "None"}</div>
+        </div>
       `;
 
       document.getElementById("orderDetailContent").innerHTML = content;
