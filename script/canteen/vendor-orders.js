@@ -155,10 +155,6 @@ function buildVendorCard(order, sequence) {
   const headerIcon = (tab === "Pending" || tab === "Preparing")
     ? `<span style="font-weight:800; font-size:16px; font-family: 'Inter', sans-serif;">${sequence}</span>`
     : `<i class="fa-solid ${cfg.icon}"></i>`;
-  const isFirstActive = sequence === 1 && (order.status === "pending" || order.status === "preparing");
-  const priorityBadge = isFirstActive
-    ? `<span class="priority-badge" style="background:#ef4444; color:#fff; font-size:10px; font-weight:800; padding:2px 6px; border-radius:4px; text-transform:uppercase; margin-left:8px; animation: pulse 2s infinite; display: flex; align-items: center; gap: 4px;"><i class="fa-solid fa-fire-burner"></i> First Order</span>`
-    : "";
 
   return `
     <div class="order-card" data-status="${tab}" data-vendor="${order.vendor}" data-order-id="${shortId}"
@@ -171,7 +167,6 @@ function buildVendorCard(order, sequence) {
             <div style="display:flex; flex-direction:column; gap:2px;">
               <div style="display:flex; align-items:center;">
                 <span class="order-card-title">Order #${shortId}</span>
-                ${priorityBadge}
               </div>
               <div class="pay-method-badge ${payBadgeClass}">
                 <i class="fa-solid ${payIcon}"></i>
@@ -247,7 +242,14 @@ window.renderVendorOrders = function () {
   if (orders.length === 0) {
     if (emptyDiv) emptyDiv.style.display = "flex";
   } else {
-    const htmlCards = orders.map((o, i) => buildVendorCard(o, i + 1)).join("");
+    // Track sequence per status for numbering (1, 2, 3...)
+    const statusCounters = {};
+    const htmlCards = orders.map((o) => {
+      const tab = window.STATUS_MAP[o.status] || "Pending";
+      statusCounters[tab] = (statusCounters[tab] || 0) + 1;
+      return buildVendorCard(o, statusCounters[tab]);
+    }).join("");
+
     if (emptyDiv) emptyDiv.style.display = "none";
     list.insertAdjacentHTML("beforeend", htmlCards);
   }
