@@ -15,9 +15,67 @@
     <link rel="stylesheet" href="../../css/navbar.css" />
     <link rel="stylesheet" href="../../css/outsider/cart.css" />
     <style>
-      #promo-select:focus {
+      #promo-input:focus {
         border-color: #e61524 !important;
         box-shadow: 0 0 0 3px rgba(230, 21, 36, 0.1);
+      }
+      .voucher-option {
+        padding: 12px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        border: 1px solid transparent;
+        margin-bottom: 4px;
+      }
+      .voucher-option:last-child {
+        margin-bottom: 0;
+      }
+      .voucher-option:hover {
+        background: #f8fafc;
+        border-color: #e2e8f0;
+      }
+      .voucher-option.selected {
+        background: #fff0f1;
+        border-color: #ffcfd1;
+      }
+      .voucher-option.disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        background: #f1f5f9;
+      }
+      .voucher-option.disabled:hover {
+        border-color: transparent;
+      }
+      .voucher-badge {
+        font-weight: 700;
+        font-size: 12px;
+        color: #e61524;
+        background: #fff0f1;
+        padding: 4px 8px;
+        border-radius: 6px;
+        text-transform: uppercase;
+      }
+      .voucher-details {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-width: 0;
+      }
+      .voucher-main {
+        font-weight: 600;
+        font-size: 13px;
+        color: #1e293b;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .voucher-sub {
+        font-size: 11px;
+        color: #64748b;
       }
       #apply-promo-btn:hover {
         background: #1e293b !important;
@@ -26,6 +84,27 @@
       }
       #apply-promo-btn:active {
         transform: translateY(0);
+      }
+      #vouchersModal .modal-content {
+        padding: 0;
+        max-width: 450px;
+        overflow: hidden;
+      }
+      #vouchersModal .voucher-option {
+        background: white;
+        border: 1.5px solid #f1f5f9;
+        margin-bottom: 12px;
+        padding: 16px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      }
+      #vouchersModal .voucher-option:hover {
+        border-color: #ffcfd1;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(230, 21, 36, 0.08);
+      }
+      #vouchersModal .voucher-option.selected {
+        border-color: #e61524;
+        background: #fff0f1;
       }
     </style>
   </head>
@@ -229,90 +308,98 @@
 
             <!-- PROMO CODE SECTION -->
             <div
-              class="promo-section"
               style="
                 margin-top: 24px;
-                padding: 20px;
-                background: white;
-                border: 1.5px solid #f0f0f5;
-                border-radius: 16px;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+                padding-top: 20px;
+                border-top: 1px solid #f1f5f9;
               "
             >
-              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
-                <div style="
-                  width: 32px; 
-                  height: 32px; 
-                  background: #fff0f1; 
-                  border-radius: 8px; 
-                  display: flex; 
-                  align-items: center; 
-                  justify-content: center; 
-                  color: #e61524;
-                ">
-                  <i class="fa-solid fa-ticket-alt" style="font-size: 14px;"></i>
-                </div>
-                <label style="
-                  font-size: 15px;
-                  font-weight: 700;
-                  color: #1e293b;
-                  margin: 0;
-                ">Have a voucher?</label>
+              <div
+                style="
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  margin-bottom: 12px;
+                "
+              >
+                <i
+                  class="fa-solid fa-tag"
+                  style="color: #e61524; font-size: 14px"
+                ></i>
+                <label
+                  for="promo-input"
+                  style="font-weight: 700; color: #0f172a; font-size: 13px"
+                  >Have a voucher?</label
+                >
               </div>
-              <div style="display: flex; gap: 8px; width: 100%;">
-                <select
-                  id="promo-select"
+              <div style="position: relative; width: 100%">
+                <input
+                  type="text"
+                  id="promo-input"
+                  placeholder="Enter code"
                   style="
-                    flex: 1;
-                    min-width: 0;
-                    padding: 10px;
+                    width: 100%;
+                    padding: 11px 85px 11px 42px;
                     border: 1.5px solid #e2e8f0;
-                    border-radius: 10px;
+                    border-radius: 12px;
                     font-size: 14px;
                     outline: none;
-                    background: white;
+                    background: #f8fafc;
+                    text-transform: uppercase;
+                    transition: all 0.2s;
+                  "
+                />
+                <button
+                  id="open-vouchers-btn"
+                  title="Browse available vouchers"
+                  style="
+                    position: absolute;
+                    left: 12px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    background: none;
+                    border: none;
+                    color: #e61524;
                     cursor: pointer;
-                    appearance: none;
-                    background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22currentColor%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3e%3cpolyline points=%226 9 12 15 18 9%22%3e%3c/polyline%3e%3c/svg%3e');
-                    background-repeat: no-repeat;
-                    background-position: right 12px center;
-                    background-size: 16px;
-                    padding-right: 40px;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 4px;
+                    transition: all 0.2s;
                   "
                 >
-                  <option value="">Select a voucher...</option>
-                </select>
+                  <i class="fa-solid fa-ticket" style="font-size: 16px"></i>
+                </button>
                 <button
                   id="apply-promo-btn"
                   style="
-                    flex-shrink: 0;
-                    padding: 0 20px;
+                    position: absolute;
+                    right: 6px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    padding: 7px 15px;
                     background: #0f172a;
                     color: white;
                     border: none;
-                    border-radius: 10px;
-                    font-weight: 600;
-                    font-size: 13px;
+                    border-radius: 8px;
+                    font-weight: 700;
+                    font-size: 12px;
                     cursor: pointer;
                     transition: all 0.2s;
-                    white-space: nowrap;
                   "
                 >
                   Apply
                 </button>
               </div>
-              <div
+              <p
                 id="promo-msg"
                 style="
-                  font-size: 12px;
-                  margin-top: 8px;
                   display: none;
-                  font-weight: 500;
+                  font-size: 12px;
+                  font-weight: 600;
+                  margin-top: 8px;
                 "
-              ></div>
+              ></p>
             </div>
 
             <div class="summary-details">
@@ -344,6 +431,51 @@
     </div>
 
     <div id="toast-container"></div>
+
+    <!-- VOUCHERS MODAL -->
+    <div class="modal" id="vouchersModal">
+      <div class="modal-overlay" id="vouchersOverlay"></div>
+      <div class="modal-content">
+        <div
+          style="
+            padding: 24px;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <h2
+            style="font-size: 18px; font-weight: 800; color: #0f172a; margin: 0"
+          >
+            Available Vouchers
+          </h2>
+          <button
+            id="closeVouchersBtn"
+            style="
+              background: none;
+              border: none;
+              font-size: 20px;
+              color: #94a3b8;
+              cursor: pointer;
+            "
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div
+          id="vouchers-list-container"
+          style="
+            padding: 20px;
+            max-height: 450px;
+            overflow-y: auto;
+            background: #f8fafc;
+          "
+        >
+          <!-- Vouchers injected here -->
+        </div>
+      </div>
+    </div>
 
     <!-- CONFIRMATION MODAL -->
     <div class="modal" id="confirmModal">
@@ -481,33 +613,62 @@
       }
 
       function updateVoucherDropdown() {
-        const select = document.getElementById("promo-select");
-        if (!select) return;
+        const container = document.getElementById("vouchers-list-container");
+        const input = document.getElementById("promo-input");
+        if (!container) return;
 
         const cart = getCart();
         const vouchers = getAvailableVouchersForCart(cart);
-        const currentValue = select.value;
 
-        select.innerHTML = '<option value="">Select a voucher...</option>';
-        vouchers.forEach((v) => {
-          const option = document.createElement("option");
-          option.value = v.code;
-          option.textContent = `${v.code} - ${v.label} (${v.vendor})`;
-          if (v.error) {
-            option.disabled = true;
-            option.textContent += ` [${v.error}]`;
-          }
-          select.appendChild(option);
-        });
-
-        if (window.appliedPromoCode) {
-          select.value = window.appliedPromoCode;
-        } else if (
-          currentValue &&
-          !select.querySelector(`option[value="${currentValue}"]:disabled`)
-        ) {
-          select.value = currentValue;
+        if (vouchers.length === 0) {
+          container.innerHTML = `
+            <div style="padding:40px 20px; text-align:center; color:#94a3b8; font-size:14px;">
+              <i class="fa-solid fa-ticket" style="font-size:48px; opacity:0.1; margin-bottom:16px; display:block;"></i>
+              <p style="font-weight:600; color:#475569; margin-bottom:4px;">No vouchers available</p>
+              <p style="font-size:13px; opacity:0.8;">Keep ordering to earn more rewards!</p>
+            </div>`;
+          return;
         }
+
+        container.innerHTML = vouchers
+          .map((v) => {
+            const isSelected = window.appliedPromoCode === v.code;
+            const isDisabled = !!v.error;
+            return `
+            <div class="voucher-option ${isSelected ? "selected" : ""} ${isDisabled ? "disabled" : ""}" 
+                 data-code="${escHtml(v.code)}" 
+                 ${isDisabled ? "" : `onclick="selectVoucher('${escHtml(v.code)}')"`}>
+              <div class="voucher-details">
+                <div class="voucher-main">${escHtml(v.label)}</div>
+                <div class="voucher-sub">${escHtml(v.vendor)}${v.error ? ` <br><span style="color:#ef4444; font-weight:600;">• ${v.error}</span>` : ""}</div>
+              </div>
+              <div class="voucher-badge">${escHtml(v.code)}</div>
+            </div>
+          `;
+          })
+          .join("");
+
+        if (window.appliedPromoCode && input && !input.value) {
+          input.value = window.appliedPromoCode;
+        }
+      }
+
+      function selectVoucher(code) {
+        const input = document.getElementById("promo-input");
+        if (input) {
+          input.value = code;
+          closeVoucherModal();
+          document.getElementById("apply-promo-btn").click();
+        }
+      }
+
+      function openVoucherModal() {
+        document.getElementById("vouchersModal").classList.add("active");
+        updateVoucherDropdown();
+      }
+
+      function closeVoucherModal() {
+        document.getElementById("vouchersModal").classList.remove("active");
       }
 
       /* â”€â”€ Recalculate totals from DOM â”€â”€ */
@@ -652,11 +813,16 @@
 
         // Apply Promo
         const applyPromoBtn = document.getElementById("apply-promo-btn");
-        const promoSelect = document.getElementById("promo-select");
-        if (applyPromoBtn && promoSelect) {
+        const promoInput = document.getElementById("promo-input");
+        const openVouchersBtn = document.getElementById("open-vouchers-btn");
+        const closeVouchersBtn = document.getElementById("closeVouchersBtn");
+        const vouchersOverlay = document.getElementById("vouchersOverlay");
+
+        if (applyPromoBtn && promoInput) {
           applyPromoBtn.onclick = () => {
-            const code = promoSelect.value;
+            const code = promoInput.value.trim().toUpperCase();
             const msgEl = document.getElementById("promo-msg");
+
             if (!code) {
               window.appliedPromo = null;
               window.appliedPromoCode = null;
@@ -678,7 +844,7 @@
             }
 
             window.appliedPromo = promo;
-            window.appliedPromoCode = code.toUpperCase();
+            window.appliedPromoCode = code;
             msgEl.textContent = `Applied! ${promo.label} saved.`;
             msgEl.style.color = "#22c55e";
             msgEl.style.display = "block";
@@ -686,9 +852,22 @@
             showToast("success", "fa-tag", "Promo code applied!");
           };
 
-          // Also apply on change for better UX
-          promoSelect.onchange = () => {
-            applyPromoBtn.click();
+          if (openVouchersBtn) {
+            openVouchersBtn.onclick = openVoucherModal;
+          }
+          if (closeVouchersBtn) {
+            closeVouchersBtn.onclick = closeVoucherModal;
+          }
+          if (vouchersOverlay) {
+            vouchersOverlay.onclick = closeVoucherModal;
+          }
+
+          // Also apply on Enter key
+          promoInput.onkeydown = (e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              applyPromoBtn.click();
+            }
           };
         }
       }
