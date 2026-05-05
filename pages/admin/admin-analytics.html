@@ -150,8 +150,8 @@
                     <p class="subtitle">Insights and performance tracking for the entire ecosystem</p>
                 </div>
                 <div class="header-actions">
-                    <button class="btn-report"><i class="fa-solid fa-download"></i> Export Data</button>
-                    <button class="btn-report primary"><i class="fa-solid fa-print"></i> Generate Report</button>
+                    <button class="btn-report"><i class="fa-solid fa-file-pdf"></i> Export PDF</button>
+                    <button class="btn-report primary"><i class="fa-solid fa-file-csv"></i> Export CSV</button>
                 </div>
             </header>
 
@@ -198,16 +198,6 @@
                             <span style="color: var(--text-muted)">Stable performance</span>
                         </div>
                     </div>
-                    <div class="kpi-card">
-                        <div class="kpi-header">
-                            <span class="kpi-label">Avg. Rating</span>
-                            <div class="kpi-icon-wrapper kpi-amber"><i class="fa-solid fa-star"></i></div>
-                        </div>
-                        <div class="kpi-value">4.8</div>
-                        <div class="kpi-footer trend-up">
-                            <i class="fa-solid fa-arrow-trend-up"></i> 0.2 points
-                        </div>
-                    </div>
                 </div>
 
                 <div class="section-card">
@@ -224,7 +214,6 @@
                                     <th>Total Orders</th>
                                     <th>Revenue</th>
                                     <th>Status</th>
-                                    <th>Rating</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -242,7 +231,6 @@
                                     <td>2,140</td>
                                     <td><strong>₱342,100</strong></td>
                                     <td><span class="badge badge-success">Top Seller</span></td>
-                                    <td><i class="fa-solid fa-star" style="color: #f59e0b"></i> 4.9</td>
                                 </tr>
                                 <tr>
                                     <td><strong>#2</strong></td>
@@ -258,7 +246,6 @@
                                     <td>1,850</td>
                                     <td><strong>₱210,450</strong></td>
                                     <td><span class="badge badge-success">High Traffic</span></td>
-                                    <td><i class="fa-solid fa-star" style="color: #f59e0b"></i> 4.8</td>
                                 </tr>
                                 <tr>
                                     <td><strong>#3</strong></td>
@@ -274,7 +261,6 @@
                                     <td>1,240</td>
                                     <td><strong>₱185,200</strong></td>
                                     <td><span class="badge badge-blue">Growing</span></td>
-                                    <td><i class="fa-solid fa-star" style="color: #f59e0b"></i> 4.7</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -313,16 +299,6 @@
                         <div class="kpi-value">Wednesday</div>
                         <div class="kpi-footer">
                             <span style="color: var(--text-muted)">High purchasing power</span>
-                        </div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-header">
-                            <span class="kpi-label">System Health</span>
-                            <div class="kpi-icon-wrapper kpi-purple"><i class="fa-solid fa-bolt"></i></div>
-                        </div>
-                        <div class="kpi-value">99.9%</div>
-                        <div class="kpi-footer">
-                            <span style="color: var(--text-muted)">Excellent stability</span>
                         </div>
                     </div>
                 </div>
@@ -408,6 +384,37 @@
                     </div>
                     <div class="chart-box">
                         <canvas id="studentActivityChart"></canvas>
+                    </div>
+
+                    <div class="weekly-stats-grid">
+                        <div class="day-stat-card">
+                            <span class="day-label">Mon</span>
+                            <span class="day-value">1,200</span>
+                        </div>
+                        <div class="day-stat-card">
+                            <span class="day-label">Tue</span>
+                            <span class="day-value">1,400</span>
+                        </div>
+                        <div class="day-stat-card peak">
+                            <span class="day-label">Wed</span>
+                            <span class="day-value">2,100</span>
+                        </div>
+                        <div class="day-stat-card">
+                            <span class="day-label">Thu</span>
+                            <span class="day-value">1,600</span>
+                        </div>
+                        <div class="day-stat-card">
+                            <span class="day-label">Fri</span>
+                            <span class="day-value">1,800</span>
+                        </div>
+                        <div class="day-stat-card">
+                            <span class="day-label">Sat</span>
+                            <span class="day-value">900</span>
+                        </div>
+                        <div class="day-stat-card">
+                            <span class="day-label">Sun</span>
+                            <span class="day-value">600</span>
+                        </div>
                     </div>
                 </div>
             </div>

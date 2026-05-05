@@ -227,105 +227,39 @@
               </p>
 
               <div id="wi-employeesContainer">
-                <!-- Initial Employee Row -->
-                <div
-                  class="wi-employee-box"
-                  style="
-                    padding: 16px;
-                    background: #f8fafc;
-                    border: 1px solid #e2e8f0;
-                    border-radius: 12px;
-                    margin-bottom: 16px;
-                  "
-                >
-                  <div class="form-grid-2">
-                    <div
-                      class="form-group"
-                      style="
-                        grid-column: span 2;
-                        display: grid;
-                        grid-template-columns: 1fr 1fr 80px;
-                        gap: 12px;
-                      "
-                    >
-                      <div>
-                        <label
-                          >Last Name
-                          <span style="color: #ef4444">*</span></label
-                        >
-                        <input
-                          type="text"
-                          class="form-control wi-emp-ln"
-                          placeholder="e.g. Santos"
-                        />
-                      </div>
-                      <div>
-                        <label
-                          >First Name
-                          <span style="color: #ef4444">*</span></label
-                        >
-                        <input
-                          type="text"
-                          class="form-control wi-emp-fn"
-                          placeholder="e.g. Maria"
-                        />
-                      </div>
-                      <div>
-                        <label>M.I.</label>
-                        <input
-                          type="text"
-                          class="form-control wi-emp-mi"
-                          placeholder="M."
-                          maxlength="3"
-                        />
-                      </div>
+                <!-- Initial Employee Card -->
+                <div class="wi-employee-card">
+                  <div class="wi-employee-card-header">
+                    <h4><i class="fa-solid fa-user-tag"></i> Staff Member #1</h4>
+                  </div>
+                  <div class="wi-employee-grid">
+                    <div class="form-group wi-grid-ln">
+                      <label>Last Name <span style="color: #ef4444">*</span></label>
+                      <input type="text" class="form-control wi-emp-ln" placeholder="e.g. Santos" />
                     </div>
-                    <div class="form-group">
-                      <label
-                        >Role/Position
-                        <span style="color: #ef4444">*</span></label
-                      >
-                      <input
-                        type="text"
-                        class="form-control wi-emp-role"
-                        placeholder="e.g. Cashier, Cook"
-                      />
+                    <div class="form-group wi-grid-fn">
+                      <label>First Name <span style="color: #ef4444">*</span></label>
+                      <input type="text" class="form-control wi-emp-fn" placeholder="e.g. Maria" />
                     </div>
-                    <div class="form-group">
-                      <label
-                        >Health Certificate
-                        <span style="color: #ef4444">*</span></label
-                      >
-                      <input
-                        type="file"
-                        class="form-control wi-emp-cert"
-                        accept="image/*,.pdf"
-                        required
-                      />
+                    <div class="form-group wi-grid-mi">
+                      <label>M.I.</label>
+                      <input type="text" class="form-control wi-emp-mi" placeholder="M." maxlength="3" />
                     </div>
-                    <div class="form-group">
-                      <label
-                        >Curriculum Vitae (CV)
-                        <span style="color: #ef4444">*</span></label
-                      >
-                      <input
-                        type="file"
-                        class="form-control wi-emp-cv"
-                        accept=".pdf,.doc,.docx"
-                        required
-                      />
+                    <div class="form-group wi-grid-prof">
+                      <label>Profession <span style="color: #ef4444">*</span></label>
+                      <input type="text" class="form-control wi-emp-role" placeholder="e.g. Cashier, Cook" />
                     </div>
-                    <div class="form-group">
-                      <label
-                        >NBI/Police Clearance
-                        <span style="color: #ef4444">*</span></label
-                      >
-                      <input
-                        type="file"
-                        class="form-control wi-emp-clearance"
-                        accept="image/*,.pdf"
-                        required
-                      />
+                    <div class="form-group wi-grid-prof">
+                      <label>Health Certificate <span style="color: #ef4444">*</span></label>
+                      <input type="file" class="form-control wi-emp-cert" accept="image/*,.pdf" required />
+                    </div>
+                    <div class="form-group wi-grid-half">
+                      <label>CV (Picture) <span style="color: #ef4444">*</span></label>
+                      <input type="file" class="form-control wi-emp-cv" accept="image/*" required />
+                    </div>
+                    <div class="form-group wi-grid-half">
+                      <label>NBI/Police Clearance <span style="color: #ef4444">*</span></label>
+                      <input type="file" class="form-control wi-emp-clearance" accept="image/*,.pdf" required />
                     </div>
                   </div>
                 </div>
@@ -372,20 +306,43 @@
               </div>
             </div>
 
-            <!-- STEP 3: FINALIZE -->
-            <div id="wi-step3" style="display: none">
-              <div class="form-section-title">Account Creation</div>
-              <p
-                style="
-                  font-size: 14px;
-                  color: #475569;
-                  margin-bottom: 24px;
-                  line-height: 1.6;
-                "
-              >
-                Almost done. Please review the applicant details below before
-                finalizing and granting access.
-              </p>
+              <div id="wi-step3" style="display: none">
+                <div class="form-section-title">Account Credentials</div>
+                <p
+                  style="
+                    font-size: 14px;
+                    color: #475569;
+                    margin-bottom: 24px;
+                    line-height: 1.6;
+                  "
+                >
+                  Set the login credentials for the canteen operator's account.
+                </p>
+
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label>Login Email <span style="color: #ef4444">*</span></label>
+                    <input type="email" id="wi-loginEmail" class="form-control" placeholder="canteen@wmsu.edu.ph" required />
+                  </div>
+                  <div class="form-group">
+                    <label>Password <span style="color: #ef4444">*</span></label>
+                    <div style="position: relative;">
+                      <input type="password" id="wi-loginPassword" class="form-control" placeholder="Min. 8 characters" required />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-section-title" style="margin-top: 32px">Review Application</div>
+                <p
+                  style="
+                    font-size: 14px;
+                    color: #475569;
+                    margin-bottom: 24px;
+                    line-height: 1.6;
+                  "
+                >
+                  Please review the applicant details below before finalizing.
+                </p>
 
               <div class="form-section-title">Admin Summary</div>
               <div class="admin-summary-box">
@@ -952,23 +909,22 @@
           }
 
           // Fill summary
-          const ln = document
-            .getElementById("wi-operatorLastName")
-            .value.trim();
-          const fn = document
-            .getElementById("wi-operatorFirstName")
-            .value.trim();
+          const ln = document.getElementById("wi-operatorLastName").value.trim();
+          const fn = document.getElementById("wi-operatorFirstName").value.trim();
           const mi = document.getElementById("wi-operatorMidInit").value.trim();
           const fullName = `${ln}, ${fn}${mi ? " " + mi : ""}`;
           document.getElementById("sum-name").innerText = fullName;
-          document.getElementById("sum-email").innerText =
-            document.getElementById("wi-operatorEmail").value || "-";
-          document.getElementById("sum-biz").innerText =
-            document.getElementById("wi-businessName").value;
+          document.getElementById("sum-email").innerText = document.getElementById("wi-operatorEmail").value || "-";
+          document.getElementById("sum-biz").innerText = document.getElementById("wi-businessName").value;
 
-          const empCount = document.querySelectorAll(".wi-employee-box").length;
-          document.getElementById("sum-employees").innerText =
-            `${empCount} Staff Member(s)`;
+          // Pre-fill login email from operator email if empty
+          const loginEmailField = document.getElementById("wi-loginEmail");
+          if (!loginEmailField.value.trim()) {
+            loginEmailField.value = document.getElementById("wi-operatorEmail").value;
+          }
+
+          const empCount = document.querySelectorAll(".wi-employee-card").length;
+          document.getElementById("sum-employees").innerText = `${empCount} Staff Member(s)`;
         }
 
         [1, 2, 3].forEach((s) => {
@@ -986,56 +942,61 @@
 
       function wiAddEmployee() {
         const container = document.getElementById("wi-employeesContainer");
+        const empCount = container.querySelectorAll(".wi-employee-card").length + 1;
         const box = document.createElement("div");
-        box.className = "wi-employee-box";
-        box.style =
-          "padding: 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 16px; position: relative;";
+        box.className = "wi-employee-card";
         box.innerHTML = `
-        <button type="button" onclick="this.parentElement.remove()" style="position: absolute; top: 12px; right: 12px; background: #fee2e2; color: #ef4444; border: none; width: 24px; height: 24px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center;"><i class="fa-solid fa-times"></i></button>
-        <div class="form-grid-2">
-          <div class="form-group" style="grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr 80px; gap: 12px;">
-            <div>
-              <label>Last Name <span style="color: #ef4444;">*</span></label>
+          <div class="wi-employee-card-header">
+            <h4><i class="fa-solid fa-user-tag"></i> Staff Member #${empCount}</h4>
+            <button type="button" class="remove-emp-btn" onclick="this.closest('.wi-employee-card').remove()">
+              <i class="fa-solid fa-times"></i>
+            </button>
+          </div>
+          <div class="wi-employee-grid">
+            <div class="form-group wi-grid-ln">
+              <label>Last Name <span style="color: #ef4444">*</span></label>
               <input type="text" class="form-control wi-emp-ln" placeholder="e.g. Santos" />
             </div>
-            <div>
-              <label>First Name <span style="color: #ef4444;">*</span></label>
+            <div class="form-group wi-grid-fn">
+              <label>First Name <span style="color: #ef4444">*</span></label>
               <input type="text" class="form-control wi-emp-fn" placeholder="e.g. Maria" />
             </div>
-            <div>
+            <div class="form-group wi-grid-mi">
               <label>M.I.</label>
               <input type="text" class="form-control wi-emp-mi" placeholder="M." maxlength="3" />
             </div>
+            <div class="form-group wi-grid-prof">
+              <label>Profession <span style="color: #ef4444">*</span></label>
+              <input type="text" class="form-control wi-emp-role" placeholder="e.g. Cashier, Cook" />
+            </div>
+            <div class="form-group wi-grid-prof">
+              <label>Health Certificate <span style="color: #ef4444">*</span></label>
+              <input type="file" class="form-control wi-emp-cert" accept="image/*,.pdf" required />
+            </div>
+            <div class="form-group wi-grid-half">
+              <label>CV (Picture) <span style="color: #ef4444">*</span></label>
+              <input type="file" class="form-control wi-emp-cv" accept="image/*" required />
+            </div>
+            <div class="form-group wi-grid-half">
+              <label>NBI/Police Clearance <span style="color: #ef4444">*</span></label>
+              <input type="file" class="form-control wi-emp-clearance" accept="image/*,.pdf" required />
+            </div>
           </div>
-          <div class="form-group">
-            <label>Role/Position <span style="color: #ef4444;">*</span></label>
-            <input type="text" class="form-control wi-emp-role" placeholder="e.g. Cashier, Cook" />
-          </div>
-          <div class="form-group">
-            <label>Health Certificate <span style="color: #ef4444;">*</span></label>
-            <input type="file" class="form-control wi-emp-cert" accept="image/*,.pdf" required />
-          </div>
-          <div class="form-group">
-            <label>Curriculum Vitae (CV) <span style="color: #ef4444;">*</span></label>
-            <input type="file" class="form-control wi-emp-cv" accept=".pdf,.doc,.docx" required />
-          </div>
-          <div class="form-group">
-            <label>NBI/Police Clearance <span style="color: #ef4444;">*</span></label>
-            <input type="file" class="form-control wi-emp-clearance" accept="image/*,.pdf" required />
-          </div>
-        </div>
-      `;
+        `;
         container.appendChild(box);
       }
 
       function wiSubmitFinal() {
         const email = document.getElementById("wi-operatorEmail").value.trim();
-        if (!email || !email.includes("@")) {
-          showToast(
-            "Invalid Email",
-            "Please go back to Step 1 and provide a valid email.",
-            "error",
-          );
+        const loginEmail = document.getElementById("wi-loginEmail").value.trim();
+        const loginPass = document.getElementById("wi-loginPassword").value.trim();
+
+        if (!loginEmail || !loginEmail.includes("@")) {
+          showToast("Invalid Credentials", "Please provide a valid login email.", "error");
+          return;
+        }
+        if (loginPass.length < 8) {
+          showToast("Weak Password", "Password must be at least 8 characters long.", "warning");
           return;
         }
 

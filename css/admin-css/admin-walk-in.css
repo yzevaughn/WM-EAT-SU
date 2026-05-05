@@ -523,3 +523,79 @@ input[type="file"]::file-selector-button:hover {
   from { transform: translateX(120%); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
 }
+
+/* Employee Card Design Improvements */
+.wi-employee-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 24px;
+  margin-bottom: 24px;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.wi-employee-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05);
+  transform: translateY(-2px);
+}
+
+.wi-employee-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.wi-employee-card-header h4 {
+  font-size: 13px;
+  font-weight: 800;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wi-employee-card-header h4 i {
+  color: #ef4444;
+}
+
+.wi-employee-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+
+.wi-grid-ln { grid-column: span 5; }
+.wi-grid-fn { grid-column: span 5; }
+.wi-grid-mi { grid-column: span 2; }
+.wi-grid-prof { grid-column: span 6; }
+.wi-grid-full { grid-column: span 12; }
+.wi-grid-half { grid-column: span 6; }
+
+.remove-emp-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #fee2e2;
+  color: #ef4444;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.remove-emp-btn:hover {
+  background: #ef4444;
+  color: #ffffff;
+  transform: scale(1.1);
+}
