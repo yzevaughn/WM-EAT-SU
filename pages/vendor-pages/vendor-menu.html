@@ -199,7 +199,13 @@
         <div class="menu-tabs-wrapper">
           <div class="menu-tabs" id="menuTabs">
             <button class="tab-btn active" onclick="setStatusFilter('active')">
-              <i class="fa-solid fa-check-circle"></i> Accepted
+              <i class="fa-solid fa-utensils"></i> Main Menu
+            </button>
+            <button class="tab-btn" onclick="setStatusFilter('posters')">
+              <i class="fa-solid fa-image"></i> Poster <span class="badge" id="count-posters">0</span>
+            </button>
+            <button class="tab-btn" onclick="setStatusFilter('accepted')">
+              <i class="fa-solid fa-check-circle"></i> Accepted <span class="badge" id="count-accepted">0</span>
             </button>
             <button class="tab-btn" onclick="setStatusFilter('pending')">
               <i class="fa-solid fa-clock"></i> Pending <span class="badge" id="count-pending">0</span>
@@ -467,13 +473,17 @@
 
       function updateTabCounts() {
         const menu = getMenu();
-        const pending = menu.filter(m => m.status === 'pending').length;
-        const accepted = menu.filter(m => m.status === 'accepted').length;
-        const rejected = menu.filter(m => m.status === 'rejected').length;
+        const posters = JSON.parse(localStorage.getItem('vendor_posters') || '[]');
+        
+        let pending = menu.filter(m => m.status === 'pending').length + posters.filter(p => p.status === 'pending').length;
+        let accepted = menu.filter(m => m.status === 'accepted').length + posters.filter(p => p.status === 'accepted').length;
+        let rejected = menu.filter(m => m.status === 'rejected').length + posters.filter(p => p.status === 'rejected').length;
+        const postersCount = posters.filter(p => (p.status || 'accepted') === 'accepted').length;
 
         const pEl = document.getElementById('count-pending');
         const aEl = document.getElementById('count-accepted');
         const rEl = document.getElementById('count-rejected');
+        const pCountEl = document.getElementById('count-posters');
 
         if (pEl) {
           pEl.textContent = pending;
@@ -486,6 +496,10 @@
         if (rEl) {
           rEl.textContent = rejected;
           rEl.style.display = rejected > 0 ? 'inline-flex' : 'none';
+        }
+        if (pCountEl) {
+          pCountEl.textContent = postersCount;
+          pCountEl.style.display = postersCount > 0 ? 'inline-flex' : 'none';
         }
       }
 
@@ -509,21 +523,76 @@
 
       /* --- Render the menu grid --- */
       function renderMenu() {
+        const grid = document.getElementById("menuGrid");
+        if (!grid) return;
+
         const allMenu = getMenu();
+        const allPosters = JSON.parse(localStorage.getItem('vendor_posters') || '[]');
+
+        if (currentStatusFilter === 'posters') {
+          // Show only accepted posters in the Posters tab
+          const acceptedPosters = allPosters.filter(p => (p.status || 'accepted') === 'accepted');
+          if (acceptedPosters.length === 0) {
+            grid.innerHTML = `<p style="color:#94a3b8;grid-column:1/-1;text-align:center;padding:60px 0;font-size:15px;">No approved posters found.</p>`;
+          } else {
+            renderPosters(acceptedPosters);
+          }
+          return;
+        }
+
         const menu = allMenu.filter(
           (item) => (item.status || "active") === currentStatusFilter,
         );
-        const grid = document.getElementById("menuGrid");
+        const posters = allPosters.filter(
+          (p) => (p.status || "accepted") === currentStatusFilter,
+        );
 
-        if (!grid) return;
-
-        if (menu.length === 0) {
+        if (menu.length === 0 && posters.length === 0) {
           grid.innerHTML = `<p style="color:#94a3b8;grid-column:1/-1;text-align:center;padding:60px 0;font-size:15px;">
             No ${currentStatusFilter === "active" ? "menu" : currentStatusFilter} items found.</p>`;
           return;
         }
 
-        grid.innerHTML = menu
+        let html = "";
+        
+        // Render posters first (as they are usually more time-sensitive promo)
+        if (posters.length > 0) {
+          html += posters.map((p, idx) => {
+            const airedPoster = localStorage.getItem('vendor_aired_poster');
+            const isAired = p.img === airedPoster;
+            const status = p.status || 'accepted'; 
+            const isPending = status === 'pending';
+            const isRejected = status === 'rejected';
+            const isAccepted = status === 'accepted';
+            
+            let statusBadge = '';
+            if (isPending) statusBadge = '<span class="category-badge" style="background:#fef3c7;color:#92400e;">Pending Approval</span>';
+            if (isRejected) statusBadge = '<span class="category-badge" style="background:#fee2e2;color:#991b1b;">Rejected</span>';
+            if (isAccepted && isAired) statusBadge = '<span class="category-badge" style="background:#10b981;">Aired Now</span>';
+
+            return `
+              <div class="menu-item-card" style="min-height: auto;">
+                <div class="item-image" style="height: 250px;">
+                  <img src="${p.img}" alt="Poster" />
+                  ${statusBadge}
+                </div>
+                <div class="item-info">
+                  <h3 class="item-name">Poster Upload</h3>
+                  <p class="item-description">Uploaded on ${new Date(p.id).toLocaleDateString()}</p>
+                  ${isRejected && p.rejectReason ? `<p style="color:#ef4444;font-size:12px;margin-top:4px;font-weight:600;">Reason: ${p.rejectReason}</p>` : ''}
+                </div>
+                <div class="actions">
+                  <button class="edit-btn" onclick="airPoster('${p.img}')" ${(isAired || !isAccepted) ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>
+                    <i class="fas fa-broadcast-tower"></i> ${isAired ? 'Airing' : 'Air Poster'}
+                  </button>
+                  <button class="delete-btn" onclick="deletePosterByID(${p.id})"><i class="fas fa-trash"></i></button>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+
+        html += menu
           .map((item) => {
             const isLow = (item.stock || 0) < 5;
             const sCls = isLow ? "stock-status low-stock" : "stock-status";
@@ -635,6 +704,8 @@
             </div>`;
           })
           .join("");
+        
+        grid.innerHTML = html;
 
         /* Availability toggles */
         grid.querySelectorAll(".avail-check").forEach((chk) => {
@@ -1014,6 +1085,67 @@
         });
 
       /* --- Poster Modal --- */
+      function renderPosters(postersToRender) {
+        const posters = postersToRender || JSON.parse(localStorage.getItem('vendor_posters') || '[]');
+        const airedPoster = localStorage.getItem('vendor_aired_poster');
+        const grid = document.getElementById("menuGrid");
+        
+        grid.innerHTML = posters.map((p, idx) => {
+          const isAired = p.img === airedPoster;
+          const status = p.status || 'accepted'; 
+          const isPending = status === 'pending';
+          const isRejected = status === 'rejected';
+          const isAccepted = status === 'accepted';
+          
+          let statusBadge = '';
+          if (isPending) statusBadge = '<span class="category-badge" style="background:#fef3c7;color:#92400e;">Pending Approval</span>';
+          if (isRejected) statusBadge = '<span class="category-badge" style="background:#fee2e2;color:#991b1b;">Rejected</span>';
+          if (isAccepted && isAired) statusBadge = '<span class="category-badge" style="background:#10b981;">Aired Now</span>';
+
+          return `
+            <div class="menu-item-card" style="min-height: auto;">
+              <div class="item-image" style="height: 250px;">
+                <img src="${p.img}" alt="Poster ${idx + 1}" />
+                ${statusBadge}
+              </div>
+              <div class="item-info">
+                <h3 class="item-name">Poster #${idx + 1}</h3>
+                <p class="item-description">Uploaded on ${new Date(p.id).toLocaleDateString()}</p>
+                ${isRejected && p.rejectReason ? `<p style="color:#ef4444;font-size:12px;margin-top:4px;font-weight:600;">Reason: ${p.rejectReason}</p>` : ''}
+              </div>
+              <div class="actions">
+                <button class="edit-btn" onclick="airPoster('${p.img}')" ${(isAired || !isAccepted) ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>
+                  <i class="fas fa-broadcast-tower"></i> ${isAired ? 'Airing' : 'Air Poster'}
+                </button>
+                <button class="delete-btn" onclick="deletePosterByID(${p.id})"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      window.deletePosterByID = function(id) {
+        const posters = JSON.parse(localStorage.getItem('vendor_posters') || '[]');
+        const idx = posters.findIndex(p => p.id === id);
+        if (idx === -1) return;
+        const deleted = posters.splice(idx, 1)[0];
+        localStorage.setItem('vendor_posters', JSON.stringify(posters));
+        
+        if (deleted.img === localStorage.getItem('vendor_aired_poster')) {
+          localStorage.removeItem('vendor_aired_poster');
+        }
+        
+        showToast("info", "fa-trash", "Poster deleted.");
+        updateTabCounts();
+        renderMenu();
+      };
+
+      window.airPoster = function(img) {
+        localStorage.setItem('vendor_aired_poster', img);
+        showToast("success", "fa-broadcast-tower", "Poster is now live on the dashboard!");
+        renderMenu();
+      };
+
       const posterModal = document.getElementById("posterModal");
       if (posterModal) {
         document
@@ -1041,21 +1173,58 @@
           .getElementById("savePosterBtn")
           .addEventListener("click", (e) => {
             e.preventDefault();
-            const f = document.getElementById("posterForm");
-            if (f && !f.checkValidity()) {
-              f.reportValidity();
-              return;
+            const fileInput = document.getElementById("posterImage");
+            if (fileInput.files && fileInput.files[0]) {
+              const reader = new FileReader();
+              reader.onload = (ev) => {
+                const posters = JSON.parse(localStorage.getItem('vendor_posters') || '[]');
+                posters.push({
+                  id: Date.now(),
+                  img: ev.target.result,
+                  status: 'pending'
+                });
+                localStorage.setItem('vendor_posters', JSON.stringify(posters));
+                
+                updateTabCounts();
+                if (currentStatusFilter === 'posters') renderMenu();
+                
+                showToast(
+                  "success",
+                  "fa-image",
+                  "Poster uploaded and sent for approval!",
+                );
+                posterModal.classList.remove("active");
+              };
+              reader.readAsDataURL(fileInput.files[0]);
+            } else {
+              const f = document.getElementById("posterForm");
+              if (f) f.reportValidity();
             }
-            showToast(
-              "success",
-              "fa-image",
-              "Poster added to student dashboard!",
-            );
-            posterModal.classList.remove("active");
           });
       }
 
+      function initDefaultPosters() {
+        const data = localStorage.getItem('vendor_posters');
+        let posters = [];
+        try {
+          posters = JSON.parse(data || '[]');
+          if (!Array.isArray(posters)) posters = [];
+        } catch (e) {
+          posters = [];
+        }
+
+        if (posters.length === 0) {
+          const exampleImg = "../../images/promo_poster_example.png";
+          localStorage.setItem('vendor_posters', JSON.stringify([{
+            id: Date.now(),
+            img: exampleImg
+          }]));
+          localStorage.setItem('vendor_aired_poster', exampleImg);
+        }
+      }
+
       /* --- Init --- */
+      initDefaultPosters();
       renderMenu();
       updateTabCounts();
 

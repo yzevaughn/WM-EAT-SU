@@ -184,6 +184,9 @@
             <button class="tab-btn active" onclick="setStatusFilter('active')">
               <i class="fa-solid fa-utensils"></i> Main Menu
             </button>
+            <button class="tab-btn" onclick="setStatusFilter('posters')">
+              <i class="fa-solid fa-image"></i> Poster <span class="badge" id="count-posters">0</span>
+            </button>
           </div>
         </div>
 
@@ -464,6 +467,13 @@
           rEl.textContent = rejected;
           rEl.style.display = rejected > 0 ? 'inline-flex' : 'none';
         }
+
+        const posters = JSON.parse(localStorage.getItem('canteen_posters') || '[]');
+        const pCountEl = document.getElementById('count-posters');
+        if (pCountEl) {
+          pCountEl.textContent = posters.length;
+          pCountEl.style.display = posters.length > 0 ? 'inline-flex' : 'none';
+        }
       }
 
       function setStatusFilter(status) {
@@ -486,13 +496,18 @@
 
       /* --- Render the menu grid --- */
       function renderMenu() {
+        const grid = document.getElementById("menuGrid");
+        if (!grid) return;
+
+        if (currentStatusFilter === 'posters') {
+          renderPosters();
+          return;
+        }
+
         const allMenu = getMenu();
         const menu = allMenu.filter(
           (item) => (item.status || "active") === currentStatusFilter,
         );
-        const grid = document.getElementById("menuGrid");
-
-        if (!grid) return;
 
         if (menu.length === 0) {
           grid.innerHTML = `<p style="color:#94a3b8;grid-column:1/-1;text-align:center;padding:60px 0;font-size:15px;">
@@ -991,6 +1006,71 @@
         });
 
       /* --- Poster Modal --- */
+      function renderPosters() {
+        const posters = JSON.parse(localStorage.getItem('canteen_posters') || '[]');
+        const airedPoster = localStorage.getItem('canteen_aired_poster');
+        const grid = document.getElementById("menuGrid");
+
+        if (posters.length === 0) {
+          grid.innerHTML = `<p style="color:#94a3b8;grid-column:1/-1;text-align:center;padding:60px 0;font-size:15px;">
+            No posters found. Click "Add Poster" to upload one.</p>`;
+          return;
+        }
+
+        grid.innerHTML = posters.map((p, idx) => {
+          const isAired = p.img === airedPoster;
+          const status = p.status || 'accepted'; 
+          const isPending = status === 'pending';
+          const isRejected = status === 'rejected';
+          const isAccepted = status === 'accepted';
+          
+          let statusBadge = '';
+          if (isPending) statusBadge = '<span class="category-badge" style="background:#fef3c7;color:#92400e;">Pending Approval</span>';
+          if (isRejected) statusBadge = '<span class="category-badge" style="background:#fee2e2;color:#991b1b;">Rejected</span>';
+          if (isAccepted && isAired) statusBadge = '<span class="category-badge" style="background:#10b981;">Aired Now</span>';
+
+          return `
+            <div class="menu-item-card" style="min-height: auto;">
+              <div class="item-image" style="height: 250px;">
+                <img src="${p.img}" alt="Poster ${idx + 1}" />
+                ${statusBadge}
+              </div>
+              <div class="item-info">
+                <h3 class="item-name">Poster #${idx + 1}</h3>
+                <p class="item-description">Uploaded on ${new Date(p.id).toLocaleDateString()}</p>
+                ${isRejected && p.rejectReason ? `<p style="color:#ef4444;font-size:12px;margin-top:4px;font-weight:600;">Reason: ${p.rejectReason}</p>` : ''}
+              </div>
+              <div class="actions">
+                <button class="edit-btn" onclick="airPoster('${p.img}')" ${(isAired || !isAccepted) ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>
+                  <i class="fas fa-broadcast-tower"></i> ${isAired ? 'Airing' : 'Air Poster'}
+                </button>
+                <button class="delete-btn" onclick="deletePoster(${idx})"><i class="fas fa-trash"></i></button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      window.airPoster = function(img) {
+        localStorage.setItem('canteen_aired_poster', img);
+        showToast("success", "fa-broadcast-tower", "Poster is now live on the dashboard!");
+        renderMenu();
+      };
+
+      window.deletePoster = function(idx) {
+        const posters = JSON.parse(localStorage.getItem('canteen_posters') || '[]');
+        const deleted = posters.splice(idx, 1)[0];
+        localStorage.setItem('canteen_posters', JSON.stringify(posters));
+        
+        if (deleted.img === localStorage.getItem('canteen_aired_poster')) {
+          localStorage.removeItem('canteen_aired_poster');
+        }
+        
+        showToast("info", "fa-trash", "Poster deleted.");
+        updateTabCounts();
+        renderMenu();
+      };
+
       const posterModal = document.getElementById("posterModal");
       if (posterModal) {
         document
@@ -1018,21 +1098,58 @@
           .getElementById("savePosterBtn")
           .addEventListener("click", (e) => {
             e.preventDefault();
-            const f = document.getElementById("posterForm");
-            if (f && !f.checkValidity()) {
-              f.reportValidity();
-              return;
+            const fileInput = document.getElementById("posterImage");
+            if (fileInput.files && fileInput.files[0]) {
+              const reader = new FileReader();
+              reader.onload = (ev) => {
+                const posters = JSON.parse(localStorage.getItem('canteen_posters') || '[]');
+                posters.push({
+                  id: Date.now(),
+                  img: ev.target.result,
+                  status: 'pending'
+                });
+                localStorage.setItem('canteen_posters', JSON.stringify(posters));
+                
+                updateTabCounts();
+                if (currentStatusFilter === 'posters') renderMenu();
+                
+                showToast(
+                  "success",
+                  "fa-image",
+                  "Poster uploaded and sent for approval!",
+                );
+                posterModal.classList.remove("active");
+              };
+              reader.readAsDataURL(fileInput.files[0]);
+            } else {
+              const f = document.getElementById("posterForm");
+              if (f) f.reportValidity();
             }
-            showToast(
-              "success",
-              "fa-image",
-              "Poster added to student dashboard!",
-            );
-            posterModal.classList.remove("active");
           });
       }
 
+      function initDefaultPosters() {
+        const data = localStorage.getItem('canteen_posters');
+        let posters = [];
+        try {
+          posters = JSON.parse(data || '[]');
+          if (!Array.isArray(posters)) posters = [];
+        } catch (e) {
+          posters = [];
+        }
+
+        if (posters.length === 0) {
+          const exampleImg = "../../images/promo_poster_example.png";
+          localStorage.setItem('canteen_posters', JSON.stringify([{
+            id: Date.now(),
+            img: exampleImg
+          }]));
+          localStorage.setItem('canteen_aired_poster', exampleImg);
+        }
+      }
+
       /* --- Init --- */
+      initDefaultPosters();
       renderMenu();
       updateTabCounts();
 

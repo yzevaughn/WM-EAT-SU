@@ -265,8 +265,36 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ============================================================
-     2. PROMO CAROUSEL LOGIC
+     3. PROMO CAROUSEL LOGIC
      ============================================================ */
+  const promoSlidesContainer = document.querySelector(".promo-slides");
+  if (promoSlidesContainer) {
+    const airedPosters = [];
+    const canteenAired = localStorage.getItem('canteen_aired_poster');
+    const vendorAired = localStorage.getItem('vendor_aired_poster');
+    
+    if (canteenAired) airedPosters.push(canteenAired);
+    if (vendorAired) airedPosters.push(vendorAired);
+
+    const uniquePosters = [...new Set(airedPosters)];
+
+    if (uniquePosters.length > 0) {
+      const existingActive = promoSlidesContainer.querySelector(".promo-slide.active");
+      if (existingActive) existingActive.classList.remove("active");
+
+      uniquePosters.reverse().forEach((img, idx) => {
+        const slide = document.createElement("div");
+        slide.className = "promo-slide" + (idx === 0 ? " active" : "");
+        slide.innerHTML = `
+          <a href="student-browse-food.html">
+            <img src="${img}" alt="Featured Promotion" />
+          </a>
+        `;
+        promoSlidesContainer.prepend(slide);
+      });
+    }
+  }
+
   const slides = document.querySelectorAll(".promo-slide");
   const dotsEl = document.getElementById("promoDots");
 
@@ -317,7 +345,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ============================================================
-     3. TOAST HELPER
+     4. TOAST HELPER
      ============================================================ */
   function showToast(type, icon, msg) {
     const toastContainer = document.getElementById("toast-container");
@@ -342,7 +370,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ============================================================
-     4. ADD TO CART LOGIC (localStorage-backed)
+     5. ADD TO CART LOGIC (localStorage-backed)
      ============================================================ */
 
   // Sync badge on page load
@@ -396,7 +424,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
   /* ============================================================
-     5. VIEW DETAILS LOGIC
+     6. VIEW DETAILS LOGIC
      ============================================================ */
   document.querySelectorAll(".view-details-btn").forEach((btn) => {
     btn.addEventListener("click", function (e) {
@@ -409,7 +437,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ============================================================
-     6. RATE & REVIEW LOGIC
+     7. RATE & REVIEW LOGIC
      ============================================================ */
   document.querySelectorAll(".rate-btn").forEach((btn) => {
     btn.addEventListener("click", function (e) {
@@ -422,7 +450,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ============================================================
-     7. FOOD MODAL LOGIC
+     8. FOOD MODAL LOGIC
      ============================================================ */
   const foodModal = document.getElementById("foodModal");
   const modalImg = document.getElementById("modalImg");
