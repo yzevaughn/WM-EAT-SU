@@ -122,6 +122,19 @@ document.addEventListener("DOMContentLoaded", () => {
       status: "approved",
       bgColor: "#a7f3d0",
     },
+    {
+      id: "POSTER-01",
+      type: "poster",
+      vendor: "The Sweet Spot",
+      title: "Summer Dessert Festival",
+      desc: "Join us for a week of sweet treats and cool drinks!",
+      img: "../../images/banner1.avif",
+      price: "N/A",
+      submitter: "Maria Santos",
+      time: "Apr 15, 2026 • 10:00 AM",
+      status: "approved",
+      bgColor: "#fca5a5",
+    },
   ];
 
   let currentTab = "menus-pending"; // menus-pending, posters-pending, approved
@@ -136,22 +149,26 @@ document.addEventListener("DOMContentLoaded", () => {
     menus: document.getElementById("count-menus"),
     posters: document.getElementById("count-posters"),
     allFood: document.getElementById("count-all-food"),
+    allPosters: document.getElementById("count-all-posters"),
   };
 
   function updateStats() {
     let menusCount = 0,
       postersCount = 0,
-      allFoodCount = 0;
+      allFoodCount = 0,
+      activePostersCount = 0;
 
     approvalItems.forEach((item) => {
       if (item.status === "pending" && item.type === "menu") menusCount++;
       if (item.status === "pending" && item.type === "poster") postersCount++;
       if (item.status === "approved" && item.type === "menu") allFoodCount++;
+      if (item.status === "approved" && item.type === "poster") activePostersCount++;
     });
 
     if (counts.menus) counts.menus.textContent = menusCount;
     if (counts.posters) counts.posters.textContent = postersCount;
     if (counts.allFood) counts.allFood.textContent = allFoodCount;
+    if (counts.allPosters) counts.allPosters.textContent = activePostersCount;
   }
 
   function renderList() {
@@ -168,6 +185,10 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (currentTab === "all-food") {
       filtered = approvalItems.filter(
         (i) => i.status === "approved" && i.type === "menu",
+      );
+    } else if (currentTab === "all-posters") {
+      filtered = approvalItems.filter(
+        (i) => i.status === "approved" && i.type === "poster",
       );
     }
 
