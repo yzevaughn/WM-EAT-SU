@@ -151,7 +151,7 @@
                 </div>
                 <div class="header-actions">
                     <button class="btn-report"><i class="fa-solid fa-file-pdf"></i> Export PDF</button>
-                    <button class="btn-report primary"><i class="fa-solid fa-file-csv"></i> Export CSV</button>
+                    <button class="btn-report"><i class="fa-solid fa-file-csv"></i> Export CSV</button>
                 </div>
             </header>
 
@@ -203,7 +203,6 @@
                 <div class="section-card">
                     <div class="card-header">
                         <h2 class="card-title"><i class="fa-solid fa-trophy"></i> Top Performing Vendors</h2>
-                        <button class="btn-report">View All Vendors</button>
                     </div>
                     <div class="table-wrapper">
                         <table class="data-grid">
@@ -305,10 +304,9 @@
 
                 <div class="section-card">
                     <div class="card-header">
-                        <h2 class="card-title"><i class="fa-solid fa-users"></i> Most Active Students (Top Spenders)</h2>
-                        <button class="btn-report">Full Student List</button>
+                        <h2 class="card-title"><i class="fa-solid fa-users"></i> Student Activity Overview</h2>
                     </div>
-                    <div class="table-wrapper">
+                    <div class="table-wrapper" style="overflow-x: auto;">
                         <table class="data-grid">
                             <thead>
                                 <tr>
@@ -377,46 +375,6 @@
                         </table>
                     </div>
                 </div>
-
-                <div class="section-card">
-                    <div class="card-header">
-                        <h2 class="card-title"><i class="fa-solid fa-chart-bar"></i> Weekly Traffic Distribution</h2>
-                    </div>
-                    <div class="chart-box">
-                        <canvas id="studentActivityChart"></canvas>
-                    </div>
-
-                    <div class="weekly-stats-grid">
-                        <div class="day-stat-card">
-                            <span class="day-label">Mon</span>
-                            <span class="day-value">1,200</span>
-                        </div>
-                        <div class="day-stat-card">
-                            <span class="day-label">Tue</span>
-                            <span class="day-value">1,400</span>
-                        </div>
-                        <div class="day-stat-card peak">
-                            <span class="day-label">Wed</span>
-                            <span class="day-value">2,100</span>
-                        </div>
-                        <div class="day-stat-card">
-                            <span class="day-label">Thu</span>
-                            <span class="day-value">1,600</span>
-                        </div>
-                        <div class="day-stat-card">
-                            <span class="day-label">Fri</span>
-                            <span class="day-value">1,800</span>
-                        </div>
-                        <div class="day-stat-card">
-                            <span class="day-label">Sat</span>
-                            <span class="day-value">900</span>
-                        </div>
-                        <div class="day-stat-card">
-                            <span class="day-label">Sun</span>
-                            <span class="day-value">600</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -440,53 +398,6 @@
             vendorTab.classList.remove('active');
             studentView.style.display = 'block';
             vendorView.style.display = 'none';
-            // Trigger chart update if hidden previously
-            if(window.activityChart) window.activityChart.update();
-        });
-
-        // Initialize Student Traffic Chart
-        const ctx = document.getElementById('studentActivityChart').getContext('2d');
-        window.activityChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                datasets: [{
-                    label: 'Campus Traffic (Orders)',
-                    data: [1200, 1400, 2100, 1600, 1800, 900, 600],
-                    backgroundColor: (context) => {
-                        const chart = context.chart;
-                        const {ctx, chartArea} = chart;
-                        if (!chartArea) return null;
-                        return context.index === 2 ? '#ef4444' : '#64748b'; // Highlight peak (Wed)
-                    },
-                    borderRadius: 8,
-                    barThickness: 40
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        backgroundColor: '#0f172a',
-                        padding: 12,
-                        titleFont: { size: 14, weight: 'bold' },
-                        bodyFont: { size: 13 }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: { color: '#f1f5f9', drawBorder: false },
-                        ticks: { font: { family: 'Inter', size: 12 }, color: '#94a3b8' }
-                    },
-                    x: {
-                        grid: { display: false },
-                        ticks: { font: { family: 'Inter', size: 12 }, color: '#94a3b8' }
-                    }
-                }
-            }
         });
     </script>
 </body>

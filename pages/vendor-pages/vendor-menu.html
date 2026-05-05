@@ -199,7 +199,13 @@
         <div class="menu-tabs-wrapper">
           <div class="menu-tabs" id="menuTabs">
             <button class="tab-btn active" onclick="setStatusFilter('active')">
-              <i class="fa-solid fa-utensils"></i> Main Menu
+              <i class="fa-solid fa-check-circle"></i> Accepted
+            </button>
+            <button class="tab-btn" onclick="setStatusFilter('pending')">
+              <i class="fa-solid fa-clock"></i> Pending <span class="badge" id="count-pending">0</span>
+            </button>
+            <button class="tab-btn" onclick="setStatusFilter('rejected')">
+              <i class="fa-solid fa-times-circle"></i> Rejected <span class="badge" id="count-rejected">0</span>
             </button>
           </div>
         </div>
@@ -966,7 +972,7 @@
                   .toLowerCase()
                   .replace(/\s+/g, "_");
               const old = getMenu().find((m) => m.id === id) || {};
-              const status = "active";
+              const status = existId ? old.status : "pending";
 
               updateMenuItem({
                 id,
