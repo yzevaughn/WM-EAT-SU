@@ -792,9 +792,6 @@ input:checked + .toggle-slider:before {
   background: #2563eb;
 }
 
-.btn-save {
-  display: none;
-}
 
 /* Small Mobile */
 @media (max-width: 480px) {

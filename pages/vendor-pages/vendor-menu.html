@@ -201,18 +201,6 @@
             <button class="tab-btn active" onclick="setStatusFilter('active')">
               <i class="fa-solid fa-utensils"></i> Main Menu
             </button>
-            <button class="tab-btn" onclick="setStatusFilter('pending')">
-              <i class="fa-solid fa-hourglass-half"></i> Pending
-              <span class="tab-badge" id="count-pending">0</span>
-            </button>
-            <button class="tab-btn" onclick="setStatusFilter('accepted')">
-              <i class="fa-solid fa-check"></i> Accepted
-              <span class="tab-badge badge-success" id="count-accepted">0</span>
-            </button>
-            <button class="tab-btn" onclick="setStatusFilter('rejected')">
-              <i class="fa-solid fa-xmark"></i> Rejected
-              <span class="tab-badge badge-danger" id="count-rejected">0</span>
-            </button>
           </div>
         </div>
 
@@ -265,7 +253,7 @@
 
                 <!-- STEP 2: PRICING -->
                 <div class="menu-step-content" data-step="2">
-                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                     <div class="form-group">
                       <label for="itemPrice">Price (&#8369;)</label>
                       <input
@@ -277,15 +265,15 @@
                         required
                       />
                     </div>
-                  <div class="form-group" style="margin-top: 12px;">
-                    <label for="itemQuantity">Stock Remaining</label>
-
-                    <input
-                      type="number"
-                      id="itemQuantity"
-                      min="0"
-                      placeholder="Enter current stock..."
-                    />
+                    <div class="form-group">
+                      <label for="itemQuantity">Stock Remaining</label>
+                      <input
+                        type="number"
+                        id="itemQuantity"
+                        min="0"
+                        placeholder="Enter current stock..."
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -477,14 +465,22 @@
         const accepted = menu.filter(m => m.status === 'accepted').length;
         const rejected = menu.filter(m => m.status === 'rejected').length;
 
-        document.getElementById('count-pending').textContent = pending;
-        document.getElementById('count-accepted').textContent = accepted;
-        document.getElementById('count-rejected').textContent = rejected;
+        const pEl = document.getElementById('count-pending');
+        const aEl = document.getElementById('count-accepted');
+        const rEl = document.getElementById('count-rejected');
 
-        // Hide badges if zero
-        document.getElementById('count-pending').style.display = pending > 0 ? 'inline-flex' : 'none';
-        document.getElementById('count-accepted').style.display = accepted > 0 ? 'inline-flex' : 'none';
-        document.getElementById('count-rejected').style.display = rejected > 0 ? 'inline-flex' : 'none';
+        if (pEl) {
+          pEl.textContent = pending;
+          pEl.style.display = pending > 0 ? 'inline-flex' : 'none';
+        }
+        if (aEl) {
+          aEl.textContent = accepted;
+          aEl.style.display = accepted > 0 ? 'inline-flex' : 'none';
+        }
+        if (rEl) {
+          rEl.textContent = rejected;
+          rEl.style.display = rejected > 0 ? 'inline-flex' : 'none';
+        }
       }
 
       function setStatusFilter(status) {
@@ -966,11 +962,11 @@
             function persistItem(imgSrc) {
               const id =
                 existId ||
-                (name + "|mang_tinos_canteen")
+                (name + "_" + Date.now() + "|mang_tinos_canteen")
                   .toLowerCase()
                   .replace(/\s+/g, "_");
               const old = getMenu().find((m) => m.id === id) || {};
-              const status = existId ? old.status || "active" : "pending";
+              const status = "active";
 
               updateMenuItem({
                 id,
@@ -995,7 +991,6 @@
               closeItemModal();
               closeConfirm();
               pendingAction = null;
-              if (!existId) currentStatusFilter = "pending";
               renderMenu();
               showToast(
                 "success",
