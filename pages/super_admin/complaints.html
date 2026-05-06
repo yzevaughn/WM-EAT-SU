@@ -471,6 +471,20 @@
       </div>
     </div>
 
+    <!-- Validation Modal (Empty Message) -->
+    <div class="modal-backdrop" id="validationModal">
+      <div class="modal-panel" style="max-width: 400px; text-align: center; background: #ffffff; color: #1e293b; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+        <div class="modal-body" style="padding: 32px;">
+            <div class="modal-icon" style="font-size: 56px; color: #f59e0b; margin-bottom: 20px; animation: pulse 2s infinite;">
+                <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+            <h2 style="font-size: 22px; font-weight: 800; color: #1e293b; margin-bottom: 12px;">Empty Message</h2>
+            <p style="font-size: 15px; color: #64748b; margin-bottom: 28px; line-height: 1.6;">It looks like you're trying to send an empty reply. Please write a message before clicking send.</p>
+            <button class="btn-submit" onclick="closeModal('validationModal')" style="width: 100%; background: #2563eb; color: #ffffff; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 15px; border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);">Got it, thanks!</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 

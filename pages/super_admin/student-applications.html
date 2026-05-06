@@ -350,17 +350,6 @@
             <input type="file" class="form-control wi-p-image" accept="image/*" />
           </div>
           <div class="form-group" style="margin-top: 10px;">
-            <label>Category of Food</label>
-            <select class="form-control wi-p-category" required>
-              <option value="" disabled selected>Select Category</option>
-              <option value="Meals">Meals</option>
-              <option value="Snacks">Snacks</option>
-              <option value="Drinks">Drinks</option>
-              <option value="Desserts">Desserts</option>
-              <option value="Healthy">Healthy</option>
-            </select>
-          </div>
-          <div class="form-group" style="margin-top: 10px;">
             <label>List of Ingredients</label>
             <textarea class="form-control wi-p-ingredients" rows="3" placeholder="e.g. Ground pork, garlic, soy sauce, pepper..." style="resize: vertical; font-family: inherit; font-size: 13px;"></textarea>
           </div>
@@ -443,10 +432,9 @@
         prodBoxes.forEach((box) => {
           const name = box.querySelector(".wi-p-name").value;
           const price = box.querySelector(".wi-p-qty").value;
-          const category = box.querySelector(".wi-p-category").value;
           const ingredients = box.querySelector(".wi-p-ingredients").value;
           if (name) {
-            products.push({ name, price, category, ingredients });
+            products.push({ name, price, ingredients });
           }
         });
 
@@ -458,7 +446,6 @@
             ? "Linked Account"
             : `${ln}, ${fn}${mi ? " " + mi : ""}`,
           studentEmail: existingEmail || email,
-          category: products.length > 0 ? products[0].category : "General",
           status: "Pending",
           dateSubmitted: new Date().toLocaleDateString("en-US", {
             month: "short",
@@ -819,7 +806,6 @@
                   <tr>
                     <th>App ID</th>
                     <th>Student Name</th>
-                    <th>Category</th>
                     <th>Status</th>
                     <th>Date Submitted</th>
                     <th class="actions-col">Actions</th>

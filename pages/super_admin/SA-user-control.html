@@ -210,7 +210,7 @@
                     <option value="All">All Status</option>
                     <option value="Active">Active</option>
                     <option value="Deactivated">Deactivated</option>
-                    <option value="Banned">Banned</option>
+                    <option value="Suspended">Suspended</option>
                   </select>
                 </div>
               </div>
@@ -291,6 +291,29 @@
         <div class="modal-footer">
           <button class="btn-cancel" onclick="closeReactivateModal()">Cancel</button>
           <button class="btn-confirm-success" onclick="confirmReactivate()">Reactivate Account</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="suspendModal" class="modal-overlay">
+      <div class="deactivate-modal">
+        <div class="modal-header">
+          <h2>Suspend User Account</h2>
+          <button class="close-modal" onclick="closeSuspendModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p class="warning-text" style="color: #ef4444; background: #fef2f2; padding: 12px; border-radius: 8px; border: 1px solid #fee2e2;">
+            <i class="fa-solid fa-triangle-exclamation"></i> Warning: This will immediately revoke all access for this user.
+          </p>
+          <div class="input-group" style="margin-top: 16px;">
+            <label for="suspensionReason" style="display: block; font-weight: 600; margin-bottom: 8px;">Reason for Suspension</label>
+            <textarea id="suspensionReason" placeholder="e.g. Terms of service violation, repeat complaints..." style="width: 100%; min-height: 100px; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1; outline: none;"></textarea>
+          </div>
+          <input type="hidden" id="suspendUserId">
+        </div>
+        <div class="modal-footer">
+          <button class="btn-cancel" onclick="closeSuspendModal()">Cancel</button>
+          <button class="btn-confirm-danger" onclick="confirmSuspend()" style="background: #ef4444;">Suspend User</button>
         </div>
       </div>
     </div>

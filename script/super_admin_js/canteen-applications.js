@@ -73,7 +73,6 @@ function addCanteenApplication(appData) {
     studentName: appData.operatorName,
     studentEmail: appData.operatorEmail,
     businessName: appData.businessName,
-    category: appData.category || "Food",
     status: "Active Vendor", // Assuming walk-in is pre-approved
     dateSubmitted: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
     rejectionReason: ""
@@ -256,8 +255,7 @@ function getFilteredAndSortedData() {
     const searchMatch = app.studentName.toLowerCase().includes(currentSearch) ||
                         app.id.toLowerCase().includes(currentSearch) ||
                         app.businessName.toLowerCase().includes(currentSearch) ||
-                        app.studentEmail.toLowerCase().includes(currentSearch) ||
-                        app.category.toLowerCase().includes(currentSearch);
+                        app.studentEmail.toLowerCase().includes(currentSearch);
     let statusMatch = true;
     if (currentStatus !== "All") statusMatch = (app.status === currentStatus);
 
@@ -295,7 +293,7 @@ function renderTable() {
   tableBody.innerHTML = "";
 
   if (totalEntries === 0) {
-    tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:#64748b;padding:32px;">No applications found matching the current filters.</td></tr>`;
+    tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#64748b;padding:32px;">No applications found matching the current filters.</td></tr>`;
     updatePaginationUI(0, 0, 0);
     return;
   }
@@ -350,7 +348,6 @@ function renderTable() {
         </div>
       </td>
       <td>${app.businessName}</td>
-      <td>${app.category}</td>
       <td><span class="status-pill ${statusClass}">${statusEmoji} ${statusLabel}</span></td>
       <td>${app.dateSubmitted}</td>
       <td class="actions-col"><div class="action-buttons">${actionButtons}</div></td>

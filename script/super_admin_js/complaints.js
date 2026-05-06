@@ -407,10 +407,10 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("dpSendReply").addEventListener("click", () => {
         const replyInput = document.getElementById("dpReplyInput");
         if(!replyInput.value.trim()) {
-            alert("Please write a reply before sending.");
+            openModal("validationModal");
             return;
         }
-        alert("Reply sent successfully to student.");
+        showToast("Success", "Reply sent successfully to student.");
         replyInput.value = "";
     });
 

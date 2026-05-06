@@ -8,12 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 'USR-1024', name: 'Reyes, Pedro', email: 'pedro.r@wm.edu.ph', type: 'Student', status: 'Active', joined: 'May 3, 2026' },
         { id: 'USR-1025', name: 'Santos, Maria', email: 'maria.s@wm.edu.ph', type: 'Staff', status: 'Active', joined: 'May 2, 2026' },
         { id: 'USR-1026', name: 'Dela Cruz, Juan', email: 'juan.dc@wm.edu.ph', type: 'Outsider', status: 'Deactivated', joined: 'May 1, 2026' },
-        { id: 'USR-1027', name: 'Lopez, Elena', email: 'elena.l@wm.edu.ph', type: 'Student', status: 'Banned', joined: 'Apr 30, 2026' },
+        { id: 'USR-1027', name: 'Lopez, Elena', email: 'elena.l@wm.edu.ph', type: 'Student', status: 'Suspended', joined: 'Apr 30, 2026' },
         { id: 'USR-1028', name: 'Garcia, Jose', email: 'jose.g@wm.edu.ph', type: 'Staff', status: 'Active', joined: 'Apr 29, 2026' },
         { id: 'USR-1029', name: 'Zaragosa, Ana', email: 'ana.z@wm.edu.ph', type: 'Outsider', status: 'Active', joined: 'Apr 28, 2026' },
         { id: 'USR-1030', name: 'Mendoza, Luis', email: 'luis.m@wm.edu.ph', type: 'Student', status: 'Active', joined: 'Apr 27, 2026' },
         { id: 'USR-1031', name: 'Bautista, Rosa', email: 'rosa.b@wm.edu.ph', type: 'Staff', status: 'Deactivated', joined: 'Apr 26, 2026' },
-        { id: 'USR-1032', name: 'Torres, Mark', email: 'mark.t@wm.edu.ph', type: 'Outsider', status: 'Banned', joined: 'Apr 25, 2026' },
+        { id: 'USR-1032', name: 'Torres, Mark', email: 'mark.t@wm.edu.ph', type: 'Outsider', status: 'Suspended', joined: 'Apr 25, 2026' },
         { id: 'USR-1033', name: 'Villanueva, Clara', email: 'clara.v@wm.edu.ph', type: 'Student', status: 'Active', joined: 'Apr 24, 2026' },
         { id: 'USR-1034', name: 'Dimagiba, Bong', email: 'bong.d@wm.edu.ph', type: 'Staff', status: 'Active', joined: 'Apr 23, 2026' },
         { id: 'USR-1035', name: 'Pascual, Irene', email: 'irene.p@wm.edu.ph', type: 'Student', status: 'Deactivated', joined: 'Apr 22, 2026' },
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 'USR-1037', name: 'Santiago, Linda', email: 'linda.s@wm.edu.ph', type: 'Staff', status: 'Active', joined: 'Apr 20, 2026' },
         { id: 'USR-1038', name: 'Aquino, Benjie', email: 'benjie.a@wm.edu.ph', type: 'Student', status: 'Active', joined: 'Apr 19, 2026' },
         { id: 'USR-1039', name: 'Dizon, Felicia', email: 'felicia.d@wm.edu.ph', type: 'Outsider', status: 'Deactivated', joined: 'Apr 18, 2026' },
-        { id: 'USR-1040', name: 'Gomez, Ricardo', email: 'ricardo.g@wm.edu.ph', type: 'Staff', status: 'Banned', joined: 'Apr 17, 2026' },
+        { id: 'USR-1040', name: 'Gomez, Ricardo', email: 'ricardo.g@wm.edu.ph', type: 'Staff', status: 'Suspended', joined: 'Apr 17, 2026' },
         { id: 'USR-1041', name: 'Navarro, Sofia', email: 'sofia.n@wm.edu.ph', type: 'Student', status: 'Active', joined: 'Apr 16, 2026' },
         { id: 'USR-1042', name: 'Ramos, Miguel', email: 'miguel.r@wm.edu.ph', type: 'Outsider', status: 'Active', joined: 'Apr 15, 2026' },
         { id: 'USR-1043', name: 'Cruz, Teresa', email: 'teresa.c@wm.edu.ph', type: 'Staff', status: 'Active', joined: 'Apr 14, 2026' },
@@ -54,10 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
         displayData.forEach(user => {
             const row = document.createElement('tr');
             
-            let statusClass = '';
-            if (user.status === 'Active') statusClass = 'status-active';
-            else if (user.status === 'Deactivated') statusClass = 'status-pending'; 
-            else if (user.status === 'Banned') statusClass = 'status-rejected';
+            let statusHtml = '';
+            if (user.status === 'Active') {
+                statusHtml = `<span class="premium-status active"><span class="status-dot-pulse"></span> ${user.status}</span>`;
+            } else if (user.status === 'Deactivated') {
+                statusHtml = `<span class="premium-status deactivated"><i class="fa-solid fa-clock-rotate-left"></i> ${user.status}</span>`;
+            } else if (user.status === 'Suspended') {
+                statusHtml = `<span class="premium-status suspended"><i class="fa-solid fa-triangle-exclamation"></i> ${user.status}</span>`;
+            }
 
             row.innerHTML = `
                 <td><span class="transaction-id">${user.id}</span></td>
@@ -68,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </td>
                 <td><span class="badge-type">${user.type === 'Staff' ? 'Teacher & Staff' : user.type}</span></td>
-                <td><span class="status-badge ${statusClass}">${user.status}</span></td>
+                <td>${statusHtml}</td>
                 <td>${user.joined}</td>
                 <td>
                     <div class="action-buttons" style="display: flex; align-items: center; gap: 8px;">
@@ -76,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ? `<button class="btn-action danger" style="padding: 6px 12px; font-size: 11px; font-weight: 600;" onclick="openDeactivateModal('${user.id}')">Deactivate</button>` 
                             : `<button class="btn-action success" style="padding: 6px 12px; font-size: 11px; font-weight: 600;" onclick="openReactivateModal('${user.id}')">Reactivate</button>`
                         }
-                        <button class="btn-action-icon" style="color: #64748b; background: none; border: none; cursor: pointer; font-size: 14px;" onclick="banUser('${user.id}')" title="Ban User">
+                        <button class="btn-action-icon" style="color: #64748b; background: none; border: none; cursor: pointer; font-size: 14px;" onclick="openSuspendModal('${user.id}')" title="Suspend User">
                             <i class="fa-solid fa-ban"></i>
                         </button>
                     </div>
@@ -168,12 +172,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    window.banUser = (id) => {
-        if(confirm('Are you sure you want to ban this user?')) {
-            const user = users.find(u => u.id === id);
-            if (user) {
-                user.status = 'Banned';
-                filterTable();
+    window.openSuspendModal = (id) => {
+        const modal = document.getElementById('suspendModal');
+        if (modal) {
+            document.getElementById('suspendUserId').value = id;
+            modal.style.display = 'flex';
+        }
+    };
+
+    window.closeSuspendModal = () => {
+        const modal = document.getElementById('suspendModal');
+        if (modal) modal.style.display = 'none';
+        document.getElementById('suspensionReason').value = '';
+    };
+
+    window.confirmSuspend = () => {
+        const id = document.getElementById('suspendUserId').value;
+        const reason = document.getElementById('suspensionReason').value.trim();
+        if (!reason) {
+            alert('Please provide a reason for suspension.');
+            return;
+        }
+        const user = users.find(u => u.id === id);
+        if (user) {
+            user.status = 'Suspended';
+            user.reason = reason;
+            filterTable();
+            closeSuspendModal();
+            if (typeof showToast === 'function') {
+                showToast('Success', `Account ${id} has been suspended.`);
             }
         }
     };

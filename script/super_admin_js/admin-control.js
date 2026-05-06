@@ -72,9 +72,9 @@ function renderAdminAccounts() {
     `).join('');
 }
 
-function renderBannedAccounts() {
-    const bannedBody = document.getElementById('bannedTableBody');
-    if (!bannedBody) return;
+function renderSuspendedAccounts() {
+    const suspendedBody = document.getElementById('suspendedTableBody');
+    if (!suspendedBody) return;
 
     const inactiveAdmins = adminData.filter(a => a.status !== 'Active');
 

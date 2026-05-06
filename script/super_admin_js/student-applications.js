@@ -401,7 +401,7 @@ function renderTable() {
   tableBody.innerHTML = "";
 
   if (totalEntries === 0) {
-    tableBody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: #64748b; padding: 32px;">No applications found matching the current filters.</td></tr>`;
+    tableBody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: #64748b; padding: 32px;">No applications found matching the current filters.</td></tr>`;
     updatePaginationUI(0, 0, 0);
     return;
   }
@@ -453,7 +453,6 @@ function renderTable() {
           <span class="student-email">${app.studentEmail}</span>
         </div>
       </td>
-      <td>${app.category}</td>
       <td>
         <span class="status-pill ${statusClass}">
           ${getStatusEmoji(app.status)} ${app.status}
