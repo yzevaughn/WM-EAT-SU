@@ -116,7 +116,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Header totals
+    function renderSummaryCards() {
+        document.getElementById('totalCanteensValue').textContent = 12;
+        document.getElementById('studentVendorsValue').textContent = 48;
+        document.getElementById('pendingPaymentsValue').textContent = '₱24.5K';
+        document.getElementById('openComplaintsValue').textContent = 5;
+    }
+
+    const activities = [
+        { title: 'New canteen application received', detail: 'Canteen D - Gardens now pending review.', time: '10 mins ago' },
+        { title: 'Payment overdue alert', detail: 'Canteen A - Main has a delayed settlement.', time: '1 hr ago' },
+        { title: 'Complaint escalated', detail: 'Order #ORD-2026-1549 requires follow-up.', time: '2 hrs ago' },
+        { title: 'Student vendor approved', detail: 'Lani Cruz vendor account successfully verified.', time: 'Yesterday' }
+    ];
+
+    function renderActivityList() {
+        const activityList = document.getElementById('activity-list');
+        if (!activityList) return;
+        activityList.innerHTML = activities.map(item => `
+            <div class="activity-item">
+                <div class="activity-meta">
+                    <span class="activity-title">${item.title}</span>
+                    <span class="activity-time">${item.time}</span>
+                </div>
+                <p class="activity-detail">${item.detail}</p>
+            </div>
+        `).join('');
+    }
+
     // Initial Renders
+    renderSummaryCards();
     renderEarningsList();
     renderPaymentList();
+    renderActivityList();
 });

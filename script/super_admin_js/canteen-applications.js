@@ -88,10 +88,16 @@ let itemsPerPage = 10;
 let currentSort = "Latest";
 let currentStatus = "All";
 let currentSearch = "";
+let currentDateFilter = "All";
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("statusFilter").addEventListener("change", (e) => {
     currentStatus = e.target.value;
+    currentPage = 1;
+    renderTable();
+  });
+  document.getElementById("dateFilter").addEventListener("change", (e) => {
+    currentDateFilter = e.target.value;
     currentPage = 1;
     renderTable();
   });
@@ -249,10 +255,28 @@ function getFilteredAndSortedData() {
   let filtered = mockApplications.filter((app) => {
     const searchMatch = app.studentName.toLowerCase().includes(currentSearch) ||
                         app.id.toLowerCase().includes(currentSearch) ||
-                        app.businessName.toLowerCase().includes(currentSearch);
+                        app.businessName.toLowerCase().includes(currentSearch) ||
+                        app.studentEmail.toLowerCase().includes(currentSearch) ||
+                        app.category.toLowerCase().includes(currentSearch);
     let statusMatch = true;
     if (currentStatus !== "All") statusMatch = (app.status === currentStatus);
-    return searchMatch && statusMatch;
+
+    let dateMatch = true;
+    if (currentDateFilter !== "All") {
+      const submittedDate = new Date(app.dateSubmitted);
+      const today = new Date();
+      const startOfToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      if (currentDateFilter === "Today") {
+        dateMatch = submittedDate >= startOfToday && submittedDate < new Date(startOfToday.getTime() + 86400000);
+      } else if (currentDateFilter === "This Week") {
+        const weekAgo = new Date(startOfToday.getTime() - 6 * 86400000);
+        dateMatch = submittedDate >= weekAgo && submittedDate <= new Date(startOfToday.getTime() + 86400000);
+      } else if (currentDateFilter === "This Month") {
+        dateMatch = submittedDate.getFullYear() === today.getFullYear() && submittedDate.getMonth() === today.getMonth();
+      }
+    }
+
+    return searchMatch && statusMatch && dateMatch;
   });
 
   filtered.sort((a, b) => {
@@ -366,62 +390,86 @@ function reviewApp(id) {
     app.status = "Under Review"; 
     saveCanteenApplications();
     renderTable(); 
+    showToast("In Review", `Application ${id} is now under review.`, "success");
   }
 }
 
 function approveApp(id) {
-  if (confirm("Are you sure you want to approve this canteen application?")) {
-    const app = mockApplications.find(x => x.id === id);
-    if (app) { 
-      app.status = "Active Vendor"; 
-      saveCanteenApplications();
-      renderTable();
-      showToast("Success", `Application ${id} has been approved!`, "success");
+  showConfirmModal({
+    title: "Approve Application",
+    message: "Are you sure you want to approve this canteen application?",
+    type: "approve",
+    requireInput: false,
+    onConfirm: () => {
+      const app = mockApplications.find(x => x.id === id);
+      if (app) {
+        app.status = "Active Vendor";
+        saveCanteenApplications();
+        renderTable();
+        showToast("Approved", `Application ${id} has been approved.`, "success");
+      }
     }
-  }
+  });
 }
 
 function rejectApp(id) {
-  const reason = prompt("Please provide a rejection reason:");
-  if (reason !== null) {
-    const app = mockApplications.find(x => x.id === id);
-    if (app) { 
-      app.status = "Rejected"; 
-      app.rejectionReason = reason || "No reason provided"; 
-      saveCanteenApplications();
-      renderTable();
-      showToast("Rejected", `Application ${id} has been rejected.`, "warning");
+  showConfirmModal({
+    title: "Reject Application",
+    message: "Are you sure you want to reject this application? Please provide a reason.",
+    type: "reject",
+    requireInput: true,
+    inputLabel: "Rejection Reason",
+    onConfirm: (reason) => {
+      const app = mockApplications.find(x => x.id === id);
+      if (app) {
+        app.status = "Rejected";
+        app.rejectionReason = reason;
+        saveCanteenApplications();
+        renderTable();
+        showToast("Rejected", `Application ${id} has been rejected.`, "warning");
+      }
     }
-  }
+  });
 }
 
 function removeVendor(id) {
-  const reason = prompt("Please provide a deactivation reason:");
-  if (reason !== null) {
-    const app = mockApplications.find(x => x.id === id);
-    if (app) { 
-      app.status = "Deactivated"; 
-      app.deactivationReason = reason || "No reason provided"; 
-      saveCanteenApplications();
-      renderTable();
-      showToast("Deactivated", `Canteen ${id} has been deactivated.`, "warning");
+  showConfirmModal({
+    title: "Deactivate Canteen",
+    message: "Are you sure you want to deactivate this canteen? Please provide a reason.",
+    type: "reject",
+    requireInput: true,
+    inputLabel: "Deactivation Reason",
+    onConfirm: (reason) => {
+      const app = mockApplications.find(x => x.id === id);
+      if (app) {
+        app.status = "Deactivated";
+        app.deactivationReason = reason;
+        saveCanteenApplications();
+        renderTable();
+        showToast("Deactivated", `Canteen ${id} has been deactivated.`, "warning");
+      }
     }
-  }
+  });
 }
 
 function reactivateApp(id) {
-  if (confirm("Are you sure you want to reactivate this canteen?")) {
-    const app = mockApplications.find(x => x.id === id);
-    if (app) { 
-      app.status = "Active Vendor"; 
-      delete app.deactivationReason;
-      saveCanteenApplications();
-      renderTable();
-      showToast("Success", `Canteen ${id} has been reactivated!`, "success");
+  showConfirmModal({
+    title: "Reactivate Canteen",
+    message: "Are you sure you want to reactivate this canteen?",
+    type: "approve",
+    requireInput: false,
+    onConfirm: () => {
+      const app = mockApplications.find(x => x.id === id);
+      if (app) {
+        app.status = "Active Vendor";
+        delete app.deactivationReason;
+        saveCanteenApplications();
+        renderTable();
+        showToast("Reactivated", `Canteen ${id} has been reactivated.`, "success");
+      }
     }
-  }
+  });
 }
-
 
 
 function openDetails(id) {

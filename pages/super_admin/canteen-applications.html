@@ -391,6 +391,110 @@
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
+    <!-- Confirmation Modal -->
+    <div class="modal-backdrop" id="confirmModal">
+      <div class="modal-panel" style="max-width: 400px; text-align: center">
+        <div class="modal-body" style="padding-top: 32px">
+          <div
+            class="modal-icon"
+            style="font-size: 48px; color: #ef4444; margin-bottom: 16px"
+            id="confirmIcon"
+          >
+            <i class="fa-solid fa-circle-exclamation"></i>
+          </div>
+          <h2
+            style="
+              font-size: 20px;
+              font-weight: 800;
+              color: #0f172a;
+              margin-bottom: 8px;
+            "
+            id="confirmTitle"
+          >
+            Confirm Action
+          </h2>
+          <p
+            style="font-size: 14px; color: #64748b; margin-bottom: 24px"
+            id="confirmMessage"
+          >
+            Are you sure you want to do this?
+          </p>
+
+          <div
+            id="confirmInputContainer"
+            style="display: none; margin-bottom: 24px; text-align: left"
+          >
+            <label
+              style="
+                display: block;
+                font-size: 13px;
+                font-weight: 600;
+                color: #475569;
+                margin-bottom: 8px;
+              "
+              id="confirmInputLabel"
+              >Reason</label
+            >
+            <textarea
+              id="confirmInput"
+              class="form-control"
+              rows="3"
+              placeholder="Enter reason here..."
+              style="
+                width: 100%;
+                border: 1px solid #cbd5e1;
+                border-radius: 8px;
+                padding: 12px;
+                font-family: inherit;
+                font-size: 14px;
+                resize: vertical;
+                box-sizing: border-box;
+                outline: none;
+                transition: border-color 0.2s;
+              "
+            ></textarea>
+          </div>
+
+          <div
+            class="form-actions"
+            style="display: flex; justify-content: center; gap: 12px"
+          >
+            <button
+              class="btn-submit"
+              id="submitConfirmBtn"
+              style="
+                padding: 10px 24px;
+                border: none;
+                color: white;
+                border-radius: 8px;
+                font-weight: 600;
+                cursor: pointer;
+                background: linear-gradient(135deg, #10b981, #059669);
+                box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+              "
+            >
+              Confirm
+            </button>
+            <button
+              class="btn-ghost"
+              id="cancelConfirmBtn"
+              style="
+                padding: 10px 24px;
+                border: 1px solid #cbd5e1;
+                background: transparent;
+                color: #475569;
+                border-radius: 8px;
+                font-weight: 600;
+                cursor: pointer;
+              "
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- TOP NAVBAR -->
   <div class="top-nav">
     <div class="nav-left">
@@ -441,7 +545,6 @@
       <div class="profile">
         <div class="profile-info">
           <span class="profile-name">Super Admin</span>
-          <span class="email">admin@wm.edu.ph</span>
         </div>
         <div class="profile-dropdown">
           <button class="profile-btn">
