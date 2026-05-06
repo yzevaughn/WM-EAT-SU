@@ -106,6 +106,7 @@ document.addEventListener("DOMContentLoaded", function() {
             let matchesDate = true;
             if (dateRange === "Today") matchesDate = item.date.includes("2026-03-05");
             if (dateRange === "Week") matchesDate = item.date.includes("2026-03-"); // Simple mock
+            if (dateRange === "Month") matchesDate = item.date.includes("2026-03");
             
             return matchesSearch && matchesStatus && matchesDate;
         });

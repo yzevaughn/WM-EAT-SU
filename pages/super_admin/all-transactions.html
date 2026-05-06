@@ -16,7 +16,16 @@
 
     <link rel="stylesheet" href="../../css/navbar.css" />
     <link rel="stylesheet" href="../../css/super_admin_css/super-dashboard.css" />
-    <link rel="stylesheet" href="../../css/super_admin_css/super-admin-transactions.css" />
+    <link rel="stylesheet" href="../../css/admin-css/student-applications.css" />
+    <link rel="stylesheet" href="../../css/admin-css/complaints.css" />
+    <style>
+      .status-completed { background: #dcfce7; color: #15803d; }
+      .status-pending { background: #fef3c7; color: #92400e; }
+      .status-cancelled { background: #fee2e2; color: #b91c1c; }
+      
+      .amount-col { font-weight: 700; color: #0f172a; }
+      .transaction-id { font-family: 'Courier New', Courier, monospace; font-weight: 600; color: #64748b; }
+    </style>
   </head>
   <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
@@ -150,96 +159,82 @@
         <header class="page-header">
           <div>
             <h1>All Transactions</h1>
-            <p class="subtitle">
-              Complete history of all orders and payments on the platform.
-            </p>
+            <p class="subtitle">Complete history of all orders and payments on the platform.</p>
           </div>
         </header>
 
-        <div class="table-container">
-          <div class="table-controls">
-            <div class="search-box">
-              <i class="fa-solid fa-search"></i>
-              <input
-                type="text"
-                id="searchInput"
-                placeholder="Search Order ID, Student, or Vendor..."
-              />
-            </div>
-            <div class="filter-group">
-              <div class="filter-item">
-                <label for="statusFilter"
-                  ><i class="fa-solid fa-filter"></i> Status:</label
-                >
-                <select id="statusFilter" class="custom-select">
-                  <option value="All">All Statuses</option>
-                  <option value="Completed">Completed</option>
-                  <option value="Pending">Pending</option>
-                  <option value="Cancelled">Cancelled</option>
-                </select>
+        <div class="dashboard-container" style="padding-top: 0;">
+          <div class="table-container">
+            <div class="table-controls">
+              <div class="search-box">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search Order ID, Student, or Vendor..." />
               </div>
-              <div class="filter-item">
-                <label for="dateFilter"
-                  ><i class="fa-solid fa-calendar"></i> Date:</label
-                >
-                <select id="dateFilter" class="custom-select">
-                  <option value="All">All Time</option>
-                  <option value="Today">Today</option>
-                  <option value="Week">This Week</option>
-                  <option value="Month">This Month</option>
-                </select>
+              <div class="filter-group">
+                <div class="filter-item">
+                  <label for="statusFilter"><i class="fa-solid fa-filter"></i> Status:</label>
+                  <select id="statusFilter" class="custom-select">
+                    <option value="All">All Statuses</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Cancelled">Cancelled</option>
+                  </select>
+                </div>
+                <div class="filter-item">
+                  <label for="dateFilter"><i class="fa-solid fa-calendar"></i> Date:</label>
+                  <select id="dateFilter" class="custom-select">
+                    <option value="All">All Time</option>
+                    <option value="Today">Today</option>
+                    <option value="Week">This Week</option>
+                    <option value="Month">This Month</option>
+                  </select>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="table-wrapper">
-            <table class="data-grid">
-              <thead>
-                <tr>
-                  <th>Order ID</th>
-                  <th>Student</th>
-                  <th>Vendor</th>
-                  <th>Items</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                  <th>Date & Time</th>
-                  <th class="actions-col">Actions</th>
-                </tr>
-              </thead>
-              <tbody id="transactionList">
-                <!-- Data populated by JS -->
-              </tbody>
-            </table>
-          </div>
-
-          <div class="pagination-footer">
-            <div class="pagination-info">
-              Showing <span id="pageStart">0</span> to
-              <span id="pageEnd">0</span> of <span id="totalEntries">0</span>
-              entries
+            <div class="table-wrapper">
+              <table class="data-grid">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Student</th>
+                    <th>Vendor</th>
+                    <th>Items</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Date & Time</th>
+                    <th class="actions-col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="transactionList">
+                  <!-- Data populated by JS -->
+                </tbody>
+              </table>
             </div>
-            <div class="pagination-nav">
-              <button class="page-btn" id="prevPage">
-                <i class="fa-solid fa-chevron-left"></i>
-              </button>
-              <div id="pageNumbers" style="display: flex; gap: 8px"></div>
-              <button class="page-btn" id="nextPage">
-                <i class="fa-solid fa-chevron-right"></i>
-              </button>
+
+            <div class="pagination-controls">
+              <div class="pagination-info">
+                Showing <span id="pageStart">0</span> to <span id="pageEnd">0</span> of <span id="totalEntries">0</span> entries
+              </div>
+              <div class="pagination-nav" id="paginationControls">
+                <button class="page-btn" id="prevPage"><i class="fa-solid fa-chevron-left"></i></button>
+                <div id="pageNumbers" style="display: flex; gap: 5px;"></div>
+                <button class="page-btn" id="nextPage"><i class="fa-solid fa-chevron-right"></i></button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="empty-state" id="emptyState">
-          <i class="fa-solid fa-receipt"></i>
-          <div class="empty-text">No transactions found</div>
+          <div class="empty-state" id="emptyState" style="display: none;">
+            <i class="fa-solid fa-receipt"></i>
+            <div class="empty-text">No transactions found</div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- View Transaction Details Modal -->
     <div class="modal-backdrop" id="detailsModal">
-      <div class="modal-panel">
+      <div class="modal-panel" style="max-width: 500px;">
         <div class="modal-header">
           <h2>Order Details</h2>
           <button class="btn-close" onclick="closeModal('detailsModal')">
@@ -251,10 +246,8 @@
             <!-- Dynamic Content -->
           </div>
         </div>
-        <div class="modal-footer">
-          <button class="btn-ghost" onclick="closeModal('detailsModal')">
-            Close
-          </button>
+        <div class="modal-footer" style="display: flex; justify-content: flex-end;">
+          <button class="btn-ghost" onclick="closeModal('detailsModal')" style="padding: 10px 20px; border: 1px solid #e2e8f0; border-radius: 8px; cursor: pointer;">Close</button>
         </div>
       </div>
     </div>
@@ -262,6 +255,6 @@
     <script src="../../script/notifications.js"></script>
     <script src="../../script/admin-js/admin-notifications-mock.js"></script>
     <script src="../../script/super_admin_js/super-notif.js"></script>
-    <script src="../../script/super_admin_js/super-admin-transactions.js"></script>
+    <script src="../../script/admin-js/all-transactions.js"></script>
   </body>
 </html>
