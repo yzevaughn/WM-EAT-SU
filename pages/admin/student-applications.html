@@ -90,89 +90,132 @@
                 </p>
               </div>
 
-              <div class="form-section-title">Personal Details</div>
-              <div class="form-grid-2">
-                <div
-                  class="form-group"
-                  style="
-                    grid-column: span 2;
-                    display: grid;
-                    grid-template-columns: 1fr 1fr 80px;
-                    gap: 12px;
-                  "
-                >
-                  <div>
-                    <label>Last Name</label>
+              <div id="wi-personalDetailsSection">
+                <div class="form-section-title">Personal Details</div>
+                <div class="form-grid-2">
+                  <div
+                    class="form-group"
+                    style="
+                      grid-column: span 2;
+                      display: grid;
+                      grid-template-columns: 1fr 1fr 80px;
+                      gap: 12px;
+                    "
+                  >
+                    <div>
+                      <label>Last Name</label>
+                      <input
+                        type="text"
+                        id="wi-lastName"
+                        class="form-control"
+                        placeholder="Dela Cruz"
+                      />
+                    </div>
+                    <div>
+                      <label>First Name</label>
+                      <input
+                        type="text"
+                        id="wi-firstName"
+                        class="form-control"
+                        placeholder="Juan"
+                      />
+                    </div>
+                    <div>
+                      <label>M.I.</label>
+                      <input
+                        type="text"
+                        id="wi-midInit"
+                        class="form-control"
+                        placeholder="M."
+                        maxlength="3"
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Student Email Address</label>
                     <input
-                      type="text"
-                      id="wi-lastName"
+                      type="email"
+                      id="wi-studentEmail"
                       class="form-control"
-                      placeholder="Dela Cruz"
+                      placeholder="student@wmsu.edu.ph"
                     />
                   </div>
-                  <div>
-                    <label>First Name</label>
+                  <div class="form-group">
+                    <label>Contact Number</label>
                     <input
-                      type="text"
-                      id="wi-firstName"
+                      type="tel"
+                      id="wi-contact"
                       class="form-control"
-                      placeholder="Juan"
-                    />
-                  </div>
-                  <div>
-                    <label>M.I.</label>
-                    <input
-                      type="text"
-                      id="wi-midInit"
-                      class="form-control"
-                      placeholder="M."
-                      maxlength="3"
+                      placeholder="0912 345 6789"
                     />
                   </div>
                 </div>
-                <div class="form-group">
-                  <label>Student Email Address</label>
-                  <input
-                    type="email"
-                    id="wi-studentEmail"
-                    class="form-control"
-                    placeholder="student@wmsu.edu.ph"
-                  />
+
+                <div class="form-section-title" style="margin-top: 32px">
+                  Required Documents
                 </div>
-                <div class="form-group">
-                  <label>Contact Number</label>
-                  <input
-                    type="tel"
-                    id="wi-contact"
-                    class="form-control"
-                    placeholder="0912 345 6789"
-                  />
+                <p style="font-size: 13px; color: #64748b; margin-bottom: 16px">
+                  Upload scanned copies of the physical documents (optional for
+                  walk-ins).
+                </p>
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label>Valid ID Copy</label>
+                    <input
+                      type="file"
+                      class="form-control"
+                      accept="image/*,.pdf"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Certifcate Of Enrollment</label>
+                    <input
+                      type="file"
+                      class="form-control"
+                      accept="image/*,.pdf"
+                    />
+                  </div>
                 </div>
               </div>
 
-              <div class="form-section-title" style="margin-top: 32px">
-                Required Documents
-              </div>
-              <p style="font-size: 13px; color: #64748b; margin-bottom: 16px">
-                Upload scanned copies of the physical documents (optional for
-                walk-ins).
-              </p>
-              <div class="form-grid-2">
-                <div class="form-group">
-                  <label>Valid ID Copy</label>
-                  <input
-                    type="file"
-                    class="form-control"
-                    accept="image/*,.pdf"
-                  />
-                </div>
-                <div class="form-group">
-                  <label>Certifcate Of Enrollment</label>
-                  <input
-                    type="file"
-                    class="form-control"
-                    accept="image/*,.pdf"
-                  />
+              <!-- Found Account Status (Hidden by default) -->
+              <div
+                id="wi-foundAccountMsg"
+                style="
+                  display: none;
+                  background: #f0fdf4;
+                  border: 1px solid #bbf7d0;
+                  border-radius: 16px;
+                  padding: 20px;
+                  margin-bottom: 24px;
+                  animation: fadeIn 0.3s ease;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 16px">
+                  <div
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      background: #dcfce7;
+                      color: #16a34a;
+                      border-radius: 12px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 18px;
+                    "
+                  >
+                    <i class="fa-solid fa-user-check"></i>
+                  </div>
+                  <div>
+                    <h4 style="margin: 0; font-size: 14px; color: #166534">
+                      Account Linked Successfully
+                    </h4>
+                    <p style="margin: 4px 0 0; font-size: 12px; color: #15803d">
+                      Personal details will be pulled from the existing student
+                      record.
+                    </p>
+                  </div>
                 </div>
               </div>
 
@@ -404,18 +447,69 @@
       }
 
       function wiSubmitFinal() {
+        const existingEmail = document
+          .getElementById("wi-existingEmail")
+          .value.trim();
+        const ln = document.getElementById("wi-lastName").value.trim();
+        const fn = document.getElementById("wi-firstName").value.trim();
+        const mi = document.getElementById("wi-midInit").value.trim();
         const email = document.getElementById("wi-studentEmail").value.trim();
-        if (!email || !email.includes("@")) {
+
+        if (!existingEmail && (!email || !email.includes("@"))) {
           showToast(
-            "Invalid Email",
-            "Please go back to Step 1 and provide a valid email.",
+            "Contact Info Required",
+            "Please provide either an existing account email or fill in the personal details.",
             "error",
           );
           return;
         }
 
+        // Gather products
+        const products = [];
+        const prodBoxes = document.querySelectorAll(".wi-product-box");
+        prodBoxes.forEach((box) => {
+          const name = box.querySelector(".wi-p-name").value;
+          const price = box.querySelector(".wi-p-qty").value;
+          const category = box.querySelector(".wi-p-category").value;
+          const ingredients = box.querySelector(".wi-p-ingredients").value;
+          if (name) {
+            products.push({ name, price, category, ingredients });
+          }
+        });
+
+        // Create new application object
+        const newId = "APP-" + (Math.floor(Math.random() * 9000) + 1000);
+        const newApp = {
+          id: newId,
+          studentName: existingEmail
+            ? "Linked Account"
+            : `${ln}, ${fn}${mi ? " " + mi : ""}`,
+          studentEmail: existingEmail || email,
+          category: products.length > 0 ? products[0].category : "General",
+          status: "Pending",
+          dateSubmitted: new Date().toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          }),
+          rejectionReason: "",
+          products: products,
+        };
+
+        // Add to global list and refresh UI
+        if (typeof mockApplications !== "undefined") {
+          mockApplications.unshift(newApp);
+          if (typeof saveStudentApplications === "function")
+            saveStudentApplications();
+          if (typeof renderTable === "function") renderTable();
+        }
+
         // Show Success
-        showToast("Success!", `Access granted to ${email}`, "success");
+        showToast(
+          "Application Submitted",
+          `Application ${newId} is now pending review.`,
+          "success",
+        );
 
         // Close modal immediately
         document.getElementById("walkInModalToggle").checked = false;
@@ -435,6 +529,27 @@
 
       document.addEventListener("DOMContentLoaded", () => {
         wiAddProduct();
+
+        // Reactive UI for Existing Account
+        const existingEmailInput = document.getElementById("wi-existingEmail");
+        const personalDetailsSection = document.getElementById(
+          "wi-personalDetailsSection",
+        );
+        const foundAccountMsg = document.getElementById("wi-foundAccountMsg");
+
+        if (existingEmailInput) {
+          existingEmailInput.addEventListener("input", (e) => {
+            const val = e.target.value.trim();
+            // Hide personal details if ANY value is entered in the existing email field
+            if (val.length > 0) {
+              personalDetailsSection.style.display = "none";
+              foundAccountMsg.style.display = "block";
+            } else {
+              personalDetailsSection.style.display = "block";
+              foundAccountMsg.style.display = "none";
+            }
+          });
+        }
       });
     </script>
 
@@ -551,8 +666,6 @@
             </a>
           </li>
         </ul>
-
-
       </div>
 
       <div class="main-content">
@@ -705,7 +818,6 @@
                   <tr>
                     <th>App ID</th>
                     <th>Student Name</th>
-                    <th>Business Name</th>
                     <th>Category</th>
                     <th>Status</th>
                     <th>Date Submitted</th>
@@ -764,12 +876,12 @@
               <span class="detail-value" id="detDate"></span>
             </div>
             <div class="detail-item">
-              <span class="detail-label">Business Name</span>
-              <span class="detail-value" id="detBusiness"></span>
-            </div>
-            <div class="detail-item">
               <span class="detail-label">Owner Name</span>
               <span class="detail-value" id="detOwner"></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Email Address</span>
+              <span class="detail-value" id="detEmail"></span>
             </div>
           </div>
 
