@@ -49,7 +49,6 @@
       <div class="profile">
         <div class="profile-info">
           <span class="profile-name">Super Admin</span>
-          <span class="email">admin@wm.edu.ph</span>
         </div>
         <div class="profile-dropdown">
           <button class="profile-btn">
@@ -145,100 +144,117 @@
       </header>
 
       <div class="dashboard-container">
-        <!-- Metrics Grid -->
-        <div class="metrics-grid">
+        <div class="dashboard-header-cards">
           <div class="metric-card bg-blue">
             <div class="metric-icon"><i class="fa-solid fa-store"></i></div>
-            <h4>Total Canteens</h4>
-            <h2 class="value">12</h2>
-            <p>2 new this month</p>
+            <h4>Total Active Canteens</h4>
+            <h2 id="totalCanteensValue">12</h2>
+            <p>Live canteen operations across campus.</p>
           </div>
           <div class="metric-card bg-purple">
             <div class="metric-icon"><i class="fa-solid fa-users"></i></div>
             <h4>Student Vendors</h4>
-            <h2 class="value">48</h2>
-            <p>5 new this week</p>
+            <h2 id="studentVendorsValue">48</h2>
+            <p>Vendors currently onboarded on the platform.</p>
           </div>
           <div class="metric-card bg-green">
             <div class="metric-icon"><i class="fa-solid fa-money-bill-trend-up"></i></div>
             <h4>Pending Payments</h4>
-            <h2 class="value">₱24.5K</h2>
-            <p>4 overdue</p>
+            <h2 id="pendingPaymentsValue">₱24.5K</h2>
+            <p>Payments awaiting reconciliation.</p>
           </div>
           <div class="metric-card bg-red">
             <div class="metric-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
             <h4>Open Complaints</h4>
-            <h2 class="value">5</h2>
-            <p>2 high priority</p>
+            <h2 id="openComplaintsValue">5</h2>
+            <p>Issues currently waiting for review.</p>
           </div>
         </div>
 
-        <!-- Quick Actions -->
-        <div class="action-grid">
-          <div class="action-card yellow" onclick="location.href='student-applications.html'">
-            <div class="badge-minimal">PENDING APPS</div>
-            <div class="card-header">
-              <div class="icon-box"><i class="fa-solid fa-user-check"></i></div>
-            </div>
-            <div class="card-body">
-              <h3>Student Applications</h3>
-              <p>Review and process new vendor applications from students.</p>
-              <a href="student-applications.html" class="card-link">Manage Apps <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-          </div>
-
-          <div class="action-card orange" onclick="location.href='canteen-applications.html'">
-             <div class="badge-minimal">WAITING</div>
-            <div class="card-header">
-              <div class="icon-box"><i class="fa-solid fa-store"></i></div>
-            </div>
-            <div class="card-body">
-              <h3>Canteen Applications</h3>
-              <p>Onboard new canteen facilities and verify staff credentials.</p>
-              <a href="canteen-applications.html" class="card-link">Review Now <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-          </div>
-
-          <div class="action-card red" onclick="location.href='complaints.html'">
-             <div class="badge-minimal">ACTION REQUIRED</div>
-            <div class="card-header">
-              <div class="icon-box"><i class="fa-solid fa-comment-dots"></i></div>
-            </div>
-            <div class="card-body">
-              <h3>Platform Complaints</h3>
-              <p>Resolve disputes and feedback from students and vendors.</p>
-              <a href="complaints.html" class="card-link">View Disputes <i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Main Dashboard Content -->
-        <div class="dashboard-content">
-          <!-- Top Earning Canteens Panel -->
-          <div class="content-panel">
-            <div class="panel-header">
-              <div class="panel-title">
-                <i class="fa-solid fa-chart-simple"></i>
-                <span>Analytics Leaderboard</span>
+        <div class="dashboard-widgets">
+          <div class="dashboard-actions-panel">
+            <div class="section-header">
+              <div>
+                <h2>Quick Access</h2>
+                <p>Access the most important workflows with one click.</p>
               </div>
-              <a href="super-admin-analytics.html" class="view-all">View all &rarr;</a>
             </div>
-            <div class="earning-list" id="earning-list">
-              <!-- JS will populate this -->
+            <div class="action-grid">
+              <div class="action-card yellow" onclick="location.href='student-applications.html'">
+                <div class="badge-minimal">PENDING APPS</div>
+                <div class="card-header">
+                  <div class="icon-box"><i class="fa-solid fa-user-check"></i></div>
+                </div>
+                <div class="card-body">
+                  <h3>Student Applications</h3>
+                  <p>Review and process new vendor applications from students.</p>
+                  <a href="student-applications.html" class="card-link">Manage Apps <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+              </div>
+
+              <div class="action-card orange" onclick="location.href='canteen-applications.html'">
+                <div class="badge-minimal">WAITING</div>
+                <div class="card-header">
+                  <div class="icon-box"><i class="fa-solid fa-store"></i></div>
+                </div>
+                <div class="card-body">
+                  <h3>Canteen Applications</h3>
+                  <p>Onboard new canteens and verify staff credentials.</p>
+                  <a href="canteen-applications.html" class="card-link">Review Now <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+              </div>
+
+              <div class="action-card red" onclick="location.href='complaints.html'">
+                <div class="badge-minimal">ACTION REQUIRED</div>
+                <div class="card-header">
+                  <div class="icon-box"><i class="fa-solid fa-comment-dots"></i></div>
+                </div>
+                <div class="card-body">
+                  <h3>Platform Complaints</h3>
+                  <p>Resolve disputes and feedback from students and vendors.</p>
+                  <a href="complaints.html" class="card-link">View Disputes <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Payment Due Tracking Panel -->
-          <div class="content-panel">
-            <div class="panel-header">
-              <div class="panel-title">
-                <i class="fa-solid fa-diamond"></i>
-                <span>Payment Due Tracking</span>
+          <div class="dashboard-content">
+            <div class="content-panel">
+              <div class="panel-header">
+                <div class="panel-title">
+                  <i class="fa-solid fa-chart-simple"></i>
+                  <span>Top Performing Vendors</span>
+                </div>
+                <a href="super-admin-analytics.html" class="view-all">View all &rarr;</a>
               </div>
-              <a href="payment-tracking.html" class="view-all">View all &rarr;</a>
+              <div class="earning-list" id="earning-list">
+                <!-- JS will populate this -->
+              </div>
             </div>
-            <div class="payment-list" id="payment-list">
-              <!-- JS will populate this -->
+
+            <div class="content-panel">
+              <div class="panel-header">
+                <div class="panel-title">
+                  <i class="fa-solid fa-file-invoice-dollar"></i>
+                  <span>Payment Due Tracking</span>
+                </div>
+                <a href="payment-tracking.html" class="view-all">View all &rarr;</a>
+              </div>
+              <div class="payment-list" id="payment-list">
+                <!-- JS will populate this -->
+              </div>
+            </div>
+
+            <div class="content-panel activity-panel">
+              <div class="panel-header">
+                <div class="panel-title">
+                  <i class="fa-solid fa-clock-rotate-left"></i>
+                  <span>Recent Activity</span>
+                </div>
+              </div>
+              <div class="activity-list" id="activity-list">
+                <!-- JS will populate this -->
+              </div>
             </div>
           </div>
         </div>
