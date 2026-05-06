@@ -148,6 +148,9 @@
                 <button class="tab-btn" id="studentTab">
                     <i class="fa-solid fa-graduation-cap"></i> Student Analytics
                 </button>
+                <button class="tab-btn" id="foodTab">
+                    <i class="fa-solid fa-utensils"></i> Food Analytics
+                </button>
             </div>
 
             <!-- VENDOR VIEW -->
@@ -159,9 +162,6 @@
                             <div class="kpi-icon-wrapper kpi-green"><i class="fa-solid fa-peso-sign"></i></div>
                         </div>
                         <div class="kpi-value">₱1,245,000</div>
-                        <div class="kpi-footer trend-up">
-                            <i class="fa-solid fa-arrow-trend-up"></i> 12% vs last month
-                        </div>
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-header">
@@ -169,9 +169,6 @@
                             <div class="kpi-icon-wrapper kpi-blue"><i class="fa-solid fa-bag-shopping"></i></div>
                         </div>
                         <div class="kpi-value">8,432</div>
-                        <div class="kpi-footer trend-up">
-                            <i class="fa-solid fa-arrow-trend-up"></i> 5.4% vs last month
-                        </div>
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-header">
@@ -179,9 +176,6 @@
                             <div class="kpi-icon-wrapper kpi-purple"><i class="fa-solid fa-store"></i></div>
                         </div>
                         <div class="kpi-value">42</div>
-                        <div class="kpi-footer">
-                            <span style="color: var(--text-muted)">Stable performance</span>
-                        </div>
                     </div>
                 </div>
 
@@ -197,7 +191,6 @@
                                     <th>Vendor / Canteen</th>
                                     <th>Total Orders</th>
                                     <th>Revenue</th>
-                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -214,7 +207,6 @@
                                     </td>
                                     <td>2,140</td>
                                     <td><strong>₱342,100</strong></td>
-                                    <td><span class="badge badge-success">Top Seller</span></td>
                                 </tr>
                                 <tr>
                                     <td><strong>#2</strong></td>
@@ -229,7 +221,6 @@
                                     </td>
                                     <td>1,850</td>
                                     <td><strong>₱210,450</strong></td>
-                                    <td><span class="badge badge-success">High Traffic</span></td>
                                 </tr>
                                 <tr>
                                     <td><strong>#3</strong></td>
@@ -244,7 +235,6 @@
                                     </td>
                                     <td>1,240</td>
                                     <td><strong>₱185,200</strong></td>
-                                    <td><span class="badge badge-blue">Growing</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -261,9 +251,6 @@
                             <div class="kpi-icon-wrapper kpi-blue"><i class="fa-solid fa-graduation-cap"></i></div>
                         </div>
                         <div class="kpi-value">2,840</div>
-                        <div class="kpi-footer trend-up">
-                            <i class="fa-solid fa-arrow-trend-up"></i> 8% growth
-                        </div>
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-header">
@@ -271,9 +258,6 @@
                             <div class="kpi-icon-wrapper kpi-green"><i class="fa-solid fa-wallet"></i></div>
                         </div>
                         <div class="kpi-value">₱142.00</div>
-                        <div class="kpi-footer trend-up">
-                            <i class="fa-solid fa-arrow-trend-up"></i> ₱12 increase
-                        </div>
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-header">
@@ -281,9 +265,6 @@
                             <div class="kpi-icon-wrapper kpi-amber"><i class="fa-solid fa-calendar-day"></i></div>
                         </div>
                         <div class="kpi-value">Wednesday</div>
-                        <div class="kpi-footer">
-                            <span style="color: var(--text-muted)">High purchasing power</span>
-                        </div>
                     </div>
                 </div>
 
@@ -301,7 +282,6 @@
                                     <th>Total Orders</th>
                                     <th>Total Spent</th>
                                     <th>Last Activity</th>
-                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -320,7 +300,6 @@
                                     <td>156</td>
                                     <td><strong>₱15,240.00</strong></td>
                                     <td>2 hours ago</td>
-                                    <td><span class="badge badge-success">Power User</span></td>
                                 </tr>
                                 <tr>
                                     <td><strong>#2</strong></td>
@@ -337,7 +316,6 @@
                                     <td>142</td>
                                     <td><strong>₱12,850.00</strong></td>
                                     <td>1 day ago</td>
-                                    <td><span class="badge badge-success">Active</span></td>
                                 </tr>
                                 <tr>
                                     <td><strong>#3</strong></td>
@@ -354,7 +332,99 @@
                                     <td>98</td>
                                     <td><strong>₱9,200.00</strong></td>
                                     <td>3 days ago</td>
-                                    <td><span class="badge badge-blue">Consistent</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOD VIEW -->
+            <div id="foodView" style="display: none;">
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-label">Total Items Sold</span>
+                            <div class="kpi-icon-wrapper kpi-green"><i class="fa-solid fa-box-open"></i></div>
+                        </div>
+                        <div class="kpi-value">12,540</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-label">Most Popular Category</span>
+                            <div class="kpi-icon-wrapper kpi-amber"><i class="fa-solid fa-fire"></i></div>
+                        </div>
+                        <div class="kpi-value">Main Course</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-label">Avg. Prep Time</span>
+                            <div class="kpi-icon-wrapper kpi-blue"><i class="fa-solid fa-clock"></i></div>
+                        </div>
+                        <div class="kpi-value">12 mins</div>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fa-solid fa-star"></i> Top Selling Menu Items</h2>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-grid">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Item Name</th>
+                                    <th>Category</th>
+                                    <th>Orders</th>
+                                    <th>Total Sales</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>#1</strong></td>
+                                    <td>
+                                        <div class="entity-cell">
+                                            <img src="../../images/burger.avif" class="entity-img" alt="Food">
+                                            <div class="entity-info">
+                                                <span class="entity-name">Special Beef Burger</span>
+                                                <span class="entity-sub">Canteen 1</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Fast Food</td>
+                                    <td>1,240</td>
+                                    <td><strong>₱86,800</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#2</strong></td>
+                                    <td>
+                                        <div class="entity-cell">
+                                            <img src="../../images/pancit.avif" class="entity-img" alt="Food">
+                                            <div class="entity-info">
+                                                <span class="entity-name">Pancit Guisado</span>
+                                                <span class="entity-sub">Sisig Express</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Main Course</td>
+                                    <td>980</td>
+                                    <td><strong>₱58,800</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#3</strong></td>
+                                    <td>
+                                        <div class="entity-cell">
+                                            <img src="../../images/shake.avif" class="entity-img" alt="Food">
+                                            <div class="entity-info">
+                                                <span class="entity-name">Mango Graham Shake</span>
+                                                <span class="entity-sub">Brew Haven</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Beverages</td>
+                                    <td>850</td>
+                                    <td><strong>₱42,500</strong></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -368,23 +438,23 @@
     <script src="../../script/admin-js/admin-notifications-mock.js"></script>
     <script>
         // Tab switching logic
-        const vendorTab = document.getElementById('vendorTab');
-        const studentTab = document.getElementById('studentTab');
-        const vendorView = document.getElementById('vendorView');
-        const studentView = document.getElementById('studentView');
+        const tabs = [
+            { btn: document.getElementById('vendorTab'), view: document.getElementById('vendorView') },
+            { btn: document.getElementById('studentTab'), view: document.getElementById('studentView') },
+            { btn: document.getElementById('foodTab'), view: document.getElementById('foodView') }
+        ];
 
-        vendorTab.addEventListener('click', () => {
-            vendorTab.classList.add('active');
-            studentTab.classList.remove('active');
-            vendorView.style.display = 'block';
-            studentView.style.display = 'none';
-        });
-
-        studentTab.addEventListener('click', () => {
-            studentTab.classList.add('active');
-            vendorTab.classList.remove('active');
-            studentView.style.display = 'block';
-            vendorView.style.display = 'none';
+        tabs.forEach(tab => {
+            tab.btn.addEventListener('click', () => {
+                // Remove active class from all buttons and hide all views
+                tabs.forEach(t => {
+                    t.btn.classList.remove('active');
+                    t.view.style.display = 'none';
+                });
+                // Add active class to clicked button and show its view
+                tab.btn.classList.add('active');
+                tab.view.style.display = 'block';
+            });
         });
     </script>
 </body>

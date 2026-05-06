@@ -81,14 +81,14 @@ const STATUS_CFG = {
 function buildActions(order, tab, sequence) {
   if (tab === "Pending") {
     const isFirst = sequence === 1;
-    const acceptBtn = isFirst 
+    const acceptBtn = isFirst
       ? `<button class="order-again-btn" data-action="accept" data-id="${order.id}"><i class="fas fa-check"></i> Accept</button>`
       : `<button class="order-again-btn disabled-btn" style="opacity:0.5; cursor:not-allowed;" 
                  onclick="showVendorToast('info', 'fa-circle-info', 'Please accept order #1 first.')" 
                  title="Sequential processing required: Accept the first order in the queue first.">
             <i class="fas fa-check"></i> Accept
          </button>`;
-    
+
     return `
     ${acceptBtn}
     <button class="cancel-btn" data-action="decline" data-id="${order.id}"><i class="fas fa-times"></i> Decline</button>`;
@@ -106,7 +106,7 @@ function buildActions(order, tab, sequence) {
               </div>`;
     }
     if (order.payment === "Cash on Pickup") {
-       actHtml += `<button class="view-code-btn open-code-btn" data-id="${order.id}" data-code="${order.pickupCode || "----"}" style="margin-top: 8px;">
+      actHtml += `<button class="view-code-btn open-code-btn" data-id="${order.id}" data-code="${order.pickupCode || "----"}" style="margin-top: 8px;">
       <i class="fa-solid fa-qrcode"></i> Show QR to Scan</button>`;
     }
     return actHtml;
@@ -148,21 +148,26 @@ function buildVendorCard(order, sequence) {
     </div>`;
 
   let timerHtml = "";
-  if (order.status === "ready" && order.vendorPickedUp && !order.studentPickedUp) {
+  if (
+    order.status === "ready" &&
+    order.vendorPickedUp &&
+    !order.studentPickedUp
+  ) {
     if (order.reportedIssue) {
-       timerHtml = `<div style="background:#fff7ed; border:1px solid #fed7aa; color:#c2410c; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px; width:100%;">
+      timerHtml = `<div style="background:#fff7ed; border:1px solid #fed7aa; color:#c2410c; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px; width:100%;">
           <i class="fa-solid fa-circle-exclamation"></i> Issue reported by student. Auto-completion paused.
        </div>`;
     } else {
-       timerHtml = `<div style="background:#eff6ff; border:1px solid #bfdbfe; color:#1d4ed8; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px; width:100%;">
+      timerHtml = `<div style="background:#eff6ff; border:1px solid #bfdbfe; color:#1d4ed8; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px; width:100%;">
           <i class="fa-solid fa-stopwatch"></i> Waiting for student pickup. Auto-completes in <span class="vendor-auto-complete-timer" data-id="${order.id}" style="font-weight:bold;">--:--</span>.
        </div>`;
     }
   }
 
-  const headerIcon = tab === "Pending" 
-    ? `<span style="font-size:18px; font-weight:800;">${sequence}</span>`
-    : `<i class="fa-solid ${cfg.icon}"></i>`;
+  const headerIcon =
+    tab === "Pending"
+      ? `<span style="font-size:18px; font-weight:800;">${sequence}</span>`
+      : `<i class="fa-solid ${cfg.icon}"></i>`;
 
   return `
     <div class="order-card" data-status="${tab}" data-vendor="${order.vendor}" data-order-id="${shortId}"
@@ -178,9 +183,11 @@ function buildVendorCard(order, sequence) {
                   <i class="fa-solid fa-user" style="font-size:10px;"></i>${esc(order.customerName || "Customer")}
                 </span>
                 <span class="customer-role-badge" style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.02em; padding:2px 8px; border-radius:12px; ${
-                  order.customerRole === "outsider" ? "background:#f3f0ff; color:#7c3aed; border:1px solid #e9d5ff;" :
-                  order.customerRole === "teacher-and-staff" ? "background:#fff7ed; color:#c2410c; border:1px solid #ffedd5;" :
-                  "background:#eff6ff; color:#2563eb; border:1px solid #dbeafe;"
+                  order.customerRole === "outsider"
+                    ? "background:#f3f0ff; color:#7c3aed; border:1px solid #e9d5ff;"
+                    : order.customerRole === "teacher-and-staff"
+                      ? "background:#fff7ed; color:#c2410c; border:1px solid #ffedd5;"
+                      : "background:#eff6ff; color:#2563eb; border:1px solid #dbeafe;"
                 }">
                   ${order.customerRole === "outsider" ? "Outsider" : order.customerRole === "teacher-and-staff" ? "Teacher/Staff" : "Student"}
                 </span>
@@ -236,11 +243,13 @@ function buildVendorCard(order, sequence) {
             }
           </div>
           ${noteHtml}
-          ${tab === "Cancelled" && order.cancellationReason 
-            ? `<div style="margin-top:10px; padding:10px; background:#fef2f2; border:1px solid #fee2e2; border-radius:10px; border-left:4px solid #ef4444; font-size:12px; color:#b91c1c;">
+          ${
+            tab === "Cancelled" && order.cancellationReason
+              ? `<div style="margin-top:10px; padding:10px; background:#fef2f2; border:1px solid #fee2e2; border-radius:10px; border-left:4px solid #ef4444; font-size:12px; color:#b91c1c;">
                  <i class="fa-solid fa-comment-slash" style="margin-right:6px;"></i><b>Cancellation Reason:</b> ${esc(order.cancellationReason)}
-               </div>` 
-            : ""}
+               </div>`
+              : ""
+          }
         </div>
         <div class="order-card-footer" style="margin-top: auto; padding-top: 16px; border-top: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
           <div class="order-total-row" style="margin-top: 0;">
@@ -254,9 +263,13 @@ function buildVendorCard(order, sequence) {
     </div>`;
 }
 
+/* --- Pagination State --- */
+let currentPage = 1;
+const ORDERS_PER_PAGE = 4;
+
 /* --- Global Render engine --- */
 window.renderVendorOrders = function () {
-  const orders = (typeof getOrders === "function" ? getOrders() : [])
+  const allOrders = (typeof getOrders === "function" ? getOrders() : [])
     .filter((o) => !o.removedByVendor)
     .sort((a, b) => new Date(a.placedAt) - new Date(b.placedAt)); // Sort by time oldest first
   const list = document.getElementById("ordersList");
@@ -264,21 +277,6 @@ window.renderVendorOrders = function () {
 
   const emptyDiv = list.querySelector(".no-orders-msg");
   list.querySelectorAll(".order-card").forEach((c) => c.remove());
-
-  if (orders.length === 0) {
-    if (emptyDiv) emptyDiv.style.display = "flex";
-  } else {
-    // Track sequence per status for numbering (1, 2, 3...)
-    const statusCounters = {};
-    const htmlCards = orders.map((o) => {
-      const tab = window.STATUS_MAP[o.status] || "Pending";
-      statusCounters[tab] = (statusCounters[tab] || 0) + 1;
-      return buildVendorCard(o, statusCounters[tab]);
-    }).join("");
-
-    if (emptyDiv) emptyDiv.style.display = "none";
-    list.insertAdjacentHTML("beforeend", htmlCards);
-  }
 
   // Update the badge counters next to tabs
   const counts = {
@@ -288,7 +286,7 @@ window.renderVendorOrders = function () {
     Completed: 0,
     Cancelled: 0,
   };
-  orders.forEach((o) => {
+  allOrders.forEach((o) => {
     const tab = window.STATUS_MAP[o.status];
     if (tab) counts[tab]++;
   });
@@ -297,165 +295,194 @@ window.renderVendorOrders = function () {
     if (el) el.textContent = n;
   });
 
-  // Show hide cards based on currently active tab
+  // Filter orders based on active tab for rendering
   const activeBtn = document.querySelector(".filter-btn.active");
   const activeTab = activeBtn ? activeBtn.dataset.tab : "Pending";
-  let hasVisible = false;
-  document.querySelectorAll(".order-card").forEach((c) => {
-    if (c.dataset.status === activeTab) {
-      c.style.display = "";
-      hasVisible = true;
-    } else {
-      c.style.display = "none";
-    }
-  });
+  const filteredOrders = allOrders.filter(o => (window.STATUS_MAP[o.status] || "Pending") === activeTab);
 
-  if (orders.length > 0) {
-    if (emptyDiv) emptyDiv.style.display = hasVisible ? "none" : "flex";
+  if (filteredOrders.length === 0) {
+    if (emptyDiv) emptyDiv.style.display = "flex";
+    const pg = document.getElementById("paginationContainer");
+    if (pg) pg.style.display = "none";
+  } else {
+    if (emptyDiv) emptyDiv.style.display = "none";
+    
+    // Pagination Logic
+    const totalPages = Math.ceil(filteredOrders.length / ORDERS_PER_PAGE);
+    if (currentPage > totalPages) currentPage = Math.max(1, totalPages);
+    
+    const startIdx = (currentPage - 1) * ORDERS_PER_PAGE;
+    const endIdx = startIdx + ORDERS_PER_PAGE;
+    const paginatedOrders = filteredOrders.slice(startIdx, endIdx);
+
+    const htmlCards = paginatedOrders
+      .map((o, idx) => {
+        return buildVendorCard(o, startIdx + idx + 1);
+      })
+      .join("");
+
+    list.insertAdjacentHTML("beforeend", htmlCards);
+    
+    // Update Pagination UI
+    const paginationContainer = document.getElementById("paginationContainer");
+    if (paginationContainer) {
+      if (totalPages > 1) {
+        paginationContainer.style.display = "flex";
+        renderPageNumbers(totalPages);
+        const prev = document.getElementById("prevPage");
+        const next = document.getElementById("nextPage");
+        if (prev) prev.disabled = (currentPage === 1);
+        if (next) next.disabled = (currentPage === totalPages);
+      } else {
+        paginationContainer.style.display = "none";
+      }
+    }
   }
 
   const clearBtn = document.getElementById("clearAllVendorBtn");
   if (clearBtn) {
     if (
       (activeTab === "Completed" || activeTab === "Cancelled") &&
-      hasVisible
+      filteredOrders.length > 0
     ) {
       clearBtn.style.display = "flex";
     } else {
       clearBtn.style.display = "none";
     }
   }
-
-  // Wire View Details
-  document.querySelectorAll(".js-view-details").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const orderId = btn.dataset.id;
-      const order = (typeof getOrders === "function" ? getOrders() : []).find(o => o.id === orderId);
-      if (!order) return;
-
-      const itemsHtml = order.items
-        .map(
-          (it) => `
-          <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; background:#f8fafc; border-radius:12px; margin-bottom:8px; border:1px solid #f1f5f9;">
-            <div style="display:flex; gap:12px; align-items:center;">
-              <img src="${esc(it.img || "")}" style="width:50px; height:50px; border-radius:8px; object-fit:cover;" onerror="this.src='https://placehold.co/50x50?text=Food'" />
-              <div>
-                <div style="font-weight:700; color:#1e293b; font-size:14px;">${esc(it.name)}</div>
-                <div style="font-size:12px; color:#64748b;">${it.qty} × ₱${it.price.toFixed(2)}</div>
-              </div>
-            </div>
-            <div style="font-weight:700; color:#0f172a;">₱${(it.price * it.qty).toFixed(2)}</div>
-          </div>`,
-        )
-        .join("");
-
-      const content = `
-        <div style="margin-bottom:20px; padding-bottom:15px; border-bottom:1px dashed #e2e8f0;">
-          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-            <span style="color:#64748b; font-size:13px;">Customer</span>
-            <span style="font-weight:700; color:#1e293b;">${esc(order.customerName || "Customer")}</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-            <span style="color:#64748b; font-size:13px;">Customer Role</span>
-            <span style="font-weight:700; font-size:12px; color:${
-              order.customerRole === 'outsider' ? '#7c3aed' : 
-              order.customerRole === 'teacher-and-staff' ? '#c2410c' : '#2563eb'
-            }">${(order.customerRole || 'student').toUpperCase().replace(/-/g, ' ')}</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-            <span style="color:#64748b; font-size:13px;">Order ID</span>
-            <span style="font-family:monospace; font-weight:700; color:#1e293b;">#${esc(order.id.slice(-6).toUpperCase())}</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-            <span style="color:#64748b; font-size:13px;">Date</span>
-            <span style="font-weight:600; color:#1e293b;">${new Date(order.placedAt).toLocaleString()}</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-            <span style="color:#64748b; font-size:13px;">Status</span>
-            <span class="status-badge ${order.status}">${order.status.toUpperCase()}</span>
-          </div>
-          <div style="display:flex; justify-content:space-between;">
-            <span style="color:#64748b; font-size:13px;">Payment</span>
-            <span style="font-weight:600; color:#1e293b;">${order.payment}</span>
-          </div>
-        </div>
-      `;
-
-      if (order.status === "cancelled" && order.cancellationReason) {
-        content += `
-          <div style="margin-top:15px; padding:12px; background:#fef2f2; border:1px solid #fee2e2; border-radius:10px; border-left:4px solid #ef4444;">
-            <div style="font-size:12px; font-weight:700; color:#991b1b; margin-bottom:4px;">Cancellation Reason:</div>
-            <div style="font-size:13px; color:#b91c1c;">${esc(order.cancellationReason)}</div>
-          </div>
-        `;
-      }
-
-      content += `
-        <div style="margin-bottom:15px; font-weight:700; color:#0f172a; font-size:14px;">Items Summary</div>
-        <div style="max-height:300px; overflow-y:auto; padding-right:5px;">
-          ${itemsHtml}
-        </div>
-
-        <div style="margin-top:20px; padding:15px; background:#f1f5f9; border-radius:12px;">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-weight:700; color:#475569;">Total Amount</span>
-            <span style="font-size:20px; font-weight:800; color:#ef4444;">₱${order.total.toFixed(2)}</span>
-          </div>
-        </div>
-        
-        <div style="margin-top:15px; padding:12px; background:#fffbeb; border-radius:10px; border:1px solid #fef3c7;">
-          <div style="font-size:12px; font-weight:700; color:#b45309; margin-bottom:4px;">Special Instructions:</div>
-          <div style="font-size:13px; color:#92400e;">${order.instructions ? esc(order.instructions) : "None"}</div>
-        </div>
-      `;
-
-      document.getElementById("orderDetailContent").innerHTML = content;
-      document.getElementById("orderDetailsModal").classList.add("active");
-    });
-  });
-
-  wirePickupModal();
 };
 
-function wirePickupModal() {
-  document.querySelectorAll(".open-code-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const card = btn.closest(".order-card");
-      const code = btn.dataset.code;
-      document.getElementById("modalCodeOrder").textContent =
-        "Order #" + card.dataset.orderId;
-      document.getElementById("modalTotalPrice").textContent =
-        "Total: ₱" + card.dataset.price;
+/* --- Event Delegation for Dynamic Buttons --- */
+document.getElementById("ordersList")?.addEventListener("click", (e) => {
+  // View Details
+  const viewBtn = e.target.closest(".js-view-details");
+  if (viewBtn) {
+    const orderId = viewBtn.dataset.id;
+    const order = (typeof getOrders === "function" ? getOrders() : []).find(
+      (o) => o.id === orderId,
+    );
+    if (!order) return;
 
+    const itemsHtml = order.items
+      .map(
+        (it) => `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; background:#f8fafc; border-radius:12px; margin-bottom:8px; border:1px solid #f1f5f9;">
+          <div style="display:flex; gap:12px; align-items:center;">
+            <img src="${esc(it.img || "")}" style="width:50px; height:50px; border-radius:8px; object-fit:cover;" onerror="this.src='https://placehold.co/50x50?text=Food'" />
+            <div>
+              <div style="font-weight:700; color:#1e293b; font-size:14px;">${esc(it.name)}</div>
+              <div style="font-size:12px; color:#64748b;">${it.qty} × ₱${it.price.toFixed(2)}</div>
+            </div>
+          </div>
+          <div style="font-weight:700; color:#0f172a;">₱${(it.price * it.qty).toFixed(2)}</div>
+        </div>`,
+      )
+      .join("");
 
+    let content = `
+      <div style="margin-bottom:20px; padding-bottom:15px; border-bottom:1px dashed #e2e8f0;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+          <span style="color:#64748b; font-size:13px;">Customer</span>
+          <span style="font-weight:700; color:#1e293b;">${esc(order.customerName || "Customer")}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+          <span style="color:#64748b; font-size:13px;">Customer Role</span>
+          <span style="font-weight:700; font-size:12px; color:${
+            order.customerRole === "outsider"
+              ? "#7c3aed"
+              : order.customerRole === "teacher-and-staff"
+                ? "#c2410c"
+                : "#2563eb"
+          }">${(order.customerRole || "student").toUpperCase().replace(/-/g, " ")}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+          <span style="color:#64748b; font-size:13px;">Order ID</span>
+          <span style="font-family:monospace; font-weight:700; color:#1e293b;">#${esc(order.id.slice(-6).toUpperCase())}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+          <span style="color:#64748b; font-size:13px;">Date</span>
+          <span style="font-weight:600; color:#1e293b;">${new Date(order.placedAt).toLocaleString()}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+          <span style="color:#64748b; font-size:13px;">Status</span>
+          <span class="status-badge ${order.status}">${order.status.toUpperCase()}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between;">
+          <span style="color:#64748b; font-size:13px;">Payment</span>
+          <span style="font-weight:600; color:#1e293b;">${order.payment}</span>
+        </div>
+      </div>
+    `;
 
-      let itemsList = document.getElementById("modalOrderItems");
-      itemsList.innerHTML = "";
-      card
-        .querySelectorAll(".order-item-row")
-        .forEach((r) => itemsList.appendChild(r.cloneNode(true)));
+    if (order.status === "cancelled" && order.cancellationReason) {
+      content += `
+        <div style="margin-top:15px; padding:12px; background:#fef2f2; border:1px solid #fee2e2; border-radius:10px; border-left:4px solid #ef4444;">
+          <div style="font-size:12px; font-weight:700; color:#991b1b; margin-bottom:4px;">Cancellation Reason:</div>
+          <div style="font-size:13px; color:#b91c1c;">${esc(order.cancellationReason)}</div>
+        </div>
+      `;
+    }
 
-      const qrSection = document.getElementById("vendorQrSection");
-      const qrImage = document.getElementById("vendorQrImage");
+    content += `
+      <div style="margin-bottom:15px; font-weight:700; color:#0f172a; font-size:14px;">Items Summary</div>
+      <div style="max-height:300px; overflow-y:auto; padding-right:5px;">
+        ${itemsHtml}
+      </div>
+
+      <div style="margin-top:20px; padding:15px; background:#f1f5f9; border-radius:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-weight:700; color:#475569;">Total Amount</span>
+          <span style="font-size:20px; font-weight:800; color:#ef4444;">₱${order.total.toFixed(2)}</span>
+        </div>
+      </div>
       
-      if (qrSection && qrImage) {
-         const items = Array.from(card.querySelectorAll(".order-item-row")).map(r => r.textContent.trim()).join(", ");
-         const qrData = JSON.stringify({
-            orderId: card.dataset.orderFullId || card.dataset.orderId || btn.dataset.id,
-            customer: card.querySelector(".order-card-title")?.textContent || "Customer",
-            items: items,
-            total: card.dataset.price
-         });
-         
-         qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(qrData);
-         qrSection.style.display = "block";
-      }
+      <div style="margin-top:15px; padding:12px; background:#fffbeb; border-radius:10px; border:1px solid #fef3c7;">
+        <div style="font-size:12px; font-weight:700; color:#b45309; margin-bottom:4px;">Special Instructions:</div>
+        <div style="font-size:13px; color:#92400e;">${order.instructions ? esc(order.instructions) : "None"}</div>
+      </div>
+    `;
 
-      document.getElementById("pickupModal").classList.add("active");
-      document.body.style.overflow = "hidden";
-    });
-  });
-}
+    document.getElementById("orderDetailContent").innerHTML = content;
+    document.getElementById("orderDetailsModal").classList.add("active");
+    return;
+  }
+
+  // Show QR (Pickup Code)
+  const qrBtn = e.target.closest(".open-code-btn");
+  if (qrBtn) {
+    const card = qrBtn.closest(".order-card");
+    const code = qrBtn.dataset.code;
+    document.getElementById("modalCodeOrder").textContent =
+      "Order #" + card.dataset.orderId;
+    document.getElementById("modalTotalPrice").textContent =
+      "Total: ₱" + card.dataset.price;
+
+    let itemsList = document.getElementById("modalOrderItems");
+    itemsList.innerHTML = "";
+    card
+      .querySelectorAll(".order-item-row")
+      .forEach((r) => itemsList.appendChild(r.cloneNode(true)));
+
+    const qrSection = document.getElementById("vendorQrSection");
+    const qrImage = document.getElementById("vendorQrImage");
+    
+    if (qrSection && qrImage) {
+       const items = Array.from(card.querySelectorAll(".order-item-row")).map(r => r.textContent.trim()).join(", ");
+       const qrData = JSON.stringify({
+          orderId: card.dataset.orderFullId || card.dataset.orderId || qrBtn.dataset.id,
+          customer: card.querySelector(".order-card-title")?.textContent || "Customer",
+          items: items,
+          total: card.dataset.price
+       });
+       
+       qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(qrData);
+       qrSection.style.display = "block";
+    }
+
+    document.getElementById("pickupModal").classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+});
 
 const cmClose = () => {
   document.getElementById("pickupModal").classList.remove("active");
@@ -468,9 +495,15 @@ const closeDetails = () => {
   document.getElementById("orderDetailsModal").classList.remove("active");
   document.body.style.overflow = "";
 };
-document.getElementById("closeOrderDetailModal")?.addEventListener("click", closeDetails);
-document.getElementById("orderDetailOverlay")?.addEventListener("click", closeDetails);
-document.getElementById("closeDetailBtn")?.addEventListener("click", closeDetails);
+document
+  .getElementById("closeOrderDetailModal")
+  ?.addEventListener("click", closeDetails);
+document
+  .getElementById("orderDetailOverlay")
+  ?.addEventListener("click", closeDetails);
+document
+  .getElementById("closeDetailBtn")
+  ?.addEventListener("click", closeDetails);
 
 document.getElementById("clearAllVendorBtn")?.addEventListener("click", () => {
   const activeBtn = document.querySelector(".filter-btn.active");
@@ -539,6 +572,53 @@ document.getElementById("clearAllVendorBtn")?.addEventListener("click", () => {
     );
 
   document.getElementById("confirmModal").classList.add("active");
+});
+
+function renderPageNumbers(totalPages) {
+  const container = document.getElementById("pageNumbers");
+  if (!container) return;
+  container.innerHTML = "";
+
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement("button");
+    btn.className = `pagination-btn ${i === currentPage ? "active" : ""}`;
+    btn.textContent = i;
+    btn.addEventListener("click", () => {
+      currentPage = i;
+      window.renderVendorOrders();
+    });
+    container.appendChild(btn);
+  }
+}
+
+// Pagination Button Listeners
+document.getElementById("prevPage")?.addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    window.renderVendorOrders();
+  }
+});
+
+document.getElementById("nextPage")?.addEventListener("click", () => {
+  const allOrders = (typeof getOrders === "function" ? getOrders() : [])
+    .filter((o) => !o.removedByVendor);
+  const activeBtn = document.querySelector(".filter-btn.active");
+  const activeTab = activeBtn ? activeBtn.dataset.tab : "Pending";
+  const filteredCount = allOrders.filter(o => (window.STATUS_MAP[o.status] || "Pending") === activeTab).length;
+  const totalPages = Math.ceil(filteredCount / ORDERS_PER_PAGE);
+  
+  if (currentPage < totalPages) {
+    currentPage++;
+    window.renderVendorOrders();
+  }
+});
+
+// Reset pagination when filter tabs are clicked
+document.getElementById("filterTabs")?.addEventListener("click", (e) => {
+  if (e.target.closest(".filter-btn")) {
+    currentPage = 1;
+    // renderVendorOrders is already called by filter-orders.js
+  }
 });
 
 // Initial render
@@ -889,7 +969,9 @@ document.getElementById("walkinTendered")?.addEventListener("input", () => {
 
 document.querySelectorAll(".pay-method-btn").forEach((btn) => {
   btn.addEventListener("click", (e) => {
-    document.querySelectorAll(".pay-method-btn").forEach((b) => b.classList.remove("active"));
+    document
+      .querySelectorAll(".pay-method-btn")
+      .forEach((b) => b.classList.remove("active"));
     const target = e.currentTarget;
     target.classList.add("active");
 
@@ -987,7 +1069,7 @@ document.getElementById("walkinChargeBtn")?.addEventListener("click", () => {
     document.getElementById("qrModalRef").textContent =
       `POS-${Date.now().toString().slice(-6)}`;
     document.getElementById("walkinQrModal").classList.add("active");
-    
+
     // Reset status display
     const statusEl = document.getElementById("paymentStatus");
     const successEl = document.getElementById("paymentSuccess");
@@ -995,7 +1077,7 @@ document.getElementById("walkinChargeBtn")?.addEventListener("click", () => {
     if (statusEl) statusEl.style.display = "block";
     if (successEl) successEl.style.display = "none";
     if (demoBtn) demoBtn.style.display = "block";
-    
+
     return;
   }
 
@@ -1007,11 +1089,11 @@ function simulatePaymentScan() {
   const statusEl = document.getElementById("paymentStatus");
   const successEl = document.getElementById("paymentSuccess");
   const demoBtn = document.getElementById("simulateScanBtn");
-  
+
   if (statusEl) statusEl.style.display = "none";
   if (successEl) successEl.style.display = "block";
   if (demoBtn) demoBtn.style.display = "none";
-  
+
   setTimeout(() => {
     document.getElementById("walkinQrModal").classList.remove("active");
     finalizeWalkinOrder();
@@ -1019,8 +1101,12 @@ function simulatePaymentScan() {
 }
 
 // Click QR or Demo Button to simulate successful scan/payment
-document.getElementById("qrCodeContainer")?.addEventListener("click", simulatePaymentScan);
-document.getElementById("simulateScanBtn")?.addEventListener("click", simulatePaymentScan);
+document
+  .getElementById("qrCodeContainer")
+  ?.addEventListener("click", simulatePaymentScan);
+document
+  .getElementById("simulateScanBtn")
+  ?.addEventListener("click", simulatePaymentScan);
 
 // Confirm payment from QR Modal
 // Manual confirmation removed as per request - now handled via click-to-simulate
@@ -1068,16 +1154,22 @@ document.getElementById("walkinOverlay")?.addEventListener("click", () => {
 setInterval(() => {
   const spans = document.querySelectorAll(".vendor-auto-complete-timer");
   if (spans.length === 0) return;
-  
+
   const orders = JSON.parse(localStorage.getItem("wm_eat_su_orders") || "[]");
   let changed = false;
 
-  spans.forEach(span => {
+  spans.forEach((span) => {
     const orderId = span.dataset.id;
-    const order = orders.find(o => o.id === orderId);
-    
-    if (!order || !order.vendorPickedUpAt || order.reportedIssue || order.studentPickedUp || order.status !== "ready") {
-       return;
+    const order = orders.find((o) => o.id === orderId);
+
+    if (
+      !order ||
+      !order.vendorPickedUpAt ||
+      order.reportedIssue ||
+      order.studentPickedUp ||
+      order.status !== "ready"
+    ) {
+      return;
     }
 
     const timeLimit = 5 * 60 * 1000;
@@ -1087,21 +1179,21 @@ setInterval(() => {
     if (timeLeft <= 0) {
       span.textContent = "0:00";
       if (order.status !== "completed") {
-         order.status = "completed";
-         order.studentPickedUp = true;
-         order.autoCompleted = true;
-         changed = true;
+        order.status = "completed";
+        order.studentPickedUp = true;
+        order.autoCompleted = true;
+        changed = true;
       }
     } else {
       const m = Math.floor(timeLeft / 60000);
       const s = Math.floor((timeLeft % 60000) / 1000);
-      span.textContent = `${m}:${s.toString().padStart(2, '0')}`;
+      span.textContent = `${m}:${s.toString().padStart(2, "0")}`;
     }
   });
 
   if (changed) {
     localStorage.setItem("wm_eat_su_orders", JSON.stringify(orders));
     if (typeof renderVendorOrders === "function") renderVendorOrders();
-    window.dispatchEvent(new Event('storage'));
+    window.dispatchEvent(new Event("storage"));
   }
 }, 1000);

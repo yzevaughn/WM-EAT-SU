@@ -228,9 +228,13 @@ function buildVendorCard(order, sequence) {
     </div>`;
 }
 
+/* --- Pagination State --- */
+let currentPage = 1;
+const ORDERS_PER_PAGE = 4;
+
 /* --- Global Render engine --- */
 window.renderVendorOrders = function () {
-  const orders = (typeof getOrders === "function" ? getOrders() : [])
+  const allOrders = (typeof getOrders === "function" ? getOrders() : [])
     .filter((o) => !o.removedByVendor)
     .sort((a, b) => new Date(a.placedAt) - new Date(b.placedAt)); // Sort by time oldest first
   const list = document.getElementById("ordersList");
@@ -238,21 +242,6 @@ window.renderVendorOrders = function () {
 
   const emptyDiv = list.querySelector(".no-orders-msg");
   list.querySelectorAll(".order-card").forEach((c) => c.remove());
-
-  if (orders.length === 0) {
-    if (emptyDiv) emptyDiv.style.display = "flex";
-  } else {
-    // Track sequence per status for numbering (1, 2, 3...)
-    const statusCounters = {};
-    const htmlCards = orders.map((o) => {
-      const tab = window.STATUS_MAP[o.status] || "Pending";
-      statusCounters[tab] = (statusCounters[tab] || 0) + 1;
-      return buildVendorCard(o, statusCounters[tab]);
-    }).join("");
-
-    if (emptyDiv) emptyDiv.style.display = "none";
-    list.insertAdjacentHTML("beforeend", htmlCards);
-  }
 
   // Update the badge counters next to tabs
   const counts = {
@@ -262,7 +251,7 @@ window.renderVendorOrders = function () {
     Completed: 0,
     Cancelled: 0,
   };
-  orders.forEach((o) => {
+  allOrders.forEach((o) => {
     const tab = window.STATUS_MAP[o.status];
     if (tab) counts[tab]++;
   });
@@ -271,148 +260,172 @@ window.renderVendorOrders = function () {
     if (el) el.textContent = n;
   });
 
-  // Show hide cards based on currently active tab
+  // Filter orders based on active tab for rendering
   const activeBtn = document.querySelector(".filter-btn.active");
   const activeTab = activeBtn ? activeBtn.dataset.tab : "Pending";
-  let hasVisible = false;
-  document.querySelectorAll(".order-card").forEach((c) => {
-    if (c.dataset.status === activeTab) {
-      c.style.display = "";
-      hasVisible = true;
-    } else {
-      c.style.display = "none";
-    }
-  });
+  const filteredOrders = allOrders.filter(o => (window.STATUS_MAP[o.status] || "Pending") === activeTab);
 
-  if (orders.length > 0) {
-    if (emptyDiv) emptyDiv.style.display = hasVisible ? "none" : "flex";
+  if (filteredOrders.length === 0) {
+    if (emptyDiv) emptyDiv.style.display = "flex";
+    const pg = document.getElementById("paginationContainer");
+    if (pg) pg.style.display = "none";
+  } else {
+    if (emptyDiv) emptyDiv.style.display = "none";
+    
+    // Pagination Logic
+    const totalPages = Math.ceil(filteredOrders.length / ORDERS_PER_PAGE);
+    if (currentPage > totalPages) currentPage = Math.max(1, totalPages);
+    
+    const startIdx = (currentPage - 1) * ORDERS_PER_PAGE;
+    const endIdx = startIdx + ORDERS_PER_PAGE;
+    const paginatedOrders = filteredOrders.slice(startIdx, endIdx);
+
+    const htmlCards = paginatedOrders
+      .map((o, idx) => {
+        return buildVendorCard(o, startIdx + idx + 1);
+      })
+      .join("");
+
+    list.insertAdjacentHTML("beforeend", htmlCards);
+    
+    // Update Pagination UI
+    const paginationContainer = document.getElementById("paginationContainer");
+    if (paginationContainer) {
+      if (totalPages > 1) {
+        paginationContainer.style.display = "flex";
+        renderPageNumbers(totalPages);
+        const prev = document.getElementById("prevPage");
+        const next = document.getElementById("nextPage");
+        if (prev) prev.disabled = (currentPage === 1);
+        if (next) next.disabled = (currentPage === totalPages);
+      } else {
+        paginationContainer.style.display = "none";
+      }
+    }
   }
 
   const clearBtn = document.getElementById("clearAllVendorBtn");
   if (clearBtn) {
     if (
       (activeTab === "Completed" || activeTab === "Cancelled") &&
-      hasVisible
+      filteredOrders.length > 0
     ) {
       clearBtn.style.display = "flex";
     } else {
       clearBtn.style.display = "none";
     }
   }
-
-  // Wire View Details
-  document.querySelectorAll(".js-view-details").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const orderId = btn.dataset.id;
-      const order = (typeof getOrders === "function" ? getOrders() : []).find(o => o.id === orderId);
-      if (!order) return;
-
-      const itemsHtml = order.items
-        .map(
-          (it) => `
-          <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; background:#f8fafc; border-radius:12px; margin-bottom:8px; border:1px solid #f1f5f9;">
-            <div style="display:flex; gap:12px; align-items:center;">
-              <img src="${esc(it.img || "")}" style="width:50px; height:50px; border-radius:8px; object-fit:cover;" onerror="this.src='https://placehold.co/50x50?text=Food'" />
-              <div>
-                <div style="font-weight:700; color:#1e293b; font-size:14px;">${esc(it.name)}</div>
-                <div style="font-size:12px; color:#64748b;">${it.qty} × ₱${it.price.toFixed(2)}</div>
-              </div>
-            </div>
-            <div style="font-weight:700; color:#0f172a;">₱${(it.price * it.qty).toFixed(2)}</div>
-          </div>`,
-        )
-        .join("");
-
-      const content = `
-        <div style="margin-bottom:20px; padding-bottom:15px; border-bottom:1px dashed #e2e8f0;">
-          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-            <span style="color:#64748b; font-size:13px;">Order ID</span>
-            <span style="font-family:monospace; font-weight:700; color:#1e293b;">#${esc(order.id.slice(-6).toUpperCase())}</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-            <span style="color:#64748b; font-size:13px;">Date</span>
-            <span style="font-weight:600; color:#1e293b;">${new Date(order.placedAt).toLocaleString()}</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-            <span style="color:#64748b; font-size:13px;">Status</span>
-            <span class="status-badge ${order.status}">${order.status.toUpperCase()}</span>
-          </div>
-          <div style="display:flex; justify-content:space-between;">
-            <span style="color:#64748b; font-size:13px;">Payment</span>
-            <span style="font-weight:600; color:#1e293b;">${order.payment}</span>
-          </div>
-        </div>
-
-        <div style="margin-bottom:15px; font-weight:700; color:#0f172a; font-size:14px;">Items Summary</div>
-        <div style="max-height:300px; overflow-y:auto; padding-right:5px;">
-          ${itemsHtml}
-        </div>
-
-        <div style="margin-top:20px; padding:15px; background:#f1f5f9; border-radius:12px;">
-          <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-weight:700; color:#475569;">Total Amount</span>
-            <span style="font-size:20px; font-weight:800; color:#ef4444;">₱${order.total.toFixed(2)}</span>
-          </div>
-        </div>
-        
-        ${
-          order.instructions
-            ? `
-        <div style="margin-top:15px; padding:12px; background:#fffbeb; border-radius:10px; border:1px solid #fef3c7;">
-          <div style="font-size:12px; font-weight:700; color:#b45309; margin-bottom:4px;">Special Instructions:</div>
-          <div style="font-size:13px; color:#92400e;">${esc(order.instructions)}</div>
-        </div>`
-            : ""
-        }
-      `;
-
-      document.getElementById("orderDetailContent").innerHTML = content;
-      document.getElementById("orderDetailsModal").classList.add("active");
-    });
-  });
-
-  wirePickupModal();
 };
 
-function wirePickupModal() {
-  document.querySelectorAll(".open-code-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const card = btn.closest(".order-card");
-      const code = btn.dataset.code;
-      document.getElementById("modalCodeOrder").textContent =
-        "Order #" + card.dataset.orderId;
-      document.getElementById("modalTotalPrice").textContent =
-        "Total: ₱" + card.dataset.price;
+/* --- Event Delegation for Dynamic Buttons --- */
+document.getElementById("ordersList")?.addEventListener("click", (e) => {
+  // View Details
+  const viewBtn = e.target.closest(".js-view-details");
+  if (viewBtn) {
+    const orderId = viewBtn.dataset.id;
+    const order = (typeof getOrders === "function" ? getOrders() : []).find(o => o.id === orderId);
+    if (!order) return;
 
+    const itemsHtml = order.items
+      .map(
+        (it) => `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; background:#f8fafc; border-radius:12px; margin-bottom:8px; border:1px solid #f1f5f9;">
+          <div style="display:flex; gap:12px; align-items:center;">
+            <img src="${esc(it.img || "")}" style="width:50px; height:50px; border-radius:8px; object-fit:cover;" onerror="this.src='https://placehold.co/50x50?text=Food'" />
+            <div>
+              <div style="font-weight:700; color:#1e293b; font-size:14px;">${esc(it.name)}</div>
+              <div style="font-size:12px; color:#64748b;">${it.qty} × ₱${it.price.toFixed(2)}</div>
+            </div>
+          </div>
+          <div style="font-weight:700; color:#0f172a;">₱${(it.price * it.qty).toFixed(2)}</div>
+        </div>`,
+      )
+      .join("");
 
+    const content = `
+      <div style="margin-bottom:20px; padding-bottom:15px; border-bottom:1px dashed #e2e8f0;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+          <span style="color:#64748b; font-size:13px;">Order ID</span>
+          <span style="font-family:monospace; font-weight:700; color:#1e293b;">#${esc(order.id.slice(-6).toUpperCase())}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+          <span style="color:#64748b; font-size:13px;">Date</span>
+          <span style="font-weight:600; color:#1e293b;">${new Date(order.placedAt).toLocaleString()}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+          <span style="color:#64748b; font-size:13px;">Status</span>
+          <span class="status-badge ${order.status}">${order.status.toUpperCase()}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between;">
+          <span style="color:#64748b; font-size:13px;">Payment</span>
+          <span style="font-weight:600; color:#1e293b;">${order.payment}</span>
+        </div>
+      </div>
 
-      let itemsList = document.getElementById("modalOrderItems");
-      itemsList.innerHTML = "";
-      card
-        .querySelectorAll(".order-item-row")
-        .forEach((r) => itemsList.appendChild(r.cloneNode(true)));
+      <div style="margin-bottom:15px; font-weight:700; color:#0f172a; font-size:14px;">Items Summary</div>
+      <div style="max-height:300px; overflow-y:auto; padding-right:5px;">
+        ${itemsHtml}
+      </div>
 
-      const qrSection = document.getElementById("vendorQrSection");
-      const qrImage = document.getElementById("vendorQrImage");
+      <div style="margin-top:20px; padding:15px; background:#f1f5f9; border-radius:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-weight:700; color:#475569;">Total Amount</span>
+          <span style="font-size:20px; font-weight:800; color:#ef4444;">₱${order.total.toFixed(2)}</span>
+        </div>
+      </div>
       
-      if (qrSection && qrImage) {
-         const items = Array.from(card.querySelectorAll(".order-item-row")).map(r => r.textContent.trim()).join(", ");
-         const qrData = JSON.stringify({
-            orderId: card.dataset.orderFullId || card.dataset.orderId || btn.dataset.id,
-            customer: card.querySelector(".order-card-title")?.textContent || "Customer",
-            items: items,
-            total: card.dataset.price
-         });
-         
-         qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(qrData);
-         qrSection.style.display = "block";
+      ${
+        order.instructions
+          ? `
+      <div style="margin-top:15px; padding:12px; background:#fffbeb; border-radius:10px; border:1px solid #fef3c7;">
+        <div style="font-size:12px; font-weight:700; color:#b45309; margin-bottom:4px;">Special Instructions:</div>
+        <div style="font-size:13px; color:#92400e;">${esc(order.instructions)}</div>
+      </div>`
+          : ""
       }
+    `;
 
-      document.getElementById("pickupModal").classList.add("active");
-      document.body.style.overflow = "hidden";
-    });
-  });
-}
+    document.getElementById("orderDetailContent").innerHTML = content;
+    document.getElementById("orderDetailsModal").classList.add("active");
+    return;
+  }
+
+  // Show QR (Pickup Code)
+  const qrBtn = e.target.closest(".open-code-btn");
+  if (qrBtn) {
+    const card = qrBtn.closest(".order-card");
+    const code = qrBtn.dataset.code;
+    document.getElementById("modalCodeOrder").textContent =
+      "Order #" + card.dataset.orderId;
+    document.getElementById("modalTotalPrice").textContent =
+      "Total: ₱" + card.dataset.price;
+
+    let itemsList = document.getElementById("modalOrderItems");
+    itemsList.innerHTML = "";
+    card
+      .querySelectorAll(".order-item-row")
+      .forEach((r) => itemsList.appendChild(r.cloneNode(true)));
+
+    const qrSection = document.getElementById("vendorQrSection");
+    const qrImage = document.getElementById("vendorQrImage");
+    
+    if (qrSection && qrImage) {
+       const items = Array.from(card.querySelectorAll(".order-item-row")).map(r => r.textContent.trim()).join(", ");
+       const qrData = JSON.stringify({
+          orderId: card.dataset.orderFullId || card.dataset.orderId || qrBtn.dataset.id,
+          customer: card.querySelector(".order-card-title")?.textContent || "Customer",
+          items: items,
+          total: card.dataset.price
+       });
+       
+       qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + encodeURIComponent(qrData);
+       qrSection.style.display = "block";
+    }
+
+    document.getElementById("pickupModal").classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+});
 
 const cmClose = () => {
   document.getElementById("pickupModal").classList.remove("active");
@@ -496,6 +509,53 @@ document.getElementById("clearAllVendorBtn")?.addEventListener("click", () => {
     );
 
   document.getElementById("confirmModal").classList.add("active");
+});
+
+function renderPageNumbers(totalPages) {
+  const container = document.getElementById("pageNumbers");
+  if (!container) return;
+  container.innerHTML = "";
+
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement("button");
+    btn.className = `pagination-btn ${i === currentPage ? "active" : ""}`;
+    btn.textContent = i;
+    btn.addEventListener("click", () => {
+      currentPage = i;
+      window.renderVendorOrders();
+    });
+    container.appendChild(btn);
+  }
+}
+
+// Pagination Button Listeners
+document.getElementById("prevPage")?.addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    window.renderVendorOrders();
+  }
+});
+
+document.getElementById("nextPage")?.addEventListener("click", () => {
+  const allOrders = (typeof getOrders === "function" ? getOrders() : [])
+    .filter((o) => !o.removedByVendor);
+  const activeBtn = document.querySelector(".filter-btn.active");
+  const activeTab = activeBtn ? activeBtn.dataset.tab : "Pending";
+  const filteredCount = allOrders.filter(o => (window.STATUS_MAP[o.status] || "Pending") === activeTab).length;
+  const totalPages = Math.ceil(filteredCount / ORDERS_PER_PAGE);
+  
+  if (currentPage < totalPages) {
+    currentPage++;
+    window.renderVendorOrders();
+  }
+});
+
+// Reset pagination when filter tabs are clicked
+document.getElementById("filterTabs")?.addEventListener("click", (e) => {
+  if (e.target.closest(".filter-btn")) {
+    currentPage = 1;
+    // renderVendorOrders is already called by orders-filter.js
+  }
 });
 
 // Initial render

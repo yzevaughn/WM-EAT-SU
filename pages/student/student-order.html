@@ -16,77 +16,6 @@
     <link rel="stylesheet" href="../../css/navbar.css" />
     <link rel="stylesheet" href="../../css/student/order.css" />
     <style>
-      /* Pagination Styles */
-      .pagination-controls {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 16px;
-        padding: 1.5rem 0;
-        background: transparent;
-        border-top: 1px solid #f1f5f9;
-        margin-top: 1rem;
-        grid-column: 1 / -1; /* Span full width in grid */
-      }
-
-      .pagination-info {
-        font-size: 14px;
-        color: #64748b;
-      }
-
-      .pagination-info span {
-        font-weight: 600;
-        color: #1e293b;
-      }
-
-      .pagination-nav {
-        display: flex;
-        gap: 4px;
-      }
-
-      .page-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 36px;
-        height: 36px;
-        padding: 0 12px;
-        border-radius: 8px;
-        border: 1px solid #e2e8f0;
-        background: white;
-        color: #475569;
-        font-size: 14px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-
-      .page-btn:hover:not(.disabled):not(.active) {
-        background: #fef2f2;
-        border-color: #fca5a5;
-        color: #ef4444;
-      }
-
-      .page-btn.active {
-        background: #ef4444;
-        color: white;
-        border-color: #ef4444;
-      }
-
-      .page-btn.disabled {
-        background: #f8fafc;
-        color: #cbd5e1;
-        cursor: not-allowed;
-      }
-
-      @media (max-width: 480px) {
-        .pagination-controls {
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-        }
-      }
     </style>
   </head>
 
@@ -316,20 +245,16 @@
           </div>
 
           <!-- Pagination Controls -->
-          <div
-            class="pagination-controls"
-            id="orderPagination"
-            style="display: none; justify-content: flex-end"
-          >
-            <div class="pagination-nav">
-              <button class="page-btn" id="prevPage">
-                <i class="fa-solid fa-chevron-left"></i>
-              </button>
-              <div id="pageNumbers" style="display: flex; gap: 4px"></div>
-              <button class="page-btn" id="nextPage">
-                <i class="fa-solid fa-chevron-right"></i>
-              </button>
+          <div class="pagination-container" id="orderPagination" style="display: none;">
+            <button class="pagination-btn" id="prevPage" title="Previous Page">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div id="pageNumbers" style="display: flex; gap: 8px;">
+              <!-- Dynamic Page Numbers -->
             </div>
+            <button class="pagination-btn" id="nextPage" title="Next Page">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -1267,7 +1192,6 @@
           .insertAdjacentHTML("afterend", html);
 
         applyFilters();
-        wireEvents();
         updateAllCartBadges();
       }
 
@@ -1320,25 +1244,21 @@
 
         // Update Pagination UI
         const pagination = document.getElementById("orderPagination");
-        if (totalItems >= 4) {
-          // Show if already 4 rows (2x2 grid)
+        if (totalItems > itemsPerPage) {
           pagination.style.display = "flex";
 
           const prevBtn = document.getElementById("prevPage");
           const nextBtn = document.getElementById("nextPage");
 
           prevBtn.disabled = currentPage === 1;
-          prevBtn.classList.toggle("disabled", currentPage === 1);
-
           nextBtn.disabled = currentPage === totalPages;
-          nextBtn.classList.toggle("disabled", currentPage === totalPages);
 
           // Page Numbers
           const pageNumbers = document.getElementById("pageNumbers");
           pageNumbers.innerHTML = "";
           for (let i = 1; i <= totalPages; i++) {
             const btn = document.createElement("button");
-            btn.className = `page-btn ${i === currentPage ? "active" : ""}`;
+            btn.className = `pagination-btn ${i === currentPage ? "active" : ""}`;
             btn.textContent = i;
             btn.onclick = () => {
               currentPage = i;
@@ -1366,295 +1286,175 @@
       }
 
       /* ── Wire interactive buttons on dynamically-rendered cards ── */
-      function wireEvents() {
-        /* Cancel Order */
-        document.querySelectorAll(".js-cancel").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const order = getOrders().find((o) => o.id === btn.dataset.id);
-            showConfirmation(
-              "Cancel Order",
-              "Are you sure you want to cancel this order?",
-              () => {
-                cancelOrder(btn.dataset.id);
-                renderOrders();
-                showToast(
-                  "success",
-                  "fa-check",
-                  "Order cancelled. The money is returned to the wallet.",
-                );
-              },
-              order,
-              { btnIcon: "none" },
-            );
-          });
-        });
-
-        /* Report Issue */
-        document.querySelectorAll(".js-report-issue").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const order = getOrders().find((o) => o.id === btn.dataset.id);
-            if (!order) return;
-
-            window.currentReportOrder = order;
-            document.getElementById("reportReason").value = "";
-            document.getElementById("reportModal").classList.add("active");
-          });
-        });
-
-        /* Mark as Picked Up (card button) */
-        document.querySelectorAll(".js-mark-picked").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const order = getOrders().find((o) => o.id === btn.dataset.id);
-            if (!order) return;
-
-            let msg = "Are you sure you want to mark this order as picked up?";
-            if (!order.vendorPickedUp) {
-              msg =
-                `<div style="margin-bottom:12px;color:#ef4444;background:#fef2f2;padding:10px;border-radius:8px;border:1px solid #fecaca;"><i class="fa-solid fa-triangle-exclamation"></i> <b>Warning:</b> The vendor has not yet confirmed this order as picked up.</div>` +
-                msg;
-            } else {
-              msg =
-                `<div style="margin-bottom:12px;color:#22c55e;background:#f0fdf4;padding:10px;border-radius:8px;border:1px solid #bbf7d0;"><i class="fa-solid fa-circle-check"></i> <b>Confirmed:</b> The vendor has already confirmed this order as picked up.</div>` +
-                msg;
-            }
-
-            showConfirmation(
-              "Mark as Picked Up",
-              msg,
-              () => {
-                const isWallet =
-                  order.payment && order.payment.includes("Wallet");
-                if (isWallet || order.vendorPickedUp) {
-                  updateOrderStatus(order.id, "completed", {
-                    studentPickedUp: true,
-                    vendorPickedUp: true,
-                  });
-                  renderOrders();
-                  showToast("success", "fa-check-double", "Order completed!");
-                } else {
-                  updateOrderStatus(order.id, order.status, {
-                    studentPickedUp: true,
-                  });
-                  renderOrders();
-                  showToast(
-                    "success",
-                    "fa-check",
-                    "Marked as picked up. Waiting for vendor confirmation.",
-                  );
-                }
-              },
-              order,
-              {
-                btnColor: "green",
-                btnIcon: "fa-solid fa-check",
-                btnText: "Confirm Pickup",
-              },
-            );
-          });
-        });
-
-        /* Pay with Wallet (Scan) */
-        document.querySelectorAll(".js-pay-wallet").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const order = getOrders().find((o) => o.id === btn.dataset.id);
-            if (!order) return;
-
-            window.currentScanOrder = order; // store for the simulate button
-            document.getElementById("scanModal").classList.add("active");
-          });
-        });
-
-        /* View Order Details (Eye Icon / Button) */
-        document.querySelectorAll(".js-view-details").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const order = getOrders().find((o) => o.id === btn.dataset.id);
-            if (!order) return;
-
-            const itemsHtml = order.items
-              .map(
-                (it) => `
-                <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; background:#f8fafc; border-radius:12px; margin-bottom:8px; border:1px solid #f1f5f9;">
-                  <div style="display:flex; gap:12px; align-items:center;">
-                    <img src="${esc(it.img || "")}" style="width:50px; height:50px; border-radius:8px; object-fit:cover;" onerror="this.src='https://placehold.co/50x50?text=Food'" />
-                    <div>
-                      <div style="font-weight:700; color:#1e293b; font-size:14px;">${esc(it.name)}</div>
-                      <div style="font-size:12px; color:#64748b;">${it.qty} × ₱${it.price.toFixed(2)}</div>
-                    </div>
-                  </div>
-                  <div style="font-weight:700; color:#0f172a;">₱${(it.price * it.qty).toFixed(2)}</div>
-                </div>`,
-              )
-              .join("");
-
-            const content = `
-              <div style="margin-bottom:20px; padding-bottom:15px; border-bottom:1px dashed #e2e8f0;">
-                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-                  <span style="color:#64748b; font-size:13px;">Order ID</span>
-                  <span style="font-family:monospace; font-weight:700; color:#1e293b;">#${esc(order.id.slice(-6).toUpperCase())}</span>
-                </div>
-                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-                  <span style="color:#64748b; font-size:13px;">Vendor</span>
-                  <span style="font-weight:700; color:#1e293b;">${esc(order.vendor)}</span>
-                </div>
-                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-                  <span style="color:#64748b; font-size:13px;">Date</span>
-                  <span style="font-weight:600; color:#1e293b;">${formatDate(order.placedAt)}</span>
-                </div>
-                <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-                  <span style="color:#64748b; font-size:13px;">Status</span>
-                  <span class="status-badge ${order.status}">${order.status.toUpperCase()}</span>
-                </div>
-                <div style="display:flex; justify-content:space-between;">
-                  <span style="color:#64748b; font-size:13px;">Payment</span>
-                  <span style="font-weight:600; color:#1e293b;">${order.payment}</span>
-                </div>
-              </div>
-            `;
-
-            if (order.status === "cancelled" && order.cancellationReason) {
-              content += `
-                <div style="margin-top:15px; padding:12px; background:#fef2f2; border:1px solid #fee2e2; border-radius:10px; border-left:4px solid #ef4444;">
-                  <div style="font-size:12px; font-weight:700; color:#991b1b; margin-bottom:4px;">Cancellation Reason:</div>
-                  <div style="font-size:13px; color:#b91c1c;">${esc(order.cancellationReason)}</div>
-                </div>
-              `;
-            }
-
-            content += `
-              <div style="margin-bottom:15px; font-weight:700; color:#0f172a; font-size:14px;">Items Summary</div>
-              <div style="max-height:300px; overflow-y:auto; padding-right:5px;">
-                ${itemsHtml}
-              </div>
-
-              <div style="margin-top:20px; padding:15px; background:#f1f5f9; border-radius:12px;">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <span style="font-weight:700; color:#475569;">Total Amount</span>
-                  <span style="font-size:20px; font-weight:800; color:#ef4444;">&#8369;${order.total.toFixed(2)}</span>
-                </div>
-              </div>
-              
-              <div style="margin-top:15px; padding:12px; background:#fffbeb; border-radius:10px; border:1px solid #fef3c7;">
-                <div style="font-size:12px; font-weight:700; color:#b45309; margin-bottom:4px;">Special Instructions:</div>
-                <div style="font-size:13px; color:#92400e;">${order.instructions ? esc(order.instructions) : "None"}</div>
-              </div>
-            `;
-
-            document.getElementById("orderDetailContent").innerHTML = content;
-            document
-              .getElementById("orderDetailsModal")
-              .classList.add("active");
-          });
-        });
-
-        /* View Pickup Code */
-        document.querySelectorAll(".js-view-code").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const order = getOrders().find((o) => o.id === btn.dataset.id);
-            if (!order) return;
-
-            document.getElementById("modalCodeVal").textContent =
-              order.pickupCode;
-            const isCash = order.payment === "Cash on Pickup";
-            const payLabel = isCash
-              ? "Cash on Pickup"
-              : "Online Payment (Wallet)";
-            document.getElementById("modalCodeOrder").innerHTML =
-              `Order #${order.id.slice(-6).toUpperCase()} &middot; ${esc(order.vendor)}<br><small style="opacity:0.8">${payLabel}</small>`;
-            document.getElementById("modalTotalPrice").textContent =
-              `Total: ₱${order.total.toFixed(2)}`;
-
-            const mImg = document.getElementById("modalFoodImage");
-            if (order.img) {
-              mImg.src = order.img;
-              mImg.style.display = "block";
-            } else {
-              mImg.style.display = "none";
-            }
-
-            document.getElementById("modalOrderItems").innerHTML = order.items
-              .map(
-                (it) =>
-                  `<div class="order-item-row"
-                style="display:flex;justify-content:space-between;font-size:14px;padding:4px 0;color:#374151;">
-                <span>${it.qty} × ${esc(it.name)}</span>
-                <span>₱${(it.price * it.qty).toFixed(2)}</span>
-              </div>`,
-              )
-              .join("");
-
-            /* Modal "Mark as Picked Up" logic removed */
-
-            pickupModal.classList.add("active");
-          });
-        });
-
-        /* Remove from history */
-        document.querySelectorAll(".js-remove").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const order = getOrders().find((o) => o.id === btn.dataset.id);
-            showConfirmation(
-              "Remove Transaction",
-              "Remove this order from your history?",
-              () => {
-                const card = document.querySelector(
-                  `.order-card[data-id="${btn.dataset.id}"]`,
-                );
-                if (card) card.classList.add("removing");
-                setTimeout(() => {
-                  removeOrder(btn.dataset.id, "student");
-                  renderOrders();
-                }, 300);
-                showToast("success", "fa-check", "Removed from history.");
-              },
-              order,
-            );
-          });
-        });
-
-        /* Order Again — re-add items to cart */
-        document.querySelectorAll(".js-order-again").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const order = getOrders().find((o) => o.id === btn.dataset.id);
-            if (!order) return;
-            order.items.forEach((it) => addToCart({ ...it }));
-            showToast("success", "fa-cart-plus", "Items added back to cart!");
-          });
-        });
-
-        /* Leave Review */
-        document.querySelectorAll(".js-review").forEach((btn) => {
-          btn.addEventListener("click", () => {
-            window.currentReviewOrderId = btn.dataset.id;
-            document.getElementById("reviewModal").classList.add("active");
-          });
-        });
-
-        /* Clear All */
-        const clearBtn = document.getElementById("clearAllBtn");
-        if (clearBtn) {
-          clearBtn.onclick = () => {
-            const af =
-              document
-                .querySelector(".filter-btn.active")
-                ?.getAttribute("data-filter") || "pending";
-            if (af !== "completed" && af !== "cancelled") return;
-            showConfirmation(
-              "Clear All",
-              `Are you sure you want to clear all ${af} orders from your history?`,
-              () => {
-                const orders = getOrders();
-                orders.forEach((o) => {
-                  if (o.status === af) {
-                    removeOrder(o.id, "student");
-                  }
-                });
-                renderOrders();
-                showToast("success", "fa-check", `All ${af} orders cleared.`);
-              },
-            );
-          };
+      /* ── Event Delegation for Dynamic Buttons ── */
+      document.getElementById("ordersList")?.addEventListener("click", (e) => {
+        const btn = e.target.closest("button");
+        if (!btn) return;
+        
+        const id = btn.dataset.id;
+        const order = getOrders().find(o => o.id === id);
+        // Note: some buttons like "Clear All" might not have data-id or order
+        
+        // Cancel Order
+        if (btn.classList.contains("js-cancel")) {
+          showConfirmation(
+            "Cancel Order",
+            "Are you sure you want to cancel this order?",
+            () => {
+              cancelOrder(id);
+              renderOrders();
+              showToast("success", "fa-check", "Order cancelled. The money is returned to the wallet.");
+            },
+            order,
+            { btnIcon: "none" }
+          );
+          return;
         }
-      }
+
+        // Report Issue
+        if (btn.classList.contains("js-report-issue")) {
+          window.currentReportOrder = order;
+          document.getElementById("reportReason").value = "";
+          document.getElementById("reportModal").classList.add("active");
+          return;
+        }
+
+        // Mark Picked Up
+        if (btn.classList.contains("js-mark-picked")) {
+          let msg = "Are you sure you want to mark this order as picked up?";
+          if (!order.vendorPickedUp) {
+            msg = `<div style="margin-bottom:12px;color:#ef4444;background:#fef2f2;padding:10px;border-radius:8px;border:1px solid #fecaca;"><i class="fa-solid fa-triangle-exclamation"></i> <b>Warning:</b> The vendor has not yet confirmed this order as picked up.</div>` + msg;
+          } else {
+            msg = `<div style="margin-bottom:12px;color:#22c55e;background:#f0fdf4;padding:10px;border-radius:8px;border:1px solid #bbf7d0;"><i class="fa-solid fa-circle-check"></i> <b>Confirmed:</b> The vendor has already confirmed this order as picked up.</div>` + msg;
+          }
+          showConfirmation("Mark as Picked Up", msg, () => {
+            const isWallet = order.payment && order.payment.includes("Wallet");
+            if (isWallet || order.vendorPickedUp) {
+              updateOrderStatus(order.id, "completed", { studentPickedUp: true, vendorPickedUp: true });
+              renderOrders();
+              showToast("success", "fa-check-double", "Order completed!");
+            } else {
+              updateOrderStatus(order.id, order.status, { studentPickedUp: true });
+              renderOrders();
+              showToast("success", "fa-check", "Marked as picked up. Waiting for vendor confirmation.");
+            }
+          }, order, { btnColor: "green", btnIcon: "fa-solid fa-check", btnText: "Confirm Pickup" });
+          return;
+        }
+
+        // Pay with Wallet (Scan)
+        if (btn.classList.contains("js-pay-wallet")) {
+          window.currentScanOrder = order;
+          document.getElementById("scanModal").classList.add("active");
+          return;
+        }
+
+        // View Details (Eye Icon)
+        if (btn.classList.contains("js-view-details")) {
+          const itemsHtml = order.items.map(it => `
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; background:#f8fafc; border-radius:12px; margin-bottom:8px; border:1px solid #f1f5f9;">
+              <div style="display:flex; gap:12px; align-items:center;">
+                <img src="${esc(it.img || "")}" style="width:50px; height:50px; border-radius:8px; object-fit:cover;" onerror="this.src='https://placehold.co/50x50?text=Food'" />
+                <div>
+                  <div style="font-weight:700; color:#1e293b; font-size:14px;">${esc(it.name)}</div>
+                  <div style="font-size:12px; color:#64748b;">${it.qty} × ₱${it.price.toFixed(2)}</div>
+                </div>
+              </div>
+              <div style="font-weight:700; color:#0f172a;">₱${(it.price * it.qty).toFixed(2)}</div>
+            </div>`).join("");
+
+          const content = `
+            <div style="margin-bottom:20px; padding-bottom:15px; border-bottom:1px dashed #e2e8f0;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                <span style="color:#64748b; font-size:13px;">Order ID</span>
+                <span style="font-family:monospace; font-weight:700; color:#1e293b;">#${esc(order.id.slice(-6).toUpperCase())}</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                <span style="color:#64748b; font-size:13px;">Vendor</span>
+                <span style="font-weight:700; color:#1e293b;">${esc(order.vendor)}</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                <span style="color:#64748b; font-size:13px;">Date</span>
+                <span style="font-weight:600; color:#1e293b;">${formatDate(order.placedAt)}</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                <span style="color:#64748b; font-size:13px;">Status</span>
+                <span class="status-badge ${order.status}">${order.status.toUpperCase()}</span>
+              </div>
+              <div style="display:flex; justify-content:space-between;">
+                <span style="color:#64748b; font-size:13px;">Payment</span>
+                <span style="font-weight:600; color:#1e293b;">${order.payment}</span>
+              </div>
+            </div>
+            <div style="margin-bottom:15px; font-weight:700; color:#0f172a; font-size:14px;">Items Summary</div>
+            <div style="max-height:300px; overflow-y:auto; padding-right:5px;">${itemsHtml}</div>
+            <div style="margin-top:20px; padding:15px; background:#f1f5f9; border-radius:12px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-weight:700; color:#475569;">Total Amount</span>
+                <span style="font-size:20px; font-weight:800; color:#ef4444;">&#8369;${order.total.toFixed(2)}</span>
+              </div>
+            </div>
+            <div style="margin-top:15px; padding:12px; background:#fffbeb; border-radius:10px; border:1px solid #fef3c7;">
+              <div style="font-size:12px; font-weight:700; color:#b45309; margin-bottom:4px;">Special Instructions:</div>
+              <div style="font-size:13px; color:#92400e;">${order.instructions ? esc(order.instructions) : "None"}</div>
+            </div>
+          `;
+          document.getElementById("orderDetailContent").innerHTML = content;
+          document.getElementById("orderDetailsModal").classList.add("active");
+          return;
+        }
+
+        // View Code
+        if (btn.classList.contains("js-view-code")) {
+          document.getElementById("modalCodeVal").textContent = order.pickupCode;
+          const isCash = order.payment === "Cash on Pickup";
+          const payLabel = isCash ? "Cash on Pickup" : "Online Payment (Wallet)";
+          document.getElementById("modalCodeOrder").innerHTML = `Order #${order.id.slice(-6).toUpperCase()} &middot; ${esc(order.vendor)}<br><small style="opacity:0.8">${payLabel}</small>`;
+          document.getElementById("modalTotalPrice").textContent = `Total: ₱${order.total.toFixed(2)}`;
+          const mImg = document.getElementById("modalFoodImage");
+          if (order.img) { mImg.src = order.img; mImg.style.display = "block"; } else { mImg.style.display = "none"; }
+          document.getElementById("modalOrderItems").innerHTML = order.items.map(it => `<div class="order-item-row" style="display:flex;justify-content:space-between;font-size:14px;padding:4px 0;color:#374151;"><span>${it.qty} × ${esc(it.name)}</span><span>₱${(it.price * it.qty).toFixed(2)}</span></div>`).join("");
+          document.getElementById("pickupModal").classList.add("active");
+          return;
+        }
+
+        // Remove from history
+        if (btn.classList.contains("js-remove")) {
+          showConfirmation("Remove Transaction", "Remove this order from your history?", () => {
+            const card = document.querySelector(`.order-card[data-id="${id}"]`);
+            if (card) card.classList.add("removing");
+            setTimeout(() => { removeOrder(id, "student"); renderOrders(); }, 300);
+            showToast("success", "fa-check", "Removed from history.");
+          }, order);
+          return;
+        }
+
+        // Order Again
+        if (btn.classList.contains("js-order-again")) {
+          order.items.forEach(it => addToCart({ ...it }));
+          showToast("success", "fa-cart-plus", "Items added back to cart!");
+          return;
+        }
+
+        // Leave Review
+        if (btn.classList.contains("js-review")) {
+          window.currentReviewOrderId = id;
+          document.getElementById("reviewModal").classList.add("active");
+          return;
+        }
+      });
+
+      // Handle "Clear All" button (outside ordersList)
+      document.getElementById("clearAllBtn")?.addEventListener("click", () => {
+        const af = document.querySelector(".filter-btn.active")?.getAttribute("data-filter") || "pending";
+        if (af !== "completed" && af !== "cancelled") return;
+        showConfirmation("Clear All", `Are you sure you want to clear all ${af} orders from your history?`, () => {
+          const orders = getOrders();
+          orders.forEach(o => { if (o.status === af) { removeOrder(o.id, "student"); } });
+          renderOrders();
+          showToast("success", "fa-check", `All ${af} orders cleared.`);
+        });
+      });
 
       /* ── Scan Modals ── */
       const scanModal = document.getElementById("scanModal");
@@ -1938,10 +1738,15 @@
         }
       };
       document.getElementById("nextPage").onclick = () => {
-        // Total pages calculation is in applyFilters, but we can just check if next button is enabled
-        currentPage++;
-        applyFilters();
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        const af = document.querySelector(".filter-btn.active")?.getAttribute("data-filter") || "pending";
+        const totalItems = Array.from(document.querySelectorAll(".order-card")).filter(c => c.dataset.status === af).length;
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        
+        if (currentPage < totalPages) {
+          currentPage++;
+          applyFilters();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
       };
 
       /* â”€â”€ Toast â”€â”€ */

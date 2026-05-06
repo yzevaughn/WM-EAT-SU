@@ -46,7 +46,8 @@
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
-  width: 100%;
+  flex: 1;
+  min-width: 0;
 }
 
 .filter-bar::-webkit-scrollbar {
