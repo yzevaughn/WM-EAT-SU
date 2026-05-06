@@ -86,6 +86,27 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
+    // Render Earnings List
+    function renderEarningsList() {
+        const earningList = document.getElementById('earning-list');
+        if (!earningList) return;
+
+        earningList.innerHTML = earnings.map(item => `
+            <div class="earning-item">
+                <div class="earning-rank" style="color: ${item.color}">${item.rank}</div>
+                <div class="earning-details">
+                    <div class="earning-info">
+                        <span class="earning-name">${item.name}</span>
+                        <span class="earning-amount">${item.amount}</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${item.progress}%; background: ${item.color}"></div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
     // Toggle Payment Status
     window.togglePaymentStatus = (id) => {
         const payment = payments.find(p => p.id === id);
@@ -96,5 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Initial Renders
+    renderEarningsList();
     renderPaymentList();
 });
