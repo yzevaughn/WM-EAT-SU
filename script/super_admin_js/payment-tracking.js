@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     let paymentData = [
-        { id: 1, name: 'Canteen 1', operator: 'John Doe', fee: 5000, status: 'Clear', type: 'Canteen', statusClass: 'status-clear', receiptUploaded: true, date: '2026-05-01', receiptImg: '../../images/receipt-mock.jpg' },
-        { id: 2, name: 'Canteen 2', operator: 'Jane Smith', fee: 5000, status: 'Unclear', type: 'Canteen', statusClass: 'status-unclear', receiptUploaded: false, date: '', receiptImg: '' },
-        { id: 3, name: 'Canteen 3', operator: 'Lani Cruz', fee: 3500, status: 'Unclear', type: 'Canteen', statusClass: 'status-unclear', receiptUploaded: false, date: '', receiptImg: '' },
-        { id: 4, name: 'Canteen 4', operator: 'Rex Bohol', fee: 3500, status: 'Unclear', type: 'Canteen', statusClass: 'status-unclear', receiptUploaded: false, date: '', receiptImg: '' },
-        { id: 5, name: 'Canteen 5', operator: 'Bruce Wayne', fee: 6000, status: 'Clear', type: 'Canteen', statusClass: 'status-clear', receiptUploaded: true, date: '2026-05-02', receiptImg: '../../images/receipt-mock.jpg' }
+        { id: 1, name: 'Canteen 1', operator: 'John Doe', fee: 5000, dueDate: '2026-05-15', status: 'Paid', type: 'Canteen', statusClass: 'status-clear', receiptUploaded: true, date: '2026-05-01', receiptImg: '../../images/receipt-mock.jpg' },
+        { id: 2, name: 'Canteen 2', operator: 'Jane Smith', fee: 5000, dueDate: '2026-05-20', status: 'Not Paid', type: 'Canteen', statusClass: 'status-unclear', receiptUploaded: false, date: '', receiptImg: '' },
+        { id: 3, name: 'Canteen 3', operator: 'Lani Cruz', fee: 3500, dueDate: '2026-05-25', status: 'Not Paid', type: 'Canteen', statusClass: 'status-unclear', receiptUploaded: false, date: '', receiptImg: '' },
+        { id: 4, name: 'Canteen 4', operator: 'Rex Bohol', fee: 3500, dueDate: '2026-05-30', status: 'Not Paid', type: 'Canteen', statusClass: 'status-unclear', receiptUploaded: false, date: '', receiptImg: '' },
+        { id: 5, name: 'Canteen 5', operator: 'Bruce Wayne', fee: 6000, dueDate: '2026-05-10', status: 'Paid', type: 'Canteen', statusClass: 'status-clear', receiptUploaded: true, date: '2026-05-02', receiptImg: '../../images/receipt-mock.jpg' }
     ];
 
     let currentStatusFilter = 'All';
@@ -39,12 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td><span class="status-badge ${item.statusClass}" style="padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; display: inline-block; text-align: center; min-width: 100px;">${item.status}</span></td>
                 <td class="actions-col">
                     <div class="row-actions" style="display: flex; justify-content: flex-end; gap: 8px;">
-
-                        <button class="btn-icon" title="Record Payment" onclick="recordSpecificPayment(${item.id})" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e2e8f0; background: white; color: #64748b; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                            <i class="fa-solid fa-credit-card"></i>
-                        </button>
-                        <button class="btn-icon ${item.status === 'Clear' ? 'is-cleared' : ''}" title="Toggle Status" onclick="toggleStatus(${item.id})" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e2e8f0; background: ${item.status === 'Clear' ? '#475569' : 'white'}; color: ${item.status === 'Clear' ? 'white' : '#64748b'}; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease;">
-                            <i class="fa-solid fa-note-sticky"></i>
+                        <button class="btn-icon" title="View Details" onclick="recordSpecificPayment(${item.id})" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e2e8f0; background: white; color: #64748b; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                            <i class="fa-solid fa-eye"></i>
                         </button>
                     </div>
                 </td>
@@ -56,8 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateCounts(filteredCount) {
-        const unclear = paymentData.filter(p => p.status === 'Unclear').length;
-        const clear = paymentData.filter(p => p.status === 'Clear').length;
+        const unclear = paymentData.filter(p => p.status === 'Not Paid').length;
+        const clear = paymentData.filter(p => p.status === 'Paid').length;
 
         document.getElementById('countUnclear').textContent = unclear;
         document.getElementById('countClear').textContent = clear;
@@ -101,6 +97,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Modal Logic
     const modal = document.getElementById('paymentModal');
+    
+    document.getElementById('modalCanteenSelect')?.addEventListener('change', (e) => {
+        const item = paymentData.find(p => p.name === e.target.value);
+        if (item) {
+            document.getElementById('modalAmount').value = '₱' + item.fee.toLocaleString();
+            document.getElementById('modalCurrentDueDate').value = item.dueDate || 'N/A';
+            
+            if (item.dueDate) {
+                const currentDate = new Date(item.dueDate);
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                document.getElementById('modalNextDueDate').value = currentDate.toISOString().split('T')[0];
+            } else {
+                document.getElementById('modalNextDueDate').value = 'N/A';
+            }
+        } else {
+            document.getElementById('modalAmount').value = '';
+            document.getElementById('modalCurrentDueDate').value = '';
+            document.getElementById('modalNextDueDate').value = '';
+        }
+    });
+
     window.openPaymentModal = () => {
         modal.classList.add('active');
     };
@@ -109,6 +126,17 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('recordPaymentForm').reset();
         document.getElementById('receiptPreview').style.display = 'none';
         document.getElementById('previewImg').src = '';
+        
+        const select = document.getElementById('modalCanteenSelect');
+        if (select) {
+            select.disabled = false;
+        }
+        const amt = document.getElementById('modalAmount');
+        if (amt) amt.value = '';
+        const curDate = document.getElementById('modalCurrentDueDate');
+        if (curDate) curDate.value = '';
+        const nextDate = document.getElementById('modalNextDueDate');
+        if (nextDate) nextDate.value = '';
     };
 
     window.previewReceipt = (event) => {
@@ -128,7 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
     window.recordSpecificPayment = (id) => {
         const item = paymentData.find(p => p.id === id);
         if (item) {
-            document.getElementById('modalCanteenSelect').value = item.name;
+            const select = document.getElementById('modalCanteenSelect');
+            if (select) {
+                select.value = item.name;
+                select.disabled = true;
+                select.dispatchEvent(new Event('change'));
+            }
             
             // Populate existing data if any
             const dateInput = document.getElementById('modalDate');
@@ -176,25 +209,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const confirmMsg = document.getElementById('confirmMessage');
         const confirmIcon = document.getElementById('confirmIcon');
 
-        if (item.status === 'Clear') {
+        if (item.status === 'Paid') {
             // Restriction: Can only unclear through Record Payment modal
-            showInfoModal("Action Restricted", `To set ${item.name} back to Unclear, please open the "Record Payment" modal and use the "Set to Unclear" button at the top.`);
+            showInfoModal("Action Restricted", `To set ${item.name} back to Not Paid, please open the "Record Payment" modal and use the "Set to Not Paid Status" button at the top.`);
             return;
         } else {
-            // Toggling to Clear requires a receipt check and confirmation
+            // Toggling to Paid requires a receipt check and confirmation
             if (!item.receiptUploaded) {
-                showInfoModal("Receipt Required", `Cannot mark as Clear. No receipt has been uploaded for ${item.name}. Please upload a receipt first via "Record Payment".`);
+                showInfoModal("Receipt Required", `Cannot mark as Paid. No receipt has been uploaded for ${item.name}. Please upload a receipt first via "View Details".`);
                 return;
             }
 
-            confirmTitle.textContent = "Mark as Clear?";
-            confirmMsg.textContent = `Are you sure you want to mark ${item.name} as Clear? This confirms you have verified the uploaded receipt.`;
+            confirmTitle.textContent = "Mark as Paid?";
+            confirmMsg.textContent = `Are you sure you want to mark ${item.name} as Paid? This confirms you have verified the uploaded receipt.`;
             confirmIcon.style.background = "#dcfce7";
             confirmIcon.style.color = "#16a34a";
             confirmIcon.innerHTML = '<i class="fa-solid fa-check"></i>';
 
             confirmBtn.onclick = () => {
-                item.status = 'Clear';
+                item.status = 'Paid';
                 item.statusClass = 'status-clear';
                 renderTable();
                 closeConfirmModal();
@@ -235,11 +268,18 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Find the record and update it
         const record = paymentData.find(p => p.name === canteenName);
         if (record) {
             record.receiptUploaded = true;
             record.date = dateVal;
+            record.status = 'Paid';
+            record.statusClass = 'status-clear';
+            
+            const nextDueDate = document.getElementById('modalNextDueDate').value;
+            if (nextDueDate && nextDueDate !== 'N/A') {
+                record.dueDate = nextDueDate; // Update the due date for next month
+            }
+
             // In a real app, we'd save the actual file path or base64
             if (receiptInput.files && receiptInput.files[0]) {
                 record.receiptImg = previewImg.src; 
@@ -251,19 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTable();
     });
 
-    window.unclearCurrentTransaction = () => {
-        const canteenName = document.getElementById('modalCanteenSelect').value;
-        if (!canteenName) return;
 
-        const record = paymentData.find(p => p.name === canteenName);
-        if (record) {
-            record.status = 'Unclear';
-            record.statusClass = 'status-unclear';
-            renderTable();
-            closePaymentModal();
-            showInfoModal("Status Updated", `${canteenName} has been set to Unclear.`);
-        }
-    };
 
     renderTable();
 });

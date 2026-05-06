@@ -162,14 +162,14 @@
         <div class="metrics-card card-unclear">
           <div class="icon-box" style="background: #fee2e2; color: #dc2626;"><i class="fa-solid fa-calendar-xmark"></i></div>
           <div class="card-info">
-            <p>Unclear Payments</p>
+            <p>Not Paid Payments</p>
             <h3 id="countUnclear" class="card-value">0</h3>
           </div>
         </div>
         <div class="metrics-card card-clear">
           <div class="icon-box" style="background: #dcfce7; color: #16a34a;"><i class="fa-solid fa-check-circle"></i></div>
           <div class="card-info">
-            <p>Clear Payments</p>
+            <p>Paid Payments</p>
             <h3 id="countClear" class="card-value">0</h3>
           </div>
         </div>
@@ -188,8 +188,8 @@
               <label for="statusFilter"><i class="fa-solid fa-filter"></i> Status:</label>
               <select id="statusFilter" class="custom-select">
                 <option value="All">All Status</option>
-                <option value="Clear">Clear</option>
-                <option value="Unclear">Unclear</option>
+                <option value="Paid">Paid</option>
+                <option value="Not Paid">Not Paid</option>
               </select>
             </div>
             <div class="filter-item">
@@ -213,11 +213,11 @@
           <table class="data-grid">
             <thead>
               <tr>
-                <th>Canteen / Vendor</th>
+                <th>Canteen</th>
                 <th>Owner</th>
                 <th>Monthly Fee</th>
                 <th>Status</th>
-                <th class="actions-col">Actions</th>
+                <th class="actions-col"><i class="fa-solid fa-eye" title="View Details"></i></th>
               </tr>
             </thead>
             <tbody id="payment-table-body">
@@ -244,43 +244,48 @@
   <!-- RECORD PAYMENT MODAL -->
   <div class="payment-modal" id="paymentModal">
     <div class="modal-overlay" onclick="closePaymentModal()"></div>
-    <div class="modal-content" style="max-width: 400px;">
+    <div class="modal-content" style="max-width: 500px;">
       <div class="modal-header">
         <h2>Record Payment</h2>
         <button class="close-btn" onclick="closePaymentModal()">&times;</button>
       </div>
       <div class="modal-body" style="padding: 20px;">
-        <!-- QUICK UNCLEAR ACTION -->
-        <div style="margin-bottom: 20px;">
-          <button type="button" class="btn-unclear" style="
-            width: 100%;
-            padding: 10px;
-            background: #fff1f2;
-            color: #be123c;
-            border: 1px solid #fecdd3;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.2s ease;
-          " onclick="unclearCurrentTransaction()">
-            <i class="fa-solid fa-rotate-left"></i>
-            <span>Set to Unclear Status</span>
-          </button>
-        </div>
 
         <form id="recordPaymentForm">
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 8px;">Canteen Name</label>
+            <select class="form-control" id="modalCanteenSelect" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0; font-family: inherit;">
+              <option value="" disabled selected>Select a canteen...</option>
+              <option value="Canteen 1">Canteen 1</option>
+              <option value="Canteen 2">Canteen 2</option>
+              <option value="Canteen 3">Canteen 3</option>
+              <option value="Canteen 4">Canteen 4</option>
+              <option value="Canteen 5">Canteen 5</option>
+            </select>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 8px;">Rental Amount to be Paid</label>
+            <input type="text" class="form-control" id="modalAmount" readonly style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0; background: #f8fafc; font-family: inherit; color: #1e293b; font-weight: 500;">
+          </div>
+
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 8px;">Current Due Date</label>
+            <input type="text" class="form-control" id="modalCurrentDueDate" readonly style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0; background: #f8fafc; font-family: inherit; color: #1e293b; font-weight: 500;">
+          </div>
+
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 8px;">Next Due Date <span style="font-weight: 400; color: #64748b; font-size: 11px;">(After payment)</span></label>
+            <input type="text" class="form-control" id="modalNextDueDate" readonly style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0; background: #dcfce7; font-family: inherit; font-weight: 600; color: #16a34a;">
+          </div>
+
           <div class="form-group">
-            <label>Transaction Date</label>
-            <input type="date" class="form-control" id="modalDate" required>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 8px;">Transaction Date</label>
+            <input type="date" class="form-control" id="modalDate" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0; font-family: inherit;">
           </div>
           
           <div class="form-group" style="margin-top: 20px;">
-            <label>Receipt Photo</label>
+            <label style="display: block; font-size: 13px; font-weight: 600; color: #475569; margin-bottom: 8px;">Receipt Photo</label>
             <div class="receipt-upload-area" id="receiptUploadArea" style="
               border: 2px dashed #cbd5e1;
               border-radius: 12px;
@@ -314,8 +319,6 @@
               </div>
             </div>
           </div>
-
-          <input type="hidden" id="modalCanteenSelect"> <!-- Kept hidden for functionality -->
 
           <div class="modal-footer" style="margin-top: 32px; display: flex; gap: 12px;">
             <button type="button" class="btn-secondary" style="
@@ -385,7 +388,7 @@
         <i class="fa-solid fa-check"></i>
       </div>
       <h2 id="confirmTitle" style="margin-bottom: 12px; font-size: 20px;">Confirm Status Change</h2>
-      <p id="confirmMessage" style="color: #64748b; font-size: 14px; margin-bottom: 24px; line-height: 1.5;">Are you sure you want to mark this transaction as clear?</p>
+      <p id="confirmMessage" style="color: #64748b; font-size: 14px; margin-bottom: 24px; line-height: 1.5;">Are you sure you want to mark this transaction as paid?</p>
       
       <div style="display: flex; gap: 12px;">
         <button class="btn-secondary" style="
