@@ -369,6 +369,11 @@
           <span class="detail-label">Description</span>
           <div class="detail-desc-box" id="detailDesc"></div>
 
+          <div id="detailAdminReplySection" style="display: none; margin-bottom: 16px;">
+            <span class="detail-label">Admin Reply</span>
+            <div class="conclusion-box" id="detailAdminReply"></div>
+          </div>
+
           <div id="detailConclusionSection" style="display: none">
             <span class="detail-label">Resolution Conclusion</span>
             <div class="conclusion-box" id="detailConclusion"></div>
@@ -406,6 +411,17 @@
     <script>
       // Mock Data
       let reports = [
+        {
+          id: "REP-003",
+          subject: "Rude Vendor Behavior",
+          order: "#ORD-2026-1550 - Sweet Corner",
+          desc: "The vendor at Sweet Corner was extremely rude when I asked about the ingredients. They ignored my questions and told me to just buy or leave.",
+          status: "review",
+          date: "March 5, 2026",
+          img: null,
+          phone: "09123456790",
+          adminReply: "Thank you for reporting this. We have reached out to the management of Sweet Corner to investigate this incident. We take vendor conduct seriously and will keep you updated.",
+        },
         {
           id: "REP-002",
           subject: "Food Quality Issue",
@@ -563,7 +579,17 @@
         const conclusionSec = document.getElementById(
           "detailConclusionSection",
         );
+        const adminReplySec = document.getElementById(
+          "detailAdminReplySection",
+        );
         const btnRemove = document.getElementById("btnRemoveReport");
+
+        if (r.adminReply) {
+          adminReplySec.style.display = "block";
+          document.getElementById("detailAdminReply").innerText = r.adminReply;
+        } else {
+          adminReplySec.style.display = "none";
+        }
 
         if (r.status === "resolved") {
           btnRemove.style.display = "inline-flex";
