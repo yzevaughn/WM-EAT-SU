@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WM EAT SU - All Transactions</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="../../css/navbar.css" />
+  <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css" />
+  <link rel="stylesheet" href="../../css/admin-css/student-applications.css" />
+  <link rel="stylesheet" href="../../css/admin-css/complaints.css" />
+  <style>
+    .status-completed { background: #dcfce7; color: #15803d; }
+    .status-pending { background: #fef3c7; color: #92400e; }
+    .status-cancelled { background: #fee2e2; color: #b91c1c; }
+    
+    .amount-col { font-weight: 700; color: #0f172a; }
+    .transaction-id { font-family: 'Courier New', Courier, monospace; font-weight: 600; color: #64748b; }
+  </style>
+</head>
+
+<body>
+  <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+
+  <!-- TOP NAVBAR -->
+  <div class="top-nav">
+    <div class="nav-left">
+      <label for="menu-checkbox" class="menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </label>
+      <a href="admin-dashboard.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="logo-text">WM EAT SU</span>
+      </a>
+    </div>
+
+    <div class="nav-center"></div>
+    <div class="nav-right">
+      <!-- Notifications -->
+      <div class="notification-dropdown">
+        <button class="nav-icon-btn" aria-label="Notifications">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notification-badge"></span>
+        </button>
+        <div class="notification-menu">
+          <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="mark-read-btn">Mark all as read</button>
+          </div>
+          <div class="notification-list">
+            <!-- Dynamic notifications -->
+          </div>
+          <div class="notification-footer">
+            <a href="admin-notifications.html">View all notifications</a>
+          </div>
+        </div>
+      </div>
+      <div class="profile">
+        <div class="profile-info">
+          <span class="profile-name">Admin</span>
+
+        </div>
+        <div class="profile-dropdown">
+          <button class="profile-btn">
+            <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" />
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="dropdown-menu">
+            <a href="../../index.html" class="dropdown-item">
+              <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <div class="left-nav" id="sidebar">
+      <ul class="nav-list">
+        <li>
+          <a href="admin-dashboard.html" class="nav-link">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="student-applications.html" class="nav-link">
+            <i class="fa-solid fa-user-check"></i>
+            <span>Student Applications</span>
+          </a>
+        </li>
+        <li>
+          <a href="canteen-applications.html" class="nav-link">
+            <i class="fa-solid fa-store"></i>
+            <span>Canteen Applications</span>
+          </a>
+        </li>
+        <li>
+          <a href="complaints.html" class="nav-link">
+            <i class="fa-solid fa-comment-dots"></i>
+            <span>Complaints</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin-menu.html" class="nav-link">
+            <i class="fa-solid fa-utensils"></i>
+            <span>Menu</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin-voucher.html" class="nav-link">
+            <i class="fa-solid fa-ticket"></i>
+            <span>Vouchers</span>
+          </a>
+        </li>
+        <li>
+          <a href="admin-analytics.html" class="nav-link">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="all-transactions.html" class="nav-link active">
+            <i class="fa-solid fa-receipt"></i>
+            <span>Transactions</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="main-content">
+      <header class="page-header">
+        <div>
+          <h1>All Transactions</h1>
+          <p class="subtitle">Complete history of all orders and payments on the platform.</p>
+        </div>
+      </header>
+
+      <div class="dashboard-container" style="padding-top: 0;">
+        <div class="table-container">
+          <div class="table-controls">
+            <div class="search-box">
+              <i class="fa-solid fa-search"></i>
+              <input type="text" id="searchInput" placeholder="Search Order ID, Student, or Vendor..." />
+            </div>
+            <div class="filter-group">
+              <div class="filter-item">
+                <label for="statusFilter"><i class="fa-solid fa-filter"></i> Status:</label>
+                <select id="statusFilter" class="custom-select">
+                  <option value="All">All Statuses</option>
+                  <option value="Completed">Completed</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Cancelled">Cancelled</option>
+                </select>
+              </div>
+              <div class="filter-item">
+                <label for="dateFilter"><i class="fa-solid fa-calendar"></i> Date:</label>
+                <select id="dateFilter" class="custom-select">
+                  <option value="All">All Time</option>
+                  <option value="Today">Today</option>
+                  <option value="Week">This Week</option>
+                  <option value="Month">This Month</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="data-grid">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Student</th>
+                  <th>Vendor</th>
+                  <th>Items</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Date & Time</th>
+                  <th class="actions-col">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="transactionList">
+                <!-- Data populated by JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="pagination-controls">
+            <div class="pagination-info">
+              Showing <span id="pageStart">0</span> to <span id="pageEnd">0</span> of <span id="totalEntries">0</span> entries
+            </div>
+            <div class="pagination-nav" id="paginationControls">
+              <button class="page-btn" id="prevPage"><i class="fa-solid fa-chevron-left"></i></button>
+              <div id="pageNumbers" style="display: flex; gap: 5px;"></div>
+              <button class="page-btn" id="nextPage"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="empty-state" id="emptyState" style="display: none;">
+          <i class="fa-solid fa-receipt"></i>
+          <div class="empty-text">No transactions found</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- View Transaction Details Modal -->
+  <div class="modal-backdrop" id="detailsModal">
+    <div class="modal-panel" style="max-width: 500px;">
+      <div class="modal-header">
+        <h2>Order Details</h2>
+        <button class="btn-close" onclick="closeModal('detailsModal')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="modalContent">
+          <!-- Dynamic Content -->
+        </div>
+      </div>
+      <div class="modal-footer" style="display: flex; justify-content: flex-end;">
+        <button class="btn-ghost" onclick="closeModal('detailsModal')" style="padding: 10px 20px; border: 1px solid #e2e8f0; border-radius: 8px; cursor: pointer;">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../script/notifications.js"></script>
+  <script src="../../script/admin-js/admin-notifications-mock.js"></script>
+  <script src="../../script/admin-js/all-transactions.js"></script>
+  <script>
+    // Link to shared notification system
+    document.addEventListener('DOMContentLoaded', () => {
+        const role = 'admin';
+        const opts = {
+            listEl: document.querySelector(".notification-list"),
+            badgeEl: document.querySelector(".notification-badge"),
+            markReadEl: document.querySelector(".mark-read-btn")
+        };
+        if (typeof renderNavbarNotifications === 'function') {
+            renderNavbarNotifications(role, opts);
+        }
+    });
+  </script>
+</body>
+
+</html>

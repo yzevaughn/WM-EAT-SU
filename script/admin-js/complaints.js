@@ -432,22 +432,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("dpEvidenceSize").textContent = detailMocks.evidence.size;
         document.querySelector(".evidence-icon").innerHTML = `<i class="fa-solid ${detailMocks.evidence.icon}" style="color: ${detailMocks.evidence.color}"></i>`;
 
-        // Populate timeline
-        const timelineContainer = document.getElementById("dpTimelineContainer");
-        timelineContainer.innerHTML = "";
-        
-        detailMocks.timeline.forEach(log => {
-            const tlItem = document.createElement("div");
-            tlItem.className = "timeline-item";
-            tlItem.innerHTML = `
-                <div class="timeline-icon"><i class="fa-solid fa-clock"></i></div>
-                <div class="timeline-content">
-                  <p class="timeline-text">${log.text}</p>
-                  <span class="timeline-time">${c.date} &bull; ${log.time}</span>
-                </div>
-            `;
-            timelineContainer.appendChild(tlItem);
-        });
+
 
         // Hide/Show Mark Resolved button based on status
         const markResolvedBtn = document.getElementById("dpMarkResolved");
@@ -501,32 +486,7 @@ document.addEventListener("DOMContentLoaded", function() {
         replyInput.value = "";
     });
 
-    document.getElementById("dpAddNote").addEventListener("click", () => {
-        const replyInput = document.getElementById("dpReplyInput");
-        if(!replyInput.value.trim()) {
-            alert("Please write a note before adding.");
-            return;
-        }
-        
-        const timelineContainer = document.getElementById("dpTimelineContainer");
-        const tlItem = document.createElement("div");
-        tlItem.className = "timeline-item";
-        
-        // Get current time formatted like "10:30 AM"
-        const now = new Date();
-        const timeStr = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
 
-        tlItem.innerHTML = `
-            <div class="timeline-icon" style="background: #e0e7ff; color: #4338ca;"><i class="fa-solid fa-clipboard"></i></div>
-            <div class="timeline-content">
-              <p class="timeline-text"><strong>Internal Note:</strong> ${replyInput.value.trim()}</p>
-              <span class="timeline-time">Just now &bull; ${timeStr}</span>
-            </div>
-        `;
-        timelineContainer.appendChild(tlItem);
-        
-        replyInput.value = "";
-    });
 
     // Initialize
     updateStats();
