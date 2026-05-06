@@ -4,9 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WM EAT SU - Admin Portal</title>
+  <title>WM EAT SU - Super Admin Dashboard</title>
+  <meta name="description" content="Super Admin control center for WM EAT SU platform management." />
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <link rel="stylesheet" href="../../css/navbar.css" />
@@ -16,6 +17,7 @@
 <body>
   <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
 
+  <!-- TOP NAV -->
   <div class="top-nav">
     <div class="nav-left">
       <label for="menu-checkbox" class="menu-toggle">
@@ -38,9 +40,7 @@
             <h3>Notifications</h3>
             <button class="mark-read-btn">Mark all as read</button>
           </div>
-          <div class="notification-list">
-            <!-- Dynamic notifications -->
-          </div>
+          <div class="notification-list"><!-- Dynamic notifications --></div>
           <div class="notification-footer">
             <a href="super-admin-notifications.html">View all notifications</a>
           </div>
@@ -65,202 +65,171 @@
     </div>
   </div>
 
+  <!-- LAYOUT -->
   <div class="layout">
+    <!-- SIDEBAR -->
     <div class="left-nav" id="sidebar">
       <ul class="nav-list">
-        <li>
-          <a href="super-dashboard.html" class="nav-link active">
-            <i class="fa-solid fa-house"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a href="super-admin-analytics.html" class="nav-link">
-            <i class="fa-solid fa-chart-line"></i>
-            <span>Analytics</span>
-          </a>
-        </li>
-        <li>
-          <a href="all-transactions.html" class="nav-link">
-            <i class="fa-solid fa-receipt"></i>
-            <span>Transactions</span>
-          </a>
-        </li>
-        <li>
-          <a href="payment-tracking.html" class="nav-link">
-            <i class="fa-solid fa-file-invoice-dollar"></i>
-            <span>Payment Tracking</span>
-          </a>
-        </li>
-        <li>
-          <a href="student-applications.html" class="nav-link">
-            <i class="fa-solid fa-user-check"></i>
-            <span>Student Application</span>
-          </a>
-        </li>
-        <li>
-          <a href="canteen-applications.html" class="nav-link">
-            <i class="fa-solid fa-store"></i>
-            <span>Canteen Application</span>
-          </a>
-        </li>
-        <li>
-          <a href="complaints.html" class="nav-link">
-            <i class="fa-solid fa-comment-dots"></i>
-            <span>Complaints</span>
-          </a>
-        </li>
-        <li>
-          <a href="admin-approval.html" class="nav-link">
-            <i class="fa-solid fa-utensils"></i>
-            <span>Menu</span>
-          </a>
-        </li>
-        <li>
-          <a href="admin-voucher.html" class="nav-link">
-            <i class="fa-solid fa-ticket"></i>
-            <span>Vouchers</span>
-          </a>
-        </li>
-        <li>
-          <a href="admin-control.html" class="nav-link">
-            <i class="fa-solid fa-gear"></i>
-            <span>Admin Control</span>
-          </a>
-        </li>
-        <li>
-          <a href="SA-user-control.html" class="nav-link">
-            <i class="fa-solid fa-users-gear"></i>
-            <span>User Control</span>
-          </a>
-        </li>
+        <li><a href="super-dashboard.html" class="nav-link active"><i class="fa-solid fa-house"></i><span>Dashboard</span></a></li>
+        <li><a href="super-admin-analytics.html" class="nav-link"><i class="fa-solid fa-chart-line"></i><span>Analytics</span></a></li>
+        <li><a href="all-transactions.html" class="nav-link"><i class="fa-solid fa-receipt"></i><span>Transactions</span></a></li>
+        <li><a href="payment-tracking.html" class="nav-link"><i class="fa-solid fa-file-invoice-dollar"></i><span>Payment Tracking</span></a></li>
+        <li><a href="student-applications.html" class="nav-link"><i class="fa-solid fa-user-check"></i><span>Student Application</span></a></li>
+        <li><a href="canteen-applications.html" class="nav-link"><i class="fa-solid fa-store"></i><span>Canteen Application</span></a></li>
+        <li><a href="complaints.html" class="nav-link"><i class="fa-solid fa-comment-dots"></i><span>Complaints</span></a></li>
+        <li><a href="admin-approval.html" class="nav-link"><i class="fa-solid fa-utensils"></i><span>Menu</span></a></li>
+        <li><a href="admin-voucher.html" class="nav-link"><i class="fa-solid fa-ticket"></i><span>Vouchers</span></a></li>
+        <li><a href="admin-control.html" class="nav-link"><i class="fa-solid fa-gear"></i><span>Admin Control</span></a></li>
+        <li><a href="SA-user-control.html" class="nav-link"><i class="fa-solid fa-users-gear"></i><span>User Control</span></a></li>
       </ul>
     </div>
 
+    <!-- MAIN CONTENT -->
     <div class="main-content">
-      <header>
-        <h1>Super Admin Dashboard</h1>
-        <p class="subtitle">Real-time platform overview and vendor management</p>
-      </header>
+      <!-- PAGE HEADER -->
+      <div class="dash-header">
+        <div class="dash-header-left">
+            <h1>Super Admin Dashboard</h1>
+          <p class="subtitle">Real-time platform overview and vendor management</p>
+        </div>
+        <div class="dash-header-right">
+          <div class="dash-date" id="dashDate"></div>
+        </div>
+      </div>
 
-      <div class="dashboard-container">
-        <div class="dashboard-header-cards">
-          <div class="metric-card bg-blue">
-            <div class="metric-icon"><i class="fa-solid fa-store"></i></div>
-            <h4>Total Active Canteens</h4>
-            <h2 id="totalCanteensValue">12</h2>
-            <p>Live canteen operations across campus.</p>
+      <!-- KPI METRIC CARDS -->
+      <div class="kpi-grid">
+        <div class="kpi-card kpi-blue">
+          <div class="kpi-top">
+            <div class="kpi-icon"><i class="fa-solid fa-store"></i></div>
+            <div class="kpi-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i> +2</div>
           </div>
-          <div class="metric-card bg-purple">
-            <div class="metric-icon"><i class="fa-solid fa-users"></i></div>
-            <h4>Student Vendors</h4>
-            <h2 id="studentVendorsValue">48</h2>
-            <p>Vendors currently onboarded on the platform.</p>
+          <div class="kpi-value" id="totalCanteensValue">12</div>
+          <div class="kpi-label">Active Canteens</div>
+          <div class="kpi-sub">Live operations across campus</div>
+        </div>
+
+        <div class="kpi-card kpi-violet">
+          <div class="kpi-top">
+            <div class="kpi-icon"><i class="fa-solid fa-users"></i></div>
+            <div class="kpi-trend trend-up"><i class="fa-solid fa-arrow-trend-up"></i> +5</div>
           </div>
-          <div class="metric-card bg-green">
-            <div class="metric-icon"><i class="fa-solid fa-money-bill-trend-up"></i></div>
-            <h4>Pending Payments</h4>
-            <h2 id="pendingPaymentsValue">₱24.5K</h2>
-            <p>Payments awaiting reconciliation.</p>
+          <div class="kpi-value" id="studentVendorsValue">48</div>
+          <div class="kpi-label">Student Vendors</div>
+          <div class="kpi-sub">Onboarded on platform</div>
+        </div>
+
+        <div class="kpi-card kpi-amber">
+          <div class="kpi-top">
+            <div class="kpi-icon"><i class="fa-solid fa-peso-sign"></i></div>
+            <div class="kpi-trend trend-down"><i class="fa-solid fa-arrow-trend-down"></i> 3 pending</div>
           </div>
-          <div class="metric-card bg-red">
-            <div class="metric-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
-            <h4>Open Complaints</h4>
-            <h2 id="openComplaintsValue">5</h2>
-            <p>Issues currently waiting for review.</p>
+          <div class="kpi-value" id="pendingPaymentsValue">₱24.5K</div>
+          <div class="kpi-label">Pending Payments</div>
+          <div class="kpi-sub">Awaiting reconciliation</div>
+        </div>
+
+        <div class="kpi-card kpi-rose">
+          <div class="kpi-top">
+            <div class="kpi-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+            <div class="kpi-trend trend-down"><i class="fa-solid fa-arrow-trend-down"></i> needs review</div>
+          </div>
+          <div class="kpi-value" id="openComplaintsValue">5</div>
+          <div class="kpi-label">Open Complaints</div>
+          <div class="kpi-sub">Issues awaiting review</div>
+        </div>
+      </div>
+
+      <!-- QUICK ACCESS + ACTIVITY ROW -->
+      <div class="dash-body">
+
+        <!-- LEFT: QUICK ACCESS CARDS -->
+        <div class="quick-access">
+          <div class="section-title-bar">
+            <div class="section-title-icon"><i class="fa-solid fa-bolt"></i></div>
+            <div>
+              <h2>Quick Access</h2>
+              <p>Jump to important workflows instantly</p>
+            </div>
+          </div>
+
+          <div class="qa-grid">
+            <div class="qa-card qa-yellow" onclick="location.href='student-applications.html'">
+              <div class="qa-card-accent"></div>
+              <div class="qa-icon"><i class="fa-solid fa-user-check"></i></div>
+              <div class="qa-body">
+                <span class="qa-badge">PENDING APPS</span>
+                <h3>Student Applications</h3>
+                <p>Review and approve new vendor applications from students.</p>
+              </div>
+              <a href="student-applications.html" class="qa-link">Go to Portal <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="qa-card qa-teal" onclick="location.href='canteen-applications.html'">
+              <div class="qa-card-accent"></div>
+              <div class="qa-icon"><i class="fa-solid fa-store"></i></div>
+              <div class="qa-body">
+                <span class="qa-badge">WAITING</span>
+                <h3>Canteen Applications</h3>
+                <p>Onboard new canteens and verify staff credentials.</p>
+              </div>
+              <a href="canteen-applications.html" class="qa-link">Go to Portal <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="qa-card qa-red" onclick="location.href='complaints.html'">
+              <div class="qa-card-accent"></div>
+              <div class="qa-icon"><i class="fa-solid fa-comment-dots"></i></div>
+              <div class="qa-body">
+                <span class="qa-badge">ACTION REQUIRED</span>
+                <h3>Platform Complaints</h3>
+                <p>Resolve disputes and feedback from students and vendors.</p>
+              </div>
+              <a href="complaints.html" class="qa-link">View Disputes <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+
+            <div class="qa-card qa-indigo" onclick="location.href='payment-tracking.html'">
+              <div class="qa-card-accent"></div>
+              <div class="qa-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+              <div class="qa-body">
+                <span class="qa-badge">DUE SOON</span>
+                <h3>Payment Tracking</h3>
+                <p>Monitor canteen dues and settle outstanding payments.</p>
+              </div>
+              <a href="payment-tracking.html" class="qa-link">Track Payments <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
           </div>
         </div>
 
-        <div class="dashboard-widgets">
-          <div class="dashboard-actions-panel">
-            <div class="section-header">
-              <div>
-                <h2>Quick Access</h2>
-                <p>Access the most important workflows with one click.</p>
+        <!-- RIGHT: RECENT ACTIVITY -->
+        <div class="right-column">
+          <div class="content-panel">
+            <div class="panel-header">
+              <div class="panel-title">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span>Recent Activity</span>
               </div>
             </div>
-            <div class="action-grid">
-              <div class="action-card yellow" onclick="location.href='student-applications.html'">
-                <div class="badge-minimal">PENDING APPS</div>
-                <div class="card-header">
-                  <div class="icon-box"><i class="fa-solid fa-user-check"></i></div>
-                </div>
-                <div class="card-body">
-                  <h3>Student Applications</h3>
-                  <p>Review and process new vendor applications from students.</p>
-                  <a href="student-applications.html" class="card-link">Manage Apps <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-              </div>
-
-              <div class="action-card orange" onclick="location.href='canteen-applications.html'">
-                <div class="badge-minimal">WAITING</div>
-                <div class="card-header">
-                  <div class="icon-box"><i class="fa-solid fa-store"></i></div>
-                </div>
-                <div class="card-body">
-                  <h3>Canteen Applications</h3>
-                  <p>Onboard new canteens and verify staff credentials.</p>
-                  <a href="canteen-applications.html" class="card-link">Review Now <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-              </div>
-
-              <div class="action-card red" onclick="location.href='complaints.html'">
-                <div class="badge-minimal">ACTION REQUIRED</div>
-                <div class="card-header">
-                  <div class="icon-box"><i class="fa-solid fa-comment-dots"></i></div>
-                </div>
-                <div class="card-body">
-                  <h3>Platform Complaints</h3>
-                  <p>Resolve disputes and feedback from students and vendors.</p>
-                  <a href="complaints.html" class="card-link">View Disputes <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="dashboard-content">
-            <div class="content-panel">
-              <div class="panel-header">
-                <div class="panel-title">
-                  <i class="fa-solid fa-chart-simple"></i>
-                  <span>Top Performing Vendors</span>
-                </div>
-                <a href="super-admin-analytics.html" class="view-all">View all &rarr;</a>
-              </div>
-              <div class="earning-list" id="earning-list">
-                <!-- JS will populate this -->
-              </div>
-            </div>
-
-            <div class="content-panel">
-              <div class="panel-header">
-                <div class="panel-title">
-                  <i class="fa-solid fa-file-invoice-dollar"></i>
-                  <span>Payment Due Tracking</span>
-                </div>
-                <a href="payment-tracking.html" class="view-all">View all &rarr;</a>
-              </div>
-              <div class="payment-list" id="payment-list">
-                <!-- JS will populate this -->
-              </div>
-            </div>
-
-            <div class="content-panel activity-panel">
-              <div class="panel-header">
-                <div class="panel-title">
-                  <i class="fa-solid fa-clock-rotate-left"></i>
-                  <span>Recent Activity</span>
-                </div>
-              </div>
-              <div class="activity-list" id="activity-list">
-                <!-- JS will populate this -->
-              </div>
-            </div>
+            <div class="activity-list" id="activity-list"></div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+
+      <!-- BOTTOM ROW: LEADERBOARD -->
+      <div class="dash-bottom dash-bottom-single">
+        <div class="content-panel">
+          <div class="panel-header">
+            <div class="panel-title">
+              <i class="fa-solid fa-trophy"></i>
+              <span>Top Performing Vendors</span>
+            </div>
+            <a href="super-admin-analytics.html" class="view-all">View all &rarr;</a>
+          </div>
+          <div class="earning-list" id="earning-list"></div>
+        </div>
+      </div>
+
+    </div><!-- /main-content -->
+  </div><!-- /layout -->
 
   <script src="../../script/notifications.js"></script>
   <script src="../../script/admin-js/admin-notifications-mock.js"></script>
