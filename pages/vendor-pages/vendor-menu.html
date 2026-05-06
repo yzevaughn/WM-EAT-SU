@@ -521,6 +521,14 @@
                     required
                   />
                 </div>
+                <div class="form-group">
+                  <label for="posterValidUntil">Valid Until</label>
+                  <input
+                    type="date"
+                    id="posterValidUntil"
+                    required
+                  />
+                </div>
               </form>
             </div>
             <div class="modal-footer">
@@ -762,6 +770,7 @@
                 <div class="item-info">
                   <h3 class="item-name">Poster Upload</h3>
                   <p class="item-description">Uploaded on ${new Date(p.id).toLocaleDateString()}</p>
+                  <p class="item-description" style="color:#10b981; font-weight:600; margin-top:4px;"><i class="fas fa-calendar-check"></i> Valid until: ${p.validUntil ? new Date(p.validUntil).toLocaleDateString() : "No date set"}</p>
                   ${isRejected && p.rejectReason ? `<p style="color:#ef4444;font-size:12px;margin-top:4px;font-weight:600;">Reason: ${p.rejectReason}</p>` : ""}
                 </div>
                 <div class="actions">
@@ -1423,6 +1432,7 @@
               <div class="item-info">
                 <h3 class="item-name">Poster #${idx + 1}</h3>
                 <p class="item-description">Uploaded on ${new Date(p.id).toLocaleDateString()}</p>
+                <p class="item-description" style="color:#10b981; font-weight:600; margin-top:4px;"><i class="fas fa-calendar-check"></i> Valid until: ${p.validUntil ? new Date(p.validUntil).toLocaleDateString() : "No date set"}</p>
                 ${isRejected && p.rejectReason ? `<p style="color:#ef4444;font-size:12px;margin-top:4px;font-weight:600;">Reason: ${p.rejectReason}</p>` : ""}
               </div>
               <div class="actions">
@@ -1505,6 +1515,12 @@
             if (fileInput.files && fileInput.files[0]) {
               const reader = new FileReader();
               reader.onload = (ev) => {
+                const validUntil = document.getElementById("posterValidUntil").value;
+                if (!validUntil) {
+                  showToast("error", "fa-calendar", "Please select a validity date");
+                  return;
+                }
+
                 const posters = JSON.parse(
                   localStorage.getItem("vendor_posters") || "[]",
                 );
@@ -1512,6 +1528,7 @@
                   id: Date.now(),
                   img: ev.target.result,
                   status: "pending",
+                  validUntil: validUntil,
                 });
                 localStorage.setItem("vendor_posters", JSON.stringify(posters));
 
@@ -1535,7 +1552,7 @@
 
       function initDefaultPosters() {
         const data = localStorage.getItem("vendor_posters");
-        const seeded = localStorage.getItem("vendor_posters_seeded_v6"); // Versioned flag
+        const seeded = localStorage.getItem("vendor_posters_seeded_v7"); // Versioned flag
         let posters = [];
         try {
           posters = JSON.parse(data || "[]");
@@ -1551,28 +1568,32 @@
               id: now - 4000000,
               img: "../../images/promo_poster_example.png",
               status: "accepted",
+              validUntil: "2026-12-31",
             },
             {
               id: now - 3000000,
               img: "../../images/banner4.avif",
               status: "accepted",
+              validUntil: "2026-11-15",
             },
             {
               id: now - 2000000,
               img: "../../images/banner5.avif",
               status: "pending",
+              validUntil: "2026-10-01",
             },
             {
               id: now - 1000000,
               img: "../../images/banner6.avif",
               status: "rejected",
               rejectReason: "The image quality is too low and the promotional text is not clearly visible.",
+              validUntil: "2026-09-20",
             },
           ];
           
           localStorage.setItem("vendor_posters", JSON.stringify(examples));
           localStorage.setItem("vendor_aired_poster", "../../images/promo_poster_example.png");
-          localStorage.setItem("vendor_posters_seeded_v6", "true");
+          localStorage.setItem("vendor_posters_seeded_v7", "true");
         }
       }
 
