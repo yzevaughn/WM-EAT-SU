@@ -210,8 +210,11 @@
         
         if (role === 'staff') {
           // Update sidebar
-          const stepName = document.querySelector('.sb-step-name');
-          if (stepName) stepName.textContent = 'Teacher/Staff Info';
+          const stepNames = document.querySelectorAll('.sb-step-name');
+          if (stepNames[0]) stepNames[0].textContent = 'Teacher/Staff Info';
+          
+          const stepSubs = document.querySelectorAll('.sb-step-sub');
+          if (stepSubs[1]) stepSubs[1].textContent = 'Teacher/Staff ID';
           
           // Update main heading
           const mainHeading = document.querySelector('.step-head h2');

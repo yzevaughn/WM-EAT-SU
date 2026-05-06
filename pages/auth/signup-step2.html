@@ -133,8 +133,10 @@
           const stepNames = document.querySelectorAll('.sb-step-name');
           if (stepNames[0]) stepNames[0].textContent = 'Teacher/Staff Info';
           
-          const sbStepSub = document.getElementById('sbStepSub');
-          if (sbStepSub) sbStepSub.textContent = 'Teacher/Staff ID';
+          const stepSubs = document.querySelectorAll('.sb-step-sub');
+          if (stepSubs[1]) {
+            stepSubs[1].textContent = 'Teacher/Staff ID';
+          }
 
           // Hide COE section for staff
           const coeSection = document.getElementById('coeSection');
