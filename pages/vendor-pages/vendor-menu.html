@@ -192,7 +192,6 @@
               <i class="fas fa-plus"></i> Add Menu
             </button>
           </div>
-
         </div>
 
         <!-- Navigation Tabs -->
@@ -202,20 +201,23 @@
               <i class="fa-solid fa-utensils"></i> Main Menu
             </button>
             <button class="tab-btn" onclick="setStatusFilter('posters')">
-              <i class="fa-solid fa-image"></i> Poster <span class="badge" id="count-posters">0</span>
+              <i class="fa-solid fa-image"></i> Poster
+              <span class="badge" id="count-posters">0</span>
             </button>
             <button class="tab-btn" onclick="setStatusFilter('accepted')">
-              <i class="fa-solid fa-check-circle"></i> Accepted <span class="badge" id="count-accepted">0</span>
+              <i class="fa-solid fa-check-circle"></i> Accepted
+              <span class="badge" id="count-accepted">0</span>
             </button>
             <button class="tab-btn" onclick="setStatusFilter('pending')">
-              <i class="fa-solid fa-clock"></i> Pending <span class="badge" id="count-pending">0</span>
+              <i class="fa-solid fa-clock"></i> Pending
+              <span class="badge" id="count-pending">0</span>
             </button>
             <button class="tab-btn" onclick="setStatusFilter('rejected')">
-              <i class="fa-solid fa-times-circle"></i> Rejected <span class="badge" id="count-rejected">0</span>
+              <i class="fa-solid fa-times-circle"></i> Rejected
+              <span class="badge" id="count-rejected">0</span>
             </button>
           </div>
         </div>
-
 
         <!-- Menu grid (dynamically rendered from localStorage) -->
         <div class="menu-grid" id="menuGrid"></div>
@@ -233,7 +235,9 @@
 
             <!-- STEP INDICATOR -->
             <div class="step-indicator" id="menuStepIndicator">
-              <div class="step-dot active" data-step="1">1<span>Details</span></div>
+              <div class="step-dot active" data-step="1">
+                1<span>Details</span>
+              </div>
               <div class="step-dot" data-step="2">2<span>Price</span></div>
               <div class="step-dot" data-step="3">3<span>Media</span></div>
               <div class="step-dot" data-step="4">4<span>Review</span></div>
@@ -245,7 +249,12 @@
                 <div class="menu-step-content active" data-step="1">
                   <div class="form-group">
                     <label for="itemName">Item Name</label>
-                    <input type="text" id="itemName" placeholder="e.g. Adobo Meal" required />
+                    <input
+                      type="text"
+                      id="itemName"
+                      placeholder="e.g. Adobo Meal"
+                      required
+                    />
                   </div>
                   <div class="form-group">
                     <label for="itemCategory">Category</label>
@@ -259,13 +268,23 @@
                   </div>
                   <div class="form-group">
                     <label for="itemDescription">Description</label>
-                    <textarea id="itemDescription" placeholder="Tell students about this dish..." required></textarea>
+                    <textarea
+                      id="itemDescription"
+                      placeholder="Tell students about this dish..."
+                      required
+                    ></textarea>
                   </div>
                 </div>
 
                 <!-- STEP 2: PRICING -->
                 <div class="menu-step-content" data-step="2">
-                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                  <div
+                    style="
+                      display: grid;
+                      grid-template-columns: 1fr 1fr;
+                      gap: 16px;
+                    "
+                  >
                     <div class="form-group">
                       <label for="itemPrice">Price (&#8369;)</label>
                       <input
@@ -287,9 +306,30 @@
                       />
                     </div>
                   </div>
-                  <div style="margin-top:16px; padding-top:16px; border-top:1px dashed #e2e8f0;">
-                    <h4 style="font-size:13px; color:#1e293b; margin-bottom:12px; font-weight:700;">Promotional Discount</h4>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                  <div
+                    style="
+                      margin-top: 16px;
+                      padding-top: 16px;
+                      border-top: 1px dashed #e2e8f0;
+                    "
+                  >
+                    <h4
+                      style="
+                        font-size: 13px;
+                        color: #1e293b;
+                        margin-bottom: 12px;
+                        font-weight: 700;
+                      "
+                    >
+                      Promotional Discount
+                    </h4>
+                    <div
+                      style="
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 16px;
+                      "
+                    >
                       <div class="form-group">
                         <label for="itemDiscountType">Discount Type</label>
                         <select id="itemDiscountType">
@@ -299,10 +339,21 @@
                       </div>
                       <div class="form-group">
                         <label for="itemDiscount">Value</label>
-                        <input type="number" id="itemDiscount" min="0" placeholder="0" />
+                        <input
+                          type="number"
+                          id="itemDiscount"
+                          min="0"
+                          placeholder="0"
+                        />
                       </div>
                     </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div
+                      style="
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        gap: 16px;
+                      "
+                    >
                       <div class="form-group">
                         <label for="itemDiscountStart">Start Date</label>
                         <input type="date" id="itemDiscountStart" />
@@ -315,29 +366,80 @@
                   </div>
                 </div>
 
-
                 <!-- STEP 3: MEDIA (Upload Only, No Preview) -->
                 <div class="menu-step-content" data-step="3">
                   <div class="form-group">
                     <label for="itemImage">Upload Product Image</label>
-                    <div style="border: 2px dashed #e5e7eb; border-radius: 12px; padding: 40px; text-align: center; cursor: pointer; transition: all 0.2s;" 
-                         onmouseover="this.style.borderColor='#dc2626'; this.style.background='#fff5f5'" 
-                         onmouseout="this.style.borderColor='#e5e7eb'; this.style.background='transparent'" 
-                         onclick="document.getElementById('itemImage').click()">
-                      <i class="fas fa-camera" style="font-size: 40px; color: #dc2626; margin-bottom: 15px;"></i>
-                      <p style="font-size: 16px; font-weight: 600; color: #1f2937; margin: 0;">Click to select a photo</p>
-                      <p style="font-size: 13px; color: #6b7280; margin-top: 5px;">PNG, JPG or JPEG up to 5MB</p>
-                      <input type="file" id="itemImage" accept="image/*" style="display: none;" onchange="handleImageUpload(this)" />
+                    <div
+                      style="
+                        border: 2px dashed #e5e7eb;
+                        border-radius: 12px;
+                        padding: 40px;
+                        text-align: center;
+                        cursor: pointer;
+                        transition: all 0.2s;
+                      "
+                      onmouseover="
+                        this.style.borderColor = '#dc2626';
+                        this.style.background = '#fff5f5';
+                      "
+                      onmouseout="
+                        this.style.borderColor = '#e5e7eb';
+                        this.style.background = 'transparent';
+                      "
+                      onclick="document.getElementById('itemImage').click()"
+                    >
+                      <i
+                        class="fas fa-camera"
+                        style="
+                          font-size: 40px;
+                          color: #dc2626;
+                          margin-bottom: 15px;
+                        "
+                      ></i>
+                      <p
+                        style="
+                          font-size: 16px;
+                          font-weight: 600;
+                          color: #1f2937;
+                          margin: 0;
+                        "
+                      >
+                        Click to select a photo
+                      </p>
+                      <p
+                        style="font-size: 13px; color: #6b7280; margin-top: 5px"
+                      >
+                        PNG, JPG or JPEG up to 5MB
+                      </p>
+                      <input
+                        type="file"
+                        id="itemImage"
+                        accept="image/*"
+                        style="display: none"
+                        onchange="handleImageUpload(this)"
+                      />
                     </div>
-                    <div id="uploadSuccessMsg" style="display: none; margin-top: 15px; text-align: center;"></div>
-
-
+                    <div
+                      id="uploadSuccessMsg"
+                      style="
+                        display: none;
+                        margin-top: 15px;
+                        text-align: center;
+                      "
+                    ></div>
                   </div>
                 </div>
 
                 <!-- STEP 4: REVIEW -->
                 <div class="menu-step-content" data-step="4">
-                  <div style="background: #f8fafc; border-radius: 12px; padding: 16px;">
+                  <div
+                    style="
+                      background: #f8fafc;
+                      border-radius: 12px;
+                      padding: 16px;
+                    "
+                  >
                     <div class="review-item">
                       <span class="review-label">Name</span>
                       <span class="review-value" id="revName">-</span>
@@ -354,28 +456,46 @@
                       <span class="review-label">Discount</span>
                       <span class="review-value" id="revDiscount">-</span>
                     </div>
-                    <div style="margin-top: 12px;">
+                    <div style="margin-top: 12px">
                       <span class="review-label">Description</span>
-                      <p id="revDesc" style="font-size: 13px; color: #475569; margin: 4px 0 0 0; line-height: 1.4;">-</p>
+                      <p
+                        id="revDesc"
+                        style="
+                          font-size: 13px;
+                          color: #475569;
+                          margin: 4px 0 0 0;
+                          line-height: 1.4;
+                        "
+                      >
+                        -
+                      </p>
                     </div>
-                    <div style="margin-top: 15px;">
+                    <div style="margin-top: 15px">
                       <span class="review-label">Product Image Preview</span>
-                      <img id="revImage" src="" alt="Preview" class="review-image-preview">
+                      <img
+                        id="revImage"
+                        src=""
+                        alt="Preview"
+                        class="review-image-preview"
+                      />
                     </div>
                   </div>
                 </div>
 
                 <input type="hidden" id="itemEditId" />
                 <input type="hidden" id="itemExistingImg" />
-
               </form>
             </div>
             <div class="modal-footer">
               <button class="btn-back" id="prevBtn">Back</button>
               <button class="btn-next" id="nextBtn">Next</button>
-              <button class="btn-save" id="saveBtn" style="display: none;">Save</button>
+              <button class="btn-save" id="saveBtn" style="display: none">
+                Save
+              </button>
 
-              <button class="btn-cancel" id="cancelBtn" style="display: none;">Cancel</button>
+              <button class="btn-cancel" id="cancelBtn" style="display: none">
+                Cancel
+              </button>
             </div>
           </div>
         </div>
@@ -503,33 +623,47 @@
 
       function updateTabCounts() {
         const menu = getMenu();
-        const posters = JSON.parse(localStorage.getItem('vendor_posters') || '[]');
-        
-        let pending = menu.filter(m => m.status === 'pending').length + posters.filter(p => p.status === 'pending').length;
-        let accepted = menu.filter(m => m.status === 'accepted').length + posters.filter(p => p.status === 'accepted').length;
-        let rejected = menu.filter(m => m.status === 'rejected').length + posters.filter(p => p.status === 'rejected').length;
-        const postersCount = posters.filter(p => (p.status || 'accepted') === 'accepted').length;
+        const posters = JSON.parse(
+          localStorage.getItem("vendor_posters") || "[]",
+        );
+        const airedPoster = localStorage.getItem("vendor_aired_poster");
 
-        const pEl = document.getElementById('count-pending');
-        const aEl = document.getElementById('count-accepted');
-        const rEl = document.getElementById('count-rejected');
-        const pCountEl = document.getElementById('count-posters');
+        let pending =
+          menu.filter((m) => m.status === "pending").length +
+          posters.filter((p) => p.status === "pending").length;
+        
+        let accepted =
+          menu.filter((m) => m.status === "accepted").length +
+          posters.filter((p) => (p.status || "accepted") === "accepted" && p.img !== airedPoster).length;
+
+        let rejected =
+          menu.filter((m) => m.status === "rejected").length +
+          posters.filter((p) => p.status === "rejected").length;
+
+        const postersCount = posters.filter(
+          (p) => (p.status || "accepted") === "accepted" && p.img === airedPoster,
+        ).length;
+
+        const pEl = document.getElementById("count-pending");
+        const aEl = document.getElementById("count-accepted");
+        const rEl = document.getElementById("count-rejected");
+        const pCountEl = document.getElementById("count-posters");
 
         if (pEl) {
           pEl.textContent = pending;
-          pEl.style.display = pending > 0 ? 'inline-flex' : 'none';
+          pEl.style.display = pending > 0 ? "inline-flex" : "none";
         }
         if (aEl) {
           aEl.textContent = accepted;
-          aEl.style.display = accepted > 0 ? 'inline-flex' : 'none';
+          aEl.style.display = accepted > 0 ? "inline-flex" : "none";
         }
         if (rEl) {
           rEl.textContent = rejected;
-          rEl.style.display = rejected > 0 ? 'inline-flex' : 'none';
+          rEl.style.display = rejected > 0 ? "inline-flex" : "none";
         }
         if (pCountEl) {
           pCountEl.textContent = postersCount;
-          pCountEl.style.display = postersCount > 0 ? 'inline-flex' : 'none';
+          pCountEl.style.display = postersCount > 0 ? "inline-flex" : "none";
         }
       }
 
@@ -541,7 +675,7 @@
         // Update active tab UI
         const tabs = document.querySelectorAll(".tab-btn");
         tabs.forEach((t) => {
-          const fnCall = t.getAttribute('onclick');
+          const fnCall = t.getAttribute("onclick");
           if (fnCall && fnCall.includes(`'${status}'`)) {
             t.classList.add("active");
           } else {
@@ -550,20 +684,24 @@
         });
       }
 
-
       /* --- Render the menu grid --- */
       function renderMenu() {
         const grid = document.getElementById("menuGrid");
         if (!grid) return;
 
         const allMenu = getMenu();
-        const allPosters = JSON.parse(localStorage.getItem('vendor_posters') || '[]');
+        const allPosters = JSON.parse(
+          localStorage.getItem("vendor_posters") || "[]",
+        );
 
-        if (currentStatusFilter === 'posters') {
-          // Show only accepted posters in the Posters tab
-          const acceptedPosters = allPosters.filter(p => (p.status || 'accepted') === 'accepted');
+        if (currentStatusFilter === "posters") {
+          // Show only the currently aired poster in the Posters tab
+          const airedPoster = localStorage.getItem("vendor_aired_poster");
+          const acceptedPosters = allPosters.filter(
+            (p) => (p.status || "accepted") === "accepted" && p.img === airedPoster,
+          );
           if (acceptedPosters.length === 0) {
-            grid.innerHTML = `<p style="color:#94a3b8;grid-column:1/-1;text-align:center;padding:60px 0;font-size:15px;">No approved posters found.</p>`;
+            grid.innerHTML = `<p style="color:#94a3b8;grid-column:1/-1;text-align:center;padding:60px 0;font-size:15px;">No active (aired) posters found.</p>`;
           } else {
             renderPosters(acceptedPosters);
           }
@@ -573,9 +711,14 @@
         const menu = allMenu.filter(
           (item) => (item.status || "active") === currentStatusFilter,
         );
-        const posters = allPosters.filter(
-          (p) => (p.status || "accepted") === currentStatusFilter,
-        );
+        const airedPoster = localStorage.getItem("vendor_aired_poster");
+        const posters = allPosters.filter((p) => {
+          const matchStatus = (p.status || "accepted") === currentStatusFilter;
+          const isAired = p.img === airedPoster;
+          // Hide already aired posters from the Accepted tab to avoid clutter
+          if (currentStatusFilter === "accepted" && isAired) return false;
+          return matchStatus;
+        });
 
         if (menu.length === 0 && posters.length === 0) {
           grid.innerHTML = `<p style="color:#94a3b8;grid-column:1/-1;text-align:center;padding:60px 0;font-size:15px;">
@@ -584,24 +727,34 @@
         }
 
         let html = "";
-        
+
         // Render posters first (as they are usually more time-sensitive promo)
         if (posters.length > 0) {
-          html += posters.map((p, idx) => {
-            const airedPoster = localStorage.getItem('vendor_aired_poster');
-            const isAired = p.img === airedPoster;
-            const status = p.status || 'accepted'; 
-            const isPending = status === 'pending';
-            const isRejected = status === 'rejected';
-            const isAccepted = status === 'accepted';
-            
-            let statusBadge = '';
-            if (isPending) statusBadge = '<span class="category-badge" style="background:#fef3c7;color:#92400e;">Pending Approval</span>';
-            if (isRejected) statusBadge = '<span class="category-badge" style="background:#fee2e2;color:#991b1b;">Rejected</span>';
-            if (isAccepted && isAired) statusBadge = '<span class="category-badge" style="background:#10b981;">Aired Now</span>';
+          html += posters
+            .map((p, idx) => {
+              const airedPoster = localStorage.getItem("vendor_aired_poster");
+              const isAired = p.img === airedPoster;
+              const status = p.status || "accepted";
+              const isPending = status === "pending";
+              const isRejected = status === "rejected";
+              const isAccepted = status === "accepted";
 
-            return `
-              <div class="menu-item-card" style="min-height: auto;">
+              let statusBadge = "";
+              if (isPending)
+                statusBadge =
+                  '<span class="category-badge" style="background:#fef3c7;color:#92400e;font-size:10px;padding:4px 10px;border-radius:4px;">Pending</span>';
+              if (isRejected)
+                statusBadge =
+                  '<span class="category-badge" style="background:#fee2e2;color:#991b1b;font-size:10px;padding:4px 10px;border-radius:4px;">Rejected</span>';
+              if (isAccepted && isAired)
+                statusBadge =
+                  '<span class="category-badge" style="background:#dcfce7;color:#166534;font-size:10px;padding:4px 10px;border-radius:4px;">Aired Now</span>';
+              if (isAccepted && !isAired)
+                statusBadge =
+                  '<span class="category-badge" style="background:#dcfce7;color:#166534;font-size:10px;padding:4px 10px;border-radius:4px;">Approved</span>';
+
+              return `
+              <div class="menu-item-card">
                 <div class="item-image" style="height: 250px;">
                   <img src="${p.img}" alt="Poster" />
                   ${statusBadge}
@@ -609,17 +762,18 @@
                 <div class="item-info">
                   <h3 class="item-name">Poster Upload</h3>
                   <p class="item-description">Uploaded on ${new Date(p.id).toLocaleDateString()}</p>
-                  ${isRejected && p.rejectReason ? `<p style="color:#ef4444;font-size:12px;margin-top:4px;font-weight:600;">Reason: ${p.rejectReason}</p>` : ''}
+                  ${isRejected && p.rejectReason ? `<p style="color:#ef4444;font-size:12px;margin-top:4px;font-weight:600;">Reason: ${p.rejectReason}</p>` : ""}
                 </div>
                 <div class="actions">
-                  <button class="edit-btn" onclick="airPoster('${p.img}')" ${(isAired || !isAccepted) ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>
-                    <i class="fas fa-broadcast-tower"></i> ${isAired ? 'Airing' : 'Air Poster'}
+                  <button class="edit-btn" onclick="airPoster('${p.img}')" ${isAired || !isAccepted ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ""}>
+                    <i class="fas fa-broadcast-tower"></i> ${isAired ? "Airing" : "Air Poster"}
                   </button>
-                  <button class="delete-btn" onclick="deletePosterByID(${p.id})"><i class="fas fa-trash"></i></button>
+                  <button class="delete-btn" onclick="deletePosterByID('${p.id}')"><i class="fas fa-trash"></i></button>
                 </div>
               </div>
             `;
-          }).join('');
+            })
+            .join("");
         }
 
         html += menu
@@ -630,19 +784,21 @@
             const catDisp = item.category
               ? item.category.charAt(0).toUpperCase() + item.category.slice(1)
               : "Meals";
-            
+
             // Check if discount is currently valid
             let activeDiscount = 0;
             const now = new Date();
-            now.setHours(0,0,0,0);
-            
-            const start = item.discountStart ? new Date(item.discountStart) : null;
+            now.setHours(0, 0, 0, 0);
+
+            const start = item.discountStart
+              ? new Date(item.discountStart)
+              : null;
             const end = item.discountEnd ? new Date(item.discountEnd) : null;
-            
+
             let isDiscountValid = true;
             if (start && now < start) isDiscountValid = false;
             if (end && now > end) isDiscountValid = false;
-            
+
             if (isDiscountValid && item.discount > 0) {
               activeDiscount = item.discount;
             }
@@ -665,13 +821,13 @@
             let statusBadge = "";
             if (isPending)
               statusBadge =
-                '<span style="background:#fef3c7;color:#92400e;font-size:10px;padding:2px 6px;border-radius:4px;font-weight:700;text-transform:uppercase;">Pending</span>';
+                '<span class="category-badge" style="background:#fef3c7;color:#92400e;font-size:10px;padding:4px 10px;border-radius:4px;right:12px;top:12px;">Pending</span>';
             if (isRejected)
               statusBadge =
-                '<span style="background:#fee2e2;color:#991b1b;font-size:10px;padding:2px 6px;border-radius:4px;font-weight:700;text-transform:uppercase;">Rejected</span>';
+                '<span class="category-badge" style="background:#fee2e2;color:#991b1b;font-size:10px;padding:4px 10px;border-radius:4px;right:12px;top:12px;">Rejected</span>';
             if (isAccepted)
               statusBadge =
-                '<span style="background:#dcfce7;color:#166534;font-size:10px;padding:2px 6px;border-radius:4px;font-weight:700;text-transform:uppercase;">Approved</span>';
+                '<span class="category-badge" style="background:#dcfce7;color:#166534;font-size:10px;padding:4px 10px;border-radius:4px;right:12px;top:12px;">Approved</span>';
 
             let rejectionNote = "";
             if (isRejected && item.rejectReason) {
@@ -687,25 +843,29 @@
               <div class="item-image" style="position:relative;">
                 <img src="${item.img || "../../images/burger.avif"}" alt="${item.name}"
                      onerror="this.src='../../images/burger.avif'" />
-                <span class="category-badge">${catDisp}</span>
-                ${avail 
-                  ? '<span style="position:absolute;top:12px;left:12px;background:#10b981;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;box-shadow:0 2px 4px rgba(0,0,0,0.1);z-index:1;">Available</span>' 
-                  : '<span style="position:absolute;top:12px;left:12px;background:#ef4444;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;box-shadow:0 2px 4px rgba(0,0,0,0.1);z-index:1;">Unavailable</span>'}
+                ${statusBadge || `<span class="category-badge">${catDisp}</span>`}
+                ${
+                  currentStatusFilter === "active"
+                    ? avail
+                      ? '<span style="position:absolute;top:12px;left:12px;background:#10b981;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;box-shadow:0 2px 4px rgba(0,0,0,0.1);z-index:1;">Available</span>'
+                      : '<span style="position:absolute;top:12px;left:12px;background:#ef4444;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;text-transform:uppercase;box-shadow:0 2px 4px rgba(0,0,0,0.1);z-index:1;">Unavailable</span>'
+                    : ""
+                }
               </div>
               <div class="item-info" style="flex:1">
                 <div style="display:flex;justify-content:space-between;align-items:flex-start;">
                   <h3 class="item-name" style="${!avail && status === "active" ? "opacity:.45;text-decoration:line-through;" : ""}">${item.name}</h3>
-                  ${statusBadge}
                 </div>
                 <p class="item-description">${item.desc || ""}</p>
                 ${rejectionNote}
               </div>
               <div class="item-footer">
                 <div class="price-container">
-                  ${activeDiscount > 0 
-                    ? `<div class="price discount-active">&#8369;${discountedPrice.toFixed(2)}</div>
+                  ${
+                    activeDiscount > 0
+                      ? `<div class="price discount-active">&#8369;${discountedPrice.toFixed(2)}</div>
                        <div class="original-price">&#8369;${Number(item.price).toFixed(2)}</div>`
-                    : `<div class="price">&#8369;${Number(item.price).toFixed(2)}</div>`
+                      : `<div class="price">&#8369;${Number(item.price).toFixed(2)}</div>`
                   }
                 </div>
 
@@ -760,7 +920,7 @@
             </div>`;
           })
           .join("");
-        
+
         grid.innerHTML = html;
 
         /* Availability toggles */
@@ -809,13 +969,13 @@
 
         /* Edit buttons */
         grid
-          .querySelectorAll(".edit-btn:not(.move-btn):not(.details-btn)")
+          .querySelectorAll(".edit-btn[data-id]:not(.move-btn):not(.details-btn)")
           .forEach((btn) =>
             btn.addEventListener("click", () => openEditModal(btn.dataset.id)),
           );
 
         /* Delete buttons */
-        grid.querySelectorAll(".delete-btn").forEach((btn) =>
+        grid.querySelectorAll(".delete-btn[data-id]").forEach((btn) =>
           btn.addEventListener("click", () => {
             pendingAction = "delete";
             pendingItemId = btn.dataset.id;
@@ -846,13 +1006,14 @@
           return;
         }
 
-
         document.getElementById("menuStepIndicator").style.display = "flex";
         // Show/Hide steps
         document.querySelectorAll(".menu-step-content").forEach((s) => {
-          s.classList.toggle("active", parseInt(s.dataset.step) === currentMenuStep);
+          s.classList.toggle(
+            "active",
+            parseInt(s.dataset.step) === currentMenuStep,
+          );
         });
-
 
         // Update dots
         document.querySelectorAll(".step-dot").forEach((dot) => {
@@ -879,7 +1040,7 @@
         const msg = document.getElementById("uploadSuccessMsg");
         if (input.files && input.files[0]) {
           const reader = new FileReader();
-          reader.onload = function(e) {
+          reader.onload = function (e) {
             msg.style.display = "block";
             msg.innerHTML = `
               <p style="color: #059669; font-size: 13px; font-weight: 600; margin-bottom: 10px;">
@@ -892,34 +1053,43 @@
         }
       }
 
-
       function renderReviewStep() {
-        document.getElementById("revName").textContent = document.getElementById("itemName").value || "-";
-        document.getElementById("revCategory").textContent = document.getElementById("itemCategory").value || "-";
-        document.getElementById("revPrice").textContent = "₱" + (parseFloat(document.getElementById("itemPrice").value) || 0).toFixed(2);
-        
-        const disc = parseFloat(document.getElementById("itemDiscount").value) || 0;
+        document.getElementById("revName").textContent =
+          document.getElementById("itemName").value || "-";
+        document.getElementById("revCategory").textContent =
+          document.getElementById("itemCategory").value || "-";
+        document.getElementById("revPrice").textContent =
+          "₱" +
+          (parseFloat(document.getElementById("itemPrice").value) || 0).toFixed(
+            2,
+          );
+
+        const disc =
+          parseFloat(document.getElementById("itemDiscount").value) || 0;
         const dType = document.getElementById("itemDiscountType").value;
         const dStart = document.getElementById("itemDiscountStart").value;
         const dEnd = document.getElementById("itemDiscountEnd").value;
-        
+
         if (disc > 0) {
           document.getElementById("revDiscountRow").style.display = "flex";
-          let discTxt = dType === "amount" ? `₱${disc.toFixed(2)} Off` : `${disc}% Off`;
+          let discTxt =
+            dType === "amount" ? `₱${disc.toFixed(2)} Off` : `${disc}% Off`;
           if (dStart || dEnd) {
-            discTxt += ` (Valid: ${dStart || 'Any'} to ${dEnd || 'Any'})`;
+            discTxt += ` (Valid: ${dStart || "Any"} to ${dEnd || "Any"})`;
           }
           document.getElementById("revDiscount").textContent = discTxt;
         } else {
           document.getElementById("revDiscountRow").style.display = "none";
         }
 
-        document.getElementById("revDesc").textContent = document.getElementById("itemDescription").value || "No description provided.";
-        
+        document.getElementById("revDesc").textContent =
+          document.getElementById("itemDescription").value ||
+          "No description provided.";
+
         const fileEl = document.getElementById("itemImage");
         const existImg = document.getElementById("itemExistingImg").value;
         const revImg = document.getElementById("revImage");
-        
+
         if (fileEl && fileEl.files && fileEl.files[0]) {
           const reader = new FileReader();
           reader.onload = (ev) => {
@@ -931,20 +1101,27 @@
         }
       }
 
-
       function validateMenuStep(step) {
         if (step === 1) {
           const name = document.getElementById("itemName").value.trim();
           const desc = document.getElementById("itemDescription").value.trim();
           if (!name || !desc) {
-            showToast("error", "fa-circle-exclamation", "Please fill in Name and Description");
+            showToast(
+              "error",
+              "fa-circle-exclamation",
+              "Please fill in Name and Description",
+            );
             return false;
           }
         }
         if (step === 2) {
           const price = document.getElementById("itemPrice").value;
           if (!price || parseFloat(price) < 0) {
-            showToast("error", "fa-circle-exclamation", "Please enter a valid price");
+            showToast(
+              "error",
+              "fa-circle-exclamation",
+              "Please enter a valid price",
+            );
             return false;
           }
         }
@@ -980,16 +1157,19 @@
             ? "Update Item"
             : "Edit Item";
 
-
         // Populate fields
         document.getElementById("itemName").value = item.name;
         document.getElementById("itemDescription").value = item.desc || "";
         document.getElementById("itemPrice").value = item.price;
-        document.getElementById("itemCategory").value = item.category || "meals";
+        document.getElementById("itemCategory").value =
+          item.category || "meals";
         document.getElementById("itemDiscount").value = item.discount || 0;
-        document.getElementById("itemDiscountType").value = item.discountType || "percentage";
-        document.getElementById("itemDiscountStart").value = item.discountStart || "";
-        document.getElementById("itemDiscountEnd").value = item.discountEnd || "";
+        document.getElementById("itemDiscountType").value =
+          item.discountType || "percentage";
+        document.getElementById("itemDiscountStart").value =
+          item.discountStart || "";
+        document.getElementById("itemDiscountEnd").value =
+          item.discountEnd || "";
 
         document.getElementById("itemQuantity").value = item.stock || 0;
         document.getElementById("itemEditId").value = item.id;
@@ -998,7 +1178,6 @@
 
         document.getElementById("uploadSuccessMsg").style.display = "none";
         document.getElementById("uploadSuccessMsg").innerHTML = "";
-
 
         if (isQuickEdit) {
           currentMenuStep = 2; // Jump to Price
@@ -1058,30 +1237,43 @@
         itemModal.classList.remove("active");
       }
 
-      document.getElementById("openModalBtn").addEventListener("click", openAddModal);
-      document.getElementById("modalClose").addEventListener("click", closeItemModal);
-      document.getElementById("cancelBtn").addEventListener("click", closeItemModal);
-      document.getElementById("modalOverlay").addEventListener("click", closeItemModal);
+      document
+        .getElementById("openModalBtn")
+        .addEventListener("click", openAddModal);
+      document
+        .getElementById("modalClose")
+        .addEventListener("click", closeItemModal);
+      document
+        .getElementById("cancelBtn")
+        .addEventListener("click", closeItemModal);
+      document
+        .getElementById("modalOverlay")
+        .addEventListener("click", closeItemModal);
 
       /* --- Save item --- */
       document.getElementById("saveBtn").addEventListener("click", (e) => {
         e.preventDefault();
         const existId = document.getElementById("itemEditId").value;
         pendingAction = "save";
-        document.getElementById("confirmSaveMsg").textContent = existId 
-          ? "Update this item?" 
+        document.getElementById("confirmSaveMsg").textContent = existId
+          ? "Update this item?"
           : "Save this new item for review?";
         document.getElementById("confirmSaveModal").classList.add("active");
       });
-
 
       /* --- Confirm modal --- */
       function closeConfirm() {
         document.getElementById("confirmSaveModal").classList.remove("active");
       }
-      document.getElementById("cancelConfirmBtn").addEventListener("click", closeConfirm);
-      document.getElementById("confirmSaveOverlay").addEventListener("click", closeConfirm);
-      document.getElementById("confirmSaveClose").addEventListener("click", closeConfirm);
+      document
+        .getElementById("cancelConfirmBtn")
+        .addEventListener("click", closeConfirm);
+      document
+        .getElementById("confirmSaveOverlay")
+        .addEventListener("click", closeConfirm);
+      document
+        .getElementById("confirmSaveClose")
+        .addEventListener("click", closeConfirm);
 
       document
         .getElementById("confirmSaveBtn")
@@ -1096,14 +1288,16 @@
             return;
           }
 
-          if (pendingAction === "deletePoster" && pendingItemId) {
-            const posters = JSON.parse(localStorage.getItem('vendor_posters') || '[]');
-            const idx = posters.findIndex(p => p.id === pendingItemId);
+          if (pendingAction === "deletePoster" && pendingItemId !== null) {
+            const posters = JSON.parse(
+              localStorage.getItem("vendor_posters") || "[]",
+            );
+            const idx = posters.findIndex((p) => String(p.id) === String(pendingItemId));
             if (idx !== -1) {
               const deleted = posters.splice(idx, 1)[0];
-              localStorage.setItem('vendor_posters', JSON.stringify(posters));
-              if (deleted.img === localStorage.getItem('vendor_aired_poster')) {
-                localStorage.removeItem('vendor_aired_poster');
+              localStorage.setItem("vendor_posters", JSON.stringify(posters));
+              if (deleted.img === localStorage.getItem("vendor_aired_poster")) {
+                localStorage.removeItem("vendor_aired_poster");
               }
               showToast("info", "fa-trash", "Poster deleted.");
             }
@@ -1124,10 +1318,14 @@
               parseFloat(document.getElementById("itemPrice").value) || 0;
             const category =
               document.getElementById("itemCategory").value || "meals";
-            const discount = parseFloat(document.getElementById("itemDiscount").value) || 0;
-            const discountType = document.getElementById("itemDiscountType").value;
-            const discountStart = document.getElementById("itemDiscountStart").value;
-            const discountEnd = document.getElementById("itemDiscountEnd").value;
+            const discount =
+              parseFloat(document.getElementById("itemDiscount").value) || 0;
+            const discountType =
+              document.getElementById("itemDiscountType").value;
+            const discountStart =
+              document.getElementById("itemDiscountStart").value;
+            const discountEnd =
+              document.getElementById("itemDiscountEnd").value;
 
             const stock =
               parseInt(document.getElementById("itemQuantity").value) || 0;
@@ -1188,24 +1386,36 @@
 
       /* --- Poster Modal --- */
       function renderPosters(postersToRender) {
-        const posters = postersToRender || JSON.parse(localStorage.getItem('vendor_posters') || '[]');
-        const airedPoster = localStorage.getItem('vendor_aired_poster');
+        const posters =
+          postersToRender ||
+          JSON.parse(localStorage.getItem("vendor_posters") || "[]");
+        const airedPoster = localStorage.getItem("vendor_aired_poster");
         const grid = document.getElementById("menuGrid");
-        
-        grid.innerHTML = posters.map((p, idx) => {
-          const isAired = p.img === airedPoster;
-          const status = p.status || 'accepted'; 
-          const isPending = status === 'pending';
-          const isRejected = status === 'rejected';
-          const isAccepted = status === 'accepted';
-          
-          let statusBadge = '';
-          if (isPending) statusBadge = '<span class="category-badge" style="background:#fef3c7;color:#92400e;">Pending Approval</span>';
-          if (isRejected) statusBadge = '<span class="category-badge" style="background:#fee2e2;color:#991b1b;">Rejected</span>';
-          if (isAccepted && isAired) statusBadge = '<span class="category-badge" style="background:#10b981;">Aired Now</span>';
 
-          return `
-            <div class="menu-item-card" style="min-height: auto;">
+        grid.innerHTML = posters
+          .map((p, idx) => {
+            const isAired = p.img === airedPoster;
+            const status = p.status || "accepted";
+            const isPending = status === "pending";
+            const isRejected = status === "rejected";
+            const isAccepted = status === "accepted";
+
+            let statusBadge = "";
+            if (isPending)
+              statusBadge =
+                '<span class="category-badge" style="background:#fef3c7;color:#92400e;font-size:10px;padding:4px 10px;border-radius:4px;">Pending</span>';
+            if (isRejected)
+              statusBadge =
+                '<span class="category-badge" style="background:#fee2e2;color:#991b1b;font-size:10px;padding:4px 10px;border-radius:4px;">Rejected</span>';
+            if (isAccepted && isAired)
+              statusBadge =
+                '<span class="category-badge" style="background:#dcfce7;color:#166534;font-size:10px;padding:4px 10px;border-radius:4px;">Aired Now</span>';
+            if (isAccepted && !isAired)
+              statusBadge =
+                '<span class="category-badge" style="background:#dcfce7;color:#166534;font-size:10px;padding:4px 10px;border-radius:4px;">Approved</span>';
+
+            return `
+            <div class="menu-item-card">
               <div class="item-image" style="height: 250px;">
                 <img src="${p.img}" alt="Poster ${idx + 1}" />
                 ${statusBadge}
@@ -1213,30 +1423,55 @@
               <div class="item-info">
                 <h3 class="item-name">Poster #${idx + 1}</h3>
                 <p class="item-description">Uploaded on ${new Date(p.id).toLocaleDateString()}</p>
-                ${isRejected && p.rejectReason ? `<p style="color:#ef4444;font-size:12px;margin-top:4px;font-weight:600;">Reason: ${p.rejectReason}</p>` : ''}
+                ${isRejected && p.rejectReason ? `<p style="color:#ef4444;font-size:12px;margin-top:4px;font-weight:600;">Reason: ${p.rejectReason}</p>` : ""}
               </div>
               <div class="actions">
-                <button class="edit-btn" onclick="airPoster('${p.img}')" ${(isAired || !isAccepted) ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ''}>
-                  <i class="fas fa-broadcast-tower"></i> ${isAired ? 'Airing' : 'Air Poster'}
+                <button class="edit-btn" onclick="airPoster('${p.img}')" ${isAired || !isAccepted ? 'disabled style="opacity:0.5; cursor:not-allowed;"' : ""}>
+                  <i class="fas fa-broadcast-tower"></i> ${isAired ? "Airing" : "Air Poster"}
                 </button>
-                <button class="delete-btn" onclick="deletePosterByID(${p.id})"><i class="fas fa-trash"></i></button>
+
+                <button class="delete-btn" onclick="deletePosterByID('${p.id}')"><i class="fas fa-trash"></i></button>
               </div>
             </div>
           `;
-        }).join('');
+          })
+          .join("");
       }
 
-      window.deletePosterByID = function(id) {
+      window.deletePosterByID = function (id) {
         pendingAction = "deletePoster";
         pendingItemId = id;
-        document.getElementById("confirmSaveMsg").textContent = "Are you sure you want to delete this poster? This action cannot be undone.";
+        document.getElementById("confirmSaveMsg").textContent =
+          "Are you sure you want to delete this poster? This action cannot be undone.";
         document.getElementById("confirmSaveModal").classList.add("active");
       };
 
-      window.airPoster = function(img) {
-        localStorage.setItem('vendor_aired_poster', img);
-        showToast("success", "fa-broadcast-tower", "Poster is now live on the dashboard!");
+      window.airPoster = function (img) {
+        localStorage.setItem("vendor_aired_poster", img);
+        showToast(
+          "success",
+          "fa-broadcast-tower",
+          "Poster is now live on the dashboard!",
+        );
         renderMenu();
+      };
+
+      window.movePoster = function(id, direction) {
+        const posters = JSON.parse(localStorage.getItem('vendor_posters') || '[]');
+        const idx = posters.findIndex(p => String(p.id) === String(id));
+        if (idx === -1) return;
+
+        if (direction === 'up' && idx > 0) {
+          [posters[idx], posters[idx - 1]] = [posters[idx - 1], posters[idx]];
+        } else if (direction === 'down' && idx < posters.length - 1) {
+          [posters[idx], posters[idx + 1]] = [posters[idx + 1], posters[idx]];
+        } else {
+          return; // No move possible
+        }
+
+        localStorage.setItem('vendor_posters', JSON.stringify(posters));
+        renderMenu();
+        updateTabCounts();
       };
 
       const posterModal = document.getElementById("posterModal");
@@ -1270,17 +1505,19 @@
             if (fileInput.files && fileInput.files[0]) {
               const reader = new FileReader();
               reader.onload = (ev) => {
-                const posters = JSON.parse(localStorage.getItem('vendor_posters') || '[]');
+                const posters = JSON.parse(
+                  localStorage.getItem("vendor_posters") || "[]",
+                );
                 posters.push({
                   id: Date.now(),
                   img: ev.target.result,
-                  status: 'pending'
+                  status: "pending",
                 });
-                localStorage.setItem('vendor_posters', JSON.stringify(posters));
-                
+                localStorage.setItem("vendor_posters", JSON.stringify(posters));
+
                 updateTabCounts();
-                if (currentStatusFilter === 'posters') renderMenu();
-                
+                if (currentStatusFilter === "posters") renderMenu();
+
                 showToast(
                   "success",
                   "fa-image",
@@ -1297,22 +1534,45 @@
       }
 
       function initDefaultPosters() {
-        const data = localStorage.getItem('vendor_posters');
+        const data = localStorage.getItem("vendor_posters");
+        const seeded = localStorage.getItem("vendor_posters_seeded_v6"); // Versioned flag
         let posters = [];
         try {
-          posters = JSON.parse(data || '[]');
+          posters = JSON.parse(data || "[]");
           if (!Array.isArray(posters)) posters = [];
         } catch (e) {
           posters = [];
         }
 
-        if (posters.length === 0) {
-          const exampleImg = "../../images/promo_poster_example.png";
-          localStorage.setItem('vendor_posters', JSON.stringify([{
-            id: Date.now(),
-            img: exampleImg
-          }]));
-          localStorage.setItem('vendor_aired_poster', exampleImg);
+        if (!seeded || posters.length === 0) {
+          const now = Date.now();
+          const examples = [
+            {
+              id: now - 4000000,
+              img: "../../images/promo_poster_example.png",
+              status: "accepted",
+            },
+            {
+              id: now - 3000000,
+              img: "../../images/banner4.avif",
+              status: "accepted",
+            },
+            {
+              id: now - 2000000,
+              img: "../../images/banner5.avif",
+              status: "pending",
+            },
+            {
+              id: now - 1000000,
+              img: "../../images/banner6.avif",
+              status: "rejected",
+              rejectReason: "The image quality is too low and the promotional text is not clearly visible.",
+            },
+          ];
+          
+          localStorage.setItem("vendor_posters", JSON.stringify(examples));
+          localStorage.setItem("vendor_aired_poster", "../../images/promo_poster_example.png");
+          localStorage.setItem("vendor_posters_seeded_v6", "true");
         }
       }
 
@@ -1320,7 +1580,6 @@
       initDefaultPosters();
       renderMenu();
       updateTabCounts();
-
     </script>
   </body>
 </html>

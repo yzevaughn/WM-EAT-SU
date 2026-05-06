@@ -347,6 +347,7 @@ input:checked + .toggle-slider:before {
   gap: 8px;
   padding: 16px;
   border-top: 1px solid #e5e7eb;
+  margin-top: auto;
 }
 
 .edit-btn {
