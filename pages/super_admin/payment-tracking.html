@@ -161,22 +161,94 @@
       </header>
 
 
-      <div class="table-panel">
-        <div class="table-responsive">
-          <table>
+      <!-- summary counters -->
+      <div class="metrics-cards">
+        <div class="metrics-card pending card-overdue">
+          <div class="icon-box" style="background: #fee2e2; color: #dc2626;"><i class="fa-solid fa-calendar-xmark"></i></div>
+          <div class="card-info">
+            <p>Overdue Payments</p>
+            <h3 id="countOverdue" class="card-value">1</h3>
+          </div>
+        </div>
+        <div class="metrics-card pending card-soon">
+          <div class="icon-box" style="background: #fff7ed; color: #ea580c;"><i class="fa-solid fa-clock"></i></div>
+          <div class="card-info">
+            <p>Due Soon</p>
+            <h3 id="countDueSoon" class="card-value">1</h3>
+          </div>
+        </div>
+        <div class="metrics-card resolved card-paid">
+          <div class="icon-box" style="background: #dcfce7; color: #16a34a;"><i class="fa-solid fa-check-circle"></i></div>
+          <div class="card-info">
+            <p>Cleared Today</p>
+            <h3 id="countCleared" class="card-value">3</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- data table -->
+      <div class="table-container">
+        <!-- table controls section -->
+        <div class="table-controls" style="padding: 24px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <div class="search-box">
+            <i class="fa-solid fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search Canteen or Operator Name...">
+          </div>
+          <div class="filter-group">
+            <div class="filter-item">
+              <label for="statusFilter"><i class="fa-solid fa-filter"></i> Status:</label>
+              <select id="statusFilter" class="custom-select">
+                <option value="All">All Status</option>
+                <option value="Paid">Paid</option>
+                <option value="Overdue">Overdue</option>
+                <option value="Due Soon">Due Soon</option>
+                <option value="Upcoming">Upcoming</option>
+              </select>
+            </div>
+            <div class="filter-item">
+              <label for="monthFilter"><i class="fa-solid fa-calendar-alt"></i> Month:</label>
+              <select id="monthFilter" class="custom-select">
+                <option value="May">May 2026</option>
+                <option value="April">April 2026</option>
+                <option value="March">March 2026</option>
+              </select>
+            </div>
+            <div class="filter-item">
+              <label for="sortFilter"><i class="fa-solid fa-sort"></i> Sort:</label>
+              <select id="sortFilter" class="custom-select">
+                <option value="Latest">Latest</option>
+                <option value="Amount">Amount</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table class="data-grid">
             <thead>
               <tr>
                 <th>Canteen / Vendor</th>
                 <th>Operator</th>
                 <th>Monthly Fee</th>
-                <th style="text-align: center;">Status</th>
-                <th style="text-align: center;">Actions</th>
+                <th>Status</th>
+                <th class="actions-col">Actions</th>
               </tr>
             </thead>
             <tbody id="payment-table-body">
               <!-- JS will populate -->
             </tbody>
           </table>
+        </div>
+
+        <!-- pagination -->
+        <div class="pagination-controls">
+          <div class="pagination-info">
+            Showing <span id="pageStart">1</span> to <span id="pageEnd">5</span> of <span id="totalEntries">5</span> entries
+          </div>
+          <div class="pagination-nav">
+            <button class="page-btn disabled"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn disabled"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
         </div>
       </div>
     </div>

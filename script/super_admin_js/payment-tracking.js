@@ -7,46 +7,93 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 5, name: 'Canteen 5', operator: 'Bruce Wayne', fee: 6000, status: 'Paid', statusClass: 'status-paid', history: [{ date: 'May 02', amount: 6000, method: 'Bank Transfer', status: 'Cleared' }] }
     ];
 
-    let currentFilter = 'all';
+    let currentFilter = 'All';
+    let searchQuery = '';
 
     const tableBody = document.getElementById('payment-table-body');
+    const searchInput = document.getElementById('searchInput');
+    const statusFilter = document.getElementById('statusFilter');
 
     function renderTable() {
         if (!tableBody) return;
 
         const filteredData = paymentData.filter(item => {
-            if (currentFilter === 'all') return true;
-            if (currentFilter === 'pending') return item.status === 'Due Soon' || item.status === 'Upcoming';
-            if (currentFilter === 'overdue') return item.status === 'Overdue';
-            if (currentFilter === 'paid') return item.status === 'Paid' || item.status === 'Partially Paid';
+            const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                item.operator.toLowerCase().includes(searchQuery.toLowerCase());
             
-            return true;
+            const matchesStatus = currentFilter === 'All' || item.status === currentFilter;
+            
+            return matchesSearch && matchesStatus;
         });
 
         tableBody.innerHTML = filteredData.map(item => `
             <tr>
-                <td><span class="canteen-name">${item.name}</span></td>
-                <td><span class="operator-name">${item.operator}</span></td>
-                <td class="fee-val">
+                <td><span class="canteen-name" style="font-weight: 700; font-size: 15px; display: block;">${item.name}</span></td>
+                <td><span class="operator-name" style="font-size: 13px; color: #64748b;">${item.operator}</span></td>
+                <td class="fee-val" style="font-weight: 600;">
                     ₱${item.fee.toLocaleString()}
                 </td>
-                <td style="text-align: center;"><span class="status-badge ${item.statusClass}">${item.status}</span></td>
-                <td>
-                    <div class="row-actions">
-                        <button class="btn-icon" title="View History" onclick="viewHistory(${item.id})">
+                <td><span class="status-badge ${item.statusClass}" style="padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; display: inline-block; text-align: center; min-width: 100px;">${item.status}</span></td>
+                <td class="actions-col">
+                    <div class="row-actions" style="display: flex; justify-content: flex-end; gap: 8px;">
+                        <button class="btn-icon" title="View History" onclick="viewHistory(${item.id})" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e2e8f0; background: white; color: #64748b; display: flex; align-items: center; justify-content: center; cursor: pointer;">
                             <i class="fa-solid fa-history"></i>
                         </button>
-                        <button class="btn-icon" title="Record Payment" onclick="recordSpecificPayment(${item.id})">
+                        <button class="btn-icon" title="Record Payment" onclick="recordSpecificPayment(${item.id})" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e2e8f0; background: white; color: #64748b; display: flex; align-items: center; justify-content: center; cursor: pointer;">
                             <i class="fa-solid fa-credit-card"></i>
                         </button>
-                        <button class="btn-icon remind" title="Send Reminder" onclick="sendReminder('${item.operator}')">
+                        <button class="btn-icon remind" title="Send Reminder" onclick="sendReminder('${item.operator}')" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e2e8f0; background: white; color: #64748b; display: flex; align-items: center; justify-content: center; cursor: pointer;">
                             <i class="fa-solid fa-paper-plane"></i>
                         </button>
                     </div>
                 </td>
             </tr>
         `).join('');
+
+        // Update counts
+        updateCounts(filteredData.length);
     }
+
+    function updateCounts(filteredCount) {
+        const overdue = paymentData.filter(p => p.status === 'Overdue').length;
+        const dueSoon = paymentData.filter(p => p.status === 'Due Soon').length;
+        const paidToday = paymentData.filter(p => p.status === 'Paid').length; // Mock count
+
+        document.getElementById('countOverdue').textContent = overdue;
+        document.getElementById('countDueSoon').textContent = dueSoon;
+        document.getElementById('countCleared').textContent = paidToday;
+
+        const total = paymentData.length;
+        document.getElementById('totalEntries').textContent = total;
+        document.getElementById('pageEnd').textContent = filteredCount;
+        document.getElementById('pageStart').textContent = filteredCount > 0 ? 1 : 0;
+    }
+
+    // Search and Filter Listeners
+    searchInput?.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        renderTable();
+    });
+
+    statusFilter?.addEventListener('change', (e) => {
+        currentFilter = e.target.value;
+        renderTable();
+    });
+
+    document.getElementById('monthFilter')?.addEventListener('change', (e) => {
+        console.log(`Filtering for month: ${e.target.value}`);
+        renderTable();
+    });
+
+    document.getElementById('sortFilter')?.addEventListener('change', (e) => {
+        const sort = e.target.value;
+        if (sort === 'Amount') {
+            paymentData.sort((a, b) => b.fee - a.fee);
+        } else {
+            paymentData.sort((a, b) => a.id - b.id);
+        }
+        renderTable();
+    });
 
     // Modal Logic
     const modal = document.getElementById('paymentModal');
