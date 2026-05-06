@@ -1103,14 +1103,20 @@
               </div>`;
           }
         } else if (o.status === "completed") {
+          const reviewBtn = o.isReviewed
+            ? `<button class="leave-review-btn" style="background:#f1f5f9; color:#94a3b8; border:1px solid #e2e8f0; cursor:default; width:auto; padding: 0 16px;" disabled>
+                 <i class="fa-solid fa-circle-check"></i> Reviewed
+               </button>`
+            : `<button class="leave-review-btn js-review" data-id="${esc(o.id)}">
+                 <i class="fa-regular fa-star"></i> Review
+               </button>`;
+
           actHtml = `
             <div style="display:flex; gap:8px; width:100%; flex-wrap:wrap;">
               <button class="order-again-btn js-order-again" data-id="${esc(o.id)}">
                 <i class="fa-solid fa-cart-plus"></i> Order Again
               </button>
-              <button class="leave-review-btn js-review" data-id="${esc(o.id)}">
-                <i class="fa-regular fa-star"></i> Review
-              </button>
+              ${reviewBtn}
               <button class="remove-btn js-remove" data-id="${esc(o.id)}" style="margin:0;">
                 <i class="fa-solid fa-trash-can"></i> Remove
               </button>
@@ -1594,6 +1600,7 @@
         /* Leave Review */
         document.querySelectorAll(".js-review").forEach((btn) => {
           btn.addEventListener("click", () => {
+            window.currentReviewOrderId = btn.dataset.id;
             document.getElementById("reviewModal").classList.add("active");
           });
         });
@@ -1785,6 +1792,11 @@
       document
         .getElementById("submitReviewBtn")
         .addEventListener("click", () => {
+          const orderId = window.currentReviewOrderId;
+          if (orderId) {
+            updateOrderStatus(orderId, "completed", { isReviewed: true });
+            renderOrders();
+          }
           document.getElementById("reviewModal").classList.remove("active");
           showToast("success", "fa-star", "Review submitted! Thank you.");
         });
