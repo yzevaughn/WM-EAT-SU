@@ -184,7 +184,10 @@
                 </div>
               </div>
 
-              <div class="fg-action no-back">
+              <div class="fg-action">
+                <a href="signup-role.html" class="btn btn-back">
+                  <i class="fa-solid fa-arrow-left"></i>
+                </a>
                 <button class="btn btn-primary" onclick="submitStep1()">
                   Continue <i class="fa-solid fa-arrow-right"></i>
                 </button>
@@ -208,7 +211,7 @@
         if (role === 'staff') {
           // Update sidebar
           const stepName = document.querySelector('.sb-step-name');
-          if (stepName) stepName.textContent = 'Staff Info';
+          if (stepName) stepName.textContent = 'Teacher/Staff Info';
           
           // Update main heading
           const mainHeading = document.querySelector('.step-head h2');
@@ -220,7 +223,7 @@
               lbl.innerHTML = lbl.innerHTML.replace('Student', 'Staff');
             }
             if (lbl.textContent.includes('School Email')) {
-              lbl.innerHTML = lbl.innerHTML.replace('School', 'Staff');
+              lbl.innerHTML = lbl.innerHTML.replace('School', 'Teacher/Staff');
             }
           });
           
