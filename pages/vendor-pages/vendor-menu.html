@@ -511,6 +511,10 @@
               </button>
             </div>
             <div class="modal-body">
+                <div style="background: #f0f9ff; border: 1px solid #bae6fd; color: #0369a1; padding: 12px; border-radius: 8px; font-size: 13px; margin-bottom: 20px; display: flex; gap: 12px; line-height: 1.5;">
+                  <i class="fas fa-info-circle" style="margin-top: 2px;"></i>
+                  <span><strong>Important:</strong> Your poster will only be visible on the dashboard for <strong>one week (7 days)</strong> starting from the time it is accepted by the admin.</span>
+                </div>
               <form id="posterForm">
                 <div class="form-group">
                   <label for="posterImage">Upload Poster Image</label>
@@ -521,14 +525,7 @@
                     required
                   />
                 </div>
-                <div class="form-group">
-                  <label for="posterValidUntil">Valid Until</label>
-                  <input
-                    type="date"
-                    id="posterValidUntil"
-                    required
-                  />
-                </div>
+
               </form>
             </div>
             <div class="modal-footer">
@@ -770,7 +767,7 @@
                 <div class="item-info">
                   <h3 class="item-name">Poster Upload</h3>
                   <p class="item-description">Uploaded on ${new Date(p.id).toLocaleDateString()}</p>
-                  <p class="item-description" style="color:#10b981; font-weight:600; margin-top:4px;"><i class="fas fa-calendar-check"></i> Valid until: ${p.validUntil ? new Date(p.validUntil).toLocaleDateString() : "No date set"}</p>
+                  ${isAccepted ? `<p class="item-description" style="color:#10b981; font-weight:600; margin-top:4px;"><i class="fas fa-calendar-check"></i> Valid until: ${new Date(p.id + 7 * 24 * 60 * 60 * 1000).toLocaleDateString()}</p>` : ""}
                   ${isRejected && p.rejectReason ? `<p style="color:#ef4444;font-size:12px;margin-top:4px;font-weight:600;">Reason: ${p.rejectReason}</p>` : ""}
                 </div>
                 <div class="actions">
@@ -1432,7 +1429,7 @@
               <div class="item-info">
                 <h3 class="item-name">Poster #${idx + 1}</h3>
                 <p class="item-description">Uploaded on ${new Date(p.id).toLocaleDateString()}</p>
-                <p class="item-description" style="color:#10b981; font-weight:600; margin-top:4px;"><i class="fas fa-calendar-check"></i> Valid until: ${p.validUntil ? new Date(p.validUntil).toLocaleDateString() : "No date set"}</p>
+                ${isAccepted ? `<p class="item-description" style="color:#10b981; font-weight:600; margin-top:4px;"><i class="fas fa-calendar-check"></i> Valid until: ${new Date(p.id + 7 * 24 * 60 * 60 * 1000).toLocaleDateString()}</p>` : ""}
                 ${isRejected && p.rejectReason ? `<p style="color:#ef4444;font-size:12px;margin-top:4px;font-weight:600;">Reason: ${p.rejectReason}</p>` : ""}
               </div>
               <div class="actions">
@@ -1513,24 +1510,17 @@
             e.preventDefault();
             const fileInput = document.getElementById("posterImage");
             if (fileInput.files && fileInput.files[0]) {
-              const reader = new FileReader();
-              reader.onload = (ev) => {
-                const validUntil = document.getElementById("posterValidUntil").value;
-                if (!validUntil) {
-                  showToast("error", "fa-calendar", "Please select a validity date");
-                  return;
-                }
-
-                const posters = JSON.parse(
-                  localStorage.getItem("vendor_posters") || "[]",
-                );
-                posters.push({
-                  id: Date.now(),
-                  img: ev.target.result,
-                  status: "pending",
-                  validUntil: validUntil,
-                });
-                localStorage.setItem("vendor_posters", JSON.stringify(posters));
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                  const posters = JSON.parse(
+                    localStorage.getItem("vendor_posters") || "[]",
+                  );
+                  posters.push({
+                    id: Date.now(),
+                    img: ev.target.result,
+                    status: "pending",
+                  });
+                  localStorage.setItem("vendor_posters", JSON.stringify(posters));
 
                 updateTabCounts();
                 if (currentStatusFilter === "posters") renderMenu();
