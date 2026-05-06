@@ -1,15 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
     let paymentData = [
+        // This Month (Assuming May 2026 based on user context)
         { id: 1, name: 'Canteen 1', operator: 'John Doe', fee: 5000, dueDate: '2026-05-15', status: 'Paid', type: 'Canteen', statusClass: 'status-clear', receiptUploaded: true, date: '2026-05-01', receiptImg: '../../images/receipt-mock.jpg' },
         { id: 2, name: 'Canteen 2', operator: 'Jane Smith', fee: 5000, dueDate: '2026-05-20', status: 'Not Paid', type: 'Canteen', statusClass: 'status-unclear', receiptUploaded: false, date: '', receiptImg: '' },
-        { id: 3, name: 'Canteen 3', operator: 'Lani Cruz', fee: 3500, dueDate: '2026-05-25', status: 'Not Paid', type: 'Canteen', statusClass: 'status-unclear', receiptUploaded: false, date: '', receiptImg: '' },
-        { id: 4, name: 'Canteen 4', operator: 'Rex Bohol', fee: 3500, dueDate: '2026-05-30', status: 'Not Paid', type: 'Canteen', statusClass: 'status-unclear', receiptUploaded: false, date: '', receiptImg: '' },
-        { id: 5, name: 'Canteen 5', operator: 'Bruce Wayne', fee: 6000, dueDate: '2026-05-10', status: 'Paid', type: 'Canteen', statusClass: 'status-clear', receiptUploaded: true, date: '2026-05-02', receiptImg: '../../images/receipt-mock.jpg' }
+        { id: 6, name: 'Canteen 6', operator: 'Clark Kent', fee: 4000, dueDate: '2026-05-28', status: 'Paid', type: 'Canteen', statusClass: 'status-clear', receiptUploaded: true, date: '2026-05-05', receiptImg: '../../images/receipt-mock.jpg' },
+        
+        // Previous Month (April 2026)
+        { id: 3, name: 'Canteen 3', operator: 'Lani Cruz', fee: 3500, dueDate: '2026-04-25', status: 'Paid', type: 'Canteen', statusClass: 'status-clear', receiptUploaded: true, date: '2026-04-20', receiptImg: '../../images/receipt-mock.jpg' },
+        { id: 4, name: 'Canteen 4', operator: 'Rex Bohol', fee: 3500, dueDate: '2026-04-30', status: 'Not Paid', type: 'Canteen', statusClass: 'status-unclear', receiptUploaded: false, date: '', receiptImg: '' },
+        { id: 7, name: 'Canteen 7', operator: 'Diana Prince', fee: 4500, dueDate: '2026-04-15', status: 'Paid', type: 'Canteen', statusClass: 'status-clear', receiptUploaded: true, date: '2026-04-10', receiptImg: '../../images/receipt-mock.jpg' },
+        { id: 8, name: 'Canteen 8', operator: 'Barry Allen', fee: 3000, dueDate: '2026-04-05', status: 'Not Paid', type: 'Canteen', statusClass: 'status-unclear', receiptUploaded: false, date: '', receiptImg: '' },
+        
+        // Next Month (June 2026)
+        { id: 5, name: 'Canteen 5', operator: 'Bruce Wayne', fee: 6000, dueDate: '2026-06-10', status: 'Not Paid', type: 'Canteen', statusClass: 'status-unclear', receiptUploaded: false, date: '', receiptImg: '' },
+        { id: 9, name: 'Canteen 9', operator: 'Arthur Curry', fee: 5500, dueDate: '2026-06-12', status: 'Paid', type: 'Canteen', statusClass: 'status-clear', receiptUploaded: true, date: '2026-06-01', receiptImg: '../../images/receipt-mock.jpg' },
+        { id: 10, name: 'Canteen 10', operator: 'Victor Stone', fee: 4200, dueDate: '2026-06-25', status: 'Not Paid', type: 'Canteen', statusClass: 'status-unclear', receiptUploaded: false, date: '', receiptImg: '' }
     ];
 
     let currentStatusFilter = 'All';
     let currentTypeFilter = 'All';
     let searchQuery = '';
+    
+    let currentPage = 1;
+    const rowsPerPage = 5;
 
     const tableBody = document.getElementById('payment-table-body');
     const searchInput = document.getElementById('searchInput');
@@ -19,6 +32,24 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderTable() {
         if (!tableBody) return;
 
+        const monthFilterValue = document.getElementById('monthFilter')?.value;
+        const specificMonthValue = document.getElementById('specificMonthInput')?.value; // "YYYY-MM"
+
+        const today = new Date();
+        const thisMonthString = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0');
+        
+        const nextMonthDate = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+        const nextMonthString = nextMonthDate.getFullYear() + '-' + String(nextMonthDate.getMonth() + 1).padStart(2, '0');
+
+        let targetMonth = '';
+        if (monthFilterValue === 'This Month') {
+            targetMonth = thisMonthString;
+        } else if (monthFilterValue === 'Next Month') {
+            targetMonth = nextMonthString;
+        } else if (monthFilterValue === 'Specific Month') {
+            targetMonth = specificMonthValue;
+        }
+
         const filteredData = paymentData.filter(item => {
             const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                                 item.operator.toLowerCase().includes(searchQuery.toLowerCase());
@@ -26,10 +57,25 @@ document.addEventListener('DOMContentLoaded', () => {
             const matchesStatus = currentStatusFilter === 'All' || item.status === currentStatusFilter;
             const matchesType = currentTypeFilter === 'All' || item.type === currentTypeFilter;
             
-            return matchesSearch && matchesStatus && matchesType;
+            let matchesMonth = true;
+            if (targetMonth && targetMonth !== '') {
+                matchesMonth = item.dueDate && item.dueDate.startsWith(targetMonth);
+            }
+            
+            return matchesSearch && matchesStatus && matchesType && matchesMonth;
         });
 
-        tableBody.innerHTML = filteredData.map(item => `
+        const totalItems = filteredData.length;
+        const totalPages = Math.ceil(totalItems / rowsPerPage) || 1;
+
+        if (currentPage > totalPages) currentPage = totalPages;
+        if (currentPage < 1) currentPage = 1;
+
+        const startIndex = (currentPage - 1) * rowsPerPage;
+        const endIndex = startIndex + rowsPerPage;
+        const paginatedData = filteredData.slice(startIndex, endIndex);
+
+        tableBody.innerHTML = paginatedData.map(item => `
             <tr>
                 <td><span class="canteen-name" style="font-weight: 700; font-size: 15px; display: block;">${item.name}</span></td>
                 <td><span class="operator-name" style="font-size: 13px; color: #64748b;">${item.operator}</span></td>
@@ -39,59 +85,85 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td><span class="status-badge ${item.statusClass}" style="padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; display: inline-block; text-align: center; min-width: 100px;">${item.status}</span></td>
                 <td class="actions-col">
                     <div class="row-actions" style="display: flex; justify-content: flex-end; gap: 8px;">
+                        ${item.status === 'Paid' ? `
                         <button class="btn-icon" title="View Details" onclick="recordSpecificPayment(${item.id})" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e2e8f0; background: white; color: #64748b; display: flex; align-items: center; justify-content: center; cursor: pointer;">
                             <i class="fa-solid fa-eye"></i>
                         </button>
+                        ` : ''}
                     </div>
                 </td>
             </tr>
         `).join('');
 
-        // Update counts
-        updateCounts(filteredData.length);
+        updateCounts(totalItems, startIndex, Math.min(endIndex, totalItems), totalPages);
     }
 
-    function updateCounts(filteredCount) {
-        const unclear = paymentData.filter(p => p.status === 'Not Paid').length;
-        const clear = paymentData.filter(p => p.status === 'Paid').length;
+    function updateCounts(totalItems, startIndex, endIndex, totalPages) {
+        document.getElementById('totalEntries').textContent = totalItems;
+        document.getElementById('pageStart').textContent = totalItems > 0 ? startIndex + 1 : 0;
+        document.getElementById('pageEnd').textContent = endIndex;
 
-        document.getElementById('countUnclear').textContent = unclear;
-        document.getElementById('countClear').textContent = clear;
+        const paginationNav = document.querySelector('.pagination-nav');
+        if (paginationNav) {
+            let navHtml = '';
+            
+            navHtml += `<button class="page-btn ${currentPage === 1 ? 'disabled' : ''}" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>`;
 
-        const total = paymentData.length;
-        document.getElementById('totalEntries').textContent = total;
-        document.getElementById('pageEnd').textContent = filteredCount;
-        document.getElementById('pageStart').textContent = filteredCount > 0 ? 1 : 0;
+            for (let i = 1; i <= totalPages; i++) {
+                navHtml += `<button class="page-btn ${currentPage === i ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+            }
+
+            navHtml += `<button class="page-btn ${currentPage === totalPages ? 'disabled' : ''}" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>`;
+
+            paginationNav.innerHTML = navHtml;
+        }
     }
+
+    window.changePage = (page) => {
+        currentPage = page;
+        renderTable();
+    };
 
     // Search and Filter Listeners
     searchInput?.addEventListener('input', (e) => {
         searchQuery = e.target.value;
+        currentPage = 1;
         renderTable();
     });
 
     statusFilter?.addEventListener('change', (e) => {
         currentStatusFilter = e.target.value;
+        currentPage = 1;
         renderTable();
     });
 
     typeFilter?.addEventListener('change', (e) => {
         currentTypeFilter = e.target.value;
+        currentPage = 1;
         renderTable();
     });
 
-    document.getElementById('monthFilter')?.addEventListener('change', (e) => {
-        console.log(`Filtering for month: ${e.target.value}`);
-        renderTable();
-    });
+    const monthFilter = document.getElementById('monthFilter');
+    const specificMonthInput = document.getElementById('specificMonthInput');
 
-    document.getElementById('sortFilter')?.addEventListener('change', (e) => {
-        const sort = e.target.value;
-        if (sort === 'Amount') {
-            paymentData.sort((a, b) => b.fee - a.fee);
+    monthFilter?.addEventListener('change', (e) => {
+        if (e.target.value === 'Specific Month') {
+            if (specificMonthInput) specificMonthInput.style.display = 'block';
         } else {
-            paymentData.sort((a, b) => a.id - b.id);
+            if (specificMonthInput) specificMonthInput.style.display = 'none';
         }
+        console.log(`Filtering for month: ${e.target.value}`);
+        currentPage = 1;
+        renderTable();
+    });
+
+    specificMonthInput?.addEventListener('change', (e) => {
+        console.log(`Filtering for specific month: ${e.target.value}`);
+        currentPage = 1;
         renderTable();
     });
 
@@ -290,8 +362,6 @@ document.addEventListener('DOMContentLoaded', () => {
         closePaymentModal();
         renderTable();
     });
-
-
 
     renderTable();
 });
