@@ -12,7 +12,7 @@ function loadCanteenApplications() {
         studentName: "Santos, Maria",
         studentEmail: "maria.s@wmsu.edu.ph",
         businessName: "Maria's Canteen",
-        category: "Food & Beverage",
+        category: "Food & Drinks",
         status: "Pending",
         dateSubmitted: "Oct 24, 2023",
         rejectionReason: ""
@@ -22,7 +22,7 @@ function loadCanteenApplications() {
         studentName: "Reyes, Jose",
         studentEmail: "jose.r@wmsu.edu.ph",
         businessName: "Reyes Lutong Bahay",
-        category: "Food & Beverage",
+        category: "Food & Drinks",
         status: "Under Review",
         dateSubmitted: "Oct 23, 2023",
         rejectionReason: ""
@@ -42,7 +42,7 @@ function loadCanteenApplications() {
         studentName: "Garcia, Pedro",
         studentEmail: "pedro.g@wmsu.edu.ph",
         businessName: "Garcia Meals",
-        category: "Food & Beverage",
+        category: "Food & Drinks",
         status: "Rejected",
         dateSubmitted: "Oct 15, 2023",
         rejectionReason: "Incomplete health clearance documentation."
@@ -73,7 +73,7 @@ function addCanteenApplication(appData) {
     studentName: appData.operatorName,
     studentEmail: appData.operatorEmail,
     businessName: appData.businessName,
-    category: "Food & Beverage", // Default
+    category: "Food & Drinks", // Default
     status: "Active Vendor", // Assuming walk-in is pre-approved
     dateSubmitted: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
     rejectionReason: ""

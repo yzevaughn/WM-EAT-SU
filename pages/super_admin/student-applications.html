@@ -227,9 +227,7 @@
                 <label
                   for="walkInModalToggle"
                   class="btn-cancel"
-                  style="cursor: pointer"
-                  >Cancel</label
-                >
+                >Cancel</label>
                 <button
                   type="button"
                   class="btn-submit"
@@ -314,10 +312,6 @@
                 <button
                   type="button"
                   class="btn-submit"
-                  style="
-                    background: linear-gradient(135deg, #10b981, #059669);
-                    box-shadow: 0 10px 20px -10px rgba(16, 185, 129, 0.5);
-                  "
                   onclick="wiSubmitFinal()"
                 >
                   Done <i class="fa-solid fa-check"></i>
@@ -380,6 +374,20 @@
       }
 
       function wiGoToStep(step) {
+        if (step === 2) {
+          const existingEmail = document.getElementById("wi-existingEmail").value.trim();
+          if (!existingEmail) {
+            const ln = document.getElementById("wi-lastName").value.trim();
+            const fn = document.getElementById("wi-firstName").value.trim();
+            const email = document.getElementById("wi-studentEmail").value.trim();
+            
+            if (!ln || !fn || !email || !email.includes("@")) {
+              showToast("Missing Information", "Please provide either an existing email or complete the personal details (Name and valid Email).", "warning");
+              return;
+            }
+          }
+        }
+
         if (step === 3) {
           const existingEmail = document
             .getElementById("wi-existingEmail")
@@ -689,19 +697,7 @@
               <label
                 for="walkInModalToggle"
                 class="btn-submit"
-                style="
-                  cursor: pointer;
-                  display: flex;
-                  align-items: center;
-                  gap: 8px;
-                  background: #ef4444;
-                  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
-                  padding: 10px 16px;
-                  border-radius: 8px;
-                  color: white;
-                  font-weight: 600;
-                  transition: all 0.2s ease;
-                "
+                style="cursor: pointer;"
               >
                 <i class="fa-solid fa-plus"></i> Walk-In Application
               </label>

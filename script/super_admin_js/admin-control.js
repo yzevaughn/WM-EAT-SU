@@ -18,7 +18,8 @@ const adminData = [
         status: "Active",
         lastLogin: "Today 08:30",
         initials: "A1",
-        avatarClass: "av-ms"
+        avatarClass: "av-ms",
+        permissions: ["users", "transactions", "apps", "complaints", "menu"]
     },
     {
         id: 2,
@@ -28,7 +29,8 @@ const adminData = [
         status: "Active",
         lastLogin: "Today 07:55",
         initials: "A2",
-        avatarClass: "av-jr"
+        avatarClass: "av-jr",
+        permissions: ["users", "transactions", "apps", "complaints", "menu"]
     },
     {
         id: 3,
@@ -38,7 +40,8 @@ const adminData = [
         status: "Deactivated",
         lastLogin: "Apr 28 14:20",
         initials: "A3",
-        avatarClass: "av-ad"
+        avatarClass: "av-ad",
+        permissions: ["users", "transactions"]
     }
 ];
 
@@ -223,20 +226,37 @@ document.getElementById('createAdminForm')?.addEventListener('submit', (e) => {
     e.preventDefault();
     const username = document.getElementById('adminUsername').value;
     
+    // Collect permissions
+    const permissions = [];
+    if (document.getElementById('permUsers').checked) permissions.push('users');
+    if (document.getElementById('permTransactions').checked) permissions.push('transactions');
+    if (document.getElementById('permApps').checked) permissions.push('apps');
+    if (document.getElementById('permComplaints').checked) permissions.push('complaints');
+    if (document.getElementById('permMenu').checked) permissions.push('menu');
+    if (document.getElementById('permVouchers').checked) permissions.push('vouchers');
+
     const newAdmin = {
         id: adminData.length + 1,
         name: username,
+        email: `${username}@campusbite.edu`, // Default email
         status: 'Active',
         lastLogin: 'Never',
         initials: username.slice(0, 2).toUpperCase(),
-        avatarClass: 'av-ms'
+        avatarClass: 'av-ms',
+        permissions: permissions
     };
     
     adminData.push(newAdmin);
     renderAdminAccounts();
     renderPermissionAdminList();
     closeCreateAdminModal();
-    alert(`New admin account created for ${username}`);
+    
+    // Show success message
+    if (typeof showToast === 'function') {
+        showToast('success', 'fa-user-shield', `Admin ${username} created with ${permissions.length} permissions.`);
+    } else {
+        alert(`New admin account created for ${username} with ${permissions.length} permissions.`);
+    }
 });
 
 function renderPermissionAdminList() {
@@ -258,22 +278,75 @@ function renderPermissionAdminList() {
             <td><span class="status-pill active">${admin.status}</span></td>
             <td><span class="login-time">${admin.lastLogin}</span></td>
             <td>
-                <button class="btn-action" onclick="openPermissionModal('${admin.name}', '${admin.email}')">
-                    <i class="fa-solid fa-eye"></i> View Audit
+                <button class="btn-action" onclick="openPermissionModal(${admin.id})">
+                    <i class="fa-solid fa-user-gear"></i> View Details
                 </button>
             </td>
         </tr>
     `).join('');
 }
 
-function openPermissionModal(adminName, adminEmail) {
+let currentEditingAdminId = null;
+
+function openPermissionModal(adminId) {
+    const admin = adminData.find(a => a.id === adminId);
+    if (!admin) return;
+
+    currentEditingAdminId = adminId;
     const modal = document.getElementById('permissionModal');
     const nameDisplay = document.getElementById('modalAdminName');
     const emailDisplay = document.getElementById('modalAdminEmail');
-    if (modal && nameDisplay) {
-        nameDisplay.textContent = `${adminName} — Audit Logs`;
-        if (emailDisplay) emailDisplay.textContent = adminEmail;
+    const grid = document.getElementById('modalPermissionsGrid');
+
+    if (modal && nameDisplay && grid) {
+        nameDisplay.textContent = `${admin.name} — Details`;
+        if (emailDisplay) emailDisplay.textContent = admin.email || `${admin.name}@campusbite.edu`;
+        
+        // Render Permissions Toggles
+        const allPerms = [
+            { id: 'editUsers', key: 'users', label: 'User Management' },
+            { id: 'editTransactions', key: 'transactions', label: 'Transactions' },
+            { id: 'editApps', key: 'apps', label: 'Applications' },
+            { id: 'editComplaints', key: 'complaints', label: 'Complaints' },
+            { id: 'editMenu', key: 'menu', label: 'Menu Control' },
+            { id: 'editVouchers', key: 'vouchers', label: 'Voucher Control' }
+        ];
+
+        grid.innerHTML = allPerms.map(p => `
+            <div class="perm-item">
+              <label class="switch">
+                <input type="checkbox" id="${p.id}" ${admin.permissions?.includes(p.key) ? 'checked' : ''}>
+                <span class="slider round"></span>
+              </label>
+              <span>${p.label}</span>
+            </div>
+        `).join('');
+
         modal.style.display = 'flex';
+    }
+}
+
+function saveAdminPermissions() {
+    if (!currentEditingAdminId) return;
+    
+    const admin = adminData.find(a => a.id === currentEditingAdminId);
+    if (admin) {
+        const permissions = [];
+        if (document.getElementById('editUsers').checked) permissions.push('users');
+        if (document.getElementById('editTransactions').checked) permissions.push('transactions');
+        if (document.getElementById('editApps').checked) permissions.push('apps');
+        if (document.getElementById('editComplaints').checked) permissions.push('complaints');
+        if (document.getElementById('editMenu').checked) permissions.push('menu');
+        if (document.getElementById('editVouchers').checked) permissions.push('vouchers');
+
+        admin.permissions = permissions;
+        
+        if (typeof showToast === 'function') {
+            showToast('success', 'fa-check-circle', `Permissions updated for ${admin.name}`);
+        } else {
+            alert(`Permissions updated for ${admin.name}`);
+        }
+        closePermissionModal();
     }
 }
 
@@ -281,13 +354,19 @@ function closePermissionModal() {
     const modal = document.getElementById('permissionModal');
     if (modal) {
         modal.style.display = 'none';
+        currentEditingAdminId = null;
     }
 }
 
 // Close modal when clicking outside
 window.addEventListener('click', (e) => {
     const modal = document.getElementById('permissionModal');
-    if (e.target === modal) {
-        closePermissionModal();
-    }
+    const createModal = document.getElementById('createAdminModal');
+    const deactivateModal = document.getElementById('deactivateModal');
+    const reactivateModal = document.getElementById('reactivateModal');
+
+    if (e.target === modal) closePermissionModal();
+    if (e.target === createModal) closeCreateAdminModal();
+    if (e.target === deactivateModal) closeDeactivateModal();
+    if (e.target === reactivateModal) closeReactivateModal();
 });

@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="student-email">${user.email}</span>
                     </div>
                 </td>
-                <td><span class="badge-type">${user.type}</span></td>
+                <td><span class="badge-type">${user.type === 'Staff' ? 'Teacher & Staff' : user.type}</span></td>
                 <td><span class="status-badge ${statusClass}">${user.status}</span></td>
                 <td>${user.joined}</td>
                 <td>
