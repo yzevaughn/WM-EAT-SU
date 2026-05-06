@@ -12,7 +12,7 @@ function loadCanteenApplications() {
         studentName: "Santos, Maria",
         studentEmail: "maria.s@wmsu.edu.ph",
         businessName: "Maria's Canteen",
-        category: "Food & Drinks",
+        category: "Food",
         status: "Pending",
         dateSubmitted: "Oct 24, 2023",
         rejectionReason: ""
@@ -22,7 +22,7 @@ function loadCanteenApplications() {
         studentName: "Reyes, Jose",
         studentEmail: "jose.r@wmsu.edu.ph",
         businessName: "Reyes Lutong Bahay",
-        category: "Food & Drinks",
+        category: "Food",
         status: "Under Review",
         dateSubmitted: "Oct 23, 2023",
         rejectionReason: ""
@@ -32,7 +32,7 @@ function loadCanteenApplications() {
         studentName: "Cruz, Ana",
         studentEmail: "ana.c@wmsu.edu.ph",
         businessName: "Ana's Snack Bar",
-        category: "Snacks & Drinks",
+        category: "Snacks",
         status: "Active Vendor",
         dateSubmitted: "Oct 18, 2023",
         rejectionReason: ""
@@ -42,7 +42,7 @@ function loadCanteenApplications() {
         studentName: "Garcia, Pedro",
         studentEmail: "pedro.g@wmsu.edu.ph",
         businessName: "Garcia Meals",
-        category: "Food & Drinks",
+        category: "Food",
         status: "Rejected",
         dateSubmitted: "Oct 15, 2023",
         rejectionReason: "Incomplete health clearance documentation."
@@ -52,7 +52,7 @@ function loadCanteenApplications() {
         studentName: "Lim, Rosa",
         studentEmail: "rosa.l@wmsu.edu.ph",
         businessName: "Lim's Corner Eats",
-        category: "Snacks & Drinks",
+        category: "Snacks",
         status: "Pending",
         dateSubmitted: "Oct 25, 2023",
         rejectionReason: ""
@@ -73,7 +73,7 @@ function addCanteenApplication(appData) {
     studentName: appData.operatorName,
     studentEmail: appData.operatorEmail,
     businessName: appData.businessName,
-    category: "Food & Drinks", // Default
+    category: appData.category || "Food",
     status: "Active Vendor", // Assuming walk-in is pre-approved
     dateSubmitted: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
     rejectionReason: ""
@@ -370,70 +370,56 @@ function reviewApp(id) {
 }
 
 function approveApp(id) {
-  showConfirmModal({
-    title: "Approve Application",
-    message: "Are you sure you want to approve this canteen application?",
-    type: "approve", requireInput: false,
-    onConfirm: () => {
-      const app = mockApplications.find(x => x.id === id);
-      if (app) { 
-        app.status = "Active Vendor"; 
-        saveCanteenApplications();
-        renderTable(); 
-      }
+  if (confirm("Are you sure you want to approve this canteen application?")) {
+    const app = mockApplications.find(x => x.id === id);
+    if (app) { 
+      app.status = "Active Vendor"; 
+      saveCanteenApplications();
+      renderTable();
+      showToast("Success", `Application ${id} has been approved!`, "success");
     }
-  });
+  }
 }
 
 function rejectApp(id) {
-  showConfirmModal({
-    title: "Reject Application",
-    message: "Are you sure you want to reject this application? Please provide a reason.",
-    type: "reject", requireInput: true, inputLabel: "Rejection Reason",
-    onConfirm: (reason) => {
-      const app = mockApplications.find(x => x.id === id);
-      if (app) { 
-        app.status = "Rejected"; 
-        app.rejectionReason = reason; 
-        saveCanteenApplications();
-        renderTable(); 
-      }
+  const reason = prompt("Please provide a rejection reason:");
+  if (reason !== null) {
+    const app = mockApplications.find(x => x.id === id);
+    if (app) { 
+      app.status = "Rejected"; 
+      app.rejectionReason = reason || "No reason provided"; 
+      saveCanteenApplications();
+      renderTable();
+      showToast("Rejected", `Application ${id} has been rejected.`, "warning");
     }
-  });
+  }
 }
 
 function removeVendor(id) {
-  showConfirmModal({
-    title: "Deactivate Canteen",
-    message: "Are you sure you want to deactivate this canteen? Please provide a reason.",
-    type: "reject", requireInput: true, inputLabel: "Deactivation Reason",
-    onConfirm: (reason) => {
-      const app = mockApplications.find(x => x.id === id);
-      if (app) { 
-        app.status = "Deactivated"; 
-        app.deactivationReason = reason; 
-        saveCanteenApplications();
-        renderTable(); 
-      }
+  const reason = prompt("Please provide a deactivation reason:");
+  if (reason !== null) {
+    const app = mockApplications.find(x => x.id === id);
+    if (app) { 
+      app.status = "Deactivated"; 
+      app.deactivationReason = reason || "No reason provided"; 
+      saveCanteenApplications();
+      renderTable();
+      showToast("Deactivated", `Canteen ${id} has been deactivated.`, "warning");
     }
-  });
+  }
 }
 
 function reactivateApp(id) {
-  showConfirmModal({
-    title: "Reactivate Canteen",
-    message: "Are you sure you want to reactivate this canteen?",
-    type: "approve", requireInput: false,
-    onConfirm: () => {
-      const app = mockApplications.find(x => x.id === id);
-      if (app) { 
-        app.status = "Active Vendor"; 
-        delete app.deactivationReason;
-        saveCanteenApplications();
-        renderTable(); 
-      }
+  if (confirm("Are you sure you want to reactivate this canteen?")) {
+    const app = mockApplications.find(x => x.id === id);
+    if (app) { 
+      app.status = "Active Vendor"; 
+      delete app.deactivationReason;
+      saveCanteenApplications();
+      renderTable();
+      showToast("Success", `Canteen ${id} has been reactivated!`, "success");
     }
-  });
+  }
 }
 
 
