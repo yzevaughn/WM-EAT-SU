@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (item.status === "approved") {
         footerHtml = `
                     <div class="ac-footer">
-                        <button class="btn-appr btn-pink" style="flex: 1;" data-id="${item.id}" data-action="remove"><i class="fa-solid fa-trash-can"></i> Remove from Menu</button>
+                        <button class="btn-appr btn-pink" style="flex: 1;" data-id="${item.id}" data-action="remove"><i class="fa-solid fa-trash-can"></i> Remove from Active Poster</button>
                     </div>
                 `;
       }
