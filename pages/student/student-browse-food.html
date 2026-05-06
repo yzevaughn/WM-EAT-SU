@@ -518,8 +518,26 @@
         }
 
         grid.innerHTML = pageItems
-          .map(
-            (f) => `
+          .map((f) => {
+            let activeDiscount = 0;
+            const now = new Date();
+            now.setHours(0,0,0,0);
+            const start = f.discountStart ? new Date(f.discountStart) : null;
+            const end = f.discountEnd ? new Date(f.discountEnd) : null;
+            let isDiscountValid = true;
+            if (start && now < start) isDiscountValid = false;
+            if (end && now > end) isDiscountValid = false;
+            if (isDiscountValid && f.discount > 0) activeDiscount = f.discount;
+            let displayPrice = f.price;
+            if (activeDiscount > 0) {
+              if (f.discountType === "amount") {
+                displayPrice = Math.max(0, f.price - activeDiscount);
+              } else {
+                displayPrice = f.price * (1 - activeDiscount / 100);
+              }
+            }
+
+            return `
           <div class="food-card" data-id="${f.id}">
             <div class="food-image">
               <img src="${f.img}" alt="${f.name}" onerror="this.src='../../images/burger.avif'">
@@ -541,15 +559,21 @@
               <div class="food-prep-time"><i class="fa-regular fa-clock"></i> Ready in ${f.prepTime}</div>
               <div class="food-vendor"><i class="fa-solid fa-store"></i> ${f.vendor}</div>
               <div class="food-footer">
-                <div class="food-price">₱${Number(f.price).toFixed(2)}</div>
+                <div class="food-price">
+                  ${activeDiscount > 0 
+                    ? `<span style="color:#ef4444; font-weight:800;">₱${displayPrice.toFixed(2)}</span>
+                       <span style="text-decoration:line-through; color:#94a3b8; font-size:12px; margin-left:5px;">₱${Number(f.price).toFixed(2)}</span>`
+                    : `₱${Number(f.price).toFixed(2)}`
+                  }
+                </div>
                 <button class="add-btn add-cart-btn" data-id="${f.id}" data-name="${f.name}">
                   <i class="fa-solid fa-plus"></i> Add to Cart
                 </button>
               </div>
             </div>
           </div>
-        `,
-          )
+        `;
+          })
           .join("");
 
         grid.querySelectorAll(".food-card").forEach((card) => {
@@ -564,10 +588,29 @@
             e.stopPropagation();
             const food = foods.find((f) => f.id === btn.dataset.id);
             if (!food) return;
+            let currentDiscount = 0;
+            const now = new Date();
+            now.setHours(0,0,0,0);
+            const start = food.discountStart ? new Date(food.discountStart) : null;
+            const end = food.discountEnd ? new Date(food.discountEnd) : null;
+            let isDiscountValid = true;
+            if (start && now < start) isDiscountValid = false;
+            if (end && now > end) isDiscountValid = false;
+            if (isDiscountValid && food.discount > 0) currentDiscount = food.discount;
+
+            let finalPrice = Number(food.price);
+            if (currentDiscount > 0) {
+              if (food.discountType === "amount") {
+                finalPrice = Math.max(0, Number(food.price) - currentDiscount);
+              } else {
+                finalPrice = Number(food.price) * (1 - currentDiscount / 100);
+              }
+            }
+
             addToCart({
               id: food.id,
               name: food.name,
-              price: Number(food.price),
+              price: finalPrice,
               vendor: food.vendor,
               img: food.img,
               qty: 1,
@@ -629,10 +672,25 @@
         const f = foods.find((x) => x.id === id);
         if (!f) return;
         activeFood = f;
+        let activeDiscount = 0;
+        const now = new Date();
+        now.setHours(0,0,0,0);
+        const start = f.discountStart ? new Date(f.discountStart) : null;
+        const end = f.discountEnd ? new Date(f.discountEnd) : null;
+        let isDiscountValid = true;
+        if (start && now < start) isDiscountValid = false;
+        if (end && now > end) isDiscountValid = false;
+        if (isDiscountValid && f.discount > 0) activeDiscount = f.discount;
+        
+        const displayPrice = activeDiscount > 0 
+          ? (f.discountType === "amount" ? Math.max(0, f.price - activeDiscount) : f.price * (1 - activeDiscount / 100))
+          : f.price;
+
         document.getElementById("modalImg").src = f.img;
         document.getElementById("modalName").textContent = f.name;
-        document.getElementById("modalPrice").textContent =
-          "₱" + Number(f.price).toFixed(2);
+        document.getElementById("modalPrice").innerHTML = activeDiscount > 0 
+          ? `<span style="color:#ef4444;">₱${displayPrice.toFixed(2)}</span> <span style="text-decoration:line-through; font-size:14px; color:#94a3b8; margin-left:8px;">₱${Number(f.price).toFixed(2)}</span>`
+          : "₱" + Number(f.price).toFixed(2);
         document.getElementById("modalVendor").innerHTML =
           `<i class="fa-solid fa-store" style="color:#3b82f6;margin-right:4px;"></i>${f.vendor}`;
         document.getElementById("modalPrep").innerHTML =
@@ -669,10 +727,29 @@
       });
       document.getElementById("modalAddBtn").onclick = () => {
         if (activeFood) {
+          let currentDiscount = 0;
+          const now = new Date();
+          now.setHours(0,0,0,0);
+          const start = activeFood.discountStart ? new Date(activeFood.discountStart) : null;
+          const end = activeFood.discountEnd ? new Date(activeFood.discountEnd) : null;
+          let isDiscountValid = true;
+          if (start && now < start) isDiscountValid = false;
+          if (end && now > end) isDiscountValid = false;
+          if (isDiscountValid && activeFood.discount > 0) currentDiscount = activeFood.discount;
+
+          let finalPrice = Number(activeFood.price);
+          if (currentDiscount > 0) {
+            if (activeFood.discountType === "amount") {
+              finalPrice = Math.max(0, Number(activeFood.price) - currentDiscount);
+            } else {
+              finalPrice = Number(activeFood.price) * (1 - currentDiscount / 100);
+            }
+          }
+
           addToCart({
             id: activeFood.id,
             name: activeFood.name,
-            price: Number(activeFood.price),
+            price: finalPrice,
             vendor: activeFood.vendor,
             img: activeFood.img,
             qty: 1,

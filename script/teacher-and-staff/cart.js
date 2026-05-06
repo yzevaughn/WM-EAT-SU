@@ -331,9 +331,29 @@ function placeOrder(instructions, payment, promoCode = null) {
 
   // 1. Validate promo against the entire cart first to satisfy requirements
   const grandTotal = cart.reduce((sum, it) => sum + it.price * it.qty, 0);
-  const itemCount = cart.reduce((sum, it) => sum + it.qty, 0);
+
+  // Calculate final total including discounts to check against balance
   const globalPromo = validatePromoCode(promoCode, cart);
   const promoObj = globalPromo && !globalPromo.error ? globalPromo : null;
+  let totalDiscount = 0;
+  if (promoObj) {
+    totalDiscount = calculateDiscount(grandTotal, promoObj, cart);
+  }
+  const totalBalanceNeeded = grandTotal - totalDiscount;
+
+  if (payment === "Wallet") {
+    const currentBalance = typeof getWalletBalance === "function" ? getWalletBalance() : 0;
+    if (currentBalance < totalBalanceNeeded) {
+      if (typeof showToast === "function") {
+        showToast("error", "fa-wallet", "Insufficient wallet balance!");
+      } else if (window.showToast) {
+        window.showToast("error", "fa-wallet", "Insufficient wallet balance!");
+      }
+      return null;
+    }
+  }
+
+  const itemCount = cart.reduce((sum, it) => sum + it.qty, 0);
 
   // Calculate total discount available for the whole cart if it's a fixed amount
   let remainingDiscount = 0;
@@ -381,6 +401,11 @@ function placeOrder(instructions, payment, promoCode = null) {
 
     const pickupCode = Math.random().toString(36).substring(2, 6).toUpperCase();
 
+    const customerName = document.querySelector(".profile-name")?.textContent?.trim() || 
+                        sessionStorage.getItem("teacherName") || 
+                        sessionStorage.getItem("studentName") || 
+                        "Customer";
+
     const order = {
       id: orderId,
       items: JSON.parse(JSON.stringify(items)),
@@ -396,8 +421,11 @@ function placeOrder(instructions, payment, promoCode = null) {
       vendor,
       pickupCode,
       img: items[0].img || "", // Use first item image as preview
+      customerName: customerName,
       customerRole: window.location.href.includes("/outsider/")
         ? "outsider"
+        : window.location.href.includes("/teacher-and-staff/")
+        ? "teacher-and-staff"
         : "student",
       removedByStudent: false,
       removedByVendor: false,

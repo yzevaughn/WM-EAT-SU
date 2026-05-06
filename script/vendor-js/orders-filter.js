@@ -70,10 +70,10 @@
       title:       "Decline Order",
       iconClass:   "fa-solid fa-circle-xmark",
       iconColor:   "#dc2626",
-      subtitle:    "Are you sure you want to <strong>decline</strong> this order? It will be marked as <strong>Cancelled</strong>. This cannot be undone.",
+      subtitle:    "Are you sure you want to <strong>decline</strong> this order? You must provide a reason to the customer. This action cannot be undone.",
       btnClass:    "btn-confirm-decline",
       btnIconClass:"fas fa-times",
-      btnLabel:    "Confirm",
+      btnLabel:    "Confirm Decline",
     },
 
     markReady: {
@@ -277,6 +277,16 @@
         </div>
     `;
 
+    if (action === "decline") {
+      modalDetail.innerHTML += `
+        <div style="margin-top: 15px; padding: 12px; background: #fff5f5; border: 1px solid #feb2b2; border-radius: 12px;">
+          <label for="cancelReason" style="display: block; font-size: 13px; font-weight: 700; color: #c53030; margin-bottom: 8px;">Reason for Cancellation <span style="color: #ef4444;">*</span></label>
+          <textarea id="cancelReason" placeholder="Please provide a reason (e.g., Out of stock, Closing soon...)" style="width: 100%; min-height: 80px; padding: 10px; border: 1px solid #fecaca; border-radius: 8px; font-size: 14px; resize: vertical; outline: none; transition: border-color 0.2s;" required></textarea>
+          <div id="cancelReasonError" style="display: none; color: #dc2626; font-size: 12px; margin-top: 4px;"><i class="fa-solid fa-circle-exclamation"></i> Please provide a reason for cancellation.</div>
+        </div>
+      `;
+    }
+
     // Add copy listener for the modal button
     const copyBtn = document.getElementById("modalCopyIdBtn");
     if (copyBtn) {
@@ -323,7 +333,19 @@
   if (confirmActionBtn) {
     confirmActionBtn.addEventListener("click", () => {
       if (QueueCard && QueueAction) {
-        handleAction(QueueCard, QueueAction);
+        if (QueueAction === "decline") {
+          const reasonEl = document.getElementById("cancelReason");
+          const reason = reasonEl?.value.trim();
+          if (!reason) {
+            const errorEl = document.getElementById("cancelReasonError");
+            if (errorEl) errorEl.style.display = "block";
+            if (reasonEl) reasonEl.style.borderColor = "#dc2626";
+            return;
+          }
+          handleAction(QueueCard, QueueAction, reason);
+        } else {
+          handleAction(QueueCard, QueueAction);
+        }
       }
       closeModal();
     });
@@ -332,7 +354,7 @@
   /* ── 7. ACTION HANDLER ─────────────────────────────────── */
 
   /** Mutates the card DOM to reflect its new status. */
-  function handleAction(card, action) {
+  function handleAction(card, action, reason = null) {
     // If cart.js data driver is available, use it!
     const orderId = card.dataset.orderFullId || card.dataset.orderId || card.querySelector(".order-id-val")?.innerText;
 
@@ -350,7 +372,7 @@
       let order = window.getOrders ? window.getOrders().find(o => o.id === orderId) : null;
 
       if (action === "accept") nextStatus = "preparing";
-      else if (action === "decline") { nextStatus = "cancelled"; isCancel = true; extraAttrs = { cancelledByVendor: true }; }
+      else if (action === "decline") { nextStatus = "cancelled"; isCancel = true; extraAttrs = { cancelledByVendor: true, cancellationReason: reason }; }
       else if (action === "markReady") nextStatus = "ready";
       else if (action === "complete") {
         extraAttrs = { vendorPickedUp: true, vendorPickedUpAt: Date.now() };

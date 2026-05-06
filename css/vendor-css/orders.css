@@ -540,6 +540,16 @@ hr {
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
+/* Disabled state for sequential processing */
+.order-again-btn.disabled-btn {
+  background: #cbd5e1 !important;
+  color: #64748b !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
 /* RESPONSIVE */
 
 /* Tablet Responsiveness */

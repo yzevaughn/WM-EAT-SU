@@ -78,11 +78,21 @@ const STATUS_CFG = {
 };
 
 /* --- Build action buttons for each status --- */
-function buildActions(order, tab) {
-  if (tab === "Pending")
+function buildActions(order, tab, sequence) {
+  if (tab === "Pending") {
+    const isFirst = sequence === 1;
+    const acceptBtn = isFirst 
+      ? `<button class="order-again-btn" data-action="accept" data-id="${order.id}"><i class="fas fa-check"></i> Accept</button>`
+      : `<button class="order-again-btn disabled-btn" style="opacity:0.5; cursor:not-allowed;" 
+                 onclick="showVendorToast('info', 'fa-circle-info', 'Please accept order #1 first.')" 
+                 title="Sequential processing required: Accept the first order in the queue first.">
+            <i class="fas fa-check"></i> Accept
+         </button>`;
+    
     return `
-    <button class="order-again-btn"  data-action="accept"  data-id="${order.id}"><i class="fas fa-check"></i> Accept</button>
-    <button class="cancel-btn"  data-action="decline" data-id="${order.id}"><i class="fas fa-times"></i> Decline</button>`;
+    ${acceptBtn}
+    <button class="cancel-btn" data-action="decline" data-id="${order.id}"><i class="fas fa-times"></i> Decline</button>`;
+  }
   if (tab === "Preparing")
     return `
     <button class="order-again-btn" data-action="markReady" data-id="${order.id}"><i class="fa-solid fa-bell"></i> Mark Ready</button>`;
@@ -150,7 +160,9 @@ function buildVendorCard(order, sequence) {
     }
   }
 
-  const headerIcon = `<i class="fa-solid ${cfg.icon}"></i>`;
+  const headerIcon = tab === "Pending" 
+    ? `<span style="font-size:18px; font-weight:800;">${sequence}</span>`
+    : `<i class="fa-solid ${cfg.icon}"></i>`;
 
   return `
     <div class="order-card" data-status="${tab}" data-vendor="${order.vendor}" data-order-id="${shortId}"
@@ -161,8 +173,17 @@ function buildVendorCard(order, sequence) {
           <div class="order-title">
             <div class="order-store-icon ${cfg.cls}">${headerIcon}</div>
             <div style="display:flex; flex-direction:column; gap:2px;">
-              <div style="display:flex; align-items:center;">
-                <span class="order-card-title">Order #${shortId}</span>
+              <div style="display:flex; align-items:center; gap: 8px; flex-wrap: wrap;">
+                <span class="customer-name-badge" style="font-size:12px; font-weight:600; color:#1e293b; background:#f1f5f9; padding:2px 8px; border-radius:12px; display:flex; align-items:center; gap:4px;">
+                  <i class="fa-solid fa-user" style="font-size:10px;"></i>${esc(order.customerName || "Customer")}
+                </span>
+                <span class="customer-role-badge" style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.02em; padding:2px 8px; border-radius:12px; ${
+                  order.customerRole === "outsider" ? "background:#f3f0ff; color:#7c3aed; border:1px solid #e9d5ff;" :
+                  order.customerRole === "teacher-and-staff" ? "background:#fff7ed; color:#c2410c; border:1px solid #ffedd5;" :
+                  "background:#eff6ff; color:#2563eb; border:1px solid #dbeafe;"
+                }">
+                  ${order.customerRole === "outsider" ? "Outsider" : order.customerRole === "teacher-and-staff" ? "Teacher/Staff" : "Student"}
+                </span>
               </div>
               <div class="pay-method-badge ${payBadgeClass}">
                 <i class="fa-solid ${payIcon}"></i>
@@ -215,10 +236,19 @@ function buildVendorCard(order, sequence) {
             }
           </div>
           ${noteHtml}
+          ${tab === "Cancelled" && order.cancellationReason 
+            ? `<div style="margin-top:10px; padding:10px; background:#fef2f2; border:1px solid #fee2e2; border-radius:10px; border-left:4px solid #ef4444; font-size:12px; color:#b91c1c;">
+                 <i class="fa-solid fa-comment-slash" style="margin-right:6px;"></i><b>Cancellation Reason:</b> ${esc(order.cancellationReason)}
+               </div>` 
+            : ""}
         </div>
-        <div class="order-total-row"><span>Total: ₱${order.total.toFixed(2)}</span></div>
-        <div class="order-actions" style="margin-top:14px;display:flex;gap:8px;">
-          ${buildActions(order, tab)}
+        <div class="order-card-footer" style="margin-top: auto; padding-top: 16px; border-top: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
+          <div class="order-total-row" style="margin-top: 0;">
+            <span style="font-weight: 800; color: #1e293b; font-size: 16px;">Total: ₱${order.total.toFixed(2)}</span>
+          </div>
+          <div class="order-actions" style="margin-top: 0; display: flex; gap: 8px;">
+            ${buildActions(order, tab, sequence)}
+          </div>
         </div>
       </div>
     </div>`;
@@ -322,6 +352,17 @@ window.renderVendorOrders = function () {
       const content = `
         <div style="margin-bottom:20px; padding-bottom:15px; border-bottom:1px dashed #e2e8f0;">
           <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+            <span style="color:#64748b; font-size:13px;">Customer</span>
+            <span style="font-weight:700; color:#1e293b;">${esc(order.customerName || "Customer")}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+            <span style="color:#64748b; font-size:13px;">Customer Role</span>
+            <span style="font-weight:700; font-size:12px; color:${
+              order.customerRole === 'outsider' ? '#7c3aed' : 
+              order.customerRole === 'teacher-and-staff' ? '#c2410c' : '#2563eb'
+            }">${(order.customerRole || 'student').toUpperCase().replace(/-/g, ' ')}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
             <span style="color:#64748b; font-size:13px;">Order ID</span>
             <span style="font-family:monospace; font-weight:700; color:#1e293b;">#${esc(order.id.slice(-6).toUpperCase())}</span>
           </div>
@@ -338,7 +379,18 @@ window.renderVendorOrders = function () {
             <span style="font-weight:600; color:#1e293b;">${order.payment}</span>
           </div>
         </div>
+      `;
 
+      if (order.status === "cancelled" && order.cancellationReason) {
+        content += `
+          <div style="margin-top:15px; padding:12px; background:#fef2f2; border:1px solid #fee2e2; border-radius:10px; border-left:4px solid #ef4444;">
+            <div style="font-size:12px; font-weight:700; color:#991b1b; margin-bottom:4px;">Cancellation Reason:</div>
+            <div style="font-size:13px; color:#b91c1c;">${esc(order.cancellationReason)}</div>
+          </div>
+        `;
+      }
+
+      content += `
         <div style="margin-bottom:15px; font-weight:700; color:#0f172a; font-size:14px;">Items Summary</div>
         <div style="max-height:300px; overflow-y:auto; padding-right:5px;">
           ${itemsHtml}
@@ -899,6 +951,7 @@ function finalizeWalkinOrder() {
     payment: paymentMethodStr,
     vendor: "Canteen 1",
     customerRole: "Walk-in",
+    customerName: "Walk-in Customer",
   };
 
   const allOrders = typeof getOrders === "function" ? getOrders() : [];
