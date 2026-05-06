@@ -1,461 +1,1136 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WM EAT SU - Admin Analytics</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
     <link rel="stylesheet" href="../../css/navbar.css" />
     <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css" />
     <link rel="stylesheet" href="../../css/admin-css/analytics.css" />
-    
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
 
     <!-- TOP NAVBAR (Consistent) -->
     <div class="top-nav">
-        <!-- LEFT: hamburger + logo -->
-        <div class="nav-left">
-            <label for="menu-checkbox" class="menu-toggle">
-                <i class="fa-solid fa-bars"></i>
-            </label>
-            <a href="admin-dashboard.html" class="logo">
-                <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-                <span class="logo-text">WM EAT SU</span>
-            </a>
-        </div>
+      <!-- LEFT: hamburger + logo -->
+      <div class="nav-left">
+        <label for="menu-checkbox" class="menu-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </label>
+        <a href="admin-dashboard.html" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
+        </a>
+      </div>
 
-        <div class="nav-center"></div>
+      <div class="nav-center"></div>
 
-        <!-- RIGHT: profile -->
-        <div class="nav-right">
-            <!-- Notifications -->
-            <div class="notification-dropdown">
-                <button class="nav-icon-btn" aria-label="Notifications">
-                    <i class="fa-regular fa-bell"></i>
-                    <span class="notification-badge"></span>
-                </button>
-                <div class="notification-menu">
-                    <div class="notification-header">
-                        <h3>Notifications</h3>
-                        <button class="mark-read-btn">Mark all as read</button>
-                    </div>
-                    <div class="notification-list">
-                        <!-- Dynamic notifications -->
-                    </div>
-                    <div class="notification-footer">
-                        <a href="admin-notifications.html">View all notifications</a>
-                    </div>
-                </div>
+      <!-- RIGHT: profile -->
+      <div class="nav-right">
+        <!-- Notifications -->
+        <div class="notification-dropdown">
+          <button class="nav-icon-btn" aria-label="Notifications">
+            <i class="fa-regular fa-bell"></i>
+            <span class="notification-badge"></span>
+          </button>
+          <div class="notification-menu">
+            <div class="notification-header">
+              <h3>Notifications</h3>
+              <button class="mark-read-btn">Mark all as read</button>
             </div>
-            <div class="profile">
-                <div class="profile-info">
-                    <span class="profile-name">Evangelista, Vaughn</span>
-                    <span class="email">vaughn.student@wm.edu.ph</span>
-                </div>
-                <div class="profile-dropdown">
-                    <button class="profile-btn">
-                        <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" />
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="../../index.html" class="dropdown-item">
-                            <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
-                        </a>
-                    </div>
-                </div>
+            <div class="notification-list">
+              <!-- Dynamic notifications -->
             </div>
+            <div class="notification-footer">
+              <a href="admin-notifications.html">View all notifications</a>
+            </div>
+          </div>
         </div>
+        <div class="profile">
+          <div class="profile-info">
+            <span class="profile-name">Evangelista, Vaughn</span>
+            <span class="email">vaughn.student@wm.edu.ph</span>
+          </div>
+          <div class="profile-dropdown">
+            <button class="profile-btn">
+              <img
+                src="../../images/pfp.jpg"
+                class="profile-pic"
+                alt="Profile"
+              />
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="../../index.html" class="dropdown-item">
+                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="layout">
-        <!-- SIDEBAR (Consistent) -->
-        <div class="left-nav" id="sidebar">
-            <div class="sidebar-logo">
-                <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
-                <span class="logo-text">WM EAT SU</span>
-            </div>
-            <ul class="nav-list">
-                <li>
-                    <a href="admin-dashboard.html" class="nav-link">
-                        <i class="fa-solid fa-house"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="student-applications.html" class="nav-link">
-                        <i class="fa-solid fa-user-check"></i>
-                        <span>Student Applications</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="canteen-applications.html" class="nav-link">
-                        <i class="fa-solid fa-store"></i>
-                        <span>Canteen Applications</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="complaints.html" class="nav-link">
-                        <i class="fa-solid fa-comment-dots"></i>
-                        <span>Complaints</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="admin-menu.html" class="nav-link">
-                        <i class="fa-solid fa-utensils"></i>
-                        <span>Menu</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="admin-voucher.html" class="nav-link">
-                        <i class="fa-solid fa-ticket"></i>
-                        <span>Vouchers</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="admin-analytics.html" class="nav-link active">
-                        <i class="fa-solid fa-chart-line"></i>
-                        <span>Analytics</span>
-                    </a>
-                </li>
-            </ul>
+      <!-- SIDEBAR (Consistent) -->
+      <div class="left-nav" id="sidebar">
+        <div class="sidebar-logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
+        </div>
+        <ul class="nav-list">
+          <li>
+            <a href="admin-dashboard.html" class="nav-link">
+              <i class="fa-solid fa-house"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-applications.html" class="nav-link">
+              <i class="fa-solid fa-user-check"></i>
+              <span>Student Applications</span>
+            </a>
+          </li>
+          <li>
+            <a href="canteen-applications.html" class="nav-link">
+              <i class="fa-solid fa-store"></i>
+              <span>Canteen Applications</span>
+            </a>
+          </li>
+          <li>
+            <a href="complaints.html" class="nav-link">
+              <i class="fa-solid fa-comment-dots"></i>
+              <span>Complaints</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-menu.html" class="nav-link">
+              <i class="fa-solid fa-utensils"></i>
+              <span>Menu</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-voucher.html" class="nav-link">
+              <i class="fa-solid fa-ticket"></i>
+              <span>Vouchers</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-analytics.html" class="nav-link active">
+              <i class="fa-solid fa-chart-line"></i>
+              <span>Analytics</span>
+            </a>
+          </li>
+        </ul>
+      </div>
 
+      <!-- MAIN CONTENT -->
+      <div class="main-content">
+        <header class="page-header">
+          <div class="header-left">
+            <h1>Platform Analytics</h1>
+            <p class="subtitle">
+              Insights and performance tracking for the entire ecosystem
+            </p>
+          </div>
+
+        </header>
+
+        <!-- TABS -->
+        <div class="analytics-tabs">
+          <button class="tab-btn active" id="allTab">
+            <i class="fa-solid fa-globe"></i> All Analytics
+          </button>
+          <button class="tab-btn" id="studentVendorTab">
+            <i class="fa-solid fa-user-graduate"></i> Student Vendor Analytics
+          </button>
+          <button class="tab-btn" id="canteenTab">
+            <i class="fa-solid fa-store"></i> Canteen Analytics
+          </button>
+          <button class="tab-btn" id="foodTab">
+            <i class="fa-solid fa-utensils"></i> Food Analytics
+          </button>
         </div>
 
-        <!-- MAIN CONTENT -->
-        <div class="main-content">
-            <header class="page-header">
-                <div class="header-left">
-                    <h1>Platform Analytics</h1>
-                    <p class="subtitle">Insights and performance tracking for the entire ecosystem</p>
+        <!-- ALL VIEW -->
+        <div id="allView">
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-label">Total Platform Revenue</span>
+                <div class="kpi-icon-wrapper kpi-green">
+                  <i class="fa-solid fa-peso-sign"></i>
                 </div>
-                <div class="header-actions">
-                    <button class="btn-report"><i class="fa-solid fa-file-pdf"></i> Export PDF</button>
-                    <button class="btn-report"><i class="fa-solid fa-file-csv"></i> Export CSV</button>
-                </div>
-            </header>
-
-            <!-- TABS -->
-            <div class="analytics-tabs">
-                <button class="tab-btn active" id="vendorTab">
-                    <i class="fa-solid fa-shop"></i> Vendor Analytics
-                </button>
-                <button class="tab-btn" id="studentTab">
-                    <i class="fa-solid fa-graduation-cap"></i> Student Analytics
-                </button>
-                <button class="tab-btn" id="foodTab">
-                    <i class="fa-solid fa-utensils"></i> Food Analytics
-                </button>
+              </div>
+              <div class="kpi-value" id="allTotalRevenue">₱3,330,200</div>
             </div>
-
-            <!-- VENDOR VIEW -->
-            <div id="vendorView">
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <div class="kpi-header">
-                            <span class="kpi-label">Total Revenue</span>
-                            <div class="kpi-icon-wrapper kpi-green"><i class="fa-solid fa-peso-sign"></i></div>
-                        </div>
-                        <div class="kpi-value">₱1,245,000</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-header">
-                            <span class="kpi-label">Total Orders</span>
-                            <div class="kpi-icon-wrapper kpi-blue"><i class="fa-solid fa-bag-shopping"></i></div>
-                        </div>
-                        <div class="kpi-value">8,432</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-header">
-                            <span class="kpi-label">Active Vendors</span>
-                            <div class="kpi-icon-wrapper kpi-purple"><i class="fa-solid fa-store"></i></div>
-                        </div>
-                        <div class="kpi-value">42</div>
-                    </div>
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-label">Total Active Vendors</span>
+                <div class="kpi-icon-wrapper kpi-purple">
+                  <i class="fa-solid fa-shop"></i>
                 </div>
-
-                <div class="section-card">
-                    <div class="card-header">
-                        <h2 class="card-title"><i class="fa-solid fa-trophy"></i> Top Performing Vendors</h2>
-                    </div>
-                    <div class="table-wrapper">
-                        <table class="data-grid">
-                            <thead>
-                                <tr>
-                                    <th>Rank</th>
-                                    <th>Vendor / Canteen</th>
-                                    <th>Total Orders</th>
-                                    <th>Revenue</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>#1</strong></td>
-                                    <td>
-                                        <div class="entity-cell">
-                                            <img src="../../images/burger.avif" class="entity-img" alt="Canteen">
-                                            <div class="entity-info">
-                                                <span class="entity-name">Canteen 1 (Main)</span>
-                                                <span class="entity-sub">Main Hub</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>2,140</td>
-                                    <td><strong>₱342,100</strong></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>#2</strong></td>
-                                    <td>
-                                        <div class="entity-cell">
-                                            <img src="../../images/pancit.avif" class="entity-img" alt="Canteen">
-                                            <div class="entity-info">
-                                                <span class="entity-name">Sisig Express</span>
-                                                <span class="entity-sub">Food Court</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>1,850</td>
-                                    <td><strong>₱210,450</strong></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>#3</strong></td>
-                                    <td>
-                                        <div class="entity-cell">
-                                            <img src="../../images/shake.avif" class="entity-img" alt="Canteen">
-                                            <div class="entity-info">
-                                                <span class="entity-name">Brew Haven</span>
-                                                <span class="entity-sub">South Gate</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>1,240</td>
-                                    <td><strong>₱185,200</strong></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+              </div>
+              <div class="kpi-value" id="allTotalVendors">42</div>
             </div>
+          </div>
 
-            <!-- STUDENT VIEW -->
-            <div id="studentView" style="display: none;">
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <div class="kpi-header">
-                            <span class="kpi-label">Active Students</span>
-                            <div class="kpi-icon-wrapper kpi-blue"><i class="fa-solid fa-graduation-cap"></i></div>
-                        </div>
-                        <div class="kpi-value">2,840</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-header">
-                            <span class="kpi-label">Avg. Daily Spend</span>
-                            <div class="kpi-icon-wrapper kpi-green"><i class="fa-solid fa-wallet"></i></div>
-                        </div>
-                        <div class="kpi-value">₱142.00</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-header">
-                            <span class="kpi-label">Peak Traffic Day</span>
-                            <div class="kpi-icon-wrapper kpi-amber"><i class="fa-solid fa-calendar-day"></i></div>
-                        </div>
-                        <div class="kpi-value">Wednesday</div>
-                    </div>
+          <div class="section-card">
+            <div class="card-header">
+              <h2 class="card-title">
+                <i class="fa-solid fa-ranking-star"></i> Leaderboard
+              </h2>
+              <div class="header-filters">
+                <div class="filter-item">
+                  <label for="allTimeFilter"
+                    ><i class="fa-solid fa-calendar-days"></i> Period:</label
+                  >
+                  <select
+                    class="form-control-sm time-period-select"
+                    id="allTimeFilter"
+                  >
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                    <option value="specific">Specific Month</option>
+                    <option value="all" selected>All Time</option>
+                  </select>
                 </div>
-
-                <div class="section-card">
-                    <div class="card-header">
-                        <h2 class="card-title"><i class="fa-solid fa-users"></i> Student Activity Overview</h2>
-                    </div>
-                    <div class="table-wrapper" style="overflow-x: auto;">
-                        <table class="data-grid">
-                            <thead>
-                                <tr>
-                                    <th>Rank</th>
-                                    <th>Student Account</th>
-                                    <th>Email Address</th>
-                                    <th>Total Orders</th>
-                                    <th>Total Spent</th>
-                                    <th>Last Activity</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>#1</strong></td>
-                                    <td>
-                                        <div class="entity-cell">
-                                            <img src="../../images/pfp.jpg" class="entity-img" alt="Student">
-                                            <div class="entity-info">
-                                                <span class="entity-name">Vaughn Evangelista</span>
-                                                <span class="entity-sub">Senior Student</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>vaughn.student@wm.edu.ph</td>
-                                    <td>156</td>
-                                    <td><strong>₱15,240.00</strong></td>
-                                    <td>2 hours ago</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>#2</strong></td>
-                                    <td>
-                                        <div class="entity-cell">
-                                            <img src="../../images/pfp.jpg" class="entity-img" alt="Student">
-                                            <div class="entity-info">
-                                                <span class="entity-name">Maria Clara</span>
-                                                <span class="entity-sub">Junior Student</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>m.clara@wm.edu.ph</td>
-                                    <td>142</td>
-                                    <td><strong>₱12,850.00</strong></td>
-                                    <td>1 day ago</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>#3</strong></td>
-                                    <td>
-                                        <div class="entity-cell">
-                                            <img src="../../images/pfp.jpg" class="entity-img" alt="Student">
-                                            <div class="entity-info">
-                                                <span class="entity-name">Jose Rizal</span>
-                                                <span class="entity-sub">Freshman</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>j.rizal@wm.edu.ph</td>
-                                    <td>98</td>
-                                    <td><strong>₱9,200.00</strong></td>
-                                    <td>3 days ago</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <input
+                  type="month"
+                  class="form-control-sm month-picker"
+                  style="display: none"
+                />
+              </div>
             </div>
-
-            <!-- FOOD VIEW -->
-            <div id="foodView" style="display: none;">
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <div class="kpi-header">
-                            <span class="kpi-label">Total Items Sold</span>
-                            <div class="kpi-icon-wrapper kpi-green"><i class="fa-solid fa-box-open"></i></div>
-                        </div>
-                        <div class="kpi-value">12,540</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-header">
-                            <span class="kpi-label">Most Popular Category</span>
-                            <div class="kpi-icon-wrapper kpi-amber"><i class="fa-solid fa-fire"></i></div>
-                        </div>
-                        <div class="kpi-value">Main Course</div>
-                    </div>
-                    <div class="kpi-card">
-                        <div class="kpi-header">
-                            <span class="kpi-label">Avg. Prep Time</span>
-                            <div class="kpi-icon-wrapper kpi-blue"><i class="fa-solid fa-clock"></i></div>
-                        </div>
-                        <div class="kpi-value">12 mins</div>
-                    </div>
-                </div>
-
-                <div class="section-card">
-                    <div class="card-header">
-                        <h2 class="card-title"><i class="fa-solid fa-star"></i> Top Selling Menu Items</h2>
-                    </div>
-                    <div class="table-wrapper">
-                        <table class="data-grid">
-                            <thead>
-                                <tr>
-                                    <th>Rank</th>
-                                    <th>Item Name</th>
-                                    <th>Category</th>
-                                    <th>Orders</th>
-                                    <th>Total Sales</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>#1</strong></td>
-                                    <td>
-                                        <div class="entity-cell">
-                                            <img src="../../images/burger.avif" class="entity-img" alt="Food">
-                                            <div class="entity-info">
-                                                <span class="entity-name">Special Beef Burger</span>
-                                                <span class="entity-sub">Canteen 1</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Fast Food</td>
-                                    <td>1,240</td>
-                                    <td><strong>₱86,800</strong></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>#2</strong></td>
-                                    <td>
-                                        <div class="entity-cell">
-                                            <img src="../../images/pancit.avif" class="entity-img" alt="Food">
-                                            <div class="entity-info">
-                                                <span class="entity-name">Pancit Guisado</span>
-                                                <span class="entity-sub">Sisig Express</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Main Course</td>
-                                    <td>980</td>
-                                    <td><strong>₱58,800</strong></td>
-                                </tr>
-                                <tr>
-                                    <td><strong>#3</strong></td>
-                                    <td>
-                                        <div class="entity-cell">
-                                            <img src="../../images/shake.avif" class="entity-img" alt="Food">
-                                            <div class="entity-info">
-                                                <span class="entity-name">Mango Graham Shake</span>
-                                                <span class="entity-sub">Brew Haven</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Beverages</td>
-                                    <td>850</td>
-                                    <td><strong>₱42,500</strong></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            <div class="table-wrapper">
+              <table class="data-grid">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Vendor</th>
+                    <th>Type</th>
+                    <th>Total Orders</th>
+                    <th>Revenue</th>
+                  </tr>
+                </thead>
+                <tbody id="allLeaderboardBody">
+                  <!-- JS RENDERED -->
+                </tbody>
+              </table>
             </div>
+            <div class="pagination-footer" id="allPagination">
+              <!-- JS RENDERED -->
+            </div>
+          </div>
         </div>
+
+        <!-- STUDENT VENDOR VIEW -->
+        <div id="studentVendorView" style="display: none">
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-label">Student Vendor Revenue</span>
+                <div class="kpi-icon-wrapper kpi-green">
+                  <i class="fa-solid fa-peso-sign"></i>
+                </div>
+              </div>
+              <div class="kpi-value" id="studentTotalRevenue">₱485,200</div>
+            </div>
+
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-label">Active Student Vendors</span>
+                <div class="kpi-icon-wrapper kpi-purple">
+                  <i class="fa-solid fa-user-tie"></i>
+                </div>
+              </div>
+              <div class="kpi-value" id="studentActiveVendors">30</div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="card-header">
+              <h2 class="card-title">
+                <i class="fa-solid fa-trophy"></i> Leaderboard
+              </h2>
+              <div class="header-filters">
+                <div class="filter-item">
+                  <label for="studentTimeFilter"
+                    ><i class="fa-solid fa-calendar-days"></i> Period:</label
+                  >
+                  <select
+                    class="form-control-sm time-period-select"
+                    id="studentTimeFilter"
+                  >
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                    <option value="specific">Specific Month</option>
+                    <option value="all" selected>All Time</option>
+                  </select>
+                </div>
+                <input
+                  type="month"
+                  class="form-control-sm month-picker"
+                  style="display: none"
+                />
+              </div>
+            </div>
+            <div class="table-wrapper">
+              <table class="data-grid">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Student Vendor</th>
+                    <th>Total Orders</th>
+                    <th>Revenue</th>
+                  </tr>
+                </thead>
+                <tbody id="studentLeaderboardBody">
+                  <!-- JS RENDERED -->
+                </tbody>
+              </table>
+            </div>
+            <div class="pagination-footer" id="studentPagination">
+              <!-- JS RENDERED -->
+            </div>
+          </div>
+        </div>
+
+        <!-- CANTEEN VIEW -->
+        <div id="canteenView" style="display: none">
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-label">Total Canteen Revenue</span>
+                <div class="kpi-icon-wrapper kpi-green">
+                  <i class="fa-solid fa-peso-sign"></i>
+                </div>
+              </div>
+              <div class="kpi-value" id="canteenTotalRevenue">₱2,845,000</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-header">
+                <span class="kpi-label">Total Active Canteens</span>
+                <div class="kpi-icon-wrapper kpi-purple">
+                  <i class="fa-solid fa-store"></i>
+                </div>
+              </div>
+              <div class="kpi-value" id="canteenActiveCanteens">12</div>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <div class="card-header">
+              <h2 class="card-title">
+                <i class="fa-solid fa-store"></i> Leaderboard
+              </h2>
+              <div class="header-filters">
+                <div class="filter-item">
+                  <label for="canteenTimeFilter"
+                    ><i class="fa-solid fa-calendar-days"></i> Period:</label
+                  >
+                  <select
+                    class="form-control-sm time-period-select"
+                    id="canteenTimeFilter"
+                  >
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                    <option value="specific">Specific Month</option>
+                    <option value="all" selected>All Time</option>
+                  </select>
+                </div>
+                <input
+                  type="month"
+                  class="form-control-sm month-picker"
+                  style="display: none"
+                />
+              </div>
+            </div>
+            <div class="table-wrapper" style="overflow-x: auto">
+              <table class="data-grid">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Canteen Name</th>
+                    <th>Location</th>
+                    <th>Total Orders</th>
+                    <th>Revenue</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="canteenLeaderboardBody">
+                  <!-- JS RENDERED -->
+                </tbody>
+              </table>
+            </div>
+            <div class="pagination-footer" id="canteenPagination">
+              <!-- JS RENDERED -->
+            </div>
+          </div>
+        </div>
+
+        <!-- FOOD VIEW -->
+        <div id="foodView" style="display: none">
+          <div class="section-card">
+            <div class="card-header">
+              <h2 class="card-title">
+                <i class="fa-solid fa-star"></i> Leaderboard
+              </h2>
+              <div class="header-filters">
+                <div class="filter-item">
+                  <label for="foodTimeFilter"
+                    ><i class="fa-solid fa-calendar-days"></i> Period:</label
+                  >
+                  <select
+                    class="form-control-sm time-period-select"
+                    id="foodTimeFilter"
+                  >
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                    <option value="specific">Specific Month</option>
+                    <option value="all" selected>All Time</option>
+                  </select>
+                </div>
+                <input
+                  type="month"
+                  class="form-control-sm month-picker"
+                  style="display: none"
+                />
+              </div>
+            </div>
+            <div class="table-wrapper">
+              <table class="data-grid">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Item Name</th>
+                    <th>Category</th>
+                    <th>Total Sold</th>
+                    <th>Total Sales</th>
+                  </tr>
+                </thead>
+                <tbody id="foodLeaderboardBody">
+                  <!-- JS RENDERED -->
+                </tbody>
+              </table>
+            </div>
+            <div class="pagination-footer" id="foodPagination">
+              <!-- JS RENDERED -->
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="../../script/notifications.js"></script>
     <script src="../../script/admin-js/admin-notifications-mock.js"></script>
     <script>
-        // Tab switching logic
-        const tabs = [
-            { btn: document.getElementById('vendorTab'), view: document.getElementById('vendorView') },
-            { btn: document.getElementById('studentTab'), view: document.getElementById('studentView') },
-            { btn: document.getElementById('foodTab'), view: document.getElementById('foodView') }
-        ];
+      // --- MOCK DATA ---
+      const leaderboardData = {
+        all: {
+          all: [
+            {
+              rank: 1,
+              name: "Canteen 1 (Main)",
+              sub: "Admin Hub",
+              type: "Canteen",
+              typeClass: "badge-blue",
+              orders: 4250,
+              revenue: "₱412,500.00",
+              img: "../../images/burger.avif",
+            },
+            {
+              rank: 2,
+              name: "Juan Dela Cruz",
+              sub: "",
+              type: "Student",
+              typeClass: "badge-warning",
+              orders: 1850,
+              revenue: "₱210,450.00",
+              img: null,
+            },
+            {
+              rank: 3,
+              name: "College of Law Canteen",
+              sub: "Law Building",
+              type: "Canteen",
+              typeClass: "badge-blue",
+              orders: 3142,
+              revenue: "₱298,850.00",
+              img: "../../images/pancit.avif",
+            },
+            {
+              rank: 4,
+              name: "Maria Santos",
+              sub: "",
+              type: "Student",
+              typeClass: "badge-warning",
+              orders: 1240,
+              revenue: "₱185,200.00",
+              img: null,
+            },
+            {
+              rank: 5,
+              name: "Gymnasium Canteen",
+              sub: "Sports Complex",
+              type: "Canteen",
+              typeClass: "badge-blue",
+              orders: 2890,
+              revenue: "₱192,200.00",
+              img: "../../images/shake.avif",
+            },
+            {
+              rank: 6,
+              name: "Science Lab Canteen",
+              sub: "Science Wing",
+              type: "Canteen",
+              typeClass: "badge-blue",
+              orders: 1240,
+              revenue: "₱110,500.00",
+              img: "../../images/burger.avif",
+            },
+            {
+              rank: 7,
+              name: "Antonio Luna",
+              sub: "",
+              type: "Student",
+              typeClass: "badge-warning",
+              orders: 842,
+              revenue: "₱89,550.00",
+              img: null,
+            },
+            {
+              rank: 8,
+              name: "Engineering Canteen",
+              sub: "Engr. Dept",
+              type: "Canteen",
+              typeClass: "badge-blue",
+              orders: 950,
+              revenue: "₱85,400.00",
+              img: "../../images/pancit.avif",
+            },
+          ],
+          today: [
+            {
+              rank: 1,
+              name: "Juan Dela Cruz",
+              sub: "",
+              type: "Student",
+              typeClass: "badge-warning",
+              orders: 45,
+              revenue: "₱4,850.00",
+              img: null,
+            },
+            {
+              rank: 2,
+              name: "Canteen 1 (Main)",
+              sub: "Admin Hub",
+              type: "Canteen",
+              typeClass: "badge-blue",
+              orders: 38,
+              revenue: "₱3,200.00",
+              img: "../../images/burger.avif",
+            },
+            {
+              rank: 3,
+              name: "Maria Santos",
+              sub: "",
+              type: "Student",
+              typeClass: "badge-warning",
+              orders: 22,
+              revenue: "₱2,150.00",
+              img: null,
+            },
+          ],
+          week: [
+            {
+              rank: 1,
+              name: "Canteen 1 (Main)",
+              sub: "Admin Hub",
+              type: "Canteen",
+              typeClass: "badge-blue",
+              orders: 310,
+              revenue: "₱28,450.00",
+              img: "../../images/burger.avif",
+            },
+            {
+              rank: 2,
+              name: "Juan Dela Cruz",
+              sub: "",
+              type: "Student",
+              typeClass: "badge-warning",
+              orders: 215,
+              revenue: "₱22,100.00",
+              img: null,
+            },
+            {
+              rank: 3,
+              name: "Maria Santos",
+              sub: "",
+              type: "Student",
+              typeClass: "badge-warning",
+              orders: 180,
+              revenue: "₱18,550.00",
+              img: null,
+            },
+            {
+              rank: 4,
+              name: "College of Law Canteen",
+              sub: "Law Building",
+              type: "Canteen",
+              typeClass: "badge-blue",
+              orders: 155,
+              revenue: "₱14,200.00",
+              img: "../../images/pancit.avif",
+            },
+          ],
+        },
+        student: {
+          all: [
+            {
+              rank: 1,
+              name: "Juan Dela Cruz",
+              sub: "Sisig Express",
+              orders: 1850,
+              revenue: "₱210,450.00",
+              img: null,
+            },
+            {
+              rank: 2,
+              name: "Maria Santos",
+              sub: "Brew Haven",
+              orders: 1240,
+              revenue: "₱185,200.00",
+              img: null,
+            },
+            {
+              rank: 3,
+              name: "Antonio Luna",
+              sub: "Healthy Bites",
+              orders: 842,
+              revenue: "₱89,550.00",
+              img: null,
+            },
+            {
+              rank: 4,
+              name: "Elena Garcia",
+              sub: "Sweet Treats",
+              orders: 650,
+              revenue: "₱62,300.00",
+              img: null,
+            },
+            {
+              rank: 5,
+              name: "Pedro Penduko",
+              sub: "Fruit Splash",
+              orders: 420,
+              revenue: "₱38,150.00",
+              img: null,
+            },
+            {
+              rank: 6,
+              name: "Gabriela Silang",
+              sub: "Pasta House",
+              orders: 380,
+              revenue: "₱32,400.00",
+              img: null,
+            },
+            {
+              rank: 7,
+              name: "Jose Rizal",
+              sub: "Book & Coffee",
+              orders: 290,
+              revenue: "₱24,800.00",
+              img: null,
+            },
+          ],
+          today: [
+            {
+              rank: 1,
+              name: "Juan Dela Cruz",
+              sub: "Sisig Express",
+              orders: 45,
+              revenue: "₱4,850.00",
+              img: null,
+            },
+            {
+              rank: 2,
+              name: "Maria Santos",
+              sub: "Brew Haven",
+              orders: 22,
+              revenue: "₱2,150.00",
+              img: null,
+            },
+            {
+              rank: 3,
+              name: "Elena Garcia",
+              sub: "Sweet Treats",
+              orders: 15,
+              revenue: "₱1,450.00",
+              img: null,
+            },
+          ],
+        },
+        canteen: {
+          all: [
+            {
+              rank: 1,
+              name: "Canteen 1 (Main)",
+              sub: "Admin Hub",
+              location: "Main Campus",
+              orders: 4250,
+              revenue: "₱412,500.00",
+              status: "Active",
+              img: "../../images/burger.avif",
+            },
+            {
+              rank: 2,
+              name: "College of Law Canteen",
+              sub: "Law Building",
+              location: "East Campus",
+              orders: 3142,
+              revenue: "₱298,850.00",
+              status: "Active",
+              img: "../../images/pancit.avif",
+            },
+            {
+              rank: 3,
+              name: "Gymnasium Canteen",
+              sub: "Sports Complex",
+              location: "Main Campus",
+              orders: 2890,
+              revenue: "₱192,200.00",
+              status: "Active",
+              img: "../../images/shake.avif",
+            },
+            {
+              rank: 4,
+              name: "Science Lab Canteen",
+              sub: "Science Wing",
+              location: "West Campus",
+              orders: 1240,
+              revenue: "₱110,500.00",
+              status: "Active",
+              img: "../../images/burger.avif",
+            },
+            {
+              rank: 5,
+              name: "Engineering Canteen",
+              sub: "Engr. Dept",
+              location: "Main Campus",
+              orders: 950,
+              revenue: "₱85,400.00",
+              status: "Active",
+              img: "../../images/pancit.avif",
+            },
+            {
+              rank: 6,
+              name: "Agriculture Canteen",
+              sub: "Agri Dept",
+              location: "North Campus",
+              orders: 720,
+              revenue: "₱62,100.00",
+              status: "Active",
+              img: "../../images/shake.avif",
+            },
+            {
+              rank: 7,
+              name: "Nursing Canteen",
+              sub: "Med Wing",
+              location: "East Campus",
+              orders: 640,
+              revenue: "₱58,900.00",
+              status: "Active",
+              img: "../../images/pancit.avif",
+            },
+            {
+              rank: 8,
+              name: "HRM Canteen",
+              sub: "Hotel Lab",
+              location: "Main Campus",
+              orders: 510,
+              revenue: "₱48,500.00",
+              status: "Active",
+              img: "../../images/burger.avif",
+            },
+          ],
+        },
+        food: {
+          all: [
+            {
+              rank: 1,
+              name: "Special Beef Burger",
+              sub: "Canteen 1",
+              cat: "Fast Food",
+              orders: 1240,
+              sales: "₱86,800.00",
+              img: "../../images/burger.avif",
+            },
+            {
+              rank: 2,
+              name: "Pancit Guisado",
+              sub: "Sisig Express",
+              cat: "Main Course",
+              orders: 980,
+              sales: "₱58,800.00",
+              img: "../../images/pancit.avif",
+            },
+            {
+              rank: 3,
+              name: "Mango Graham Shake",
+              sub: "Brew Haven",
+              cat: "Beverages",
+              orders: 850,
+              sales: "₱42,500.00",
+              img: "../../images/shake.avif",
+            },
+            {
+              rank: 4,
+              name: "Chicken Inasal",
+              sub: "Canteen 1",
+              cat: "Main Course",
+              orders: 720,
+              sales: "₱64,800.00",
+              img: "../../images/pancit.avif",
+            },
+            {
+              rank: 5,
+              name: "Halo-Halo",
+              sub: "Healthy Bites",
+              cat: "Dessert",
+              orders: 540,
+              sales: "₱27,000.00",
+              img: "../../images/shake.avif",
+            },
+            {
+              rank: 6,
+              name: "Ice Coffee",
+              sub: "Brew Haven",
+              cat: "Beverages",
+              orders: 480,
+              sales: "₱19,200.00",
+              img: "../../images/shake.avif",
+            },
+            {
+              rank: 7,
+              name: "Spaghetti",
+              sub: "Pasta House",
+              cat: "Main Course",
+              orders: 320,
+              sales: "₱16,000.00",
+              img: "../../images/pancit.avif",
+            },
+          ],
+        },
+      };
 
-        tabs.forEach(tab => {
-            tab.btn.addEventListener('click', () => {
-                // Remove active class from all buttons and hide all views
-                tabs.forEach(t => {
-                    t.btn.classList.remove('active');
-                    t.view.style.display = 'none';
-                });
-                // Add active class to clicked button and show its view
-                tab.btn.classList.add('active');
-                tab.view.style.display = 'block';
-            });
+      // --- PAGINATION STATE ---
+      const itemsPerPage = 5;
+      const currentPages = { all: 1, student: 1, canteen: 1, food: 1 };
+
+      // --- RENDER FUNCTIONS ---
+      function renderPagination(targetId, totalItems, category) {
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        const currentPage = currentPages[category];
+        const container = document.getElementById(targetId);
+
+        if (totalPages <= 1) {
+          container.innerHTML = "";
+          return;
+        }
+
+        const startItem = (currentPage - 1) * itemsPerPage + 1;
+        const endItem = Math.min(currentPage * itemsPerPage, totalItems);
+
+        container.innerHTML = `
+          <div class="pagination-info">Showing ${startItem} to ${endItem} of ${totalItems} entries</div>
+          <div class="pagination-btns">
+            <button class="pg-btn prev" ${currentPage === 1 ? "disabled" : ""} onclick="changePage('${category}', ${currentPage - 1})">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            ${Array.from({ length: totalPages }, (_, i) => i + 1)
+              .map(
+                (page) => `
+              <button class="pg-btn ${page === currentPage ? "active" : ""}" onclick="changePage('${category}', ${page})">
+                ${page}
+              </button>
+            `,
+              )
+              .join("")}
+            <button class="pg-btn next" ${currentPage === totalPages ? "disabled" : ""} onclick="changePage('${category}', ${currentPage + 1})">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        `;
+      }
+
+      window.changePage = function (category, page) {
+        currentPages[category] = page;
+        if (category === "all")
+          renderAllTable(document.getElementById("allTimeFilter").value);
+        if (category === "student")
+          renderStudentTable(
+            document.getElementById("studentTimeFilter").value,
+          );
+        if (category === "canteen")
+          renderCanteenTable(
+            document.getElementById("canteenTimeFilter").value,
+          );
+        if (category === "food")
+          renderFoodTable(document.getElementById("foodTimeFilter").value);
+      };
+
+      function renderAllTable(period) {
+        const data = leaderboardData.all[period] || leaderboardData.all.all;
+        const tbody = document.getElementById("allLeaderboardBody");
+        const startIndex = (currentPages.all - 1) * itemsPerPage;
+        const pagedData = data.slice(startIndex, startIndex + itemsPerPage);
+
+        tbody.innerHTML = pagedData
+          .map(
+            (item) => `
+          <tr>
+            <td><strong>#${item.rank}</strong></td>
+            <td>
+              <div class="entity-cell">
+                ${item.img ? `<img src="${item.img}" class="entity-img" alt="Vendor">` : ""}
+                <div class="entity-info">
+                  <span class="entity-name">${item.name}</span>
+                  ${item.sub ? `<span class="entity-sub">${item.sub}</span>` : ""}
+                </div>
+              </div>
+            </td>
+            <td><span class="badge ${item.typeClass}">${item.type}</span></td>
+            <td>${item.orders}</td>
+            <td><strong>${item.revenue}</strong></td>
+          </tr>
+        `,
+          )
+          .join("");
+
+        renderPagination("allPagination", data.length, "all");
+      }
+
+      function renderStudentTable(period) {
+        const data =
+          leaderboardData.student[period] || leaderboardData.student.all;
+        const tbody = document.getElementById("studentLeaderboardBody");
+        const startIndex = (currentPages.student - 1) * itemsPerPage;
+        const pagedData = data.slice(startIndex, startIndex + itemsPerPage);
+
+        tbody.innerHTML = pagedData
+          .map(
+            (item) => `
+          <tr>
+            <td><strong>#${item.rank}</strong></td>
+            <td>
+              <div class="entity-cell">
+                ${item.img ? `<img src="${item.img}" class="entity-img" alt="Vendor">` : ""}
+                <div class="entity-info">
+                  <span class="entity-name">${item.name}</span>
+                </div>
+              </div>
+            </td>
+            <td>${item.orders}</td>
+            <td><strong>${item.revenue}</strong></td>
+          </tr>
+        `,
+          )
+          .join("");
+
+        renderPagination("studentPagination", data.length, "student");
+      }
+
+      function renderCanteenTable(period) {
+        const data =
+          leaderboardData.canteen[period] || leaderboardData.canteen.all;
+        const tbody = document.getElementById("canteenLeaderboardBody");
+        const startIndex = (currentPages.canteen - 1) * itemsPerPage;
+        const pagedData = data.slice(startIndex, startIndex + itemsPerPage);
+
+        tbody.innerHTML = pagedData
+          .map(
+            (item) => `
+          <tr>
+            <td><strong>#${item.rank}</strong></td>
+            <td>
+              <div class="entity-cell">
+                ${item.img ? `<img src="${item.img}" class="entity-img" alt="Canteen">` : ""}
+                <div class="entity-info">
+                  <span class="entity-name">${item.name}</span>
+                  ${item.sub ? `<span class="entity-sub">${item.sub}</span>` : ""}
+                </div>
+              </div>
+            </td>
+            <td>${item.location || "N/A"}</td>
+            <td>${item.orders}</td>
+            <td><strong>${item.revenue}</strong></td>
+            <td><span class="status-pill active" style="background: #dcfce7; color: #166534; padding: 4px 12px; border-radius: 99px; font-size: 12px; font-weight: 600;">${item.status}</span></td>
+          </tr>
+        `,
+          )
+          .join("");
+
+        renderPagination("canteenPagination", data.length, "canteen");
+      }
+
+      function renderFoodTable(period) {
+        const data = leaderboardData.food[period] || leaderboardData.food.all;
+        const tbody = document.getElementById("foodLeaderboardBody");
+        const startIndex = (currentPages.food - 1) * itemsPerPage;
+        const pagedData = data.slice(startIndex, startIndex + itemsPerPage);
+
+        tbody.innerHTML = pagedData
+          .map(
+            (item) => `
+          <tr>
+            <td><strong>#${item.rank}</strong></td>
+            <td>
+              <div class="entity-cell">
+                ${item.img ? `<img src="${item.img}" class="entity-img" alt="Food">` : ""}
+                <div class="entity-info">
+                  <span class="entity-name">${item.name}</span>
+                  ${item.sub ? `<span class="entity-sub">${item.sub}</span>` : ""}
+                </div>
+              </div>
+            </td>
+            <td>${item.cat}</td>
+            <td>${item.orders}</td>
+            <td><strong>${item.sales}</strong></td>
+          </tr>
+        `,
+          )
+          .join("");
+
+        renderPagination("foodPagination", data.length, "food");
+      }
+
+      // Tab switching logic
+      const tabs = [
+        {
+          btn: document.getElementById("allTab"),
+          view: document.getElementById("allView"),
+        },
+        {
+          btn: document.getElementById("studentVendorTab"),
+          view: document.getElementById("studentVendorView"),
+        },
+        {
+          btn: document.getElementById("canteenTab"),
+          view: document.getElementById("canteenView"),
+        },
+        {
+          btn: document.getElementById("foodTab"),
+          view: document.getElementById("foodView"),
+        },
+      ];
+
+      tabs.forEach((tab) => {
+        tab.btn.addEventListener("click", () => {
+          tabs.forEach((t) => {
+            t.btn.classList.remove("active");
+            t.view.style.display = "none";
+          });
+          tab.btn.classList.add("active");
+          tab.view.style.display = "block";
         });
+      });
+
+      // Time period filter logic
+      document.querySelectorAll(".time-period-select").forEach((select) => {
+        select.addEventListener("change", function () {
+          const id = this.id;
+          const period = this.value;
+          const picker = this.closest(".header-filters").querySelector(".month-picker");
+          
+          if (period === "specific") {
+            picker.style.display = "block";
+          } else {
+            picker.style.display = "none";
+          }
+
+          if (id === "allTimeFilter") {
+            currentPages.all = 1;
+            renderAllTable(period);
+            updateKPIs("all", period);
+          }
+          if (id === "studentTimeFilter") {
+            currentPages.student = 1;
+            renderStudentTable(period);
+            updateKPIs("student", period);
+          }
+          if (id === "canteenTimeFilter") {
+            currentPages.canteen = 1;
+            renderCanteenTable(period);
+            updateKPIs("canteen", period);
+          }
+          if (id === "foodTimeFilter") {
+            currentPages.food = 1;
+            renderFoodTable(period);
+          }
+        });
+      });
+
+      // --- KPI DATA ---
+      const kpiData = {
+        all: {
+          all: { revenue: "₱3,330,200", vendors: "42" },
+          today: { revenue: "₱12,450", vendors: "38" },
+          week: { revenue: "₱85,200", vendors: "40" },
+          month: { revenue: "₱412,500", vendors: "42" }
+        },
+        student: {
+          all: { revenue: "₱485,200", active: "30" },
+          today: { revenue: "₱4,850", active: "12" },
+          week: { revenue: "₱22,100", active: "25" },
+          month: { revenue: "₱85,400", active: "30" }
+        },
+        canteen: {
+          all: { revenue: "₱2,845,000", active: "12" },
+          today: { revenue: "₱3,200", active: "10" },
+          week: { revenue: "₱28,450", active: "12" },
+          month: { revenue: "₱192,200", active: "12" }
+        }
+      };
+
+      function updateKPIs(category, period) {
+        const data = kpiData[category][period] || kpiData[category].all;
+        if (category === "all") {
+          document.getElementById("allTotalRevenue").textContent = data.revenue;
+          document.getElementById("allTotalVendors").textContent = data.vendors;
+        } else if (category === "student") {
+          document.getElementById("studentTotalRevenue").textContent = data.revenue;
+          document.getElementById("studentActiveVendors").textContent = data.active;
+        } else if (category === "canteen") {
+          document.getElementById("canteenTotalRevenue").textContent = data.revenue;
+          document.getElementById("canteenActiveCanteens").textContent = data.active;
+        }
+      }
+
+      // Initial render
+      renderAllTable("all");
+      renderStudentTable("all");
+      renderCanteenTable("all");
+      renderFoodTable("all");
+      updateKPIs("all", "all");
+      updateKPIs("student", "all");
+      updateKPIs("canteen", "all");
     </script>
-</body>
+  </body>
 </html>

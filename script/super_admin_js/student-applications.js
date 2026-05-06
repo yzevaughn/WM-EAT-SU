@@ -240,29 +240,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Confirmation Modal Global Support (Buttons)
-  const sub = document.getElementById("submitConfirmBtn");
-  if (sub) {
-    sub.onclick = () => {
-      const inputContainer = document.getElementById("confirmInputContainer");
-      let val = null;
-      if (inputContainer && inputContainer.style.display === "block") {
-        val = document.getElementById("confirmInput").value.trim();
-        if (!val) { alert("Please enter a reason."); return; }
-      }
-      if (confirmCallback) confirmCallback(val);
-      closeModal("confirmModal");
-      confirmCallback = null;
-    };
-  }
-  const can = document.getElementById("cancelConfirmBtn");
-  if (can) {
-    can.onclick = () => {
-      closeModal("confirmModal");
-      confirmCallback = null;
-    };
-  }
-
   // Initial render
   loadStudentApplications();
   renderTable();
@@ -530,6 +507,7 @@ function updatePaginationUI(start, end, total) {
   const totalPages = Math.ceil(total / itemsPerPage);
   const prevBtn = document.getElementById("prevPage");
   const nextBtn = document.getElementById("nextPage");
+  
   if (prevBtn) {
     if (currentPage <= 1) prevBtn.classList.add("disabled");
     else prevBtn.classList.remove("disabled");
@@ -538,6 +516,60 @@ function updatePaginationUI(start, end, total) {
     if (currentPage >= totalPages || total === 0) nextBtn.classList.add("disabled");
     else nextBtn.classList.remove("disabled");
   }
+
+  // Dynamic Page Buttons
+  const nav = document.querySelector(".pagination-nav");
+  if (nav) {
+    // Keep prev button
+    const prevMarkup = prevBtn ? prevBtn.outerHTML : "";
+    const nextMarkup = nextBtn ? nextBtn.outerHTML : "";
+    
+    let buttonsHtml = prevMarkup;
+    
+    // Simple pagination logic: show 1, current, last and some dots
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) {
+        buttonsHtml += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+      }
+    } else {
+      // Show first, last, and around current
+      if (currentPage <= 4) {
+        for (let i = 1; i <= 5; i++) {
+          buttonsHtml += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+        }
+        buttonsHtml += `<span class="page-dots">...</span>`;
+        buttonsHtml += `<button class="page-btn" onclick="goToPage(${totalPages})">${totalPages}</button>`;
+      } else if (currentPage >= totalPages - 3) {
+        buttonsHtml += `<button class="page-btn" onclick="goToPage(1)">1</button>`;
+        buttonsHtml += `<span class="page-dots">...</span>`;
+        for (let i = totalPages - 4; i <= totalPages; i++) {
+          buttonsHtml += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+        }
+      } else {
+        buttonsHtml += `<button class="page-btn" onclick="goToPage(1)">1</button>`;
+        buttonsHtml += `<span class="page-dots">...</span>`;
+        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+          buttonsHtml += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="goToPage(${i})">${i}</button>`;
+        }
+        buttonsHtml += `<span class="page-dots">...</span>`;
+        buttonsHtml += `<button class="page-btn" onclick="goToPage(${totalPages})">${totalPages}</button>`;
+      }
+    }
+    
+    buttonsHtml += nextMarkup;
+    nav.innerHTML = buttonsHtml;
+
+    // Re-attach listeners to the new prev/next buttons
+    const newPrev = document.getElementById("prevPage");
+    const newNext = document.getElementById("nextPage");
+    if (newPrev) newPrev.onclick = () => { if (currentPage > 1) { currentPage--; renderTable(); } };
+    if (newNext) newNext.onclick = () => { if (currentPage < totalPages) { currentPage++; renderTable(); } };
+  }
+}
+
+function goToPage(p) {
+  currentPage = p;
+  renderTable();
 }
 
 // Global Actions
@@ -644,18 +676,6 @@ function reactivateVendor(id) {
 }
 
 // Modal & Details Logic
-function openModal(id) {
-  const m = document.getElementById(id);
-  if(m) m.classList.add("active");
-  document.body.style.overflow = "hidden";
-}
-
-function closeModal(id) {
-  const m = document.getElementById(id);
-  if(m) m.classList.remove("active");
-  document.body.style.overflow = "auto";
-}
-
 function openDetails(id) {
   const app = mockApplications.find((x) => x.id === id);
   if (!app) return;
@@ -724,38 +744,4 @@ function openDetails(id) {
   const footer = document.getElementById("detailsFooter");
   footer.innerHTML = `<button class="btn-ghost" onclick="closeModal('detailsModal')">Close</button>`;
   openModal("detailsModal");
-}
-
-// Confirmation Modal Global Support
-let confirmCallback = null;
-function showConfirmModal(options) {
-  const modal = document.getElementById("confirmModal");
-  if(!modal) return;
-  document.getElementById("confirmTitle").innerText = options.title || "Confirm Action";
-  document.getElementById("confirmMessage").innerText = options.message || "Are you sure?";
-  
-  const icon = document.getElementById("confirmIcon");
-  const submitBtn = document.getElementById("submitConfirmBtn");
-  
-  if (options.type === 'approve') {
-    icon.style.color = "#10b981";
-    icon.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
-    submitBtn.style.background = "linear-gradient(135deg, #10b981, #059669)";
-  } else {
-    icon.style.color = "#ef4444";
-    icon.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
-    submitBtn.style.background = "linear-gradient(135deg, #ef4444, #dc2626)";
-  }
-
-  const inputContainer = document.getElementById("confirmInputContainer");
-  if (options.requireInput) {
-    inputContainer.style.display = "block";
-    document.getElementById("confirmInputLabel").innerText = options.inputLabel || "Reason";
-    document.getElementById("confirmInput").value = "";
-  } else {
-    inputContainer.style.display = "none";
-  }
-
-  confirmCallback = options.onConfirm;
-  openModal("confirmModal");
 }
