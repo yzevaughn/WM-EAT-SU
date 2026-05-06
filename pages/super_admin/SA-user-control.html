@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WM EAT SU - User Control</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="../../css/navbar.css" />
+    <link rel="stylesheet" href="../../css/super_admin_css/super-dashboard.css" />
+    <link rel="stylesheet" href="../../css/super_admin_css/student-applications.css" />
+    <link rel="stylesheet" href="../../css/super_admin_css/admin-control.css" />
+  </head>
+
+  <body>
+    <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
+
+    <!-- TOP NAVBAR -->
+    <div class="top-nav">
+      <div class="nav-left">
+        <label for="menu-checkbox" class="menu-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </label>
+        <a href="super-dashboard.html" class="logo">
+          <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+          <span class="logo-text">WM EAT SU</span>
+        </a>
+      </div>
+      <div class="nav-center"></div>
+      <div class="nav-right">
+        <div class="notification-dropdown">
+          <button class="nav-icon-btn" aria-label="Notifications">
+            <i class="fa-regular fa-bell"></i>
+            <span class="notification-badge"></span>
+          </button>
+          <div class="notification-menu">
+            <div class="notification-header">
+              <h3>Notifications</h3>
+              <button class="mark-read-btn">Mark all as read</button>
+            </div>
+            <div class="notification-list">
+              <!-- Dynamic notifications -->
+            </div>
+            <div class="notification-footer">
+              <a href="super-admin-notifications.html">View all notifications</a>
+            </div>
+          </div>
+        </div>
+        <div class="profile">
+          <div class="profile-info">
+            <span class="profile-name">Super Admin</span>
+            <span class="email">admin@wm.edu.ph</span>
+          </div>
+          <div class="profile-dropdown">
+            <button class="profile-btn">
+              <img src="../../images/pfp.jpg" class="profile-pic" alt="Profile" />
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="dropdown-menu">
+              <a href="../../index.html" class="dropdown-item">
+                <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layout">
+      <div class="left-nav" id="sidebar">
+        <ul class="nav-list">
+          <li>
+            <a href="super-dashboard.html" class="nav-link">
+              <i class="fa-solid fa-house"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="super-admin-analytics.html" class="nav-link">
+              <i class="fa-solid fa-chart-line"></i>
+              <span>Analytics</span>
+            </a>
+          </li>
+          <li>
+            <a href="all-transactions.html" class="nav-link">
+              <i class="fa-solid fa-receipt"></i>
+              <span>Transactions</span>
+            </a>
+          </li>
+          <li>
+            <a href="payment-tracking.html" class="nav-link">
+              <i class="fa-solid fa-file-invoice-dollar"></i>
+              <span>Payment Tracking</span>
+            </a>
+          </li>
+          <li>
+            <a href="student-applications.html" class="nav-link">
+              <i class="fa-solid fa-user-check"></i>
+              <span>Student Application</span>
+            </a>
+          </li>
+          <li>
+            <a href="canteen-applications.html" class="nav-link">
+              <i class="fa-solid fa-store"></i>
+              <span>Canteen Application</span>
+            </a>
+          </li>
+          <li>
+            <a href="complaints.html" class="nav-link">
+              <i class="fa-solid fa-comment-dots"></i>
+              <span>Complaints</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-approval.html" class="nav-link">
+              <i class="fa-solid fa-utensils"></i>
+              <span>Menu</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-voucher.html" class="nav-link">
+              <i class="fa-solid fa-ticket"></i>
+              <span>Vouchers</span>
+            </a>
+          </li>
+          <li>
+            <a href="admin-control.html" class="nav-link">
+              <i class="fa-solid fa-gear"></i>
+              <span>Admin Control</span>
+            </a>
+          </li>
+          <li>
+            <a href="SA-user-control.html" class="nav-link active">
+              <i class="fa-solid fa-users-gear"></i>
+              <span>User Control</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="main-content">
+        <header class="page-header">
+          <div>
+            <h1>User Management</h1>
+            <p class="subtitle">Monitor and control all accounts across the platform.</p>
+          </div>
+        </header>
+
+        <div class="dashboard-container">
+          <!-- Metrics Grid -->
+          <div class="metrics-grid">
+            <div class="metric-card bg-blue">
+              <div class="metric-icon"><i class="fa-solid fa-users"></i></div>
+              <h4>Total Users</h4>
+              <h2 class="value">124</h2>
+              <p>Platform wide</p>
+            </div>
+            <div class="metric-card bg-purple">
+              <div class="metric-icon"><i class="fa-solid fa-user-graduate"></i></div>
+              <h4>Students</h4>
+              <h2 class="value">86</h2>
+              <p>Active students</p>
+            </div>
+            <div class="metric-card bg-green">
+              <div class="metric-icon"><i class="fa-solid fa-person-walking-arrow-right"></i></div>
+              <h4>Visitors</h4>
+              <h2 class="value">18</h2>
+              <p>Visitors of WMSU</p>
+            </div>
+            <div class="metric-card bg-red">
+              <div class="metric-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+              <h4>Teachers</h4>
+              <h2 class="value">20</h2>
+              <p>WMSU Faculty & Staff</p>
+            </div>
+          </div>
+
+          <!-- Table Controls Section -->
+          <div class="table-container" style="margin-top: 30px;">
+            <div class="table-controls">
+              <div style="display: flex; align-items: center; gap: 15px;">
+                <div class="entries-dropdown">
+                  <span>Show</span>
+                  <select id="entriesPerPage" class="custom-select" style="width: 70px;">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                  </select>
+                  <span>entries</span>
+                </div>
+                <div class="search-box">
+                  <i class="fa-solid fa-search"></i>
+                  <input type="text" id="userSearch" placeholder="Search User Name or ID..." />
+                </div>
+              </div>
+              <div class="filter-group">
+                <div class="filter-item">
+                  <label><i class="fa-solid fa-users"></i> Account:</label>
+                  <select id="accountFilter" class="custom-select">
+                    <option value="All">All Accounts</option>
+                    <option value="Staff">Staff</option>
+                    <option value="Student">Student</option>
+                    <option value="Outsider">Outsider</option>
+                  </select>
+                </div>
+                <div class="filter-item">
+                  <label><i class="fa-solid fa-filter"></i> Status:</label>
+                  <select id="statusFilter" class="custom-select">
+                    <option value="All">All Status</option>
+                    <option value="Active">Active</option>
+                    <option value="Deactivated">Deactivated</option>
+                    <option value="Banned">Banned</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="table-wrapper" style="overflow-x: auto;">
+              <table class="data-grid">
+                <thead>
+                  <tr>
+                    <th>USER ID</th>
+                    <th>FULL NAME</th>
+                    <th>ACCOUNT TYPE</th>
+                    <th>STATUS</th>
+                    <th>DATE JOINED</th>
+                    <th class="actions-col">ACTIONS</th>
+                  </tr>
+                </thead>
+                <tbody id="userTableBody">
+                  <!-- Rendered by SA-user-control.js -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="pagination-controls">
+              <div class="pagination-info">
+                Showing <span id="pageStart">1</span> to <span id="pageEnd">0</span> of <span id="totalEntries">0</span> entries
+              </div>
+              <div class="pagination-nav" id="paginationControls">
+                <button class="page-btn" id="prevPage"><i class="fa-solid fa-chevron-left"></i></button>
+                <div id="pageNumbers" style="display: flex; gap: 5px;">
+                  <button class="page-btn active">1</button>
+                </div>
+                <button class="page-btn" id="nextPage"><i class="fa-solid fa-chevron-right"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODALS FOR USER CONTROL -->
+    <div id="deactivateModal" class="modal-overlay">
+      <div class="deactivate-modal">
+        <div class="modal-header">
+          <h2>Deactivate User Account</h2>
+          <button class="close-modal" onclick="closeDeactivateModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p class="warning-text">Are you sure you want to deactivate this account? The user will be unable to log in or place orders.</p>
+          <div class="input-group">
+            <label for="deactivationReason">Reason for Deactivation</label>
+            <textarea id="deactivationReason" placeholder="e.g. Policy violation, suspicious activity..." style="width: 100%; min-height: 80px; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0;"></textarea>
+          </div>
+          <input type="hidden" id="targetUserId">
+        </div>
+        <div class="modal-footer">
+          <button class="btn-cancel" onclick="closeDeactivateModal()">Cancel</button>
+          <button class="btn-confirm-danger" onclick="confirmDeactivate()">Deactivate Account</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="reactivateModal" class="modal-overlay">
+      <div class="deactivate-modal">
+        <div class="modal-header">
+          <h2>Reactivate User Account</h2>
+          <button class="close-modal" onclick="closeReactivateModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div style="text-align: center; padding: 20px 0;">
+            <div style="width: 60px; height: 60px; background: #f0fdf4; color: #16a34a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 16px;">
+              <i class="fa-solid fa-user-check"></i>
+            </div>
+            <p style="color: #475569; font-size: 15px; line-height: 1.5;">Are you sure you want to restore access for this user?</p>
+          </div>
+          <input type="hidden" id="reactivateUserId">
+        </div>
+        <div class="modal-footer">
+          <button class="btn-cancel" onclick="closeReactivateModal()">Cancel</button>
+          <button class="btn-confirm-success" onclick="confirmReactivate()">Reactivate Account</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../script/notifications.js"></script>
+    <script src="../../script/admin-js/admin-notifications-mock.js"></script>
+    <script src="../../script/super_admin_js/super-notif.js"></script>
+    <script src="../../script/super_admin_js/SA-user-control.js"></script>
+  </body>
+</html>

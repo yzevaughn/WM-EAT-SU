@@ -145,6 +145,12 @@
             <span>Admin Control</span>
           </a>
         </li>
+        <li>
+          <a href="SA-user-control.html" class="nav-link">
+            <i class="fa-solid fa-users-gear"></i>
+            <span>User Control</span>
+          </a>
+        </li>
       </ul>
 
     </div>
@@ -318,7 +324,29 @@
       </div>
       <div class="modal-footer">
         <button class="btn-cancel" onclick="closeDeactivateModal()">Cancel</button>
-        <button class="btn-confirm-danger" onclick="confirmDeactivate()">Deactivate</button>
+        <button class="btn-confirm-danger" onclick="confirmDeactivate()">Deactivate Account</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="reactivateModal" class="modal-overlay">
+    <div class="deactivate-modal">
+      <div class="modal-header">
+        <h2>Reactivate Admin</h2>
+        <button class="close-modal" onclick="closeReactivateModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="text-align: center; padding: 20px 0;">
+          <div style="width: 60px; height: 60px; background: #f0fdf4; color: #16a34a; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 16px;">
+            <i class="fa-solid fa-user-check"></i>
+          </div>
+          <p style="color: #475569; font-size: 15px; line-height: 1.5;">Are you sure you want to reactivate this account? This will restore all administrative permissions and system access.</p>
+        </div>
+        <input type="hidden" id="reactivateAdminId">
+      </div>
+      <div class="modal-footer">
+        <button class="btn-cancel" onclick="closeReactivateModal()">Cancel</button>
+        <button class="btn-confirm-success" onclick="confirmReactivate()">Reactivate Account</button>
       </div>
     </div>
   </div>

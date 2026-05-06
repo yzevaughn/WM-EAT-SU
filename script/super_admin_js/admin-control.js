@@ -178,6 +178,15 @@ function closeDeactivateModal() {
 }
 
 function reactivateAdmin(adminId) {
+    const modal = document.getElementById('reactivateModal');
+    if (modal) {
+        document.getElementById('reactivateAdminId').value = adminId;
+        modal.style.display = 'flex';
+    }
+}
+
+function confirmReactivate() {
+    const adminId = parseInt(document.getElementById('reactivateAdminId').value);
     const admin = adminData.find(a => a.id === adminId);
     if (admin) {
         admin.status = 'Active';
@@ -185,6 +194,14 @@ function reactivateAdmin(adminId) {
         admin.deactivatedDate = '';
         renderAdminAccounts();
         renderDeactivatedAccounts();
+        closeReactivateModal();
+    }
+}
+
+function closeReactivateModal() {
+    const modal = document.getElementById('reactivateModal');
+    if (modal) {
+        modal.style.display = 'none';
     }
 }
 
