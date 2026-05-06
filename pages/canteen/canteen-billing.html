@@ -132,8 +132,6 @@
         color: #0f172a;
       }
 
-
-
       /* PAYMENT HISTORY TIMELINE */
       .timeline {
         display: flex;
@@ -167,9 +165,15 @@
         margin-top: 3px;
         box-shadow: 0 0 0 4px white;
       }
-      .timeline-dot.upcoming { border-color: #f59e0b; }
-      .timeline-dot.paid { border-color: #10b981; }
-      .timeline-dot.late { border-color: #ef4444; }
+      .timeline-dot.upcoming {
+        border-color: #f59e0b;
+      }
+      .timeline-dot.paid {
+        border-color: #10b981;
+      }
+      .timeline-dot.late {
+        border-color: #ef4444;
+      }
 
       .timeline-content {
         flex: 1;
@@ -205,9 +209,18 @@
         border-radius: 20px;
         text-transform: capitalize;
       }
-      .status-badge.upcoming { background: #fffbeb; color: #92400e; }
-      .status-badge.paid { background: #f0fdf4; color: #166534; }
-      .status-badge.late { background: #fef2f2; color: #991b1b; }
+      .status-badge.upcoming {
+        background: #fffbeb;
+        color: #92400e;
+      }
+      .status-badge.paid {
+        background: #f0fdf4;
+        color: #166534;
+      }
+      .status-badge.late {
+        background: #fef2f2;
+        color: #991b1b;
+      }
 
       .main-content {
         background: #f8fafc;
@@ -357,7 +370,8 @@
                 <i class="fa-solid fa-flag"></i><span>Reports</span>
               </a>
               <a href="canteen-billing.html" class="dropdown-item">
-                <i class="fa-solid fa-file-invoice-dollar"></i><span>Billing</span>
+                <i class="fa-solid fa-file-invoice-dollar"></i
+                ><span>Billing</span>
               </a>
               <a href="../../index.html" class="dropdown-item">
                 <i class="fas fa-sign-out-alt"></i><span>Log Out</span>
@@ -418,7 +432,9 @@
             <div class="alert-content">
               <div class="alert-title">Payment due in 8 days</div>
               <div class="alert-desc">
-                Your next rent of <strong>&#8369;4,500</strong> is due on <strong>May 14, 2026</strong>. Please settle on time to avoid late fees.
+                Your next rent of <strong>&#8369;4,500</strong> is due on
+                <strong>May 14, 2026</strong>. Please settle on time to avoid
+                late fees.
               </div>
             </div>
           </div>
@@ -429,7 +445,9 @@
               <div class="stat-info">
                 <h3>Tenancy Duration</h3>
                 <p>3 yrs 4 mo</p>
-                <span style="font-size: 12px; color: #64748b">Since Jan 2023</span>
+                <span style="font-size: 12px; color: #64748b"
+                  >Since Jan 2023</span
+                >
               </div>
               <div class="stat-icon icon-blue">
                 <i class="fa-solid fa-calendar-alt"></i>
@@ -440,7 +458,9 @@
               <div class="stat-info">
                 <h3>Last Payment</h3>
                 <p>&#8369;4,500</p>
-                <span style="font-size: 12px; color: #64748b">Apr 14, 2026</span>
+                <span style="font-size: 12px; color: #64748b"
+                  >Apr 14, 2026</span
+                >
               </div>
               <div class="stat-icon icon-green">
                 <i class="fa-solid fa-file-invoice"></i>
@@ -451,7 +471,9 @@
               <div class="stat-info">
                 <h3>Next Due</h3>
                 <p style="color: #ea580c">May 14</p>
-                <span style="font-size: 12px; color: #ea580c; font-weight: 600">8 days left</span>
+                <span style="font-size: 12px; color: #ea580c; font-weight: 600"
+                  >8 days left</span
+                >
               </div>
               <div class="stat-icon icon-orange">
                 <i class="fa-solid fa-clock"></i>
@@ -480,28 +502,25 @@
               <div class="card-body">
                 <div class="details-list">
                   <div class="detail-item">
-                    <div class="detail-label"><i class="fa-solid fa-store"></i> Stall</div>
-                    <div class="detail-value">No. 4, Bldg C</div>
+                    <div class="detail-label">
+                      <i class="fa-solid fa-store"></i> Stall
+                    </div>
+                    <div class="detail-value">Canteen Position 2</div>
                   </div>
                   <div class="detail-item">
-                    <div class="detail-label"><i class="fa-solid fa-vector-square"></i> Area</div>
+                    <div class="detail-label">
+                      <i class="fa-solid fa-vector-square"></i> Area
+                    </div>
                     <div class="detail-value">18 sqm</div>
                   </div>
+
                   <div class="detail-item">
-                    <div class="detail-label"><i class="fa-solid fa-calendar-check"></i> Start date</div>
-                    <div class="detail-value">Jan 1, 2023</div>
-                  </div>
-                  <div class="detail-item">
-                    <div class="detail-label"><i class="fa-solid fa-calendar-xmark"></i> Expiry</div>
-                    <div class="detail-value">Dec 31, 2026</div>
-                  </div>
-                  <div class="detail-item">
-                    <div class="detail-label"><i class="fa-solid fa-peso-sign"></i> Monthly rent</div>
+                    <div class="detail-label">
+                      <i class="fa-solid fa-peso-sign"></i> Monthly rent
+                    </div>
                     <div class="detail-value">&#8369;4,500</div>
                   </div>
                 </div>
-
-
               </div>
             </div>
 
@@ -570,13 +589,17 @@
                 </div>
 
                 <!-- PAGINATION -->
-                <div class="pagination-wrap" style="justify-content: center;">
+                <div class="pagination-wrap" style="justify-content: center">
                   <div class="pagination-nav">
-                    <button class="page-btn disabled"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="page-btn disabled">
+                      <i class="fa-solid fa-chevron-left"></i>
+                    </button>
                     <button class="page-btn active">1</button>
                     <button class="page-btn">2</button>
                     <button class="page-btn">3</button>
-                    <button class="page-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                    <button class="page-btn">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </button>
                   </div>
                 </div>
               </div>
