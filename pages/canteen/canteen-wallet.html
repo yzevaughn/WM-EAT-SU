@@ -273,25 +273,30 @@
           <div class="history-controls">
             <div class="search-bar">
               <i class="fas fa-search"></i>
-              <input type="text" placeholder="Search Order ID or Customer..." />
+              <input type="text" id="paymentSearch" placeholder="Search Order ID or Customer..." />
             </div>
 
             <div class="filters">
-              <select class="filter-dropdown">
+              <select class="filter-dropdown date-filter" id="paymentDateFilter">
                 <option value="">All Dates</option>
                 <option value="today">Today</option>
                 <option value="week">This Week</option>
                 <option value="month">This Month</option>
+                <option value="specific">Specific Date</option>
+                <option value="month-specific">Specific Month</option>
               </select>
+              <input type="date" class="filter-dropdown date-picker" id="paymentDatePicker" style="display: none;" />
+              <input type="month" class="filter-dropdown month-picker" id="paymentMonthPicker" style="display: none;" />
 
-              <select class="filter-dropdown">
+              <select class="filter-dropdown" id="paymentMethodFilter">
                 <option value="">All Payment Methods</option>
-                <option value="gcash">GCash</option>
-                <option value="cash">Cash on Delivery</option>
-                <option value="card">Credit/Debit Card</option>
+                <option value="GCash">GCash</option>
+                <option value="Cash">Cash</option>
+                <option value="PayMaya">PayMaya</option>
+                <option value="Wallet">Wallet</option>
               </select>
 
-              <select class="sort-dropdown">
+              <select class="sort-dropdown" id="paymentSort">
                 <option value="latest">Sort by: Latest</option>
                 <option value="oldest">Sort by: Oldest</option>
                 <option value="highest">Sort by: Highest Amount</option>
@@ -301,7 +306,7 @@
           </div>
 
           <div class="table-responsive">
-            <table class="history-table">
+            <table class="history-table" id="paymentTable">
               <thead>
                 <tr>
                   <th>Order ID</th>
@@ -513,23 +518,33 @@
           <div class="history-controls">
             <div class="search-bar">
               <i class="fas fa-search"></i>
-              <input type="text" placeholder="Search Reference ID..." />
+              <input type="text" id="withdrawalSearch" placeholder="Search Reference ID..." />
             </div>
 
             <div class="filters">
-              <select class="filter-dropdown">
+              <select class="filter-dropdown" id="withdrawalStatusFilter">
                 <option value="">All Status</option>
                 <option value="pending">Pending</option>
                 <option value="success">Success</option>
                 <option value="failed">Failed</option>
               </select>
 
-              <select class="filter-dropdown">
+              <select class="filter-dropdown date-filter" id="withdrawalDateFilter">
+                <option value="">All Dates</option>
+                <option value="today">Today</option>
+                <option value="week">This Week</option>
+                <option value="month">This Month</option>
+                <option value="specific">Specific Date</option>
+                <option value="month-specific">Specific Month</option>
+              </select>
+              <input type="date" class="filter-dropdown date-picker" id="withdrawalDatePicker" style="display: none;" />
+              <input type="month" class="filter-dropdown month-picker" id="withdrawalMonthPicker" style="display: none;" />
+
+              <select class="filter-dropdown" id="withdrawalMethodFilter">
                 <option value="">All Methods</option>
-                <option value="gcash">GCash</option>
-                <option value="PayMaya">PayMaya</option>
-                <option value="maya">Maya</option>
-                <option value="bank">Bank Transfer</option>
+                <option value="GCash">GCash</option>
+                <option value="Maya">Maya</option>
+                <option value="Bank Transfer">Bank Transfer</option>
               </select>
             </div>
           </div>
@@ -887,6 +902,7 @@
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
 
+    <script src="../../script/wallet-grid.js"></script>
     <script>
       const paymentMethods = document.getElementById("paymentMethods");
 
@@ -1321,6 +1337,166 @@
           amountEl.style.color = "#10b981";
         }
       }
+
+      // Date Picker Visibility Logic
+      document.querySelectorAll(".date-filter").forEach((select) => {
+        select.addEventListener("change", function () {
+          const parent = this.parentElement;
+          const datePicker = parent.querySelector(".date-picker");
+          const monthPicker = parent.querySelector(".month-picker");
+          
+          datePicker.style.display = "none";
+          monthPicker.style.display = "none";
+          
+          if (this.value === "specific") {
+            datePicker.style.display = "block";
+          } else if (this.value === "month-specific") {
+            monthPicker.style.display = "block";
+          }
+        });
+      });
+
+      // Data Grid Initialization
+      const now = new Date();
+      const today = now.toISOString().split('T')[0];
+      const yesterday = new Date(now.setDate(now.getDate() - 1)).toISOString().split('T')[0];
+      const lastWeek = new Date(now.setDate(now.getDate() - 6)).toISOString().split('T')[0];
+      const lastMonth = new Date(now.setMonth(now.getMonth() - 1)).toISOString().split('T')[0];
+
+      const paymentData = [
+        { id: '#ORD-1049', customer: 'Juan Dela Cruz', items: '2x Classic Burger Meal, 1x Fries', method: 'GCash', date: `${today}T12:30:00`, amount: 29.97 },
+        { id: '#ORD-1048', customer: 'Maria Santos', items: '1x Spicy Chicken Sandwich', method: 'Cash', date: `${today}T11:15:00`, amount: 9.99 },
+        { id: '#ORD-1047', customer: 'Pedro Penduko', items: '3x Softdrink, 1x Nachos', method: 'GCash', date: `${yesterday}T10:45:00`, amount: 12.50 },
+        { id: '#ORD-1046', customer: 'Anna Reyes', items: '1x Salad Bowl', method: 'GCash', date: `${yesterday}T14:20:00`, amount: 15.00 },
+        { id: '#ORD-1045', customer: 'Vaughn Evangelista', items: '2x Pizza Slice', method: 'GCash', date: `${lastWeek}T18:00:00`, amount: 18.50 },
+        { id: '#ORD-1044', customer: 'Liza Soberano', items: '1x Pasta Carbonara', method: 'Cash', date: `${lastWeek}T12:00:00`, amount: 25.00 },
+        { id: '#ORD-1043', customer: 'James Reid', items: '1x Cheeseburger', method: 'GCash', date: `${lastMonth}T09:30:00`, amount: 12.00 },
+        { id: '#ORD-1042', customer: 'Nadine Lustre', items: '2x Hotdog Sandwich', method: 'Cash', date: `${lastMonth}T15:45:00`, amount: 10.50 },
+        { id: '#ORD-1041', customer: 'Kathryn Bernardo', items: '1x Fried Rice, 1x Egg', method: 'GCash', date: '2026-10-01T07:15:00', amount: 8.75 },
+        { id: '#ORD-1040', customer: 'Daniel Padilla', items: '3x Siomai, 1x Rice', method: 'Cash', date: '2026-09-25T11:00:00', amount: 11.20 },
+        { id: '#ORD-1039', customer: 'Alden Richards', items: '1x Lechon Kawali', method: 'GCash', date: `${today}T14:30:00`, amount: 45.00 },
+        { id: '#ORD-1038', customer: 'Maine Mendoza', items: '2x Halo-Halo', method: 'GCash', date: `${yesterday}T16:00:00`, amount: 30.00 },
+        { id: '#ORD-1037', customer: 'Vice Ganda', items: '1x Steak Meal', method: 'Cash', date: '2026-11-05T19:00:00', amount: 150.00 },
+        { id: '#ORD-1036', customer: 'Anne Curtis', items: '1x Caesar Salad', method: 'GCash', date: '2026-11-04T12:30:00', amount: 65.00 },
+        { id: '#ORD-1035', customer: 'Pia Wurtzbach', items: '1x Lobster Roll', method: 'GCash', date: '2026-11-03T13:15:00', amount: 200.00 },
+        { id: '#ORD-1034', customer: 'Catriona Gray', items: '1x Silk Road Pasta', method: 'PayMaya', date: `${today}T09:00:00`, amount: 155.50 },
+        { id: '#ORD-1033', customer: 'Isko Moreno', items: '2x Tapa King', method: 'Wallet', date: `${yesterday}T08:30:00`, amount: 88.00 },
+      ];
+
+      const withdrawalData = [
+        { id: '#WDR-9021', method: 'GCash', recipient: '0912 345 6789', status: 'Success', date: `${today}T09:15:00`, amount: -500.00 },
+        { id: '#WDR-9022', method: 'Maya', recipient: '0912 345 6789', status: 'Pending', date: `${today}T14:45:00`, amount: -1000.00 },
+        { id: '#WDR-8954', method: 'Bank Transfer', recipient: 'BDO - **** 1234', status: 'Success', date: `${yesterday}T14:30:00`, amount: -1200.00 },
+        { id: '#WDR-8953', method: 'GCash', recipient: '0922 111 2222', status: 'Failed', date: `${lastWeek}T10:20:00`, amount: -300.00 },
+        { id: '#WDR-8952', method: 'Maya', recipient: '0933 444 5555', status: 'Success', date: `${lastMonth}T16:10:00`, amount: -2500.00 },
+        { id: '#WDR-8951', method: 'Bank Transfer', recipient: 'BPI - **** 5678', status: 'Success', date: '2026-09-15T11:00:00', amount: -5000.00 },
+        { id: '#WDR-8950', method: 'GCash', recipient: '0944 777 8888', status: 'Success', date: '2026-11-01T08:00:00', amount: -150.00 },
+        { id: '#WDR-8949', method: 'Maya', recipient: '0955 999 0000', status: 'Failed', date: '2026-11-02T10:30:00', amount: -75.00 },
+        { id: '#WDR-8948', method: 'Bank Transfer', recipient: 'Metrobank - **** 9999', status: 'Pending', date: '2026-11-03T11:45:00', amount: -3000.00 },
+      ];
+
+      window.paymentTableGrid = new DataGrid({
+        tableId: 'paymentTable',
+        initialData: paymentData,
+        itemsPerPage: 5,
+        onRender: (item) => {
+          const date = new Date(item.date);
+          const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+          const timeStr = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+          const methodClass = item.method.toLowerCase();
+          let methodIcon = 'fa-credit-card';
+          let displayClass = 'online';
+          
+          if (methodClass === 'cash') {
+            methodIcon = 'fa-money-bill-wave';
+            displayClass = 'cash';
+          } else if (methodClass === 'paymaya') {
+            methodIcon = 'fa-wallet';
+            displayClass = 'online'; 
+          } else if (methodClass === 'wallet') {
+            methodIcon = 'fa-vault';
+            displayClass = 'online';
+          } else if (methodClass === 'gcash') {
+            methodIcon = 'fa-credit-card'; // Or specific gcash icon if available, using card as placeholder
+            displayClass = 'online';
+          }
+
+          return `
+            <tr>
+              <td><span class="order-id">${item.id}</span></td>
+              <td>${item.customer}</td>
+              <td><span class="item-list">${item.items}</span></td>
+              <td><span class="pay-method ${displayClass}"><i class="fa-solid ${methodIcon}" style="margin-right: 4px"></i>${item.method}</span></td>
+              <td>${dateStr}<br /><span class="time-sub">${timeStr}</span></td>
+              <td class="amount">&#8369;${item.amount.toFixed(2)}</td>
+              <td class="text-right">
+                <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('${item.id}', '${item.customer}', '${item.items}', '${item.method}', '${dateStr}', '${timeStr}', '${item.amount}', 'Payment')">
+                  <i class="fa-solid fa-eye"></i>
+                </label>
+              </td>
+            </tr>
+          `;
+        }
+      });
+
+      window.withdrawalHistoryTableGrid = new DataGrid({
+        tableId: 'withdrawalHistoryTable',
+        initialData: withdrawalData,
+        itemsPerPage: 5,
+        onRender: (item) => {
+          const date = new Date(item.date);
+          const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+          const timeStr = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+          const methodClass = item.method.toLowerCase().replace(' ', '');
+          return `
+            <tr>
+              <td><span class="order-id">${item.id}</span></td>
+              <td><span class="pay-method ${methodClass}">${item.method}</span></td>
+              <td>${item.recipient}</td>
+              <td><span class="status-pill status-${item.status.toLowerCase()}">${item.status}</span></td>
+              <td>${dateStr}<br /><span class="time-sub">${timeStr}</span></td>
+              <td class="amount" style="color: #ef4444">-&#8369;${Math.abs(item.amount).toFixed(2)}</td>
+              <td class="text-right">
+                <label for="detailsToggle" class="view-btn" onclick="showTransactionDetails('${item.id}', 'Vendor Withdrawal', 'Withdrawal via ${item.method}', '${item.method}', '${dateStr}', '${timeStr}', '${item.amount}', 'Withdrawal')">
+                  <i class="fa-solid fa-eye"></i>
+                </label>
+              </td>
+            </tr>
+          `;
+        }
+      });
+
+      // Bind Controls
+      document.getElementById('paymentSearch').addEventListener('input', (e) => paymentTableGrid.setSearch(e.target.value));
+      document.getElementById('paymentDateFilter').addEventListener('change', (e) => {
+        paymentTableGrid.setFilters({ dateRange: e.target.value });
+      });
+      document.getElementById('paymentDatePicker').addEventListener('change', (e) => {
+        paymentTableGrid.setFilters({ specificDate: e.target.value });
+      });
+      document.getElementById('paymentMonthPicker').addEventListener('change', (e) => {
+        paymentTableGrid.setFilters({ specificDate: e.target.value });
+      });
+      document.getElementById('paymentMethodFilter').addEventListener('change', (e) => paymentTableGrid.setFilters({ method: e.target.value }));
+      document.getElementById('paymentSort').addEventListener('change', (e) => {
+        const [key, dir] = e.target.value === 'latest' ? ['date', 'desc'] : 
+                         e.target.value === 'oldest' ? ['date', 'asc'] :
+                         e.target.value === 'highest' ? ['amount', 'desc'] : ['amount', 'asc'];
+        paymentTableGrid.setSort(key, dir);
+      });
+
+      document.getElementById('withdrawalSearch').addEventListener('input', (e) => withdrawalHistoryTableGrid.setSearch(e.target.value));
+      document.getElementById('withdrawalStatusFilter').addEventListener('change', (e) => withdrawalHistoryTableGrid.setFilters({ status: e.target.value }));
+      document.getElementById('withdrawalDateFilter').addEventListener('change', (e) => {
+        withdrawalHistoryTableGrid.setFilters({ dateRange: e.target.value });
+      });
+      document.getElementById('withdrawalDatePicker').addEventListener('change', (e) => {
+        withdrawalHistoryTableGrid.setFilters({ specificDate: e.target.value });
+      });
+      document.getElementById('withdrawalMonthPicker').addEventListener('change', (e) => {
+        withdrawalHistoryTableGrid.setFilters({ specificDate: e.target.value });
+      });
+      document.getElementById('withdrawalMethodFilter').addEventListener('change', (e) => withdrawalHistoryTableGrid.setFilters({ method: e.target.value }));
     </script>
     <script src="../../script/notifications.js"></script>
   </body>
