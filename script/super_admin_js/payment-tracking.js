@@ -1,18 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
     let paymentData = [
-        { id: 1, name: 'Canteen 1', operator: 'John Doe', fee: 5000, status: 'Paid', statusClass: 'status-paid', history: [{ date: 'May 01', amount: 5000, method: 'Cash', status: 'Cleared' }] },
-        { id: 2, name: 'Canteen 2', operator: 'Jane Smith', fee: 5000, status: 'Overdue', statusClass: 'status-overdue', history: [{ date: 'Apr 01', amount: 5000, method: 'G-Cash', status: 'Cleared' }] },
-        { id: 3, name: 'Canteen 3', operator: 'Mike Ross', fee: 4500, status: 'Due Soon', statusClass: 'status-due-soon', history: [] },
-        { id: 4, name: 'Canteen 4', operator: 'Sarah Connor', fee: 5500, status: 'Upcoming', statusClass: 'status-upcoming', history: [] },
-        { id: 5, name: 'Canteen 5', operator: 'Bruce Wayne', fee: 6000, status: 'Paid', statusClass: 'status-paid', history: [{ date: 'May 02', amount: 6000, method: 'Bank Transfer', status: 'Cleared' }] }
+        { id: 1, name: 'Canteen 1', operator: 'John Doe', fee: 5000, status: 'Clear', type: 'Canteen', statusClass: 'status-clear', receiptUploaded: true, date: '2026-05-01', receiptImg: '../../images/receipt-mock.jpg' },
+        { id: 2, name: 'Canteen 2', operator: 'Jane Smith', fee: 5000, status: 'Unclear', type: 'Canteen', statusClass: 'status-unclear', receiptUploaded: false, date: '', receiptImg: '' },
+        { id: 3, name: 'Canteen 3', operator: 'Lani Cruz', fee: 3500, status: 'Unclear', type: 'Canteen', statusClass: 'status-unclear', receiptUploaded: false, date: '', receiptImg: '' },
+        { id: 4, name: 'Canteen 4', operator: 'Rex Bohol', fee: 3500, status: 'Unclear', type: 'Canteen', statusClass: 'status-unclear', receiptUploaded: false, date: '', receiptImg: '' },
+        { id: 5, name: 'Canteen 5', operator: 'Bruce Wayne', fee: 6000, status: 'Clear', type: 'Canteen', statusClass: 'status-clear', receiptUploaded: true, date: '2026-05-02', receiptImg: '../../images/receipt-mock.jpg' }
     ];
 
-    let currentFilter = 'All';
+    let currentStatusFilter = 'All';
+    let currentTypeFilter = 'All';
     let searchQuery = '';
 
     const tableBody = document.getElementById('payment-table-body');
     const searchInput = document.getElementById('searchInput');
     const statusFilter = document.getElementById('statusFilter');
+    const typeFilter = document.getElementById('vendorTypeFilter');
 
     function renderTable() {
         if (!tableBody) return;
@@ -21,9 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                                 item.operator.toLowerCase().includes(searchQuery.toLowerCase());
             
-            const matchesStatus = currentFilter === 'All' || item.status === currentFilter;
+            const matchesStatus = currentStatusFilter === 'All' || item.status === currentStatusFilter;
+            const matchesType = currentTypeFilter === 'All' || item.type === currentTypeFilter;
             
-            return matchesSearch && matchesStatus;
+            return matchesSearch && matchesStatus && matchesType;
         });
 
         tableBody.innerHTML = filteredData.map(item => `
@@ -36,14 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td><span class="status-badge ${item.statusClass}" style="padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; display: inline-block; text-align: center; min-width: 100px;">${item.status}</span></td>
                 <td class="actions-col">
                     <div class="row-actions" style="display: flex; justify-content: flex-end; gap: 8px;">
-                        <button class="btn-icon" title="View History" onclick="viewHistory(${item.id})" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e2e8f0; background: white; color: #64748b; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                            <i class="fa-solid fa-history"></i>
-                        </button>
+
                         <button class="btn-icon" title="Record Payment" onclick="recordSpecificPayment(${item.id})" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e2e8f0; background: white; color: #64748b; display: flex; align-items: center; justify-content: center; cursor: pointer;">
                             <i class="fa-solid fa-credit-card"></i>
                         </button>
-                        <button class="btn-icon remind" title="Send Reminder" onclick="sendReminder('${item.operator}')" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e2e8f0; background: white; color: #64748b; display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                            <i class="fa-solid fa-paper-plane"></i>
+                        <button class="btn-icon ${item.status === 'Clear' ? 'is-cleared' : ''}" title="Toggle Status" onclick="toggleStatus(${item.id})" style="width: 32px; height: 32px; border-radius: 6px; border: 1px solid #e2e8f0; background: ${item.status === 'Clear' ? '#475569' : 'white'}; color: ${item.status === 'Clear' ? 'white' : '#64748b'}; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease;">
+                            <i class="fa-solid fa-note-sticky"></i>
                         </button>
                     </div>
                 </td>
@@ -55,13 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateCounts(filteredCount) {
-        const overdue = paymentData.filter(p => p.status === 'Overdue').length;
-        const dueSoon = paymentData.filter(p => p.status === 'Due Soon').length;
-        const paidToday = paymentData.filter(p => p.status === 'Paid').length; // Mock count
+        const unclear = paymentData.filter(p => p.status === 'Unclear').length;
+        const clear = paymentData.filter(p => p.status === 'Clear').length;
 
-        document.getElementById('countOverdue').textContent = overdue;
-        document.getElementById('countDueSoon').textContent = dueSoon;
-        document.getElementById('countCleared').textContent = paidToday;
+        document.getElementById('countUnclear').textContent = unclear;
+        document.getElementById('countClear').textContent = clear;
 
         const total = paymentData.length;
         document.getElementById('totalEntries').textContent = total;
@@ -76,7 +75,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     statusFilter?.addEventListener('change', (e) => {
-        currentFilter = e.target.value;
+        currentStatusFilter = e.target.value;
+        renderTable();
+    });
+
+    typeFilter?.addEventListener('change', (e) => {
+        currentTypeFilter = e.target.value;
         renderTable();
     });
 
@@ -124,70 +128,82 @@ document.addEventListener('DOMContentLoaded', () => {
     window.recordSpecificPayment = (id) => {
         const item = paymentData.find(p => p.id === id);
         if (item) {
-            const select = document.getElementById('modalCanteenSelect');
-            if (select) {
-                // Find option that matches name or id
-                for (let i = 0; i < select.options.length; i++) {
-                    if (select.options[i].text.includes(item.name)) {
-                        select.selectedIndex = i;
-                        break;
-                    }
-                }
+            document.getElementById('modalCanteenSelect').value = item.name;
+            
+            // Populate existing data if any
+            const dateInput = document.getElementById('modalDate');
+            const preview = document.getElementById('receiptPreview');
+            const img = document.getElementById('previewImg');
+            
+            if (item.date) {
+                dateInput.value = item.date;
+            } else {
+                dateInput.value = '';
             }
+
+            if (item.receiptImg) {
+                img.src = item.receiptImg;
+                preview.style.display = 'block';
+            } else {
+                img.src = '';
+                preview.style.display = 'none';
+            }
+
             openPaymentModal();
         }
     };
 
-    window.sendReminder = (operator) => {
-        const btn = event.currentTarget;
-        const originalHtml = btn.innerHTML;
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
-        btn.style.pointerEvents = 'none';
 
-        setTimeout(() => {
-            btn.innerHTML = '<i class="fa-solid fa-check"></i>';
-            btn.style.color = 'var(--color-green)';
-            btn.style.borderColor = 'var(--color-green)';
-            alert(`Reminder successfully sent to ${operator}!`);
-            
-            setTimeout(() => {
-                btn.innerHTML = originalHtml;
-                btn.style.pointerEvents = 'auto';
-                btn.style.color = '';
-                btn.style.borderColor = '';
-            }, 2000);
-        }, 1500);
+
+    const infoModal = document.getElementById('infoModal');
+    window.closeInfoModal = () => infoModal.classList.remove('active');
+
+    window.showInfoModal = (title, message) => {
+        document.getElementById('infoTitle').textContent = title;
+        document.getElementById('infoMessage').textContent = message;
+        infoModal.classList.add('active');
     };
 
-    const historyModal = document.getElementById('historyModal');
-    window.openHistoryModal = () => historyModal.classList.add('active');
-    window.closeHistoryModal = () => historyModal.classList.remove('active');
+    const confirmModal = document.getElementById('confirmStatusModal');
+    window.closeConfirmModal = () => confirmModal.classList.remove('active');
 
-    window.viewHistory = (id) => {
+    window.toggleStatus = (id) => {
         const item = paymentData.find(p => p.id === id);
-        if (item) {
-            document.getElementById('historyTitle').textContent = `${item.name} Payment History`;
-            const list = document.getElementById('historyList');
-            
-            if (item.history && item.history.length > 0) {
-                list.innerHTML = item.history.map(h => `
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid var(--card-border);">
-                        <div>
-                            <div style="font-weight: 600; font-size: 14px;">${h.date}</div>
-                            <div style="font-size: 12px; color: var(--text-muted);">${h.method}</div>
-                        </div>
-                        <div style="text-align: right;">
-                            <div style="font-weight: 700; color: var(--color-green);">₱${h.amount.toLocaleString()}</div>
-                            <div style="font-size: 11px; background: rgba(22, 163, 74, 0.1); color: var(--color-green); padding: 2px 8px; border-radius: 10px; display: inline-block;">${h.status}</div>
-                        </div>
-                    </div>
-                `).join('');
-            } else {
-                list.innerHTML = '<div style="text-align: center; padding: 40px; color: var(--text-muted);">No payment history found for this canteen.</div>';
+        if (!item) return;
+
+        const confirmBtn = document.getElementById('confirmActionBtn');
+        const confirmTitle = document.getElementById('confirmTitle');
+        const confirmMsg = document.getElementById('confirmMessage');
+        const confirmIcon = document.getElementById('confirmIcon');
+
+        if (item.status === 'Clear') {
+            // Restriction: Can only unclear through Record Payment modal
+            showInfoModal("Action Restricted", `To set ${item.name} back to Unclear, please open the "Record Payment" modal and use the "Set to Unclear" button at the top.`);
+            return;
+        } else {
+            // Toggling to Clear requires a receipt check and confirmation
+            if (!item.receiptUploaded) {
+                showInfoModal("Receipt Required", `Cannot mark as Clear. No receipt has been uploaded for ${item.name}. Please upload a receipt first via "Record Payment".`);
+                return;
             }
-            openHistoryModal();
+
+            confirmTitle.textContent = "Mark as Clear?";
+            confirmMsg.textContent = `Are you sure you want to mark ${item.name} as Clear? This confirms you have verified the uploaded receipt.`;
+            confirmIcon.style.background = "#dcfce7";
+            confirmIcon.style.color = "#16a34a";
+            confirmIcon.innerHTML = '<i class="fa-solid fa-check"></i>';
+
+            confirmBtn.onclick = () => {
+                item.status = 'Clear';
+                item.statusClass = 'status-clear';
+                renderTable();
+                closeConfirmModal();
+            };
+            confirmModal.classList.add('active');
         }
     };
+
+
 
 
     // Month Selector Logic
@@ -200,10 +216,54 @@ document.addEventListener('DOMContentLoaded', () => {
     // Form Submit
     document.getElementById('recordPaymentForm')?.addEventListener('submit', (e) => {
         e.preventDefault();
-        alert('Payment recorded successfully!');
+        
+        const canteenName = document.getElementById('modalCanteenSelect').value;
+        const dateVal = document.getElementById('modalDate').value;
+        const previewImg = document.getElementById('previewImg');
+
+        if (!canteenName) {
+            showInfoModal("Error", "Canteen context lost. Please try again.");
+            return;
+        }
+
+        // Check if a new file was uploaded OR if an existing image is present
+        const receiptInput = document.getElementById('receiptInput');
+        const hasImage = (receiptInput.files && receiptInput.files.length > 0) || (previewImg.src && !previewImg.src.endsWith('/'));
+
+        if (!hasImage) {
+            showInfoModal("Receipt Required", "Please upload a receipt/proof of payment to record this transaction.");
+            return;
+        }
+
+        // Find the record and update it
+        const record = paymentData.find(p => p.name === canteenName);
+        if (record) {
+            record.receiptUploaded = true;
+            record.date = dateVal;
+            // In a real app, we'd save the actual file path or base64
+            if (receiptInput.files && receiptInput.files[0]) {
+                record.receiptImg = previewImg.src; 
+            }
+            showInfoModal("Success", `Payment record updated for ${canteenName}.`);
+        }
+
         closePaymentModal();
         renderTable();
     });
+
+    window.unclearCurrentTransaction = () => {
+        const canteenName = document.getElementById('modalCanteenSelect').value;
+        if (!canteenName) return;
+
+        const record = paymentData.find(p => p.name === canteenName);
+        if (record) {
+            record.status = 'Unclear';
+            record.statusClass = 'status-unclear';
+            renderTable();
+            closePaymentModal();
+            showInfoModal("Status Updated", `${canteenName} has been set to Unclear.`);
+        }
+    };
 
     renderTable();
 });

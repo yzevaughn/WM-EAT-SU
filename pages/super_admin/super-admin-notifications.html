@@ -4,60 +4,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WM EAT SU — Notifications</title>
+  <title>WM EAT SU — Super Admin Notifications</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <link rel="stylesheet" href="../../css/navbar.css" />
-  <link rel="stylesheet" href="../../css/admin-css/admin-dashboard.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<link rel="stylesheet" href="../../css/notifications.css" /></head>
+  <link rel="stylesheet" href="../../css/super_admin_css/super-dashboard.css" />
+  <link rel="stylesheet" href="../../css/notifications.css" />
+</head>
 
 <body>
   <input type="checkbox" id="menu-checkbox" class="menu-checkbox" />
 
-  <!-- ----------------------------------------
-         TOP NAVBAR
-         ---------------------------------------- -->
+  <!-- TOP NAVBAR -->
   <div class="top-nav">
-    <!-- LEFT: hamburger + logo -->
     <div class="nav-left">
       <label for="menu-checkbox" class="menu-toggle">
         <i class="fa-solid fa-bars"></i>
       </label>
-      <a href="admin-dashboard.html" class="logo">
+      <a href="super-dashboard.html" class="logo">
         <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
         <span class="logo-text">WM EAT SU</span>
       </a>
     </div>
 
     <div class="nav-center"></div>
-    <!-- RIGHT: profile -->
-          <div class="nav-right">
-        <!-- Notifications -->
-        <div class="notification-dropdown">
-          <button class="nav-icon-btn" aria-label="Notifications">
-            <i class="fa-regular fa-bell"></i>
-            <span class="notification-badge"></span>
-          </button>
-          <div class="notification-menu">
-            <div class="notification-header">
-              <h3>Notifications</h3>
-              <button class="mark-read-btn">Mark all as read</button>
-            </div>
-            <div class="notification-list">
-              <!-- Dynamic notifications -->
-            </div>
-            <div class="notification-footer">
-              <a href="admin-notifications.html">View all notifications</a>
-            </div>
+
+    <div class="nav-right">
+      <!-- Notifications Dropdown -->
+      <div class="notification-dropdown">
+        <button class="nav-icon-btn" aria-label="Notifications">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notification-badge"></span>
+        </button>
+        <div class="notification-menu">
+          <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="mark-read-btn">Mark all as read</button>
+          </div>
+          <div class="notification-list">
+            <!-- Dynamic notifications -->
+          </div>
+          <div class="notification-footer">
+            <a href="super-admin-notifications.html">View all notifications</a>
           </div>
         </div>
+      </div>
+
       <div class="profile">
         <div class="profile-info">
-          <span class="profile-name">Vaughn Evangelista</span>
-          <span class="email">vaughn.student@wm.edu.ph</span>
+          <span class="profile-name">Super Admin</span>
+          <span class="email">admin@wm.edu.ph</span>
         </div>
         <div class="profile-dropdown">
           <button class="profile-btn">
@@ -73,33 +71,39 @@
       </div>
     </div>
   </div>
-  <!-- /top-nav -->
 
-  <!-- ----------------------------------------
-         LAYOUT
-         ---------------------------------------- -->
   <div class="layout">
-    <!-- -- SIDEBAR -- -->
+    <!-- SIDEBAR -->
     <div class="left-nav" id="sidebar">
-      <!-- logo shown on mobile inside sidebar -->
-
       <ul class="nav-list">
         <li>
-          <a href="admin-dashboard.html" class="nav-link">
+          <a href="super-dashboard.html" class="nav-link">
             <i class="fa-solid fa-house"></i>
             <span>Dashboard</span>
           </a>
         </li>
         <li>
+          <a href="top-earners.html" class="nav-link">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Top Earners</span>
+          </a>
+        </li>
+        <li>
+          <a href="payment-tracking.html" class="nav-link">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+            <span>Payment Tracking</span>
+          </a>
+        </li>
+        <li>
           <a href="student-applications.html" class="nav-link">
             <i class="fa-solid fa-user-check"></i>
-            <span>Student Applications</span>
+            <span>Student Application</span>
           </a>
         </li>
         <li>
           <a href="canteen-applications.html" class="nav-link">
             <i class="fa-solid fa-store"></i>
-            <span>Canteen Applications</span>
+            <span>Canteen Application</span>
           </a>
         </li>
         <li>
@@ -109,7 +113,7 @@
           </a>
         </li>
         <li>
-          <a href="admin-menu.html" class="nav-link">
+          <a href="admin-approval.html" class="nav-link">
             <i class="fa-solid fa-utensils"></i>
             <span>Menu</span>
           </a>
@@ -121,20 +125,16 @@
           </a>
         </li>
         <li>
-          <a href="admin-analytics.html" class="nav-link">
-            <i class="fa-solid fa-chart-line"></i>
-            <span>Analytics</span>
+          <a href="admin-control.html" class="nav-link">
+            <i class="fa-solid fa-gear"></i>
+            <span>Admin Control</span>
           </a>
         </li>
       </ul>
-
-
     </div>
 
     <div class="main-content">
-
-      <!-- Notifications Component -->
-      <div class="notifications-container" id="adminNotifContainer" style="margin-top: 20px;">
+      <div class="notifications-container" id="superAdminNotifContainer" style="margin-top: 20px;">
         <div class="notifications-header">
           <h1>All Notifications</h1>
           <div class="notifications-filters" style="display: flex; gap: 10px; align-items: center;">
@@ -142,7 +142,7 @@
               <button class="filter-btn active">All</button>
               <button class="filter-btn">Unread</button>
             </div>
-            <button class="mark-all-read-btn" style="background: none; border: none; color: var(--admin-primary); font-size: 13px; font-weight: 600; cursor: pointer;">Mark all as read</button>
+            <button class="mark-all-read-btn" style="background: none; border: none; color: #dc2626; font-size: 13px; font-weight: 600; cursor: pointer;">Mark all as read</button>
             <button class="clear-all-notif-btn" style="background: none; border: none; color: #ef4444; font-size: 13px; font-weight: 600; cursor: pointer;">Clear All</button>
           </div>
         </div>
@@ -150,24 +150,12 @@
           <!-- Dynamic notifications will be injected here -->
         </div>
       </div>
-      </div>
-      </div>
-      <!-- /Notifications Component -->
+    </div>
+  </div>
 
   <script src="../../script/notifications.js"></script>
   <script src="../../script/admin-js/admin-notifications-mock.js"></script>
-  <script src="../../script/admin-js/admin-dashboard.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const container = document.getElementById('adminNotifContainer');
-      if (container) {
-        renderNotificationsPage('admin', container);
-      }
-    });
-  </script>
+  <script src="../../script/super_admin_js/super-notif.js"></script>
 </body>
 
 </html>
-
-
-

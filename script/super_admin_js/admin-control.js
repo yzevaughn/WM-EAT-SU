@@ -118,6 +118,7 @@ function renderDeactivatedAccounts() {
             </div>
             </td>
             <td><span class="date-text">${admin.deactivatedDate || 'Recently'}</span></td>
+            <td><span class="reason-text">${admin.reason || 'No reason provided'}</span></td>
             <td>
                 <div class="action-group">
                     ${getActionButtons(admin.status, admin.id)}
@@ -146,10 +147,17 @@ function promptDeactivate(adminId) {
 
 function confirmDeactivate() {
     const adminId = parseInt(document.getElementById('deactivateAdminId').value);
+    const reason = document.getElementById('deactivationReason').value;
     
+    if (!reason) {
+        alert('Please provide a reason for deactivation.');
+        return;
+    }
+
     const admin = adminData.find(a => a.id === adminId);
     if (admin) {
         admin.status = 'Deactivated';
+        admin.reason = reason;
         
         const today = new Date();
         const options = { month: 'short', day: 'numeric', year: 'numeric' };
@@ -165,6 +173,7 @@ function closeDeactivateModal() {
     const modal = document.getElementById('deactivateModal');
     if (modal) {
         modal.style.display = 'none';
+        document.getElementById('deactivationReason').value = '';
     }
 }
 
@@ -214,23 +223,29 @@ document.getElementById('createAdminForm')?.addEventListener('submit', (e) => {
 });
 
 function renderPermissionAdminList() {
-    const adminList = document.querySelector('.admin-list');
-    if (!adminList) return;
+    const tableBody = document.getElementById('permissionAdminTableBody');
+    if (!tableBody) return;
 
     const activeAdmins = adminData.filter(admin => admin.status === 'Active');
 
-    adminList.innerHTML = activeAdmins.map((admin, index) => `
-        <div class="admin-item" data-id="${admin.id}" onclick="openPermissionModal('${admin.name}', '${admin.email}')">
-            <div class="admin-item-info">
-                <img src="../../images/pfp.jpg" class="admin-avatar-img sm" alt="Admin">
-                <div class="admin-item-text">
-                    <div class="name-status-row">
+    tableBody.innerHTML = activeAdmins.map(admin => `
+        <tr>
+            <td>
+                <div class="user-cell">
+                    <img src="../../images/pfp.jpg" class="admin-avatar-img sm" alt="Admin">
+                    <div class="user-details">
                         <h4>${admin.name}</h4>
-                        <span class="status-dot ${admin.status.toLowerCase()}"></span>
                     </div>
                 </div>
-            </div>
-        </div>
+            </td>
+            <td><span class="status-pill active">${admin.status}</span></td>
+            <td><span class="login-time">${admin.lastLogin}</span></td>
+            <td>
+                <button class="btn-action" onclick="openPermissionModal('${admin.name}', '${admin.email}')">
+                    <i class="fa-solid fa-eye"></i> View Audit
+                </button>
+            </td>
+        </tr>
     `).join('');
 }
 
@@ -239,7 +254,7 @@ function openPermissionModal(adminName, adminEmail) {
     const nameDisplay = document.getElementById('modalAdminName');
     const emailDisplay = document.getElementById('modalAdminEmail');
     if (modal && nameDisplay) {
-        nameDisplay.textContent = `${adminName} — Permissions`;
+        nameDisplay.textContent = `${adminName} — Audit Logs`;
         if (emailDisplay) emailDisplay.textContent = adminEmail;
         modal.style.display = 'flex';
     }

@@ -185,11 +185,8 @@ td {
   min-width: 100px;
 }
 
-.status-due-soon { background: rgba(234, 88, 12, 0.1); color: var(--color-orange); }
-.status-upcoming { background: rgba(37, 99, 235, 0.1); color: var(--color-blue); }
-.status-overdue  { background: rgba(220, 38, 38, 0.1); color: var(--color-red); }
-.status-paid     { background: rgba(22, 163, 74, 0.1); color: var(--color-green); }
-.status-partially-paid { background: rgba(14, 165, 233, 0.1); color: #0ea5e9; }
+.status-clear   { background: rgba(22, 163, 74, 0.1); color: var(--color-green); }
+.status-unclear { background: rgba(220, 38, 38, 0.1); color: var(--color-red); }
 
 /* Action Cell Styles */
 .row-actions {
@@ -239,8 +236,12 @@ td {
   display: none;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-  backdrop-filter: blur(4px);
+  z-index: 9999;
+  backdrop-filter: blur(8px);
+}
+
+.payment-modal.active {
+  display: flex;
 }
 
 .modal-overlay {
@@ -440,6 +441,12 @@ td {
   border: 1px solid #f1f5f9;
   margin-bottom: 30px;
   overflow: hidden;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 .data-grid {

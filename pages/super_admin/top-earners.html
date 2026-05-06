@@ -181,7 +181,17 @@
 
       <!-- Combined Leaderboard Panel -->
       <div class="leaderboard-panel">
-        <h2>Combined Leaderboard — All Vendors</h2>
+        <div class="panel-header-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h2 style="margin: 0;">Combined Leaderboard — All Vendors</h2>
+          <div class="filter-item">
+            <label for="typeFilter" style="font-size: 14px; font-weight: 500; color: #64748b; margin-right: 8px;"><i class="fa-solid fa-users"></i> Type:</label>
+            <select id="typeFilter" class="custom-select" style="padding: 8px 12px; border-radius: 8px; border: 1px solid #e2e8f0; background: #fff; font-size: 14px; color: #1e293b; outline: none; transition: all 0.2s;">
+              <option value="All">All Types</option>
+              <option value="Canteen">Canteens Only</option>
+              <option value="Student">Students Only</option>
+            </select>
+          </div>
+        </div>
         <div class="table-responsive">
           <table>
             <thead>

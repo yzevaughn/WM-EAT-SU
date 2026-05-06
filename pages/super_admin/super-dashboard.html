@@ -28,11 +28,10 @@
     </div>
     <div class="nav-center"></div>
     <div class="nav-right">
-      <!-- Notifications -->
       <div class="notification-dropdown">
         <button class="nav-icon-btn" aria-label="Notifications">
           <i class="fa-regular fa-bell"></i>
-          <span class="notification-badge">3</span>
+          <span class="notification-badge"></span>
         </button>
         <div class="notification-menu">
           <div class="notification-header">
@@ -40,25 +39,10 @@
             <button class="mark-read-btn">Mark all as read</button>
           </div>
           <div class="notification-list">
-            <a href="super-dashboard.html" class="notification-item unread">
-              <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
-              <div class="notif-content">
-                <p class="notif-title">New Canteen Application</p>
-                <p class="notif-desc">A new canteen application has been submitted.</p>
-                <span class="notif-time">2 mins ago</span>
-              </div>
-            </a>
-            <a href="super-dashboard.html" class="notification-item unread">
-              <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
-              <div class="notif-content">
-                <p class="notif-title">System Update</p>
-                <p class="notif-desc">Maintenance scheduled for tonight at 12:00 AM.</p>
-                <span class="notif-time">1 hour ago</span>
-              </div>
-            </a>
+            <!-- Dynamic notifications -->
           </div>
           <div class="notification-footer">
-            <a href="#">View all notifications</a>
+            <a href="super-admin-notifications.html">View all notifications</a>
           </div>
         </div>
       </div>
@@ -250,6 +234,9 @@
     </div>
   </div>
 
+  <script src="../../script/notifications.js"></script>
+  <script src="../../script/admin-js/admin-notifications-mock.js"></script>
+  <script src="../../script/super_admin_js/super-notif.js"></script>
   <script src="../../script/super_admin_js/super-dashboard.js"></script>
 </body>
 

@@ -29,11 +29,10 @@
     </div>
     <div class="nav-center"></div>
     <div class="nav-right">
-      <!-- Notifications -->
       <div class="notification-dropdown">
         <button class="nav-icon-btn" aria-label="Notifications">
           <i class="fa-regular fa-bell"></i>
-          <span class="notification-badge">3</span>
+          <span class="notification-badge"></span>
         </button>
         <div class="notification-menu">
           <div class="notification-header">
@@ -41,25 +40,10 @@
             <button class="mark-read-btn">Mark all as read</button>
           </div>
           <div class="notification-list">
-            <a href="super-dashboard.html" class="notification-item unread">
-              <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
-              <div class="notif-content">
-                <p class="notif-title">New Canteen Application</p>
-                <p class="notif-desc">A new canteen application has been submitted.</p>
-                <span class="notif-time">2 mins ago</span>
-              </div>
-            </a>
-            <a href="super-dashboard.html" class="notification-item unread">
-              <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
-              <div class="notif-content">
-                <p class="notif-title">System Update</p>
-                <p class="notif-desc">Maintenance scheduled for tonight at 12:00 AM.</p>
-                <span class="notif-time">1 hour ago</span>
-              </div>
-            </a>
+            <!-- Dynamic notifications -->
           </div>
           <div class="notification-footer">
-            <a href="#">View all notifications</a>
+            <a href="super-admin-notifications.html">View all notifications</a>
           </div>
         </div>
       </div>
@@ -163,25 +147,18 @@
 
       <!-- summary counters -->
       <div class="metrics-cards">
-        <div class="metrics-card pending card-overdue">
+        <div class="metrics-card card-unclear">
           <div class="icon-box" style="background: #fee2e2; color: #dc2626;"><i class="fa-solid fa-calendar-xmark"></i></div>
           <div class="card-info">
-            <p>Overdue Payments</p>
-            <h3 id="countOverdue" class="card-value">1</h3>
+            <p>Unclear Payments</p>
+            <h3 id="countUnclear" class="card-value">0</h3>
           </div>
         </div>
-        <div class="metrics-card pending card-soon">
-          <div class="icon-box" style="background: #fff7ed; color: #ea580c;"><i class="fa-solid fa-clock"></i></div>
-          <div class="card-info">
-            <p>Due Soon</p>
-            <h3 id="countDueSoon" class="card-value">1</h3>
-          </div>
-        </div>
-        <div class="metrics-card resolved card-paid">
+        <div class="metrics-card card-clear">
           <div class="icon-box" style="background: #dcfce7; color: #16a34a;"><i class="fa-solid fa-check-circle"></i></div>
           <div class="card-info">
-            <p>Cleared Today</p>
-            <h3 id="countCleared" class="card-value">3</h3>
+            <p>Clear Payments</p>
+            <h3 id="countClear" class="card-value">0</h3>
           </div>
         </div>
       </div>
@@ -199,10 +176,8 @@
               <label for="statusFilter"><i class="fa-solid fa-filter"></i> Status:</label>
               <select id="statusFilter" class="custom-select">
                 <option value="All">All Status</option>
-                <option value="Paid">Paid</option>
-                <option value="Overdue">Overdue</option>
-                <option value="Due Soon">Due Soon</option>
-                <option value="Upcoming">Upcoming</option>
+                <option value="Clear">Clear</option>
+                <option value="Unclear">Unclear</option>
               </select>
             </div>
             <div class="filter-item">
@@ -257,89 +232,216 @@
   <!-- RECORD PAYMENT MODAL -->
   <div class="payment-modal" id="paymentModal">
     <div class="modal-overlay" onclick="closePaymentModal()"></div>
-    <div class="modal-content">
+    <div class="modal-content" style="max-width: 400px;">
       <div class="modal-header">
         <h2>Record Payment</h2>
         <button class="close-btn" onclick="closePaymentModal()">&times;</button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="padding: 20px;">
+        <!-- QUICK UNCLEAR ACTION -->
+        <div style="margin-bottom: 20px;">
+          <button type="button" class="btn-unclear" style="
+            width: 100%;
+            padding: 10px;
+            background: #fff1f2;
+            color: #be123c;
+            border: 1px solid #fecdd3;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+          " onclick="unclearCurrentTransaction()">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>Set to Unclear Status</span>
+          </button>
+        </div>
+
         <form id="recordPaymentForm">
           <div class="form-group">
-            <label>Canteen Name</label>
-            <select class="form-control" id="modalCanteenSelect">
-              <option value="">Select Canteen</option>
-              <option value="A">Canteen A - Main</option>
-              <option value="B">Canteen B - Annex</option>
-              <option value="C">Canteen C - Science</option>
-              <option value="D">Canteen D - Engineering</option>
-            </select>
+            <label>Transaction Date</label>
+            <input type="date" class="form-control" id="modalDate" required>
           </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Amount Paid (₱)</label>
-              <input type="number" class="form-control" placeholder="0.00" id="modalAmount">
-            </div>
-            <div class="form-group">
-              <label>Payment Method</label>
-              <select class="form-control" id="modalMethod">
-                <option value="GCash">GCash</option>
-                <option value="Cash">Cash</option>
-                <option value="Bank Transfer">Bank Transfer</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Reference Number / Receipt ID</label>
-            <input type="text" class="form-control" placeholder="e.g. 1029384756">
-          </div>
-          <div class="form-group">
-            <label>Notes</label>
-            <textarea class="form-control" placeholder="Any additional notes..."></textarea>
-          </div>
-          <div class="form-group" style="margin-top: 16px;">
-            <label>Upload Receipt / Proof of Payment</label>
+          
+          <div class="form-group" style="margin-top: 20px;">
+            <label>Receipt Photo</label>
             <div class="receipt-upload-area" id="receiptUploadArea" style="
-              border: 2px dashed var(--card-border);
-              border-radius: var(--radius-md);
-              padding: 24px;
+              border: 2px dashed #cbd5e1;
+              border-radius: 12px;
+              padding: 30px 16px;
               text-align: center;
               cursor: pointer;
-              transition: var(--transition);
               background: #f8fafc;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 8px;
             " onclick="document.getElementById('receiptInput').click()">
-              <i class="fa-solid fa-cloud-upload-alt" style="font-size: 24px; color: var(--text-muted); margin-bottom: 8px;"></i>
-              <p style="font-size: 13px; color: var(--text-muted); margin: 0;">Click to upload or drag and drop receipt image</p>
+              <div class="upload-icon-wrapper" style="
+                width: 48px;
+                height: 48px;
+                background: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+                color: #64748b;
+                font-size: 20px;
+              ">
+                <i class="fa-solid fa-camera"></i>
+              </div>
+              <p style="font-size: 13px; font-weight: 600; color: #334155; margin: 0;">Tap to Capture Receipt</p>
               <input type="file" id="receiptInput" style="display: none;" accept="image/*" onchange="previewReceipt(event)">
-              <div id="receiptPreview" style="margin-top: 12px; display: none;">
-                <img id="previewImg" src="" style="max-width: 100%; max-height: 150px; border-radius: 8px; box-shadow: var(--shadow-sm);">
+              <div id="receiptPreview" style="margin-top: 8px; display: none; width: 100%;">
+                <img id="previewImg" src="" style="max-width: 100%; max-height: 150px; border-radius: 8px; border: 1px solid #e2e8f0; object-fit: contain;">
               </div>
             </div>
           </div>
-          <div class="modal-footer" style="margin-top: 24px; display: flex; gap: 12px;">
-            <button type="button" class="btn-secondary" style="flex: 1;" onclick="closePaymentModal()">Cancel</button>
-            <button type="submit" class="btn-primary" style="flex: 2;">Save Payment Record</button>
+
+          <input type="hidden" id="modalCanteenSelect"> <!-- Kept hidden for functionality -->
+
+          <div class="modal-footer" style="margin-top: 32px; display: flex; gap: 12px;">
+            <button type="button" class="btn-secondary" style="
+              flex: 1;
+              padding: 14px;
+              border-radius: 12px;
+              background: #f1f5f9;
+              color: #475569;
+              font-weight: 600;
+              font-size: 14px;
+              border: 1px solid #e2e8f0;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 8px;
+              transition: all 0.2s ease;
+            " onclick="showInfoModal('Feature Coming Soon', 'The edit history for this payment record is currently being processed by the audit system.')">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+              <span>History</span>
+            </button>
+
+            <button type="submit" class="btn-primary" style="
+              flex: 2; 
+              padding: 14px; 
+              border-radius: 12px; 
+              background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+              color: white;
+              font-weight: 700;
+              font-size: 15px;
+              border: none;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 10px;
+              box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.2);
+              transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 20px 25px -5px rgba(15, 23, 42, 0.25)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 15px -3px rgba(15, 23, 42, 0.2)';" onmousedown="this.style.transform='scale(0.98)';">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <span>Complete</span>
+            </button>
           </div>
         </form>
       </div>
     </div>
   </div>
 
-  <!-- PAYMENT HISTORY MODAL -->
-  <div class="payment-modal" id="historyModal">
-    <div class="modal-overlay" onclick="closeHistoryModal()"></div>
-    <div class="modal-content" style="max-width: 600px;">
-      <div class="modal-header">
-        <h2 id="historyTitle">Payment History</h2>
-        <button class="close-btn" onclick="closeHistoryModal()">&times;</button>
+
+
+  <!-- CUSTOM CONFIRMATION MODAL -->
+  <div class="payment-modal" id="confirmStatusModal">
+    <div class="modal-overlay" onclick="closeConfirmModal()"></div>
+    <div class="modal-content" style="max-width: 400px; text-align: center; padding: 32px;">
+      <div class="confirm-icon" id="confirmIcon" style="
+        width: 72px;
+        height: 72px;
+        background: #dcfce7;
+        color: #16a34a;
+        font-size: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+      ">
+        <i class="fa-solid fa-check"></i>
       </div>
-      <div class="modal-body">
-        <div class="history-list" id="historyList">
-          <!-- Dynamic history items -->
-        </div>
+      <h2 id="confirmTitle" style="margin-bottom: 12px; font-size: 20px;">Confirm Status Change</h2>
+      <p id="confirmMessage" style="color: #64748b; font-size: 14px; margin-bottom: 24px; line-height: 1.5;">Are you sure you want to mark this transaction as clear?</p>
+      
+      <div style="display: flex; gap: 12px;">
+        <button class="btn-secondary" style="
+          flex: 1;
+          padding: 12px;
+          border-radius: 12px;
+          background: #f8fafc;
+          color: #64748b;
+          font-weight: 600;
+          border: 1px solid #e2e8f0;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        " onclick="closeConfirmModal()">Cancel</button>
+        <button id="confirmActionBtn" class="btn-primary" style="
+          flex: 1;
+          padding: 12px;
+          border-radius: 12px;
+          background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+          color: white;
+          font-weight: 700;
+          border: none;
+          cursor: pointer;
+          box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.1);
+          transition: all 0.3s ease;
+        " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 15px -3px rgba(15, 23, 42, 0.2)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 6px -1px rgba(15, 23, 42, 0.1)';" onmousedown="this.style.transform='scale(0.98)';">
+          Confirm
+        </button>
       </div>
     </div>
   </div>
 
+  <!-- INFO/WARNING MODAL -->
+  <div class="payment-modal" id="infoModal">
+    <div class="modal-overlay" onclick="closeInfoModal()"></div>
+    <div class="modal-content" style="max-width: 400px; text-align: center; padding: 32px;">
+      <div id="infoIcon" style="
+        width: 72px;
+        height: 72px;
+        background: #fff7ed;
+        color: #ea580c;
+        font-size: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+      ">
+        <i class="fa-solid fa-circle-info"></i>
+      </div>
+      <h2 id="infoTitle" style="margin-bottom: 12px; font-size: 20px;">Notice</h2>
+      <p id="infoMessage" style="color: #64748b; font-size: 14px; margin-bottom: 24px; line-height: 1.5;">Message goes here.</p>
+      <button class="btn-primary" style="
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        background: #0f172a;
+        color: white;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      " onclick="closeInfoModal()">Understand</button>
+    </div>
+  </div>
+
+  <script src="../../script/notifications.js"></script>
+  <script src="../../script/admin-js/admin-notifications-mock.js"></script>
+  <script src="../../script/super_admin_js/super-notif.js"></script>
   <script src="../../script/super_admin_js/payment-tracking.js"></script>
 </body>
 

@@ -37,48 +37,24 @@
     <div class="nav-center"></div>
     <!-- RIGHT: profile -->
           <div class="nav-right">
-        <!-- Notifications -->
-        <div class="notification-dropdown">
-          <button class="nav-icon-btn" aria-label="Notifications">
-            <i class="fa-regular fa-bell"></i>
-            <span class="notification-badge">3</span>
-          </button>
-          <div class="notification-menu">
-            <div class="notification-header">
-              <h3>Notifications</h3>
-              <button class="mark-read-btn">Mark all as read</button>
-            </div>
-            <div class="notification-list">
-              <a href="admin-dashboard.html" class="notification-item unread">
-                <div class="notif-icon green"><i class="fa-solid fa-check"></i></div>
-                <div class="notif-content">
-                  <p class="notif-title">Order #1234 Ready</p>
-                  <p class="notif-desc">Your order from Canteen 1 is ready for pickup.</p>
-                  <span class="notif-time">2 mins ago</span>
-                </div>
-              </a>
-              <a href="admin-dashboard.html" class="notification-item unread">
-                <div class="notif-icon blue"><i class="fa-solid fa-info"></i></div>
-                <div class="notif-content">
-                  <p class="notif-title">Wallet Top-up</p>
-                  <p class="notif-desc">Successfully added &#8369;500.00 to your wallet.</p>
-                  <span class="notif-time">1 hour ago</span>
-                </div>
-              </a>
-              <a href="admin-dashboard.html" class="notification-item">
-                <div class="notif-icon orange"><i class="fa-solid fa-fire-burner"></i></div>
-                <div class="notif-content">
-                  <p class="notif-title">Order Preparing</p>
-                  <p class="notif-desc">Vendor has started preparing your order.</p>
-                  <span class="notif-time">2 hours ago</span>
-                </div>
-              </a>
-            </div>
-            <div class="notification-footer">
-              <a href="admin-notifications.html">View all notifications</a>
-            </div>
+      <div class="notification-dropdown">
+        <button class="nav-icon-btn" aria-label="Notifications">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notification-badge"></span>
+        </button>
+        <div class="notification-menu">
+          <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="mark-read-btn">Mark all as read</button>
+          </div>
+          <div class="notification-list">
+            <!-- Dynamic notifications -->
+          </div>
+          <div class="notification-footer">
+            <a href="super-admin-notifications.html">View all notifications</a>
           </div>
         </div>
+      </div>
       <div class="profile">
         <div class="profile-info">
           <span class="profile-name">Super Admin</span>
@@ -183,10 +159,10 @@
           <table class="admin-table">
             <thead>
                 <tr>
-                  <th>Administrator</th>
-                  <th>Account Status</th>
-                  <th>Last Login</th>
-                  <th>Actions</th>
+                  <th>ADMINISTRATOR</th>
+                  <th>ACCOUNT STATUS</th>
+                  <th>LAST LOGIN</th>
+                  <th>ACTIONS</th>
                 </tr>
             </thead>
             <tbody id="adminTableBody">
@@ -198,54 +174,27 @@
         <div class="permission-section">
           <div class="section-header">
             <div class="header-text">
-              <h1>Permission Control</h1>
-              <p>Control feature access for each admin account</p>
+              <h1>Admin Audit Logs</h1>
+              <p>Track administrative actions and system access history</p>
             </div>
           </div>
 
           <div class="permission-grid">
-            <div class="admin-selector-card">
-              <div class="selector-header">
-                <h3>Select Admin</h3>
-              </div>
-              <div class="admin-list">
-                <div class="admin-item selected">
-                  <div class="admin-item-info">
-                    <span class="status-dot active"></span>
-                    <div class="admin-item-text">
-                      <h4>admin1</h4>
-                    </div>
-                  </div>
-                  <span class="selected-badge">Selected</span>
-                </div>
-                <div class="admin-item">
-                  <div class="admin-item-info">
-                    <span class="status-dot active"></span>
-                    <div class="admin-item-text">
-                      <h4>admin2</h4>
-                    </div>
-                  </div>
-                </div>
-                <div class="admin-item">
-                  <div class="admin-item-info">
-                    <span class="status-dot suspended"></span>
-                    <div class="admin-item-text">
-                      <h4>admin3</h4>
-                      <p>App Reviewer</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="admin-item">
-                  <div class="admin-item-info">
-                    <span class="status-dot inactive"></span>
-                    <div class="admin-item-text">
-                      <h4>admin4</h4>
-                      <p>Support Admin</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="admin-grid-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>ADMINISTRATOR</th>
+                  <th>ACCOUNT STATUS</th>
+                  <th>LAST LOGIN</th>
+                  <th>ACTIONS</th>
+                </tr>
+              </thead>
+              <tbody id="permissionAdminTableBody">
+                <!-- Dynamically populated by JS -->
+              </tbody>
+            </table>
+          </div>
           </div>
         </div>
 
@@ -261,9 +210,10 @@
             <table class="deactivated-table">
               <thead>
                 <tr>
-                  <th>Account Status</th>
-                  <th>Date</th>
-                  <th>Actions</th>
+                  <th>ADMINISTRATOR</th>
+                  <th>DEACTIVATION DATE</th>
+                  <th>REASON</th>
+                  <th>ACTIONS</th>
                 </tr>
               </thead>
               <tbody id="deactivatedTableBody">
@@ -285,54 +235,33 @@
     <div class="permission-modal">
       <div class="modal-header">
         <div class="modal-header-titles">
-          <h2 id="modalAdminName">Admin — Permissions</h2>
+          <h2 id="modalAdminName">Admin — Audit Logs</h2>
           <p id="modalAdminEmail" class="modal-email">admin@example.com</p>
         </div>
         <button class="close-modal" onclick="closePermissionModal()">&times;</button>
       </div>
       <div class="modal-body">
-        <div class="permissions-grid-modal">
-          <div class="perm-item">
-            <label class="switch">
-              <input type="checkbox" checked>
-              <span class="slider round"></span>
-            </label>
-            <span>Menu Management</span>
+        <div class="audit-log-list">
+          <div class="audit-item" style="padding: 12px; border-bottom: 1px solid #f1f5f9;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-weight: 700; color: #1e293b; font-size: 13px;">Login Attempt</span>
+              <span style="color: #64748b; font-size: 12px;">Today, 08:30 AM</span>
+            </div>
+            <p style="margin: 0; color: #475569; font-size: 13px;">Successful login from IP 192.168.1.1</p>
           </div>
-          <div class="perm-item">
-            <label class="switch">
-              <input type="checkbox" checked>
-              <span class="slider round"></span>
-            </label>
-            <span>Complaints</span>
+          <div class="audit-item" style="padding: 12px; border-bottom: 1px solid #f1f5f9;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-weight: 700; color: #1e293b; font-size: 13px;">Complaint Resolved</span>
+              <span style="color: #64748b; font-size: 12px;">Yesterday, 04:15 PM</span>
+            </div>
+            <p style="margin: 0; color: #475569; font-size: 13px;">Resolved complaint #CMP-8821 (Late Delivery)</p>
           </div>
-          <div class="perm-item">
-            <label class="switch">
-              <input type="checkbox" checked>
-              <span class="slider round"></span>
-            </label>
-            <span>Student Application</span>
-          </div>
-          <div class="perm-item">
-            <label class="switch">
-              <input type="checkbox" checked>
-              <span class="slider round"></span>
-            </label>
-            <span>Canteen Application</span>
-          </div>
-          <div class="perm-item">
-            <label class="switch">
-              <input type="checkbox" checked>
-              <span class="slider round"></span>
-            </label>
-            <span>Analytics</span>
-          </div>
-          <div class="perm-item">
-            <label class="switch">
-              <input type="checkbox" checked>
-              <span class="slider round"></span>
-            </label>
-            <span>Voucher</span>
+          <div class="audit-item" style="padding: 12px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+              <span style="font-weight: 700; color: #1e293b; font-size: 13px;">Voucher Created</span>
+              <span style="color: #64748b; font-size: 12px;">May 04, 2026</span>
+            </div>
+            <p style="margin: 0; color: #475569; font-size: 13px;">Created new voucher code 'SUMMER20'</p>
           </div>
         </div>
       </div>
@@ -375,6 +304,10 @@
       </div>
       <div class="modal-body">
         <p class="warning-text">Are you sure you want to deactivate this admin account? They will lose all access immediately.</p>
+        <div class="input-group">
+          <label for="deactivationReason">Reason for Deactivation</label>
+          <textarea id="deactivationReason" placeholder="e.g. Policy violation, No longer part of the team..." required style="width: 100%; min-height: 80px; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0;"></textarea>
+        </div>
         <input type="hidden" id="deactivateAdminId">
       </div>
       <div class="modal-footer">
@@ -384,6 +317,9 @@
     </div>
   </div>
 
+  <script src="../../script/notifications.js"></script>
+  <script src="../../script/admin-js/admin-notifications-mock.js"></script>
+  <script src="../../script/super_admin_js/super-notif.js"></script>
   <script src="../../script/super_admin_js/admin-control.js"></script>
 </body>
 

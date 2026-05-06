@@ -245,6 +245,14 @@ document.addEventListener("DOMContentLoaded", function() {
                             comp.status = "Resolved";
                             updateStats();
                             renderComplaints();
+                            
+                            // Trigger admin notification
+                            if (typeof notifyComplaintResolved === 'function') {
+                                notifyComplaintResolved({
+                                    id: comp.id,
+                                    student: comp.user
+                                });
+                            }
                         }
                     }
                 });
@@ -470,6 +478,14 @@ document.addEventListener("DOMContentLoaded", function() {
                     updateStats();
                     renderComplaints();
                     closeModal("detailsModal");
+
+                    // Trigger admin notification
+                    if (typeof notifyComplaintResolved === 'function') {
+                        notifyComplaintResolved({
+                            id: comp.id,
+                            student: comp.user
+                        });
+                    }
                 }
             }
         });

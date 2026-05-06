@@ -31,8 +31,16 @@ renderList('students-list', students);
 
 // Render Table
 const tableBody = document.getElementById('leaderboard-body');
-if (tableBody) {
-    tableBody.innerHTML = leaderboard.map(item => `
+const typeFilter = document.getElementById('typeFilter');
+
+function renderLeaderboard(filterValue = 'All') {
+    if (!tableBody) return;
+    
+    const filteredLeaderboard = filterValue === 'All' 
+        ? leaderboard 
+        : leaderboard.filter(item => item.type === filterValue);
+
+    tableBody.innerHTML = filteredLeaderboard.map(item => `
         <tr>
             <td class="row-rank">${item.rank}</td>
             <td class="row-name">${item.name}</td>
@@ -45,6 +53,16 @@ if (tableBody) {
             </td>
         </tr>
     `).join('');
+}
+
+// Initial render
+renderLeaderboard();
+
+// Event listener for filter
+if (typeFilter) {
+    typeFilter.addEventListener('change', (e) => {
+        renderLeaderboard(e.target.value);
+    });
 }
 
 function renderList(elementId, data) {
