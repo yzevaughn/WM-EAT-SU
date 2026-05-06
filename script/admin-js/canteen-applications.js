@@ -301,18 +301,18 @@ function renderTable() {
       actionButtons = `
         <button class="btn-action btn-approve" onclick="approveApp('${app.id}')">Approve</button>
         <button class="btn-action btn-reject" onclick="rejectApp('${app.id}')">Reject</button>
-        <button class="btn-action btn-details" onclick="openDetails('${app.id}')">View Details</button>
+        <button class="btn-action btn-details" onclick="openDetails('${app.id}')" title="View Details"><i class="fa-solid fa-eye"></i></button>
       `;
     } else if (app.status === "Active Vendor") {
       actionButtons = `
-        <button class="btn-action btn-details" onclick="openDetails('${app.id}')">View Details</button>
+        <button class="btn-action btn-details" onclick="openDetails('${app.id}')" title="View Details"><i class="fa-solid fa-eye"></i></button>
         <button class="btn-action btn-reason" onclick="removeVendor('${app.id}')">Deactivate</button>
       `;
     } else if (app.status === "Rejected") {
-      actionButtons = `<button class="btn-action btn-details" onclick="openDetails('${app.id}')">View Details</button>`;
+      actionButtons = `<button class="btn-action btn-details" onclick="openDetails('${app.id}')" title="View Details"><i class="fa-solid fa-eye"></i></button>`;
     } else if (app.status === "Deactivated") {
       actionButtons = `
-        <button class="btn-action btn-details" onclick="openDetails('${app.id}')">View Details</button>
+        <button class="btn-action btn-details" onclick="openDetails('${app.id}')" title="View Details"><i class="fa-solid fa-eye"></i></button>
         <button class="btn-action btn-approve" onclick="reactivateApp('${app.id}')">Reactivate</button>
       `;
     }
