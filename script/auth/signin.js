@@ -71,8 +71,8 @@ function signIn() {
 
   let ok = true;
 
-  // ✅ Email validation (basic only — allows admin123)
-  if (!em || (!em.includes("@") && em !== "admin123")) {
+  // ✅ Email validation (basic only — allows admin IDs)
+  if (!em || (!em.includes("@") && em !== "admin123" && em !== "superadmin")) {
     fErr("email", "Enter a valid email or admin ID");
     ok = false;
   } else {
@@ -108,6 +108,17 @@ function signIn() {
       sessionStorage.setItem("role", "admin");
       setTimeout(() => {
         window.location.href = "../admin/admin-dashboard.html";
+      }, 1000);
+      return;
+    }
+
+    // 👑 SUPER ADMIN DEMO
+    if (em === "superadmin" && pw === "superadmin123") {
+      showGA("Super Admin signed in successfully! Redirecting…", "ok");
+      btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Welcome Super Admin!';
+      sessionStorage.setItem("role", "superadmin");
+      setTimeout(() => {
+        window.location.href = "../super_admin/super-dashboard.html";
       }, 1000);
       return;
     }
