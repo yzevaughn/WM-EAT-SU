@@ -101,7 +101,7 @@ function buildActions(order, tab) {
     }
     return actHtml;
   }
-  if (tab === "Completed" || tab === "Cancelled")
+  if (tab === "Completed")
     return `
     <button class="remove-btn" data-action="deleteHistory" data-id="${order.id}">
       <i class="fa-solid fa-trash-can"></i> Delete</button>`;
@@ -140,7 +140,11 @@ function buildVendorCard(order, sequence) {
     : "";
 
   let timerHtml = "";
-  if (order.status === "ready" && order.vendorPickedUp && !order.studentPickedUp) {
+  if (tab === "Pending") {
+    timerHtml = `<div style="background:#fff7ed; border:1px solid #fed7aa; color:#c2410c; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px; width:100%;">
+          <i class="fa-solid fa-clock"></i> Accepting order... Auto-declines in <span class="vendor-pending-timer" data-id="${order.id}" style="font-weight:bold;">--:--</span>.
+       </div>`;
+  } else if (order.status === "ready" && order.vendorPickedUp && !order.studentPickedUp) {
     if (order.reportedIssue) {
        timerHtml = `<div style="background:#fff7ed; border:1px solid #fed7aa; color:#c2410c; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px; width:100%;">
           <i class="fa-solid fa-circle-exclamation"></i> Issue reported by student. Auto-completion paused.
@@ -219,6 +223,23 @@ function buildVendorCard(order, sequence) {
             }
           </div>
           ${noteHtml}
+          ${
+            tab === "Cancelled"
+              ? `<div class="cancellation-notice-fixed" style="width:100%; box-sizing:border-box; margin-top:16px;">
+                 <div style="background:#fef2f2; border:1px solid #fee2e2; border-radius:12px; padding:16px; display:flex; gap:12px; min-height:80px; box-sizing:border-box;">
+                   <div style="color:#ef4444; font-size:18px; margin-top:2px; flex-shrink:0;">
+                     <i class="fa-solid fa-circle-info"></i>
+                   </div>
+                   <div style="flex:1;">
+                     <div style="color:#991b1b; font-weight:700; font-size:14px; margin-bottom:4px; line-height:1;">Cancellation reason</div>
+                     <div style="color:#b91c1c; font-size:13px; line-height:1.5; font-weight:500; word-break:break-word;">
+                       ${order.cancellationReason ? esc(order.cancellationReason) : "No reason provided"}
+                     </div>
+                   </div>
+                 </div>
+               </div>`
+              : ""
+          }
         </div>
         <div class="order-total-row"><span>Total: ₱${order.total.toFixed(2)}</span></div>
         <div class="order-actions" style="margin-top:14px;display:flex;gap:8px;">
@@ -306,10 +327,7 @@ window.renderVendorOrders = function () {
 
   const clearBtn = document.getElementById("clearAllVendorBtn");
   if (clearBtn) {
-    if (
-      (activeTab === "Completed" || activeTab === "Cancelled") &&
-      filteredOrders.length > 0
-    ) {
+    if (activeTab === "Completed" && filteredOrders.length > 0) {
       clearBtn.style.display = "flex";
     } else {
       clearBtn.style.display = "none";
@@ -361,6 +379,23 @@ document.getElementById("ordersList")?.addEventListener("click", (e) => {
           <span style="font-weight:600; color:#1e293b;">${order.payment}</span>
         </div>
       </div>
+      ${
+        order.status === "cancelled"
+          ? `<div class="cancellation-notice-fixed" style="width:100%; box-sizing:border-box; margin-top:12px; margin-bottom:20px;">
+               <div style="background:#fef2f2; border:1px solid #fee2e2; border-radius:12px; padding:16px; display:flex; gap:12px; min-height:80px; box-sizing:border-box;">
+                 <div style="color:#ef4444; font-size:18px; margin-top:2px; flex-shrink:0;">
+                   <i class="fa-solid fa-circle-info"></i>
+                 </div>
+                 <div style="flex:1;">
+                   <div style="color:#991b1b; font-weight:700; font-size:14px; margin-bottom:4px; line-height:1;">Cancellation reason</div>
+                   <div style="color:#b91c1c; font-size:13px; line-height:1.4; font-weight:500; word-break:break-word;">
+                     ${order.cancellationReason ? esc(order.cancellationReason) : "No reason provided"}
+                   </div>
+                 </div>
+               </div>
+             </div>`
+          : ""
+      }
 
       <div style="margin-bottom:15px; font-weight:700; color:#0f172a; font-size:14px;">Items Summary</div>
       <div style="max-height:300px; overflow-y:auto; padding-right:5px;">
@@ -445,7 +480,7 @@ document.getElementById("closeDetailBtn")?.addEventListener("click", closeDetail
 document.getElementById("clearAllVendorBtn")?.addEventListener("click", () => {
   const activeBtn = document.querySelector(".filter-btn.active");
   const activeTab = activeBtn ? activeBtn.dataset.tab : "Pending";
-  if (activeTab !== "Completed" && activeTab !== "Cancelled") return;
+  if (activeTab !== "Completed") return;
 
   const title = document.getElementById("modalHeaderTitle");
   const sub = document.getElementById("modalSubtitle");
@@ -466,8 +501,7 @@ document.getElementById("clearAllVendorBtn")?.addEventListener("click", () => {
   actionBtn.style.margin = "0";
 
   const customHandler = () => {
-    const statusMapInv = { Completed: "completed", Cancelled: "cancelled" };
-    const rawStatus = statusMapInv[activeTab];
+    const rawStatus = "completed";
     if (rawStatus) {
       const allOrders = getOrders();
       allOrders.forEach((o) => {
@@ -1080,18 +1114,21 @@ document.getElementById("walkinOverlay")?.addEventListener("click", () => {
   document.getElementById("walkinModal").classList.remove("active");
 });
 
-/* ── Vendor Auto-Complete Timer Logic ── */
+/* ── Vendor Timer Logic (Auto-Complete & Auto-Decline) ── */
 setInterval(() => {
-  const spans = document.querySelectorAll(".vendor-auto-complete-timer");
-  if (spans.length === 0) return;
-  
+  const autoCompleteSpans = document.querySelectorAll(".vendor-auto-complete-timer");
+  const pendingSpans = document.querySelectorAll(".vendor-pending-timer");
+
+  if (autoCompleteSpans.length === 0 && pendingSpans.length === 0) return;
+
   const orders = JSON.parse(localStorage.getItem("wm_eat_su_orders") || "[]");
   let changed = false;
 
-  spans.forEach(span => {
+  // 1. Handle Auto-Complete Timers (Ready -> Completed)
+  autoCompleteSpans.forEach(span => {
     const orderId = span.dataset.id;
     const order = orders.find(o => o.id === orderId);
-    
+
     if (!order || !order.vendorPickedUpAt || order.reportedIssue || order.studentPickedUp || order.status !== "ready") {
        return;
     }
@@ -1108,6 +1145,31 @@ setInterval(() => {
          order.autoCompleted = true;
          changed = true;
       }
+    } else {
+      const m = Math.floor(timeLeft / 60000);
+      const s = Math.floor((timeLeft % 60000) / 1000);
+      span.textContent = `${m}:${s.toString().padStart(2, '0')}`;
+    }
+  });
+
+  // 2. Handle Pending Timers (Pending -> Cancelled)
+  pendingSpans.forEach((span) => {
+    const orderId = span.dataset.id;
+    const order = orders.find((o) => o.id === orderId);
+
+    if (!order || order.status !== "pending") return;
+
+    const timeLimit = 10 * 60 * 1000; // 10 minutes
+    const placedTime = new Date(order.placedAt).getTime();
+    const timePassed = Date.now() - placedTime;
+    const timeLeft = timeLimit - timePassed;
+
+    if (timeLeft <= 0) {
+      span.textContent = "0:00";
+      order.status = "cancelled";
+      order.cancelledByVendor = true;
+      order.cancellationReason = "System: Order not accepted within 10 minutes";
+      changed = true;
     } else {
       const m = Math.floor(timeLeft / 60000);
       const s = Math.floor((timeLeft % 60000) / 1000);

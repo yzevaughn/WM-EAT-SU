@@ -1003,7 +1003,11 @@
 
         /* Top message banner for dual confirmation */
         let topMsgHtml = "";
-        if (o.status === "ready" && !o.studentPickedUp && o.vendorPickedUp) {
+        if (o.status === "pending") {
+          topMsgHtml = `<div style="background:#fff7ed; border:1px solid #fed7aa; color:#c2410c; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px; width: 100%;">
+              <i class="fa-solid fa-clock"></i> Waiting for vendor to accept. Automatically declines in <span class="pending-timer" data-id="${esc(o.id)}" style="font-weight:bold;">--:--</span>.
+           </div>`;
+        } else if (o.status === "ready" && !o.studentPickedUp && o.vendorPickedUp) {
           if (o.reportedIssue) {
             topMsgHtml = `<div style="background:#fff7ed; border:1px solid #fed7aa; color:#c2410c; padding:10px; border-radius:8px; margin-bottom:12px; font-size:13px; width: 100%;">
               <i class="fa-solid fa-circle-exclamation"></i> Issue reported. Auto-completion is paused pending vendor review.
@@ -1072,29 +1076,30 @@
             </div>`;
         } else if (o.status === "cancelled") {
           const statusMsg = o.cancelledByVendor
-            ? `<p style="font-size:12px;color:#ef4444;margin-bottom:8px;">
-                 <i class="fa-solid fa-circle-info"></i>
-                 The vendor has declined this order.
-               </p>`
-            : `<p style="font-size:12px;color:#64748b;margin-bottom:8px;">
-                 <i class="fa-solid fa-circle-info"></i>
-                  You have cancelled this order.
-                </p>`;
+            ? `<div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; color:#ef4444; font-weight:800; font-size:13px; text-transform:uppercase; letter-spacing:0.5px;">
+                 <i class="fa-solid fa-circle-xmark"></i>
+                 <span>Order Declined by Vendor</span>
+               </div>`
+            : `<div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; color:#64748b; font-weight:800; font-size:13px; text-transform:uppercase; letter-spacing:0.5px;">
+                 <i class="fa-solid fa-circle-user"></i>
+                 <span>Cancelled by You</span>
+               </div>`;
 
-          const reasonMsg = o.cancellationReason 
-            ? `<div style="margin-bottom:12px; padding:10px; background:#fef2f2; border:1px solid #fee2e2; border-radius:8px; font-size:13px; color:#991b1b;">
-                 <strong style="display:block; margin-bottom:4px; font-size:11px; text-transform:uppercase; letter-spacing:0.5px;">Reason for Cancellation:</strong>
-                 ${esc(o.cancellationReason)}
-               </div>` 
-            : "";
-
-          actHtml =
-            statusMsg +
-            reasonMsg +
-            `
-            <button class="remove-btn js-remove" data-id="${esc(o.id)}" style="margin:0;">
-              <i class="fa-solid fa-trash-can"></i> Remove
-            </button>`;
+          actHtml = `
+            <div class="cancellation-notice-fixed" style="width:100%; box-sizing:border-box; margin-top:16px;">
+              ${statusMsg}
+              <div style="background:#fef2f2; border:1px solid #fee2e2; border-radius:12px; padding:16px; display:flex; gap:12px; min-height:80px; box-sizing:border-box;">
+                <div style="color:#ef4444; font-size:18px; margin-top:2px; flex-shrink:0;">
+                  <i class="fa-solid fa-circle-info"></i>
+                </div>
+                <div style="flex:1;">
+                  <div style="color:#991b1b; font-weight:700; font-size:14px; margin-bottom:4px; line-height:1;">Cancellation reason</div>
+                  <div style="color:#b91c1c; font-size:13px; line-height:1.5; font-weight:500; word-break:break-word;">
+                    ${o.cancellationReason ? esc(o.cancellationReason) : (o.cancelledByVendor ? "No reason provided by vendor" : "Order cancelled by user")}
+                  </div>
+                </div>
+              </div>
+            </div>`;
         }
 
         return `
@@ -1169,10 +1174,11 @@
               </div>
 
               <hr class="order-divider" />
-              <div class="order-total-row">
+              <div class="order-total-row" style="margin-bottom: ${o.status === "cancelled" ? "0" : "4px"};">
                 <span>Total Amount: &#8369;${o.total.toFixed(2)}</span>
-                ${actHtml ? `<div class="order-actions">${actHtml}</div>` : ""}
+                ${o.status !== "cancelled" && actHtml ? `<div class="order-actions">${actHtml}</div>` : ""}
               </div>
+              ${o.status === "cancelled" && actHtml ? `<div class="cancellation-fixed-pos" style="width:100%; border-top:1px solid #f1f5f9; padding-top:4px;">${actHtml}</div>` : ""}
             </div>
           </div>`;
       }
@@ -1235,7 +1241,7 @@
 
         const clearBtn = document.getElementById("clearAllBtn");
         if (clearBtn) {
-          if ((af === "completed" || af === "cancelled") && totalItems > 0) {
+          if (af === "completed" && totalItems > 0) {
             clearBtn.style.display = "flex";
           } else {
             clearBtn.style.display = "none";
@@ -1386,6 +1392,23 @@
                 <span style="font-weight:600; color:#1e293b;">${order.payment}</span>
               </div>
             </div>
+            ${
+              order.status === "cancelled"
+                ? `<div class="cancellation-notice-fixed" style="width:100%; box-sizing:border-box; margin-top:12px; margin-bottom:20px;">
+                     <div style="background:#fef2f2; border:1px solid #fee2e2; border-radius:12px; padding:16px; display:flex; gap:12px; min-height:80px; box-sizing:border-box;">
+                       <div style="color:#ef4444; font-size:18px; margin-top:2px; flex-shrink:0;">
+                         <i class="fa-solid fa-circle-info"></i>
+                       </div>
+                       <div style="flex:1;">
+                         <div style="color:#991b1b; font-weight:700; font-size:14px; margin-bottom:4px; line-height:1;">Cancellation reason</div>
+                         <div style="color:#b91c1c; font-size:13px; line-height:1.4; font-weight:500; word-break:break-word;">
+                           ${order.cancellationReason ? esc(order.cancellationReason) : (order.cancelledByVendor ? "No reason provided by vendor" : "Order cancelled by user")}
+                         </div>
+                       </div>
+                     </div>
+                   </div>`
+                : ""
+            }
             <div style="margin-bottom:15px; font-weight:700; color:#0f172a; font-size:14px;">Items Summary</div>
             <div style="max-height:300px; overflow-y:auto; padding-right:5px;">${itemsHtml}</div>
             <div style="margin-top:20px; padding:15px; background:#f1f5f9; border-radius:12px;">
@@ -1447,7 +1470,7 @@
       // Handle "Clear All" button (outside ordersList)
       document.getElementById("clearAllBtn")?.addEventListener("click", () => {
         const af = document.querySelector(".filter-btn.active")?.getAttribute("data-filter") || "pending";
-        if (af !== "completed" && af !== "cancelled") return;
+        if (af !== "completed") return;
         showConfirmation("Clear All", `Are you sure you want to clear all ${af} orders from your history?`, () => {
           const orders = getOrders();
           orders.forEach(o => { if (o.status === af) { removeOrder(o.id, "student"); } });
@@ -1807,8 +1830,9 @@
         );
       };
 
-      /* ── Auto-Complete Timer ── */
+      /* ── Auto-Complete & Pending Timer ── */
       setInterval(() => {
+        // Handle Auto-Complete Timer (Ready -> Completed)
         document.querySelectorAll(".auto-complete-timer").forEach((span) => {
           const orderId = span.dataset.id;
           const order = getOrders().find((o) => o.id === orderId);
@@ -1826,6 +1850,32 @@
             });
             renderOrders();
             showToast("success", "fa-check-double", "Order auto-completed!");
+          } else {
+            const m = Math.floor(timeLeft / 60000);
+            const s = Math.floor((timeLeft % 60000) / 1000);
+            span.textContent = `${m}:${s.toString().padStart(2, "0")}`;
+          }
+        });
+
+        // Handle Pending Timer (Pending -> Cancelled)
+        document.querySelectorAll(".pending-timer").forEach((span) => {
+          const orderId = span.dataset.id;
+          const order = getOrders().find((o) => o.id === orderId);
+          if (!order || order.status !== "pending") return;
+
+          const timeLimit = 10 * 60 * 1000; // 10 minutes
+          const placedTime = new Date(order.placedAt).getTime();
+          const timePassed = Date.now() - placedTime;
+          const timeLeft = timeLimit - timePassed;
+
+          if (timeLeft <= 0) {
+            span.textContent = "0:00";
+            updateOrderStatus(order.id, "cancelled", {
+              cancelledByVendor: true,
+              cancellationReason: "System: Order not accepted within 10 minutes",
+            });
+            renderOrders();
+            showToast("error", "fa-ban", "Order auto-declined due to timeout.");
           } else {
             const m = Math.floor(timeLeft / 60000);
             const s = Math.floor((timeLeft % 60000) / 1000);
