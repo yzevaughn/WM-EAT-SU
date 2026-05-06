@@ -690,78 +690,105 @@ input:checked + .slider:before {
   background: #15803d;
 }
 
-/* ── PREMIUM STATUS BADGES ── */
+/* ══════════════════════════════════════════
+   PREMIUM STATUS BADGES — Modern Pill
+   ══════════════════════════════════════════ */
+
 .premium-status {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 16px;
-  border-radius: 50px;
-  font-size: 12px;
+  gap: 7px;
+  padding: 5px 13px;
+  border-radius: 9999px;
+  font-size: 11.5px;
   font-weight: 700;
-  letter-spacing: 0.02em;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  transition: all 0.3s ease;
-  border: 1px solid transparent;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 1.5px solid transparent;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  cursor: default;
 }
 
-.premium-status i {
-  font-size: 10px;
-}
-
-/* ACTIVE: Vivid Green + Pulse */
+/* ── ACTIVE ─────────────────────── */
 .premium-status.active {
-  background: #ecfdf5;
-  color: #059669;
-  border-color: #a7f3d0;
+  background: #f0fdf4;
+  color: #15803d;
+  border-color: #bbf7d0;
+  box-shadow: 0 0 0 3px rgba(34,197,94,0.08);
 }
 
+.premium-status.active:hover {
+  background: #dcfce7;
+  box-shadow: 0 0 0 4px rgba(34,197,94,0.14);
+  transform: translateY(-1px);
+}
+
+/* Live pulsing dot */
 .status-dot-pulse {
-  width: 6px;
-  height: 6px;
-  background: #10b981;
+  width: 7px;
+  height: 7px;
+  background: #22c55e;
   border-radius: 50%;
   position: relative;
+  flex-shrink: 0;
 }
 
-.status-dot-pulse::after {
+.status-dot-pulse::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #10b981;
+  inset: -3px;
+  background: rgba(34,197,94,0.3);
   border-radius: 50%;
-  animation: statusPulse 2s infinite;
+  animation: livePing 1.6s ease-out infinite;
 }
 
-@keyframes statusPulse {
-  0% { transform: scale(1); opacity: 0.8; }
-  100% { transform: scale(3); opacity: 0; }
+@keyframes livePing {
+  0%   { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2.4); opacity: 0; }
 }
 
-/* DEACTIVATED: Sophisticated Slate */
+/* ── DEACTIVATED ─────────────────── */
 .premium-status.deactivated {
-  background: #f1f5f9;
-  color: #475569;
+  background: #f8fafc;
+  color: #64748b;
   border-color: #cbd5e1;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
 
-/* SUSPENDED: Striking Amber/Red */
+.premium-status.deactivated i {
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.premium-status.deactivated:hover {
+  background: #f1f5f9;
+  transform: translateY(-1px);
+}
+
+/* ── SUSPENDED ───────────────────── */
 .premium-status.suspended {
   background: #fff7ed;
   color: #c2410c;
-  border-color: #fed7aa;
+  border-color: #fdba74;
+  box-shadow: 0 0 0 3px rgba(249,115,22,0.08);
+  animation: suspendGlow 2.8s ease-in-out infinite;
 }
 
 .premium-status.suspended i {
+  font-size: 11px;
   color: #ea580c;
 }
 
-.premium-status:hover {
+.premium-status.suspended:hover {
+  background: #ffedd5;
+  box-shadow: 0 0 0 5px rgba(249,115,22,0.15);
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+
+@keyframes suspendGlow {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(249,115,22,0.08); }
+  50%       { box-shadow: 0 0 0 5px rgba(249,115,22,0.18); }
 }
 
 

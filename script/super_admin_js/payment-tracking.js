@@ -168,14 +168,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Modal Logic
-    const modal = document.getElementById('paymentModal');
-    
     document.getElementById('modalCanteenSelect')?.addEventListener('change', (e) => {
         const item = paymentData.find(p => p.name === e.target.value);
         if (item) {
             document.getElementById('modalAmount').value = '₱' + item.fee.toLocaleString();
             document.getElementById('modalCurrentDueDate').value = item.dueDate || 'N/A';
-            
+
             if (item.dueDate) {
                 const currentDate = new Date(item.dueDate);
                 currentDate.setMonth(currentDate.getMonth() + 1);
@@ -191,24 +189,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     window.openPaymentModal = () => {
-        modal.classList.add('active');
-    };
-    window.closePaymentModal = () => {
-        modal.classList.remove('active');
-        document.getElementById('recordPaymentForm').reset();
-        document.getElementById('receiptPreview').style.display = 'none';
-        document.getElementById('previewImg').src = '';
-        
-        const select = document.getElementById('modalCanteenSelect');
-        if (select) {
-            select.disabled = false;
+        const m = document.getElementById('paymentModal');
+        if (m) m.classList.add('active');
+        // Set today's date by default
+        const dateInput = document.getElementById('modalDate');
+        if (dateInput && !dateInput.value) {
+            dateInput.value = new Date().toISOString().split('T')[0];
         }
-        const amt = document.getElementById('modalAmount');
-        if (amt) amt.value = '';
-        const curDate = document.getElementById('modalCurrentDueDate');
-        if (curDate) curDate.value = '';
-        const nextDate = document.getElementById('modalNextDueDate');
-        if (nextDate) nextDate.value = '';
+    };
+
+    window.closePaymentModal = () => {
+        const m = document.getElementById('paymentModal');
+        if (m) m.classList.remove('active');
+        const form = document.getElementById('recordPaymentForm');
+        if (form) form.reset();
+        const preview = document.getElementById('receiptPreview');
+        if (preview) preview.style.display = 'none';
+        const img = document.getElementById('previewImg');
+        if (img) img.src = '';
+        const select = document.getElementById('modalCanteenSelect');
+        if (select) select.disabled = false;
+        ['modalAmount', 'modalCurrentDueDate', 'modalNextDueDate'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.value = '';
+        });
     };
 
     window.previewReceipt = (event) => {
@@ -321,46 +325,50 @@ document.addEventListener('DOMContentLoaded', () => {
     // Form Submit
     document.getElementById('recordPaymentForm')?.addEventListener('submit', (e) => {
         e.preventDefault();
-        
+
         const canteenName = document.getElementById('modalCanteenSelect').value;
-        const dateVal = document.getElementById('modalDate').value;
-        const previewImg = document.getElementById('previewImg');
+        const dateVal     = document.getElementById('modalDate').value;
+        const previewImg  = document.getElementById('previewImg');
 
         if (!canteenName) {
-            showInfoModal("Error", "Canteen context lost. Please try again.");
+            showInfoModal('Missing Selection', 'Please select a canteen first.');
             return;
         }
 
-        // Check if a new file was uploaded OR if an existing image is present
+        if (!dateVal) {
+            showInfoModal('Missing Date', 'Please enter the transaction date.');
+            return;
+        }
+
         const receiptInput = document.getElementById('receiptInput');
-        const hasImage = (receiptInput.files && receiptInput.files.length > 0) || (previewImg.src && !previewImg.src.endsWith('/'));
+        const hasImage = (receiptInput.files && receiptInput.files.length > 0) ||
+                         (previewImg.src && !previewImg.src.endsWith('/') && previewImg.src !== location.href);
 
         if (!hasImage) {
-            showInfoModal("Receipt Required", "Please upload a receipt/proof of payment to record this transaction.");
+            showInfoModal('Receipt Required', 'Please upload a receipt or proof of payment before submitting.');
             return;
         }
 
         const record = paymentData.find(p => p.name === canteenName);
         if (record) {
             record.receiptUploaded = true;
-            record.date = dateVal;
-            record.status = 'Paid';
-            record.statusClass = 'status-clear';
-            
+            record.date            = dateVal;
+            record.status          = 'Paid';
+            record.statusClass     = 'status-clear';
+
             const nextDueDate = document.getElementById('modalNextDueDate').value;
             if (nextDueDate && nextDueDate !== 'N/A') {
-                record.dueDate = nextDueDate; // Update the due date for next month
+                record.dueDate = nextDueDate;
             }
 
-            // In a real app, we'd save the actual file path or base64
             if (receiptInput.files && receiptInput.files[0]) {
-                record.receiptImg = previewImg.src; 
+                record.receiptImg = previewImg.src;
             }
-            showInfoModal("Success", `Payment record updated for ${canteenName}.`);
         }
 
         closePaymentModal();
         renderTable();
+        showInfoModal('Payment Recorded ✓', `Payment for ${canteenName} has been successfully recorded and marked as Paid.`);
     });
 
     renderTable();

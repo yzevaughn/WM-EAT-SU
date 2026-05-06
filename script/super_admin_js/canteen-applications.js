@@ -2,64 +2,107 @@
 let mockApplications = [];
 
 function loadCanteenApplications() {
-  const stored = localStorage.getItem('canteen_applications');
-  if (stored) {
-    mockApplications = JSON.parse(stored);
-  } else {
-    mockApplications = [
-      {
-        id: "CAN-1001",
-        studentName: "Santos, Maria",
-        studentEmail: "maria.s@wmsu.edu.ph",
-        businessName: "Maria's Canteen",
-        category: "Food",
-        status: "Pending",
-        dateSubmitted: "Oct 24, 2023",
-        rejectionReason: ""
-      },
-      {
-        id: "CAN-1002",
-        studentName: "Reyes, Jose",
-        studentEmail: "jose.r@wmsu.edu.ph",
-        businessName: "Reyes Lutong Bahay",
-        category: "Food",
-        status: "Under Review",
-        dateSubmitted: "Oct 23, 2023",
-        rejectionReason: ""
-      },
-      {
-        id: "CAN-1003",
-        studentName: "Cruz, Ana",
-        studentEmail: "ana.c@wmsu.edu.ph",
-        businessName: "Ana's Snack Bar",
-        category: "Snacks",
-        status: "Active Vendor",
-        dateSubmitted: "Oct 18, 2023",
-        rejectionReason: ""
-      },
-      {
-        id: "CAN-1004",
-        studentName: "Garcia, Pedro",
-        studentEmail: "pedro.g@wmsu.edu.ph",
-        businessName: "Garcia Meals",
-        category: "Food",
-        status: "Rejected",
-        dateSubmitted: "Oct 15, 2023",
-        rejectionReason: "Incomplete health clearance documentation."
-      },
-      {
-        id: "CAN-1005",
-        studentName: "Lim, Rosa",
-        studentEmail: "rosa.l@wmsu.edu.ph",
-        businessName: "Lim's Corner Eats",
-        category: "Snacks",
-        status: "Pending",
-        dateSubmitted: "Oct 25, 2023",
-        rejectionReason: ""
-      }
-    ];
-    saveCanteenApplications();
-  }
+  // Always reset to ensure new mock data is loaded
+  localStorage.removeItem('canteen_applications');
+  mockApplications = [
+    // ── Pending ──────────────────────────────────────────
+    {
+      id: "CAN-1001",
+      studentName: "Santos, Maria",
+      studentEmail: "maria.s@wmsu.edu.ph",
+      businessName: "Maria's Canteen",
+      status: "Pending",
+      dateSubmitted: "May 6, 2026",
+      rejectionReason: ""
+    },
+    {
+      id: "CAN-1005",
+      studentName: "Lim, Rosa",
+      studentEmail: "rosa.l@wmsu.edu.ph",
+      businessName: "Lim's Corner Eats",
+      status: "Pending",
+      dateSubmitted: "May 6, 2026",
+      rejectionReason: ""
+    },
+    // ── Under Review ─────────────────────────────────────
+    {
+      id: "CAN-1002",
+      studentName: "Reyes, Jose",
+      studentEmail: "jose.r@wmsu.edu.ph",
+      businessName: "Reyes Lutong Bahay",
+      status: "Under Review",
+      dateSubmitted: "Apr 30, 2026",
+      rejectionReason: ""
+    },
+    {
+      id: "CAN-1015",
+      studentName: "Santiago, Mila",
+      studentEmail: "mila.s@wmsu.edu.ph",
+      businessName: "Mila's Comfort Food",
+      status: "Under Review",
+      dateSubmitted: "Apr 29, 2026",
+      rejectionReason: ""
+    },
+    // ── Active Vendors ───────────────────────────────────
+    {
+      id: "CAN-1003",
+      studentName: "Cruz, Ana",
+      studentEmail: "ana.c@wmsu.edu.ph",
+      businessName: "Ana's Snack Bar",
+      status: "Active Vendor",
+      dateSubmitted: "Apr 25, 2026",
+      rejectionReason: ""
+    },
+    {
+      id: "CAN-1016",
+      studentName: "Mendoza, Roberto",
+      studentEmail: "roberto.m@wmsu.edu.ph",
+      businessName: "Mendoza Carinderia",
+      status: "Active Vendor",
+      dateSubmitted: "Apr 20, 2026",
+      rejectionReason: ""
+    },
+    {
+      id: "CAN-1017",
+      studentName: "Dizon, Cynthia",
+      studentEmail: "cynthia.d@wmsu.edu.ph",
+      businessName: "Cynthia's Special Meals",
+      status: "Active Vendor",
+      dateSubmitted: "Apr 18, 2026",
+      rejectionReason: ""
+    },
+    // ── Rejected ─────────────────────────────────────────
+    {
+      id: "CAN-1004",
+      studentName: "Garcia, Pedro",
+      studentEmail: "pedro.g@wmsu.edu.ph",
+      businessName: "Garcia Meals",
+      status: "Rejected",
+      dateSubmitted: "Apr 15, 2026",
+      rejectionReason: "Incomplete health clearance documentation."
+    },
+    {
+      id: "CAN-1018",
+      studentName: "Quinto, Bernard",
+      studentEmail: "bernard.q@wmsu.edu.ph",
+      businessName: "Bernard's Food Stop",
+      status: "Rejected",
+      dateSubmitted: "Apr 12, 2026",
+      rejectionReason: "Business permit has expired."
+    },
+    // ── Deactivated ──────────────────────────────────────
+    {
+      id: "CAN-1019",
+      studentName: "Lopez, Gloria",
+      studentEmail: "gloria.l@wmsu.edu.ph",
+      businessName: "Gloria's Homestyle",
+      status: "Deactivated",
+      dateSubmitted: "Apr 10, 2026",
+      rejectionReason: "",
+      deactivationReason: "Repeated health inspection failures."
+    },
+  ];
+  saveCanteenApplications();
 }
 
 function saveCanteenApplications() {
