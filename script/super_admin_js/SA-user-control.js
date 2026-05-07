@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td><span class="badge-type">${user.type === 'Staff' ? 'Teacher & Staff' : user.type}</span></td>
                 <td>${statusBadge(user.status)}</td>
                 <td>${user.joined}</td>
-                <td>${actionButtons(user)}</td>
+                <td class="actions-col">${actionButtons(user)}</td>
             `;
             tableBody.appendChild(row);
         });

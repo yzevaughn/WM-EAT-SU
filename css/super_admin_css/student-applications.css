@@ -348,6 +348,10 @@ h1 {
 }
 
 /* ─── ACTION BUTTONS — Modern Consistent System ─── */
+.actions-col {
+  text-align: right !important;
+}
+
 .action-buttons {
   display: flex;
   gap: 6px;
