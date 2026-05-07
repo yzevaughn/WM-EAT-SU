@@ -232,12 +232,22 @@ function buildVendorCard(order, sequence) {
           <div class="order-items-display" style="background: #f8fafc; padding: 10px; border-radius: 10px; border: 1px solid #f1f5f9;">
             ${
               order.items && order.items.length > 1
-                ? `<div style="display:flex; justify-content:space-between; align-items:center; font-size:14px; font-weight:600; color:#475569;">
-                  <span>${order.items.length} items purchased</span>
+                ? `<div style="display:flex; justify-content:space-between; align-items:center; font-size:14px; font-weight:600; color:#475569; margin-bottom:8px;">
+                  <span>${order.items.length} items</span>
                   <button class="js-view-details" data-id="${esc(order.id)}" style="background:#fff; border:1.5px solid #e2e8f0; color:#ef4444; cursor:pointer; width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; transition:all 0.2s;" title="View Details">
                     <i class="fa-solid fa-eye"></i>
                   </button>
-                 </div>`
+                 </div>
+                 ${tab === 'Pending' ? (order.items || []).map((it, idx) => `
+                   <div style="display:flex; justify-content:space-between; align-items:center; padding:7px 8px; background:#fff; border-radius:8px; margin-bottom:6px; border:1px solid #f1f5f9;">
+                     <span style="font-size:13px; color:#475569; font-weight:500;">${it.qty} × ${esc(it.name)}</span>
+                     <div style="display:flex; align-items:center; gap:8px;">
+                       <span style="font-size:13px; font-weight:700; color:#0f172a;">₱${(it.price * it.qty).toFixed(2)}</span>
+                       <button class="js-vendor-cancel-item" data-id="${esc(order.id)}" data-idx="${idx}" data-role="${esc(order.customerRole || 'student')}" title="Remove this item" style="background:#fef2f2; border:1px solid #fecaca; color:#ef4444; cursor:pointer; width:26px; height:26px; border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                         <i class="fa-solid fa-times" style="font-size:11px;"></i>
+                       </button>
+                     </div>
+                   </div>`).join('') : `<div style="font-size:14px; color:#475569; font-weight:500;">${(order.items || []).map(it => `${it.qty} × ${esc(it.name)}`).join(', ')}</div>`}`
                 : `<div class="order-item-row" style="padding:0; display:flex; justify-content:space-between; align-items:center;">
                   <span style="font-size:14px; color:#475569; font-weight:600;">${order.items && order.items[0] ? order.items[0].qty + " × " + esc(order.items[0].name) : "No items"}</span>
                   <button class="js-view-details" data-id="${esc(order.id)}" style="background:#fff; border:1.5px solid #e2e8f0; color:#ef4444; cursor:pointer; width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; transition:all 0.2s;" title="View Details">
@@ -365,6 +375,98 @@ window.renderVendorOrders = function () {
 
 /* --- Event Delegation for Dynamic Buttons --- */
 document.getElementById("ordersList")?.addEventListener("click", (e) => {
+
+  // Vendor: Remove Individual Item from Pending Order
+  const cancelItemBtn = e.target.closest(".js-vendor-cancel-item");
+  if (cancelItemBtn) {
+    const orderId = cancelItemBtn.dataset.id;
+    const itemIdx = parseInt(cancelItemBtn.dataset.idx);
+    const customerRole = cancelItemBtn.dataset.role || 'student';
+    const order = (typeof getOrders === "function" ? getOrders() : []).find(o => o.id === orderId);
+    if (!order) return;
+    const item = order.items[itemIdx];
+    if (!item) return;
+
+    const isLastItem = order.items.length === 1;
+    const icon = document.getElementById("modalHeaderIcon");
+    const title = document.getElementById("modalHeaderTitle");
+    const sub = document.getElementById("modalSubtitle");
+    const det = document.getElementById("modalDetail");
+    const actionBtn = document.getElementById("confirmActionBtn");
+    const btnIcon = document.getElementById("confirmBtnIcon");
+    const btnText = document.getElementById("confirmBtnText");
+
+    icon.className = "fa-solid fa-circle-exclamation";
+    icon.style.color = "#ef4444";
+    title.textContent = isLastItem ? "Decline Order" : "Remove Item";
+
+    if (isLastItem) {
+      sub.innerHTML = `<div style="color:#ef4444; background:#fef2f2; padding:10px; border-radius:8px; border:1px solid #fecaca; margin-bottom:12px; font-size:13px;">
+        <i class="fa-solid fa-triangle-exclamation"></i> This is the only item. Removing it will <strong>decline the entire order</strong> and refund the customer.
+      </div>This will cancel the order for <strong>${esc(order.customerName || 'the customer')}</strong>.`;
+    } else {
+      sub.innerHTML = `Remove <strong>${esc(item.name)}</strong> (×${item.qty}) from Order <strong>#${esc(order.id.slice(-6).toUpperCase())}</strong>? The item cost will be refunded to the customer.`;
+    }
+    det.innerHTML = "";
+
+    actionBtn.className = "cancel-btn";
+    btnIcon.className = "fa-solid fa-times";
+    btnText.textContent = isLastItem ? "Decline Order" : "Remove Item";
+    actionBtn.style.margin = "0";
+
+    // Wallet key map
+    const walletKeyMap = {
+      'student': 'student_wm_eat_su_balance',
+      'teacher-and-staff': 'teacher_wm_eat_su_balance',
+      'outsider': 'outsider_wm_eat_su_balance',
+    };
+    const walletKey = walletKeyMap[customerRole] || 'student_wm_eat_su_balance';
+
+    const customHandler = () => {
+      const allOrders = typeof getOrders === "function" ? getOrders() : [];
+      const o = allOrders.find(x => x.id === orderId);
+      if (!o) return;
+
+      if (o.items.length === 1) {
+        // Decline entire order
+        if (typeof updateOrderStatus === "function") {
+          updateOrderStatus(o.id, "cancelled", {
+            cancelledByVendor: true,
+            cancellationReason: `Vendor removed item: ${item.name} (out of stock or unavailable)`,
+          });
+        }
+        showVendorToast("success", "fa-check", "Order declined and customer refunded.");
+      } else {
+        // Splice item, recalculate total, refund
+        const removedItem = o.items.splice(itemIdx, 1)[0];
+        const refundAmount = removedItem.price * removedItem.qty;
+        o.total = Math.max(0, o.total - refundAmount);
+
+        const currentBalance = parseFloat(localStorage.getItem(walletKey) || '0');
+        localStorage.setItem(walletKey, (currentBalance + refundAmount).toFixed(2));
+
+        const orderIdx = allOrders.findIndex(x => x.id === orderId);
+        if (orderIdx !== -1) {
+          allOrders[orderIdx] = o;
+          localStorage.setItem('wm_eat_su_orders', JSON.stringify(allOrders));
+        }
+        showVendorToast("success", "fa-check", `${esc(removedItem.name)} removed. ₱${refundAmount.toFixed(2)} refunded to customer.`);
+      }
+
+      window.renderVendorOrders();
+      document.getElementById("confirmModal").classList.remove("active");
+      actionBtn.removeEventListener("click", customHandler);
+    };
+
+    actionBtn.addEventListener("click", customHandler);
+    ["closeConfirmModal", "cancelConfirmModal", "confirmOverlay"].forEach(id => {
+      document.getElementById(id)?.addEventListener("click", () => actionBtn.removeEventListener("click", customHandler), { once: true });
+    });
+
+    document.getElementById("confirmModal").classList.add("active");
+    return;
+  }
+
   // View Details
   const viewBtn = e.target.closest(".js-view-details");
   if (viewBtn) {
