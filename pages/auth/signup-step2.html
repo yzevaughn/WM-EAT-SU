@@ -35,7 +35,7 @@
             <div class="sb-step active">
               <div class="sb-dot"><i class="fa-solid fa-file-lines"></i></div>
               <div class="sb-step-name">Documents</div>
-              <div class="sb-step-sub" id="sbStepSub">COE &amp; School ID</div>
+              <div class="sb-step-sub" id="sbStepSub">COE &amp; School ID (Front &amp; Back)</div>
             </div>
             <div class="sb-step">
               <div class="sb-dot">
@@ -87,20 +87,38 @@
                   </div>
                 </div>
 
-                <!-- School ID Camera Capture -->
+                <!-- School ID (Front) Camera Capture -->
                 <div class="fg">
                   <div class="uz-lbl">
                     <i class="fa-solid fa-id-card"></i>
-                    School ID <span class="req">*</span>
+                    School ID (Front) <span class="req">*</span>
                   </div>
-                  <div class="cam-zone" id="idZone">
-                    <div class="cam-idle" id="idIdle">
+                  <div class="cam-zone" id="idFrontZone">
+                    <div class="cam-idle" id="idFrontIdle">
                       <div class="cam-ico"><i class="fa-solid fa-id-card"></i></div>
-                      <div class="cam-label">School ID</div>
+                      <div class="cam-label">School ID (Front)</div>
                       <div class="cam-hint">Front of your WMSU ID</div>
                     </div>
                   </div>
-                  <div class="ferr" id="ferr-id">
+                  <div class="ferr" id="ferr-id-front">
+                    <i class="fa-solid fa-circle-exclamation"></i><span></span>
+                  </div>
+                </div>
+
+                <!-- School ID (Back) Camera Capture -->
+                <div class="fg">
+                  <div class="uz-lbl">
+                    <i class="fa-solid fa-id-card"></i>
+                    School ID (Back) <span class="req">*</span>
+                  </div>
+                  <div class="cam-zone" id="idBackZone">
+                    <div class="cam-idle" id="idBackIdle">
+                      <div class="cam-ico"><i class="fa-solid fa-id-card"></i></div>
+                      <div class="cam-label">School ID (Back)</div>
+                      <div class="cam-hint">Back of your WMSU ID</div>
+                    </div>
+                  </div>
+                  <div class="ferr" id="ferr-id-back">
                     <i class="fa-solid fa-circle-exclamation"></i><span></span>
                   </div>
                 </div>
@@ -159,7 +177,9 @@
           // Update hints
           document.querySelectorAll('.cam-hint').forEach(hint => {
              if (hint.textContent.includes('School ID')) {
-                hint.textContent = 'Front of your Teacher/Staff ID';
+                hint.textContent = hint.textContent.replace('School ID', 'Teacher/Staff ID');
+             } else if (hint.textContent.includes('WMSU ID')) {
+                hint.textContent = hint.textContent.replace('WMSU ID', 'Teacher/Staff ID');
              }
           });
 
