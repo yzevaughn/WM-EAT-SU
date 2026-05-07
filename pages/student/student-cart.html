@@ -791,7 +791,11 @@
             const cart = getCart();
             const item = cart.find((c) => c.id === id);
             if (item) {
-              updateQty(id, item.qty + 1);
+              const result = updateQty(id, item.qty + 1);
+              if (result && result.capped) {
+                showToast("warning", "fa-triangle-exclamation",
+                  `Maximum stock reached! Only ${result.max} unit(s) available.`);
+              }
               renderCart();
             }
           });

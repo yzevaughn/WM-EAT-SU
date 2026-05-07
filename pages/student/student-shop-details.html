@@ -532,14 +532,25 @@
             const foodId  = parseInt(btn.getAttribute("data-id"));
             const f       = foods.find(x => x.id === foodId);
             if (!f) return;
+            // Look up live stock from localStorage menu
+            const liveItem = getAvailableMenu().find(m => m.name === f.name && m.vendor === f.vendor);
+            const liveStock = liveItem ? liveItem.stock : undefined;
+            if (liveStock === 0) {
+              showToast("error", "fa-ban", `"${f.name}" is out of stock!`);
+              return;
+            }
             const priceNum = parseFloat(f.price.replace(/[^\d.]/g, "")) || 0;
-            addToCart({ id: makeItemId(f.name, f.vendor), name: f.name, price: priceNum, vendor: f.vendor, img: f.img, qty: 1 });
-            const orig = '<i class="fa-solid fa-plus"></i> Add to Cart';
-            btn.innerHTML = '<i class="fa-solid fa-check"></i> Added!';
-            btn.style.background = "#16a34a";
-            btn.style.boxShadow  = "0 4px 14px rgba(22,163,74,.35)";
-            showToast("success", "fa-cart-plus", `"${f.name}" added to cart!`);
-            setTimeout(() => { btn.innerHTML = orig; btn.style.background = ""; btn.style.boxShadow = ""; }, 2000);
+            const result = addToCart({ id: makeItemId(f.name, f.vendor), name: f.name, price: priceNum, vendor: f.vendor, img: f.img, stock: liveStock, qty: 1 });
+            if (result && result.capped) {
+              showToast("warning", "fa-triangle-exclamation", `Only ${result.max} unit(s) of "${f.name}" available!`);
+            } else {
+              const orig = '<i class="fa-solid fa-plus"></i> Add to Cart';
+              btn.innerHTML = '<i class="fa-solid fa-check"></i> Added!';
+              btn.style.background = "#16a34a";
+              btn.style.boxShadow  = "0 4px 14px rgba(22,163,74,.35)";
+              showToast("success", "fa-cart-plus", `"${f.name}" added to cart!`);
+              setTimeout(() => { btn.innerHTML = orig; btn.style.background = ""; btn.style.boxShadow = ""; }, 2000);
+            }
           });
         });
       }
@@ -581,11 +592,22 @@
       });
       document.getElementById("modalAddBtn").onclick = () => {
         if (activeShopFood) {
+          const liveItem = getAvailableMenu().find(m => m.name === activeShopFood.name && m.vendor === activeShopFood.vendor);
+          const liveStock = liveItem ? liveItem.stock : undefined;
+          if (liveStock === 0) {
+            showToast("error", "fa-ban", `"${activeShopFood.name}" is out of stock!`);
+            document.getElementById("foodModal").classList.remove("open");
+            return;
+          }
           const priceNum = parseFloat(activeShopFood.price.replace(/[^\d.]/g, "")) || 0;
-          addToCart({ id: makeItemId(activeShopFood.name, activeShopFood.vendor), name: activeShopFood.name, price: priceNum, vendor: activeShopFood.vendor, img: activeShopFood.img, qty: 1 });
+          const result = addToCart({ id: makeItemId(activeShopFood.name, activeShopFood.vendor), name: activeShopFood.name, price: priceNum, vendor: activeShopFood.vendor, img: activeShopFood.img, stock: liveStock, qty: 1 });
+          if (result && result.capped) {
+            showToast("warning", "fa-triangle-exclamation", `Only ${result.max} unit(s) of "${activeShopFood.name}" available!`);
+          } else {
+            showToast("success", "fa-cart-plus", `"${activeShopFood?.name ?? "Item"}" added to cart!`);
+          }
         }
         document.getElementById("foodModal").classList.remove("open");
-        showToast("success", "fa-cart-plus", `"${activeShopFood?.name ?? "Item"}" added to cart!`);
       };
 
       /* ─────────── TOAST ─────────── */

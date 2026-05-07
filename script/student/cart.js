@@ -266,23 +266,46 @@ function saveCart(cart) {
 function addToCart(item) {
   const cart = getCart();
   const existing = cart.find((c) => c.id === item.id);
+  const stockLimit = item.stock ?? Infinity;
   if (existing) {
-    existing.qty += item.qty || 1;
+    const newQty = existing.qty + (item.qty || 1);
+    if (newQty > stockLimit) {
+      existing.qty = stockLimit;
+      saveCart(cart);
+      updateAllCartBadges();
+      return { capped: true, max: stockLimit };
+    }
+    existing.qty = newQty;
   } else {
-    cart.push({ ...item, qty: item.qty || 1 });
+    const clampedQty = Math.min(item.qty || 1, stockLimit);
+    cart.push({ ...item, qty: clampedQty });
   }
   saveCart(cart);
   updateAllCartBadges();
+  return { capped: false };
 }
 
 function updateQty(id, qty) {
   const cart = getCart();
   const idx = cart.findIndex((c) => c.id === id);
-  if (idx === -1) return;
-  if (qty <= 0) cart.splice(idx, 1);
-  else cart[idx].qty = qty;
+  if (idx === -1) return { capped: false };
+  if (qty <= 0) {
+    cart.splice(idx, 1);
+    saveCart(cart);
+    updateAllCartBadges();
+    return { capped: false };
+  }
+  const stockLimit = cart[idx].stock ?? Infinity;
+  if (qty > stockLimit) {
+    cart[idx].qty = stockLimit;
+    saveCart(cart);
+    updateAllCartBadges();
+    return { capped: true, max: stockLimit };
+  }
+  cart[idx].qty = qty;
   saveCart(cart);
   updateAllCartBadges();
+  return { capped: false };
 }
 
 function removeFromCart(id) {

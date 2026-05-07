@@ -795,6 +795,7 @@ button {
 .toast.success { border-left: 4px solid #22c55e; }
 .toast.error   { border-left: 4px solid #ef4444; }
 .toast.info    { border-left: 4px solid #3b82f6; }
+.toast.warning { border-left: 4px solid #f59e0b; }
 
 .toast i {
   font-size: 18px;
@@ -804,6 +805,7 @@ button {
 .toast.success i { color: #22c55e; }
 .toast.error   i { color: #ef4444; }
 .toast.info    i { color: #3b82f6; }
+.toast.warning i { color: #f59e0b; }
 
 .toast.fade-out {
   animation: toastOut .3s ease forwards;

@@ -558,6 +558,15 @@
               </div>
               <div class="food-prep-time"><i class="fa-regular fa-clock"></i> Ready in ${f.prepTime}</div>
               <div class="food-vendor"><i class="fa-solid fa-store"></i> ${f.vendor}</div>
+              ${
+                (f.stock !== undefined && f.stock !== null)
+                  ? f.stock === 0
+                    ? `<div style="font-size:11px;font-weight:700;color:#ef4444;margin-top:4px;"><i class="fa-solid fa-circle-xmark"></i> Out of Stock</div>`
+                    : f.stock <= 5
+                      ? `<div style="font-size:11px;font-weight:700;color:#f59e0b;margin-top:4px;"><i class="fa-solid fa-triangle-exclamation"></i> Only ${f.stock} left</div>`
+                      : `<div style="font-size:11px;color:#64748b;margin-top:4px;"><i class="fa-solid fa-box"></i> ${f.stock} available</div>`
+                  : ''
+              }
               <div class="food-footer">
                 <div class="food-price">
                   ${activeDiscount > 0 
@@ -566,8 +575,8 @@
                     : `₱${Number(f.price).toFixed(2)}`
                   }
                 </div>
-                <button class="add-btn add-cart-btn" data-id="${f.id}" data-name="${f.name}">
-                  <i class="fa-solid fa-plus"></i> Add to Cart
+                <button class="add-btn add-cart-btn" data-id="${f.id}" data-name="${f.name}" ${f.stock === 0 ? 'disabled style="opacity:0.5;cursor:not-allowed;"' : ''}>
+                  ${f.stock === 0 ? '<i class="fa-solid fa-ban"></i> Out of Stock' : '<i class="fa-solid fa-plus"></i> Add to Cart'}
                 </button>
               </div>
             </div>
@@ -588,6 +597,13 @@
             e.stopPropagation();
             const food = foods.find((f) => f.id === btn.dataset.id);
             if (!food) return;
+
+            // Block if out of stock
+            if ((food.stock ?? Infinity) === 0) {
+              showToast("error", "fa-ban", `"${food.name}" is out of stock!`);
+              return;
+            }
+
             let currentDiscount = 0;
             const now = new Date();
             now.setHours(0,0,0,0);
@@ -607,28 +623,31 @@
               }
             }
 
-            addToCart({
+            const result = addToCart({
               id: food.id,
               name: food.name,
               price: finalPrice,
               vendor: food.vendor,
               img: food.img,
+              stock: food.stock,
               qty: 1,
             });
-            const orig = '<i class="fa-solid fa-plus"></i> Add to Cart';
-            btn.innerHTML = '<i class="fa-solid fa-check"></i> Added!';
-            btn.style.background = "#16a34a";
-            btn.style.boxShadow = "0 4px 14px rgba(22,163,74,.35)";
-            showToast(
-              "success",
-              "fa-cart-plus",
-              `"${food.name}" added to cart!`,
-            );
-            setTimeout(() => {
-              btn.innerHTML = orig;
-              btn.style.background = "";
-              btn.style.boxShadow = "";
-            }, 2000);
+
+            if (result && result.capped) {
+              showToast("warning", "fa-triangle-exclamation",
+                `Only ${result.max} unit(s) of "${food.name}" available!`);
+            } else {
+              const orig = food.stock === 0 ? '<i class="fa-solid fa-ban"></i> Out of Stock' : '<i class="fa-solid fa-plus"></i> Add to Cart';
+              btn.innerHTML = '<i class="fa-solid fa-check"></i> Added!';
+              btn.style.background = "#16a34a";
+              btn.style.boxShadow = "0 4px 14px rgba(22,163,74,.35)";
+              showToast("success", "fa-cart-plus", `"${food.name}" added to cart!`);
+              setTimeout(() => {
+                btn.innerHTML = orig;
+                btn.style.background = "";
+                btn.style.boxShadow = "";
+              }, 2000);
+            }
           });
         });
 
@@ -727,6 +746,13 @@
       });
       document.getElementById("modalAddBtn").onclick = () => {
         if (activeFood) {
+          // Block if out of stock
+          if ((activeFood.stock ?? Infinity) === 0) {
+            showToast("error", "fa-ban", `"${activeFood.name}" is out of stock!`);
+            document.getElementById("foodModal").classList.remove("open");
+            return;
+          }
+
           let currentDiscount = 0;
           const now = new Date();
           now.setHours(0,0,0,0);
@@ -746,19 +772,22 @@
             }
           }
 
-          addToCart({
+          const result = addToCart({
             id: activeFood.id,
             name: activeFood.name,
             price: finalPrice,
             vendor: activeFood.vendor,
             img: activeFood.img,
+            stock: activeFood.stock,
             qty: 1,
           });
-          showToast(
-            "success",
-            "fa-cart-plus",
-            `"${activeFood.name}" added to cart!`,
-          );
+
+          if (result && result.capped) {
+            showToast("warning", "fa-triangle-exclamation",
+              `Only ${result.max} unit(s) of "${activeFood.name}" available!`);
+          } else {
+            showToast("success", "fa-cart-plus", `"${activeFood.name}" added to cart!`);
+          }
         }
         document.getElementById("foodModal").classList.remove("open");
       };
