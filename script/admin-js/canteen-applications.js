@@ -520,6 +520,31 @@ function openDetails(id) {
   document.getElementById("detDate").innerText         = app.dateSubmitted;
   document.getElementById("detBusiness").innerText     = app.businessName;
   document.getElementById("detOwner").innerText        = app.studentName;
+  document.getElementById("detEmail").innerText        = app.studentEmail || "No email provided";
+  document.getElementById("detContact").innerText      = app.contactNumber || "0912 345 6789";
+
+  const empContainer = document.getElementById("detEmployeesContainer");
+  empContainer.innerHTML = "";
+  const employees = app.employees || [
+    { name: "Juan Dela Cruz", role: "Cashier" },
+    { name: "Maria Clara", role: "Cook" }
+  ];
+
+  employees.forEach(emp => {
+    empContainer.innerHTML += `
+      <div style="padding: 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="font-weight: 500; color: #334155;"><i class="fa-solid fa-user" style="color: #94a3b8; margin-right: 8px;"></i> ${emp.name}</div>
+          <div style="font-size: 13px; color: #64748b; background: #e2e8f0; padding: 4px 8px; border-radius: 4px;">${emp.role}</div>
+        </div>
+        <div style="display: flex; gap: 16px; font-size: 12px; flex-wrap: wrap;">
+          <a href="#" style="color: #3b82f6; text-decoration: none;"><i class="fa-solid fa-notes-medical" style="margin-right: 4px;"></i> Health Cert</a>
+          <a href="#" style="color: #3b82f6; text-decoration: none;"><i class="fa-solid fa-address-card" style="margin-right: 4px;"></i> CV / ID</a>
+          <a href="#" style="color: #3b82f6; text-decoration: none;"><i class="fa-solid fa-building-shield" style="margin-right: 4px;"></i> NBI Clearance</a>
+        </div>
+      </div>
+    `;
+  });
 
   const fbSection = document.getElementById("adminFeedbackSection");
   const fbLabel   = document.getElementById("adminFeedbackLabel");
