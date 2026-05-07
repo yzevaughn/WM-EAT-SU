@@ -318,6 +318,133 @@
       </div>
     </div>
 
+    <div id="viewDocsModal" class="modal-overlay">
+      <div class="view-docs-modal">
+        <div class="modal-header">
+          <h2>Student Documents</h2>
+          <button class="close-modal" onclick="closeViewDocsModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="student-meta" id="docsStudentMeta">
+             <strong id="docsStudentName">Student Name</strong>
+             <span id="docsStudentId">USR-XXXX</span>
+          </div>
+          <div class="docs-gallery">
+            <div class="doc-item">
+              <label>Certificate of Enrollment (COR)</label>
+              <div class="doc-placeholder">
+                <i class="fa-solid fa-file-invoice"></i>
+                <span>COR_STUDENT_2024.jpg</span>
+                <button class="btn-view-placeholder">View Document</button>
+              </div>
+            </div>
+            <div class="doc-item">
+              <label>School ID (Front)</label>
+              <div class="doc-placeholder">
+                <i class="fa-solid fa-id-card"></i>
+                <span>ID_FRONT_STUDENT.jpg</span>
+                <button class="btn-view-placeholder">View Document</button>
+              </div>
+            </div>
+            <div class="doc-item">
+              <label>School ID (Back)</label>
+              <div class="doc-placeholder">
+                <i class="fa-solid fa-id-card-clip"></i>
+                <span>ID_BACK_STUDENT.jpg</span>
+                <button class="btn-view-placeholder">View Document</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-cancel" onclick="closeViewDocsModal()">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .view-docs-modal {
+        background: white;
+        width: 95%;
+        max-width: 800px;
+        border-radius: 16px;
+        overflow: hidden;
+        animation: slideUp 0.3s ease;
+      }
+      .student-meta {
+        background: #f8fafc;
+        padding: 15px 20px;
+        border-bottom: 1px solid #e2e8f0;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+      }
+      .student-meta strong { font-size: 16px; color: #1e293b; }
+      .student-meta span { font-size: 13px; color: #64748b; }
+      
+      .docs-gallery {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      @media (min-width: 640px) {
+        .docs-gallery { grid-template-columns: 1fr 1fr; }
+        .doc-item:first-child { grid-column: span 2; }
+      }
+      
+      .doc-item label {
+        display: block;
+        font-size: 12px;
+        font-weight: 700;
+        color: #475569;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 8px;
+      }
+      .doc-placeholder {
+        background: #f8fafc;
+        border: 2px dashed #e2e8f0;
+        border-radius: 12px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        text-align: center;
+        transition: all 0.2s;
+      }
+      .doc-placeholder:hover {
+        border-color: #cbd5e1;
+        background: #f1f5f9;
+      }
+      .doc-placeholder i {
+        font-size: 24px;
+        color: #64748b;
+      }
+      .doc-placeholder span {
+        font-size: 13px;
+        color: #1e293b;
+        font-weight: 500;
+        word-break: break-all;
+      }
+      .btn-view-placeholder {
+        background: #2563eb;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .btn-view-placeholder:hover {
+        background: #1d4ed8;
+      }
+    </style>
+
     <script src="../../script/notifications.js"></script>
     <script src="../../script/admin-js/admin-notifications-mock.js"></script>
     <script src="../../script/super_admin_js/super-notif.js"></script>

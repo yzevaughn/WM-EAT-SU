@@ -68,7 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
                </button>`
             : '';
 
-        return `<div class="action-buttons" style="display:flex;align-items:center;gap:8px;">${primary}${suspendBtn}</div>`;
+        // View Documents button for Students
+        const viewDocsBtn = user.type === 'Student'
+            ? `<button class="btn-action-icon" onclick="openViewDocsModal('${id}')" title="View Documents" style="color:#2563eb; background:#eff6ff; border:1px solid #dbeafe; padding:6px 10px; border-radius:8px; cursor:pointer; font-size:13px;">
+                <i class="fa-solid fa-eye"></i>
+               </button>`
+            : '';
+
+        return `<div class="action-buttons" style="display:flex;align-items:center;gap:8px;">${primary}${viewDocsBtn}${suspendBtn}</div>`;
     }
 
     // ── Render Table ───────────────────────────────────────
@@ -237,8 +244,29 @@ document.addEventListener('DOMContentLoaded', () => {
         if (user) { user.status = 'Suspended'; user.reason = reason; applyFilters(); closeSuspendModal(); }
     };
 
+    // ── View Documents Modal ───────────────────────────────
+    window.openViewDocsModal = (id) => {
+        const user = users.find(u => u.id === id);
+        if (!user) return;
+
+        const modal = document.getElementById('viewDocsModal');
+        if (modal) {
+            document.getElementById('docsStudentName').textContent = user.name;
+            document.getElementById('docsStudentId').textContent = user.id;
+            
+            // In a real app, you'd set the src of the images based on user data
+            // For now, we use the sample images defined in the HTML
+            
+            modal.style.display = 'flex';
+        }
+    };
+    window.closeViewDocsModal = () => {
+        const modal = document.getElementById('viewDocsModal');
+        if (modal) modal.style.display = 'none';
+    };
+
     // Close modals when clicking backdrop
-    ['deactivateModal','reactivateModal','suspendModal'].forEach(id => {
+    ['deactivateModal','reactivateModal','suspendModal','viewDocsModal'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.addEventListener('click', (e) => { if (e.target === el) el.style.display = 'none'; });
     });
