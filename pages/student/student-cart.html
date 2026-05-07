@@ -426,6 +426,14 @@
                   margin-top: 8px;
                 "
               ></p>
+              <!-- Singularity voucher notice -->
+              <div id="promo-vendor-notice" style="margin-top:10px; padding:10px 14px; border-radius:10px; background:#fff7ed; border:1.5px solid #fde68a; align-items:flex-start; gap:10px; display:none;">
+                <i class="fa-solid fa-circle-info" style="color:#f59e0b; font-size:14px; margin-top:2px; flex-shrink:0;"></i>
+                <p style="margin:0; font-size:12px; color:#92400e; line-height:1.5;">
+                  <strong>Vouchers are for Singular Orders only.</strong><br>
+                  Your cart has <span id="item-count-label">2 or more items</span>. Please reduce your cart to exactly 1 item to apply a voucher.
+                </p>
+              </div>
             </div>
 
             <div class="summary-details">
@@ -565,6 +573,38 @@
         }
 
         updateAllCartBadges();
+
+        // ── Singularity voucher/promo enforcement ──
+        const isNotSingular = totalQty >= 2;
+        
+        const promoNotice     = document.getElementById('promo-vendor-notice');
+        const promoInput      = document.getElementById('promo-input');
+        const applyBtn        = document.getElementById('apply-promo-btn');
+        const openVouchersBtn = document.getElementById('open-vouchers-btn');
+        const itemCountLabel  = document.getElementById('item-count-label');
+
+        if (itemCountLabel && isNotSingular) {
+          itemCountLabel.textContent = `${totalQty} items`;
+        }
+
+        if (promoNotice) promoNotice.style.display = isNotSingular ? 'flex' : 'none';
+
+        [promoInput, applyBtn, openVouchersBtn].forEach(el => {
+          if (!el) return;
+          el.disabled = isNotSingular;
+          el.style.opacity = isNotSingular ? '0.4' : '1';
+          el.style.cursor  = isNotSingular ? 'not-allowed' : '';
+          el.title = isNotSingular ? 'Vouchers are only available for singular (1 item) orders' : '';
+        });
+
+        if (isNotSingular && window.appliedPromoCode) {
+          window.appliedPromo = null;
+          window.appliedPromoCode = null;
+          if (promoInput) promoInput.value = '';
+          const msgEl = document.getElementById('promo-msg');
+          if (msgEl) { msgEl.textContent = ''; msgEl.style.display = 'none'; }
+          showToast('warning', 'fa-circle-info', 'Voucher removed — cart must have exactly 1 item.');
+        }
 
         const cartContainer = document.querySelector(".cart-container");
         const orderSummary = document.querySelector(".order-summary");

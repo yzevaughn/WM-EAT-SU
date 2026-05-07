@@ -33,6 +33,17 @@ function validatePromoCode(code, items = []) {
 
   const total = items.reduce((s, i) => s + i.price * i.qty, 0);
 
+  // ── Singularity rule: vouchers/promos only apply to single-item orders ──
+  if (items.length > 0) {
+    const totalQty = items.reduce((s, i) => s + i.qty, 0);
+    if (totalQty >= 2) {
+      return {
+        error:
+          "Vouchers can only be used on singular orders (exactly 1 item). Please reduce your cart to a single item to use this voucher.",
+      };
+    }
+  }
+
   // 1. Check static codes
   const staticPromo = PROMO_CODES[upperCode];
   if (staticPromo) {
