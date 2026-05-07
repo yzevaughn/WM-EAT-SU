@@ -38,7 +38,9 @@ const adminData = [
         email: "admin3@campusbite.edu",
         role: "Admin",
         status: "Deactivated",
-        lastLogin: "Apr 28 14:20",
+        lastLogin: "04/28/2023 14:20",
+        deactivatedDate: "04/29/2023",
+        reason: "Policy violation",
         initials: "A3",
         avatarClass: "av-ad",
         permissions: ["users", "transactions"]
@@ -163,7 +165,7 @@ function confirmDeactivate() {
         admin.reason = reason;
         
         const today = new Date();
-        const options = { month: 'short', day: 'numeric', year: 'numeric' };
+        const options = { month: '2-digit', day: '2-digit', year: 'numeric' };
         admin.deactivatedDate = today.toLocaleDateString('en-US', options);
 
         renderAdminAccounts();
