@@ -34,6 +34,134 @@
         }
       }
 
+      /* ── Scan to Pay FAB ── */
+      .scan-to-pay-fab {
+        display: none;
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 900;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+        color: #fff;
+        border: none;
+        border-radius: 50px;
+        padding: 14px 22px;
+        font-size: 15px;
+        font-weight: 700;
+        font-family: 'Inter', sans-serif;
+        cursor: pointer;
+        box-shadow: 0 6px 24px rgba(239,68,68,0.45);
+        transition: transform 0.2s, box-shadow 0.2s;
+        text-decoration: none;
+      }
+      .scan-to-pay-fab:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 32px rgba(239,68,68,0.55);
+      }
+      .scan-to-pay-fab i { font-size: 18px; }
+      @media (max-width: 768px) {
+        .scan-to-pay-fab { display: flex; }
+      }
+
+      /* ── Scan to Pay Modal ── */
+      #scanToPayToggle:checked ~ #scanToPayModal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .camera-wrapper {
+        position: relative;
+        width: 260px;
+        height: 260px;
+        background: #000;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.20);
+        border: 4px solid #f1f5f9;
+      }
+      .camera-wrapper video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .scan-overlay {
+        position: absolute;
+        inset: 0;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .scan-line {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: #ef4444;
+        box-shadow: 0 0 15px #ef4444;
+        animation: scan 2s linear infinite;
+      }
+      @keyframes scan {
+        0% { top: 0; }
+        100% { top: 100%; }
+      }
+      .scan-corners {
+        position: absolute;
+        inset: 40px;
+        border: 2px solid transparent;
+      }
+      .scan-corners::before, .scan-corners::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-color: #ef4444;
+        border-style: solid;
+      }
+      .scan-corners::before {
+        top: 0; left: 0;
+        border-width: 4px 0 0 4px;
+      }
+      .scan-corners::after {
+        top: 0; right: 0;
+        border-width: 4px 4px 0 0;
+      }
+      .scan-corners-bottom::before, .scan-corners-bottom::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-color: #ef4444;
+        border-style: solid;
+      }
+      .scan-corners-bottom::before {
+        bottom: 0; left: 0;
+        border-width: 0 0 4px 4px;
+      }
+      .scan-corners-bottom::after {
+        bottom: 0; right: 0;
+        border-width: 0 4px 4px 0;
+      }
+
+      .scan-pay-hint {
+        font-size: 0.82rem;
+        color: #94a3b8;
+        text-align: center;
+        max-width: 240px;
+        line-height: 1.5;
+      }
+      .btn-refresh-qr {
+        width:100%; padding:13px; border-radius:12px; border:none;
+        background:linear-gradient(135deg,#ef4444,#b91c1c); color:#fff;
+        font-size:15px; font-weight:700; font-family:'Inter',sans-serif;
+        cursor:pointer; display:flex; align-items:center; justify-content:center;
+        gap:8px; transition:opacity 0.2s;
+      }
+      .btn-refresh-qr:hover { opacity:0.9; }
+
       #cashInToggle:checked ~ #cashInModal {
         display: flex;
         align-items: center;
@@ -488,6 +616,38 @@
     <!-- Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
          CASH IN MODAL
          Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â -->
+    <!-- SCAN TO PAY FAB (mobile only) -->
+    <label for="scanToPayToggle" class="scan-to-pay-fab" id="scanToPayFab">
+      <i class="fa-solid fa-qrcode"></i> Scan to Pay
+    </label>
+
+    <!-- SCAN TO PAY MODAL -->
+    <input type="checkbox" id="scanToPayToggle" style="display:none" />
+    <div class="modal" id="scanToPayModal">
+      <label for="scanToPayToggle" class="modal-overlay"></label>
+      <div class="modal-content" style="max-width:360px;border-radius:24px;overflow:hidden">
+        <div class="modal-header" style="background:linear-gradient(135deg,#ef4444,#b91c1c);color:#fff;border-radius:0">
+          <h2 style="color:#fff;margin:0"><i class="fa-solid fa-qrcode" style="margin-right:8px"></i>Scan to Pay</h2>
+          <label for="scanToPayToggle" class="modal-close" style="color:#fff"><i class="fa-solid fa-times"></i></label>
+        </div>
+        <div class="scan-pay-modal-body">
+          <div class="camera-wrapper">
+            <video id="scanVideo" autoplay playsinline></video>
+            <div class="scan-overlay">
+              <div class="scan-line"></div>
+              <div class="scan-corners"></div>
+              <div class="scan-corners-bottom"></div>
+            </div>
+          </div>
+          <p class="scan-pay-hint">Align the vendor's QR code within the frame to pay instantly from your wallet.</p>
+          <div class="scan-pay-user-info" style="margin-top: 10px;">
+            <span class="sp-balance-label">Your Balance</span>
+            <span class="sp-balance" id="spBalance">&#8369;245.50</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <input type="checkbox" id="cashInToggle" style="display: none" />
     <div class="modal" id="cashInModal">
       <label for="cashInToggle" class="modal-overlay"></label>
@@ -1783,6 +1943,38 @@
           e.key === "student_wm_eat_su_transactions"
         ) {
           loadWalletData();
+        }
+      });
+
+      /* ── Scan to Pay Camera Logic ── */
+      let scanStream = null;
+
+      async function startCamera() {
+        const video = document.getElementById('scanVideo');
+        try {
+          scanStream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: 'environment' }
+          });
+          video.srcObject = scanStream;
+        } catch (err) {
+          console.error("Camera error:", err);
+        }
+      }
+
+      function stopCamera() {
+        if (scanStream) {
+          scanStream.getTracks().forEach(track => track.stop());
+          scanStream = null;
+        }
+      }
+
+      document.getElementById('scanToPayToggle').addEventListener('change', function () {
+        if (this.checked) {
+          const bal = document.getElementById('balanceValue');
+          if (bal) document.getElementById('spBalance').textContent = '\u20b1' + parseFloat(bal.textContent).toFixed(2);
+          startCamera();
+        } else {
+          stopCamera();
         }
       });
     </script>
